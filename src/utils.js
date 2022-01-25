@@ -4,8 +4,13 @@ const findComponentByFrameId = (frames, frameId, returnComponent) => {
   return newFrame[returnComponent]
 }
 
-const capitalizeEachWord = (shipFrame) => {
-  return shipFrame.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
+const capitalizeEachWord = (component) => {
+  return component.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
 }
 
-export { findComponentByFrameId, capitalizeEachWord }
+// powerCoreIds => Power Cores
+const readableIds = (currentId) => {
+  return currentId[0].toUpperCase() + currentId.slice(1).replace('Id', '').split(/(?=[A-Z])/).join(" ") 
+}
+
+export { findComponentByFrameId, capitalizeEachWord, readableIds }
