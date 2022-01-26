@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
-import {SetTier, SetFrame} from './ShipPartSetters'
+import SetTier from './ShipPartSetters/SetTier';
+import SetFrame from './ShipPartSetters/SetFrame';
+import SetPowerCore from './ShipPartSetters/SetPowerCore';
 import defaultSelections from '../defaultShipSelection';
 
 function CustomShipPage(props) {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
-  const [constraints, setConstraints] = useState({})
 
   return (
     <div className='customShipDisplay'>
       <h2>Custom Ship Page</h2>
 
       <div className='partSetterBlock' >
-        <SetTier {...customShipParts} setCustomShipParts={setCustomShipParts} constraints={constraints} setConstraints={setConstraints}></SetTier>
-        <SetFrame {...customShipParts} setCustomShipParts={setCustomShipParts} constraints={constraints} setConstraints={setConstraints}></SetFrame>
+        <SetTier customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} ></SetTier>
+        <SetFrame customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} ></SetFrame>
+        <SetPowerCore customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} ></SetPowerCore>
       </div>
     </div>
   );
