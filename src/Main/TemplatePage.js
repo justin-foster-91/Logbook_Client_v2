@@ -28,7 +28,9 @@ const TemplatePage = (props) => {
 
       <p></p>
 
-      <button>Custom Ship</button>
+      <Link to='/custom_ship'>
+        <button>Custom Ship</button>
+      </Link>
 
       <p></p>
 
