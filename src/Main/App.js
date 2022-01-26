@@ -5,8 +5,7 @@ import HangarPage from './HangarPage';
 import TemplatePage from './TemplatePage';
 import CustomShipPage from './CustomShipPage';
 
-// TODO: table parsing
-// TODO: More efficient import of ShipPartSetters components
+// TODO: change default ship to something functional
 
 function App() {
   const [userShips, setUserShips] = useState([])
