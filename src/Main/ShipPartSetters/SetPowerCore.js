@@ -1,49 +1,44 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {getPowerCoreData, getPowerCoreIdList, getCoreQuantityFromSize, findComponentByFrameId, doesFrameSizeAllowCore} from '../../metaTables'
 import frames from '../../frames.json'
 import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
 
 function SetPowerCore(props) {
-
   let {customShipParts, setCustomShipParts} = props;
   let {tierId, powerCoreIds} = props.customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
   let frameSize = findComponentByFrameId(frames, frameId, 'size')
   let powerCoreQuantity = getCoreQuantityFromSize(frameSize)
-  // console.log(size, getCoreQuantityFromSize(size));
+
+  //If size of saved core does not fit with frame size, set to 'none'
+  powerCoreIds = powerCoreIds.map(core => {
+    if(core === 'none' ? 0 
+      : getPowerCoreData(core).sizes.map(size => sizeLetterToStringConverter(size)).includes(frameSize)) {
+        return core
+    } else return 'none'
+  })
 
   let pcuProvided = powerCoreIds
-    .map(core => core === null ? 0 : getPowerCoreData(core).pcuProvided)
+    .map(core => getPowerCoreData(core).pcuProvided)
     .reduce((total, pcu) => total + pcu)
 
   let bpCost = powerCoreIds
-    .map(core => core === null ? 0 : getPowerCoreData(core).bpCost)
+    .map(core => getPowerCoreData(core).bpCost)
     .reduce((total, bp) => total + bp)
-
 
   const handlePowerCoreChange = (event) => {
     let coreIndex = event.target.name
-    let selectedOption = event.target.value
+    let selectedCoreOption = event.target.value
 
-    if(selectedOption === 'None') selectedOption = null
-    else selectedOption = selectedOption.split(' ').slice(0, 2).join(' ')
+    if(selectedCoreOption === 'None') selectedCoreOption = 'none'
+    else selectedCoreOption = selectedCoreOption.split(' ').slice(0, 2).join(' ')
 
-    customShipParts.powerCoreIds[coreIndex] = selectedOption
+    customShipParts.powerCoreIds[coreIndex] = selectedCoreOption
     setCustomShipParts({...customShipParts})
   }
 
-
-  // Small - Large: 1 Core
-  // Medium & Large: 1 Core + 1 Core optional (bonus from expansion bay)
-  // Huge: 2 Cores
-  // Gargantuan: 3 Cores
-  // Colossal: 4 Cores
-  // Supercolossal: 5 (colossal) Cores OR 1 (supercolossal) + 4 (huge or gargantuan) Cores
-
-  // A power core typically has a backup battery system for use in emergencies 
-  // that can provide limited power—enough for life support, gravity, and comms (see page 430), 
-  // but no other systems—for 2d6 days.
+  // TODO: Checking for ship validity
   
   return (
     <>
@@ -53,21 +48,30 @@ function SetPowerCore(props) {
 
       {/* Create array of length powerCoreQuantity, create a dropdown for each length value */}
       {Array(powerCoreQuantity).fill(1).map((dropdown, idx) => {
-        console.log(powerCoreIds[idx])
-        return <select 
-          // defaultValue must match the option's string
-          defaultValue={powerCoreIds[idx] === undefined ? 'None' : `${capitalizeEachWord(powerCoreIds[idx])} (PCU ${getPowerCoreData(powerCoreIds[idx]).pcuProvided} | Size: ${getPowerCoreData(powerCoreIds[idx]).sizes.join(', ')})`} 
-          key={'dropdown'+idx} name={idx} onChange={handlePowerCoreChange}>
-          
-          <option>None</option>
-          {getPowerCoreIdList().map((core, idx) => 
-            !doesFrameSizeAllowCore(core, frameSize) ||
-            <option key={'option'+idx}>
-              {`${core} (PCU ${getPowerCoreData(core).pcuProvided} | Size: ${getPowerCoreData(core).sizes.join(', ')})`}
-            </option>
-          )}
+        return <div key={'powerCore'+idx}>
+          Power Core {idx+1} <br/>
+          {/* defaultValue must match the option's string */}
+          <select 
+            defaultValue={
+              (powerCoreIds[idx] === undefined || powerCoreIds[idx] === 'none')
+                ? 'None' 
+                : `${capitalizeEachWord(powerCoreIds[idx])} (PCU ${getPowerCoreData(powerCoreIds[idx]).pcuProvided} | Size: ${getPowerCoreData(powerCoreIds[idx]).sizes.join(', ')})`
+            } 
+            name={idx} onChange={handlePowerCoreChange}
+          >
+            
+            <option key='null'>None</option>
+            {getPowerCoreIdList().map((core, idx) => 
+              !doesFrameSizeAllowCore(core, frameSize) ||
+              <option key={'option'+idx}>
+                {`${core} (PCU ${getPowerCoreData(core).pcuProvided} | Size: ${getPowerCoreData(core).sizes.join(', ')})`}
+              </option>
+            )}
 
-        </select>
+          </select><br/>
+          Special Material: 
+          <p></p>
+        </div>
       })}
       
       <p></p>

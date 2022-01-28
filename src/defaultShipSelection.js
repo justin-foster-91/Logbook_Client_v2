@@ -197,7 +197,7 @@ let defaultSelections = {
 	"hasSpaceStationFramework": 0,
 	"isSetDefaultCrewSkillValues": 0,
 	"isUseStrictRules": 1,
-	"powerCoreIds": ["pulse-black"],
+	"powerCoreIds": ["none"],
 	"powerCoreSpecialMaterials": ["none"],
 	"ctNetworkNodes": 0,
 	"reinforcedBulkheadId": "none",

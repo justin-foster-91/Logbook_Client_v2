@@ -63,6 +63,8 @@ const getTierData = (tierId) => {
 }
 
 const getPowerCoreData = (powerCoreId) => {
+  if(powerCoreId === 'none') return {sizes: 'none', pcuProvided: 0, bpCost: 0, source: 'none', sfsLegal: true};
+
   let array = powerCores[capitalizeEachWord(powerCoreId)]
 
   return {sizes: array[0], pcuProvided: array[1], bpCost: array[2], source: array[3], sfsLegal: array[4]}
@@ -104,7 +106,7 @@ const doesFrameSizeAllowCore = (core, frameSize) => {
   let sizeLetterList = getPowerCoreData(core).sizes
   let sizeWordList = sizeLetterList.map(size => sizeLetterToStringConverter(size))
 
-  if(frameSize === 'supercolossal' && sizeWordList.includes()) return true;
+  if(frameSize === 'Supercolossal' && sizeWordList.includes('Huge')) return true;
 
   return sizeWordList.includes(frameSize);
 }
