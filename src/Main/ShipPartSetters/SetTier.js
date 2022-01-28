@@ -6,10 +6,9 @@ function SetTier(props) {
   let {customShipParts, setCustomShipParts} = props;
   let {tierId} = props.customShipParts
 
-  let buildPoints = getTierData(tierId).buildPoints
-  let hpIncrementMultiplier = getTierData(tierId).hpIncrementMultiplier
+  let {buildPoints, hpIncrementMultiplier} = getTierData(tierId)
 
-  const handleChange = (ev) => {
+  const handleTierChange = (ev) => {
     customShipParts.tierId = ev.target.value
     setCustomShipParts({...customShipParts})
   }
@@ -20,7 +19,8 @@ function SetTier(props) {
 
       <p></p>
 
-      <select defaultValue={tierId} onChange={handleChange}>
+      <select defaultValue={tierId} onChange={handleTierChange}>
+        {/* {getComponentIdList('shipTiers').map((tier, idx) => <option key={idx}>{tier}</option>)} */}
         {getTierIdList().map((tier, idx) => <option key={idx}>{tier}</option>)}
       </select>
 

@@ -4,6 +4,11 @@ import SetFrame from './ShipPartSetters/SetFrame';
 import SetPowerCore from './ShipPartSetters/SetPowerCore';
 import defaultSelections from '../defaultShipSelection';
 
+// TODO: check component logic, move to meta tables
+
+// TODO: Convert getTierIdList into something more broadly usable
+// TODO: should I be doing this in react native?
+
 function CustomShipPage(props) {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
 

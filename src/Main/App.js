@@ -5,8 +5,6 @@ import HangarPage from './HangarPage';
 import TemplatePage from './TemplatePage';
 import CustomShipPage from './CustomShipPage';
 
-// TODO: change default ship to something functional
-
 function App() {
   const [userShips, setUserShips] = useState([])
 

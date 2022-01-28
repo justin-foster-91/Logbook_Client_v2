@@ -14,19 +14,19 @@ function SetFrame(props) {
     return defaultString;
   }
 
-  let frameId = capitalizeEachWord(customShipParts.frameId);
+  let frameId                 = capitalizeEachWord(customShipParts.frameId);
   let {startTotal, increment} = findComponentByFrameId(frames, frameId, 'hp')
-  let size = findComponentByFrameId(frames, frameId, 'size')
-  let maneuverability = findComponentByFrameId(frames, frameId, 'maneuverability')
-  let hp = startTotal + (increment * getTierData(tierId).hpIncrementMultiplier)
-  let dt = findComponentByFrameId(frames, frameId, 'dt')
-  let ct = findComponentByFrameId(frames, frameId, 'ct')
-  let expansions = formatExpansions(findComponentByFrameId(frames, frameId, 'expansions'))
-  let minCrew = findComponentByFrameId(frames, frameId, 'minimumCrew')
-  let maxCrew = findComponentByFrameId(frames, frameId, 'maximumCrew')
-  let cost = findComponentByFrameId(frames, frameId, 'cost')
+  let size                    = findComponentByFrameId(frames, frameId, 'size')
+  let maneuverability         = findComponentByFrameId(frames, frameId, 'maneuverability')
+  let hp                      = startTotal + (increment * getTierData(tierId).hpIncrementMultiplier)
+  let dt                      = findComponentByFrameId(frames, frameId, 'dt')
+  let ct                      = findComponentByFrameId(frames, frameId, 'ct')
+  let expansions              = formatExpansions(findComponentByFrameId(frames, frameId, 'expansions'))
+  let minCrew                 = findComponentByFrameId(frames, frameId, 'minimumCrew')
+  let maxCrew                 = findComponentByFrameId(frames, frameId, 'maximumCrew')
+  let bpCost                  = findComponentByFrameId(frames, frameId, 'cost')
 
-  const handleChange = (ev) => {
+  const handleFrameIdChange = (ev) => {
     customShipParts.frameId = ev.target.value
     setCustomShipParts({...customShipParts})
   }
@@ -37,7 +37,7 @@ function SetFrame(props) {
 
       <p></p>
 
-      <select defaultValue={frameId} onChange={handleChange}>
+      <select defaultValue={frameId} onChange={handleFrameIdChange}>
         {frames.map((frame, idx) => <option key={idx}>{frame.type}</option>)}
       </select>
 
@@ -53,7 +53,7 @@ function SetFrame(props) {
         Minimum Crew {minCrew};
         Maximum Crew {maxCrew}
       </div>
-      <div>BP Cost: {cost}</div>
+      <div>BP Cost: {bpCost}</div>
     </>
   );
 }
