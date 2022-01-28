@@ -1,7 +1,7 @@
 import React from 'react';
-import {getTierData} from '../../metaTables'
+import {getTierData, findComponentByFrameId} from '../../metaTables'
 import frames from '../../frames.json'
-import { capitalizeEachWord, findComponentByFrameId } from '../../utils';
+import { capitalizeEachWord } from '../../utils';
 
 function SetFrame(props) {
 

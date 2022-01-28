@@ -1,4 +1,4 @@
-import { capitalizeEachWord } from './utils';
+import { capitalizeEachWord, sizeLetterToStringConverter } from './utils';
 
 let shipTiers = {
 // Tier: [buildPoints, hpIncrements]
@@ -74,12 +74,7 @@ const getTierIdList = () => {
 
 const getPowerCoreIdList = () => {
   return Object.keys(powerCores).sort((a, b) => a + b)
-  // return sortKeys(powerCores)
 }
-
-// const sortKeys = ('power cores') => {
-//   return Object.keys(object).sort((a, b) => a + b)
-// }
 
 
   // Small - Large: 1 Core
@@ -89,6 +84,7 @@ const getPowerCoreIdList = () => {
   // Colossal: 4 Cores
   // Supercolossal: 5 (colossal) Cores OR 1 (supercolossal) + 4 (huge or gargantuan) Cores
 
+// TODO: add in bonus core from expansion
 // Str size => Num core quantity
 const getCoreQuantityFromSize = (size) => {
   size = size.toLowerCase() 
@@ -101,11 +97,31 @@ const getCoreQuantityFromSize = (size) => {
   if(size === 'supercolossal') return 5;
 }
 
+// Supercolossal: 5 (colossal) Cores OR 1 (supercolossal) + 4 (huge or gargantuan) Cores
+
+// String core => Boolean
+const doesFrameSizeAllowCore = (core, frameSize) => {
+  let sizeLetterList = getPowerCoreData(core).sizes
+  let sizeWordList = sizeLetterList.map(size => sizeLetterToStringConverter(size))
+
+  if(frameSize === 'supercolossal' && sizeWordList.includes()) return true;
+
+  return sizeWordList.includes(frameSize);
+}
+
+const findComponentByFrameId = (frames, frameId, returnComponent) => {
+  let newFrame = frames.find(frame => frame.type.toLowerCase() === frameId.toLowerCase())
+  
+  return newFrame[returnComponent]
+}
+
 
 export {
   getTierData, 
   getPowerCoreData, 
   getTierIdList, 
   getPowerCoreIdList, 
-  getCoreQuantityFromSize 
+  getCoreQuantityFromSize,
+  doesFrameSizeAllowCore,
+  findComponentByFrameId
 }

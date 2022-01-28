@@ -1,35 +1,38 @@
 import React from 'react';
-import {getPowerCoreData, getPowerCoreIdList, getCoreQuantityFromSize} from '../../metaTables'
+import {getPowerCoreData, getPowerCoreIdList, getCoreQuantityFromSize, findComponentByFrameId, doesFrameSizeAllowCore} from '../../metaTables'
 import frames from '../../frames.json'
-import { capitalizeEachWord, findComponentByFrameId } from '../../utils';
+import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
 
 function SetPowerCore(props) {
 
   let {customShipParts, setCustomShipParts} = props;
   let {tierId, powerCoreIds} = props.customShipParts
 
-  // TODO: accommodate multiple power cores
-
   let frameId = capitalizeEachWord(customShipParts.frameId);
-  let size = findComponentByFrameId(frames, frameId, 'size')
-  let powerCoreQuantity = getCoreQuantityFromSize(size)
+  let frameSize = findComponentByFrameId(frames, frameId, 'size')
+  let powerCoreQuantity = getCoreQuantityFromSize(frameSize)
   // console.log(size, getCoreQuantityFromSize(size));
 
   let pcuProvided = powerCoreIds
-    .map(core => getPowerCoreData(core).pcuProvided)
+    .map(core => core === null ? 0 : getPowerCoreData(core).pcuProvided)
     .reduce((total, pcu) => total + pcu)
 
   let bpCost = powerCoreIds
-    .map(core => getPowerCoreData(core).bpCost)
+    .map(core => core === null ? 0 : getPowerCoreData(core).bpCost)
     .reduce((total, bp) => total + bp)
 
 
-  const handlePowerCoreChange = (ev) => {
-    // FIXME:
-    console.log(ev.target.value);
-    customShipParts.powerCoreIds[0] = ev.target.value
+  const handlePowerCoreChange = (event) => {
+    let coreIndex = event.target.name
+    let selectedOption = event.target.value
+
+    if(selectedOption === 'None') selectedOption = null
+    else selectedOption = selectedOption.split(' ').slice(0, 2).join(' ')
+
+    customShipParts.powerCoreIds[coreIndex] = selectedOption
     setCustomShipParts({...customShipParts})
   }
+
 
   // Small - Large: 1 Core
   // Medium & Large: 1 Core + 1 Core optional (bonus from expansion bay)
@@ -48,13 +51,25 @@ function SetPowerCore(props) {
 
       <p></p>
 
-      {(() => new Array(powerCoreQuantity).fill(1))().map((core, idx) => {
-        return <select defaultValue={tierId} onChange={handlePowerCoreChange}>
-          {getPowerCoreIdList().map((tier, idx) => <option key={idx}>{tier}</option>)}
+      {/* Create array of length powerCoreQuantity, create a dropdown for each length value */}
+      {Array(powerCoreQuantity).fill(1).map((dropdown, idx) => {
+        console.log(powerCoreIds[idx])
+        return <select 
+          // defaultValue must match the option's string
+          defaultValue={powerCoreIds[idx] === undefined ? 'None' : `${capitalizeEachWord(powerCoreIds[idx])} (PCU ${getPowerCoreData(powerCoreIds[idx]).pcuProvided} | Size: ${getPowerCoreData(powerCoreIds[idx]).sizes.join(', ')})`} 
+          key={'dropdown'+idx} name={idx} onChange={handlePowerCoreChange}>
+          
+          <option>None</option>
+          {getPowerCoreIdList().map((core, idx) => 
+            !doesFrameSizeAllowCore(core, frameSize) ||
+            <option key={'option'+idx}>
+              {`${core} (PCU ${getPowerCoreData(core).pcuProvided} | Size: ${getPowerCoreData(core).sizes.join(', ')})`}
+            </option>
+          )}
+
         </select>
       })}
       
-
       <p></p>
 
       <div>

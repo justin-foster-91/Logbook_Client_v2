@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import templates from '../shipTemplates';
 import frames from '../frames.json';
-import {findComponentByFrameId, capitalizeEachWord, readableIds} from '../utils';
+import {capitalizeEachWord, readableIds} from '../utils';
+import {findComponentByFrameId} from '../metaTables';
 
 
 const TemplatePage = (props) => {
@@ -16,7 +17,7 @@ const TemplatePage = (props) => {
 
       {/* Display template options */}
       {templates.map((template, idx) => {
-          return <button onClick={() => setSelectedTemplate(template)} value={template.shipName} key={idx}>{template.shipName || 'Template'} </button>
+          return <button onClick={() => setSelectedTemplate(template)} value={template.shipName} key={'template'+idx}>{template.shipName || 'Template'} </button>
         })}
 
       <p></p>
