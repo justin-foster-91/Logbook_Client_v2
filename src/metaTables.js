@@ -117,6 +117,32 @@ const findComponentByFrameId = (frames, frameId, returnComponent) => {
   return newFrame[returnComponent]
 }
 
+// Object ship => {validity: Bool, errors: [Error]}
+// Error = {shipPart: String, message: String}
+const validateShip = (ship) => {
+  return validatePowerCores(ship)
+
+  // return true;
+}
+
+
+  
+
+// Object ship => {validity: Bool, errors: [Error]}
+// Error = {shipPart: String, message: String}
+const validatePowerCores = (ship) => {
+  // Supercolossal: 5 (colossal) Cores OR 1 (supercolossal) + 4 (huge or gargantuan) Cores
+
+  // power core must fit frame size
+
+  // supercolossal frame: 5 cores
+  // if one of powerCores is supercolossal
+  //// then the other 4 must fit size huge
+  // if no supercolossal powerCore
+  //// then all 5 must be colossal
+
+}
+
 
 export {
   getTierData, 
@@ -125,5 +151,6 @@ export {
   getPowerCoreIdList, 
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
-  findComponentByFrameId
+  findComponentByFrameId,
+  validateShip
 }
