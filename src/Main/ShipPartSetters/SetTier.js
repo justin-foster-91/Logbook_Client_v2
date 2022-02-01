@@ -4,7 +4,7 @@ import {getTierData, getTierIdList} from '../../metaTables'
 function SetTier(props) {
 
   let {customShipParts, setCustomShipParts} = props;
-  let {tierId} = props.customShipParts
+  let {tierId} = customShipParts
 
   let {buildPoints, hpIncrementMultiplier} = getTierData(tierId)
 

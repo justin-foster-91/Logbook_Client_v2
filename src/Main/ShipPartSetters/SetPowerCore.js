@@ -5,7 +5,7 @@ import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
 
 function SetPowerCore(props) {
   let {customShipParts, setCustomShipParts} = props;
-  let {tierId, powerCoreIds} = props.customShipParts
+  let {tierId, powerCoreIds} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
   let frameSize = findComponentByFrameId(frames, frameId, 'size')
@@ -37,13 +37,18 @@ function SetPowerCore(props) {
     customShipParts.powerCoreIds[coreIndex] = selectedCoreOption
     setCustomShipParts({...customShipParts})
   }
-
-  // TODO: Checking for ship validity
   
   return (
     <>
       <h3>Power Core</h3>
 
+      <p></p>
+      {/* {frameSize.toLowerCase() === 'supercolossal' 
+        ? '**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**' 
+        : ''} */}
+      {frameSize.toLowerCase() === 'supercolossal' 
+        && '**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**' 
+      }
       <p></p>
 
       {/* Create array of length powerCoreQuantity, create a dropdown for each length value */}
@@ -62,7 +67,7 @@ function SetPowerCore(props) {
             
             <option key='null'>None</option>
             {getPowerCoreIdList().map((core, idx) => 
-              !doesFrameSizeAllowCore(core, frameSize) ||
+              doesFrameSizeAllowCore(core, frameSize) &&
               <option key={'option'+idx}>
                 {`${core} (PCU ${getPowerCoreData(core).pcuProvided} | Size: ${getPowerCoreData(core).sizes.join(', ')})`}
               </option>
