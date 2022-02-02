@@ -20,7 +20,6 @@ function SetTier(props) {
       <p></p>
 
       <select defaultValue={tierId} onChange={handleTierChange}>
-        {/* {getComponentIdList('shipTiers').map((tier, idx) => <option key={idx}>{tier}</option>)} */}
         {getTierIdList().map((tier, idx) => <option key={idx}>{tier}</option>)}
       </select>
 

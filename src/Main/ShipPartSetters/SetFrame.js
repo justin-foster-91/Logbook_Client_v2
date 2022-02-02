@@ -1,11 +1,11 @@
-import React from 'react';
-import {getTierData, findComponentByFrameId} from '../../metaTables'
+import React, {useEffect} from 'react';
+import {getTierData, findComponentByFrameId, getPowerCoreData, getThrusterData} from '../../metaTables'
 import frames from '../../frames.json'
-import { capitalizeEachWord } from '../../utils';
+import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
 
 function SetFrame(props) {
 
-  let {tierId} = props.customShipParts
+  let {tierId, powerCoreIds, thrustersId} = props.customShipParts
   let {customShipParts, setCustomShipParts} = props;  
 
   const formatExpansions = (defaultString) => {
@@ -27,9 +27,42 @@ function SetFrame(props) {
   let bpCost                  = findComponentByFrameId(frames, frameId, 'cost')
 
   const handleFrameIdChange = (ev) => {
+    // TODO: tidy up other ship parts if sizes don't make sense
+
     customShipParts.frameId = ev.target.value
     setCustomShipParts({...customShipParts})
   }
+
+  //If size of saved core does not fit with frame size, set to 'none'
+  useEffect(() => {
+    // powerCoreIds.current = powerCoreIds.map(core => {
+    //   if(core === 'none' 
+    //     ? 0 
+    //     : getPowerCoreData(core).sizes.map(coreSize => sizeLetterToStringConverter(coreSize)).includes(size)) {
+    //       return core
+    //   } else return 'none'
+    // })
+  })
+
+  //If size of saved core does not fit with frame size, set to 'none'
+  useEffect(() => {
+    // console.log(sizeLetterToStringConverter(getThrusterData(thrustersId).size));
+  
+  //   if(thrustersId === 'none' 
+  //   ? 0 
+  //   : getThrusterData(thrustersId).size.map(coreSize => sizeLetterToStringConverter(coreSize)).includes(size)) {
+  //     return core
+  // } else return 'none'
+  })
+
+
+  // powerCoreIds.current = powerCoreIds.map(core => {
+  //   if(core === 'none' 
+  //     ? 0 
+  //     : getPowerCoreData(core).sizes.map(coreSize => sizeLetterToStringConverter(coreSize)).includes(size)) {
+  //       return core
+  //   } else return 'none'
+  // })
 
   return (
     <>

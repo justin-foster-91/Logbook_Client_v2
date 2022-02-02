@@ -28,8 +28,9 @@ function SetThrusters(props) {
           doesFrameSizeAllowThruster(thruster, frameSize) && 
           <option key={idx}>{thruster} Thrusters</option>
         )}
-      </select>
-
+      </select><br/>
+      {/* TODO: */}
+      Special Material: 
       <p></p>
 
       <div>

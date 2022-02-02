@@ -11,6 +11,7 @@ function SetPowerCore(props) {
   let frameSize = findComponentByFrameId(frames, frameId, 'size')
   let powerCoreQuantity = getCoreQuantityFromSize(frameSize)
 
+  // FIXME: move this code into SetFrame
   //If size of saved core does not fit with frame size, set to 'none'
   powerCoreIds = powerCoreIds.map(core => {
     if(core === 'none' ? 0 
@@ -43,9 +44,6 @@ function SetPowerCore(props) {
       <h3>Power Core</h3>
 
       <p></p>
-      {/* {frameSize.toLowerCase() === 'supercolossal' 
-        ? '**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**' 
-        : ''} */}
       {frameSize.toLowerCase() === 'supercolossal' 
         && '**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**' 
       }
@@ -74,6 +72,7 @@ function SetPowerCore(props) {
             )}
 
           </select><br/>
+          {/* TODO: */}
           Special Material: 
           <p></p>
         </div>

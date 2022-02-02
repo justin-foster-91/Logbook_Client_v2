@@ -164,21 +164,28 @@ const findComponentByFrameId = (frames, frameId, returnComponent) => {
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
 const validateShip = (ship) => {
-  let functionList = [validatePowerCores(ship)]
+  let powerCoreValidation = validatePowerCores(ship)
+  // let thrustersValidation = validateThrusters(ship)
 
-  let allValid = functionList.every(func => func.valid === true)
-  let invalidShipParts = []
-
-  // functionList.forEach(func => func.errors.push(invalidShipParts))
-
-  // return allValid 
-  //   ? {validity: true, errors: []} 
-  //   : {validity: false, errors: invalidShipParts}
-
-  return allValid 
-    ? {validity: true, errors: []} 
-    : {validity: false}
+  return mergeValidations([powerCoreValidation])
 }
+
+const mergeValidations = (validationList) => {
+  let allValid = true
+  let allErrors = []
+
+  validationList.forEach(validation => {
+    allValid = allValid && validation.validity;
+    if(validation.errors) allErrors = allErrors.concat(validation.errors)
+  })
+
+  return {validity: allValid, errors: allErrors}
+}
+
+// const validateThrusters = (ship) => {
+//   // return {validity: false, errors: [{shipPart: 'Thrusters', message: 'Not yet written'}]}
+//   return {validity: true, errors: []}
+// }
 
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
@@ -190,7 +197,7 @@ const validatePowerCores = (ship) => {
   if(ship.powerCoreIds.every(core => core === 'none')){
     // all power cores are empty
 
-    return {validity: false, error: [{shipPart: 'Power Cores', message: 'All ships must have at least 1 Power Core.'}]}
+    return {validity: false, errors: [{shipPart: 'Power Cores', message: 'All ships must have at least 1 Power Core.'}]}
   }
 
   if(findComponentByFrameId(frames, ship.frameId, 'size').toLowerCase() === 'supercolossal'){
@@ -210,11 +217,11 @@ const validatePowerCores = (ship) => {
       if(hugeCoreBoolArray.includes(false)){
         // one of the remaining cores is not 'huge' size (all 'Gargantuan' sized cores also fit size 'Huge')
 
-        return {validity: false, error: [{shipPart: 'Power Cores', message: 'Colossal and supercolossal cores may not both be equipped on the same ship.'}]}
+        return {validity: false, errors: [{shipPart: 'Power Cores', message: 'Colossal and supercolossal cores may not both be equipped on the same ship.'}]}
       } else{
         // all remaining cores are 'huge' size
 
-        return {validity: true, error: []}
+        return {validity: true, errors: []}
       }
     } else{
       // no cores were supercolossal size
@@ -224,16 +231,16 @@ const validatePowerCores = (ship) => {
       if(colossalCoreBoolArray.includes(false)){
         // not all cores were colossal size
 
-        return {validity: false, error: [{shipPart: 'Power Cores', message: 'Without a Supercolossal power core, all 5 cores must be designed for Colossal ships'}]}
+        return {validity: false, errors: [{shipPart: 'Power Cores', message: 'Without a Supercolossal power core, all 5 cores must be designed for Colossal ships'}]}
       } else {
         // all cores were colossal size
 
-        return {validity: true, error: []}
+        return {validity: true, errors: []}
       }
     }
   }
 
-  return {validity: true, error: []}
+  return {validity: true, errors: []}
 }
 
 
