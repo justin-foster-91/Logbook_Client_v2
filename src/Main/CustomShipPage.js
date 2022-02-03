@@ -10,12 +10,13 @@ function CustomShipPage(props) {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
 
   useEffect(() => {
-    //FIXME: evaluates true if frame changes size after power core is chosen
     console.log(validateShip(customShipParts))
   })
 
-  // TODO: frame size constraints passed into other components
+  // TODO: metaTables setNewFrame, thrusters don't work
   // TODO: change 'none' usage to null
+  // TODO: metaTables cleanup
+  // TODO: power core render cleanup
 
   return (
     <div className='customShipDisplay'>

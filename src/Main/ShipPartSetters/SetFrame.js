@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {getTierData, findComponentByFrameId, getPowerCoreData, getThrusterData, doesFrameSizeAllowCore, getCoreQuantityFromSize} from '../../metaTables'
+import React from 'react';
+import { getTierData, findComponentByFrameId, setNewFrame } from '../../metaTables'
 import frames from '../../frames.json'
-import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
+import { capitalizeEachWord } from '../../utils';
 
 function SetFrame(props) {
 
-  let {tierId, powerCoreIds, thrustersId} = props.customShipParts
-  let {customShipParts, setCustomShipParts} = props;  
+  let { tierId } = props.customShipParts
+  let { customShipParts, setCustomShipParts } = props;  
 
   const formatExpansions = (defaultString) => {
     if(defaultString.toString().search('unlimited') >= 0) return "Unlimited"
@@ -27,22 +27,8 @@ function SetFrame(props) {
   let bpCost                  = findComponentByFrameId(frames, frameId, 'cost')
 
   const handleFrameIdChange = (ev) => {
-
-    // TODO:
-    // setNewFrame(customShipParts, frame)
-
-    // change power cores to 'none' if they don't fit the new frame
-    powerCoreIds.forEach((core, idx) => {
-      if(core !== 'none' && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, ev.target.value, 'size'))) {
-        customShipParts.powerCoreIds[idx] = 'none'
-      } 
-    })
-
-    // reduce length of the power core list if moving to a smaller frame
-    let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(frames, ev.target.value, 'size'))
-    if(powerCoreIds.length > newCoreAmount) customShipParts.powerCoreIds.length = newCoreAmount;
-
     // TODO: set new thrusters
+    setNewFrame(customShipParts, ev.target.value)
 
     customShipParts.frameId = ev.target.value
     setCustomShipParts({...customShipParts})

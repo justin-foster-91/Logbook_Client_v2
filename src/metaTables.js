@@ -161,13 +161,48 @@ const findComponentByFrameId = (frames, frameId, returnComponent) => {
   return newFrame[returnComponent]
 }
 
+const setNewFrame = (shipParts, frame) => {
+  let {powerCoreIds, thrustersId} = shipParts
+
+  frameChangingPowerCores(powerCoreIds, frame)
+  frameChangingThrusters(thrustersId, frame)
+}
+
+const frameChangingPowerCores = (powerCoreIds, frame) => {
+  // change power cores to 'none' if they don't fit the new frame
+  powerCoreIds.forEach((core, idx) => {
+    if(core !== 'none' && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, frame, 'size'))) {
+      powerCoreIds[idx] = 'none'
+    } 
+  })
+
+  // reduce length of the power core list if moving to a smaller frame
+  let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(frames, frame, 'size'))
+  if(powerCoreIds.length > newCoreAmount) powerCoreIds.length = newCoreAmount;
+}
+
+const frameChangingThrusters = (thrustersId, frame) => {
+  // change thrusters to 'none' if they don't fit the new frame
+
+  // console.log(thrustersId !== 'none');
+  // console.log(doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
+  console.log(thrustersId, findComponentByFrameId(frames, frame, 'size'));
+
+  // FIXME: HOW ON EARTH IS THIS NULL
+  console.log(doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
+
+  // if(thrustersId !== 'none' && !doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size'))) {
+  //   thrustersId = 'none'
+  // }
+}
+
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
 const validateShip = (ship) => {
   let powerCoreValidation = validatePowerCores(ship)
-  // let thrustersValidation = validateThrusters(ship)
+  let thrustersValidation = validateThrusters(ship)
 
-  return mergeValidations([powerCoreValidation])
+  return mergeValidations([powerCoreValidation, thrustersValidation])
 }
 
 const mergeValidations = (validationList) => {
@@ -182,10 +217,13 @@ const mergeValidations = (validationList) => {
   return {validity: allValid, errors: allErrors}
 }
 
-// const validateThrusters = (ship) => {
-//   // return {validity: false, errors: [{shipPart: 'Thrusters', message: 'Not yet written'}]}
-//   return {validity: true, errors: []}
-// }
+const validateThrusters = (ship) => {
+  if(ship.thrustersId === 'none'){
+    return {validity: false, errors: [{shipPart: 'Thrusters', message: 'All ships must have at least 1 Thruster'}]}
+  }
+
+  return {validity: true, errors: []}
+}
 
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
@@ -255,5 +293,6 @@ export {
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
+  setNewFrame,
   validateShip
 }
