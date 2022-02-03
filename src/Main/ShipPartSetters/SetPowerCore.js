@@ -11,14 +11,6 @@ function SetPowerCore(props) {
   let frameSize = findComponentByFrameId(frames, frameId, 'size')
   let powerCoreQuantity = getCoreQuantityFromSize(frameSize)
 
-  // FIXME: move this code into SetFrame
-  //If size of saved core does not fit with frame size, set to 'none'
-  // powerCoreIds = powerCoreIds.map(core => {
-  //   if(core === 'none' ? 0 
-  //     : getPowerCoreData(core).sizes.map(size => sizeLetterToStringConverter(size)).includes(frameSize)) {
-  //       return core
-  //   } else return 'none'
-  // })
 
   let pcuProvided = powerCoreIds
     .map(core => getPowerCoreData(core).pcuProvided)
@@ -32,7 +24,7 @@ function SetPowerCore(props) {
     let coreIndex = event.target.name
     let selectedCoreOption = event.target.value
 
-    if(selectedCoreOption === 'None') selectedCoreOption = 'none'
+    if(selectedCoreOption === 'None') selectedCoreOption = null
     else selectedCoreOption = selectedCoreOption.split(' ').slice(0, 2).join(' ')
 
     customShipParts.powerCoreIds[coreIndex] = selectedCoreOption
@@ -56,7 +48,7 @@ function SetPowerCore(props) {
           {/* defaultValue must match the option's string */}
           <select 
             defaultValue={
-              (powerCoreIds[idx] === undefined || powerCoreIds[idx] === 'none')
+              (powerCoreIds[idx] === undefined || powerCoreIds[idx] === null)
                 ? 'None' 
                 : `${capitalizeEachWord(powerCoreIds[idx])} (PCU ${getPowerCoreData(powerCoreIds[idx]).pcuProvided} | Size: ${getPowerCoreData(powerCoreIds[idx]).sizes.join(', ')})`
             } 

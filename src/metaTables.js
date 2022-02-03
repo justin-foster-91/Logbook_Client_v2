@@ -98,7 +98,7 @@ const getTierData = (tierId) => {
 }
 
 const getPowerCoreData = (powerCoreId) => {
-  if(powerCoreId === 'none') return {sizes: 'none', pcuProvided: 0, bpCost: 0, source: 'none', sfsLegal: true};
+  if(powerCoreId === null) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null, sfsLegal: true};
 
   let array = powerCores[capitalizeEachWord(powerCoreId)]
 
@@ -106,7 +106,7 @@ const getPowerCoreData = (powerCoreId) => {
 }
 
 const getThrusterData = (thrustersId) => {
-  if(thrustersId === 'none') return {size: 'none', speed: 'none', pilotingModifier: 'none', pcuCost: 0, bpCost: 0, source: 'none', sfsLegal: true};
+  if(thrustersId === null) return {size: null, speed: null, pilotingModifier: null, pcuCost: 0, bpCost: 0, source: null, sfsLegal: true};
 
   let array = thrusters[capitalizeEachWord(thrustersId)]
 
@@ -169,10 +169,10 @@ const setNewFrame = (shipParts, frame) => {
 }
 
 const frameChangingPowerCores = (powerCoreIds, frame) => {
-  // change power cores to 'none' if they don't fit the new frame
+  // change power cores to null if they don't fit the new frame
   powerCoreIds.forEach((core, idx) => {
-    if(core !== 'none' && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, frame, 'size'))) {
-      powerCoreIds[idx] = 'none'
+    if(core !== null && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, frame, 'size'))) {
+      powerCoreIds[idx] = null
     } 
   })
 
@@ -182,17 +182,17 @@ const frameChangingPowerCores = (powerCoreIds, frame) => {
 }
 
 const frameChangingThrusters = (thrustersId, frame) => {
-  // change thrusters to 'none' if they don't fit the new frame
+  // change thrusters to null if they don't fit the new frame
 
-  // console.log(thrustersId !== 'none');
+  // console.log(thrustersId !== null);
   // console.log(doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
   console.log(thrustersId, findComponentByFrameId(frames, frame, 'size'));
 
   // FIXME: HOW ON EARTH IS THIS NULL
   console.log(doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
 
-  // if(thrustersId !== 'none' && !doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size'))) {
-  //   thrustersId = 'none'
+  // if(thrustersId !== null && !doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size'))) {
+  //   thrustersId = null
   // }
 }
 
@@ -218,7 +218,7 @@ const mergeValidations = (validationList) => {
 }
 
 const validateThrusters = (ship) => {
-  if(ship.thrustersId === 'none'){
+  if(ship.thrustersId === null){
     return {validity: false, errors: [{shipPart: 'Thrusters', message: 'All ships must have at least 1 Thruster'}]}
   }
 
@@ -232,7 +232,7 @@ const validatePowerCores = (ship) => {
   // power core must fit frame size
   // limit core number by frame size
 
-  if(ship.powerCoreIds.every(core => core === 'none')){
+  if(ship.powerCoreIds.every(core => core === null)){
     // all power cores are empty
 
     return {validity: false, errors: [{shipPart: 'Power Cores', message: 'All ships must have at least 1 Power Core.'}]}

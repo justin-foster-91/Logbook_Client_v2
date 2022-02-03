@@ -22,7 +22,7 @@ function SetThrusters(props) {
 
       <p></p>
 
-      <select defaultValue={thrustersId === undefined || thrustersId === 'none' ? 'None' : `${thrustersId} Thrusters`} onChange={handleThrusterChange}>
+      <select defaultValue={thrustersId === undefined || thrustersId === null ? 'None' : `${thrustersId} Thrusters`} onChange={handleThrusterChange}>
         <option key='null'>None</option>
         {getThrusterIdList().map((thruster, idx) => 
           doesFrameSizeAllowThruster(thruster, frameSize) && 

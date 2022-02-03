@@ -1,22 +1,22 @@
 let defaultSelections = {
-	"ablativeArmorId": "none",
+	"ablativeArmorId": null,
 	"ablativeArmorByPosition": {
 		"forward": 0,
 		"aft": 0,
 		"port": 0,
 		"starboard": 0
 	},
-	"antiHackingSystemsId": "none",
-	"antiPersonnelWeaponId": "none",
-	"armorId": "none",
-	"armorMaterialId": "none",
+	"antiHackingSystemsId": null,
+	"antiPersonnelWeaponId": null,
+	"armorId": null,
+	"armorMaterialId": null,
 	"computerCountermeasures": {
 		"alarm": false,
 		"fakeShell": false,
 		"feedback": false,
 		"firewall": false,
 		"lockout": false,
-		"shockGridId": "none",
+		"shockGridId": null,
 		"wipe": false
 	},
 	"computerId": "basic-computer",
@@ -173,12 +173,12 @@ let defaultSelections = {
 	"customFrameBaseId": "light-freighter",
 	"customComponents": [],
 	"dedicatedComputerId": "basic-computer",
-	"defensiveCountermeasuresId": "none",
-	"defensiveCountermeasuresMaterialId": "none",
-	"deflectorShieldId": "none",
-	"driftEngineId": "none",
-	"expansionBayIds": ["none", "none", "none"],
-	"fortifiedHullId": "none",
+	"defensiveCountermeasuresId": null,
+	"defensiveCountermeasuresMaterialId": null,
+	"deflectorShieldId": null,
+	"driftEngineId": null,
+	"expansionBayIds": [null, null, null],
+	"fortifiedHullId": null,
 	"frameId": "light-freighter",
 	"hasAlgalShielding": 0,
 	"hasAutoDestruct": 0,
@@ -197,14 +197,14 @@ let defaultSelections = {
 	"hasSpaceStationFramework": 0,
 	"isSetDefaultCrewSkillValues": 0,
 	"isUseStrictRules": 1,
-	"powerCoreIds": ["none"],
-	"powerCoreSpecialMaterials": ["none"],
+	"powerCoreIds": [null],
+	"powerCoreSpecialMaterials": [null],
 	"ctNetworkNodes": 0,
-	"reinforcedBulkheadId": "none",
-	"roboticAppendageId": "none",
+	"reinforcedBulkheadId": null,
+	"roboticAppendageId": null,
 	"secondaryComputerId": "basic-computer",
-	"sensorsId": "none",
-	"sensorsMaterialId": "none",
+	"sensorsId": null,
+	"sensorsMaterialId": null,
 	"shieldType": "shields",
 	"shieldsByPosition": {
 		"forward": 0,
@@ -212,25 +212,25 @@ let defaultSelections = {
 		"port": 0,
 		"starboard": 0
 	},
-	"shieldsId": "none",
+	"shieldsId": null,
 	"shipConcept": "",
 	"shipName": "",
 	"sources": {
 		"pw": true,
 		"som": true
 	},
-	"thrustersId": "none",
-	"thrustersMaterialId": "none",
-	"thrustersBoosterId": "none",
-	"thrustersBoosterMaterialId": "none",
+	"thrustersId": null,
+	"thrustersMaterialId": null,
+	"thrustersBoosterId": null,
+	"thrustersBoosterMaterialId": null,
 	"tierId": "1",
 	"version": "1.0.1",
-	"viId": "none",
-	"viHoloProjectorId": "none",
-	"viSkillExpanderId": "none",
+	"viId": null,
+	"viHoloProjectorId": null,
+	"viSkillExpanderId": null,
 	"weaponMounts": {
 		"forward": [{
-			"weaponId": "none",
+			"weaponId": null,
 			"weight": "light",
 			"templateWeight": "light",
 			"isFromTemplate": true,
@@ -238,9 +238,9 @@ let defaultSelections = {
 			"isLinked": false,
 			"canHaveOrbitalDiscount": false,
 			"hasOrbitalDiscount": false,
-			"specialMaterial": "none"
+			"specialMaterial": null
 		}, {
-			"weaponId": "none",
+			"weaponId": null,
 			"weight": "light",
 			"templateWeight": "light",
 			"isFromTemplate": true,
@@ -248,11 +248,11 @@ let defaultSelections = {
 			"isLinked": false,
 			"canHaveOrbitalDiscount": false,
 			"hasOrbitalDiscount": false,
-			"specialMaterial": "none"
+			"specialMaterial": null
 		}],
 		"aft": [],
 		"port": [{
-			"weaponId": "none",
+			"weaponId": null,
 			"weight": "light",
 			"templateWeight": "light",
 			"isFromTemplate": true,
@@ -260,10 +260,10 @@ let defaultSelections = {
 			"isLinked": false,
 			"canHaveOrbitalDiscount": false,
 			"hasOrbitalDiscount": false,
-			"specialMaterial": "none"
+			"specialMaterial": null
 		}],
 		"starboard": [{
-			"weaponId": "none",
+			"weaponId": null,
 			"weight": "light",
 			"templateWeight": "light",
 			"isFromTemplate": true,
@@ -271,7 +271,7 @@ let defaultSelections = {
 			"isLinked": false,
 			"canHaveOrbitalDiscount": false,
 			"hasOrbitalDiscount": false,
-			"specialMaterial": "none"
+			"specialMaterial": null
 		}],
 		"turret": []
 	}
