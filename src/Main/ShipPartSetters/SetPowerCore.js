@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {getPowerCoreData, getPowerCoreIdList, getCoreQuantityFromSize, findComponentByFrameId, doesFrameSizeAllowCore} from '../../metaTables'
 import frames from '../../frames.json'
-import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
+import { capitalizeEachWord } from '../../utils';
 
 function SetPowerCore(props) {
   let {customShipParts, setCustomShipParts} = props;
-  let {tierId, powerCoreIds} = customShipParts
+  let {powerCoreIds} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
   let frameSize = findComponentByFrameId(frames, frameId, 'size')

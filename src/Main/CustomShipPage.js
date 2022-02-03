@@ -5,6 +5,7 @@ import SetPowerCore from './ShipPartSetters/SetPowerCore';
 import defaultSelections from '../defaultShipSelection';
 import {validateShip} from '../metaTables';
 import SetThrusters from './ShipPartSetters/SetThrusters';
+import SetArmor from './ShipPartSetters/SetArmor';
 
 function CustomShipPage(props) {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
@@ -14,7 +15,6 @@ function CustomShipPage(props) {
   })
 
   // TODO: metaTables setNewFrame, thrusters don't work
-  // TODO: change 'none' usage to null
   // TODO: metaTables cleanup
   // TODO: power core render cleanup
 
@@ -27,6 +27,7 @@ function CustomShipPage(props) {
         <SetFrame customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} ></SetFrame>
         <SetPowerCore customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} ></SetPowerCore>
         <SetThrusters customShipParts={customShipParts} setCustomShipParts={setCustomShipParts}></SetThrusters>
+        <SetArmor customShipParts={customShipParts} setCustomShipParts={setCustomShipParts}></SetArmor>
       </div>
     </div>
   );

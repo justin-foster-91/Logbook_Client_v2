@@ -91,6 +91,25 @@ let thrusters = {
   'SC8':	['Sc',	8,	-1,	500,	24, 'DS', false]
 }
 
+let armor = {
+  // Name, AC, TL, Turn, Cost (in BP)
+  'Mk 1': [+1, null, null, 1],
+  'Mk 2': [+2, null, null, 2],
+  'Mk 3': [+3, null, null, 3],
+  'Mk 4': [+4, null, null, 5],
+  'Mk 5': [+5, -1, null, 7],
+  'Mk 6': [+6, -1, null, 9],
+  'Mk 7': [+7, -1, null, 12],
+  'Mk 8': [+8, -1, null, 15],
+  'Mk 9': [+9, -2, +1, 18],
+  'Mk 10': [+10, -2, +1, 21],
+  'Mk 11': [+11, -2, +1, 25],
+  'Mk 12': [+12, -3, +2, 30],
+  'Mk 13': [+13, -3, +2, 35],
+  'Mk 14': [+14, -3, +2, 40],
+  'Mk 15': [+15, -4, +3, 45]
+}
+
 const getTierData = (tierId) => {
   let array = shipTiers[tierId]
 
@@ -106,11 +125,20 @@ const getPowerCoreData = (powerCoreId) => {
 }
 
 const getThrusterData = (thrustersId) => {
-  if(thrustersId === null) return {size: null, speed: null, pilotingModifier: null, pcuCost: 0, bpCost: 0, source: null, sfsLegal: true};
+  if(thrustersId === null) return {size: null, speed: 0, pilotingModifier: 0, pcuCost: 0, bpCost: 0, source: null, sfsLegal: true};
 
-  let array = thrusters[capitalizeEachWord(thrustersId)]
+  let array = thrusters[thrustersId]
 
   return {size: array[0], speed: array[1], pilotingModifier: array[2], pcuCost: array[3], bpCost: array[4], source: array[5], sfsLegal: array[6]}
+}
+
+const getArmorData = (armorId, size) => {
+  if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0}
+
+  let sizeMod = {'Tiny': 1, 'Small': 2, 'Medium': 3, 'Large': 4, 'Huge': 5, 'Gargantuan': 6, 'Colossal': 7, 'Supercolossal': 8}
+  let array = armor[armorId]
+
+  return {acBonus: array[0], tlPenalty: array[1], turnDistance: array[2], bpCost: (array[3] * sizeMod[size]), sfsLegal: true}
 }
 
 const getTierIdList = () => {
@@ -123,6 +151,10 @@ const getPowerCoreIdList = () => {
 
 const getThrusterIdList = () => {
   return Object.keys(thrusters).sort((a, b) => a + b)
+}
+
+const getArmorIdList = () => {
+  return Object.keys(armor).sort((a, b) => a + b)
 }
 
 // TODO: add in bonus core from expansion
@@ -152,7 +184,7 @@ const doesFrameSizeAllowThruster = (thruster, frameSize) => {
   let sizeLetter = getThrusterData(thruster).size
   let sizeWord = sizeLetterToStringConverter(sizeLetter)
 
-  return sizeWord.match(frameSize);
+  return sizeWord.match(frameSize) ? true : false;
 }
 
 const findComponentByFrameId = (frames, frameId, returnComponent) => {
@@ -184,16 +216,12 @@ const frameChangingPowerCores = (powerCoreIds, frame) => {
 const frameChangingThrusters = (thrustersId, frame) => {
   // change thrusters to null if they don't fit the new frame
 
-  // console.log(thrustersId !== null);
-  // console.log(doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
-  console.log(thrustersId, findComponentByFrameId(frames, frame, 'size'));
+  console.log(thrustersId !== null);
+  console.log(!doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
 
-  // FIXME: HOW ON EARTH IS THIS NULL
-  console.log(doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
-
-  // if(thrustersId !== null && !doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size'))) {
-  //   thrustersId = null
-  // }
+  if(thrustersId !== null && !doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size'))) {
+    thrustersId = null
+  }
 }
 
 // Object ship => {validity: Bool, errors: [Error]}
@@ -286,9 +314,11 @@ export {
   getTierData, 
   getPowerCoreData, 
   getThrusterData,
+  getArmorData,
   getTierIdList, 
   getPowerCoreIdList, 
   getThrusterIdList,
+  getArmorIdList,
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,

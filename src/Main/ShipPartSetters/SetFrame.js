@@ -34,8 +34,6 @@ function SetFrame(props) {
     setCustomShipParts({...customShipParts})
   }
 
-
-
   return (
     <>
       <h3>Frame</h3>

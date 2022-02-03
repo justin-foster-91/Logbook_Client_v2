@@ -10,6 +10,7 @@ function SetThrusters(props) {
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
   let frameSize = findComponentByFrameId(frames, frameId, 'size')
+  let {speed, pilotingModifier, pcuCost, bpCost} = getThrusterData(thrustersId)
 
   const handleThrusterChange = (ev) => {
     customShipParts.thrustersId = ev.target.value.split(' ')[0]
@@ -34,11 +35,11 @@ function SetThrusters(props) {
       <p></p>
 
       <div>
-        Speed (in hexes): {getThrusterData(thrustersId).speed}; 
-        Piloting Modifier: {getThrusterData(thrustersId).pilotingModifier}
+        Speed (in hexes): {speed}; 
+        Piloting Modifier: {pilotingModifier}
       </div>
-        PCU cost: {getThrusterData(thrustersId).pcuCost}; 
-        BP cost: {getThrusterData(thrustersId).bpCost}
+        PCU cost: {pcuCost}; 
+        BP cost: {bpCost}
     </>
   );
 }
