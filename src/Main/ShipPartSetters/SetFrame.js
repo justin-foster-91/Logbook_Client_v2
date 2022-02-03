@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {getTierData, findComponentByFrameId, getPowerCoreData, getThrusterData} from '../../metaTables'
+import {getTierData, findComponentByFrameId, getPowerCoreData, getThrusterData, doesFrameSizeAllowCore, getCoreQuantityFromSize} from '../../metaTables'
 import frames from '../../frames.json'
 import { capitalizeEachWord, sizeLetterToStringConverter } from '../../utils';
 
@@ -27,42 +27,28 @@ function SetFrame(props) {
   let bpCost                  = findComponentByFrameId(frames, frameId, 'cost')
 
   const handleFrameIdChange = (ev) => {
-    // TODO: tidy up other ship parts if sizes don't make sense
+
+    // TODO:
+    // setNewFrame(customShipParts, frame)
+
+    // change power cores to 'none' if they don't fit the new frame
+    powerCoreIds.forEach((core, idx) => {
+      if(core !== 'none' && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, ev.target.value, 'size'))) {
+        customShipParts.powerCoreIds[idx] = 'none'
+      } 
+    })
+
+    // reduce length of the power core list if moving to a smaller frame
+    let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(frames, ev.target.value, 'size'))
+    if(powerCoreIds.length > newCoreAmount) customShipParts.powerCoreIds.length = newCoreAmount;
+
+    // TODO: set new thrusters
 
     customShipParts.frameId = ev.target.value
     setCustomShipParts({...customShipParts})
   }
 
-  //If size of saved core does not fit with frame size, set to 'none'
-  useEffect(() => {
-    // powerCoreIds.current = powerCoreIds.map(core => {
-    //   if(core === 'none' 
-    //     ? 0 
-    //     : getPowerCoreData(core).sizes.map(coreSize => sizeLetterToStringConverter(coreSize)).includes(size)) {
-    //       return core
-    //   } else return 'none'
-    // })
-  })
 
-  //If size of saved core does not fit with frame size, set to 'none'
-  useEffect(() => {
-    // console.log(sizeLetterToStringConverter(getThrusterData(thrustersId).size));
-  
-  //   if(thrustersId === 'none' 
-  //   ? 0 
-  //   : getThrusterData(thrustersId).size.map(coreSize => sizeLetterToStringConverter(coreSize)).includes(size)) {
-  //     return core
-  // } else return 'none'
-  })
-
-
-  // powerCoreIds.current = powerCoreIds.map(core => {
-  //   if(core === 'none' 
-  //     ? 0 
-  //     : getPowerCoreData(core).sizes.map(coreSize => sizeLetterToStringConverter(coreSize)).includes(size)) {
-  //       return core
-  //   } else return 'none'
-  // })
 
   return (
     <>

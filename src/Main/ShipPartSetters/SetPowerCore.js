@@ -13,12 +13,12 @@ function SetPowerCore(props) {
 
   // FIXME: move this code into SetFrame
   //If size of saved core does not fit with frame size, set to 'none'
-  powerCoreIds = powerCoreIds.map(core => {
-    if(core === 'none' ? 0 
-      : getPowerCoreData(core).sizes.map(size => sizeLetterToStringConverter(size)).includes(frameSize)) {
-        return core
-    } else return 'none'
-  })
+  // powerCoreIds = powerCoreIds.map(core => {
+  //   if(core === 'none' ? 0 
+  //     : getPowerCoreData(core).sizes.map(size => sizeLetterToStringConverter(size)).includes(frameSize)) {
+  //       return core
+  //   } else return 'none'
+  // })
 
   let pcuProvided = powerCoreIds
     .map(core => getPowerCoreData(core).pcuProvided)
