@@ -1,9 +1,9 @@
 import './App.css';
 import { Routes, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import HangarPage from './HangarPage';
-import TemplatePage from './TemplatePage';
-import CustomShipPage from './CustomShipPage';
+import HangarPage from './Pages/HangarPage';
+import TemplatePage from './Pages/TemplatePage';
+import CustomShipPage from './Pages/CustomShipPage';
 
 function App() {
   const [userShips, setUserShips] = useState([])

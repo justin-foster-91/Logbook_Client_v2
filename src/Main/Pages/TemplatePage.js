@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import templates from '../shipTemplates';
-import frames from '../frames.json';
-import {capitalizeEachWord, readableIds} from '../utils';
-import {findComponentByFrameId} from '../shipFunctions';
+import templates from '../../shipTemplates';
+import frames from '../../frames.json';
+import {capitalizeEachWord, readableIds} from '../../utils';
+import {findComponentByFrameId} from '../../shipFunctions';
 
 
 const TemplatePage = (props) => {

@@ -1,5 +1,10 @@
 const capitalizeEachWord = (component) => {
-  return component.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
+  let returnComponent = component;
+
+  returnComponent = returnComponent.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
+  returnComponent = returnComponent.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
+
+  return returnComponent;
 }
 
 // powerCoreIds => Power Cores
