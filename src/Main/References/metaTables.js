@@ -57,6 +57,7 @@ let powerCores = {
 }
 
 let thrusters = {
+  // Thruster: [size, speed, pilotingModifier, pcuCost, bpCost, source, sfsLegal]
   'T6':	['T',	6,	+1,	20,	3, 'CRB', true],
   'T8':	['T',	8,	+0,	25,	4, 'CRB', true],
   'T10':	['T',	10,	+0,	30,	5, 'CRB', true],
@@ -91,6 +92,7 @@ let thrusters = {
 }
 
 let armor = {
+  // Armor: [acBonus, tlPenalty, turnDistance, bpCost]
   'Mk 1': [+1, null, null, 1],
   'Mk 2': [+2, null, null, 2],
   'Mk 3': [+3, null, null, 3],
@@ -140,7 +142,18 @@ const getArmorData = (armorId, size) => {
 }
 
 const getTierIdList = () => {
-  return Object.keys(shipTiers).sort((a, b) => eval(a) - eval(b))
+  return Object
+    .keys(shipTiers)
+    .map(key => key.includes('/') ? key.split('/').reduce((total, num) => total / num) : key)
+    .sort((a, b) => a - b)
+    .map(key => {
+      if(key === .25) key = '1/4'
+      if(key < .4 && key > .3) key = '1/3'
+      if(key === .5) key = '1/2'
+      return key
+    })
+
+  // return Object.keys(shipTiers).sort((a, b) => eval(a) - eval(b))
 }
 
 const getPowerCoreIdList = () => {

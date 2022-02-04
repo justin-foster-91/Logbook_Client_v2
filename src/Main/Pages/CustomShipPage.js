@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import SetTier from '../ShipPartSetters/SetTier';
 import SetFrame from '../ShipPartSetters/SetFrame';
 import SetPowerCore from '../ShipPartSetters/SetPowerCore';
-import defaultSelections from '../../defaultShipSelection';
-import {validateShip} from '../../shipFunctions';
+import defaultSelections from '../References/defaultShipSelection';
+import {validateShip} from '../References/shipFunctions';
 import SetThrusters from '../ShipPartSetters/SetThrusters';
 import SetArmor from '../ShipPartSetters/SetArmor';
 
@@ -14,8 +14,10 @@ function CustomShipPage(props) {
     console.log(validateShip(customShipParts))
   })
 
+  // TODO: is armor and ablative armor stackable or mutually exclusive
+
   // Required systems: Tier (APL based), Frame, Power Core, Thrusters
-  // Other systems needed for combat, but not required for a starship
+  // Other systems needed for combat, but not required for a starship 
 
   return (
     <div className='customShipDisplay'>

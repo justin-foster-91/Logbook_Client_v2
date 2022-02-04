@@ -32,9 +32,9 @@ const doesFrameSizeAllowThruster = (thruster, frameSize) => {
   return sizeWord.match(frameSize) ? true : false;
 }
 
-const findComponentByFrameId = (frames, frameId, returnComponent) => {
+const findComponentByFrameId = (frameId, returnComponent) => {
   let newFrame = frames.find(frame => frame.type === capitalizeEachWord(frameId))
-  
+   
   return newFrame[returnComponent]
 }
 
@@ -50,19 +50,19 @@ const setNewFrame = (ship, frameId) => {
 const updatePowerCoresToMatchFrame = (ship) => {
   // change power cores to null if they don't fit the new frame
   ship.powerCoreIds.forEach((core, idx) => {
-    if(core !== null && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, ship.frameId, 'size'))) {
+    if(core !== null && !doesFrameSizeAllowCore(core, findComponentByFrameId(ship.frameId, 'size'))) {
       ship.powerCoreIds[idx] = null
     } 
   })
 
   // reduce length of the power core list if moving to a smaller frame
-  let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(frames, ship.frameId, 'size'))
+  let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(ship.frameId, 'size'))
   if(ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
 }
 
 const updateThrustersToMatchFrame = (ship) => {
   // change thrusters to null if they don't fit the new frame
-  if(ship.thrustersId !== null && !doesFrameSizeAllowThruster(ship.thrustersId, findComponentByFrameId(frames, ship.frameId, 'size'))) {
+  if(ship.thrustersId !== null && !doesFrameSizeAllowThruster(ship.thrustersId, findComponentByFrameId(ship.frameId, 'size'))) {
     ship.thrustersId = null
   }
 }
@@ -109,7 +109,7 @@ const validatePowerCores = (ship) => {
     return {validity: false, errors: [{shipPart: 'Power Cores', message: 'All ships must have at least 1 Power Core.'}]}
   }
 
-  if(findComponentByFrameId(frames, ship.frameId, 'size').toLowerCase() === 'supercolossal'){
+  if(findComponentByFrameId(ship.frameId, 'size').toLowerCase() === 'supercolossal'){
     // ship frame is supercolossal
 
     let supercolossalCoreBoolArray = ship.powerCoreIds.map(core => getPowerCoreData(core).sizes.includes('Sc'))

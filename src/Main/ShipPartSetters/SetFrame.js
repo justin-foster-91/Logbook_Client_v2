@@ -1,8 +1,8 @@
 import React from 'react';
-import { getTierData } from '../../metaTables'
-import { findComponentByFrameId, setNewFrame } from '../../shipFunctions';
-import frames from '../../frames.json'
-import { capitalizeEachWord } from '../../utils';
+import { getTierData } from '../References/metaTables'
+import { findComponentByFrameId, setNewFrame } from '../References/shipFunctions';
+import frames from '../References/frames.json'
+import { capitalizeEachWord } from '../References/utils';
 
 function SetFrame(props) {
 
@@ -16,21 +16,21 @@ function SetFrame(props) {
   }
 
   let frameId                 = capitalizeEachWord(customShipParts.frameId);
-  let {startTotal, increment} = findComponentByFrameId(frames, frameId, 'hp')
-  let size                    = findComponentByFrameId(frames, frameId, 'size')
-  let maneuverability         = findComponentByFrameId(frames, frameId, 'maneuverability')
+  let {startTotal, increment} = findComponentByFrameId(frameId, 'hp')
+  let size                    = findComponentByFrameId(frameId, 'size')
+  let maneuverability         = findComponentByFrameId(frameId, 'maneuverability')
   let hp                      = startTotal + (increment * getTierData(tierId).hpIncrementMultiplier)
-  let dt                      = findComponentByFrameId(frames, frameId, 'dt')
-  let ct                      = findComponentByFrameId(frames, frameId, 'ct')
-  let expansions              = formatExpansions(findComponentByFrameId(frames, frameId, 'expansions'))
-  let minCrew                 = findComponentByFrameId(frames, frameId, 'minimumCrew')
-  let maxCrew                 = findComponentByFrameId(frames, frameId, 'maximumCrew')
-  let bpCost                  = findComponentByFrameId(frames, frameId, 'cost')
+  let dt                      = findComponentByFrameId(frameId, 'dt')
+  let ct                      = findComponentByFrameId(frameId, 'ct')
+  let expansions              = formatExpansions(findComponentByFrameId(frameId, 'expansions'))
+  let minCrew                 = findComponentByFrameId(frameId, 'minimumCrew')
+  let maxCrew                 = findComponentByFrameId(frameId, 'maximumCrew')
+  let bpCost                  = findComponentByFrameId(frameId, 'cost')
 
   const handleFrameIdChange = (ev) => {
-    setNewFrame(customShipParts, ev.target.value)
+    let frameOption = ev.target.value
 
-    customShipParts.frameId = ev.target.value
+    setNewFrame(customShipParts, frameOption)
     setCustomShipParts({...customShipParts})
   }
 

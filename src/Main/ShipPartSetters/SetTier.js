@@ -1,5 +1,5 @@
 import React from 'react';
-import {getTierData, getTierIdList} from '../../metaTables'
+import {getTierData, getTierIdList} from '../References/metaTables'
 
 function SetTier(props) {
 
@@ -9,7 +9,9 @@ function SetTier(props) {
   let {buildPoints, hpIncrementMultiplier} = getTierData(tierId)
 
   const handleTierChange = (ev) => {
-    customShipParts.tierId = ev.target.value
+    let tierOption = ev.target.value
+
+    customShipParts.tierId = tierOption
     setCustomShipParts({...customShipParts})
   }
 

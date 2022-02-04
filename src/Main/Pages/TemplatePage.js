@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import templates from '../../shipTemplates';
-import frames from '../../frames.json';
-import {capitalizeEachWord, readableIds} from '../../utils';
-import {findComponentByFrameId} from '../../shipFunctions';
+import React, { useState } from "react";
+import templates from '../References/shipTemplates';
+import {capitalizeEachWord, readableIds} from '../References/utils';
+import {findComponentByFrameId} from '../References/shipFunctions';
 
 
 const TemplatePage = (props) => {
@@ -50,7 +49,7 @@ const TemplateBreakdown = (props) => {
   let readableFrameId = ''
 
   if(props.shipName) {
-    foundSize = findComponentByFrameId(frames, props.frameId.replace("-", " "), 'size')
+    foundSize = findComponentByFrameId(props.frameId.replace("-", " "), 'size')
     readableFrameId = capitalizeEachWord(props.frameId)
   }
 

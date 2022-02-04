@@ -1,8 +1,7 @@
 import React from 'react';
-import {getThrusterData, getThrusterIdList } from '../../metaTables';
-import { findComponentByFrameId, doesFrameSizeAllowThruster } from '../../shipFunctions';
-import frames from '../../frames.json';
-import {capitalizeEachWord} from '../../utils';
+import {getThrusterData, getThrusterIdList } from '../References/metaTables';
+import { findComponentByFrameId, doesFrameSizeAllowThruster } from '../References/shipFunctions';
+import {capitalizeEachWord} from '../References/utils';
 
 function SetThrusters(props) {
 
@@ -10,11 +9,13 @@ function SetThrusters(props) {
   let {thrustersId} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
-  let frameSize = findComponentByFrameId(frames, frameId, 'size')
+  let frameSize = findComponentByFrameId(frameId, 'size')
   let {speed, pilotingModifier, pcuCost, bpCost} = getThrusterData(thrustersId)
 
   const handleThrusterChange = (ev) => {
-    customShipParts.thrustersId = ev.target.value.split(' ')[0]
+    let thrusterOption = ev.target.value.split(' ')[0]
+
+    customShipParts.thrustersId = thrusterOption
     setCustomShipParts({...customShipParts})
   }
 

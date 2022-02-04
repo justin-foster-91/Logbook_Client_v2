@@ -1,25 +1,24 @@
 import React from 'react';
-import {getPowerCoreData, getPowerCoreIdList } from '../../metaTables';
-import { findComponentByFrameId, doesFrameSizeAllowCore, getCoreQuantityFromSize } from '../../shipFunctions';
-import frames from '../../frames.json';
-import { capitalizeEachWord } from '../../utils';
+import {getPowerCoreData, getPowerCoreIdList } from '../References/metaTables';
+import { findComponentByFrameId, doesFrameSizeAllowCore, getCoreQuantityFromSize } from '../References/shipFunctions';
+import { capitalizeEachWord } from '../References/utils';
 
 const PowerCoreSelections = (props) => {
   let {customShipParts, setCustomShipParts} = props
   let {powerCoreIds} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
-  let frameSize = findComponentByFrameId(frames, frameId, 'size')
+  let frameSize = findComponentByFrameId(frameId, 'size')
   let powerCoreQuantity = getCoreQuantityFromSize(frameSize)
 
   const handlePowerCoreChange = (event) => {
     let coreIndex = event.target.name
-    let selectedCoreOption = event.target.value
+    let coreOption = event.target.value
 
-    if(selectedCoreOption === 'None') selectedCoreOption = null
-    else selectedCoreOption = selectedCoreOption.split(' ').slice(0, 2).join(' ')
+    if(coreOption === 'None') coreOption = null
+    else coreOption = coreOption.split(' ').slice(0, 2).join(' ')
 
-    customShipParts.powerCoreIds[coreIndex] = selectedCoreOption
+    customShipParts.powerCoreIds[coreIndex] = coreOption
     setCustomShipParts({...customShipParts})
   }
 

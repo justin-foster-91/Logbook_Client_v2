@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import frames from '../../frames.json';
-import {capitalizeEachWord} from '../../utils';
-import {findComponentByFrameId} from '../../shipFunctions';
+import React from "react";
+import {capitalizeEachWord} from '../References/utils';
+import {findComponentByFrameId} from '../References/shipFunctions';
 
 
 const HangarPage = (props) => {
@@ -16,7 +15,8 @@ const HangarPage = (props) => {
       {/* Display ships that have been selected */}
       {props.userShips.map((ship, idx) => {
         return <div className="hangarShips" key={ship.shipName + idx}>
-          {ship.shipName} (Tier {ship.tierId} [{findComponentByFrameId(frames, ship.frameId.replace("-", " "), 'size')}] {capitalizeEachWord(ship.frameId)})
+          {/* TODO: double check this replace usage */}
+          {ship.shipName} (Tier {ship.tierId} [{findComponentByFrameId(ship.frameId.replace("-", " "), 'size')}] {capitalizeEachWord(ship.frameId)})
         </div>
       })}
 

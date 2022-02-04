@@ -1,8 +1,7 @@
 import React from 'react';
-import { getPowerCoreData } from '../../metaTables';
-import { findComponentByFrameId } from '../../shipFunctions';
-import frames from '../../frames.json'
-import { capitalizeEachWord } from '../../utils';
+import { getPowerCoreData } from '../References/metaTables';
+import { findComponentByFrameId } from '../References/shipFunctions';
+import { capitalizeEachWord } from '../References/utils';
 import PowerCoreSelections from './PowerCoreSelections';
 
 function SetPowerCore(props) {
@@ -10,7 +9,7 @@ function SetPowerCore(props) {
   let {powerCoreIds} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
-  let frameSize = findComponentByFrameId(frames, frameId, 'size')
+  let frameSize = findComponentByFrameId(frameId, 'size')
 
   let pcuProvided = powerCoreIds
     .map(core => getPowerCoreData(core).pcuProvided)
