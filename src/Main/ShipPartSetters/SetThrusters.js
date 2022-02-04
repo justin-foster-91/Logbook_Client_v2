@@ -1,5 +1,6 @@
 import React from 'react';
-import {getThrusterData, getThrusterIdList, findComponentByFrameId, doesFrameSizeAllowThruster} from '../../metaTables';
+import {getThrusterData, getThrusterIdList } from '../../metaTables';
+import { findComponentByFrameId, doesFrameSizeAllowThruster } from '../../shipFunctions';
 import frames from '../../frames.json';
 import {capitalizeEachWord} from '../../utils';
 

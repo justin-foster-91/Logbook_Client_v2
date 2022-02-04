@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import frames from '../frames.json';
 import {capitalizeEachWord} from '../utils';
-import {findComponentByFrameId} from '../metaTables';
+import {findComponentByFrameId} from '../shipFunctions';
 
 
 const HangarPage = (props) => {

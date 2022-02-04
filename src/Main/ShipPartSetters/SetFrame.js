@@ -1,5 +1,6 @@
 import React from 'react';
-import { getTierData, findComponentByFrameId, setNewFrame } from '../../metaTables'
+import { getTierData } from '../../metaTables'
+import { findComponentByFrameId, setNewFrame } from '../../shipFunctions';
 import frames from '../../frames.json'
 import { capitalizeEachWord } from '../../utils';
 
@@ -27,7 +28,6 @@ function SetFrame(props) {
   let bpCost                  = findComponentByFrameId(frames, frameId, 'cost')
 
   const handleFrameIdChange = (ev) => {
-    // TODO: set new thrusters
     setNewFrame(customShipParts, ev.target.value)
 
     customShipParts.frameId = ev.target.value

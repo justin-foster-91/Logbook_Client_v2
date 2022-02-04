@@ -92,7 +92,6 @@ let thrusters = {
 }
 
 let armor = {
-  // Name, AC, TL, Turn, Cost (in BP)
   'Mk 1': [+1, null, null, 1],
   'Mk 2': [+2, null, null, 2],
   'Mk 3': [+3, null, null, 3],
@@ -193,34 +192,32 @@ const findComponentByFrameId = (frames, frameId, returnComponent) => {
   return newFrame[returnComponent]
 }
 
-const setNewFrame = (shipParts, frame) => {
-  let {powerCoreIds, thrustersId} = shipParts
+// (Object, String) => void
+const setNewFrame = (ship, frameId) => {
 
-  frameChangingPowerCores(powerCoreIds, frame)
-  frameChangingThrusters(thrustersId, frame)
+  ship.frameId = frameId
+
+  updatePowerCoresToMatchFrame(ship)
+  updateThrustersToMatchFrame(ship)
 }
 
-const frameChangingPowerCores = (powerCoreIds, frame) => {
+const updatePowerCoresToMatchFrame = (ship) => {
   // change power cores to null if they don't fit the new frame
-  powerCoreIds.forEach((core, idx) => {
-    if(core !== null && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, frame, 'size'))) {
-      powerCoreIds[idx] = null
+  ship.powerCoreIds.forEach((core, idx) => {
+    if(core !== null && !doesFrameSizeAllowCore(core, findComponentByFrameId(frames, ship.frameId, 'size'))) {
+      ship.powerCoreIds[idx] = null
     } 
   })
 
   // reduce length of the power core list if moving to a smaller frame
-  let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(frames, frame, 'size'))
-  if(powerCoreIds.length > newCoreAmount) powerCoreIds.length = newCoreAmount;
+  let newCoreAmount = getCoreQuantityFromSize(findComponentByFrameId(frames, ship.frameId, 'size'))
+  if(ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
 }
 
-const frameChangingThrusters = (thrustersId, frame) => {
+const updateThrustersToMatchFrame = (ship) => {
   // change thrusters to null if they don't fit the new frame
-
-  console.log(thrustersId !== null);
-  console.log(!doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size')));
-
-  if(thrustersId !== null && !doesFrameSizeAllowThruster(thrustersId, findComponentByFrameId(frames, frame, 'size'))) {
-    thrustersId = null
+  if(ship.thrustersId !== null && !doesFrameSizeAllowThruster(ship.thrustersId, findComponentByFrameId(frames, ship.frameId, 'size'))) {
+    ship.thrustersId = null
   }
 }
 
@@ -319,10 +316,11 @@ export {
   getPowerCoreIdList, 
   getThrusterIdList,
   getArmorIdList,
-  getCoreQuantityFromSize,
-  doesFrameSizeAllowCore,
-  doesFrameSizeAllowThruster,
-  findComponentByFrameId,
-  setNewFrame,
-  validateShip
+
+  // getCoreQuantityFromSize,
+  // doesFrameSizeAllowCore,
+  // doesFrameSizeAllowThruster,
+  // findComponentByFrameId,
+  // setNewFrame,
+  // validateShip
 }

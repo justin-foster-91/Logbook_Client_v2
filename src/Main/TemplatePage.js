@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import templates from '../shipTemplates';
 import frames from '../frames.json';
 import {capitalizeEachWord, readableIds} from '../utils';
-import {findComponentByFrameId} from '../metaTables';
+import {findComponentByFrameId} from '../shipFunctions';
 
 
 const TemplatePage = (props) => {

@@ -3,7 +3,7 @@ import SetTier from './ShipPartSetters/SetTier';
 import SetFrame from './ShipPartSetters/SetFrame';
 import SetPowerCore from './ShipPartSetters/SetPowerCore';
 import defaultSelections from '../defaultShipSelection';
-import {validateShip} from '../metaTables';
+import {validateShip} from '../shipFunctions';
 import SetThrusters from './ShipPartSetters/SetThrusters';
 import SetArmor from './ShipPartSetters/SetArmor';
 
@@ -13,10 +13,6 @@ function CustomShipPage(props) {
   useEffect(() => {
     console.log(validateShip(customShipParts))
   })
-
-  // TODO: metaTables setNewFrame, thrusters don't work
-  // TODO: metaTables cleanup
-  // TODO: power core render cleanup
 
   return (
     <div className='customShipDisplay'>
