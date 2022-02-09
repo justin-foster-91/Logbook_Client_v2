@@ -16,7 +16,6 @@ const PowerCoreSelections = (props) => {
     let coreOption = event.target.value
 
     if(coreOption === 'None') coreOption = null
-    else coreOption = coreOption.split(' ').slice(0, 2).join(' ')
 
     customShipParts.powerCoreIds[coreIndex] = coreOption
     setCustomShipParts({...customShipParts})
@@ -26,20 +25,12 @@ const PowerCoreSelections = (props) => {
     Array(powerCoreQuantity).fill(1).map((dropdown, idx) => {
       return <div key={'powerCore'+idx}>
         Power Core {idx+1} <br/>
-        {/* defaultValue must match the option's string */}
-        <select 
-          defaultValue={
-            (powerCoreIds[idx] === undefined || powerCoreIds[idx] === null)
-              ? 'None' 
-              : `${capitalizeEachWord(powerCoreIds[idx])} (PCU ${getPowerCoreData(powerCoreIds[idx]).pcuProvided} | Size: ${getPowerCoreData(powerCoreIds[idx]).sizes.join(', ')})`
-          } 
-          name={idx} onChange={handlePowerCoreChange}
-        >
+        <select defaultValue={powerCoreIds[idx] === null ? 'None' : powerCoreIds[idx]} name={idx} onChange={handlePowerCoreChange}>
           
           <option key='null'>None</option>
           {getPowerCoreIdList().map((core, idx) => 
             doesFrameSizeAllowCore(core, frameSize) &&
-            <option key={'option'+idx}>
+            <option key={'option'+idx} value={core}>
               {`${core} (PCU ${getPowerCoreData(core).pcuProvided} | Size: ${getPowerCoreData(core).sizes.join(', ')})`}
             </option>
           )}

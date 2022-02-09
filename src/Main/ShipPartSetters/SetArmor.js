@@ -2,6 +2,7 @@ import React from 'react';
 import {getArmorData, getArmorIdList} from '../References/metaTables';
 import { capitalizeEachWord } from '../References/utils';
 import { findComponentByFrameId } from '../References/shipFunctions';
+import AblativeArmor from './AblativeArmor';
 
 function SetArmor(props) {
 
@@ -11,13 +12,21 @@ function SetArmor(props) {
   let frameId = capitalizeEachWord(customShipParts.frameId);
   let size = findComponentByFrameId(frameId, 'size')
 
-  let { acBonus, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size)
+  let { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size)
 
   const handleArmorChange = (ev) => {
-    let armorOption = ev.target.value.replace(' Armor', '')
+    let armorOption = ev.target.value
+
+    if(armorOption === 'None') armorOption = null
 
     customShipParts.armorId = armorOption
     setCustomShipParts({...customShipParts})
+  }
+
+  const renderArmorBonus = () => {
+    if(!acBonus && !tempHP) return 'AC/Temp HP: 0; '
+    if(acBonus) return `Bonus AC: ${acBonus}; `
+    else return `Temp HP: ${tempHP}; `
   }
 
   const renderSpecial = () => {
@@ -32,19 +41,35 @@ function SetArmor(props) {
       <h3>Armor</h3>
 
       <p></p>
-      <select defaultValue={armorId === undefined || armorId === null ? 'None' : `${armorId} Thrusters`} onChange={handleArmorChange}>
+      {/* TODO: default value needs to accommodate all possible armor options */}
+      <select defaultValue={armorId === undefined || armorId === null ? 'None' : armorId} onChange={handleArmorChange}>
         <option key='null'>None</option>
-        {getArmorIdList().map((thruster, idx) => 
-          <option key={idx}>{thruster} Armor</option>
-        )}
+        {getArmorIdList().map((armor, idx) => {
+          if(armor.includes('Mk')) return <option key={idx} value={armor}>{armor} Armor (+{getArmorData(armor, size).acBonus} AC)</option>
+          if(armor.includes('Energy')) return <option key={idx} value={armor}>{armor}</option>
+          if(armor.includes('ablative')) return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
+          else return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
+        })}
       </select><br/>
       
       {/* TODO: */}
       Special Material: 
       <p></p>
 
+      {armorId && armorId.includes('ablative') &&
+        <AblativeArmor customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} size={size}></AblativeArmor> 
+      }
+      <p></p>
+
+      {armorId && armorId.includes('Energy') && 
+        'A ship equipped with energy-absorbent plating can store some of the energy that strikes the hull, redirecting that energy to power the ship’s systems. ' +
+        'Once per turn, when a ship with energy-absorbent plating is hit by an attack that penetrates its shields, the ship’s engineer may immediately take a free divert action. ' + 
+        'The boost granted by this free divert action does not stack with the benefit of any other divert action already benefiting the ship.'
+      }
+      <p></p>
+
       <div>
-        Bonus to AC: {acBonus};
+        {renderArmorBonus()}
         Special: {renderSpecial()}
       </div>
         BP cost: {bpCost}

@@ -14,10 +14,14 @@ function CustomShipPage(props) {
     console.log(validateShip(customShipParts))
   })
 
-  // TODO: is armor and ablative armor stackable or mutually exclusive
+  // TODO: explain TL and turn penalties when they happen
 
-  // Required systems: Tier (APL based), Frame, Power Core, Thrusters
-  // Other systems needed for combat, but not required for a starship 
+  // TODO: ship validation for temp hp
+  // TODO: re-balance button
+  // TODO: empty ablativeArmorByPosition values when no longer ablative armor
+
+  // TODO: implement prop types
+  // TODO: context: track TL and other penalties
 
   return (
     <div className='customShipDisplay'>
