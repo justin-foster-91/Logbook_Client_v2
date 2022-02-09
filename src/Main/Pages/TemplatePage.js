@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import templates from '../References/shipTemplates';
 import {capitalizeEachWord, readableIds} from '../References/utils';
 import {findComponentByFrameId} from '../References/shipFunctions';
+import { ShipsContext } from "../Context/shipContext";
 
-
-const TemplatePage = (props) => {
+const TemplatePage = () => {
   const [selectedTemplate, setSelectedTemplate] = useState({});
+  const { userShips, setUserShips } = useContext(ShipsContext);
 
   return (
     <div className="templateDisplay">
@@ -36,7 +37,7 @@ const TemplatePage = (props) => {
 
       <Link to="/hangar">
         <button>Cancel</button>
-        <button onClick={() => props.setUserShips((userShips) => userShips.concat([selectedTemplate]))}>Add Ship</button>
+        <button onClick={() => setUserShips((userShips) => userShips.concat([selectedTemplate]))}>Add Ship</button>
       </Link>
       
     </div>

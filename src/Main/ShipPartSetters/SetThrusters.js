@@ -33,7 +33,8 @@ function SetThrusters(props) {
           doesFrameSizeAllowThruster(thruster, frameSize) && 
           <option key={idx} value={thruster}>{thruster} Thrusters</option>
         )}
-      </select><br/>
+      </select>
+      <br/>
       {/* TODO: */}
       Special Material: 
       <p></p>

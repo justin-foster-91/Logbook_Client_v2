@@ -30,7 +30,7 @@ function SetArmor(props) {
   }
 
   const renderSpecial = () => {
-    if(tlPenalty && turnDistance) return `${tlPenalty} TL; ${turnDistance} turn distance`
+    if(tlPenalty && turnDistance) return `${tlPenalty} TL; +${turnDistance} turn distance`
     if(tlPenalty) return `${tlPenalty} TL`
 
     return 'n/a'
@@ -50,7 +50,8 @@ function SetArmor(props) {
           if(armor.includes('ablative')) return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
           else return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
         })}
-      </select><br/>
+      </select>
+      <br/>
       
       {/* TODO: */}
       Special Material: 

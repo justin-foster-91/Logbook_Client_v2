@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, {useContext} from "react";
 import {capitalizeEachWord} from '../References/utils';
 import {findComponentByFrameId} from '../References/shipFunctions';
+import { ShipsContext } from "../Context/shipContext";
 
-
-const HangarPage = (props) => {
-
+const HangarPage = () => {
+  const { userShips } = useContext(ShipsContext);
+  
   return (
     <div className="hangarDisplay">
       <h2>Hangar Page</h2>
@@ -13,7 +14,7 @@ const HangarPage = (props) => {
       <p></p>
 
       {/* Display ships that have been selected */}
-      {props.userShips.map((ship, idx) => {
+      {userShips.map((ship, idx) => {
         return <div className="hangarShips" key={ship.shipName + idx}>
           {/* TODO: double check this replace usage */}
           {ship.shipName} (Tier {ship.tierId} [{findComponentByFrameId(ship.frameId.replace("-", " "), 'size')}] {capitalizeEachWord(ship.frameId)})

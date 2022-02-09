@@ -24,7 +24,8 @@ const PowerCoreSelections = (props) => {
   return(
     Array(powerCoreQuantity).fill(1).map((dropdown, idx) => {
       return <div key={'powerCore'+idx}>
-        Power Core {idx+1} <br/>
+        Power Core {idx+1} 
+        <br/>
         <select defaultValue={powerCoreIds[idx] === null ? 'None' : powerCoreIds[idx]} name={idx} onChange={handlePowerCoreChange}>
           
           <option key='null'>None</option>
@@ -35,7 +36,8 @@ const PowerCoreSelections = (props) => {
             </option>
           )}
 
-        </select><br/>
+        </select>
+        <br/>
         {/* TODO: */}
         Special Material: 
         <p></p>

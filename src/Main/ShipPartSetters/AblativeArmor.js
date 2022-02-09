@@ -11,11 +11,7 @@ function AblativeArmor(props) {
   let usedHP = forward + port + starboard + aft
 
   useEffect(() => {
-    ablativeArmorByPosition.forward = balancedHP;
-    ablativeArmorByPosition.port = balancedHP;
-    ablativeArmorByPosition.starboard = balancedHP;
-    ablativeArmorByPosition.aft = balancedHP;
-    setCustomShipParts({...customShipParts})
+    balanceAllHP()
   }, [])
 
   const handleTempHPChange = (ev) => {
@@ -27,13 +23,27 @@ function AblativeArmor(props) {
     setCustomShipParts({...customShipParts})
   }
 
-  const isWithinTotalHP = () => {
-    return usedHP <= maxHP
+  const balanceAllHP = () => {
+    ablativeArmorByPosition.forward = balancedHP;
+    ablativeArmorByPosition.port = balancedHP;
+    ablativeArmorByPosition.starboard = balancedHP;
+    ablativeArmorByPosition.aft = balancedHP;
+    setCustomShipParts({...customShipParts})
+  }
+
+  const setArcHPValues = (ev) => {
+    ev.preventDefault()
+    balanceAllHP()
+    console.log(ev);
+  }
+
+  const isCorrectTotalHP = () => {
+    return usedHP === maxHP
   }
 
   const isBalanced = () => {
     let arcs = [forward, port, starboard, aft]
-    return arcs.every(arc => arc === balancedHP)
+    return arcs.every(arc => arc === forward)
   }
 
   return (
@@ -50,13 +60,17 @@ function AblativeArmor(props) {
 
         <label htmlFor="aft">Aft:</label>
         <input type="number" id="aft" name="aft" defaultValue={balancedHP} required/> 
+      
+        <br/>
+        <button onClick={(ev) => setArcHPValues(ev)}>Balance All HP</button>
       </form>
 
-      Used: {usedHP} -- Total allowed: {maxHP}
+      Used: {usedHP} -- Allowed: {maxHP}
+      
       <br/>
-      {!isWithinTotalHP() && `**Ablative armor total may not exceed ${maxHP}**`}
+      {isCorrectTotalHP() || `Your total HP must add up to ${maxHP}`}
       <br/>
-      {!isBalanced() && 'NOTE: The ship has a -1 penalty to Piloting because temporary HP from ablative armor is not balanced.'}
+      {isBalanced() || 'NOTE: The ship has a -1 penalty to Piloting because temporary HP from ablative armor is not balanced.'}
 
     </div>
   );
