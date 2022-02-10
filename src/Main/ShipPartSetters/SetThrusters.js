@@ -1,17 +1,15 @@
 import React, { useContext } from 'react';
 import {getThrusterData, getThrusterIdList } from '../References/metaTables';
-import { findComponentByFrameId, doesFrameSizeAllowThruster } from '../References/shipFunctions';
-import {capitalizeEachWord} from '../References/utils';
+import { doesFrameSizeAllowThruster } from '../References/shipFunctions';
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetThrusters() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
 
   let {thrustersId} = customShipParts
 
-  let frameId = capitalizeEachWord(customShipParts.frameId);
-  let frameSize = findComponentByFrameId(frameId, 'size')
   let {speed, pilotingModifier, pcuCost, bpCost} = getThrusterData(thrustersId)
+  let {size} = framePackage
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value
@@ -31,7 +29,7 @@ function SetThrusters() {
       <select defaultValue={thrustersId === null ? 'None' : `${thrustersId} Thrusters`} onChange={handleThrusterChange}>
         <option key='null'>None</option>
         {getThrusterIdList().map((thruster, idx) => 
-          doesFrameSizeAllowThruster(thruster, frameSize) && 
+          doesFrameSizeAllowThruster(thruster, size) && 
           <option key={idx} value={thruster}>{thruster} Thrusters</option>
         )}
       </select>

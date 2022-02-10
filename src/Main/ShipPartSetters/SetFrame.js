@@ -1,33 +1,16 @@
 import React, { useContext } from 'react';
-import { getTierData } from '../References/metaTables'
-import { findComponentByFrameId, setNewFrame } from '../References/shipFunctions';
+import { setNewFrame } from '../References/shipFunctions';
 import frames from '../References/frames.json'
 import { capitalizeEachWord } from '../References/utils';
 import { CustomShipContext } from "../Context/shipContext";
 
 
 function SetFrame() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
 
-  let { tierId } = customShipParts
+  let frameId = capitalizeEachWord(customShipParts.frameId);
 
-  const formatExpansions = (defaultString) => {
-    if(defaultString.toString().search('unlimited') >= 0) return "Unlimited"
-
-    return defaultString;
-  }
-
-  let frameId                 = capitalizeEachWord(customShipParts.frameId);
-  let {startTotal, increment} = findComponentByFrameId(frameId, 'hp')
-  let size                    = findComponentByFrameId(frameId, 'size')
-  let maneuverability         = findComponentByFrameId(frameId, 'maneuverability')
-  let hp                      = startTotal + (increment * getTierData(tierId).hpIncrementMultiplier)
-  let dt                      = findComponentByFrameId(frameId, 'dt')
-  let ct                      = findComponentByFrameId(frameId, 'ct')
-  let expansions              = formatExpansions(findComponentByFrameId(frameId, 'expansions'))
-  let minCrew                 = findComponentByFrameId(frameId, 'minimumCrew')
-  let maxCrew                 = findComponentByFrameId(frameId, 'maximumCrew')
-  let bpCost                  = findComponentByFrameId(frameId, 'cost')
+  let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = framePackage
 
   const handleFrameIdChange = (ev) => {
     let frameOption = ev.target.value

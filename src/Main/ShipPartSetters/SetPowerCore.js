@@ -1,17 +1,13 @@
 import React, { useContext } from 'react';
 import { getPowerCoreData } from '../References/metaTables';
-import { findComponentByFrameId } from '../References/shipFunctions';
-import { capitalizeEachWord } from '../References/utils';
 import PowerCoreSelections from './PowerCoreSelections';
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetPowerCore() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
 
   let {powerCoreIds} = customShipParts
-
-  let frameId = capitalizeEachWord(customShipParts.frameId);
-  let frameSize = findComponentByFrameId(frameId, 'size')
+  let {size} = framePackage
 
   let pcuProvided = powerCoreIds
     .map(core => getPowerCoreData(core).pcuProvided)
@@ -26,7 +22,7 @@ function SetPowerCore() {
       <h3>Power Core</h3>
 
       <p></p>
-      {frameSize.toLowerCase() === 'supercolossal' 
+      {size.toLowerCase() === 'supercolossal' 
         && '**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**' 
       }
       <p></p>
