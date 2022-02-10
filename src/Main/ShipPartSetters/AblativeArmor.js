@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {getArmorData, getArmorIdList} from '../References/metaTables';
+import { CustomShipContext } from "../Context/shipContext";
 
 function AblativeArmor(props) {
-  let { armorId, ablativeArmorByPosition } = props.customShipParts
-  let { size, setCustomShipParts, customShipParts } = props
-  let {forward, port, starboard, aft} = props.customShipParts.ablativeArmorByPosition
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+
+  let { armorId, ablativeArmorByPosition } = customShipParts
+  let { size } = props
+  let {forward, port, starboard, aft} = customShipParts.ablativeArmorByPosition
 
   let maxHP = getArmorData(armorId, size).tempHP
   let balancedHP = (getArmorData(armorId, size).tempHP)/4

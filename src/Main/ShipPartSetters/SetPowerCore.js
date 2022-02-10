@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { getPowerCoreData } from '../References/metaTables';
 import { findComponentByFrameId } from '../References/shipFunctions';
 import { capitalizeEachWord } from '../References/utils';
 import PowerCoreSelections from './PowerCoreSelections';
+import { CustomShipContext } from "../Context/shipContext";
 
-function SetPowerCore(props) {
-  let {customShipParts, setCustomShipParts} = props;
+function SetPowerCore() {
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+
   let {powerCoreIds} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);

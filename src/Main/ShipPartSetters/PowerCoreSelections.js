@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {getPowerCoreData, getPowerCoreIdList } from '../References/metaTables';
 import { findComponentByFrameId, doesFrameSizeAllowCore, getCoreQuantityFromSize } from '../References/shipFunctions';
 import { capitalizeEachWord } from '../References/utils';
+import { CustomShipContext } from "../Context/shipContext";
 
-const PowerCoreSelections = (props) => {
-  let {customShipParts, setCustomShipParts} = props
+const PowerCoreSelections = () => {
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+
   let {powerCoreIds} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);

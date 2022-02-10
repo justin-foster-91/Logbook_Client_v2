@@ -7,7 +7,7 @@ import { ShipsContext } from "../Context/shipContext";
 
 const TemplatePage = () => {
   const [selectedTemplate, setSelectedTemplate] = useState({});
-  const { userShips, setUserShips } = useContext(ShipsContext);
+  const { setUserShips } = useContext(ShipsContext);
 
   return (
     <div className="templateDisplay">

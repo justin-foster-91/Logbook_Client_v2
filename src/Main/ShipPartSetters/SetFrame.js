@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { getTierData } from '../References/metaTables'
 import { findComponentByFrameId, setNewFrame } from '../References/shipFunctions';
 import frames from '../References/frames.json'
 import { capitalizeEachWord } from '../References/utils';
+import { CustomShipContext } from "../Context/shipContext";
 
-function SetFrame(props) {
 
-  let { tierId } = props.customShipParts
-  let { customShipParts, setCustomShipParts } = props;  
+function SetFrame() {
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+
+  let { tierId } = customShipParts
 
   const formatExpansions = (defaultString) => {
     if(defaultString.toString().search('unlimited') >= 0) return "Unlimited"

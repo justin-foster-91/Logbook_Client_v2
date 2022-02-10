@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {getThrusterData, getThrusterIdList } from '../References/metaTables';
 import { findComponentByFrameId, doesFrameSizeAllowThruster } from '../References/shipFunctions';
 import {capitalizeEachWord} from '../References/utils';
+import { CustomShipContext } from "../Context/shipContext";
 
-function SetThrusters(props) {
+function SetThrusters() {
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let {customShipParts, setCustomShipParts} = props;
   let {thrustersId} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);

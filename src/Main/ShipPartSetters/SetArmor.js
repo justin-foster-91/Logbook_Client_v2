@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {getArmorData, getArmorIdList} from '../References/metaTables';
 import { capitalizeEachWord } from '../References/utils';
 import { findComponentByFrameId } from '../References/shipFunctions';
 import AblativeArmor from './AblativeArmor';
 import { getTierData } from '../References/metaTables'
+import { CustomShipContext } from "../Context/shipContext";
 
-function SetArmor(props) {
 
-  let {customShipParts, setCustomShipParts} = props;
+function SetArmor() {
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+
   let {armorId} = customShipParts
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
@@ -15,7 +17,7 @@ function SetArmor(props) {
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size)
 
-  let { tierId } = props.customShipParts
+  let { tierId } = customShipParts
   let {startTotal, increment} = findComponentByFrameId(frameId, 'hp')
   let hp = startTotal + (increment * getTierData(tierId).hpIncrementMultiplier)
 
@@ -67,7 +69,7 @@ function SetArmor(props) {
       <p></p>
 
       {armorId && armorId.includes('ablative') &&
-        <AblativeArmor customShipParts={customShipParts} setCustomShipParts={setCustomShipParts} size={size}></AblativeArmor> 
+        <AblativeArmor size={size}></AblativeArmor> 
       }
       <p></p>
 

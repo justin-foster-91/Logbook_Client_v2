@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {getTierData, getTierIdList} from '../References/metaTables'
+import { CustomShipContext } from "../Context/shipContext";
 
-function SetTier(props) {
+function SetTier() {
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let {customShipParts, setCustomShipParts} = props;
   let {tierId} = customShipParts
 
   let {buildPoints, hpIncrementMultiplier} = getTierData(tierId)
