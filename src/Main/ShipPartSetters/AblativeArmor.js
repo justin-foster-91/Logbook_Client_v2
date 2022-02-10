@@ -16,7 +16,6 @@ function AblativeArmor(props) {
 
   const handleTempHPChange = (ev) => {
     let ablativeArc = ev.target.name;
-    // FIXME: why do I need to convert this to a number? It's supposed to be a number input type
     let ablativeArcValue = Number(ev.target.value);
 
     ablativeArmorByPosition[ablativeArc] = ablativeArcValue;
@@ -50,16 +49,16 @@ function AblativeArmor(props) {
     <div>
       <form onChange={(ev) => handleTempHPChange(ev)}>
         <label htmlFor="forward">Forward:</label>
-        <input type="number" id="forward" name="forward" defaultValue={balancedHP} required/> 
+        <input type="number" id="forward" name="forward" defaultValue={balancedHP} value={forward} required/> 
 
         <label htmlFor="port">Port:</label>
-        <input type="number" id="port" name="port" defaultValue={balancedHP} required/> 
+        <input type="number" id="port" name="port" defaultValue={balancedHP} value={port} required/> 
 
         <label htmlFor="starboard">Starboard:</label>
-        <input type="number" id="starboard" name="starboard" defaultValue={balancedHP} required/> 
+        <input type="number" id="starboard" name="starboard" defaultValue={balancedHP} value={starboard} required/> 
 
         <label htmlFor="aft">Aft:</label>
-        <input type="number" id="aft" name="aft" defaultValue={balancedHP} required/> 
+        <input type="number" id="aft" name="aft" defaultValue={balancedHP} value={aft} required/> 
       
         <br/>
         <button onClick={(ev) => setArcHPValues(ev)}>Balance All HP</button>

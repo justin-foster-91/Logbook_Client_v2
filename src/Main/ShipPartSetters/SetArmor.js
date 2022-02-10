@@ -3,6 +3,7 @@ import {getArmorData, getArmorIdList} from '../References/metaTables';
 import { capitalizeEachWord } from '../References/utils';
 import { findComponentByFrameId } from '../References/shipFunctions';
 import AblativeArmor from './AblativeArmor';
+import { getTierData } from '../References/metaTables'
 
 function SetArmor(props) {
 
@@ -14,11 +15,17 @@ function SetArmor(props) {
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size)
 
+  let { tierId } = props.customShipParts
+  let {startTotal, increment} = findComponentByFrameId(frameId, 'hp')
+  let hp = startTotal + (increment * getTierData(tierId).hpIncrementMultiplier)
+
+
   const handleArmorChange = (ev) => {
     let armorOption = ev.target.value
 
     if(armorOption === 'None') armorOption = null
 
+    
     customShipParts.armorId = armorOption
     setCustomShipParts({...customShipParts})
   }
@@ -47,7 +54,9 @@ function SetArmor(props) {
         {getArmorIdList().map((armor, idx) => {
           if(armor.includes('Mk')) return <option key={idx} value={armor}>{armor} Armor (+{getArmorData(armor, size).acBonus} AC)</option>
           if(armor.includes('Energy')) return <option key={idx} value={armor}>{armor}</option>
-          if(armor.includes('ablative')) return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
+          if(armor.includes('ablative')) {
+            if(getArmorData(armor, size).tempHP <= hp*2) return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
+          }
           else return <option key={idx} value={armor}>{armor} (+{getArmorData(armor, size).tempHP} THP)</option>
         })}
       </select>

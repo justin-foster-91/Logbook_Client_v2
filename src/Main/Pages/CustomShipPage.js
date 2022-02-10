@@ -9,22 +9,28 @@ import SetArmor from '../ShipPartSetters/SetArmor';
 import { ShipsContext } from "../Context/shipContext";
 
 function CustomShipPage() {
-  // const [customShipParts, setCustomShipParts] = useState(defaultSelections)
-  const { customShipParts, setCustomShipParts } = useContext(ShipsContext);
+  const [customShipParts, setCustomShipParts] = useState(defaultSelections)
+  // const { customShipParts, setCustomShipParts } = useContext(ShipsContext);
 
   useEffect(() => {
     console.log(validateShip(customShipParts))
   })
 
+  // FIXME: make all changes to customShipParts a setter function
   // TODO: explain TL and turn penalties when they happen
 
   // TODO: ship validation for temp hp
-  // TODO: re-balance button
   // TODO: empty ablativeArmorByPosition values when no longer ablative armor
   // TODO: add note explaining armor differences
 
   // TODO: implement prop types
   // TODO: context: track TL and other penalties
+
+  const [showJSON, setShowJSON] = useState()
+
+  const printJSON = () => {
+    setShowJSON(!showJSON)
+  }
 
   return (
     <div className='customShipDisplay'>
@@ -37,6 +43,11 @@ function CustomShipPage() {
         <SetThrusters customShipParts={customShipParts} setCustomShipParts={setCustomShipParts}></SetThrusters>
         <SetArmor customShipParts={customShipParts} setCustomShipParts={setCustomShipParts}></SetArmor>
       </div>
+
+      <p></p>
+      <button onClick={() => printJSON()}>JSON ME</button>
+      <br/>
+      {showJSON && JSON.stringify(customShipParts, null, 1)}
     </div>
   );
 }
