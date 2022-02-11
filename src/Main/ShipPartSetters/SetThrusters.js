@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import {getThrusterData, getThrusterIdList } from '../References/metaTables';
-import { doesFrameSizeAllowThruster } from '../References/shipFunctions';
+import { doesFrameSizeAllowThruster, getFramePackageFromShip } from '../References/shipFunctions';
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetThrusters() {
-  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   let {thrustersId} = customShipParts
 
   let {speed, pilotingModifier, pcuCost, bpCost} = getThrusterData(thrustersId)
-  let {size} = framePackage
+  let {size} = getFramePackageFromShip(customShipParts)
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value

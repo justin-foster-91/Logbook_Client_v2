@@ -1,6 +1,7 @@
 import {getPowerCoreData, getThrusterData} from './metaTables'
 import { capitalizeEachWord, sizeLetterToStringConverter } from './utils';
 import frames from './frames.json';
+import {getTierData} from './metaTables'
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -152,11 +153,58 @@ const validatePowerCores = (ship) => {
   return {validity: true, errors: []}
 }
 
+const formatExpansions = (defaultString) => {
+  if(defaultString.toString().search('unlimited') >= 0) return "Unlimited"
+
+  return defaultString;
+}
+
+const getFramePackageFromShip = (ship) => {
+  let { tierId } = ship
+  let frameId = capitalizeEachWord(ship.frameId);
+  let {startTotal, increment} = findComponentByFrameId(frameId, 'hp')
+
+  let framePackage = {
+    size: findComponentByFrameId(frameId, 'size'),
+    maneuverability: findComponentByFrameId(frameId, 'maneuverability'),
+    hp: startTotal + (increment * getTierData(tierId).hpIncrementMultiplier),
+    dt: findComponentByFrameId(frameId, 'dt'),
+    ct: findComponentByFrameId(frameId, 'ct'),
+    expansions: formatExpansions(findComponentByFrameId(frameId, 'expansions')),
+    minCrew: findComponentByFrameId(frameId, 'minimumCrew'),
+    maxCrew: findComponentByFrameId(frameId, 'maximumCrew'),
+    bpCost: findComponentByFrameId(frameId, 'cost')
+  }
+
+  return framePackage;
+}
+
+class Ship{
+  constructor(shipParts){
+    this.shipParts = shipParts
+  }
+
+  getFramePackage(){
+
+    return getFramePackageFromShip(this.shipParts)
+  }
+}
+
+const getTotalBPCostsFromShip = (ship) => {
+  let totalBPCost = 0
+
+  totalBPCost += getThrusterData(ship.thrusterId).bpCost
+
+  return totalBPCost
+}
+
 export {
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
   setNewFrame,
-  validateShip
+  validateShip,
+  getFramePackageFromShip,
+  Ship
 }

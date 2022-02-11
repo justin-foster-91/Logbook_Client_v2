@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import {getArmorData, getArmorIdList} from '../References/metaTables';
 import AblativeArmor from './AblativeArmor';
 import { CustomShipContext } from "../Context/shipContext";
+import { getFramePackageFromShip } from '../References/shipFunctions';
 
 function SetArmor() {
-  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   let {armorId} = customShipParts
-  let { size, hp } = framePackage
+  let { size, hp } = getFramePackageFromShip(customShipParts)
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size)
 
 

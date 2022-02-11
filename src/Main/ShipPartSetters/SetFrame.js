@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
-import { setNewFrame } from '../References/shipFunctions';
+import { setNewFrame, getFramePackageFromShip } from '../References/shipFunctions';
 import frames from '../References/frames.json'
 import { capitalizeEachWord } from '../References/utils';
 import { CustomShipContext } from "../Context/shipContext";
 
 
 function SetFrame() {
-  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
   let frameId = capitalizeEachWord(customShipParts.frameId);
 
-  let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = framePackage
+  let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = getFramePackageFromShip(customShipParts)
+  // let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
 
   const handleFrameIdChange = (ev) => {
     let frameOption = ev.target.value

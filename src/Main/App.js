@@ -4,14 +4,14 @@ import React, { useState, useEffect } from "react";
 import HangarPage from './Pages/HangarPage';
 import TemplatePage from './Pages/TemplatePage';
 import CustomShipPage from './Pages/CustomShipPage';
-import { ShipsProvider, CustomShipsProvider } from "./Context/shipContext";
+import { ShipsProvider, CustomShipProvider } from "./Context/shipContext";
 
 function App() {
   // const [userShips, setUserShips] = useState([])
 
   return (
     <ShipsProvider>
-      <CustomShipsProvider>
+      <CustomShipProvider>
       <div className="App">
         <main className="Routes">
             <Routes>
@@ -22,7 +22,7 @@ function App() {
             </Routes>
         </main>
       </div>
-      </CustomShipsProvider>
+      </CustomShipProvider>
     </ShipsProvider>
   );
 }

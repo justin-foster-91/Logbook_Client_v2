@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import { getPowerCoreData } from '../References/metaTables';
 import PowerCoreSelections from './PowerCoreSelections';
 import { CustomShipContext } from "../Context/shipContext";
+import { getFramePackageFromShip } from '../References/shipFunctions';
 
 function SetPowerCore() {
-  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   let {powerCoreIds} = customShipParts
-  let {size} = framePackage
+  let {size} = getFramePackageFromShip(customShipParts)
 
   let pcuProvided = powerCoreIds
     .map(core => getPowerCoreData(core).pcuProvided)

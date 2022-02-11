@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import {getPowerCoreData, getPowerCoreIdList } from '../References/metaTables';
-import { doesFrameSizeAllowCore, getCoreQuantityFromSize } from '../References/shipFunctions';
+import { doesFrameSizeAllowCore, getCoreQuantityFromSize, getFramePackageFromShip } from '../References/shipFunctions';
 import { CustomShipContext } from "../Context/shipContext";
 
 const PowerCoreSelections = () => {
-  const { customShipParts, setCustomShipParts, framePackage } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   let {powerCoreIds} = customShipParts
 
-  let { size } = framePackage
+  let { size } = getFramePackageFromShip(customShipParts)
   let powerCoreQuantity = getCoreQuantityFromSize(size)
 
   const handlePowerCoreChange = (event) => {
