@@ -5,12 +5,12 @@ import { CustomShipContext } from "../Context/shipContext";
 function SetTier() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let { tierId } = customShipParts;
+  const { tierId } = customShipParts;
 
-  let { buildPoints, hpIncrementMultiplier } = getTierData(tierId);
+  const { buildPoints, hpIncrementMultiplier } = getTierData(tierId);
 
   const handleTierChange = (ev) => {
-    let tierOption = ev.target.value;
+    const tierOption = ev.target.value;
 
     customShipParts.tierId = tierOption;
     setCustomShipParts({ ...customShipParts });

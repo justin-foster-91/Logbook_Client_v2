@@ -7,9 +7,9 @@ import { getFramePackageFromShip } from "../References/shipFunctions";
 function SetArmor() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let { armorId } = customShipParts;
-  let { size, hp } = getFramePackageFromShip(customShipParts);
-  let { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size);
+  const { armorId } = customShipParts;
+  const { size, hp } = getFramePackageFromShip(customShipParts);
+  const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size);
 
   const handleArmorChange = (ev) => {
     let armorOption = ev.target.value;

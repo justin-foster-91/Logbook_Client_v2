@@ -5,22 +5,21 @@ import { CustomShipContext } from "../Context/shipContext";
 function AblativeArmor(props) {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let { armorId, ablativeArmorByPosition } = customShipParts;
-  let { size } = props;
-  let { forward, port, starboard, aft } =
-    customShipParts.ablativeArmorByPosition;
+  const { armorId, ablativeArmorByPosition } = customShipParts;
+  const { size } = props;
+  const { forward, port, starboard, aft } = customShipParts.ablativeArmorByPosition;
 
-  let maxHP = getArmorData(armorId, size).tempHP;
-  let balancedHP = getArmorData(armorId, size).tempHP / 4;
-  let usedHP = forward + port + starboard + aft;
+  const maxHP = getArmorData(armorId, size).tempHP;
+  const balancedHP = getArmorData(armorId, size).tempHP / 4;
+  const usedHP = forward + port + starboard + aft;
 
   useEffect(() => {
     balanceAllHP();
   }, []);
 
   const handleTempHPChange = (ev) => {
-    let ablativeArc = ev.target.name;
-    let ablativeArcValue = Number(ev.target.value);
+    const ablativeArc = ev.target.name;
+    const ablativeArcValue = Number(ev.target.value);
 
     ablativeArmorByPosition[ablativeArc] = ablativeArcValue;
     setCustomShipParts({ ...customShipParts });
@@ -45,7 +44,7 @@ function AblativeArmor(props) {
   };
 
   const isBalanced = () => {
-    let arcs = [forward, port, starboard, aft];
+    const arcs = [forward, port, starboard, aft];
     return arcs.every((arc) => arc === forward);
   };
 

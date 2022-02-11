@@ -6,10 +6,10 @@ import { CustomShipContext } from "../Context/shipContext";
 function SetThrusters() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let { thrustersId } = customShipParts;
+  const { thrustersId } = customShipParts;
 
-  let { speed, pilotingModifier, pcuCost, bpCost } = getThrusterData(thrustersId);
-  let { size } = getFramePackageFromShip(customShipParts);
+  const { speed, pilotingModifier, pcuCost, bpCost } = getThrusterData(thrustersId);
+  const { size } = getFramePackageFromShip(customShipParts);
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value;

@@ -7,14 +7,14 @@ import { getFramePackageFromShip } from "../References/shipFunctions";
 function SetPowerCore() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let { powerCoreIds } = customShipParts;
-  let { size } = getFramePackageFromShip(customShipParts);
+  const { powerCoreIds } = customShipParts;
+  const { size } = getFramePackageFromShip(customShipParts);
 
-  let pcuProvided = powerCoreIds
+  const pcuProvided = powerCoreIds
     .map((core) => getPowerCoreData(core).pcuProvided)
     .reduce((total, pcu) => total + pcu);
 
-  let bpCost = powerCoreIds
+  const bpCost = powerCoreIds
     .map((core) => getPowerCoreData(core).bpCost)
     .reduce((total, bp) => total + bp);
 

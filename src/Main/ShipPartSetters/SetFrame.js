@@ -7,23 +7,13 @@ import { CustomShipContext } from "../Context/shipContext";
 function SetFrame() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
-  let frameId = capitalizeEachWord(customShipParts.frameId);
+  const frameId = capitalizeEachWord(customShipParts.frameId);
 
-  let {
-    size,
-    maneuverability,
-    hp,
-    dt,
-    ct,
-    expansions,
-    minCrew,
-    maxCrew,
-    bpCost,
-  } = getFramePackageFromShip(customShipParts);
+  const { size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost } = getFramePackageFromShip(customShipParts);
   // let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
 
   const handleFrameIdChange = (ev) => {
-    let frameOption = ev.target.value;
+    const frameOption = ev.target.value;
 
     setNewFrame(customShipParts, frameOption);
     setCustomShipParts({ ...customShipParts });

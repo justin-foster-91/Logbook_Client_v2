@@ -6,13 +6,13 @@ import { CustomShipContext } from "../Context/shipContext";
 const PowerCoreSelections = () => {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let { powerCoreIds } = customShipParts;
+  const { powerCoreIds } = customShipParts;
 
-  let { size } = getFramePackageFromShip(customShipParts);
-  let powerCoreQuantity = getCoreQuantityFromSize(size);
+  const { size } = getFramePackageFromShip(customShipParts);
+  const powerCoreQuantity = getCoreQuantityFromSize(size);
 
   const handlePowerCoreChange = (event) => {
-    let coreIndex = event.target.name;
+    const coreIndex = event.target.name;
     let coreOption = event.target.value;
 
     if (coreOption === "None") coreOption = null;
