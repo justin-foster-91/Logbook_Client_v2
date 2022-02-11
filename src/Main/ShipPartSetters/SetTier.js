@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
-import {getTierData, getTierIdList} from '../References/metaTables'
+import React, { useContext } from "react";
+import { getTierData, getTierIdList } from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetTier() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
-  let {tierId} = customShipParts
+  let { tierId } = customShipParts;
 
-  let {buildPoints, hpIncrementMultiplier} = getTierData(tierId)
+  let { buildPoints, hpIncrementMultiplier } = getTierData(tierId);
 
   const handleTierChange = (ev) => {
-    let tierOption = ev.target.value
+    let tierOption = ev.target.value;
 
-    customShipParts.tierId = tierOption
-    setCustomShipParts({...customShipParts})
-  }
+    customShipParts.tierId = tierOption;
+    setCustomShipParts({ ...customShipParts });
+  };
 
   return (
     <>
@@ -23,14 +23,15 @@ function SetTier() {
       <p></p>
 
       <select defaultValue={tierId} onChange={handleTierChange}>
-        {getTierIdList().map((tier, idx) => <option key={idx}>{tier}</option>)}
+        {getTierIdList().map((tier, idx) => (
+          <option key={idx}>{tier}</option>
+        ))}
       </select>
 
       <p></p>
 
       <div>
-        BP Budget: {buildPoints}; 
-        HP Increments: {hpIncrementMultiplier}
+        BP Budget: {buildPoints}; HP Increments: {hpIncrementMultiplier}
       </div>
     </>
   );

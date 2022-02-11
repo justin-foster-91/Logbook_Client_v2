@@ -21,8 +21,6 @@ function CustomShipPage() {
   // TODO: empty ablativeArmorByPosition values when no longer ablative armor
   // TODO: add note explaining armor differences
 
-  // TODO: context: track TL and other penalties
-
   // TODO: swap lets to const
 
   const [showJSON, setShowJSON] = useState();
