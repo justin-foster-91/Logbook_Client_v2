@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { getArmorData, getArmorIdList } from "../References/metaTables";
+import React, { useEffect, useContext } from "react";
+import { getArmorData } from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
 function AblativeArmor(props) {
@@ -36,7 +36,6 @@ function AblativeArmor(props) {
   const setArcHPValues = (ev) => {
     ev.preventDefault();
     balanceAllHP();
-    console.log(ev);
   };
 
   const isCorrectTotalHP = () => {
@@ -50,15 +49,16 @@ function AblativeArmor(props) {
 
   return (
     <div>
-      <form onChange={(ev) => handleTempHPChange(ev)}>
+      <form>
         <label htmlFor="forward">Forward:</label>
         <input
           type="number"
           id="forward"
           name="forward"
-          defaultValue={balancedHP}
+          // defaultValue={balancedHP}
           value={forward}
           required
+          onChange={(ev) => handleTempHPChange(ev)}
         />
 
         <label htmlFor="port">Port:</label>
@@ -66,9 +66,10 @@ function AblativeArmor(props) {
           type="number"
           id="port"
           name="port"
-          defaultValue={balancedHP}
+          // defaultValue={balancedHP}
           value={port}
           required
+          onChange={(ev) => handleTempHPChange(ev)}
         />
 
         <label htmlFor="starboard">Starboard:</label>
@@ -76,9 +77,10 @@ function AblativeArmor(props) {
           type="number"
           id="starboard"
           name="starboard"
-          defaultValue={balancedHP}
+          // defaultValue={balancedHP}
           value={starboard}
           required
+          onChange={(ev) => handleTempHPChange(ev)}
         />
 
         <label htmlFor="aft">Aft:</label>
@@ -86,9 +88,10 @@ function AblativeArmor(props) {
           type="number"
           id="aft"
           name="aft"
-          defaultValue={balancedHP}
+          // defaultValue={balancedHP}
           value={aft}
           required
+          onChange={(ev) => handleTempHPChange(ev)}
         />
 
         <br />

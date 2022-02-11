@@ -12,7 +12,7 @@ const TemplateBreakdown = (props) => {
   }
 
   const showFrameComponents = () => {
-    let componentArray = [
+    const componentArray = [
       "tierId",
       "frameId",
       "powerCoreIds",
@@ -24,7 +24,7 @@ const TemplateBreakdown = (props) => {
       "sensorsId",
       "shieldsId",
     ];
-    let pairedArray = [];
+    const pairedArray = [];
 
     for (let i = 0; i < componentArray.length; i++) {
       if (componentArray[i] === "weaponMounts") {

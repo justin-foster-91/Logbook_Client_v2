@@ -8,7 +8,7 @@ import SetArmor from "../ShipPartSetters/SetArmor";
 import { CustomShipContext } from "../Context/shipContext";
 
 function CustomShipPage() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+  const { customShipParts } = useContext(CustomShipContext);
 
   useEffect(() => {
     console.log(validateShip(customShipParts));
@@ -20,8 +20,6 @@ function CustomShipPage() {
   // TODO: ship validation for temp hp
   // TODO: empty ablativeArmorByPosition values when no longer ablative armor
   // TODO: add note explaining armor differences
-
-  // TODO: swap lets to const
 
   const [showJSON, setShowJSON] = useState();
 

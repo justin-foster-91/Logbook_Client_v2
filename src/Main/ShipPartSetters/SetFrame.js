@@ -5,7 +5,7 @@ import { capitalizeEachWord } from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetFrame() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   const frameId = capitalizeEachWord(customShipParts.frameId);
 

@@ -66,12 +66,12 @@ function SetArmor() {
                   {armor} (+{getArmorData(armor, size).tempHP} THP)
                 </option>
               );
-          } else
-            return (
-              <option key={idx} value={armor}>
-                {armor} (+{getArmorData(armor, size).tempHP} THP)
-              </option>
-            );
+          }
+          return (
+            <option key={idx} value={armor}>
+              {armor} (+{getArmorData(armor, size).tempHP} THP)
+            </option>
+          );
         })}
       </select>
       <br />
