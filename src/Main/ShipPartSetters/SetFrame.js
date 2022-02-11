@@ -3,14 +3,17 @@ import { setNewFrame, getFramePackageFromShip } from "../References/shipFunction
 import frames from "../References/frames.json";
 import { capitalizeEachWord } from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
+import { getSizeData } from '../References/metaTables';
 
 function SetFrame() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
   const frameId = capitalizeEachWord(customShipParts.frameId);
 
   const { size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost } = getFramePackageFromShip(customShipParts);
   // let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
+
+  const { length, weight, acMod, tlMod } = getSizeData(size)
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
@@ -33,10 +36,14 @@ function SetFrame() {
 
       <p></p>
 
+      <div>Size: {size}</div>
       <div>
-        Size {size}; Maneuverability {maneuverability}; HP {hp}; DT {dt}; CT{" "}
+        Maneuverability {maneuverability}; HP {hp}; DT {dt}; CT{" "}
         {ct}; Expansion Bays {expansions}; Minimum Crew {minCrew}; Maximum Crew{" "}
         {maxCrew}
+      </div>
+      <div>
+        Length: {length}; Weight: {weight}; AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}
       </div>
       <div>BP Cost: {bpCost}</div>
     </>

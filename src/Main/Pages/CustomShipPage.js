@@ -14,12 +14,16 @@ function CustomShipPage() {
     console.log(validateShip(customShipParts));
   });
 
+  // code smells and file structure
+
   // FIXME: make all changes to customShipParts a setter function
+
   // TODO: explain TL and turn penalties when they happen
+  // TODO: add note explaining armor differences
 
   // TODO: ship validation for temp hp
-  // TODO: empty ablativeArmorByPosition values when no longer ablative armor
-  // TODO: add note explaining armor differences
+  // TODO: size mod to AC/TL from frame
+  
 
   const [showJSON, setShowJSON] = useState();
 

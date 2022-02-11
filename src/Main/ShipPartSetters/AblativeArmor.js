@@ -55,7 +55,6 @@ function AblativeArmor(props) {
           type="number"
           id="forward"
           name="forward"
-          // defaultValue={balancedHP}
           value={forward}
           required
           onChange={(ev) => handleTempHPChange(ev)}
@@ -66,7 +65,6 @@ function AblativeArmor(props) {
           type="number"
           id="port"
           name="port"
-          // defaultValue={balancedHP}
           value={port}
           required
           onChange={(ev) => handleTempHPChange(ev)}
@@ -77,7 +75,6 @@ function AblativeArmor(props) {
           type="number"
           id="starboard"
           name="starboard"
-          // defaultValue={balancedHP}
           value={starboard}
           required
           onChange={(ev) => handleTempHPChange(ev)}
@@ -88,7 +85,6 @@ function AblativeArmor(props) {
           type="number"
           id="aft"
           name="aft"
-          // defaultValue={balancedHP}
           value={aft}
           required
           onChange={(ev) => handleTempHPChange(ev)}

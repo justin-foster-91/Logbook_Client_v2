@@ -1,4 +1,5 @@
 import { capitalizeEachWord } from './utils';
+import { getFramePackageFromShip } from './shipFunctions';
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
 let shipTiers = {
@@ -26,6 +27,17 @@ let shipTiers = {
   '18':	[800,	4],
   '19':	[900,	4],
   '20':	[1000, 5],
+}
+
+let shipSize = {
+  // Size:	[Length,	Weight,	AC and TL Modifier]
+  'Tiny':	['20-60 ft.',	'2-40 tons',	+2],
+  'Small':	['60-120 ft.',	'30-250 tons',	+1],
+  'Medium':	['120-300 ft.',	'50-2,500 tons',	+0],
+  'Large':	['300-800 ft.',	'2,000-50,000 tons',	-1],
+  'Huge':	['800-2,000 ft.',	'40,000-640,000 tons',	-2],
+  'Gargantuan':	['2,000-15,000 ft.',	'600,000 tons to 250 megatons',	-4],
+  'Colossal':	['Over 15,000 ft.',	'200-2,000 megatons',	-8],
 }
 
 // https://www.aonsrd.com/Starship_PowerCores.aspx
@@ -149,6 +161,12 @@ const getTierData = (tierId) => {
   return {buildPoints: array[0], hpIncrementMultiplier: array[1]}
 }
 
+const getSizeData = (size) => {
+  let array = shipSize[size]
+
+  return {length: array[0], weight: array[1], acMod: array[2], tlMod: array[2]}
+}
+
 const getPowerCoreData = (powerCoreId) => {
   if(powerCoreId === null) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null, sfsLegal: true};
 
@@ -208,6 +226,7 @@ const getArmorIdList = () => {
 
 export {
   getTierData, 
+  getSizeData,
   getPowerCoreData, 
   getThrusterData,
   getArmorData,

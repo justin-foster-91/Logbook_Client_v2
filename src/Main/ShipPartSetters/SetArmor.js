@@ -16,6 +16,14 @@ function SetArmor() {
 
     if (armorOption === "None") armorOption = null;
 
+    // if armor is not ablative, empty ablative hp values
+    if(!armorOption.includes('ablative')){
+      customShipParts.ablativeArmorByPosition.forward = 0;
+      customShipParts.ablativeArmorByPosition.port = 0;
+      customShipParts.ablativeArmorByPosition.starboard = 0;
+      customShipParts.ablativeArmorByPosition.aft = 0;
+    }
+
     customShipParts.armorId = armorOption;
     setCustomShipParts({ ...customShipParts });
   };

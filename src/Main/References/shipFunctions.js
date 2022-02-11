@@ -264,6 +264,24 @@ const getTotalBPCostsFromShip = (ship) => {
   return totalBPCost;
 };
 
+const getTotalTL = () => {
+  /* 
+    Target Lock (TL): This value is used when determining whether tracking weapons 
+    (see Type on page 303) hit a starship. TL is calculated based on the starship’s 
+    size, defensive countermeasures (see page 298), and armor, plus the pilot’s number of ranks 
+    in the Piloting skill. See page 320 for details.
+  */
+}
+
+const getTotalAB = () => {
+  /* 
+    Armor Class (AC): This value is used when determining whether direct-fire weapons 
+    (see Type on page 303) hit a starship. AC is calculated based on the ship’s 
+    size, maneuverability, and physical armor, as well as the pilot’s number of ranks 
+    in the Piloting skill. See page 320 for details on calculating AC.
+  */
+}
+
 export {
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
