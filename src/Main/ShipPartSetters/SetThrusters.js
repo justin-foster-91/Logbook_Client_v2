@@ -44,7 +44,7 @@ function SetThrusters() {
       {/* TODO: */}
       Special Material:
       <p></p>
-      The maximum speed of a starship’s thrusters either grants a bonus or imparts a penalty to Piloting checks to fly the vessel.
+      The maximum speed of a starship’s thrusters may grant a bonus or impart a penalty to Piloting checks to fly the vessel.
       <div>
         Speed (in hexes): {speed}; Piloting Modifier: {pilotingModifier}
       </div>

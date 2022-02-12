@@ -15,7 +15,7 @@ function AblativeArmor(props) {
 
   useEffect(() => {
     balanceAllHP();
-  }, []);
+  }, [maxHP]);
 
   const handleTempHPChange = (ev) => {
     const ablativeArc = ev.target.name;

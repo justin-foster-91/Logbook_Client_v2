@@ -21,8 +21,10 @@ function CustomShipPage() {
   // TODO: explain TL and turn penalties when they happen
   // TODO: add note explaining armor differences
 
-  // TODO: ship validation for temp hp
-  // TODO: size mod to AC/TL from frame
+  // TODO: too much short circuit logic?
+  // TODO: clean .includes logic on SetArmor to something cleaner
+
+  // TODO: create more Ship class methods
   
 
   const [showJSON, setShowJSON] = useState();

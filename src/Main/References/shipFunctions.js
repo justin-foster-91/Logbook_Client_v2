@@ -1,7 +1,7 @@
 import { getPowerCoreData, getThrusterData } from "./metaTables";
 import { capitalizeEachWord, sizeLetterToStringConverter } from "./utils";
 import frames from "./frames.json";
-import { getTierData } from "./metaTables";
+import { getTierData, getArmorData } from "./metaTables";
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -92,8 +92,9 @@ const updateThrustersToMatchFrame = (ship) => {
 const validateShip = (ship) => {
   let powerCoreValidation = validatePowerCores(ship);
   let thrustersValidation = validateThrusters(ship);
+  let armorValidation = validateArmor(ship)
 
-  return mergeValidations([powerCoreValidation, thrustersValidation]);
+  return mergeValidations([powerCoreValidation, thrustersValidation, armorValidation]);
 };
 
 const mergeValidations = (validationList) => {
@@ -216,6 +217,37 @@ const validatePowerCores = (ship) => {
   return { validity: true, errors: [] };
 };
 
+const validateArmor = (ship) => {
+  // let { size } = getFramePackageFromShip(ship)
+  ship = new Ship(ship)
+
+  const { forward, port, starboard, aft } = ship.parts.ablativeArmorByPosition
+  const totalUsedTempHP = forward + port + starboard + aft
+  const totalAllowedTempHP = getArmorData(ship.parts.armorId, ship.getSize()).tempHP
+  
+  // if ablative
+  // temp hp allocation must equal the total allowed
+  if(ship.parts.armorId && ship.parts.armorId.includes('ablative')){
+    if(totalAllowedTempHP !== totalUsedTempHP){
+      return {
+        validity: false,
+        errors: [
+          {
+            shipPart: "Armor",
+            message: "Total temporary HP used must equal the total amount that is allowed.",
+          },
+        ],
+      };
+    }
+  }
+
+  //has ablative armor
+  //ablative armor used temp hp
+  //ablative armor total temp hp
+
+  return { validity: true, errors: [] };
+}
+
 const formatExpansions = (defaultString) => {
   if (defaultString.toString().search("unlimited") >= 0) return "Unlimited";
 
@@ -243,12 +275,16 @@ const getFramePackageFromShip = (ship) => {
 };
 
 class Ship {
-  constructor(shipParts) {
-    this.shipParts = shipParts;
+  constructor(parts) {
+    this.parts = parts;
   }
 
   getFramePackage() {
-    return getFramePackageFromShip(this.shipParts);
+    return getFramePackageFromShip(this.parts);
+  }
+
+  getSize() {
+    return this.getFramePackage().size;
   }
 }
 

@@ -42,6 +42,26 @@ function SetArmor() {
     return "n/a";
   };
 
+  const renderArmorDescription = () => {
+    if (armorId.includes("Mk"))
+      return (
+        'Standard armor with a bonus to AC'
+      );
+    if (armorId.includes("Energy"))
+      return (
+        'Energy-absorbent plating can store some of the energy that strikes the hull, redirecting that energy to power the ship’s systems with an Engineering check.'
+      );
+    if (armorId.includes("ablative")) {
+      return (
+        'Destructible armor that confers a temporary HP bonus to each arc.'
+      )
+    }
+    return (
+      "Interposed defenses grant temporary HP that doesn't need to be distributed into quadrants, instead providing a single pool to draw from regardless of which arc an attack strikes."
+    );
+
+  }
+
   return (
     <>
       <h3>Armor</h3>
@@ -49,7 +69,7 @@ function SetArmor() {
       {/* TODO: default value needs to accommodate all possible armor options */}
       <select
         defaultValue={
-          armorId === undefined || armorId === null ? "None" : armorId
+          armorId === null ? "None" : armorId
         }
         onChange={handleArmorChange}
       >
@@ -85,16 +105,15 @@ function SetArmor() {
       <br />
       {/* TODO: */}
       Special Material:
+
+      <p></p>
+      <div>
+        {armorId && renderArmorDescription()}
+      </div>
       <p></p>
       {armorId && armorId.includes("ablative") && (
         <AblativeArmor size={size}></AblativeArmor>
       )}
-      <p></p>
-      {armorId &&
-        armorId.includes("Energy") &&
-        "A ship equipped with energy-absorbent plating can store some of the energy that strikes the hull, redirecting that energy to power the ship’s systems. " +
-          "Once per turn, when a ship with energy-absorbent plating is hit by an attack that penetrates its shields, the ship’s engineer may immediately take a free divert action. " +
-          "The boost granted by this free divert action does not stack with the benefit of any other divert action already benefiting the ship."}
       <p></p>
       <div>
         {renderArmorBonus()}

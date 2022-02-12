@@ -1,5 +1,4 @@
 import { capitalizeEachWord } from './utils';
-import { getFramePackageFromShip } from './shipFunctions';
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
 let shipTiers = {
