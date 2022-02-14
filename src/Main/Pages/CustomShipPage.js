@@ -6,6 +6,7 @@ import { validateShip } from "../References/shipFunctions";
 import SetThrusters from "../ShipPartSetters/SetThrusters";
 import SetArmor from "../ShipPartSetters/SetArmor";
 import { CustomShipContext } from "../Context/shipContext";
+import SetComputer from "../ShipPartSetters/SetComputer";
 
 function CustomShipPage() {
   const { customShipParts } = useContext(CustomShipContext);
@@ -14,18 +15,12 @@ function CustomShipPage() {
     console.log(validateShip(customShipParts));
   });
 
-  // code smells and file structure
 
-  // FIXME: make all changes to customShipParts a setter function
+  // TODO: make all changes to customShipParts a setter function
 
-  // TODO: explain TL and turn penalties when they happen
-  // TODO: add note explaining armor differences
-
-  // TODO: too much short circuit logic?
-  // TODO: clean .includes logic on SetArmor to something cleaner
 
   // TODO: create more Ship class methods
-  
+  // TODO: customShip => customizeShip
 
   const [showJSON, setShowJSON] = useState();
 
@@ -43,6 +38,7 @@ function CustomShipPage() {
         <SetPowerCore></SetPowerCore>
         <SetThrusters></SetThrusters>
         <SetArmor></SetArmor>
+        <SetComputer></SetComputer>
       </div>
 
       <p></p>

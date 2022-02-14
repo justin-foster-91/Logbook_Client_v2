@@ -1,7 +1,6 @@
-import { getPowerCoreData, getThrusterData } from "./metaTables";
+import { getPowerCoreData, getThrusterData, getTierData, getArmorData } from "./metaTables";
 import { capitalizeEachWord, sizeLetterToStringConverter } from "./utils";
 import frames from "./frames.json";
-import { getTierData, getArmorData } from "./metaTables";
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -317,6 +316,7 @@ const getTotalAB = () => {
     in the Piloting skill. See page 320 for details on calculating AC.
   */
 }
+
 
 export {
   getCoreQuantityFromSize,
