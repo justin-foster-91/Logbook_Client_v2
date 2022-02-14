@@ -37,6 +37,7 @@ let shipSize = {
   'Huge': ['800-2,000 ft.', '40,000-640,000 tons', -2],
   'Gargantuan': ['2,000-15,000 ft.', '600,000 tons to 250 megatons', -4],
   'Colossal': ['Over 15,000 ft.', '200-2,000 megatons', -8],
+  'Supercolossal': ['Over 6 miles', 'Over 2,000 megatons', -8]
 }
 
 // https://www.aonsrd.com/Starship_PowerCores.aspx

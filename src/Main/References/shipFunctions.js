@@ -1,4 +1,4 @@
-import { getPowerCoreData, getThrusterData, getTierData, getArmorData } from "./metaTables";
+import { getPowerCoreData, getThrusterData, getTierData, getArmorData, getComputerData } from "./metaTables";
 import { capitalizeEachWord, sizeLetterToStringConverter } from "./utils";
 import frames from "./frames.json";
 
@@ -224,8 +224,6 @@ const validateArmor = (ship) => {
   const totalUsedTempHP = forward + port + starboard + aft
   const totalAllowedTempHP = getArmorData(ship.parts.armorId, ship.getSize()).tempHP
   
-  // if ablative
-  // temp hp allocation must equal the total allowed
   if(ship.parts.armorId && ship.parts.armorId.includes('ablative')){
     if(totalAllowedTempHP !== totalUsedTempHP){
       return {
@@ -239,10 +237,6 @@ const validateArmor = (ship) => {
       };
     }
   }
-
-  //has ablative armor
-  //ablative armor used temp hp
-  //ablative armor total temp hp
 
   return { validity: true, errors: [] };
 }
@@ -287,17 +281,61 @@ class Ship {
   }
 }
 
-const getTotalBPCostsFromShip = (ship) => {
-  let totalBPCost = 0;
+const getTotalBPCosts = (ship) => {
+  const { thrustersId, powerCoreIds, armorId, computerId } = ship
+  const powerCoreTotalBPCost = powerCoreIds.map(core => getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
 
-  totalBPCost +=
-    //frame
-    //power core
-    getThrusterData(ship.thrusterId).bpCost;
-    //armor
+  const bpExpenses = [
+    getFramePackageFromShip(ship).bpCost,
+    powerCoreTotalBPCost,
+    getThrusterData(thrustersId).bpCost,
+    getArmorData(armorId, getFramePackageFromShip(ship).size).bpCost,
+    getComputerData(computerId).bpCost,
+    // crew quarters
+    // defensive countermeasures
+    // drift engine
+    // expansion bays
+    // fortified hull
+    // reinforced bulkhead
+    // security (misc)
+    // sensors
+    // shields
+    // weapons
+    // other systems
+  ]
 
-  return totalBPCost;
+  return bpExpenses.reduce((total, num) => total + num);
 };
+
+const getTotalPCUCosts = (ship) => {
+  const { thrustersId, computerId } = ship
+
+  const pcuExpenses = [
+    getThrusterData(thrustersId).pcuCost,
+    getComputerData(computerId).pcuCost,
+    // defensive countermeasures
+    // expansion bays
+    // security (misc)
+    // shields
+    // weapons
+    // other systems
+  ]
+
+  return pcuExpenses.reduce((total, num) => total + num);
+}
+
+const getEssentialPCUCosts = (ship) => {
+  const { thrustersId } = ship
+
+  const pcuExpenses = [
+    getThrusterData(thrustersId).pcuCost,
+    // defensive countermeasures
+    // shields
+    // weapons
+  ]
+
+  return pcuExpenses.reduce((total, num) => total + num);
+}
 
 const getTotalTL = () => {
   /* 
@@ -308,7 +346,7 @@ const getTotalTL = () => {
   */
 }
 
-const getTotalAB = () => {
+const getTotalAC = () => {
   /* 
     Armor Class (AC): This value is used when determining whether direct-fire weapons 
     (see Type on page 303) hit a starship. AC is calculated based on the ship’s 
@@ -327,5 +365,7 @@ export {
   validateShip,
   getFramePackageFromShip,
   Ship,
-  getTotalBPCostsFromShip,
+  getTotalBPCosts,
+  getTotalPCUCosts,
+  getEssentialPCUCosts
 };

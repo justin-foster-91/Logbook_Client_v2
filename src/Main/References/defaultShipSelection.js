@@ -222,7 +222,7 @@ let defaultSelections = {
 	"thrustersMaterialId": null,
 	"thrustersBoosterId": null,
 	"thrustersBoosterMaterialId": null,
-	"tierId": "1",
+	"tierId": 1,
 	"version": "1.0.1",
 	"viId": null,
 	"viHoloProjectorId": null,
