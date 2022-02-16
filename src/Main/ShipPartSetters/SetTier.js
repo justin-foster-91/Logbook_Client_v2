@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { getTierData, getTierIdList } from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
+import { shipSetter } from '../References/shipFunctions'
 
 function SetTier() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
+  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
   const { tierId } = customShipParts;
 
@@ -12,9 +13,17 @@ function SetTier() {
   const handleTierChange = (ev) => {
     const tierOption = ev.target.value;
 
-    customShipParts.tierId = tierOption;
+
+    ship.setTier(tierOption)
+    // shipSetter(customShipParts, "tierId", tierOption)
+    // // customShipParts.tierId = tierOption;
     setCustomShipParts({ ...customShipParts });
   };
+
+  // const shipSetter = (part, value) => {
+  //   customShipParts[part] = value;
+  //   setCustomShipParts({ ...customShipParts });
+  // }
 
   return (
     <>

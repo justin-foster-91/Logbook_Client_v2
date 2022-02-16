@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { setNewFrame, getFramePackageFromShip } from "../References/shipFunctions";
+import { getFramePackageFromShip } from "../References/shipFunctions";
 import frames from "../References/frames.json";
 import { capitalizeEachWord } from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
@@ -10,15 +10,15 @@ function SetFrame() {
 
   const frameId = capitalizeEachWord(customShipParts.frameId);
 
-  const { size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost } = getFramePackageFromShip(customShipParts);
-  // let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
+  let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
 
   const { length, weight, acMod, tlMod } = getSizeData(size)
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
 
-    setNewFrame(customShipParts, frameOption);
+    // setNewFrame(customShipParts, frameOption);
+    ship.setFrame(frameOption)
     setCustomShipParts({ ...customShipParts });
   };
 

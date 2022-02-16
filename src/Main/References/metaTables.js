@@ -1,4 +1,5 @@
 import { capitalizeEachWord } from './utils';
+import frames from "../References/frames.json";
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
 let shipTiers = {
@@ -28,6 +29,7 @@ let shipTiers = {
   '20': [1000, 5],
 }
 
+// TODO: sources for sizes
 let shipSize = {
   // Size: [Length, Weight, AC and TL Modifier]
   'Tiny': ['20-60 ft.', '2-40 tons', +2],
@@ -65,9 +67,9 @@ let powerCores = {
   'Gateway Light': [['L', 'H', 'G'], 300, 30, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'Gateway Heavy': [['L', 'H', 'G'], 400, 40, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'Gateway Ultra': [['H', 'G', 'C'], 500, 50, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
-  'Titan Light': [['Sc'], 700, 50, 'EoB', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
-  'Titan Heavy': [['Sc'], 950, 60, 'EoB', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
-  'Titan Ultra': [['Sc'], 1200, 70, 'EoB', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/']
+  'Titan Light': [['Sc'], 700, 50, 'DS', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
+  'Titan Heavy': [['Sc'], 950, 60, 'DS', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
+  'Titan Ultra': [['Sc'], 1200, 70, 'DS', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/']
 }
 
 // https://www.aonsrd.com/Starship_Thrusters.aspx
@@ -101,9 +103,9 @@ let thrusters = {
   'C4': ['C', 4, +2, 200, 8, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'C6': ['C', 6, +1, 300, 12, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'C8': ['C', 8, +0, 400, 16, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
-  'SC4': ['Sc', 4, +1, 300, 16, 'EoB', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
-  'SC6': ['Sc', 6, +0, 400, 20, 'EoB', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
-  'SC8': ['Sc', 8, -1, 500, 24, 'EoB', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/']
+  'SC4': ['Sc', 4, +1, 300, 16, 'DS', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
+  'SC6': ['Sc', 6, +0, 400, 20, 'DS', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/'],
+  'SC8': ['Sc', 8, -1, 500, 24, 'DS', false, 'Starfinder #6: Empire of Bones pg. 45', 'https://paizo.com/products/btpya1ai/']
 }
 
 // https://www.aonsrd.com/Starship_Armor.aspx
@@ -189,6 +191,17 @@ let computers = {
   'Mk 10 Duonode': [+10, 2, 55, 200, 'CRB', true, 'Starfinder Core Rulebook pg. 297', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook']
 }
 
+let networkNodes = {
+  // Name:	[Bonus,	Node Maximum,	PCU Cost,	BP Cost]
+  'Mk 4':	[+4,	2,	8,	4],
+  'Mk 5':	[+5,	2,	10,	5],
+  'Mk 6':	[+6,	3,	11,	6],
+  'Mk 7':	[+7,	3,	13,	7],
+  'Mk 8':	[+8,	4,	15,	8],
+  'Mk 9':	[+9,	4,	17,	9],
+  'Mk 10':	[+10,	5,	19,	10]
+}
+
 const getTierData = (tierId) => {
   const array = shipTiers[tierId]
 
@@ -217,6 +230,7 @@ const getThrusterData = (thrustersId) => {
   return {size: array[0], speed: array[1], pilotingModifier: array[2], pcuCost: array[3], bpCost: array[4], sourceShort: array[5], sfsLegal: array[6], sourceFull: array[7], sourceLink: array[8]}
 }
 
+// TODO: can I do this without passing in size?
 const getArmorData = (armorId, size) => {
   if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, sourceShort: null, sfsLegal: true, sourceFull: null, sourceLink: null}
 
@@ -239,6 +253,16 @@ const getComputerData = (computerId) => {
   return {bonus: array[0], nodes: array[1], pcuCost: array[2], bpCost: array[3], sourceShort: array[4], sfsLegal: array[5], sourceFull: array[6], sourceLink: array[7]}
 }
 
+// TODO: can I do this without passing in size?
+const getNetworkNodeData = (nodeId, size) => { 
+  if(nodeId === null || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
+
+  console.log(nodeId, size);
+  const array = networkNodes[nodeId]
+
+  return {bonus: array[0], nodeMax: array[1], pcuCost: array[2], bpCost: array[3]}
+}
+
 const getTierIdList = () => {
   return Object
     .keys(shipTiers)
@@ -252,6 +276,10 @@ const getTierIdList = () => {
     })
 
   // return Object.keys(shipTiers).sort((a, b) => eval(a) - eval(b))
+}
+
+const getFrameIdList = () => {
+  return frames.map(frame => frame.type)
 }
 
 const getPowerCoreIdList = () => {
@@ -270,6 +298,10 @@ const getComputerIdList = () => {
   return Object.keys(computers).sort((a, b) => a + b)
 }
 
+const getNetworkNodeIdList = () => {
+  return Object.keys(networkNodes).sort((a, b) => a + b)
+}
+
 export {
   getTierData, 
   getSizeData,
@@ -277,9 +309,12 @@ export {
   getThrusterData,
   getArmorData,
   getComputerData,
+  getNetworkNodeData,
   getTierIdList, 
+  getFrameIdList,
   getPowerCoreIdList, 
   getThrusterIdList,
   getArmorIdList,
-  getComputerIdList
+  getComputerIdList,
+  getNetworkNodeIdList
 }

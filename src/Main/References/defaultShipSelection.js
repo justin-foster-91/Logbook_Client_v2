@@ -167,6 +167,7 @@ let defaultSelections = {
 			}
 		}
 	},
+	"ctNetworkNodes": 0,
 	"ctTim": 0,
 	"ctTimAll": 0,
 	"customFrameBaseId": "light-freighter",
@@ -198,7 +199,6 @@ let defaultSelections = {
 	"isUseStrictRules": 1,
 	"powerCoreIds": [null],
 	"powerCoreSpecialMaterials": [null],
-	"ctNetworkNodes": 0,
 	"reinforcedBulkheadId": null,
 	"roboticAppendageId": null,
 	"secondaryComputerId": "basic-computer",

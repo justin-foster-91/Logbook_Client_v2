@@ -1,4 +1,12 @@
-import { getPowerCoreData, getThrusterData, getTierData, getArmorData, getComputerData } from "./metaTables";
+import { 
+  getPowerCoreData, 
+  getThrusterData, 
+  getTierData, 
+  getArmorData, 
+  getComputerData, 
+  getTierIdList,
+  getFrameIdList 
+} from "./metaTables";
 import { capitalizeEachWord, sizeLetterToStringConverter } from "./utils";
 import frames from "./frames.json";
 
@@ -44,47 +52,54 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 };
 
 // (Object, String) => void
-const setNewFrame = (ship, frameId) => {
-  ship.frameId = frameId;
+// const setNewFrame = (ship, frameId) => {
+//   ship.frameId = frameId;
 
-  updatePowerCoresToMatchFrame(ship);
-  updateThrustersToMatchFrame(ship);
-};
+//   updatePowerCoresToMatchFrame(ship);
+//   updateThrustersToMatchFrame(ship);
+// };
 
 const updatePowerCoresToMatchFrame = (ship) => {
+  let { frameId, powerCoreIds } = ship
+  const size = findComponentByFrameId(frameId, "size")
+
   // change power cores to null if they don't fit the new frame
-  ship.powerCoreIds.forEach((core, idx) => {
+  powerCoreIds.forEach((core, idx) => {
     if (
       core !== null &&
-      !doesFrameSizeAllowCore(
-        core,
-        findComponentByFrameId(ship.frameId, "size")
-      )
+      !doesFrameSizeAllowCore(core, size)
     ) {
-      ship.powerCoreIds[idx] = null;
+      powerCoreIds[idx] = null;
     }
   });
 
   // reduce length of the power core list if moving to a smaller frame
-  let newCoreAmount = getCoreQuantityFromSize(
-    findComponentByFrameId(ship.frameId, "size")
-  );
-  if (ship.powerCoreIds.length > newCoreAmount)
-    ship.powerCoreIds.length = newCoreAmount;
+  let newCoreAmount = getCoreQuantityFromSize(size);
+  if (powerCoreIds.length > newCoreAmount)
+    powerCoreIds.length = newCoreAmount;
 };
 
 const updateThrustersToMatchFrame = (ship) => {
+  let { frameId, thrustersId } = ship
+  const size = findComponentByFrameId(frameId, "size")
+  
   // change thrusters to null if they don't fit the new frame
-  if (
-    ship.thrustersId !== null &&
-    !doesFrameSizeAllowThruster(
-      ship.thrustersId,
-      findComponentByFrameId(ship.frameId, "size")
-    )
-  ) {
-    ship.thrustersId = null;
+  if (thrustersId !== null && !doesFrameSizeAllowThruster(thrustersId, size)) {
+    thrustersId = null;
   }
 };
+
+const updateComputerToMatchFrame = (ship) => {
+  let { frameId, computerId } = ship
+  const size = findComponentByFrameId(frameId, "size")
+
+  console.log(size);
+  // change computer to 'mk 4 mono' if size changes to supercolossal
+  if(size === 'Supercolossal'){
+    // FIXME: WHYYYYY
+    computerId = 'Mk 4 Mononode'
+  }
+}
 
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
@@ -279,6 +294,19 @@ class Ship {
   getSize() {
     return this.getFramePackage().size;
   }
+
+  setTier(tierNum) {
+    if(!getTierIdList().includes(tierNum)) throw 'Tier input did not match allowed tier options'
+    return this.parts.tierId = tierNum
+  }
+
+  setFrame(frameType) {
+    if(!getFrameIdList().includes(frameType)) throw 'Frame input did not match allowed frame options'
+    updatePowerCoresToMatchFrame(this.parts);
+    updateThrustersToMatchFrame(this.parts);
+    updateComputerToMatchFrame(this.parts);
+    return this.parts.frameId = frameType
+  }
 }
 
 const getTotalBPCosts = (ship) => {
@@ -355,17 +383,22 @@ const getTotalAC = () => {
   */
 }
 
+const shipSetter = (ship, part, value) => {
+  ship[part] = value;
+}
+
 
 export {
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
-  setNewFrame,
+  // setNewFrame,
   validateShip,
   getFramePackageFromShip,
   Ship,
   getTotalBPCosts,
   getTotalPCUCosts,
-  getEssentialPCUCosts
+  getEssentialPCUCosts,
+  shipSetter
 };

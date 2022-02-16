@@ -25,7 +25,12 @@ function CustomShipPage() {
   });
 
 
-  // defaultShip -- 'has' section using 0's and 1's
+  // TODO: selecting a computer, then changing size to supercolossal should default to mk 4
+  // TODO: track computer bonus sequence (+4/+4/+4)
+  // TODO: track computer total costs
+
+  // TODO: metatable functions that take in size
+
   // TODO: make all changes to customShipParts a setter function
   // TODO: SetComputer supercolossal exception
 
