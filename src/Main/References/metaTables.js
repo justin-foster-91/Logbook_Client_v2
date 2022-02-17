@@ -230,8 +230,8 @@ const getThrusterData = (thrustersId) => {
   return {size: array[0], speed: array[1], pilotingModifier: array[2], pcuCost: array[3], bpCost: array[4], sourceShort: array[5], sfsLegal: array[6], sourceFull: array[7], sourceLink: array[8]}
 }
 
-// TODO: can I do this without passing in size?
 const getArmorData = (armorId, size) => {
+  if(size === undefined) throw "getArmorData(armorId, size) must take in a size parameter"
   if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, sourceShort: null, sfsLegal: true, sourceFull: null, sourceLink: null}
 
   let sizeMod = {'Tiny': 1, 'Small': 2, 'Medium': 3, 'Large': 4, 'Huge': 5, 'Gargantuan': 6, 'Colossal': 7, 'Supercolossal': 8}
@@ -253,8 +253,8 @@ const getComputerData = (computerId) => {
   return {bonus: array[0], nodes: array[1], pcuCost: array[2], bpCost: array[3], sourceShort: array[4], sfsLegal: array[5], sourceFull: array[6], sourceLink: array[7]}
 }
 
-// TODO: can I do this without passing in size?
 const getNetworkNodeData = (nodeId, size) => { 
+  if(size === undefined) throw "getNetworkNodeData(nodeId, size) must take in a size parameter"
   if(nodeId === null || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
   console.log(nodeId, size);

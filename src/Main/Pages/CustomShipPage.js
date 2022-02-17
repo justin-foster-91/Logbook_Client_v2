@@ -20,20 +20,13 @@ function CustomShipPage() {
   const essentialPCUCosts = getEssentialPCUCosts(customShipParts)
   const totalPCUBudget = powerCoreIds.map(core => getPowerCoreData(core).pcuProvided).reduce((total, num) => total + num)
 
-  useEffect(() => {
-    console.log(validateShip(customShipParts));
-  });
+  // useEffect(() => {
+  //   console.log(validateShip(customShipParts));
+  // });
 
-
-  // TODO: selecting a computer, then changing size to supercolossal should default to mk 4
-  // TODO: track computer bonus sequence (+4/+4/+4)
-  // TODO: track computer total costs
-
-  // TODO: metatable functions that take in size
+  // TODO: tooltips on calculations and labels
 
   // TODO: make all changes to customShipParts a setter function
-  // TODO: SetComputer supercolossal exception
-
 
   // TODO: create more Ship class methods
   // TODO: customShip => customizeShip

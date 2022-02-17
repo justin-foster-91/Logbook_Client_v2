@@ -1,14 +1,7 @@
-import { 
-  getPowerCoreData, 
-  getThrusterData, 
-  getTierData, 
-  getArmorData, 
-  getComputerData, 
-  getTierIdList,
-  getFrameIdList 
-} from "./metaTables";
-import { capitalizeEachWord, sizeLetterToStringConverter } from "./utils";
+import * as Tables from "./metaTables";
+import * as Utils from "./utils";
 import frames from "./frames.json";
+import Ship from './ship'
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -25,9 +18,9 @@ const getCoreQuantityFromSize = (size) => {
 
 // String core => Boolean
 const doesFrameSizeAllowCore = (core, frameSize) => {
-  let sizeLetterList = getPowerCoreData(core).sizes;
+  let sizeLetterList = Tables.getPowerCoreData(core).sizes;
   let sizeWordList = sizeLetterList.map((size) =>
-    sizeLetterToStringConverter(size)
+    Utils.sizeLetterToStringConverter(size)
   );
 
   if (frameSize === "Supercolossal" && sizeWordList.includes("Huge"))
@@ -37,67 +30,54 @@ const doesFrameSizeAllowCore = (core, frameSize) => {
 };
 
 const doesFrameSizeAllowThruster = (thruster, frameSize) => {
-  let sizeLetter = getThrusterData(thruster).size;
-  let sizeWord = sizeLetterToStringConverter(sizeLetter);
+  let sizeLetter = Tables.getThrusterData(thruster).size;
+  let sizeWord = Utils.sizeLetterToStringConverter(sizeLetter);
 
   return sizeWord.match(frameSize) ? true : false;
 };
 
 const findComponentByFrameId = (frameId, returnComponent) => {
   let newFrame = frames.find(
-    (frame) => frame.type === capitalizeEachWord(frameId)
+    (frame) => frame.type === Utils.capitalizeEachWord(frameId)
   );
 
   return newFrame[returnComponent];
 };
 
-// (Object, String) => void
-// const setNewFrame = (ship, frameId) => {
-//   ship.frameId = frameId;
-
-//   updatePowerCoresToMatchFrame(ship);
-//   updateThrustersToMatchFrame(ship);
-// };
-
 const updatePowerCoresToMatchFrame = (ship) => {
-  let { frameId, powerCoreIds } = ship
-  const size = findComponentByFrameId(frameId, "size")
+  const size = findComponentByFrameId(ship.frameId, "size")
 
   // change power cores to null if they don't fit the new frame
-  powerCoreIds.forEach((core, idx) => {
+  ship.powerCoreIds.forEach((core, idx) => {
     if (
       core !== null &&
       !doesFrameSizeAllowCore(core, size)
     ) {
-      powerCoreIds[idx] = null;
+      ship.powerCoreIds[idx] = null;
     }
   });
 
   // reduce length of the power core list if moving to a smaller frame
   let newCoreAmount = getCoreQuantityFromSize(size);
-  if (powerCoreIds.length > newCoreAmount)
-    powerCoreIds.length = newCoreAmount;
+  if (ship.powerCoreIds.length > newCoreAmount)
+  ship.powerCoreIds.length = newCoreAmount;
 };
 
 const updateThrustersToMatchFrame = (ship) => {
-  let { frameId, thrustersId } = ship
-  const size = findComponentByFrameId(frameId, "size")
+  const size = findComponentByFrameId(ship.frameId, "size")
   
   // change thrusters to null if they don't fit the new frame
-  if (thrustersId !== null && !doesFrameSizeAllowThruster(thrustersId, size)) {
-    thrustersId = null;
+  if (ship.thrustersId !== null && !doesFrameSizeAllowThruster(ship.thrustersId, size)) {
+    ship.thrustersId = null;
   }
 };
 
 const updateComputerToMatchFrame = (ship) => {
-  let { frameId, computerId } = ship
-  const size = findComponentByFrameId(frameId, "size")
+  const size = findComponentByFrameId(ship.frameId, "size")
 
-  console.log(size);
-  // change computer to 'mk 4 mono' if size changes to supercolossal
+  // change computer to 'Mk 4 Mononode' if size changes to supercolossal
   if(size === 'Supercolossal'){
-    // FIXME: WHYYYYY
-    computerId = 'Mk 4 Mononode'
+    ship.computerId = 'Mk 4 Mononode'
   }
 }
 
@@ -166,7 +146,7 @@ const validatePowerCores = (ship) => {
     // ship frame is supercolossal
 
     let supercolossalCoreBoolArray = ship.powerCoreIds.map((core) =>
-      getPowerCoreData(core).sizes.includes("Sc")
+      Tables.getPowerCoreData(core).sizes.includes("Sc")
     );
 
     if (supercolossalCoreBoolArray.includes(true)) {
@@ -178,8 +158,8 @@ const validatePowerCores = (ship) => {
         .filter((core, idx) => indexOfFirstSupercolossalMatch !== idx)
         .map(
           (core) =>
-            getPowerCoreData(core).sizes.includes("H") &&
-            !getPowerCoreData(core).sizes.includes("C")
+            Tables.getPowerCoreData(core).sizes.includes("H") &&
+            !Tables.getPowerCoreData(core).sizes.includes("C")
         );
 
       if (hugeCoreBoolArray.includes(false)) {
@@ -204,7 +184,7 @@ const validatePowerCores = (ship) => {
       // no cores were supercolossal size
 
       let colossalCoreBoolArray = ship.powerCoreIds.map((core) =>
-        getPowerCoreData(core).sizes.includes("C")
+        Tables.getPowerCoreData(core).sizes.includes("C")
       );
 
       if (colossalCoreBoolArray.includes(false)) {
@@ -237,7 +217,7 @@ const validateArmor = (ship) => {
 
   const { forward, port, starboard, aft } = ship.parts.ablativeArmorByPosition
   const totalUsedTempHP = forward + port + starboard + aft
-  const totalAllowedTempHP = getArmorData(ship.parts.armorId, ship.getSize()).tempHP
+  const totalAllowedTempHP = Tables.getArmorData(ship.parts.armorId, ship.getSize()).tempHP
   
   if(ship.parts.armorId && ship.parts.armorId.includes('ablative')){
     if(totalAllowedTempHP !== totalUsedTempHP){
@@ -264,13 +244,13 @@ const formatExpansions = (defaultString) => {
 
 const getFramePackageFromShip = (ship) => {
   let { tierId } = ship;
-  let frameId = capitalizeEachWord(ship.frameId);
+  let frameId = Utils.capitalizeEachWord(ship.frameId);
   let { startTotal, increment } = findComponentByFrameId(frameId, "hp");
 
   let framePackage = {
     size: findComponentByFrameId(frameId, "size"),
     maneuverability: findComponentByFrameId(frameId, "maneuverability"),
-    hp: startTotal + increment * getTierData(tierId).hpIncrementMultiplier,
+    hp: startTotal + increment * Tables.getTierData(tierId).hpIncrementMultiplier,
     dt: findComponentByFrameId(frameId, "dt"),
     ct: findComponentByFrameId(frameId, "ct"),
     expansions: formatExpansions(findComponentByFrameId(frameId, "expansions")),
@@ -282,43 +262,16 @@ const getFramePackageFromShip = (ship) => {
   return framePackage;
 };
 
-class Ship {
-  constructor(parts) {
-    this.parts = parts;
-  }
-
-  getFramePackage() {
-    return getFramePackageFromShip(this.parts);
-  }
-
-  getSize() {
-    return this.getFramePackage().size;
-  }
-
-  setTier(tierNum) {
-    if(!getTierIdList().includes(tierNum)) throw 'Tier input did not match allowed tier options'
-    return this.parts.tierId = tierNum
-  }
-
-  setFrame(frameType) {
-    if(!getFrameIdList().includes(frameType)) throw 'Frame input did not match allowed frame options'
-    updatePowerCoresToMatchFrame(this.parts);
-    updateThrustersToMatchFrame(this.parts);
-    updateComputerToMatchFrame(this.parts);
-    return this.parts.frameId = frameType
-  }
-}
-
 const getTotalBPCosts = (ship) => {
   const { thrustersId, powerCoreIds, armorId, computerId } = ship
-  const powerCoreTotalBPCost = powerCoreIds.map(core => getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
+  const powerCoreTotalBPCost = powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
 
   const bpExpenses = [
     getFramePackageFromShip(ship).bpCost,
     powerCoreTotalBPCost,
-    getThrusterData(thrustersId).bpCost,
-    getArmorData(armorId, getFramePackageFromShip(ship).size).bpCost,
-    getComputerData(computerId).bpCost,
+    Tables.getThrusterData(thrustersId).bpCost,
+    Tables.getArmorData(armorId, getFramePackageFromShip(ship).size).bpCost,
+    Tables.getComputerData(computerId).bpCost,
     // crew quarters
     // defensive countermeasures
     // drift engine
@@ -339,8 +292,8 @@ const getTotalPCUCosts = (ship) => {
   const { thrustersId, computerId } = ship
 
   const pcuExpenses = [
-    getThrusterData(thrustersId).pcuCost,
-    getComputerData(computerId).pcuCost,
+    Tables.getThrusterData(thrustersId).pcuCost,
+    Tables.getComputerData(computerId).pcuCost,
     // defensive countermeasures
     // expansion bays
     // security (misc)
@@ -356,7 +309,7 @@ const getEssentialPCUCosts = (ship) => {
   const { thrustersId } = ship
 
   const pcuExpenses = [
-    getThrusterData(thrustersId).pcuCost,
+    Tables.getThrusterData(thrustersId).pcuCost,
     // defensive countermeasures
     // shields
     // weapons
@@ -393,10 +346,11 @@ export {
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
-  // setNewFrame,
+  updatePowerCoresToMatchFrame,
+  updateThrustersToMatchFrame,
+  updateComputerToMatchFrame,
   validateShip,
   getFramePackageFromShip,
-  Ship,
   getTotalBPCosts,
   getTotalPCUCosts,
   getEssentialPCUCosts,

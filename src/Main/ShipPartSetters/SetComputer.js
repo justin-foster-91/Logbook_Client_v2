@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import { getComputerData, getComputerIdList, getNetworkNodeData, getNetworkNodeIdList } from "../References/metaTables";
+import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
-import { capitalizeEachWord } from '../References/utils'
+import * as Utils from '../References/utils'
+import NonPrimaryComputers from "./NonPrimaryComputers";
 
 function SetComputer() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
@@ -9,9 +10,9 @@ function SetComputer() {
   const [isMononode, setIsMononode] = useState(true)
 
   const { computerId, tierId, secondaryComputerId, ctNetworkNodes } = customShipParts;
-  const { bonus, nodes, pcuCost, bpCost } = getComputerData(computerId);
+  const { bonus, nodes, pcuCost, bpCost } = Tables.getComputerData(computerId);
   const size = ship.getSize();
-  const [Mk, x] = capitalizeEachWord(computerId).split(' ')
+  const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
 
   const { 
@@ -19,16 +20,16 @@ function SetComputer() {
      nodes: secondaryNodes, 
      pcuCost: secondaryPCUCost, 
      bpCost: secondaryBPCost 
-  } = getComputerData(secondaryComputerId)
+  } = Tables.getComputerData(secondaryComputerId)
 
   const { 
     bonus: networkBonus, 
     nodeMax, 
     pcuCost: networkPCUCost, 
     bpCost: networkBPCost
-  } = getNetworkNodeData(networkNodeId, ship.getSize())
+  } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
 
-  const totalCompBPCosts = bpCost + (0 || secondaryBPCost) + ((0 || networkBPCost) * (0 || ctNetworkNodes))
+  const totalCompBPCosts = bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
   const totalCompPCUCosts = pcuCost + (0 || secondaryPCUCost) + ((0 || networkPCUCost) * (0 || ctNetworkNodes))
   const totalNodes = nodes + (0 || secondaryNodes) + (0 || ctNetworkNodes)
 
@@ -119,7 +120,7 @@ function SetComputer() {
           onChange={(ev) => handleSecondaryComputerChange(ev)}
         >
           <option key={-1}>Basic Computer</option>
-          {getComputerIdList().map(
+          {Tables.getComputerIdList().map(
             (computer, idx) =>
               computer.split(" ")[1] < 4 && (
                 <option key={idx}>{computer}</option>
@@ -150,7 +151,7 @@ function SetComputer() {
       Primary Computer
       <br />
       <select defaultValue={computerId} onChange={handleComputerChange}>
-        {getComputerIdList().map((computer, idx) =>
+        {Tables.getComputerIdList().map((computer, idx) =>
           renderComputerOptions(computer, idx)
         )}
       </select>
@@ -158,7 +159,7 @@ function SetComputer() {
       {isSupercolossal && renderNonPrimaryComputers()}
       <p></p>
       <div>
-        Bonus: {bonusList}; Total Nodes: {totalNodes}; Tier: {computerTier}
+        Bonus: {bonusList}; Nodes: {totalNodes}; Tier: {computerTier}
       </div>
       <div>
         PCU Cost: {totalCompPCUCosts}; BP Cost: {totalCompBPCosts}

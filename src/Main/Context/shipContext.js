@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 import defaultSelections from '../References/defaultShipSelection';
-import { Ship } from '../References/shipFunctions';
+import Ship from '../References/ship';
 
 
 export const ShipsContext = createContext({userShips: [], setUserShips: ()=>{}});

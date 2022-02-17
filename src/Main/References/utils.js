@@ -5,7 +5,7 @@ const capitalizeEachWord = (component) => {
     .split("-")
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
-    
+
   returnComponent = returnComponent
     .split(" ")
     .map((word) => word[0].toUpperCase() + word.slice(1))
@@ -28,14 +28,14 @@ const readableIds = (currentId) => {
 
 const sizeLetterToStringConverter = (letter) => {
   let sizeConverter = {
-    "T": "Tiny",
-    "S": "Small",
-    "M": "Medium",
-    "L": "Large",
-    "H": "Huge",
-    "G": "Gargantuan",
-    "C": "Colossal",
-    "Sc": "Supercolossal",
+    T: "Tiny",
+    S: "Small",
+    M: "Medium",
+    L: "Large",
+    H: "Huge",
+    G: "Gargantuan",
+    C: "Colossal",
+    Sc: "Supercolossal",
   };
 
   return sizeConverter[letter];
