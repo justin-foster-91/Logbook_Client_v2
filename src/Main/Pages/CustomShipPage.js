@@ -49,9 +49,9 @@ function CustomShipPage() {
       <div className="partSetterBlock">
         <SetTier></SetTier>
         <SetFrame></SetFrame>
-        {/* <SetPowerCore></SetPowerCore>
+        <SetPowerCore></SetPowerCore>
         <SetThrusters></SetThrusters>
-        <SetArmor></SetArmor> */}
+        <SetArmor></SetArmor>
         <SetComputer></SetComputer>
       </div>
 
