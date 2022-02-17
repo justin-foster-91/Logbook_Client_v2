@@ -24,7 +24,6 @@ function SetComputer() {
 
   const { 
     bonus: networkBonus, 
-    nodeMax, 
     pcuCost: networkPCUCost, 
     bpCost: networkBPCost
   } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
@@ -83,23 +82,6 @@ function SetComputer() {
     setCustomShipParts({ ...customShipParts });
   };
 
-  const handleSecondaryComputerChange = (ev) => {
-    const secondaryComputerOption = ev.target.value;
-
-    customShipParts.secondaryComputerId = secondaryComputerOption;
-    setCustomShipParts({ ...customShipParts });
-  };
-
-  const handleNodeChange = (ev) => {
-    const nodeAmount = ev.target.value
-    console.log(nodeAmount, nodeMax);
-
-    if(nodeAmount < 0 || nodeAmount > nodeMax) return
-
-    customShipParts.ctNetworkNodes = Number(nodeAmount)
-    setCustomShipParts({ ...customShipParts });
-  };
-
   const renderComputerOptions = (computer, idx) => {
     if (isSupercolossal) {
       if (computer.split(" ")[1] >= 4) {
@@ -108,40 +90,6 @@ function SetComputer() {
     } else {
       return <option key={idx}>{computer}</option>;
     }
-  };
-
-  const renderNonPrimaryComputers = () => {
-    return (
-      <>
-        Secondary Computer
-        <br />
-        <select
-          defaultValue={secondaryComputerId}
-          onChange={(ev) => handleSecondaryComputerChange(ev)}
-        >
-          <option key={-1}>Basic Computer</option>
-          {Tables.getComputerIdList().map(
-            (computer, idx) =>
-              computer.split(" ")[1] < 4 && (
-                <option key={idx}>{computer}</option>
-              )
-          )}
-        </select>
-
-        <p></p>
-        
-        {isMononode &&
-        <div>
-          <label htmlFor="networkNodes">Network Nodes</label>
-          <br/>
-          <select onChange={(ev) => handleNodeChange(ev)}>
-            {Array(nodeMax+1).fill(1).map((node, idx) => 
-              <option key={idx}>{idx}</option>
-            )}
-          </select>
-        </div>}
-      </>
-    );
   };
 
   return (
@@ -156,7 +104,11 @@ function SetComputer() {
         )}
       </select>
       <p></p>
-      {isSupercolossal && renderNonPrimaryComputers()}
+      {isSupercolossal && 
+        <NonPrimaryComputers
+          isMononode={isMononode}
+        ></NonPrimaryComputers>
+      }
       <p></p>
       <div>
         Bonus: {bonusList}; Nodes: {totalNodes}; Tier: {computerTier}

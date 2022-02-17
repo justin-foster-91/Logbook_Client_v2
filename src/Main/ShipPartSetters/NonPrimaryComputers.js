@@ -6,32 +6,12 @@ import * as Utils from '../References/utils'
 function NonPrimaryComputers(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
-  const { computerId, tierId, secondaryComputerId, ctNetworkNodes } = customShipParts;
-  const size = ship.getSize();
-  const { setIsSupercolossal, isMononode } = props
+  const { computerId, secondaryComputerId } = customShipParts;
+  const { isMononode } = props
   const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
 
-  const { 
-    bonus: secondaryBonus,
-     nodes: secondaryNodes, 
-     pcuCost: secondaryPCUCost, 
-     bpCost: secondaryBPCost 
-  } = Tables.getComputerData(secondaryComputerId)
-
-  const { 
-    bonus: networkBonus, 
-    nodeMax, 
-    pcuCost: networkPCUCost, 
-    bpCost: networkBPCost
-  } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
-
-  useEffect(() => {
-    setIsSupercolossal(false);
-
-    customShipParts.secondaryComputerId = "Basic Computer";
-    setCustomShipParts({ ...customShipParts });
-  }, [size]);
+  const { nodeMax } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
 
   const handleSecondaryComputerChange = (ev) => {
     const secondaryComputerOption = ev.target.value;
