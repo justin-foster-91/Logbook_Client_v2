@@ -18,7 +18,7 @@ let defaultSelections = {
 		"shockGridId": null,
 		"wipe": false
 	},
-	"computerId": "basic-computer",
+	"computerId": "Basic Computer",
 	"crewQuartersId": "common",
 	"crewSkills": {
 		"captain": {
@@ -170,9 +170,9 @@ let defaultSelections = {
 	"ctNetworkNodes": 0,
 	"ctTim": 0,
 	"ctTimAll": 0,
-	"customFrameBaseId": "light-freighter",
+	"customFrameBaseId": "Light Freighter",
 	"customComponents": [],
-	"dedicatedComputerId": "basic-computer",
+	"dedicatedComputerId": "Basic Computer",
 	"defensiveCountermeasuresId": null,
 	"defensiveCountermeasuresMaterialId": null,
 	"deflectorShieldId": null,
@@ -201,7 +201,7 @@ let defaultSelections = {
 	"powerCoreSpecialMaterials": [null],
 	"reinforcedBulkheadId": null,
 	"roboticAppendageId": null,
-	"secondaryComputerId": "basic-computer",
+	"secondaryComputerId": "Basic Computer",
 	"sensorsId": null,
 	"sensorsMaterialId": null,
 	"shieldType": "shields",

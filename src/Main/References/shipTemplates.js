@@ -1,5 +1,4 @@
 
-
 let templates = [
   {
     "ablativeArmorId": "none",

@@ -43,7 +43,7 @@ function SetComputer() {
   }
 
   const bonusSplitter = (bonus, nodes) => {
-    if(!isSupercolossal) return Array(nodes || 1).fill(`+${bonus}`)
+    if(computerId.includes("Basic")) return ['+0']
 
     return Array(nodes).fill(`+${bonus}`)
   }
@@ -72,9 +72,9 @@ function SetComputer() {
       setIsMononode(true)
     } else{
       setIsMononode(false)
-      customShipParts.ctNetworkNodes = 0
     }
-
+    
+    customShipParts.ctNetworkNodes = 0;
     customShipParts.computerId = computerOption;
     setCustomShipParts({ ...customShipParts });
   };

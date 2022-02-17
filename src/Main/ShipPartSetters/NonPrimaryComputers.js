@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import * as Utils from '../References/utils'
@@ -6,7 +6,7 @@ import * as Utils from '../References/utils'
 function NonPrimaryComputers(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
-  const { computerId, secondaryComputerId } = customShipParts;
+  let { computerId, secondaryComputerId, ctNetworkNodes } = customShipParts;
   const { isMononode } = props
   const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
@@ -21,12 +21,11 @@ function NonPrimaryComputers(props) {
   };
 
   const handleNodeChange = (ev) => {
-    const nodeAmount = ev.target.value
-    console.log(nodeAmount, nodeMax);
+    const nodeAmount = Number(ev.target.value)
 
     if(nodeAmount < 0 || nodeAmount > nodeMax) return
 
-    customShipParts.ctNetworkNodes = Number(nodeAmount)
+    customShipParts.ctNetworkNodes = nodeAmount
     setCustomShipParts({ ...customShipParts });
   };
 
@@ -53,7 +52,7 @@ function NonPrimaryComputers(props) {
       <div>
         <label htmlFor="networkNodes">Network Nodes</label>
         <br/>
-        <select onChange={(ev) => handleNodeChange(ev)}>
+        <select value={ctNetworkNodes} onChange={(ev) => handleNodeChange(ev)}>
           {Array(nodeMax+1).fill(1).map((node, idx) => 
             <option key={idx}>{idx}</option>
           )}

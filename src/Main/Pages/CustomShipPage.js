@@ -24,8 +24,10 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
+  // TODO: shipTemplates, converting to better format
+  // TODO: SF totals console logs
   // TODO: move the bonus splitter to ship functions
-  // TODO: tooltips on calculations and labels
+  // TODO: cleanup capitalize function from utils
 
   // TODO: make all changes to customShipParts a setter function
 

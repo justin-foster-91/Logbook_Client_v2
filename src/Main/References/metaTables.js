@@ -230,7 +230,7 @@ const getThrusterData = (thrustersId) => {
 }
 
 const getArmorData = (armorId, size) => {
-  if(size === undefined) throw "getArmorData(armorId, size) must take in a size parameter"
+  if(size === undefined) throw new Error("getArmorData(armorId, size) must take in a size parameter")
   if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, sourceShort: null, sfsLegal: true, sourceFull: null, sourceLink: null}
 
   let sizeMod = {'Tiny': 1, 'Small': 2, 'Medium': 3, 'Large': 4, 'Huge': 5, 'Gargantuan': 6, 'Colossal': 7, 'Supercolossal': 8}
@@ -253,7 +253,7 @@ const getComputerData = (computerId) => {
 }
 
 const getNetworkNodeData = (nodeId, size) => { 
-  if(size === undefined) throw "getNetworkNodeData(nodeId, size) must take in a size parameter"
+  if(size === undefined) throw new Error("getNetworkNodeData(nodeId, size) must take in a size parameter")
   if(nodeId === null || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
   const array = networkNodes[nodeId]

@@ -263,6 +263,7 @@ const getFramePackageFromShip = (ship) => {
 };
 
 const getTotalBPCosts = (ship) => {
+  // console.log("Total BP");
   const { thrustersId, powerCoreIds, armorId } = ship
   const powerCoreTotalBPCost = powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
 
@@ -289,6 +290,7 @@ const getTotalBPCosts = (ship) => {
 };
 
 const getTotalPCUCosts = (ship) => {
+  // console.log("Total PCU");
   const { thrustersId } = ship
 
   const pcuExpenses = [
@@ -319,21 +321,27 @@ const getEssentialPCUCosts = (ship) => {
 }
 
 const getTotalCompBPCosts = (ship) => {
+  // console.log('Total comp BP');
   const { size } = getFramePackageFromShip(ship)
   const { bpCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
+  const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
+  const networkNodeId = `${Mk} ${x}`
   const { bpCost: secondaryBPCost } = Tables.getComputerData(ship.secondaryComputerId)
-  const { bpCost: networkBPCost } = Tables.getNetworkNodeData(ship.networkNodeId, size)
+  const { bpCost: networkBPCost } = Tables.getNetworkNodeData(networkNodeId, size)
 
   return bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
 }
 
 const getTotalCompPCUCosts = (ship) => {
+  // console.log('Total comp PCU');
   const { size } = getFramePackageFromShip(ship)
   const { pcuCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
+  const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
+  const networkNodeId = `${Mk} ${x}`
   const { pcuCost: secondaryPCUCost } = Tables.getComputerData(ship.secondaryComputerId)
-  const { pcuCost: networkPCUCost } = Tables.getNetworkNodeData(ship.networkNodeId, size)
+  const { pcuCost: networkPCUCost } = Tables.getNetworkNodeData(networkNodeId, size)
 
   return pcuCost + secondaryPCUCost + (networkPCUCost * ctNetworkNodes)
 }
@@ -374,5 +382,7 @@ export {
   getTotalBPCosts,
   getTotalPCUCosts,
   getEssentialPCUCosts,
+  getTotalCompBPCosts,
+  getTotalCompPCUCosts,
   shipSetter
 };
