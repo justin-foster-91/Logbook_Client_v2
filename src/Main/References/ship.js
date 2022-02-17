@@ -14,6 +14,14 @@ class Ship {
     return this.getFramePackage().size;
   }
 
+  getTotalBPCosts() {
+    return SF.getTotalBPCosts(this.parts)
+  }
+
+  getTotalPCUCosts() {
+    return SF.getTotalPCUCosts(this.parts)
+  }
+
   setTier(tierNum) {
     if(!Tables.getTierIdList().includes(tierNum)) throw 'Tier input did not match allowed tier options'
     this.parts.tierId = tierNum

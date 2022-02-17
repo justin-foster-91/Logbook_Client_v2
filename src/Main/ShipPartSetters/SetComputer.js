@@ -3,6 +3,7 @@ import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import * as Utils from '../References/utils'
 import NonPrimaryComputers from "./NonPrimaryComputers";
+import * as SF from "../References/shipFunctions";
 
 function SetComputer() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
@@ -10,27 +11,23 @@ function SetComputer() {
   const [isMononode, setIsMononode] = useState(true)
 
   const { computerId, tierId, secondaryComputerId, ctNetworkNodes } = customShipParts;
-  const { bonus, nodes, pcuCost, bpCost } = Tables.getComputerData(computerId);
+  const { bonus, nodes } = Tables.getComputerData(computerId);
   const size = ship.getSize();
   const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
 
   const { 
     bonus: secondaryBonus,
-     nodes: secondaryNodes, 
-     pcuCost: secondaryPCUCost, 
-     bpCost: secondaryBPCost 
+    nodes: secondaryNodes, 
   } = Tables.getComputerData(secondaryComputerId)
 
   const { 
     bonus: networkBonus, 
-    pcuCost: networkPCUCost, 
-    bpCost: networkBPCost
-  } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
+  } = Tables.getNetworkNodeData(networkNodeId, size)
 
-  const totalCompBPCosts = bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
-  const totalCompPCUCosts = pcuCost + (0 || secondaryPCUCost) + ((0 || networkPCUCost) * (0 || ctNetworkNodes))
-  const totalNodes = nodes + (0 || secondaryNodes) + (0 || ctNetworkNodes)
+  const totalCompBPCosts = SF.getTotalCompBPCosts(customShipParts)
+  const totalCompPCUCosts = SF.getTotalCompPCUCosts(customShipParts)
+  const totalNodes = nodes + secondaryNodes + ctNetworkNodes
 
   const combineBonuses = () => {
     let primaryBonusArr = bonusSplitter(bonus, nodes)

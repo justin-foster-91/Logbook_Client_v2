@@ -263,7 +263,7 @@ const getFramePackageFromShip = (ship) => {
 };
 
 const getTotalBPCosts = (ship) => {
-  const { thrustersId, powerCoreIds, armorId, computerId } = ship
+  const { thrustersId, powerCoreIds, armorId } = ship
   const powerCoreTotalBPCost = powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
 
   const bpExpenses = [
@@ -271,7 +271,7 @@ const getTotalBPCosts = (ship) => {
     powerCoreTotalBPCost,
     Tables.getThrusterData(thrustersId).bpCost,
     Tables.getArmorData(armorId, getFramePackageFromShip(ship).size).bpCost,
-    Tables.getComputerData(computerId).bpCost,
+    getTotalCompBPCosts(ship),
     // crew quarters
     // defensive countermeasures
     // drift engine
@@ -289,11 +289,11 @@ const getTotalBPCosts = (ship) => {
 };
 
 const getTotalPCUCosts = (ship) => {
-  const { thrustersId, computerId } = ship
+  const { thrustersId } = ship
 
   const pcuExpenses = [
     Tables.getThrusterData(thrustersId).pcuCost,
-    Tables.getComputerData(computerId).pcuCost,
+    getTotalCompPCUCosts(ship),
     // defensive countermeasures
     // expansion bays
     // security (misc)
@@ -316,6 +316,26 @@ const getEssentialPCUCosts = (ship) => {
   ]
 
   return pcuExpenses.reduce((total, num) => total + num);
+}
+
+const getTotalCompBPCosts = (ship) => {
+  const { size } = getFramePackageFromShip(ship)
+  const { bpCost } = Tables.getComputerData(ship.computerId);
+  const { ctNetworkNodes } = ship
+  const { bpCost: secondaryBPCost } = Tables.getComputerData(ship.secondaryComputerId)
+  const { bpCost: networkBPCost } = Tables.getNetworkNodeData(ship.networkNodeId, size)
+
+  return bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
+}
+
+const getTotalCompPCUCosts = (ship) => {
+  const { size } = getFramePackageFromShip(ship)
+  const { pcuCost } = Tables.getComputerData(ship.computerId);
+  const { ctNetworkNodes } = ship
+  const { pcuCost: secondaryPCUCost } = Tables.getComputerData(ship.secondaryComputerId)
+  const { pcuCost: networkPCUCost } = Tables.getNetworkNodeData(ship.networkNodeId, size)
+
+  return pcuCost + secondaryPCUCost + (networkPCUCost * ctNetworkNodes)
 }
 
 const getTotalTL = () => {

@@ -29,7 +29,6 @@ let shipTiers = {
   '20': [1000, 5],
 }
 
-// TODO: sources for sizes
 let shipSize = {
   // Size: [Length, Weight, AC and TL Modifier]
   'Tiny': ['20-60 ft.', '2-40 tons', +2],
@@ -257,7 +256,6 @@ const getNetworkNodeData = (nodeId, size) => {
   if(size === undefined) throw "getNetworkNodeData(nodeId, size) must take in a size parameter"
   if(nodeId === null || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
-  console.log(nodeId, size);
   const array = networkNodes[nodeId]
 
   return {bonus: array[0], nodeMax: array[1], pcuCost: array[2], bpCost: array[3]}

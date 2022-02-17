@@ -10,13 +10,13 @@ import SetComputer from "../ShipPartSetters/SetComputer";
 import * as Tables from '../References/metaTables'
 
 function CustomShipPage() {
-  const { customShipParts } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { tierId, powerCoreIds } = customShipParts
 
-  const totalBPCosts = SF.getTotalBPCosts(customShipParts)
+  const totalBPCosts = ship.getTotalBPCosts()
   const totalBPBudget = Tables.getTierData(tierId).buildPoints
 
-  const totalPCUCosts = SF.getTotalPCUCosts(customShipParts)
+  const totalPCUCosts = ship.getTotalPCUCosts()
   const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
   const totalPCUBudget = powerCoreIds.map(core => Tables.getPowerCoreData(core).pcuProvided).reduce((total, num) => total + num)
 
@@ -24,6 +24,7 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
+  // TODO: move the bonus splitter to ship functions
   // TODO: tooltips on calculations and labels
 
   // TODO: make all changes to customShipParts a setter function
