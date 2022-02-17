@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { getThrusterData, getThrusterIdList } from "../References/metaTables";
-import { doesFrameSizeAllowThruster, getFramePackageFromShip } from "../References/shipFunctions";
+import * as Tables from "../References/metaTables";
+import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetThrusters() {
@@ -8,8 +8,8 @@ function SetThrusters() {
 
   const { thrustersId } = customShipParts;
 
-  const { speed, pilotingModifier, pcuCost, bpCost } = getThrusterData(thrustersId);
-  const { size } = getFramePackageFromShip(customShipParts);
+  const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
+  const { size } = SF.getFramePackageFromShip(customShipParts);
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value;
@@ -31,9 +31,9 @@ function SetThrusters() {
         onChange={handleThrusterChange}
       >
         <option key="null">None</option>
-        {getThrusterIdList().map(
+        {Tables.getThrusterIdList().map(
           (thruster, idx) =>
-            doesFrameSizeAllowThruster(thruster, size) && (
+            SF.doesFrameSizeAllowThruster(thruster, size) && (
               <option key={idx} value={thruster}>
                 {thruster} Thrusters
               </option>

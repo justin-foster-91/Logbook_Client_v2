@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { getPowerCoreData, getPowerCoreIdList } from "../References/metaTables";
-import { doesFrameSizeAllowCore, getCoreQuantityFromSize, getFramePackageFromShip } from "../References/shipFunctions";
+import * as Tables from "../References/metaTables";
+import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 
 const PowerCoreSelections = () => {
@@ -8,8 +8,8 @@ const PowerCoreSelections = () => {
 
   const { powerCoreIds } = customShipParts;
 
-  const { size } = getFramePackageFromShip(customShipParts);
-  const powerCoreQuantity = getCoreQuantityFromSize(size);
+  const { size } = SF.getFramePackageFromShip(customShipParts);
+  const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
   const handlePowerCoreChange = (event) => {
     const coreIndex = event.target.name;
@@ -36,13 +36,13 @@ const PowerCoreSelections = () => {
             onChange={handlePowerCoreChange}
           >
             <option key="null">None</option>
-            {getPowerCoreIdList().map(
+            {Tables.getPowerCoreIdList().map(
               (core, idx) =>
-                doesFrameSizeAllowCore(core, size) && (
+                SF.doesFrameSizeAllowCore(core, size) && (
                   <option key={"option" + idx} value={core}>
                     {`${core} (PCU ${
-                      getPowerCoreData(core).pcuProvided
-                    } | Size: ${getPowerCoreData(core).sizes.join(", ")})`}
+                      Tables.getPowerCoreData(core).pcuProvided
+                    } | Size: ${Tables.getPowerCoreData(core).sizes.join(", ")})`}
                   </option>
                 )
             )}

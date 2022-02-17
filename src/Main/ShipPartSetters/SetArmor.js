@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { getArmorData, getArmorIdList } from "../References/metaTables";
+import * as Tables from "../References/metaTables";
 import AblativeArmor from "./AblativeArmor";
 import { CustomShipContext } from "../Context/shipContext";
-import { getFramePackageFromShip } from "../References/shipFunctions";
+import * as SF from "../References/shipFunctions";
 
 function SetArmor() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   const { armorId } = customShipParts;
-  const { size, hp } = getFramePackageFromShip(customShipParts);
-  const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = getArmorData(armorId, size);
+  const { size, hp } = SF.getFramePackageFromShip(customShipParts);
+  const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getArmorData(armorId, size);
 
   const handleArmorChange = (ev) => {
     let armorOption = ev.target.value;
@@ -74,11 +74,11 @@ function SetArmor() {
         onChange={handleArmorChange}
       >
         <option key="null">None</option>
-        {getArmorIdList().map((armor, idx) => {
+        {Tables.getArmorIdList().map((armor, idx) => {
           if (armor.includes("Mk"))
             return (
               <option key={idx} value={armor}>
-                {armor} Armor (+{getArmorData(armor, size).acBonus} AC)
+                {armor} Armor (+{Tables.getArmorData(armor, size).acBonus} AC)
               </option>
             );
           if (armor.includes("Energy"))
@@ -88,16 +88,16 @@ function SetArmor() {
               </option>
             );
           if (armor.includes("ablative")) {
-            if (getArmorData(armor, size).tempHP <= hp * 2)
+            if (Tables.getArmorData(armor, size).tempHP <= hp * 2)
               return (
                 <option key={idx} value={armor}>
-                  {armor} (+{getArmorData(armor, size).tempHP} THP)
+                  {armor} (+{Tables.getArmorData(armor, size).tempHP} THP)
                 </option>
               );
           }
           return (
             <option key={idx} value={armor}>
-              {armor} (+{getArmorData(armor, size).tempHP} THP)
+              {armor} (+{Tables.getArmorData(armor, size).tempHP} THP)
             </option>
           );
         })}

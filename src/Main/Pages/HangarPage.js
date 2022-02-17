@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
-import { capitalizeEachWord } from "../References/utils";
-import { findComponentByFrameId } from "../References/shipFunctions";
+import * as Utils from "../References/utils";
+import * as SF from "../References/shipFunctions";
 import { ShipsContext } from "../Context/shipContext";
 
 const HangarPage = () => {
@@ -19,8 +19,8 @@ const HangarPage = () => {
           <div className="hangarShips" key={ship.shipName + idx}>
             {/* TODO: double check this replace usage */}
             {ship.shipName} (Tier {ship.tierId} [
-            {findComponentByFrameId(ship.frameId.replace("-", " "), "size")}]{" "}
-            {capitalizeEachWord(ship.frameId)})
+            {SF.findComponentByFrameId(ship.frameId.replace("-", " "), "size")}]{" "}
+            {Utils.capitalizeEachWord(ship.frameId)})
           </div>
         );
       })}

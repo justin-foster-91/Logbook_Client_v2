@@ -2,23 +2,23 @@ import React, { useEffect, useState, useContext } from "react";
 import SetTier from "../ShipPartSetters/SetTier";
 import SetFrame from "../ShipPartSetters/SetFrame";
 import SetPowerCore from "../ShipPartSetters/SetPowerCore";
-import { validateShip, getTotalBPCosts, getTotalPCUCosts, getEssentialPCUCosts } from "../References/shipFunctions";
+import * as SF from "../References/shipFunctions";
 import SetThrusters from "../ShipPartSetters/SetThrusters";
 import SetArmor from "../ShipPartSetters/SetArmor";
 import { CustomShipContext } from "../Context/shipContext";
 import SetComputer from "../ShipPartSetters/SetComputer";
-import { getTierData, getPowerCoreData } from '../References/metaTables'
+import * as Tables from '../References/metaTables'
 
 function CustomShipPage() {
   const { customShipParts } = useContext(CustomShipContext);
   const { tierId, powerCoreIds } = customShipParts
 
-  const totalBPCosts = getTotalBPCosts(customShipParts)
-  const totalBPBudget = getTierData(tierId).buildPoints
+  const totalBPCosts = SF.getTotalBPCosts(customShipParts)
+  const totalBPBudget = Tables.getTierData(tierId).buildPoints
 
-  const totalPCUCosts = getTotalPCUCosts(customShipParts)
-  const essentialPCUCosts = getEssentialPCUCosts(customShipParts)
-  const totalPCUBudget = powerCoreIds.map(core => getPowerCoreData(core).pcuProvided).reduce((total, num) => total + num)
+  const totalPCUCosts = SF.getTotalPCUCosts(customShipParts)
+  const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
+  const totalPCUBudget = powerCoreIds.map(core => Tables.getPowerCoreData(core).pcuProvided).reduce((total, num) => total + num)
 
   // useEffect(() => {
   //   console.log(validateShip(customShipParts));
@@ -30,6 +30,7 @@ function CustomShipPage() {
 
   // TODO: create more Ship class methods
   // TODO: customShip => customizeShip
+  // TODO: get function for frame types instead of frame import?
 
 
   const [showJSON, setShowJSON] = useState();

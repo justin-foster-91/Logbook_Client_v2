@@ -1,14 +1,14 @@
 import React from "react";
-import { capitalizeEachWord, readableIds } from "../References/utils";
-import { findComponentByFrameId } from "../References/shipFunctions";
+import * as Utils from "../References/utils";
+import * as SF from "../References/shipFunctions";
 
 const TemplateBreakdown = (props) => {
   let foundSize = "";
   let readableFrameId = "";
 
   if (props.shipName) {
-    foundSize = findComponentByFrameId(props.frameId.replace("-", " "), "size");
-    readableFrameId = capitalizeEachWord(props.frameId);
+    foundSize = SF.findComponentByFrameId(props.frameId.replace("-", " "), "size");
+    readableFrameId = Utils.capitalizeEachWord(props.frameId);
   }
 
   const showFrameComponents = () => {
@@ -31,7 +31,7 @@ const TemplateBreakdown = (props) => {
         console.log(props[componentArray[i]]);
       } else {
         pairedArray.push([
-          readableIds(componentArray[i]),
+          Utils.readableIds(componentArray[i]),
           props[componentArray[i]],
         ]);
       }
@@ -54,9 +54,9 @@ const TemplateBreakdown = (props) => {
               <b>{pair[0]}:</b>{" "}
               {typeof pair[1] === "object"
                 ? pair[1]
-                    .map((element) => capitalizeEachWord(element))
+                    .map((element) => Utils.capitalizeEachWord(element))
                     .join(", ")
-                : capitalizeEachWord(pair[1])}
+                : Utils.capitalizeEachWord(pair[1])}
             </div>
           );
         })}

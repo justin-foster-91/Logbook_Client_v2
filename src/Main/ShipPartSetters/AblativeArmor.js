@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { getArmorData } from "../References/metaTables";
+import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
 function AblativeArmor(props) {
@@ -9,8 +9,8 @@ function AblativeArmor(props) {
   const { size } = props;
   const { forward, port, starboard, aft } = customShipParts.ablativeArmorByPosition;
 
-  const maxHP = getArmorData(armorId, size).tempHP;
-  const balancedHP = getArmorData(armorId, size).tempHP / 4;
+  const maxHP = Tables.getArmorData(armorId, size).tempHP;
+  const balancedHP = Tables.getArmorData(armorId, size).tempHP / 4;
   const usedHP = forward + port + starboard + aft;
 
   useEffect(() => {

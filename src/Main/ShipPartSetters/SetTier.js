@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { getTierData, getTierIdList } from "../References/metaTables";
+import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
-import { shipSetter } from '../References/shipFunctions'
 
 function SetTier() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
   const { tierId } = customShipParts;
 
-  const { buildPoints, hpIncrementMultiplier } = getTierData(tierId);
+  const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
 
   const handleTierChange = (ev) => {
     const tierOption = ev.target.value;
@@ -32,7 +31,7 @@ function SetTier() {
       <p></p>
 
       <select defaultValue={tierId} onChange={handleTierChange}>
-        {getTierIdList().map((tier, idx) => (
+        {Tables.getTierIdList().map((tier, idx) => (
           <option key={idx}>{tier}</option>
         ))}
       </select>

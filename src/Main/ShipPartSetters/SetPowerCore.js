@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
-import { getPowerCoreData } from "../References/metaTables";
+import * as Tables from "../References/metaTables";
 import PowerCoreSelections from "./PowerCoreSelections";
 import { CustomShipContext } from "../Context/shipContext";
-import { getFramePackageFromShip } from "../References/shipFunctions";
+import * as SF from "../References/shipFunctions";
 
 function SetPowerCore() {
   const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
 
   const { powerCoreIds } = customShipParts;
-  const { size } = getFramePackageFromShip(customShipParts);
+  const { size } = SF.getFramePackageFromShip(customShipParts);
 
   const pcuProvided = powerCoreIds
-    .map((core) => getPowerCoreData(core).pcuProvided)
+    .map((core) => Tables.getPowerCoreData(core).pcuProvided)
     .reduce((total, pcu) => total + pcu);
 
   const bpCost = powerCoreIds
-    .map((core) => getPowerCoreData(core).bpCost)
+    .map((core) => Tables.getPowerCoreData(core).bpCost)
     .reduce((total, bp) => total + bp);
 
   return (
