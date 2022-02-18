@@ -4,25 +4,15 @@ import { CustomShipContext } from "../Context/shipContext";
 
 function SetTier() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
-
   const { tierId } = customShipParts;
-
   const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
 
   const handleTierChange = (ev) => {
     const tierOption = ev.target.value;
 
-
     ship.setTier(tierOption)
-    // shipSetter(customShipParts, "tierId", tierOption)
-    // // customShipParts.tierId = tierOption;
     setCustomShipParts({ ...customShipParts });
   };
-
-  // const shipSetter = (part, value) => {
-  //   customShipParts[part] = value;
-  //   setCustomShipParts({ ...customShipParts });
-  // }
 
   return (
     <>

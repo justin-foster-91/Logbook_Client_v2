@@ -37,8 +37,8 @@ function TemplateConverter(props) {
     // recursively enter the lowest nested object to replace strings
     // const allKeys = Object.keys(ship)
 
-    console.log(JSON.parse(JSON.stringify(ship).replaceAll("None", null)));
-    ship = JSON.parse(JSON.stringify(ship).replaceAll("None", null))
+    console.log(JSON.parse(JSON.stringify(ship).replace(/None/g, null)));
+    ship = JSON.parse(JSON.stringify(ship).replace(/None/g, null))
     // console.log(JSON.stringify(ship));
 
     return ship

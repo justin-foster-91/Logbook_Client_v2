@@ -8,6 +8,7 @@ import SetArmor from "../ShipPartSetters/SetArmor";
 import { CustomShipContext } from "../Context/shipContext";
 import SetComputer from "../ShipPartSetters/SetComputer";
 import * as Tables from '../References/metaTables'
+import SetCrewQuarters from "../ShipPartSetters/SetCrewQuarters";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -24,7 +25,7 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
-  // TODO: shipTemplates, converting to better format
+  // TODO: noneToNull() not working
 
   // TODO: move the bonus splitter to ship functions
   // TODO: cleanup capitalize function from utils
@@ -49,6 +50,7 @@ function CustomShipPage() {
         <SetThrusters></SetThrusters>
         <SetArmor></SetArmor>
         <SetComputer></SetComputer>
+        <SetCrewQuarters></SetCrewQuarters>
       </div>
 
       <br/>
