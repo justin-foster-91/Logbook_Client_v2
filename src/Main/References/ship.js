@@ -23,13 +23,13 @@ class Ship {
   }
 
   setTier(tierNum) {
-    if(!Tables.getTierIdList().includes(tierNum)) throw 'Tier input did not match allowed tier options'
+    if(!Tables.getTierIdList().includes(tierNum)) throw new Error('Tier input did not match allowed tier options')
     this.parts.tierId = tierNum
     return this
   }
 
   setFrame(frameType) {
-    if(!Tables.getFrameIdList().includes(frameType)) throw 'Frame input did not match allowed frame options'
+    if(!Tables.getFrameIdList().includes(frameType)) throw new Error('Frame input did not match allowed frame options')
     this.parts.frameId = frameType
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);

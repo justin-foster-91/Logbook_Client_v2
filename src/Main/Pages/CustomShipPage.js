@@ -30,6 +30,8 @@ function CustomShipPage() {
   // TODO: move the bonus splitter to ship functions
   // TODO: cleanup capitalize function from utils
   // TODO: cleanup split on '-' in capitalizeEachWord
+  // TODO: change all defaultValues
+  // TODO: make handleChanges consistent
 
   // TODO: make all changes to customShipParts a setter function
 

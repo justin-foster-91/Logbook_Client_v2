@@ -2,7 +2,7 @@ import { capitalizeEachWord } from './utils';
 import frames from "../References/frames.json";
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
-let shipTiers = {
+const shipTiers = {
   // Tier: [buildPoints, hpIncrements]
   '1/4': [25, 0],
   '1/3': [30, 0],
@@ -29,7 +29,7 @@ let shipTiers = {
   '20': [1000, 5],
 }
 
-let shipSize = {
+const shipSize = {
   // Size: [Length, Weight, AC and TL Modifier]
   'Tiny': ['20-60 ft.', '2-40 tons', +2],
   'Small': ['60-120 ft.', '30-250 tons', +1],
@@ -42,7 +42,7 @@ let shipSize = {
 }
 
 // https://www.aonsrd.com/Starship_PowerCores.aspx
-let powerCores = {
+const powerCores = {
   // Power Core: [[Sizes], pcuProvided, bpCost, source, sfsLegal]
   'Micron Light': [['T'], 50, 4, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'Micron Heavy': [['T'], 70, 6, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
@@ -72,7 +72,7 @@ let powerCores = {
 }
 
 // https://www.aonsrd.com/Starship_Thrusters.aspx
-let thrusters = {
+const thrusters = {
   // Thruster: [size, speed, pilotingModifier, pcuCost, bpCost, source, sfsLegal, sourceFull, sourceLink]
   'T6': ['T', 6, +1, 20, 3, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'T8': ['T', 8, +0, 25, 4, 'CRB', true, 'Starfinder Core Rulebook pg. 296', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
@@ -108,7 +108,7 @@ let thrusters = {
 }
 
 // https://www.aonsrd.com/Starship_Armor.aspx
-let armor = {
+const armor = {
   // Armor: [acBonus, tempHP, tlPenalty, turnDistance, bpCost, sourceShort, sfsLegal, sourceFull, sourceLink]
   'Mk 1': [+1, null, null, null, 1, 'CRB', true, 'Starfinder Core Rulebook pg. 297', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'Mk 2': [+2, null, null, null, 2, 'CRB', true, 'Starfinder Core Rulebook pg. 297', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
@@ -157,7 +157,7 @@ let armor = {
 }
 
 // https://www.aonsrd.com/Starship_Computers.aspx
-let computers = {
+const computers = {
   // Name: [Bonus, Nodes, PCU cost, BP cost, sourceShort, sfsLegal, sourceFull, sourceLink]
   'Basic Computer': [+0, 0, 0, 0, 'CRB', true, 'Starfinder Core Rulebook pg. 297', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
   'Mk 1 Mononode': [+1, 1, 10, 1, 'CRB', true, 'Starfinder Core Rulebook pg. 297', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook'],
@@ -190,7 +190,7 @@ let computers = {
   'Mk 10 Duonode': [+10, 2, 55, 200, 'CRB', true, 'Starfinder Core Rulebook pg. 297', 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook']
 }
 
-let networkNodes = {
+const networkNodes = {
   // Name:	[Bonus,	Node Maximum,	PCU Cost,	BP Cost]
   'Mk 4':	[+4,	2,	8,	4],
   'Mk 5':	[+5,	2,	10,	5],
@@ -199,6 +199,14 @@ let networkNodes = {
   'Mk 8':	[+8,	4,	15,	8],
   'Mk 9':	[+9,	4,	17,	9],
   'Mk 10':	[+10,	5,	19,	10]
+}
+
+// https://www.aonsrd.com/Starship_CrewQuarters.aspx?ItemName=All
+const crewQuarters = {
+// Quality: [bpCost, sfsLegal, description] 
+  "Common": [0, true, "Common crew quarters are the most basic type. They consist of simple bunks (sometimes folding out from the side of a hallway) or other similarly austere places to rest. Crew members who sleep in common quarters usually keep their personal possessions in a footlocker. Common crew quarters also include a communal bathroom (which includes a military-style shower) and a tiny galley (big enough to prepare only the most basic of meals). Starships with crews numbering in the dozens or hundreds often have massive barracks where crew members sleep in shifts."],
+  "Good": [2, true, "Good crew quarters are a bit more upscale than common crew quarters. They consist of dormitory-style rooms that can hold one or two small beds (larger starships usually require lower-ranking crew members to share these quarters) and sometimes a personal closet or drawer space for each occupant. Good crew quarters also include one or two shared bathrooms with multiple sinks and shower stalls, and a dining space with an attached galley. Crews of larger starships eat in this dining space in shifts."],
+  "Luxurious": [5, true, "Luxurious crew quarters are the pinnacle of comfort. They consist of private rooms for each crew member, with personal bathrooms (including showers with high water pressure) and furnishings that match the resident’s tastes. Some luxurious crew quarters also feature a kitchenette, gaming areas, or intimate meeting spaces."]
 }
 
 const getTierData = (tierId) => {
@@ -261,6 +269,12 @@ const getNetworkNodeData = (nodeId, size) => {
   return {bonus: array[0], nodeMax: array[1], pcuCost: array[2], bpCost: array[3]}
 }
 
+const getQuartersData = (quartersId) => {
+  const array = crewQuarters[quartersId]
+
+  return {bpCost: array[0], sfsLegal: array[1], description: array[2]}
+}
+
 const getTierIdList = () => {
   return Object
     .keys(shipTiers)
@@ -300,6 +314,10 @@ const getNetworkNodeIdList = () => {
   return Object.keys(networkNodes).sort((a, b) => a + b)
 }
 
+const getQuartersIdList = () => {
+  return Object.keys(crewQuarters).sort((a, b) => a + b)
+}
+
 export {
   getTierData, 
   getSizeData,
@@ -308,11 +326,13 @@ export {
   getArmorData,
   getComputerData,
   getNetworkNodeData,
+  getQuartersData,
   getTierIdList, 
   getFrameIdList,
   getPowerCoreIdList, 
   getThrusterIdList,
   getArmorIdList,
   getComputerIdList,
-  getNetworkNodeIdList
+  getNetworkNodeIdList,
+  getQuartersIdList
 }

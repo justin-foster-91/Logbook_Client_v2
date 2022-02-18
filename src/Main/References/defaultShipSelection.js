@@ -19,7 +19,7 @@ let defaultSelections = {
 		"wipe": false
 	},
 	"computerId": "Basic Computer",
-	"crewQuartersId": "common",
+	"crewQuartersId": "Common",
 	"crewSkills": {
 		"captain": {
 			"countOfficers": 0,
@@ -179,7 +179,7 @@ let defaultSelections = {
 	"driftEngineId": null,
 	"expansionBayIds": [null, null, null],
 	"fortifiedHullId": null,
-	"frameId": "light-freighter",
+	"frameId": "Light Freighter",
 	"hasAlgalShielding": 0,
 	"hasAutoDestruct": 0,
 	"hasBiometricLocks": 0,

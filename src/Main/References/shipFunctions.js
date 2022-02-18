@@ -264,16 +264,15 @@ const getFramePackageFromShip = (ship) => {
 
 const getTotalBPCosts = (ship) => {
   // console.log("Total BP");
-  const { thrustersId, powerCoreIds, armorId } = ship
-  const powerCoreTotalBPCost = powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
+  const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
 
   const bpExpenses = [
     getFramePackageFromShip(ship).bpCost,
     powerCoreTotalBPCost,
-    Tables.getThrusterData(thrustersId).bpCost,
-    Tables.getArmorData(armorId, getFramePackageFromShip(ship).size).bpCost,
+    Tables.getThrusterData(ship.thrustersId).bpCost,
+    Tables.getArmorData(ship.armorId, getFramePackageFromShip(ship).size).bpCost,
     getTotalCompBPCosts(ship),
-    // crew quarters
+    Tables.getQuartersData(ship.crewQuartersId).bpCost
     // defensive countermeasures
     // drift engine
     // expansion bays

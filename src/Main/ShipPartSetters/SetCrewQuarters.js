@@ -1,11 +1,17 @@
 import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
+import * as Tables from '../References/metaTables'
 
 function SetCrewQuarters(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { crewQuartersId } = customShipParts
+  const { bpCost, description } = Tables.getQuartersData(crewQuartersId)
 
-  const handleQuartersChange = () => {
+  const handleQuartersChange = (ev) => {
+    const quartersOption = ev.target.value;
 
+    customShipParts.crewQuartersId = quartersOption
+    setCustomShipParts({ ...customShipParts });
   }
 
   return (
@@ -14,16 +20,18 @@ function SetCrewQuarters(props) {
 
       <p></p>
 
-      {/* <select defaultValue={tierId} onChange={handleTierChange}>
-        {Tables.getTierIdList().map((tier, idx) => (
-          <option key={idx}>{tier}</option>
+      <select value={crewQuartersId} onChange={handleQuartersChange}>
+        {Tables.getQuartersIdList().map((quarters, idx) => (
+          <option key={idx}>{quarters}</option>
         ))}
-      </select> */}
+      </select>
+      <br/>
+      {description}
 
       <p></p>
 
       <div>
-        {/* BP Budget: {buildPoints}; */}
+        BP Cost: {bpCost}
       </div>
     </>
   );
