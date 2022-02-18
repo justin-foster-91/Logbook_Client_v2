@@ -6,10 +6,10 @@ const capitalizeEachWord = (component) => {
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
 
-  returnComponent = returnComponent
-    .split(" ")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
+  // returnComponent = returnComponent
+  //   .split(" ")
+  //   .map((word) => word[0].toUpperCase() + word.slice(1))
+  //   .join(" ");
 
   return returnComponent;
 };

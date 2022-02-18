@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import * as Utils from "../References/utils";
 import * as SF from "../References/shipFunctions";
 import { ShipsContext } from "../Context/shipContext";
+import TemplateConverter from './TemplateConverter'
 
 const HangarPage = () => {
   const { userShips } = useContext(ShipsContext);
@@ -30,6 +31,11 @@ const HangarPage = () => {
       <Link to="/templates">
         <button>Ship Templates</button>
       </Link>
+      <br/>
+      <Link to="/template_converter">
+        <button>Converter</button>
+      </Link>
+
     </div>
   );
 };

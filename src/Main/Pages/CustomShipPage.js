@@ -25,16 +25,12 @@ function CustomShipPage() {
   // });
 
   // TODO: shipTemplates, converting to better format
-  // TODO: SF totals console logs
+
   // TODO: move the bonus splitter to ship functions
   // TODO: cleanup capitalize function from utils
+  // TODO: cleanup split on '-' in capitalizeEachWord
 
   // TODO: make all changes to customShipParts a setter function
-
-  // TODO: create more Ship class methods
-  // TODO: customShip => customizeShip
-  // TODO: get function for frame types instead of frame import?
-
 
   const [showJSON, setShowJSON] = useState();
 
@@ -65,7 +61,14 @@ function CustomShipPage() {
       </p>
       <button onClick={() => printJSON()}>JSON ME</button>
       <br />
-      {showJSON && JSON.stringify(customShipParts, null, 1)}
+      {showJSON && 
+      <pre style={{
+        textAlign: 'left', 
+        width: '300px', 
+        height: '300px',
+        margin: '0 auto'
+      }}>{JSON.stringify(customShipParts, null, 2)}
+      </pre>}
     </div>
   );
 }
