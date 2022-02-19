@@ -1,53 +1,127 @@
 {
-  "ablativeArmorId": "none",
-  "ablativeArmorByPosition": {
-    "forward": 0,
-    "aft": 0,
-    "port": 0,
-    "starboard": 0
-  },
-  "antiHackingSystemsId": "none",
-  "antiPersonnelWeaponId": "none",
-  "armorId": "mk-4",
-  "armorMaterialId": "none",
+  "version": "1.0.1",
+  "hasCrew": true,
+  "isSetDefaultCrewSkillValues": 0,
+  "isUseStrictRules": true,
+  "shipName": "Atech Immortal",
+  "shipConcept": "Severe and pugnacious, the Immortal is the workhorse capital ship of military fleets like those of the Stewards and the Knights of Golarion. Thickly armored and loaded with weapons, this cruiser rarely needs to fire a shot in most conflicts, as its mere appearance in-system can stop a conflict cold and send all but the most militant threats running for the safety of the Drift.",
+  "tierId": "10",
+  "frameId": "Cruiser",
+  "powerCoreIds": [
+    "Nova Ultra",
+    null
+  ],
+  "thrustersId": "H8",
+  "armorId": "Mk 4",
+  "computerId": "Mk 3 Duonode",
+  "crewQuartersId": "Good",
+  "defensiveCountermeasuresId": "Mk 4",
+  "driftEngineId": "Signal Basic",
+  "expansionBayIds": [
+    "Cargo Hold",
+    "Cargo Hold",
+    "Cargo Hold",
+    "Life Boats",
+    "Medical Bay",
+    "Shuttle Bay"
+  ],
+  "expansionBaysCountUsed": 0,
+  "antiHackingSystemsId": null,
+  "antiPersonnelWeaponId": null,
+  "hasBiometricLocks": 0,
   "computerCountermeasures": {
     "alarm": false,
     "fakeShell": false,
     "feedback": false,
     "firewall": false,
     "lockout": false,
-    "shockGridId": "none",
+    "shockGridId": null,
     "wipe": false
   },
-  "computerId": "mk-1-duonode",
-  "crewQuartersId": "common",
+  "hasSelfDestructSystem": 0,
+  "hasDataNet": 0,
+  "hasHiveJoining": 0,
+  "sensorsId": "Basic Long Range",
+  "shieldsId": "Medium 200",
+  "weaponMounts": {
+    "forward": [
+      {
+        "weaponId": "particle-beam-cannon",
+        "weight": "capital",
+        "templateWeight": "capital",
+        "isFromTemplate": true,
+        "canBeLinked": false,
+        "isLinked": false,
+        "specialMaterial": null,
+        "hasOrbitalDiscount": false
+      }
+    ],
+    "aft": [],
+    "port": [
+      {
+        "weaponId": "light-plasma-cannon",
+        "weight": "light",
+        "templateWeight": "light",
+        "isFromTemplate": true,
+        "canBeLinked": false,
+        "isLinked": false,
+        "specialMaterial": null,
+        "hasOrbitalDiscount": false
+      }
+    ],
+    "starboard": [
+      {
+        "weaponId": "light-plasma-cannon",
+        "weight": "light",
+        "templateWeight": "light",
+        "isFromTemplate": true,
+        "canBeLinked": false,
+        "isLinked": false,
+        "specialMaterial": null,
+        "hasOrbitalDiscount": false
+      }
+    ],
+    "turret": [
+      {
+        "weaponId": "heavy-plasma-torpedo-launcher",
+        "weight": "heavy",
+        "templateWeight": "heavy",
+        "isFromTemplate": true,
+        "canBeLinked": false,
+        "isLinked": false,
+        "specialMaterial": null,
+        "hasOrbitalDiscount": false
+      }
+    ]
+  },
   "crewSkills": {
     "captain": {
+      "count": 1,
       "countOfficers": 0,
-      "hasRole": false,
+      "hasRole": 1,
       "skills": {
         "bluff": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "computers": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "diplomacy": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "engineering": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "gunnery": {
-          "modifier": 0
+          "modifier": 19
         },
         "intimidate": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "piloting": {
           "modifier": 0,
@@ -60,46 +134,50 @@
       }
     },
     "engineer": {
-      "countOfficers": 1,
-      "countOfficerCrew": 0,
-      "hasRole": false,
+      "hasRole": 1,
       "skills": {
         "engineering": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "computers": {
           "modifier": 0,
           "ranks": 0
         }
-      }
+      },
+      "countOfficers": 1,
+      "countOfficerCrew": 20
     },
     "gunner": {
-      "countOfficers": 1,
-      "countOfficerCrew": 0,
-      "hasRole": true,
       "skills": {
+        "gunnery": {
+          "modifier": 24
+        },
         "computers": {
-          "modifier": "3",
-          "ranks": "2"
+          "modifier": 0,
+          "ranks": 0
         },
         "engineering": {
-          "modifier": "5",
-          "ranks": "2"
-        },
-        "gunnery": {
-          "modifier": "6"
+          "modifier": 0,
+          "ranks": 0
         }
-      }
+      },
+      "hasRole": 1,
+      "countOfficers": 3,
+      "countOfficerCrew": 10
     },
     "pilot": {
-      "countOfficers": 1,
-      "countOfficerCrew": 0,
-      "hasRole": true,
       "skills": {
         "computers": {
           "modifier": 0,
           "ranks": 0
+        },
+        "gunnery": {
+          "modifier": 0
+        },
+        "piloting": {
+          "modifier": 9,
+          "ranks": 10
         },
         "diplomacy": {
           "modifier": 0,
@@ -109,27 +187,20 @@
           "modifier": 0,
           "ranks": 0
         },
-        "gunnery": {
-          "modifier": "6"
-        },
         "intimidate": {
           "modifier": 0,
-          "ranks": "0"
-        },
-        "piloting": {
-          "modifier": "10",
-          "ranks": "2"
+          "ranks": 0
         }
-      }
+      },
+      "hasRole": 1,
+      "countOfficers": 1,
+      "countOfficerCrew": 3
     },
     "scienceOfficer": {
-      "countOfficers": 1,
-      "countOfficerCrew": 0,
-      "hasRole": false,
       "skills": {
         "computers": {
-          "modifier": 0,
-          "ranks": 0
+          "modifier": 9,
+          "ranks": 10
         },
         "life-science": {
           "modifier": 0,
@@ -139,7 +210,10 @@
           "modifier": 0,
           "ranks": 0
         }
-      }
+      },
+      "hasRole": 1,
+      "countOfficers": 1,
+      "countOfficerCrew": 0
     },
     "chiefMate": {
       "countOfficers": 1,
@@ -168,98 +242,56 @@
       }
     }
   },
+  "ablativeArmorId": null,
+  "ablativeArmorByPosition": {
+    "forward": 0,
+    "aft": 0,
+    "port": 0,
+    "starboard": 0
+  },
+  "armorMaterialId": null,
   "ctTim": 0,
   "ctTimAll": 0,
-  "customFrameBaseId": "light-freighter",
+  "customFrameBaseId": "Light Freighter",
   "customComponents": [],
-  "dedicatedComputerId": "basic-computer",
-  "defensiveCountermeasuresId": "mk-3",
-  "defensiveCountermeasuresMaterialId": "none",
-  "deflectorShieldId": "none",
-  "driftEngineId": "signal-basic",
-  "expansionBayIds": ["none"],
-  "fortifiedHullId": "none",
-  "frameId": "fighter",
+  "dedicatedComputerId": "Basic Computer",
+  "defensiveCountermeasuresMaterialId": null,
+  "deflectorShieldId": null,
+  "fortifiedHullId": null,
   "hasAlgalShielding": 0,
   "hasAutoDestruct": 0,
-  "hasBiometricLocks": true,
   "hasColonyShipFramework": 0,
   "hasConsciousnessUplink": 0,
-  "hasCrew": 1,
-  "hasDataNet": 0,
   "hasEmergencyAccelerator": 0,
-  "hasHiveJoining": 0,
   "hasHolographicMantle": 0,
   "hasPowersap": 0,
   "hasReconfigurationSystem": 0,
   "hasRootSystem": 0,
-  "hasSelfDestructSystem": 0,
   "hasSpaceStationFramework": 0,
-  "isSetDefaultCrewSkillValues": 0,
-  "isUseStrictRules": false,
-  "powerCoreIds": ["pulse-brown"],
-  "powerCoreSpecialMaterials": ["none"],
-  "reinforcedBulkheadId": "none",
-  "roboticAppendageId": "none",
-  "secondaryComputerId": "basic-computer",
-  "sensorsId": "basic-medium-range",
-  "sensorsMaterialId": "none",
+  "powerCoreSpecialMaterials": [
+    null,
+    null
+  ],
+  "ctNetworkNodes": 0,
+  "reinforcedBulkheadId": null,
+  "roboticAppendageId": null,
+  "secondaryComputerId": "Basic Computer",
+  "sensorsMaterialId": null,
   "shieldType": "shields",
   "shieldsByPosition": {
-    "forward": 10,
-    "aft": 10,
-    "port": 10,
-    "starboard": 10
+    "forward": 50,
+    "aft": 50,
+    "port": 50,
+    "starboard": 50
   },
-  "shieldsId": "basic-40",
-  "shipConcept": "From escorting corporate mining expeditions to providing an orbital guard for fledgling colonies operating outside Steward protection, variations of the Dyad have defended against space pirates and raiders for generations.",
-  "shipName": "AAC Dyad",
   "sources": {
     "pw": true,
     "som": true
   },
-  "thrustersId": "t10",
-  "thrustersMaterialId": "none",
-  "thrustersBoosterId": "none",
-  "thrustersBoosterMaterialId": "none",
-  "tierId": "2",
-  "version": "1.0.1",
-  "viId": "none",
-  "viHoloProjectorId": "none",
-  "viSkillExpanderId": "none",
-  "weaponMounts": {
-    "forward": [{
-      "weaponId": "light-buster-cannon",
-      "weight": "light",
-      "templateWeight": "light",
-      "isFromTemplate": true,
-      "canBeLinked": false,
-      "isLinked": false,
-      "specialMaterial": "none",
-      "hasOrbitalDiscount": false
-    }, {
-      "weaponId": "light-plasma-torpedo-launcher",
-      "weight": "light",
-      "templateWeight": "light",
-      "isFromTemplate": true,
-      "canBeLinked": false,
-      "isLinked": false,
-      "specialMaterial": "none",
-      "hasOrbitalDiscount": false
-    }],
-    "aft": [{
-      "weaponId": "flak-thrower",
-      "weight": "light",
-      "templateWeight": "light",
-      "isFromTemplate": true,
-      "canBeLinked": false,
-      "isLinked": false,
-      "specialMaterial": "none",
-      "hasOrbitalDiscount": false
-    }],
-    "port": [],
-    "starboard": [],
-    "turret": []
-  },
-  "ctNetworkNodes": 0
+  "thrustersMaterialId": null,
+  "thrustersBoosterId": null,
+  "thrustersBoosterMaterialId": null,
+  "viId": null,
+  "viHoloProjectorId": null,
+  "viSkillExpanderId": null
 }

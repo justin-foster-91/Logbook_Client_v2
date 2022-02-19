@@ -25,11 +25,12 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
-  // TODO: noneToNull() not working
+  // TODO: why didn't sortObject() work?
+  // TODO: put hyphensToSpaces() through treeTransform()
+  // TODO: cleanup capitalize function from utils
+
 
   // TODO: move the bonus splitter to ship functions
-  // TODO: cleanup capitalize function from utils
-  // TODO: cleanup split on '-' in capitalizeEachWord
   // TODO: change all defaultValues
   // TODO: make handleChanges consistent
 

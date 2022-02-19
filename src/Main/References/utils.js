@@ -1,4 +1,5 @@
 const capitalizeEachWord = (component) => {
+  if(component === null) return component;
   let returnComponent = component;
 
   returnComponent = returnComponent
@@ -41,4 +42,21 @@ const sizeLetterToStringConverter = (letter) => {
   return sizeConverter[letter];
 };
 
-export { capitalizeEachWord, readableIds, sizeLetterToStringConverter };
+const treeTransform = (tree, transform) => {
+  // recursively enter the lowest nested object to replace strings
+  if(typeof tree !== 'object'){
+    
+    return transform(tree)
+  } else{
+    const allKeys = Object.keys(tree)
+
+    for(let k of allKeys){
+      if(tree[k] === null) return k
+      tree[k] = treeTransform(tree[k], transform)
+    }
+
+    return tree
+  }
+}
+
+export { capitalizeEachWord, readableIds, sizeLetterToStringConverter, treeTransform };

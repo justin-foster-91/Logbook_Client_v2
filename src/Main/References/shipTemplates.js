@@ -1,28 +1,28 @@
 
 let templates = [
   {
-    "ablativeArmorId": "none",
+    "ablativeArmorId": null,
     "ablativeArmorByPosition": {
       "forward": 0,
       "aft": 0,
       "port": 0,
       "starboard": 0
     },
-    "antiHackingSystemsId": "none",
-    "antiPersonnelWeaponId": "none",
-    "armorId": "mk-4",
-    "armorMaterialId": "none",
+    "antiHackingSystemsId": null,
+    "antiPersonnelWeaponId": null,
+    "armorId": "Mk 4",
+    "armorMaterialId": null,
     "computerCountermeasures": {
       "alarm": false,
       "fakeShell": false,
       "feedback": false,
       "firewall": false,
       "lockout": false,
-      "shockGridId": "none",
+      "shockGridId": null,
       "wipe": false
     },
-    "computerId": "mk-1-duonode",
-    "crewQuartersId": "common",
+    "computerId": "Mk 1 Duonode",
+    "crewQuartersId": "Common",
     "crewSkills": {
       "captain": {
         "countOfficers": 0,
@@ -172,16 +172,18 @@ let templates = [
     },
     "ctTim": 0,
     "ctTimAll": 0,
-    "customFrameBaseId": "light-freighter",
+    "customFrameBaseId": "Light Freighter",
     "customComponents": [],
-    "dedicatedComputerId": "basic-computer",
-    "defensiveCountermeasuresId": "mk-3",
-    "defensiveCountermeasuresMaterialId": "none",
-    "deflectorShieldId": "none",
-    "driftEngineId": "signal-basic",
-    "expansionBayIds": ["none"],
-    "fortifiedHullId": "none",
-    "frameId": "fighter",
+    "dedicatedComputerId": "Basic Computer",
+    "defensiveCountermeasuresId": "Mk 3",
+    "defensiveCountermeasuresMaterialId": null,
+    "deflectorShieldId": null,
+    "driftEngineId": "Signal Basic",
+    "expansionBayIds": [
+      null
+    ],
+    "fortifiedHullId": null,
+    "frameId": "Fighter",
     "hasAlgalShielding": 0,
     "hasAutoDestruct": 0,
     "hasBiometricLocks": true,
@@ -199,13 +201,17 @@ let templates = [
     "hasSpaceStationFramework": 0,
     "isSetDefaultCrewSkillValues": 0,
     "isUseStrictRules": false,
-    "powerCoreIds": ["pulse-brown"],
-    "powerCoreSpecialMaterials": ["none"],
-    "reinforcedBulkheadId": "none",
-    "roboticAppendageId": "none",
-    "secondaryComputerId": "basic-computer",
-    "sensorsId": "basic-medium-range",
-    "sensorsMaterialId": "none",
+    "powerCoreIds": [
+      "Pulse Brown"
+    ],
+    "powerCoreSpecialMaterials": [
+      null
+    ],
+    "reinforcedBulkheadId": null,
+    "roboticAppendageId": null,
+    "secondaryComputerId": "Basic Computer",
+    "sensorsId": "Basic Medium Range",
+    "sensorsMaterialId": null,
     "shieldType": "shields",
     "shieldsByPosition": {
       "forward": 10,
@@ -213,52 +219,57 @@ let templates = [
       "port": 10,
       "starboard": 10
     },
-    "shieldsId": "basic-40",
+    "shieldsId": "Basic 40",
     "shipConcept": "From escorting corporate mining expeditions to providing an orbital guard for fledgling colonies operating outside Steward protection, variations of the Dyad have defended against space pirates and raiders for generations.",
     "shipName": "AAC Dyad",
     "sources": {
       "pw": true,
       "som": true
     },
-    "thrustersId": "t10",
-    "thrustersMaterialId": "none",
-    "thrustersBoosterId": "none",
-    "thrustersBoosterMaterialId": "none",
+    "thrustersId": "T10",
+    "thrustersMaterialId": null,
+    "thrustersBoosterId": null,
+    "thrustersBoosterMaterialId": null,
     "tierId": "2",
     "version": "1.0.1",
-    "viId": "none",
-    "viHoloProjectorId": "none",
-    "viSkillExpanderId": "none",
+    "viId": null,
+    "viHoloProjectorId": null,
+    "viSkillExpanderId": null,
     "weaponMounts": {
-      "forward": [{
-        "weaponId": "light-buster-cannon",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }, {
-        "weaponId": "light-plasma-torpedo-launcher",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
-      "aft": [{
-        "weaponId": "flak-thrower",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
+      "forward": [
+        {
+          "weaponId": "light-buster-cannon",
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        },
+        {
+          "weaponId": "light-plasma-torpedo-launcher",
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
+      "aft": [
+        {
+          "weaponId": "flak-thrower",
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
       "port": [],
       "starboard": [],
       "turret": []
@@ -266,28 +277,28 @@ let templates = [
     "ctNetworkNodes": 0
   },
   {
-    "ablativeArmorId": "none",
+    "ablativeArmorId": null,
     "ablativeArmorByPosition": {
       "forward": 0,
       "aft": 0,
       "port": 0,
       "starboard": 0
     },
-    "antiHackingSystemsId": "none",
-    "antiPersonnelWeaponId": "none",
-    "armorId": "mk-5",
-    "armorMaterialId": "none",
+    "antiHackingSystemsId": null,
+    "antiPersonnelWeaponId": null,
+    "armorId": "Mk 5",
+    "armorMaterialId": null,
     "computerCountermeasures": {
       "alarm": false,
       "fakeShell": false,
       "feedback": false,
       "firewall": false,
       "lockout": false,
-      "shockGridId": "none",
+      "shockGridId": null,
       "wipe": false
     },
-    "computerId": "mk-3-trinode",
-    "crewQuartersId": "common",
+    "computerId": "Mk 3 Trinode",
+    "crewQuartersId": "Common",
     "crewSkills": {
       "captain": {
         "countOfficers": 0,
@@ -437,16 +448,22 @@ let templates = [
     },
     "ctTim": 0,
     "ctTimAll": 0,
-    "customFrameBaseId": "light-freighter",
+    "customFrameBaseId": "Light Freighter",
     "customComponents": [],
-    "dedicatedComputerId": "basic-computer",
-    "defensiveCountermeasuresId": "mk-5",
-    "defensiveCountermeasuresMaterialId": "none",
-    "deflectorShieldId": "none",
-    "driftEngineId": "signal-basic",
-    "expansionBayIds": ["combat-training-facility-elite", "cargo-hold", "hangar-bay", "hangar-bay", "tech-workshop"],
-    "fortifiedHullId": "none",
-    "frameId": "carrier",
+    "dedicatedComputerId": "Basic Computer",
+    "defensiveCountermeasuresId": "Mk 5",
+    "defensiveCountermeasuresMaterialId": null,
+    "deflectorShieldId": null,
+    "driftEngineId": "Signal Basic",
+    "expansionBayIds": [
+      "Combat Training Facility Elite",
+      "Cargo Hold",
+      "Hangar Bay",
+      "Hangar Bay",
+      "Tech Workshop"
+    ],
+    "fortifiedHullId": null,
+    "frameId": "Carrier",
     "hasAlgalShielding": 0,
     "hasAutoDestruct": 0,
     "hasBiometricLocks": 0,
@@ -464,13 +481,21 @@ let templates = [
     "hasSpaceStationFramework": 0,
     "isSetDefaultCrewSkillValues": 0,
     "isUseStrictRules": 1,
-    "powerCoreIds": ["gateway-ultra", "none", "none"],
-    "powerCoreSpecialMaterials": ["none", "none", "none"],
-    "reinforcedBulkheadId": "none",
-    "roboticAppendageId": "none",
-    "secondaryComputerId": "basic-computer",
-    "sensorsId": "basic-long-range",
-    "sensorsMaterialId": "none",
+    "powerCoreIds": [
+      "Gateway Ultra",
+      null,
+      null
+    ],
+    "powerCoreSpecialMaterials": [
+      null,
+      null,
+      null
+    ],
+    "reinforcedBulkheadId": null,
+    "roboticAppendageId": null,
+    "secondaryComputerId": "Basic Computer",
+    "sensorsId": "Basic Long Range",
+    "sensorsMaterialId": null,
     "shieldType": "shields",
     "shieldsByPosition": {
       "forward": 120,
@@ -478,118 +503,131 @@ let templates = [
       "port": 120,
       "starboard": 120
     },
-    "shieldsId": "heavy-480",
+    "shieldsId": "Heavy 480",
     "shipConcept": "A product of the Allied Arms Corporation (AAC) of Triaxus, the Hoardmaster is the flagship of the Skyfire Legion’s mercenary fleet. The aptly named carrier can launch over a dozen smaller craft into battle. Designed to operate in tandem with AAC Dyads, this specialized carrier has experienced a surge in popularity during the past 50 years.",
     "shipName": "AAC Hoardmaster",
     "sources": {
       "pw": true,
       "som": true
     },
-    "thrustersId": "g4",
-    "thrustersMaterialId": "none",
-    "thrustersBoosterId": "none",
-    "thrustersBoosterMaterialId": "none",
+    "thrustersId": "G4",
+    "thrustersMaterialId": null,
+    "thrustersBoosterId": null,
+    "thrustersBoosterMaterialId": null,
     "tierId": "14",
     "version": "1.0.1",
-    "viId": "none",
-    "viHoloProjectorId": "none",
-    "viSkillExpanderId": "none",
+    "viId": null,
+    "viHoloProjectorId": null,
+    "viSkillExpanderId": null,
     "weaponMounts": {
-      "forward": [{
-        "weaponId": "mega-teleportation-beam",
-        "weight": "capital",
-        "templateWeight": "capital",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }],
+      "forward": [
+        {
+          "weaponId": "mega-teleportation-beam",
+          "weight": "capital",
+          "templateWeight": "capital",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        }
+      ],
       "aft": [],
-      "port": [{
-        "weaponId": "twin-laser",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }, {
-        "weaponId": "none",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }, {
-        "weaponId": "none",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }],
-      "starboard": [{
-        "weaponId": "twin-laser",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }, {
-        "weaponId": "none",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }, {
-        "weaponId": "none",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }],
-      "turret": [{
-        "weaponId": "laser-net",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }, {
-        "weaponId": "none",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }]
+      "port": [
+        {
+          "weaponId": "twin-laser",
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        },
+        {
+          "weaponId": null,
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        },
+        {
+          "weaponId": null,
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        }
+      ],
+      "starboard": [
+        {
+          "weaponId": "twin-laser",
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        },
+        {
+          "weaponId": null,
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        },
+        {
+          "weaponId": null,
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        }
+      ],
+      "turret": [
+        {
+          "weaponId": "laser-net",
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        },
+        {
+          "weaponId": null,
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        }
+      ]
     },
     "ctNetworkNodes": 0
   },
@@ -601,18 +639,28 @@ let templates = [
     "shipName": "Atech Immortal",
     "shipConcept": "Severe and pugnacious, the Immortal is the workhorse capital ship of military fleets like those of the Stewards and the Knights of Golarion. Thickly armored and loaded with weapons, this cruiser rarely needs to fire a shot in most conflicts, as its mere appearance in-system can stop a conflict cold and send all but the most militant threats running for the safety of the Drift.",
     "tierId": "10",
-    "frameId": "cruiser",
-    "powerCoreIds": ["nova-ultra", "none"],
-    "thrustersId": "h8",
-    "armorId": "mk-4",
-    "computerId": "mk-3-duonode",
-    "crewQuartersId": "good",
-    "defensiveCountermeasuresId": "mk-4",
-    "driftEngineId": "signal-basic",
-    "expansionBayIds": ["cargo-hold", "cargo-hold", "cargo-hold", "life-boats", "medical-bay", "shuttle-bay"],
+    "frameId": "Cruiser",
+    "powerCoreIds": [
+      "Nova Ultra",
+      null
+    ],
+    "thrustersId": "H8",
+    "armorId": "Mk 4",
+    "computerId": "Mk 3 Duonode",
+    "crewQuartersId": "Good",
+    "defensiveCountermeasuresId": "Mk 4",
+    "driftEngineId": "Signal Basic",
+    "expansionBayIds": [
+      "Cargo Hold",
+      "Cargo Hold",
+      "Cargo Hold",
+      "Life Boats",
+      "Medical Bay",
+      "Shuttle Bay"
+    ],
     "expansionBaysCountUsed": 0,
-    "antiHackingSystemsId": "none",
-    "antiPersonnelWeaponId": "none",
+    "antiHackingSystemsId": null,
+    "antiPersonnelWeaponId": null,
     "hasBiometricLocks": 0,
     "computerCountermeasures": {
       "alarm": false,
@@ -620,56 +668,64 @@ let templates = [
       "feedback": false,
       "firewall": false,
       "lockout": false,
-      "shockGridId": "none",
+      "shockGridId": null,
       "wipe": false
     },
     "hasSelfDestructSystem": 0,
     "hasDataNet": 0,
     "hasHiveJoining": 0,
-    "sensorsId": "basic-long-range",
-    "shieldsId": "medium-200",
+    "sensorsId": "Basic Long Range",
+    "shieldsId": "Medium 200",
     "weaponMounts": {
-      "forward": [{
-        "weaponId": "particle-beam-cannon",
-        "weight": "capital",
-        "templateWeight": "capital",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
+      "forward": [
+        {
+          "weaponId": "particle-beam-cannon",
+          "weight": "capital",
+          "templateWeight": "capital",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
       "aft": [],
-      "port": [{
-        "weaponId": "light-plasma-cannon",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
-      "starboard": [{
-        "weaponId": "light-plasma-cannon",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
-      "turret": [{
-        "weaponId": "heavy-plasma-torpedo-launcher",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }]
+      "port": [
+        {
+          "weaponId": "light-plasma-cannon",
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
+      "starboard": [
+        {
+          "weaponId": "light-plasma-cannon",
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
+      "turret": [
+        {
+          "weaponId": "heavy-plasma-torpedo-launcher",
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ]
     },
     "crewSkills": {
       "captain": {
@@ -819,22 +875,22 @@ let templates = [
         }
       }
     },
-    "ablativeArmorId": "none",
+    "ablativeArmorId": null,
     "ablativeArmorByPosition": {
       "forward": 0,
       "aft": 0,
       "port": 0,
       "starboard": 0
     },
-    "armorMaterialId": "none",
+    "armorMaterialId": null,
     "ctTim": 0,
     "ctTimAll": 0,
-    "customFrameBaseId": "light-freighter",
+    "customFrameBaseId": "Light Freighter",
     "customComponents": [],
-    "dedicatedComputerId": "basic-computer",
-    "defensiveCountermeasuresMaterialId": "none",
-    "deflectorShieldId": "none",
-    "fortifiedHullId": "none",
+    "dedicatedComputerId": "Basic Computer",
+    "defensiveCountermeasuresMaterialId": null,
+    "deflectorShieldId": null,
+    "fortifiedHullId": null,
     "hasAlgalShielding": 0,
     "hasAutoDestruct": 0,
     "hasColonyShipFramework": 0,
@@ -845,12 +901,15 @@ let templates = [
     "hasReconfigurationSystem": 0,
     "hasRootSystem": 0,
     "hasSpaceStationFramework": 0,
-    "powerCoreSpecialMaterials": ["none", "none"],
+    "powerCoreSpecialMaterials": [
+      null,
+      null
+    ],
     "ctNetworkNodes": 0,
-    "reinforcedBulkheadId": "none",
-    "roboticAppendageId": "none",
-    "secondaryComputerId": "basic-computer",
-    "sensorsMaterialId": "none",
+    "reinforcedBulkheadId": null,
+    "roboticAppendageId": null,
+    "secondaryComputerId": "Basic Computer",
+    "sensorsMaterialId": null,
     "shieldType": "shields",
     "shieldsByPosition": {
       "forward": 50,
@@ -862,36 +921,36 @@ let templates = [
       "pw": true,
       "som": true
     },
-    "thrustersMaterialId": "none",
-    "thrustersBoosterId": "none",
-    "thrustersBoosterMaterialId": "none",
-    "viId": "none",
-    "viHoloProjectorId": "none",
-    "viSkillExpanderId": "none"
+    "thrustersMaterialId": null,
+    "thrustersBoosterId": null,
+    "thrustersBoosterMaterialId": null,
+    "viId": null,
+    "viHoloProjectorId": null,
+    "viSkillExpanderId": null
   },
   {
-    "ablativeArmorId": "none",
+    "ablativeArmorId": null,
     "ablativeArmorByPosition": {
       "forward": 0,
       "aft": 0,
       "port": 0,
       "starboard": 0
     },
-    "antiHackingSystemsId": "none",
-    "antiPersonnelWeaponId": "none",
-    "armorId": "mk-4",
-    "armorMaterialId": "none",
+    "antiHackingSystemsId": null,
+    "antiPersonnelWeaponId": null,
+    "armorId": "Mk 4",
+    "armorMaterialId": null,
     "computerCountermeasures": {
       "alarm": false,
       "fakeShell": false,
       "feedback": false,
       "firewall": false,
       "lockout": false,
-      "shockGridId": "none",
+      "shockGridId": null,
       "wipe": false
     },
-    "computerId": "mk-2-duonode",
-    "crewQuartersId": "common",
+    "computerId": "Mk 2 Duonode",
+    "crewQuartersId": "Common",
     "crewSkills": {
       "captain": {
         "countOfficers": 0,
@@ -1041,16 +1100,25 @@ let templates = [
     },
     "ctTim": 0,
     "ctTimAll": 0,
-    "customFrameBaseId": "light-freighter",
+    "customFrameBaseId": "Light Freighter",
     "customComponents": [],
-    "dedicatedComputerId": "basic-computer",
-    "defensiveCountermeasuresId": "mk-4",
-    "defensiveCountermeasuresMaterialId": "none",
-    "deflectorShieldId": "none",
-    "driftEngineId": "signal-basic",
-    "expansionBayIds": ["cargo-hold", "cargo-hold", "cargo-hold", "cargo-hold", "cargo-hold", "cargo-hold", "escape-pods", "medical-bay"],
-    "fortifiedHullId": "steel-composite",
-    "frameId": "heavy-freighter",
+    "dedicatedComputerId": "Basic Computer",
+    "defensiveCountermeasuresId": "Mk 4",
+    "defensiveCountermeasuresMaterialId": null,
+    "deflectorShieldId": null,
+    "driftEngineId": "Signal Basic",
+    "expansionBayIds": [
+      "Cargo Hold",
+      "Cargo Hold",
+      "Cargo Hold",
+      "Cargo Hold",
+      "Cargo Hold",
+      "Cargo Hold",
+      "Escape Pods",
+      "Medical Bay"
+    ],
+    "fortifiedHullId": "Steel Composite",
+    "frameId": "Heavy Freighter",
     "hasAlgalShielding": 0,
     "hasAutoDestruct": 0,
     "hasBiometricLocks": 0,
@@ -1068,13 +1136,17 @@ let templates = [
     "hasSpaceStationFramework": 0,
     "isSetDefaultCrewSkillValues": 0,
     "isUseStrictRules": false,
-    "powerCoreIds": ["pulse-orange"],
-    "powerCoreSpecialMaterials": ["none"],
-    "reinforcedBulkheadId": "none",
-    "roboticAppendageId": "none",
-    "secondaryComputerId": "basic-computer",
-    "sensorsId": "basic-medium-range",
-    "sensorsMaterialId": "none",
+    "powerCoreIds": [
+      "Pulse Orange"
+    ],
+    "powerCoreSpecialMaterials": [
+      null
+    ],
+    "reinforcedBulkheadId": null,
+    "roboticAppendageId": null,
+    "secondaryComputerId": "Basic Computer",
+    "sensorsId": "Basic Medium Range",
+    "sensorsMaterialId": null,
     "shieldType": "shields",
     "shieldsByPosition": {
       "forward": 30,
@@ -1082,91 +1154,103 @@ let templates = [
       "port": 30,
       "starboard": 30
     },
-    "shieldsId": "medium-120",
+    "shieldsId": "Medium 120",
     "shipConcept": "The ATech Resolute is a simple, sturdy ship with a bold personality and a beloved subculture. AbadarCorp first commissioned the Resolute over a century ago to meet its growing need for a deep space freighter that didn’t need an escort. An especially troubling surge in piracy had made the conglomerate’s colonial ambitions far too costly not to take more direct action. The answer came in the form of this blocky, golden hulk that, no matter how hard it was battered, wouldn’t give up the fight. NOTE: Discrepancy in CT between tool and SOM. I think they forgot to add the fortified hull bonus.",
     "shipName": "Atech Resolute",
     "sources": {
       "pw": true,
       "som": true
     },
-    "thrustersId": "l8",
-    "thrustersMaterialId": "none",
-    "thrustersBoosterId": "none",
-    "thrustersBoosterMaterialId": "none",
+    "thrustersId": "L8",
+    "thrustersMaterialId": null,
+    "thrustersBoosterId": null,
+    "thrustersBoosterMaterialId": null,
     "tierId": "8",
     "version": "1.0.1",
-    "viId": "none",
-    "viHoloProjectorId": "none",
-    "viSkillExpanderId": "none",
+    "viId": null,
+    "viHoloProjectorId": null,
+    "viSkillExpanderId": null,
     "weaponMounts": {
-      "forward": [{
-        "weaponId": "heavy-laser-cannon",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }, {
-        "weaponId": "none",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }, {
-        "weaponId": "none",
-        "weight": "light",
-        "templateWeight": "light",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
-      "aft": [{
-        "weaponId": "flak-thrower",
-        "weight": "light",
-        "isFromTemplate": false,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }],
-      "port": [{
-        "weaponId": "light-particle-beam",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
-      "starboard": [{
-        "weaponId": "light-particle-beam",
-        "weight": "heavy",
-        "templateWeight": "heavy",
-        "isFromTemplate": true,
-        "canBeLinked": false,
-        "isLinked": false,
-        "specialMaterial": "none",
-        "hasOrbitalDiscount": false
-      }],
-      "turret": [{
-        "weaponId": "light-plasma-torpedo-launcher",
-        "weight": "light",
-        "isFromTemplate": false,
-        "canBeLinked": false,
-        "isLinked": false,
-        "canHaveOrbitalDiscount": false,
-        "hasOrbitalDiscount": false,
-        "specialMaterial": "none"
-      }]
+      "forward": [
+        {
+          "weaponId": "heavy-laser-cannon",
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        },
+        {
+          "weaponId": null,
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        },
+        {
+          "weaponId": null,
+          "weight": "light",
+          "templateWeight": "light",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
+      "aft": [
+        {
+          "weaponId": "flak-thrower",
+          "weight": "light",
+          "isFromTemplate": false,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        }
+      ],
+      "port": [
+        {
+          "weaponId": "light-particle-beam",
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
+      "starboard": [
+        {
+          "weaponId": "light-particle-beam",
+          "weight": "heavy",
+          "templateWeight": "heavy",
+          "isFromTemplate": true,
+          "canBeLinked": false,
+          "isLinked": false,
+          "specialMaterial": null,
+          "hasOrbitalDiscount": false
+        }
+      ],
+      "turret": [
+        {
+          "weaponId": "light-plasma-torpedo-launcher",
+          "weight": "light",
+          "isFromTemplate": false,
+          "canBeLinked": false,
+          "isLinked": false,
+          "canHaveOrbitalDiscount": false,
+          "hasOrbitalDiscount": false,
+          "specialMaterial": null
+        }
+      ]
     },
     "ctNetworkNodes": 0
   }

@@ -3,15 +3,11 @@ import * as Utils from "../References/utils";
 import * as SF from "../References/shipFunctions";
 
 const TemplateBreakdown = (props) => {
-  let foundSize = "";
-  let readableFrameId = "";
-
-  if (props.shipName) {
-    foundSize = SF.findComponentByFrameId(props.frameId.replace("-", " "), "size");
-    readableFrameId = Utils.capitalizeEachWord(props.frameId);
-  }
+  const { frameId, shipName, tierId } = props
+  const size = SF.findComponentByFrameId(frameId, "size");
 
   const showFrameComponents = () => {
+    const pairedArray = [];
     const componentArray = [
       "tierId",
       "frameId",
@@ -24,18 +20,14 @@ const TemplateBreakdown = (props) => {
       "sensorsId",
       "shieldsId",
     ];
-    const pairedArray = [];
-
-    for (let i = 0; i < componentArray.length; i++) {
-      if (componentArray[i] === "weaponMounts") {
-        console.log(props[componentArray[i]]);
-      } else {
-        pairedArray.push([
-          Utils.readableIds(componentArray[i]),
-          props[componentArray[i]],
-        ]);
-      }
-    }
+    
+    componentArray.map(component => {
+      pairedArray.push([
+        Utils.readableIds(component),
+        props[component],
+      ]);
+      return component
+    })
 
     return pairedArray;
   };
@@ -44,19 +36,22 @@ const TemplateBreakdown = (props) => {
     <div className="templateRender">
       <div className="shipKeyPoints">
         <b>
-          {props.shipName} (Tier {props.tierId} [{foundSize}] {readableFrameId})
+          {shipName} (Tier {tierId} [{size}] {frameId})
         </b>
       </div>
       <div>
         {showFrameComponents().map((pair, idx) => {
+          let partKey = pair[0]
+          let partValue = pair[1]
           return (
             <div key={idx}>
-              <b>{pair[0]}:</b>{" "}
-              {typeof pair[1] === "object"
-                ? pair[1]
-                    .map((element) => Utils.capitalizeEachWord(element))
+              <b>{partKey}:</b>{" "}
+              {/* Check if the value in an array */}
+              {typeof partValue === "object"
+                ? partValue
+                    .filter((element) => element !== null)
                     .join(", ")
-                : Utils.capitalizeEachWord(pair[1])}
+                : partValue}
             </div>
           );
         })}

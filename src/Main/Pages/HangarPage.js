@@ -21,7 +21,7 @@ const HangarPage = () => {
             {/* TODO: double check this replace usage */}
             {ship.shipName} (Tier {ship.tierId} [
             {SF.findComponentByFrameId(ship.frameId.replace("-", " "), "size")}]{" "}
-            {Utils.capitalizeEachWord(ship.frameId)})
+            {ship.frameId})
           </div>
         );
       })}
