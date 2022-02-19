@@ -5,8 +5,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
 
 function SetPowerCore() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
-
+  const { customShipParts } = useContext(CustomShipContext);
   const { powerCoreIds } = customShipParts;
   const { size } = SF.getFramePackageFromShip(customShipParts);
 
@@ -23,15 +22,11 @@ function SetPowerCore() {
       <h3>Power Core</h3>
 
       <p></p>
-      {size.toLowerCase() === "supercolossal" &&
+      {size === "Supercolossal" &&
         "**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**"}
       <p></p>
 
-      {/* Create array of length powerCoreQuantity, create a dropdown for each length value */}
-      <PowerCoreSelections
-        setCustomShipParts={setCustomShipParts}
-        customShipParts={customShipParts}
-      ></PowerCoreSelections>
+      <PowerCoreSelections></PowerCoreSelections>
 
       <p></p>
 

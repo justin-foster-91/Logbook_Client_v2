@@ -20,7 +20,7 @@ function SetTier() {
 
       <p></p>
 
-      <select defaultValue={tierId} onChange={handleTierChange}>
+      <select value={tierId} onChange={handleTierChange}>
         {Tables.getTierIdList().map((tier, idx) => (
           <option key={idx}>{tier}</option>
         ))}

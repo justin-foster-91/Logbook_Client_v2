@@ -4,19 +4,16 @@ import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetThrusters() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
-
+  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
   const { thrustersId } = customShipParts;
-
   const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
   const { size } = SF.getFramePackageFromShip(customShipParts);
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value;
-
     if (thrusterOption === "None") thrusterOption = null;
 
-    customShipParts.thrustersId = thrusterOption;
+    ship.setThrusters(thrusterOption)
     setCustomShipParts({ ...customShipParts });
   };
 
@@ -25,15 +22,16 @@ function SetThrusters() {
       <h3>Thrusters</h3>
       <p></p>
       <select
-        defaultValue={
-          thrustersId === null ? "None" : `${thrustersId} Thrusters`
+        value={
+          thrustersId === null ? "None" : thrustersId
         }
         onChange={handleThrusterChange}
       >
-        <option key="null">None</option>
+        <option key="None">None</option>
         {Tables.getThrusterIdList().map(
           (thruster, idx) =>
-            SF.doesFrameSizeAllowThruster(thruster, size) && (
+            SF.doesFrameSizeAllowThruster(thruster, size) 
+            && (
               <option key={idx} value={thruster}>
                 {thruster} Thrusters
               </option>

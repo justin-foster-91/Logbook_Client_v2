@@ -22,8 +22,7 @@ function NonPrimaryComputers(props) {
 
   const handleNodeChange = (ev) => {
     const nodeAmount = Number(ev.target.value)
-
-    if(nodeAmount < 0 || nodeAmount > nodeMax) return
+    // if(nodeAmount < 0 || nodeAmount > nodeMax) return
 
     customShipParts.ctNetworkNodes = nodeAmount
     setCustomShipParts({ ...customShipParts });

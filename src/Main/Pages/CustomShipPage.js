@@ -25,15 +25,17 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
+  // TODO: tax return
+
   // TODO: why didn't sortObject() work?
   // TODO: put hyphensToSpaces() through treeTransform()
   // TODO: cleanup capitalize function from utils
 
 
   // TODO: move the bonus splitter to ship functions
+
   // TODO: change all defaultValues
   // TODO: make handleChanges consistent
-
   // TODO: make all changes to customShipParts a setter function
 
   const [showJSON, setShowJSON] = useState();

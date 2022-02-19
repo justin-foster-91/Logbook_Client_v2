@@ -5,26 +5,16 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
 
 function SetArmor() {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
-
+  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
   const { armorId } = customShipParts;
   const { size, hp } = SF.getFramePackageFromShip(customShipParts);
   const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getArmorData(armorId, size);
 
   const handleArmorChange = (ev) => {
     let armorOption = ev.target.value;
-
     if (armorOption === "None") armorOption = null;
 
-    // if armor is not ablative, empty ablative hp values
-    if(!armorOption.includes('ablative')){
-      customShipParts.ablativeArmorByPosition.forward = 0;
-      customShipParts.ablativeArmorByPosition.port = 0;
-      customShipParts.ablativeArmorByPosition.starboard = 0;
-      customShipParts.ablativeArmorByPosition.aft = 0;
-    }
-
-    customShipParts.armorId = armorOption;
+    ship.setArmor(armorOption)
     setCustomShipParts({ ...customShipParts });
   };
 
@@ -59,21 +49,19 @@ function SetArmor() {
     return (
       "Interposed defenses grant temporary HP that doesn't need to be distributed into quadrants, instead providing a single pool to draw from regardless of which arc an attack strikes."
     );
-
   }
 
   return (
     <>
       <h3>Armor</h3>
       <p></p>
-      {/* TODO: default value needs to accommodate all possible armor options */}
       <select
-        defaultValue={
+        value={
           armorId === null ? "None" : armorId
         }
         onChange={handleArmorChange}
       >
-        <option key="null">None</option>
+        <option key="None">None</option>
         {Tables.getArmorIdList().map((armor, idx) => {
           if (armor.includes("Mk"))
             return (

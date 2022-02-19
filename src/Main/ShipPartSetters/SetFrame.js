@@ -6,17 +6,13 @@ import * as Tables from '../References/metaTables';
 
 function SetFrame() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
-
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
-
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
-
-  const { length, weight, acMod, tlMod } = Tables.getSizeData(size)
+  const { length, weight, acMod } = Tables.getSizeData(size)
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
 
-    // setNewFrame(customShipParts, frameOption);
     ship.setFrame(frameOption)
     setCustomShipParts({ ...customShipParts });
   };
@@ -27,7 +23,7 @@ function SetFrame() {
 
       <p></p>
 
-      <select defaultValue={frameId} onChange={handleFrameIdChange}>
+      <select value={frameId} onChange={handleFrameIdChange}>
         {frames.map((frame, idx) => (
           <option key={idx}>{frame.type}</option>
         ))}
