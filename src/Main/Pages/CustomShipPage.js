@@ -9,6 +9,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import SetComputer from "../ShipPartSetters/SetComputer";
 import * as Tables from '../References/metaTables'
 import SetCrewQuarters from "../ShipPartSetters/SetCrewQuarters";
+import SetDefensiveCounter from "../ShipPartSetters/SetDefensiveCounter";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -37,24 +38,36 @@ function CustomShipPage() {
   // TODO: organize shipFunctions
 
 
+
   const [showJSON, setShowJSON] = useState();
 
   const printJSON = () => {
     setShowJSON(!showJSON);
   };
 
+  let setterList = [ 
+    SetTier, 
+    SetFrame, 
+    SetPowerCore, 
+    SetThrusters,
+    SetArmor, 
+    SetComputer,
+    SetCrewQuarters, 
+    SetDefensiveCounter
+  ]
+
   return (
     <div className="customShipDisplay">
       <h2>Custom Ship Page</h2>
 
-      <div className="partSetterBlock">
-        <SetTier></SetTier>
-        <SetFrame></SetFrame>
-        <SetPowerCore></SetPowerCore>
-        <SetThrusters></SetThrusters>
-        <SetArmor></SetArmor>
-        <SetComputer></SetComputer>
-        <SetCrewQuarters></SetCrewQuarters>
+      <div className="partSetterList">
+        {setterList.map((Setter, idx) => {
+          return (
+            <div className="partSetterBlock" key={idx}>
+              <Setter></Setter>
+            </div>
+          )
+        })}
       </div>
 
       <br/>
@@ -67,6 +80,7 @@ function CustomShipPage() {
       </p>
       <button onClick={() => printJSON()}>JSON ME</button>
       <br />
+
       {showJSON && 
       <pre style={{
         textAlign: 'left', 

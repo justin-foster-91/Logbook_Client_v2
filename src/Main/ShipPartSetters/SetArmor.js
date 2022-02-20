@@ -58,7 +58,7 @@ function SetArmor() {
       <p></p>
       <select
         value={
-          armorId === null ? "None" : armorId
+          armorId ? armorId : "None"
         }
         onChange={handleArmorChange}
       >

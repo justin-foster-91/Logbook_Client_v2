@@ -93,6 +93,11 @@ class Ship {
     this.parts.crewQuartersId = quarters
     return this
   }
+
+  setDefensiveCounters(defense) {
+    this.parts.defensiveCountermeasuresId = defense
+    return this
+  }
 }
 
 export default Ship

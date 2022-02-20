@@ -209,6 +209,26 @@ const crewQuarters = {
   "Luxurious": [5, true, "Luxurious crew quarters are the pinnacle of comfort. They consist of private rooms for each crew member, with personal bathrooms (including showers with high water pressure) and furnishings that match the resident’s tastes. Some luxurious crew quarters also feature a kitchenette, gaming areas, or intimate meeting spaces."]
 }
 
+const defensiveCounter = {
+  // Name:	[TL bonus,	PCU cost,	BP cost]
+  'Mk 1': [+1,	1,	2],
+  'Mk 2': [+2,	1,	3],
+  'Mk 3': [+3,	2,	4],
+  'Mk 4': [+4,	3,	6],
+  'Mk 5': [+5,	4,	8],
+  'Mk 6': [+6,	5,	11],
+  'Mk 7': [+7,	7,	14],
+  'Mk 8': [+8,	9,	18],
+  'Mk 9': [+9,	11,	22],
+  'Mk 10': [+10,	13,	27],
+  'Mk 11': [+11,	16,	33],
+  'Mk 12': [+12,	20,	40],
+  'Mk 13': [+13,	25,	50],
+  'Mk 14': [+14,	32,	65],
+  'Mk 15': [+15,	45,	90]
+}
+
+// <--- Data extractions --->
 const getTierData = (tierId) => {
   const array = shipTiers[tierId]
 
@@ -275,6 +295,16 @@ const getQuartersData = (quartersId) => {
   return {bpCost: array[0], sfsLegal: array[1], description: array[2]}
 }
 
+const getDefensiveCounterData = (defensiveCounterId) => {
+  if(defensiveCounterId === null) return {tlBonus: 0, pcuCost: 0, bpCost: 0, sfsLegal: true}
+
+  const array = defensiveCounter[defensiveCounterId]
+
+  return {tlBonus: array[0], pcuCost: array[1], bpCost: array[2], sfsLegal: true}
+}
+
+
+// <--- ID extractions -->
 const getTierIdList = () => {
   return Object
     .keys(shipTiers)
@@ -318,6 +348,10 @@ const getQuartersIdList = () => {
   return Object.keys(crewQuarters).sort((a, b) => a + b)
 }
 
+const getDefensiveCounterIdList = () => {
+  return Object.keys(defensiveCounter).sort((a, b) => a + b)
+}
+
 export {
   getTierData, 
   getSizeData,
@@ -327,6 +361,8 @@ export {
   getComputerData,
   getNetworkNodeData,
   getQuartersData,
+  getDefensiveCounterData,
+
   getTierIdList, 
   getFrameIdList,
   getPowerCoreIdList, 
@@ -334,5 +370,6 @@ export {
   getArmorIdList,
   getComputerIdList,
   getNetworkNodeIdList,
-  getQuartersIdList
+  getQuartersIdList,
+  getDefensiveCounterIdList
 }

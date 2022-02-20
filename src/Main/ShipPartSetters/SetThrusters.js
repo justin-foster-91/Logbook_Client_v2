@@ -24,7 +24,7 @@ function SetThrusters() {
       <p></p>
       <select
         value={
-          thrustersId === null ? "None" : thrustersId
+          thrustersId ? thrustersId : "None"
         }
         onChange={handleThrusterChange}
       >
