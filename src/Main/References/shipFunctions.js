@@ -363,8 +363,52 @@ const getTotalAC = () => {
   */
 }
 
-const shipSetter = (ship, part, value) => {
-  ship[part] = value;
+// const bonusPackage = {
+//   primary: computerId, 
+//   secondary: secondaryComputerId,
+//   networkCount: ctNetworkNodes,
+//   size: size,
+//   isSuperC: isSupercolossal
+// }
+const combineComputerBonuses = (ship, size) => {
+  const { 
+    computerId: primary, 
+    secondaryComputerId: secondary, 
+    ctNetworkNodes: networkCount, 
+  } = ship
+  const isSuperC = size === 'Supercolossal'
+
+  const { bonus, nodes } = Tables.getComputerData(primary);
+  const [Mk, x] = Utils.capitalizeEachWord(primary).split(' ')
+  const networkId = `${Mk} ${x}`
+  const { 
+    bonus: secondaryBonus,
+    nodes: secondaryNodes, 
+  } = Tables.getComputerData(secondary)
+  const { 
+    bonus: networkBonus, 
+  } = Tables.getNetworkNodeData(networkId, size)
+
+  const combineBonuses = () => {
+    let primaryBonusArr = bonusSplitter(primary, bonus, nodes, true)
+
+    if(!isSuperC){
+      return primaryBonusArr.join("/");
+    } else{
+      let secondaryBonusArr = bonusSplitter(secondary, secondaryBonus, secondaryNodes, false)
+      let networkBonusArr = bonusSplitter(networkId, networkBonus, networkCount, false)
+
+      return primaryBonusArr.concat(networkBonusArr).concat(secondaryBonusArr).join('/')
+    }
+  }
+
+  return combineBonuses()
+}
+
+const bonusSplitter = (comp, bonus, nodes, isPrimary) => {
+  if(comp.includes("Basic") && isPrimary) return ['+0']
+
+  return Array(nodes).fill(`+${bonus}`)
 }
 
 
@@ -383,5 +427,5 @@ export {
   getEssentialPCUCosts,
   getTotalCompBPCosts,
   getTotalCompPCUCosts,
-  shipSetter
+  combineComputerBonuses
 };

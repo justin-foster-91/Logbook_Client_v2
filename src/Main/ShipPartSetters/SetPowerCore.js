@@ -6,6 +6,7 @@ import * as SF from "../References/shipFunctions";
 
 function SetPowerCore() {
   const { customShipParts } = useContext(CustomShipContext);
+  
   const { powerCoreIds } = customShipParts;
   const { size } = SF.getFramePackageFromShip(customShipParts);
 

@@ -2,34 +2,32 @@ import React, { useEffect, useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
-function AblativeArmor(props) {
-  const { customShipParts, setCustomShipParts } = useContext(CustomShipContext);
-
-  const { armorId, ablativeArmorByPosition } = customShipParts;
-  const { size } = props;
+function AblativeArmor() {
+  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { armorId } = customShipParts;
+  const { size } = ship.getSize();
   const { forward, port, starboard, aft } = customShipParts.ablativeArmorByPosition;
-
   const maxHP = Tables.getArmorData(armorId, size).tempHP;
   const balancedHP = Tables.getArmorData(armorId, size).tempHP / 4;
   const usedHP = forward + port + starboard + aft;
 
   useEffect(() => {
     balanceAllHP();
-  }, [maxHP]);
+  }, [armorId]);
 
   const handleTempHPChange = (ev) => {
     const ablativeArc = ev.target.name;
     const ablativeArcValue = Number(ev.target.value);
 
-    ablativeArmorByPosition[ablativeArc] = ablativeArcValue;
+    ship.setAblativeHPByPosition(ablativeArc, ablativeArcValue)
     setCustomShipParts({ ...customShipParts });
   };
 
   const balanceAllHP = () => {
-    ablativeArmorByPosition.forward = balancedHP;
-    ablativeArmorByPosition.port = balancedHP;
-    ablativeArmorByPosition.starboard = balancedHP;
-    ablativeArmorByPosition.aft = balancedHP;
+    ship.setAblativeHPByPosition('forward', balancedHP)
+    ship.setAblativeHPByPosition('port', balancedHP)
+    ship.setAblativeHPByPosition('starboard', balancedHP)
+    ship.setAblativeHPByPosition('aft', balancedHP)
     setCustomShipParts({ ...customShipParts });
   };
 

@@ -4,6 +4,7 @@ import { CustomShipContext } from "../Context/shipContext";
 
 function SetTier() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  
   const { tierId } = customShipParts;
   const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
 

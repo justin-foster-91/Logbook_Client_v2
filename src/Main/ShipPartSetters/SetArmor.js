@@ -6,6 +6,7 @@ import * as SF from "../References/shipFunctions";
 
 function SetArmor() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  
   const { armorId } = customShipParts;
   const { size, hp } = SF.getFramePackageFromShip(customShipParts);
   const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getArmorData(armorId, size);
@@ -99,9 +100,9 @@ function SetArmor() {
         {armorId && renderArmorDescription()}
       </div>
       <p></p>
-      {armorId && armorId.includes("ablative") && (
-        <AblativeArmor size={size}></AblativeArmor>
-      )}
+      {armorId 
+      && armorId.includes("ablative") 
+      && <AblativeArmor size={size}></AblativeArmor>}
       <p></p>
       <div>
         {renderArmorBonus()}

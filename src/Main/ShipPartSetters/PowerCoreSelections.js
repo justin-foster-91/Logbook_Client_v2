@@ -5,6 +5,7 @@ import { CustomShipContext } from "../Context/shipContext";
 
 const PowerCoreSelections = () => {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  
   const { powerCoreIds } = customShipParts;
   const { size } = SF.getFramePackageFromShip(customShipParts);
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);

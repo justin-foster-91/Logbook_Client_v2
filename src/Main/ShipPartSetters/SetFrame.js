@@ -6,6 +6,7 @@ import * as Tables from '../References/metaTables';
 
 function SetFrame() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
   const { length, weight, acMod } = Tables.getSizeData(size)

@@ -5,6 +5,7 @@ import { CustomShipContext } from "../Context/shipContext";
 
 function SetThrusters() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  
   const { thrustersId } = customShipParts;
   const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
   const { size } = SF.getFramePackageFromShip(customShipParts);

@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
-import * as Utils from '../References/utils'
 import NonPrimaryComputers from "./NonPrimaryComputers";
 import * as SF from "../References/shipFunctions";
 
@@ -11,56 +10,25 @@ function SetComputer() {
   const [isMononode, setIsMononode] = useState(true)
 
   const { computerId, tierId, secondaryComputerId, ctNetworkNodes } = customShipParts;
-  const { bonus, nodes } = Tables.getComputerData(computerId);
+  const { nodes } = Tables.getComputerData(computerId);
   const size = ship.getSize();
-  const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
-  const networkNodeId = `${Mk} ${x}`
-
-  const { 
-    bonus: secondaryBonus,
-    nodes: secondaryNodes, 
-  } = Tables.getComputerData(secondaryComputerId)
-
-  const { 
-    bonus: networkBonus, 
-  } = Tables.getNetworkNodeData(networkNodeId, size)
-
+  const { nodes: secondaryNodes } = Tables.getComputerData(secondaryComputerId)
   const totalCompBPCosts = SF.getTotalCompBPCosts(customShipParts)
   const totalCompPCUCosts = SF.getTotalCompPCUCosts(customShipParts)
   const totalNodes = nodes + secondaryNodes + ctNetworkNodes
-
-  const combineBonuses = () => {
-    let primaryBonusArr = bonusSplitter(bonus, nodes)
-
-    if(!isSupercolossal){
-      return primaryBonusArr.join("/");
-    } else{
-      let secondaryBonusArr = bonusSplitter(secondaryBonus, secondaryNodes)
-      let networkBonusArr = bonusSplitter(networkBonus, ctNetworkNodes)
-
-      return primaryBonusArr.concat(networkBonusArr).concat(secondaryBonusArr).join('/')
-    }
-  }
-
-  const bonusSplitter = (bonus, nodes) => {
-    if(computerId.includes("Basic")) return ['+0']
-
-    return Array(nodes).fill(`+${bonus}`)
-  }
-
-  const bonusList = combineBonuses()
+  const bonusList = SF.combineComputerBonuses(customShipParts, size)
   const computerTier = Math.max(Math.floor(tierId / 2), 1);
 
   useEffect(() => {
     if (size === "Supercolossal") {
       setIsSupercolossal(true);
 
-      customShipParts.computerId = "Mk 4 Mononode";
+      ship.setComputer("Mk 4 Mononode")
       setCustomShipParts({ ...customShipParts });
     } else {
       setIsSupercolossal(false);
 
-      customShipParts.secondaryComputerId = "Basic Computer";
+      ship.setSecondaryComputer("Basic Computer")
       setCustomShipParts({ ...customShipParts });
     }
   }, [size]);
@@ -74,8 +42,7 @@ function SetComputer() {
       setIsMononode(false)
     }
     
-    customShipParts.ctNetworkNodes = 0;
-    customShipParts.computerId = computerOption;
+    ship.setComputer(computerOption).setNetworkNodeCount(0)
     setCustomShipParts({ ...customShipParts });
   };
 
@@ -95,7 +62,7 @@ function SetComputer() {
       <p></p>
       Primary Computer
       <br />
-      <select defaultValue={computerId} onChange={handleComputerChange}>
+      <select value={computerId} onChange={handleComputerChange}>
         {Tables.getComputerIdList().map((computer, idx) =>
           renderComputerOptions(computer, idx)
         )}

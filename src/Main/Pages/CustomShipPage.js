@@ -27,16 +27,15 @@ function CustomShipPage() {
 
   // TODO: tax return
 
-  // TODO: why didn't sortObject() work?
+  // TODO: ablative armor dependency array, computer size dependency
+  // TODO: why didn't sortObject() in TemplateConverter work?
   // TODO: put hyphensToSpaces() through treeTransform()
+  // TODO: setCustomShipParts({ ...customShipParts }) everywhere
+  // TODO: cleanup bonusSplitter()
+
   // TODO: cleanup capitalize function from utils
+  // TODO: organize shipFunctions
 
-
-  // TODO: move the bonus splitter to ship functions
-
-  // TODO: change all defaultValues
-  // TODO: make handleChanges consistent
-  // TODO: make all changes to customShipParts a setter function
 
   const [showJSON, setShowJSON] = useState();
 

@@ -22,15 +22,15 @@ class Ship {
     return SF.getTotalPCUCosts(this.parts)
   }
 
-  setTier(tierNum) {
-    if(!Tables.getTierIdList().includes(tierNum)) throw new Error('Tier input did not match allowed tier options')
-    this.parts.tierId = tierNum
+  setTier(tier) {
+    if(!Tables.getTierIdList().includes(tier)) throw new Error('Tier input did not match allowed tier options')
+    this.parts.tierId = tier
     return this
   }
 
-  setFrame(frameType) {
-    if(!Tables.getFrameIdList().includes(frameType)) throw new Error('Frame input did not match allowed frame options')
-    this.parts.frameId = frameType
+  setFrame(frame) {
+    if(!Tables.getFrameIdList().includes(frame)) throw new Error('Frame input did not match allowed frame options')
+    this.parts.frameId = frame
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
@@ -59,13 +59,38 @@ class Ship {
   
     // if armor is not ablative, empty ablative hp values
     if(armor === null || !armor.includes('ablative')){
-      this.parts.ablativeArmorByPosition.forward = 0;
-      this.parts.ablativeArmorByPosition.port = 0;
-      this.parts.ablativeArmorByPosition.starboard = 0;
-      this.parts.ablativeArmorByPosition.aft = 0;
+      this.setAblativeHPByPosition('forward', 0)
+      this.setAblativeHPByPosition('port', 0)
+      this.setAblativeHPByPosition('starboard', 0)
+      this.setAblativeHPByPosition('aft', 0)
     }
 
     this.parts.armorId = armor
+    return this
+  }
+
+  setAblativeHPByPosition(pos, hp) {
+    this.parts.ablativeArmorByPosition[pos] = hp
+    return this
+  }
+
+  setComputer(comp) {
+    this.parts.computerId = comp
+    return this
+  }
+
+  setSecondaryComputer(comp) {
+    this.parts.secondaryComputerId = comp
+    return this
+  }
+
+  setNetworkNodeCount(count) {
+    this.parts.ctNetworkNodes = count
+    return this
+  }
+
+  setCrewQuarters(quarters) {
+    this.parts.crewQuartersId = quarters
     return this
   }
 }

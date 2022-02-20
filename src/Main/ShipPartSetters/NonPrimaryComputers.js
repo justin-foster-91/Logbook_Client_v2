@@ -10,21 +10,19 @@ function NonPrimaryComputers(props) {
   const { isMononode } = props
   const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
-
   const { nodeMax } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
 
   const handleSecondaryComputerChange = (ev) => {
-    const secondaryComputerOption = ev.target.value;
+    const secondaryOption = ev.target.value;
 
-    customShipParts.secondaryComputerId = secondaryComputerOption;
+    ship.setSecondaryComputer(secondaryOption)
     setCustomShipParts({ ...customShipParts });
   };
 
   const handleNodeChange = (ev) => {
     const nodeAmount = Number(ev.target.value)
-    // if(nodeAmount < 0 || nodeAmount > nodeMax) return
 
-    customShipParts.ctNetworkNodes = nodeAmount
+    ship.setNetworkNodeCount(nodeAmount)
     setCustomShipParts({ ...customShipParts });
   };
 
@@ -33,8 +31,8 @@ function NonPrimaryComputers(props) {
       Secondary Computer
       <br />
       <select
-        defaultValue={secondaryComputerId}
-        onChange={(ev) => handleSecondaryComputerChange(ev)}
+        value={secondaryComputerId}
+        onChange={handleSecondaryComputerChange}
       >
         <option key={-1}>Basic Computer</option>
         {Tables.getComputerIdList().map(
@@ -51,7 +49,7 @@ function NonPrimaryComputers(props) {
       <div>
         <label htmlFor="networkNodes">Network Nodes</label>
         <br/>
-        <select value={ctNetworkNodes} onChange={(ev) => handleNodeChange(ev)}>
+        <select value={ctNetworkNodes} onChange={handleNodeChange}>
           {Array(nodeMax+1).fill(1).map((node, idx) => 
             <option key={idx}>{idx}</option>
           )}
