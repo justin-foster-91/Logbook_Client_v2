@@ -22,6 +22,14 @@ class Ship {
     return SF.getTotalPCUCosts(this.parts)
   }
 
+  getTotalPCUBudget() {
+    return this.parts.powerCoreIds
+      .map(core => Tables.getPowerCoreData(core).pcuProvided)
+      .reduce((total, num) => total + num)
+  }
+
+
+
   setTier(tier) {
     if(!Tables.getTierIdList().includes(tier)) throw new Error('Tier input did not match allowed tier options')
     this.parts.tierId = tier
@@ -96,6 +104,11 @@ class Ship {
 
   setDefensiveCounters(defense) {
     this.parts.defensiveCountermeasuresId = defense
+    return this
+  }
+
+  setDriftEngine(engine) {
+    this.parts.driftEngineId = engine
     return this
   }
 }

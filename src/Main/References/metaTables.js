@@ -41,6 +41,17 @@ const shipSize = {
   'Supercolossal': ['Over 6 miles', 'Over 2,000 megatons', -8]
 }
 
+const sizeMod = {
+  'Tiny': 1, 
+  'Small': 2, 
+  'Medium': 3, 
+  'Large': 4, 
+  'Huge': 5, 
+  'Gargantuan': 6, 
+  'Colossal': 7, 
+  'Supercolossal': 8
+}
+
 // https://www.aonsrd.com/Starship_PowerCores.aspx
 const powerCores = {
   // Power Core: [[Sizes], pcuProvided, bpCost, source, sfsLegal]
@@ -209,6 +220,7 @@ const crewQuarters = {
   "Luxurious": [5, true, "Luxurious crew quarters are the pinnacle of comfort. They consist of private rooms for each crew member, with personal bathrooms (including showers with high water pressure) and furnishings that match the resident’s tastes. Some luxurious crew quarters also feature a kitchenette, gaming areas, or intimate meeting spaces."]
 }
 
+// https://aonsrd.com/Starship_DefCounters.aspx
 const defensiveCounter = {
   // Name:	[TL bonus,	PCU cost,	BP cost]
   'Mk 1': [+1,	1,	2],
@@ -227,6 +239,28 @@ const defensiveCounter = {
   'Mk 14': [+14,	32,	65],
   'Mk 15': [+15,	45,	90]
 }
+
+// https://www.aonsrd.com/Starship_DriftEngines.aspx
+// https://aonsrd.com/StarshipInterstellar.aspx
+const driftEngines = {
+  // Drift Engine:	[Rating, 	Minimum PCU,	Maximum Size,	BP Cost, special, sfsLegal, sourceLink, source]
+  'Signal Basic':	[1,	75,	null,	2, null, true, 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook', 'Starfinder Core Rulebook pg. 298'],
+  'Signal Booster':	[2,	100,	'Huge',	5, null, true, 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook', 'Starfinder Core Rulebook pg. 298'],
+  'Signal Major':	[3,	150,	'Large',	10, null, true, 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook', 'Starfinder Core Rulebook pg. 298'],
+  'Signal Superior':	[4,	175,	'Large',	15, null, true, 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook', 'Starfinder Core Rulebook pg. 298'],
+  'Signal Ultra':	[5,	200,	'Medium',	20, null, true, 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook', 'Starfinder Core Rulebook pg. 298'],
+  'Archon Drive':	[1,	150,	null,	15,	'Restricted (Church of Iomedae, Knights of Golarion)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 9'],
+  'Chaos Sail':	[1,	75,	null,	4,	'Restricted (Church of Besmara)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 9'],
+  'Constellation Orrery':	[2,	150,	'Huge',	10,	'Restricted (Church of Ibra)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 10'],
+  'Elemental Engine':	[1,	100,	null,	5,	'Restricted (Elemental Plane)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 10'],
+  'First Drive':	[3,	175,	'Large',	12,	'Restricted (Eldest, fey)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 10'],
+  'Fold Gates':	['Special',	200,	'Huge',	0,	'Journeying between a pair of fold gates is limited to predetermined destinations—those locations with functioning fold gates (determined by the GM).', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 10'],
+  'Helldrive':	[1,	100,	null,	10,	'Restricted (Church of Asmodeus, Hellknights)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 11'],
+  'Planar Aperture Drive':	[2,	150,	null,	15,	'Restricted (Tetrad, witchwyrds)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 11'],
+  'Shadow Engine':	[1,	75,	null,	3,	'Painful, Restricted (Church of Zon-Kuthon, velstracs)', false, 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'Starship Operations Manual pg. 11'],
+  'Onos drive':	[1/2,	150,	'Medium',	10,	'Restricted (Azlanti Star Empire)', false, 'https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse', 'Starfinder #42: Whispers of the Eclipse pg. 50']
+}
+
 
 // <--- Data extractions --->
 const getTierData = (tierId) => {
@@ -261,7 +295,6 @@ const getArmorData = (armorId, size) => {
   if(size === undefined) throw new Error("getArmorData(armorId, size) must take in a size parameter")
   if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, sourceShort: null, sfsLegal: true, sourceFull: null, sourceLink: null}
 
-  let sizeMod = {'Tiny': 1, 'Small': 2, 'Medium': 3, 'Large': 4, 'Huge': 5, 'Gargantuan': 6, 'Colossal': 7, 'Supercolossal': 8}
   const array = armor[armorId]
 
   if(armorId.includes('Mk') || armorId.includes('Energy-Absorbent')){
@@ -302,6 +335,17 @@ const getDefensiveCounterData = (defensiveCounterId) => {
 
   return {tlBonus: array[0], pcuCost: array[1], bpCost: array[2], sfsLegal: true}
 }
+
+const getDriftEngineData = (driftEngineId, size) => {
+  if(size === undefined) throw new Error("getDriftEngineData(driftEngines, size) must take in a size parameter")
+  if(driftEngineId === null) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, special: null, sfsLegal: true, sourceLink: null, source: null}
+
+  const array = driftEngines[driftEngineId]
+
+  return {rating: array[0], minPCU: array[1], maxSize: array[2], bpCost: (array[3] * sizeMod[size]), special: array[4], sfsLegal: array[5], sourceLink: array[6], source: array[7]}
+
+}
+
 
 
 // <--- ID extractions -->
@@ -352,7 +396,13 @@ const getDefensiveCounterIdList = () => {
   return Object.keys(defensiveCounter).sort((a, b) => a + b)
 }
 
+const getDriftEngineIdList = () => {
+  return Object.keys(driftEngines).sort((a, b) => a + b)
+}
+
 export {
+  sizeMod,
+
   getTierData, 
   getSizeData,
   getPowerCoreData, 
@@ -362,6 +412,7 @@ export {
   getNetworkNodeData,
   getQuartersData,
   getDefensiveCounterData,
+  getDriftEngineData,
 
   getTierIdList, 
   getFrameIdList,
@@ -371,5 +422,6 @@ export {
   getComputerIdList,
   getNetworkNodeIdList,
   getQuartersIdList,
-  getDefensiveCounterIdList
+  getDefensiveCounterIdList,
+  getDriftEngineIdList
 }

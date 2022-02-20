@@ -10,6 +10,7 @@ import SetComputer from "../ShipPartSetters/SetComputer";
 import * as Tables from '../References/metaTables'
 import SetCrewQuarters from "../ShipPartSetters/SetCrewQuarters";
 import SetDefensiveCounter from "../ShipPartSetters/SetDefensiveCounter";
+import SetDriftEngine from "../ShipPartSetters/SetDriftEngine";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -20,7 +21,7 @@ function CustomShipPage() {
 
   const totalPCUCosts = ship.getTotalPCUCosts()
   const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
-  const totalPCUBudget = powerCoreIds.map(core => Tables.getPowerCoreData(core).pcuProvided).reduce((total, num) => total + num)
+  const totalPCUBudget = ship.getTotalPCUBudget()
 
   // useEffect(() => {
   //   console.log(validateShip(customShipParts));
@@ -36,9 +37,10 @@ function CustomShipPage() {
 
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
+  // TODO: cleanup sourceShort usage. Turn sourceShort into a function based on source text
 
-
-
+  // TODO: powerCore and thrusters should default to the first option of the select
+  
   const [showJSON, setShowJSON] = useState();
 
   const printJSON = () => {
@@ -53,7 +55,8 @@ function CustomShipPage() {
     SetArmor, 
     SetComputer,
     SetCrewQuarters, 
-    SetDefensiveCounter
+    SetDefensiveCounter,
+    SetDriftEngine
   ]
 
   return (

@@ -22,21 +22,13 @@ function SetThrusters() {
     <>
       <h3>Thrusters</h3>
       <p></p>
-      <select
-        value={
-          thrustersId ? thrustersId : "None"
-        }
-        onChange={handleThrusterChange}
-      >
+      <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>
         <option key="None">None</option>
-        {Tables.getThrusterIdList().map(
-          (thruster, idx) =>
-            SF.doesFrameSizeAllowThruster(thruster, size) 
-            && (
-              <option key={idx} value={thruster}>
-                {thruster} Thrusters
-              </option>
-            )
+        {Tables.getThrusterIdList().map((thruster, idx) =>
+          SF.doesFrameSizeAllowThruster(thruster, size) 
+          && <option key={idx} value={thruster}>
+            {thruster} Thrusters
+          </option>
         )}
       </select>
       <br />
