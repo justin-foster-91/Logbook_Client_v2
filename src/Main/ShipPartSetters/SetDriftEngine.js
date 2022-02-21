@@ -37,7 +37,6 @@ function SetDriftEngine() {
       <h3>Drift Engines</h3>
 
       <p></p>
-      {/* engineMinPCU(engine) > pcuBudget */}
       <select value={driftEngineId ? driftEngineId : "None"} onChange={handleDriftEngineChange}>
         <option key="None">None</option>
         {Tables.getDriftEngineIdList().map((engine, idx) => 
