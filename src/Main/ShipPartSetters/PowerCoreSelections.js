@@ -7,7 +7,7 @@ const PowerCoreSelections = () => {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
   
   const { powerCoreIds } = customShipParts;
-  const { size } = SF.getFramePackageFromShip(customShipParts);
+  const size = ship.getSize();
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
   const handlePowerCoreChange = (event) => {
@@ -34,8 +34,7 @@ const PowerCoreSelections = () => {
             onChange={handlePowerCoreChange}
           >
             <option key="None">None</option>
-            {Tables.getPowerCoreIdList().map(
-              (core, idx) =>
+            {Tables.getPowerCoreIdList().map((core, idx) =>
                 SF.doesFrameSizeAllowCore(core, size) && (
                   <option key={"option" + idx} value={core}>
                     {`${core} (PCU ${

@@ -1,25 +1,46 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { CustomShipContext } from "../Context/shipContext";
+import * as Tables from '../References/metaTables'
+import ExpansionBaySelections from './ExpansionBaySelections';
 
-function SetExpansionBays(props) {
-  //64 Expansion Bay Types
+//TODO: track stat changes and exceptions of each expansion type
+//64 Expansion Bay Types
 
-  //Booster Thruster Housing: adds an additional thruster slot
-  //Dedicated Computer Housing: adds an additional mononode computer slot
-  //Docking Canopy: takes up 2 expansion bays
-  //Drift Booster: is compatible only with a Supercolossal ship.
-  //Drift Stasis Unit: drift stasis sickness stat block
-  //External Expansion Bay: can double the number of expansion bay slots at cost of turn distance
-  //Habitat Simulator: takes up 3 expansion bays
-  //Hangar Bay: takes up 4 expansion bays
-  //Healing pods: can be installed only in a biomechanical starship.
-  //Power Core Housing: adds an additional power core slot
-  //Recycling System: is compatible only with a Supercolossal ship.
-  //Tactical Sensor Tank is compatible only with a Supercolossal ship.
+function SetExpansionBays() {
+  const { customShipParts, ship } = useContext(CustomShipContext);
+  const { expansionBayIds } = customShipParts
+  const size = ship.getSize()
+
+  let pcuCostTotal = 0
+  let bpCostTotal = 0
+  // workaround for frame with 0 expansion bays
+  // may not be needed if this component is conditionally rendered based on expansion bay allowance
+  if(expansionBayIds.length){
+    pcuCostTotal = expansionBayIds
+      .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+      .reduce((total, pcu) => total + pcu);
+
+    bpCostTotal = expansionBayIds
+      .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+      .reduce((total, bp) => total + bp);
+  } 
+  
 
   return (
-    <div>
-      
-    </div>
+    <>
+      <h3>Expansion Bays</h3>
+
+      <p></p>
+
+      <ExpansionBaySelections></ExpansionBaySelections>      
+
+      <p></p>
+
+      <div>
+        Total PCU Costs: {pcuCostTotal}; 
+        Total BP Costs: {bpCostTotal}
+      </div>
+    </>
   );
 }
 

@@ -46,6 +46,7 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
+    SF.updateExpansionBaysToMatchFrame(this.parts);
     return this
   }
 
@@ -113,6 +114,19 @@ class Ship {
 
   setDriftEngine(engine) {
     this.parts.driftEngineId = engine
+    return this
+  }
+
+  setExpansionBay(expansion, idx) {
+    if(!Tables.getExpansionBayIdList().includes(expansion) && expansion !== null) throw new Error("Expansion bay input did not match allowed expansion options")
+    if(idx === null) throw new Error("setExpansionBay(bay, idx) must take an index parameter")
+
+    const expansionQuantity = this.getFramePackage().expansions
+    
+    // External bay exception
+    if(idx+1 > expansionQuantity) throw new Error(`Expansion bay number ${idx+1} may not exceed the allowed ${expansionQuantity} expansions`)
+  
+    this.parts.expansionBayIds[idx] = expansion
     return this
   }
 

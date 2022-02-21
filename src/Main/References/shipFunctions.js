@@ -38,7 +38,7 @@ const doesFrameSizeAllowThruster = (thruster, frameSize) => {
 
 const findComponentByFrameId = (frameId, returnComponent) => {
   let newFrame = frames.find(
-    (frame) => frame.type === Utils.capitalizeEachWord(frameId)
+    (frame) => frame.type === frameId
   );
 
   return newFrame[returnComponent];
@@ -79,6 +79,15 @@ const updateComputerToMatchFrame = (ship) => {
   if(size === 'Supercolossal'){
     ship.computerId = 'Mk 4 Mononode'
   }
+}
+
+const updateExpansionBaysToMatchFrame = (ship) => {
+  // const size = findComponentByFrameId(ship.frameId, "size")
+  let { expansions } = getFramePackageFromShip(ship)
+  if(typeof expansions === 'string') expansions = 30
+
+  // set expansionBayIds list to the length of allowed expansions for the size
+  ship.expansionBayIds.length = expansions
 }
 
 // Object ship => {validity: Bool, errors: [Error]}
@@ -421,6 +430,7 @@ export {
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,
+  updateExpansionBaysToMatchFrame,
   validateShip,
   getFramePackageFromShip,
   getTotalBPCosts,

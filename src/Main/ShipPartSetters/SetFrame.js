@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import frames from "../References/frames.json";
 import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
@@ -10,6 +10,12 @@ function SetFrame() {
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
   const { length, weight, acMod } = Tables.getSizeData(size)
+
+  // useEffect(() => {
+  //   // Running setFrame on render to initialize the expansionBayIds list with correct length
+  //   ship.setFrame(frameId)
+  //   setCustomShipParts({ ...customShipParts });
+  // }, [])
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;

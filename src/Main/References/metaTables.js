@@ -450,9 +450,16 @@ const getDriftEngineData = (driftEngineId, size) => {
 
 const getExpansionBayData = (expansionBayId, size) => {
   if(size === undefined) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
+  if(expansionBayId === null || expansionBayId === undefined) return {pcuCost: 0, bpCost: 0, source: null}
 
-  //Decoy Husk uses (cost * size mod)
-  //Quantum Defender costs are Special
+  const array = expansionBays[expansionBayId]
+
+  if(expansionBayId === 'Quantum Defender') {
+    return {pcuCost: Math.max(20, (5 * sizeMod[size])), bpCost: Math.max(10, (4 * sizeMod[size])), source: array[2]}
+  }
+  if(expansionBayId === 'Decoy Husk') return {pcuCost: (array[0] + sizeMod[size]), bpCost: (array[1] * sizeMod[size]), source: array[2]}
+  
+  return {pcuCost: array[0], bpCost: array[1], source: array[2]}
 }
 
 const getFortifiedHullData = (fortifiedHullId, size) => {
