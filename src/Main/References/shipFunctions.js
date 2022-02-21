@@ -265,19 +265,20 @@ const getFramePackageFromShip = (ship) => {
 const getTotalBPCosts = (ship) => {
   // console.log("Total BP");
   const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
+  const { size } = getFramePackageFromShip(ship)
 
   const bpExpenses = [
     getFramePackageFromShip(ship).bpCost,
     powerCoreTotalBPCost,
     Tables.getThrusterData(ship.thrustersId).bpCost,
-    Tables.getArmorData(ship.armorId, getFramePackageFromShip(ship).size).bpCost,
+    Tables.getArmorData(ship.armorId, size).bpCost,
     getTotalCompBPCosts(ship),
-    Tables.getQuartersData(ship.crewQuartersId).bpCost
-    // defensive countermeasures
-    // drift engine
+    Tables.getQuartersData(ship.crewQuartersId).bpCost,
+    Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).bpCost,
+    Tables.getDriftEngineData(ship.driftEngineId, size).bpCost,
     // expansion bays
-    // fortified hull
-    // reinforced bulkhead
+    Tables.getFortifiedHullData(ship.fortifiedHullId, size).bpCost,
+    Tables.getReinforcedBulkheadData(ship.reinforcedBulkheadId, size).bpCost,
     // security (misc)
     // sensors
     // shields
@@ -295,7 +296,7 @@ const getTotalPCUCosts = (ship) => {
   const pcuExpenses = [
     Tables.getThrusterData(thrustersId).pcuCost,
     getTotalCompPCUCosts(ship),
-    // defensive countermeasures
+    Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).pcuCost,
     // expansion bays
     // security (misc)
     // shields
@@ -311,7 +312,7 @@ const getEssentialPCUCosts = (ship) => {
 
   const pcuExpenses = [
     Tables.getThrusterData(thrustersId).pcuCost,
-    // defensive countermeasures
+    Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).pcuCost,
     // shields
     // weapons
   ]

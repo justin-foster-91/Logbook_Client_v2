@@ -346,6 +346,26 @@ const expansionBays = {
   'Vault':	[3,	2, 'Near Space pg. 114', 'Some crews need a secure vault to store valuables. Breaking into a vault generally requires two skill checks (determined by the GM, though Computers and Engineering are common) with a DC equal to 10 + 1-1/2 × the ship’s tier. Failing either check by 5 or more sets off alarms, alerting the whole ship.']
 }
 
+//https://www.aonsrd.com/StarshipHulls.aspx
+const fortifiedHulls = {
+  // Material:	[CT bonus,	BP cost, source]
+  'Steel composite':	[1,	2, 'Starship Operations Manual pg. 21'],
+  'Adamantine alloy':	[2,	4, 'Starship Operations Manual pg. 21'],
+  'Nanocarbon plate':	[3,	6, 'Starship Operations Manual pg. 21'],
+  'Polycarbon plate':	[4,	9, 'Starship Operations Manual pg. 21'],
+  'Pure adamantine':	[5,	12, 'Starship Operations Manual pg. 21']
+}
+
+//https://www.aonsrd.com/StarshipBulkheads.aspx
+const reinforcedBulkheads = {
+// Bulkhead:	[Fortification %,	BP cost]
+  'Mk 1':	[10,	2, 'Starship Operations Manual pg. 21'],
+  'Mk 2':	[20,	3, 'Starship Operations Manual pg. 21'],
+  'Mk 3':	[30,	5, 'Starship Operations Manual pg. 21'],
+  'Mk 4':	[40,	7, 'Starship Operations Manual pg. 21'],
+  'Mk 5':	[50,	10, 'Starship Operations Manual pg. 21']
+}
+
 
 // <--- Data extractions --->
 const getTierData = (tierId) => {
@@ -435,6 +455,25 @@ const getExpansionBayData = (expansionBayId, size) => {
   //Quantum Defender costs are Special
 }
 
+const getFortifiedHullData = (fortifiedHullId, size) => {
+  if(size === undefined) throw new Error("getFortifiedHullData(fortifiedHullId, size) must take in a size parameter")
+  if(fortifiedHullId === null) return {ctBonus: 0, bpCost: 0, source: null}
+
+  const array = fortifiedHulls[fortifiedHullId]
+
+  return {ctBonus: (array[0] * sizeMod[size]), bpCost: (array[1] * sizeMod[size]), source: array[2]}
+}
+
+const getReinforcedBulkheadData = (reinforcedBulkheadId, size) => {
+  if(size === undefined) throw new Error("getReinforcedBulkeadData(reinforcedBulkheadId, size) must take in a size parameter")
+  if(reinforcedBulkheadId === null) return {fortification: 0, bpCost: 0, source: null}
+
+  const array = reinforcedBulkheads[reinforcedBulkheadId]
+
+  //fortification is a %
+  return {fortification: array[0], bpCost: (array[1] * sizeMod[size]), source: array[2]}
+}
+
 
 
 // <--- ID extractions -->
@@ -493,7 +532,16 @@ const getExpansionBayIdList = () => {
   return Object.keys(expansionBays).sort((a, b) => a + b)
 }
 
+const getFortifiedHullIdList = () => {
+  return Object.keys(fortifiedHulls).sort((a, b) => a + b)
+}
+
+const getReinforcedBulkheadIdList = () => {
+  return Object.keys(reinforcedBulkheads).sort((a, b) => a + b)
+}
+
 export {
+  sources,
   sizeMod,
 
   getTierData, 
@@ -506,6 +554,9 @@ export {
   getQuartersData,
   getDefensiveCounterData,
   getDriftEngineData,
+  getExpansionBayData,
+  getFortifiedHullData,
+  getReinforcedBulkheadData,
 
   getTierIdList, 
   getFrameIdList,
@@ -517,5 +568,7 @@ export {
   getQuartersIdList,
   getDefensiveCounterIdList,
   getDriftEngineIdList,
-  getExpansionBayIdList
+  getExpansionBayIdList,
+  getFortifiedHullIdList,
+  getReinforcedBulkheadIdList,
 }

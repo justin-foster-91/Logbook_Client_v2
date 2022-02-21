@@ -1,6 +1,7 @@
 import React from 'react';
 
 function SetExpansionBays(props) {
+  //64 Expansion Bay Types
 
   //Booster Thruster Housing: adds an additional thruster slot
   //Dedicated Computer Housing: adds an additional mononode computer slot

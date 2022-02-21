@@ -12,6 +12,8 @@ import SetCrewQuarters from "../ShipPartSetters/SetCrewQuarters";
 import SetDefensiveCounter from "../ShipPartSetters/SetDefensiveCounter";
 import SetDriftEngine from "../ShipPartSetters/SetDriftEngine";
 import SetExpansionBays from "../ShipPartSetters/SetExpansionBays";
+import SetFortifiedHull from "../ShipPartSetters/SetFortifiedHull";
+import SetReinforcedBulkheads from "../ShipPartSetters/SetReinforcedBulkheads";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -59,6 +61,8 @@ function CustomShipPage() {
     SetDefensiveCounter,
     SetDriftEngine,
     // SetExpansionBays,
+    SetFortifiedHull,
+    SetReinforcedBulkheads,
   ]
 
   return (

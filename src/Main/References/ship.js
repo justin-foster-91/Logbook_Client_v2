@@ -28,6 +28,10 @@ class Ship {
       .reduce((total, num) => total + num)
   }
 
+  getBonusPackage() {
+
+  }
+
 
 
   setTier(tier) {
@@ -109,6 +113,16 @@ class Ship {
 
   setDriftEngine(engine) {
     this.parts.driftEngineId = engine
+    return this
+  }
+
+  setFortifiedHull(hull) {
+    this.parts.fortifiedHullId = hull
+    return this
+  }
+
+  setReinforcedBulkheads(bulkhead) {
+    this.parts.reinforcedBulkheadId = bulkhead
     return this
   }
 }
