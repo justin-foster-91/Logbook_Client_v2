@@ -30,6 +30,8 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
+  // TODO: what is { id } = ship called
+  // TODO: why does it work on updateComputerToMatchFrame but not updateThrustersToMatchFrame
 
   // TODO: why didn't sortObject() in TemplateConverter work?
   // TODO: put hyphensToSpaces() through treeTransform()
@@ -40,12 +42,9 @@ function CustomShipPage() {
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
 
-  // TODO: powerCore and thrusters should default to the first option of the select
-  // TODO: for unlimited expansion bay ships, default to x but allow to add more
-  // TODO: expansion dropdown menu to change the tempExpansionCap to a higher value
+  // TODO: Show allowed expansion counter. Give button to add a new expansion dropdown
   // TODO: conditionally render SetExpansionBays based off of expansion count
-  // TODO: defaultShipSelections that don't have the correct expansion length need to be processed correctly
-  // TODO: ablative armor dependency array, computer size dependency
+  // TODO: remove the priming expansion array with set length
 
   const [showJSON, setShowJSON] = useState();
 
@@ -56,14 +55,14 @@ function CustomShipPage() {
   let setterList = [ 
     SetTier, 
     SetFrame, 
-    SetPowerCore, 
-    SetThrusters,
+    // SetPowerCore, 
+    // SetThrusters,
     // SetArmor, 
     // SetComputer,
     // SetCrewQuarters, 
     // SetDefensiveCounter,
     // SetDriftEngine,
-    // SetExpansionBays,
+    SetExpansionBays,
     // SetFortifiedHull,
     // SetReinforcedBulkheads,
   ]

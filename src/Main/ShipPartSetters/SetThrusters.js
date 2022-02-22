@@ -12,7 +12,7 @@ function SetThrusters() {
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value;
-    if (thrusterOption === "None") thrusterOption = null;
+    // if (thrusterOption === "None") thrusterOption = null;
 
     ship.setThrusters(thrusterOption)
     setCustomShipParts({ ...customShipParts });
@@ -23,7 +23,7 @@ function SetThrusters() {
       <h3>Thrusters</h3>
       <p></p>
       <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>
-        <option key="None">None</option>
+        {/* <option key="None">None</option> */}
         {Tables.getThrusterIdList().map((thruster, idx) =>
           SF.doesFrameSizeAllowThruster(thruster, size) 
           && <option key={idx} value={thruster}>

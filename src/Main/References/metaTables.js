@@ -57,6 +57,15 @@ const shipSize = {
   'Supercolossal': ['Over 6 miles', 'Over 2,000 megatons', -8]
 }
 
+const maneuverability = {
+  // Maneuverability:	[Distance Between Turns,	Piloting Check Modifier]
+  'Clumsy':	[4,	-2],
+  'Poor':	[3,	-1],
+  'Average':	[2,	0],
+  'Good':	[1,	+1],
+  'Perfect':	[0, +2]
+}
+
 const sizeMod = {
   'Tiny': 1, 
   'Small': 2, 
@@ -374,6 +383,12 @@ const getTierData = (tierId) => {
   return {buildPoints: array[0], hpIncrementMultiplier: array[1]}
 }
 
+const getManeuverabilityData = (type) => {
+  const array = maneuverability[type]
+
+  return {turnDistance: array[0], pilotingModifier: array[1]}
+}
+
 const getSizeData = (size) => {
   const array = shipSize[size]
 
@@ -552,6 +567,7 @@ export {
   sizeMod,
 
   getTierData, 
+  getManeuverabilityData,
   getSizeData,
   getPowerCoreData, 
   getThrusterData,

@@ -10,12 +10,13 @@ function SetFrame() {
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
   const { length, weight, acMod } = Tables.getSizeData(size)
+  const { turnDistance, pilotingModifier } = Tables.getManeuverabilityData(maneuverability)
 
-  // useEffect(() => {
-  //   // Running setFrame on render to initialize the expansionBayIds list with correct length
-  //   ship.setFrame(frameId)
-  //   setCustomShipParts({ ...customShipParts });
-  // }, [])
+  useEffect(() => {
+    // Running setFrame on render to initialize later components that depend on the frame 
+    ship.setFrame(frameId)
+    setCustomShipParts({ ...customShipParts });
+  }, [])
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
@@ -38,13 +39,19 @@ function SetFrame() {
 
       <p></p>
 
-      <div>Size: {size}</div>
+      <div>Size: {size}; Maneuverability: {maneuverability}</div>
       <div>
-        Maneuverability {maneuverability}; HP {hp}; DT {dt}; CT{" "}
+        HP {hp}; DT {dt}; CT{" "}
         {ct}; Expansion Bays {expansions}; Minimum Crew {minCrew}; Maximum Crew{" "}
         {maxCrew}
       </div>
       <div>
+        {/* Stats from maneuverability */}
+        Turn Distance: {turnDistance}; 
+        Piloting Mod: {pilotingModifier > 0 && '+'}{pilotingModifier}
+      </div>
+      <div>
+        {/* Stats from size */}
         Length: {length}; Weight: {weight}; AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}
       </div>
       <div>BP Cost: {bpCost}</div>

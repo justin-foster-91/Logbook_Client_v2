@@ -46,13 +46,13 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 
 const updatePowerCoresToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
+  const computerIdList = Tables.getPowerCoreIdList()
+  const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
 
   // change power cores to null if they don't fit the new frame
   ship.powerCoreIds.forEach((core, idx) => {
-    if (
-      core !== null &&
-      !doesFrameSizeAllowCore(core, size)
-    ) {
+    if(core === null && idx === 0) ship.powerCoreIds[idx] = firstMatch
+    if(core !== null && !doesFrameSizeAllowCore(core, size)) {
       ship.powerCoreIds[idx] = null;
     }
   });
@@ -65,11 +65,13 @@ const updatePowerCoresToMatchFrame = (ship) => {
 
 const updateThrustersToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
-  
-  // change thrusters to null if they don't fit the new frame
-  if (ship.thrustersId !== null && !doesFrameSizeAllowThruster(ship.thrustersId, size)) {
-    ship.thrustersId = null;
-  }
+  // let { thrustersId } = ship
+  const thrusterIdList = Tables.getThrusterIdList()
+  const firstMatch = thrusterIdList.find(thruster => doesFrameSizeAllowThruster(thruster, size))
+
+  if (ship.thrustersId === null) ship.thrustersId = firstMatch
+  // change thrusters to firstMatch if they don't fit the new frame
+  if (ship.thrustersId !== firstMatch && !doesFrameSizeAllowThruster(ship.thrustersId, size)) ship.thrustersId = firstMatch;
 };
 
 const updateComputerToMatchFrame = (ship) => {
