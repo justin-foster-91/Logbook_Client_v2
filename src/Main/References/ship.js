@@ -36,12 +36,14 @@ class Ship {
 
   setTier(tier) {
     if(!Tables.getTierIdList().includes(tier)) throw new Error('Tier input did not match allowed tier options')
+    
     this.parts.tierId = tier
     return this
   }
 
   setFrame(frame) {
     if(!Tables.getFrameIdList().includes(frame)) throw new Error('Frame input did not match allowed frame options')
+    
     this.parts.frameId = frame
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
@@ -69,13 +71,17 @@ class Ship {
 
   setArmor(armor) {
     if(!Tables.getArmorIdList().includes(armor) && armor !== null) throw new Error('Armor input did not match allowed armor options')
-  
+    const balancedHP = Tables.getArmorData(armor, this.getSize()).tempHP / 4;
+    const arcList = ['forward', 'port', 'starboard', 'aft']
+
     // if armor is not ablative, empty ablative hp values
     if(armor === null || !armor.includes('ablative')){
-      this.setAblativeHPByPosition('forward', 0)
-      this.setAblativeHPByPosition('port', 0)
-      this.setAblativeHPByPosition('starboard', 0)
-      this.setAblativeHPByPosition('aft', 0)
+      arcList.map(arc => this.setAblativeHPByPosition(arc, 0))
+    }
+
+    // if armor is ablative, balance hp values
+    if(armor.includes('ablative')){
+      arcList.map(arc => this.setAblativeHPByPosition(arc, balancedHP))
     }
 
     this.parts.armorId = armor
@@ -88,6 +94,8 @@ class Ship {
   }
 
   setComputer(comp) {
+    if(!Tables.getComputerIdList().includes(comp) && comp !== null) throw new Error('Computer input did not match allowed computer options')
+
     this.parts.computerId = comp
     return this
   }
@@ -108,11 +116,15 @@ class Ship {
   }
 
   setDefensiveCounters(defense) {
+    if(!Tables.getDefensiveCounterIdList().includes(defense) && defense !== null) throw new Error('Defensive counter input did not match allowed defensive options')
+
     this.parts.defensiveCountermeasuresId = defense
     return this
   }
 
   setDriftEngine(engine) {
+    if(!Tables.getDriftEngineIdList().includes(engine) && engine !== null) throw new Error('Drift engine input did not match allowed engine options')
+
     this.parts.driftEngineId = engine
     return this
   }
@@ -131,11 +143,15 @@ class Ship {
   }
 
   setFortifiedHull(hull) {
+    if(!Tables.getFortifiedHullIdList().includes(hull) && hull !== null) throw new Error('Fortified hull input did not match allowed hull options')
+
     this.parts.fortifiedHullId = hull
     return this
   }
 
   setReinforcedBulkheads(bulkhead) {
+    if(!Tables.getReinforcedBulkheadIdList().includes(bulkhead) && bulkhead !== null) throw new Error('Reinforced bulkhead input did not match allowed bulkhead options')
+
     this.parts.reinforcedBulkheadId = bulkhead
     return this
   }

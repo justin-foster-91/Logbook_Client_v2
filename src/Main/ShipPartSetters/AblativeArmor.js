@@ -1,19 +1,15 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
 function AblativeArmor() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
   const { armorId } = customShipParts;
-  const { size } = ship.getSize();
+  const size = ship.getSize();
   const { forward, port, starboard, aft } = customShipParts.ablativeArmorByPosition;
   const maxHP = Tables.getArmorData(armorId, size).tempHP;
   const balancedHP = Tables.getArmorData(armorId, size).tempHP / 4;
   const usedHP = forward + port + starboard + aft;
-
-  useEffect(() => {
-    balanceAllHP();
-  }, [armorId]);
 
   const handleTempHPChange = (ev) => {
     const ablativeArc = ev.target.name;
@@ -23,17 +19,18 @@ function AblativeArmor() {
     setCustomShipParts({ ...customShipParts });
   };
 
-  const balanceAllHP = () => {
+  const setArcHPValues = (ev) => {
+    ev.preventDefault();
+
+    balanceAllHP(balancedHP);
+    setCustomShipParts({ ...customShipParts });
+  };
+
+  const balanceAllHP = (balancedHP) => {  
     ship.setAblativeHPByPosition('forward', balancedHP)
     ship.setAblativeHPByPosition('port', balancedHP)
     ship.setAblativeHPByPosition('starboard', balancedHP)
     ship.setAblativeHPByPosition('aft', balancedHP)
-    setCustomShipParts({ ...customShipParts });
-  };
-
-  const setArcHPValues = (ev) => {
-    ev.preventDefault();
-    balanceAllHP();
   };
 
   const isCorrectTotalHP = () => {
@@ -55,7 +52,7 @@ function AblativeArmor() {
           name="forward"
           value={forward}
           required
-          onChange={(ev) => handleTempHPChange(ev)}
+          onChange={handleTempHPChange}
         />
 
         <label htmlFor="port">Port:</label>
@@ -65,7 +62,7 @@ function AblativeArmor() {
           name="port"
           value={port}
           required
-          onChange={(ev) => handleTempHPChange(ev)}
+          onChange={handleTempHPChange}
         />
 
         <label htmlFor="starboard">Starboard:</label>
@@ -75,7 +72,7 @@ function AblativeArmor() {
           name="starboard"
           value={starboard}
           required
-          onChange={(ev) => handleTempHPChange(ev)}
+          onChange={handleTempHPChange}
         />
 
         <label htmlFor="aft">Aft:</label>
@@ -85,11 +82,11 @@ function AblativeArmor() {
           name="aft"
           value={aft}
           required
-          onChange={(ev) => handleTempHPChange(ev)}
+          onChange={handleTempHPChange}
         />
 
         <br />
-        <button onClick={(ev) => setArcHPValues(ev)}>Balance All HP</button>
+        <button onClick={setArcHPValues}>Balance All HP</button>
       </form>
       Used: {usedHP} -- Allowed: {maxHP}
       <br />

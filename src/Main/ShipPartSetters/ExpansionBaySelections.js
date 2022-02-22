@@ -16,7 +16,7 @@ import * as Tables from '../References/metaTables'
   //Recycling System: is compatible only with a Supercolossal ship.
   //Tactical Sensor Tank is compatible only with a Supercolossal ship.
 
-function ExpansionBaySelections(props) {
+function ExpansionBaySelections() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
   const { expansionBayIds } = customShipParts

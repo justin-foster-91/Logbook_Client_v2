@@ -74,10 +74,14 @@ const updateThrustersToMatchFrame = (ship) => {
 
 const updateComputerToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
+  let { computerId: primary, secondaryComputerId: secondary} = ship
+  const compList = Tables.getComputerIdList()
 
   // change computer to 'Mk 4 Mononode' if size changes to supercolossal
   if(size === 'Supercolossal'){
-    ship.computerId = 'Mk 4 Mononode'
+    if(compList.indexOf(primary) < 13) primary = 'Mk 4 Mononode'
+  } else{
+    if(secondary !== 'Basic Computer') secondary = 'Basic Computer'
   }
 }
 
@@ -373,13 +377,6 @@ const getTotalAC = () => {
   */
 }
 
-// const bonusPackage = {
-//   primary: computerId, 
-//   secondary: secondaryComputerId,
-//   networkCount: ctNetworkNodes,
-//   size: size,
-//   isSuperC: isSupercolossal
-// }
 const combineComputerBonuses = (ship, size) => {
   const { 
     computerId: primary, 
@@ -422,6 +419,7 @@ const bonusSplitter = (comp, bonus, nodes, isPrimary) => {
 }
 
 
+
 export {
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
@@ -438,5 +436,5 @@ export {
   getEssentialPCUCosts,
   getTotalCompBPCosts,
   getTotalCompPCUCosts,
-  combineComputerBonuses
+  combineComputerBonuses,
 };

@@ -31,8 +31,6 @@ function CustomShipPage() {
   // });
 
 
-
-  // TODO: ablative armor dependency array, computer size dependency
   // TODO: why didn't sortObject() in TemplateConverter work?
   // TODO: put hyphensToSpaces() through treeTransform()
   // TODO: setCustomShipParts({ ...customShipParts }) everywhere
@@ -41,16 +39,14 @@ function CustomShipPage() {
 
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
-  // TODO: cleanup sourceShort usage.
 
   // TODO: powerCore and thrusters should default to the first option of the select
-  // TODO: add source restrictions
-  // TODO: add option match checks to all ship setters
   // TODO: for unlimited expansion bay ships, default to x but allow to add more
   // TODO: expansion dropdown menu to change the tempExpansionCap to a higher value
   // TODO: conditionally render SetExpansionBays based off of expansion count
   // TODO: defaultShipSelections that don't have the correct expansion length need to be processed correctly
-  
+  // TODO: ablative armor dependency array, computer size dependency
+
   const [showJSON, setShowJSON] = useState();
 
   const printJSON = () => {
@@ -62,14 +58,14 @@ function CustomShipPage() {
     SetFrame, 
     SetPowerCore, 
     SetThrusters,
-    SetArmor, 
-    SetComputer,
-    SetCrewQuarters, 
-    SetDefensiveCounter,
-    SetDriftEngine,
-    SetExpansionBays,
-    SetFortifiedHull,
-    SetReinforcedBulkheads,
+    // SetArmor, 
+    // SetComputer,
+    // SetCrewQuarters, 
+    // SetDefensiveCounter,
+    // SetDriftEngine,
+    // SetExpansionBays,
+    // SetFortifiedHull,
+    // SetReinforcedBulkheads,
   ]
 
   return (

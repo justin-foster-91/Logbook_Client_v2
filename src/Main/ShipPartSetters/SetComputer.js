@@ -22,14 +22,8 @@ function SetComputer() {
   useEffect(() => {
     if (size === "Supercolossal") {
       setIsSupercolossal(true);
-
-      ship.setComputer("Mk 4 Mononode")
-      setCustomShipParts({ ...customShipParts });
     } else {
       setIsSupercolossal(false);
-
-      ship.setSecondaryComputer("Basic Computer")
-      setCustomShipParts({ ...customShipParts });
     }
   }, [size]);
 
