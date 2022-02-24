@@ -33,7 +33,7 @@ const PowerCoreSelections = () => {
             name={idx}
             onChange={handlePowerCoreChange}
           >
-            <option key="None">None</option>
+            {(idx > 0) && <option key="None">None</option>}
             {Tables.getPowerCoreIdList().map((core, idx) =>
                 SF.doesFrameSizeAllowCore(core, size) && (
                   <option key={"option" + idx} value={core}>

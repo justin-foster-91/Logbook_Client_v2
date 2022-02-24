@@ -17,17 +17,14 @@ function SetDriftEngine() {
     setCustomShipParts({ ...customShipParts });
   }
 
-  const engineMinPCU = (engine) => {
-    return Tables.getDriftEngineData(engine, size).minPCU
-  }
-
   const isWithinBudget = (engine) => {
-    return engineMinPCU(engine) <= pcuBudget
+    const { minPCU } = Tables.getDriftEngineData(engine, size)
+    return minPCU <= pcuBudget
   }
 
   const isWithinMaxSize = (engine) => {
     let { maxSize } = Tables.getDriftEngineData(engine, size)
-    if(maxSize === null) maxSize = Infinity
+    if(maxSize === null) maxSize = 'Supercolossal'
 
     return Tables.sizeMod[size] <= Tables.sizeMod[maxSize]
   }
@@ -40,9 +37,9 @@ function SetDriftEngine() {
       <select value={driftEngineId ? driftEngineId : "None"} onChange={handleDriftEngineChange}>
         <option key="None">None</option>
         {Tables.getDriftEngineIdList().map((engine, idx) => 
-          isWithinBudget(engine) 
-          && isWithinMaxSize(engine)
-          && <option key={idx} value={engine}>
+          isWithinBudget(engine) && 
+          isWithinMaxSize(engine) && 
+          <option key={idx} value={engine}>
             {engine}
           </option>
         )}

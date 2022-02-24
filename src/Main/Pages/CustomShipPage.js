@@ -30,14 +30,13 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
-  // TODO: what is { id } = ship called
-  // TODO: why does it work on updateComputerToMatchFrame but not updateThrustersToMatchFrame
+  // DESTRUCTURING
 
-  // TODO: why didn't sortObject() in TemplateConverter work?
   // TODO: put hyphensToSpaces() through treeTransform()
+  // TODO: file structure
   // TODO: setCustomShipParts({ ...customShipParts }) everywhere
   // TODO: cleanup bonusSplitter()
-  // TODO: file structure
+  
 
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
@@ -45,6 +44,9 @@ function CustomShipPage() {
   // TODO: Show allowed expansion counter. Give button to add a new expansion dropdown
   // TODO: conditionally render SetExpansionBays based off of expansion count
   // TODO: remove the priming expansion array with set length
+
+  // TODO: flexible accordion component for long descriptions
+  // TODO: mystery -- how did temp hp on the 4 arcs get in the url?
 
   const [showJSON, setShowJSON] = useState();
 
@@ -55,16 +57,16 @@ function CustomShipPage() {
   let setterList = [ 
     SetTier, 
     SetFrame, 
-    // SetPowerCore, 
-    // SetThrusters,
+    SetPowerCore, 
+    SetThrusters,
     // SetArmor, 
-    // SetComputer,
-    // SetCrewQuarters, 
-    // SetDefensiveCounter,
-    // SetDriftEngine,
+    SetComputer,
+    SetCrewQuarters, 
+    SetDefensiveCounter,
+    SetDriftEngine,
     SetExpansionBays,
-    // SetFortifiedHull,
-    // SetReinforcedBulkheads,
+    SetFortifiedHull,
+    SetReinforcedBulkheads,
   ]
 
   return (

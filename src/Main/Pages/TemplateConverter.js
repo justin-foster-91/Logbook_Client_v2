@@ -12,15 +12,15 @@ function TemplateConverter(props) {
   }
 
   const convert = (ship) => {
-    sortKeys(ship)
+    // ship = sortObject(ship)
     hyphensToSpaces(ship)
-    noneToNull(ship)
+    // noneToNull(ship)
 
     return ship
   }
 
   // const hyphensToSpaces = (ship) => {
-  //   Utils.treeTransform(ship, (leaf)=>{
+  //   Utils.treeTransform(ship, (leaf, key)=>{
   //     if(ship[key] === null) return key
   //     if(typeof ship[key] === 'string'){
   //       ship[key] = Utils.capitalizeEachWord(ship[key])
@@ -31,35 +31,46 @@ function TemplateConverter(props) {
   //   })
   // }
 
+  // const hyphensToSpaces = (ship) => {
+  //   const keysWithID = Object.keys(ship).filter(key => key.match(/Id/))
+
+  //   keysWithID.map(key => {
+  //     if(ship[key] === null) return key
+  //     if(typeof ship[key] === 'string'){
+  //       ship[key] = Utils.capitalizeEachWord(ship[key])
+  //     } else{
+  //       ship[key].map((item, idx) => ship[key][idx] = Utils.capitalizeEachWord(ship[key][idx]))
+  //     } 
+  //     return key
+  //   })
+
+  //   return ship
+  // }
+
   const hyphensToSpaces = (ship) => {
-    const keysWithID = Object.keys(ship).filter(key => key.match(/Id/))
-
-    keysWithID.map(key => {
-      if(ship[key] === null) return key
-      if(typeof ship[key] === 'string'){
-        ship[key] = Utils.capitalizeEachWord(ship[key])
-      } else{
-        ship[key].map((item, idx) => ship[key][idx] = Utils.capitalizeEachWord(ship[key][idx]))
-      } 
-      return key
+    return Utils.treeTransform(ship, (node, key)=>{
+      if(key.match(/Id/)) {
+        if(typeof node === 'object') return node.map(item => Utils.capitalizeEachWord(item))
+        else return Utils.capitalizeEachWord(node)
+      }
+      return node
     })
-
-    return ship
   }
+  
 
   const noneToNull = (ship) => {
-    Utils.treeTransform(ship, (leaf)=>{
-      if(leaf === 'None' || leaf === 'none') return null
-      return leaf
+    Utils.treeTransform(ship, (node)=>{
+      if(node === 'None' || node === 'none') return null
+      return node
     })
   }
 
-  // function sortObject(obj) {
-  //   return Object.keys(obj).sort().reduce(function (result, key) {
-  //       result[key] = obj[key];
-  //       return result;
-  //   }, {});
-  // }
+  function sortObject(obj) {
+    return Object.keys(obj).sort().reduce(function (result, key) {
+        result[key] = obj[key];
+        return result;
+    }, {});
+  }
 
   function sortKeys(obj_1) {
     var key = Object.keys(obj_1)

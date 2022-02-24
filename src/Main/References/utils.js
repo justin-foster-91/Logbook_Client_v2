@@ -42,17 +42,17 @@ const sizeLetterToStringConverter = (letter) => {
   return sizeConverter[letter];
 };
 
-const treeTransform = (tree, transform) => {
+const treeTransform = (tree, transform, key) => {
   // recursively enter the lowest nested object to replace strings
   if(typeof tree !== 'object'){
     
-    return transform(tree)
+    return transform(tree, key)
   } else{
     const allKeys = Object.keys(tree)
 
     for(let k of allKeys){
       if(tree[k] === null) return k
-      tree[k] = treeTransform(tree[k], transform)
+      tree[k] = treeTransform(transform(tree[k], k), transform, k)
     }
 
     return tree

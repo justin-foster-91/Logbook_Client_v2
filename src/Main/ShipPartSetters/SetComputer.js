@@ -22,19 +22,19 @@ function SetComputer() {
   useEffect(() => {
     if (size === "Supercolossal") {
       setIsSupercolossal(true);
+      
+      if(computerId.includes('Mononode')){
+        setIsMononode(true)
+      } else{
+        setIsMononode(false)
+      }
     } else {
       setIsSupercolossal(false);
     }
-  }, [size]);
+  }, [size, computerId]);
 
   const handleComputerChange = (ev) => {
     const computerOption = ev.target.value;
-
-    if(computerOption.includes('Mononode')){
-      setIsMononode(true)
-    } else{
-      setIsMononode(false)
-    }
     
     ship.setComputer(computerOption).setNetworkNodeCount(0)
     setCustomShipParts({ ...customShipParts });

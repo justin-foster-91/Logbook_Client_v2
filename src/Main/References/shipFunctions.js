@@ -76,14 +76,14 @@ const updateThrustersToMatchFrame = (ship) => {
 
 const updateComputerToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
-  let { computerId: primary, secondaryComputerId: secondary} = ship
+  // let { computerId, secondaryComputerId: secondary} = ship
   const compList = Tables.getComputerIdList()
 
   // change computer to 'Mk 4 Mononode' if size changes to supercolossal
   if(size === 'Supercolossal'){
-    if(compList.indexOf(primary) < 13) primary = 'Mk 4 Mononode'
+    if(compList.indexOf(ship.computerId) < 13) ship.computerId = 'Mk 4 Mononode'
   } else{
-    if(secondary !== 'Basic Computer') secondary = 'Basic Computer'
+    if(ship.secondaryComputerId !== 'Basic Computer') ship.secondaryComputerId = 'Basic Computer'
   }
 }
 
