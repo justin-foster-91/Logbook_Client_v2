@@ -48,17 +48,21 @@ const updatePowerCoresToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
   const computerIdList = Tables.getPowerCoreIdList()
   const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
+  let newCoreAmount = getCoreQuantityFromSize(size);
+
 
   // change power cores to null if they don't fit the new frame
   ship.powerCoreIds.forEach((core, idx) => {
+    
     if(core === null && idx === 0) ship.powerCoreIds[idx] = firstMatch
     if(core !== null && !doesFrameSizeAllowCore(core, size)) {
-      ship.powerCoreIds[idx] = null;
+      if(idx === 0) ship.powerCoreIds[idx] = firstMatch
+      else ship.powerCoreIds[idx] = null;
     }
   });
 
+
   // reduce length of the power core list if moving to a smaller frame
-  let newCoreAmount = getCoreQuantityFromSize(size);
   if (ship.powerCoreIds.length > newCoreAmount)
   ship.powerCoreIds.length = newCoreAmount;
 };
@@ -90,7 +94,7 @@ const updateComputerToMatchFrame = (ship) => {
 const updateExpansionBaysToMatchFrame = (ship) => {
   // const size = findComponentByFrameId(ship.frameId, "size")
   let { expansions } = getFramePackageFromShip(ship)
-  if(typeof expansions === 'string') expansions = 30
+  // if(typeof expansions === 'string') expansions = 30
 
   // set expansionBayIds list to the length of allowed expansions for the size
   ship.expansionBayIds.length = expansions
@@ -263,24 +267,29 @@ const getFramePackageFromShip = (ship) => {
   let { startTotal, increment } = findComponentByFrameId(frameId, "hp");
 
   let framePackage = {
+    source: findComponentByFrameId(frameId, "source"),
     size: findComponentByFrameId(frameId, "size"),
     maneuverability: findComponentByFrameId(frameId, "maneuverability"),
     hp: startTotal + increment * Tables.getTierData(tierId).hpIncrementMultiplier,
     dt: findComponentByFrameId(frameId, "dt"),
     ct: findComponentByFrameId(frameId, "ct"),
+    mounts: findComponentByFrameId(frameId, "mounts"),
     expansions: formatExpansions(findComponentByFrameId(frameId, "expansions")),
     minCrew: findComponentByFrameId(frameId, "minimumCrew"),
     maxCrew: findComponentByFrameId(frameId, "maximumCrew"),
     bpCost: findComponentByFrameId(frameId, "cost"),
+    specialAbility: findComponentByFrameId(frameId, "specialAbility"),
   };
 
   return framePackage;
 };
 
 const getTotalBPCosts = (ship) => {
-  // console.log("Total BP");
   const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
   const { size } = getFramePackageFromShip(ship)
+  const driftEngineBPCost = ship.frameId === "Oma" 
+    ? Math.ceil(Tables.getDriftEngineData(ship.driftEngineId, size).bpCost * 1.5)
+    : Tables.getDriftEngineData(ship.driftEngineId, size).bpCost
 
   const bpExpenses = [
     getFramePackageFromShip(ship).bpCost,
@@ -290,7 +299,7 @@ const getTotalBPCosts = (ship) => {
     getTotalCompBPCosts(ship),
     Tables.getQuartersData(ship.crewQuartersId).bpCost,
     Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).bpCost,
-    Tables.getDriftEngineData(ship.driftEngineId, size).bpCost,
+    driftEngineBPCost,
     // expansion bays
     Tables.getFortifiedHullData(ship.fortifiedHullId, size).bpCost,
     Tables.getReinforcedBulkheadData(ship.reinforcedBulkheadId, size).bpCost,
@@ -305,7 +314,6 @@ const getTotalBPCosts = (ship) => {
 };
 
 const getTotalPCUCosts = (ship) => {
-  // console.log("Total PCU");
   const { thrustersId } = ship
 
   const pcuExpenses = [
@@ -336,7 +344,6 @@ const getEssentialPCUCosts = (ship) => {
 }
 
 const getTotalCompBPCosts = (ship) => {
-  // console.log('Total comp BP');
   const { size } = getFramePackageFromShip(ship)
   const { bpCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
@@ -349,7 +356,6 @@ const getTotalCompBPCosts = (ship) => {
 }
 
 const getTotalCompPCUCosts = (ship) => {
-  // console.log('Total comp PCU');
   const { size } = getFramePackageFromShip(ship)
   const { pcuCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship

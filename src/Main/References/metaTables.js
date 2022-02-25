@@ -9,12 +9,14 @@ const sources = {
   'Starship Operations Manual': ['https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual', 'COM', false],
   'Starfinder #6: Empire of Bones': ['https://paizo.com/products/btpya1ai/', 'EoB', false],
   'Starfinder #7: The Reach of Empire': ['https://paizo.com/products/btpya1rp?Starfinder-Adventure-Path-7-The-Reach-of-Empire', 'RotE', false],
+  'Starfinder #19: Fate of the Fifth': ['https://paizo.com/products/btq01wtb?Starfinder-Adventure-Path-19-Fate-of-the-Fifth', false],
   'Starfinder #20: The Last Refuge': ['https://paizo.com/products/btq01zo2?Starfinder-Adventure-Path-20-The-Last-Refuge', false],
   'Starfinder #27: Deceivers’ Moon': ['https://paizo.com/products/btq0216g?Starfinder-Adventure-Path-27-Deceivers-Moon', 'DM', false],
   'Starfinder #42: Whispers of the Eclipse': ['https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse', false],
   'Near Space': ['https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space', 'NS', false],
   'Tech Revolution': ['https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution', 'TR', false],
   'Alien Archive': ['https://paizo.com/products/btq01wt9?Starfinder-Alien-Archive-3', false],
+  'Alien Archive 2': ['https://paizo.com/products/btpya20r?Starfinder-Alien-Archive-2', false],
 }
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
@@ -269,11 +271,11 @@ const defensiveCounter = {
 // https://aonsrd.com/StarshipInterstellar.aspx
 const driftEngines = {
   // Drift Engine:	[Rating, 	Minimum PCU,	Maximum Size,	BP Cost, source, special]
-  'Signal Basic':	[1,	75,	null,	2, null, 'Starfinder Core Rulebook pg. 298'],
-  'Signal Booster':	[2,	100,	'Huge',	5, null, 'Starfinder Core Rulebook pg. 298'],
-  'Signal Major':	[3,	150,	'Large',	10, null, 'Starfinder Core Rulebook pg. 298'],
-  'Signal Superior':	[4,	175,	'Large',	15, null, 'Starfinder Core Rulebook pg. 298'],
-  'Signal Ultra':	[5,	200,	'Medium',	20, null, 'Starfinder Core Rulebook pg. 298'],
+  'Signal Basic':	[1,	75,	null,	2, 'Starfinder Core Rulebook pg. 298', null],
+  'Signal Booster':	[2,	100,	'Huge',	5, 'Starfinder Core Rulebook pg. 298', null],
+  'Signal Major':	[3,	150,	'Large',	10, 'Starfinder Core Rulebook pg. 298', null],
+  'Signal Superior':	[4,	175,	'Large',	15, 'Starfinder Core Rulebook pg. 298', null],
+  'Signal Ultra':	[5,	200,	'Medium',	20, 'Starfinder Core Rulebook pg. 298', null],
   'Archon Drive':	[1,	150,	null,	15,	'Starship Operations Manual pg. 9', 'Restricted (Church of Iomedae, Knights of Golarion)'],
   'Chaos Sail':	[1,	75,	null,	4,	'Starship Operations Manual pg. 9', 'Restricted (Church of Besmara)'],
   'Constellation Orrery':	[2,	150,	'Huge',	10,	'Starship Operations Manual pg. 10', 'Restricted (Church of Ibra)'],
@@ -460,7 +462,7 @@ const getDriftEngineData = (driftEngineId, size) => {
 
   const array = driftEngines[driftEngineId]
 
-  return {rating: array[0], minPCU: array[1], maxSize: array[2], bpCost: (array[3] * sizeMod[size]), source: array[7], special: array[4]}
+  return {rating: array[0], minPCU: array[1], maxSize: array[2], bpCost: (array[3] * sizeMod[size]), source: array[4], special: array[5]}
 }
 
 const getExpansionBayData = (expansionBayId, size) => {

@@ -3,8 +3,13 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import ExpansionBaySelections from './ExpansionBaySelections';
 
-//TODO: track stat changes and exceptions of each expansion type
+// TODO: carrier frame must have 1 hangar expansion
+// TODO: track stat changes and exceptions of each expansion type
 //64 Expansion Bay Types
+
+//Pioneer 1 (usually cargo hold)
+//Shuttle 3 (usually cargo holds or passenger seating)
+//Carrier 10 (must have at least 1 hanger bay)
 
 function SetExpansionBays() {
   const { customShipParts, ship } = useContext(CustomShipContext);

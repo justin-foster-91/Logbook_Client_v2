@@ -52,7 +52,7 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
-    SF.updateExpansionBaysToMatchFrame(this.parts);
+    // SF.updateExpansionBaysToMatchFrame(this.parts);
     this.onShipChange(this.parts)
     return this
   }
@@ -151,7 +151,7 @@ class Ship {
     const expansionQuantity = this.getFramePackage().expansions
     
     // External bay exception
-    if(idx+1 > expansionQuantity) throw new Error(`Expansion bay number ${idx+1} may not exceed the allowed ${expansionQuantity} expansions`)
+    // if(idx+1 > expansionQuantity) throw new Error(`Expansion bay number ${idx+1} may not exceed the allowed ${expansionQuantity} expansions`)
   
     this.parts.expansionBayIds[idx] = expansion
     this.onShipChange(this.parts)

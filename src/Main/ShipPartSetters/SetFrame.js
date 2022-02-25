@@ -8,12 +8,15 @@ function SetFrame() {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
-  let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
+  let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost, specialAbility } = ship.getFramePackage()
   const { length, weight, acMod } = Tables.getSizeData(size)
   const { turnDistance, pilotingModifier } = Tables.getManeuverabilityData(maneuverability)
+  let specialName = null
+  if(specialAbility)specialName = Object.keys(specialAbility)[0]
 
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
+    // I may not need this later
     ship.setFrame(frameId)
   }, [])
 
@@ -58,6 +61,12 @@ function SetFrame() {
           Length: {length}; Weight: {weight}; AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}
         </div>
       </fieldset>
+
+      {specialAbility &&
+      <fieldset>
+        <legend>Special Ability</legend>
+        <div><b>{specialName}</b> {specialAbility[specialName]}</div>
+      </fieldset>}
 
 
       <div>BP Cost: {bpCost}</div>

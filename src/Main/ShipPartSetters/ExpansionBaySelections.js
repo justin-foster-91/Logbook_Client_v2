@@ -18,12 +18,15 @@ import * as Tables from '../References/metaTables'
 
 function ExpansionBaySelections() {
   const { customShipParts, ship } = useContext(CustomShipContext);
+  
 
   const { expansionBayIds } = customShipParts
   const size = ship.getSize()
-  let { expansions: expansionCount } = ship.getFramePackage()
-  if(typeof expansionCount === 'string') expansionCount = 30
+  let { expansions: expansionCap } = ship.getFramePackage()
+  if(typeof expansionCap === 'string') expansionCap = 30
   const tempExpansionCap = 10;
+  const expansionCount = expansionBayIds.length
+  const allExpansionsShown = (expansionCount === expansionCap)
 
 
   const handleExpansionBayChange = (ev) => {
@@ -34,35 +37,51 @@ function ExpansionBaySelections() {
     ship.setExpansionBay(expansionOption, expansionIndex)
   }
 
-  // SuperC expansions set to 30
-  return Array(Math.min(tempExpansionCap, expansionCount))
-    .fill(1)
-    .map((dropdown, idx) => {
-      return (
-        <div key={"expansionBay" + idx}>
-          Expansion Bay {idx + 1}
-          <br />
-          <select
-            value={
-              expansionBayIds[idx] ? expansionBayIds[idx] : "None"
-            }
-            name={idx}
-            onChange={handleExpansionBayChange}
-          >
-            <option key="None">None</option>
-            {Tables.getExpansionBayIdList().map((expansion, idx) => (
-              <option key={"option" + idx} value={expansion}>
-                {expansion}
-              </option>)
-            )}
-          </select>
-          <br />
-          PCU Cost: {Tables.getExpansionBayData(expansionBayIds[idx], size).pcuCost}; 
-          BP Cost: {Tables.getExpansionBayData(expansionBayIds[idx], size).bpCost}
-          <p></p>
-        </div>
-      );
-    });
-}
+  const handleNewExpansion = () => {
+    if(expansionCount >= expansionCap) return;
+
+    ship.setExpansionBay(null, expansionCount)
+  }
+
+  return (
+    <>
+      <p>Expansions: {expansionCount}/{expansionCap}</p>
+      {Array(expansionCount)
+        .fill(1)
+        .map((dropdown, idx) => {
+          const { pcuCost, bpCost } = Tables.getExpansionBayData(expansionBayIds[idx], size)
+          return (
+            <div key={"expansionBay" + idx}>
+              Expansion Bay {idx + 1} <button>Copy</button><button>Delete</button>
+
+              <br />
+
+              <select
+                value={expansionBayIds[idx] ? expansionBayIds[idx] : "None"}
+                name={idx}
+                onChange={handleExpansionBayChange}
+              >
+                <option key="None">None</option>
+                {Tables.getExpansionBayIdList().map((expansion, idx) => (
+                  <option key={"option" + idx} value={expansion}>
+                    {expansion}
+                  </option>)
+                )}
+              </select>
+
+              <br />
+
+              <div>
+                PCU Cost: {pcuCost}; 
+                BP Cost: {bpCost}
+              </div>
+
+              <br/>
+            </div>
+          );
+      })}
+      {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion {expansionCount+1}/{expansionCap}</button>}
+    </>
+  )}
 
 export default ExpansionBaySelections;

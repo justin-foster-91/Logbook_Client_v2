@@ -1,8 +1,6 @@
 [{
 	"type": "Pioneer",
-	"sourceLink": "https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse",
-	"sourceText": "Starfinder #42: Whispers of the Eclipse pg. 49",
-	"sfsLegal": false,
+	"source": "Starfinder #42: Whispers of the Eclipse pg. 49",
 	"size": "Small",
 	"maneuverability": "Good",
 	"hp": {
@@ -26,9 +24,7 @@
 	"specialAbility": null
 }, {
 	"type": "Racer",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Tiny",
 	"maneuverability": "Perfect",
 	"hp": {
@@ -52,9 +48,7 @@
 	"specialAbility": null
 }, {
 	"type": "Statikete",
-	"sourceLink": "https://paizo.com/products/btq01wtb?Starfinder-Adventure-Path-19-Fate-of-the-Fifth",
-	"sourceText": "Starfinder #19: Fate of the Fifth pg. 57",
-	"sfsLegal": false,
+	"source": "Starfinder #19: Fate of the Fifth pg. 57",
 	"size": "Tiny",
 	"maneuverability": "Perfect",
 	"hp": {
@@ -72,12 +66,10 @@
 	"minimumCrew": 1,
 	"maximumCrew": 1,
 	"cost": 5,
-	"specialAbility": "When a starship built with a statikete frame is hit with an EMP weapon, it reduces the duration of that weapon’s effect by half, rounded down to a minimum of 0 rounds."
+	"specialAbility": {"EMP Dispersal (Ex)": "When a starship built with a statikete frame is hit with an EMP weapon, it reduces the duration of that weapon’s effect by half, rounded down to a minimum of 0 rounds."}
 }, {
 	"type": "Interceptor",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Tiny",
 	"maneuverability": "Perfect",
 	"hp": {
@@ -98,9 +90,7 @@
 	"specialAbility": null
 }, {
 	"type": "Shuttle",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Small",
 	"maneuverability": "Perfect",
 	"hp": {
@@ -121,9 +111,7 @@
 	"specialAbility": null
 }, {
 	"type": "Fighter",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Tiny",
 	"maneuverability": "Good",
 	"hp": {
@@ -148,9 +136,7 @@
 	"specialAbility": null
 }, {
 	"type": "Light Freighter",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Small",
 	"maneuverability": "Good",
 	"hp": {
@@ -177,9 +163,7 @@
 	"specialAbility": null
 }, {
 	"type": "Explorer",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Medium",
 	"maneuverability": "Good",
 	"hp": {
@@ -209,9 +193,7 @@
 	"specialAbility": null
 }, {
 	"type": "Transport",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Medium",
 	"maneuverability": "Average",
 	"hp": {
@@ -239,9 +221,7 @@
 	"specialAbility": null
 }, {
 	"type": "Oma",
-	"sourceLink": "https://paizo.com/products/btpy9ujg",
-	"sourceText": "Alien Archive pg. 89",
-	"sfsLegal": false,
+	"source": "Alien Archive pg. 89",
 	"size": "Medium",
 	"maneuverability": "Average",
 	"hp": {
@@ -269,12 +249,10 @@
 	"minimumCrew": 1,
 	"maximumCrew": 6,
 	"cost": 20,
-	"specialAbility": "An oma's body must be specially refitted to accommodate Drift travel installing a Drift engine in an oma increases the price of the engine by 50%."
+	"specialAbility": {"Drift Resistant (Ex)": "An Oma's body must be specially refitted to accommodate Drift travel installing a Drift engine in an oma increases the price of the engine by 50%."}
 }, {
 	"type": "Destroyer",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Large",
 	"maneuverability": "Average",
 	"hp": {
@@ -307,9 +285,7 @@
 	"specialAbility": null
 }, {
 	"type": "Heavy Freighter",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Large",
 	"maneuverability": "Average",
 	"hp": {
@@ -337,9 +313,7 @@
 	"specialAbility": null
 }, {
 	"type": "Vermelith",
-	"sourceLink": "https://paizo.com/products/btpya20r?Starfinder-Alien-Archive-2",
-	"sourceText": "Alien Archive 2 pg. 131",
-	"sfsLegal": false,
+	"source": "Alien Archive 2 pg. 131",
 	"size": "Large",
 	"maneuverability": "Average",
 	"hp": {
@@ -370,12 +344,10 @@
 	"minimumCrew": 6,
 	"maximumCrew": 20,
 	"cost": 45,
-	"specialAbility": "An EMP weapon has half its normal duration against a vessel built using this frame. The vessel has a +1 bonus to its AC against direct fire weapons that use gravity and a +1 bonus to Piloting checks the pilot attempts due to gravity, such as escaping a tractor beam. In addition, a biomechanical ship built from this frame treats its radiation exposure as 1 level lower when determining critical damage effects due to radiation."
+	"specialAbility": {"Extreme Resistance (Ex)": "An EMP weapon has half its normal duration against a vessel built using this frame. The vessel has a +1 bonus to its AC against direct fire weapons that use gravity and a +1 bonus to Piloting checks the pilot attempts due to gravity, such as escaping a tractor beam. In addition, a biomechanical ship built from this frame treats its radiation exposure as 1 level lower when determining critical damage effects due to radiation."}
 }, {
 	"type": "Bulk Freighter",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Huge",
 	"maneuverability": "Poor",
 	"hp": {
@@ -402,9 +374,7 @@
 	"specialAbility": null
 }, {
 	"type": "Cruiser",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 295",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 295",
 	"size": "Huge",
 	"maneuverability": "Average",
 	"hp": {
@@ -434,9 +404,7 @@
 	"specialAbility": null
 }, {
 	"type": "Carrier",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 296",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 296",
 	"size": "Gargantuan",
 	"maneuverability": "Poor",
 	"hp": {
@@ -466,9 +434,7 @@
 	"specialAbility": null
 }, {
 	"type": "Battleship",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 296",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 296",
 	"size": "Gargantuan",
 	"maneuverability": "Average",
 	"hp": {
@@ -504,9 +470,7 @@
 	"specialAbility": null
 }, {
 	"type": "Dreadnought",
-	"sourceLink": "https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook",
-	"sourceText": "Starfinder Core Rulebook pg. 296",
-	"sfsLegal": true,
+	"source": "Starfinder Core Rulebook pg. 296",
 	"size": "Colossal",
 	"maneuverability": "Clumsy",
 	"hp": {
@@ -539,9 +503,7 @@
 	"specialAbility": null
 }, {
 	"type": "Base Ship",
-	"sourceLink": "https://paizo.com/products/btpya1ai/",
-	"sourceText": "Starfinder #6: Empire of Bones pg. 45",
-	"sfsLegal": false,
+	"source": "Starfinder #6: Empire of Bones pg. 45",
 	"size": "Supercolossal",
 	"maneuverability": "Clumsy",
 	"hp": {
@@ -571,9 +533,7 @@
 	"specialAbility": null
 }, {
 	"type": "Ultranought",
-	"sourceLink": "https://paizo.com/products/btpya1ai/",
-	"sourceText": "Starfinder #6: Empire of Bones pg. 45",
-	"sfsLegal": false,
+	"source": "Starfinder #6: Empire of Bones pg. 45",
 	"size": "Supercolossal",
 	"maneuverability": "Clumsy",
 	"hp": {
