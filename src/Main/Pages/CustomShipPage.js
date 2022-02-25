@@ -31,8 +31,9 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
-
   // DESTRUCTURING
+
+  // TODO: updateExpansionBaysToMatchFrame return error
 
 
   // TODO: cleanup capitalize function from utils
@@ -58,14 +59,14 @@ function CustomShipPage() {
   let setterList = [ 
     SetTier, 
     SetFrame, 
-    SetPowerCore, 
+    // SetPowerCore, 
     // SetThrusters,
     // SetArmor, 
     // SetComputer,
     // SetCrewQuarters, 
     // SetDefensiveCounter,
-    SetDriftEngine,
-    // SetExpansionBays,
+    // SetDriftEngine,
+    SetExpansionBays,
     // SetFortifiedHull,
     // SetReinforcedBulkheads,
     // SetSecurity,

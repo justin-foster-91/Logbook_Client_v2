@@ -86,11 +86,14 @@ const updateComputerToMatchFrame = (ship) => {
 
 const updateExpansionBaysToMatchFrame = (ship) => {
   // const size = findComponentByFrameId(ship.frameId, "size")
-  let { expansions } = getFramePackageFromShip(ship)
-  // if(typeof expansions === 'string') expansions = 30
+  const { expansions } = getFramePackageFromShip(ship)
 
-  // set expansionBayIds list to the length of allowed expansions for the size
-  ship.expansionBayIds.length = expansions
+  if(ship.expansionBayIds.length > expansions) ship.expansionBayIds.length = expansions
+
+  // FIXME: Array.prototype.map() expects a return value from arrow function
+  ship.expansionBayIds.map((expansion, idx) => {
+    if(expansion === null) ship.expansionBayIds[idx] = "Cargo Hold"
+  })
 }
 
 // Object ship => {validity: Bool, errors: [Error]}

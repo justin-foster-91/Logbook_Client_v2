@@ -16,15 +16,15 @@ import * as Tables from '../References/metaTables'
   //Recycling System: is compatible only with a Supercolossal ship.
   //Tactical Sensor Tank is compatible only with a Supercolossal ship.
 
+  // Standard expansion bay flavor text / description on an accordion
+
 function ExpansionBaySelections() {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  
 
   const { expansionBayIds } = customShipParts
   const size = ship.getSize()
   let { expansions: expansionCap } = ship.getFramePackage()
-  if(typeof expansionCap === 'string') expansionCap = 30
-  const tempExpansionCap = 10;
+  if(typeof expansionCap === 'string') expansionCap = 'Unlimited'
   const expansionCount = expansionBayIds.length
   const allExpansionsShown = (expansionCount === expansionCap)
 
@@ -38,9 +38,19 @@ function ExpansionBaySelections() {
   }
 
   const handleNewExpansion = () => {
+    if(expansionCap === 'Unlimited') expansionCap = Infinity
     if(expansionCount >= expansionCap) return;
 
-    ship.setExpansionBay(null, expansionCount)
+    ship.setExpansionBay('Cargo Hold', expansionCount)
+  }
+
+  const handleCopy = (ev) => {
+    console.log(ev.target.name);
+    console.log(ev.target.value);
+  }
+
+  const handleDelete = (ev) => {
+
   }
 
   return (
@@ -50,18 +60,21 @@ function ExpansionBaySelections() {
         .fill(1)
         .map((dropdown, idx) => {
           const { pcuCost, bpCost } = Tables.getExpansionBayData(expansionBayIds[idx], size)
+          const indexValue = expansionBayIds[idx] ? expansionBayIds[idx] : "None"
           return (
             <div key={"expansionBay" + idx}>
-              Expansion Bay {idx + 1} <button>Copy</button><button>Delete</button>
+              Expansion Bay {idx + 1} 
+              <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
+              <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
 
               <br />
 
               <select
-                value={expansionBayIds[idx] ? expansionBayIds[idx] : "None"}
+                value={indexValue}
                 name={idx}
                 onChange={handleExpansionBayChange}
               >
-                <option key="None">None</option>
+                {/* <option key="None">None</option> */}
                 {Tables.getExpansionBayIdList().map((expansion, idx) => (
                   <option key={"option" + idx} value={expansion}>
                     {expansion}
@@ -81,6 +94,8 @@ function ExpansionBaySelections() {
           );
       })}
       {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion {expansionCount+1}/{expansionCap}</button>}
+      <br/>
+      Supercolossal ships with increased width or length can support more expansion bays.
     </>
   )}
 
