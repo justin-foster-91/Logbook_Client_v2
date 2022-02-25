@@ -14,6 +14,7 @@ import SetDriftEngine from "../ShipPartSetters/SetDriftEngine";
 import SetExpansionBays from "../ShipPartSetters/SetExpansionBays";
 import SetFortifiedHull from "../ShipPartSetters/SetFortifiedHull";
 import SetReinforcedBulkheads from "../ShipPartSetters/SetReinforcedBulkheads";
+import SetSecurity from '../ShipPartSetters/SetSecurity'
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -32,18 +33,15 @@ function CustomShipPage() {
 
   // DESTRUCTURING
 
-  // TODO: put hyphensToSpaces() through treeTransform()
-  // TODO: file structure
-  // TODO: setCustomShipParts({ ...customShipParts }) everywhere
-  // TODO: cleanup bonusSplitter()
-  
 
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
 
+  // TODO: render only 3 expansion dropdowns unless there are more in the expansionIds array
   // TODO: Show allowed expansion counter. Give button to add a new expansion dropdown
   // TODO: conditionally render SetExpansionBays based off of expansion count
   // TODO: remove the priming expansion array with set length
+  // TODO: empty expansions function as cargo holds
 
   // TODO: flexible accordion component for long descriptions
   // TODO: mystery -- how did temp hp on the 4 arcs get in the url?
@@ -58,15 +56,16 @@ function CustomShipPage() {
     SetTier, 
     SetFrame, 
     SetPowerCore, 
-    SetThrusters,
+    // SetThrusters,
     // SetArmor, 
-    SetComputer,
-    SetCrewQuarters, 
-    SetDefensiveCounter,
-    SetDriftEngine,
+    // SetComputer,
+    // SetCrewQuarters, 
+    // SetDefensiveCounter,
+    // SetDriftEngine,
     SetExpansionBays,
-    SetFortifiedHull,
-    SetReinforcedBulkheads,
+    // SetFortifiedHull,
+    // SetReinforcedBulkheads,
+    // SetSecurity,
   ]
 
   return (

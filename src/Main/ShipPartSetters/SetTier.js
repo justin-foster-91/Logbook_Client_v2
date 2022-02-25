@@ -3,7 +3,7 @@ import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetTier() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { tierId } = customShipParts;
   const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
@@ -12,7 +12,6 @@ function SetTier() {
     const tierOption = ev.target.value;
 
     ship.setTier(tierOption)
-    setCustomShipParts({ ...customShipParts });
   };
 
   return (

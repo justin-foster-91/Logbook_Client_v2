@@ -3,7 +3,7 @@ import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
 function AblativeArmor() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { armorId } = customShipParts;
   const size = ship.getSize();
   const { forward, port, starboard, aft } = customShipParts.ablativeArmorByPosition;
@@ -16,14 +16,12 @@ function AblativeArmor() {
     const ablativeArcValue = Number(ev.target.value);
 
     ship.setAblativeHPByPosition(ablativeArc, ablativeArcValue)
-    setCustomShipParts({ ...customShipParts });
   };
 
   const setArcHPValues = (ev) => {
     ev.preventDefault();
 
     balanceAllHP(balancedHP);
-    setCustomShipParts({ ...customShipParts });
   };
 
   const balanceAllHP = (balancedHP) => {  

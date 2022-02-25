@@ -5,7 +5,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
 
 function SetArmor() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { armorId } = customShipParts;
   const { size, hp } = SF.getFramePackageFromShip(customShipParts);
@@ -16,7 +16,6 @@ function SetArmor() {
     if (armorOption === "None") armorOption = null;
 
     ship.setArmor(armorOption)
-    setCustomShipParts({ ...customShipParts });
   };
 
   const renderArmorBonus = () => {

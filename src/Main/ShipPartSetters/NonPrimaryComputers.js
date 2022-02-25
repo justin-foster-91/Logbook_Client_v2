@@ -4,7 +4,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Utils from '../References/utils'
 
 function NonPrimaryComputers(props) {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
 
   let { computerId, secondaryComputerId, ctNetworkNodes } = customShipParts;
   const { isMononode } = props
@@ -16,14 +16,12 @@ function NonPrimaryComputers(props) {
     const secondaryOption = ev.target.value;
 
     ship.setSecondaryComputer(secondaryOption)
-    setCustomShipParts({ ...customShipParts });
   };
 
   const handleNodeChange = (ev) => {
     const nodeAmount = Number(ev.target.value)
 
     ship.setNetworkNodeCount(nodeAmount)
-    setCustomShipParts({ ...customShipParts });
   };
 
   return (

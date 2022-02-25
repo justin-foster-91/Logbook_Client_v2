@@ -5,7 +5,7 @@ import * as Tables from '../References/metaTables'
 //TODO: track the CT bonus
 
 function SetFortifiedHull() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { fortifiedHullId } = customShipParts
   const size = ship.getSize()
   const { ctBonus, bpCost } = Tables.getFortifiedHullData(fortifiedHullId, size)
@@ -15,7 +15,6 @@ function SetFortifiedHull() {
     if (hullsOption === "None") hullsOption = null;
 
     ship.setFortifiedHull(hullsOption)
-    setCustomShipParts({ ...customShipParts });
   }
 
   return (

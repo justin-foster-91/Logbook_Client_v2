@@ -4,7 +4,7 @@ import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 
 const PowerCoreSelections = () => {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { powerCoreIds } = customShipParts;
   const size = ship.getSize();
@@ -16,7 +16,6 @@ const PowerCoreSelections = () => {
     if (coreOption === "None") coreOption = null;
 
     ship.setPowerCore(coreOption, coreIndex)
-    setCustomShipParts({ ...customShipParts });
   };
 
   return Array(powerCoreQuantity)

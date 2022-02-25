@@ -3,7 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 
 function SetDefensiveCounters() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { defensiveCountermeasuresId: defensiveId } = customShipParts
   const { tlBonus, pcuCost, bpCost } = Tables.getDefensiveCounterData(defensiveId)
 
@@ -12,7 +12,6 @@ function SetDefensiveCounters() {
     if(defensiveOption === "None") defensiveOption = null
 
     ship.setDefensiveCounters(defensiveOption)
-    setCustomShipParts({ ...customShipParts });
   }
 
   return (

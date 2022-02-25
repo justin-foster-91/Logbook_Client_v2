@@ -5,7 +5,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables';
 
 function SetFrame() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost} = ship.getFramePackage()
@@ -15,14 +15,12 @@ function SetFrame() {
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
     ship.setFrame(frameId)
-    setCustomShipParts({ ...customShipParts });
   }, [])
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
 
     ship.setFrame(frameOption)
-    setCustomShipParts({ ...customShipParts });
   };
 
   return (
@@ -45,15 +43,23 @@ function SetFrame() {
         {ct}; Expansion Bays {expansions}; Minimum Crew {minCrew}; Maximum Crew{" "}
         {maxCrew}
       </div>
-      <div>
-        {/* Stats from maneuverability */}
-        Turn Distance: {turnDistance}; 
-        Piloting Mod: {pilotingModifier > 0 && '+'}{pilotingModifier}
-      </div>
-      <div>
-        {/* Stats from size */}
-        Length: {length}; Weight: {weight}; AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}
-      </div>
+
+      <fieldset>
+        <legend>Maneuverability</legend>
+        <div>
+          Turn Distance: {turnDistance}; 
+          Piloting Mod: {pilotingModifier > 0 && '+'}{pilotingModifier}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Size</legend>
+        <div>
+          Length: {length}; Weight: {weight}; AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}
+        </div>
+      </fieldset>
+
+
       <div>BP Cost: {bpCost}</div>
     </>
   );

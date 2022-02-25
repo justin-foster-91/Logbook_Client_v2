@@ -4,7 +4,7 @@ import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 
 function SetThrusters() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { thrustersId } = customShipParts;
   const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
@@ -15,7 +15,6 @@ function SetThrusters() {
     // if (thrusterOption === "None") thrusterOption = null;
 
     ship.setThrusters(thrusterOption)
-    setCustomShipParts({ ...customShipParts });
   };
 
   return (

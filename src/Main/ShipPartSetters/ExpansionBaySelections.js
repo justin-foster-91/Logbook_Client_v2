@@ -17,7 +17,7 @@ import * as Tables from '../References/metaTables'
   //Tactical Sensor Tank is compatible only with a Supercolossal ship.
 
 function ExpansionBaySelections() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { expansionBayIds } = customShipParts
   const size = ship.getSize()
@@ -32,7 +32,6 @@ function ExpansionBaySelections() {
     if(expansionOption === "None") expansionOption = null
 
     ship.setExpansionBay(expansionOption, expansionIndex)
-    setCustomShipParts({ ...customShipParts });
   }
 
   // SuperC expansions set to 30

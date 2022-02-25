@@ -3,7 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 
 function SetCrewQuarters() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { crewQuartersId } = customShipParts
   const { bpCost, description } = Tables.getQuartersData(crewQuartersId)
 
@@ -11,7 +11,6 @@ function SetCrewQuarters() {
     const quartersOption = ev.target.value;
 
     ship.setCrewQuarters(quartersOption)
-    setCustomShipParts({ ...customShipParts });
   }
 
   return (

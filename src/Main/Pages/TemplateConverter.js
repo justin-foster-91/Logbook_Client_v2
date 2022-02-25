@@ -12,40 +12,12 @@ function TemplateConverter(props) {
   }
 
   const convert = (ship) => {
-    // ship = sortObject(ship)
+    ship = sortObject(ship)
     hyphensToSpaces(ship)
-    // noneToNull(ship)
+    noneToNull(ship)
 
     return ship
   }
-
-  // const hyphensToSpaces = (ship) => {
-  //   Utils.treeTransform(ship, (leaf, key)=>{
-  //     if(ship[key] === null) return key
-  //     if(typeof ship[key] === 'string'){
-  //       ship[key] = Utils.capitalizeEachWord(ship[key])
-  //     } else{
-  //       ship[key].map((item, idx) => ship[key][idx] = Utils.capitalizeEachWord(ship[key][idx]))
-  //     } 
-  //     return key
-  //   })
-  // }
-
-  // const hyphensToSpaces = (ship) => {
-  //   const keysWithID = Object.keys(ship).filter(key => key.match(/Id/))
-
-  //   keysWithID.map(key => {
-  //     if(ship[key] === null) return key
-  //     if(typeof ship[key] === 'string'){
-  //       ship[key] = Utils.capitalizeEachWord(ship[key])
-  //     } else{
-  //       ship[key].map((item, idx) => ship[key][idx] = Utils.capitalizeEachWord(ship[key][idx]))
-  //     } 
-  //     return key
-  //   })
-
-  //   return ship
-  // }
 
   const hyphensToSpaces = (ship) => {
     return Utils.treeTransform(ship, (node, key)=>{
@@ -72,30 +44,6 @@ function TemplateConverter(props) {
     }, {});
   }
 
-  function sortKeys(obj_1) {
-    var key = Object.keys(obj_1)
-      .sort(function order(key1, key2) {
-        if (key1 < key2) return -1;
-        else if (key1 > key2) return +1;
-        else return 0;
-    }); 
-      
-    // Taking the object in 'temp' object
-    // and deleting the original object.
-    var temp = {};
-      
-    for (var i = 0; i < key.length; i++) {
-      temp[key[i]] = obj_1[key[i]];
-      delete obj_1[key[i]];
-    } 
-
-    // Copying the object from 'temp' to 
-    // 'original object'.
-    for (var i = 0; i < key.length; i++) {
-      obj_1[key[i]] = temp[key[i]];
-    } 
-    return obj_1;
-  }
 
   return (
     <div>

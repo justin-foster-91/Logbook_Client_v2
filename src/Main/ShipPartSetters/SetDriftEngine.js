@@ -3,7 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 
 function SetDriftEngine() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { driftEngineId } = customShipParts
   const size = ship.getSize()
   const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size)
@@ -14,7 +14,6 @@ function SetDriftEngine() {
     if(engineOption === "None") engineOption = null
 
     ship.setDriftEngine(engineOption)
-    setCustomShipParts({ ...customShipParts });
   }
 
   const isWithinBudget = (engine) => {

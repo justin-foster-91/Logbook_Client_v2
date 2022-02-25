@@ -5,7 +5,7 @@ import * as Tables from '../References/metaTables'
 //TODO: track the fortification %
 
 function SetReinforcedBulkheads() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { reinforcedBulkheadId } = customShipParts
   const size = ship.getSize()
   const { fortification, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
@@ -15,7 +15,6 @@ function SetReinforcedBulkheads() {
     if (bulkheadsOption === "None") bulkheadsOption = null;
 
     ship.setReinforcedBulkheads(bulkheadsOption)
-    setCustomShipParts({ ...customShipParts });
   }
 
   return (

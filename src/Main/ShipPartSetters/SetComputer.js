@@ -5,7 +5,7 @@ import NonPrimaryComputers from "./NonPrimaryComputers";
 import * as SF from "../References/shipFunctions";
 
 function SetComputer() {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const [isSupercolossal, setIsSupercolossal] = useState(false);
   const [isMononode, setIsMononode] = useState(true)
 
@@ -37,7 +37,6 @@ function SetComputer() {
     const computerOption = ev.target.value;
     
     ship.setComputer(computerOption).setNetworkNodeCount(0)
-    setCustomShipParts({ ...customShipParts });
   };
 
   const renderComputerOptions = (computer, idx) => {

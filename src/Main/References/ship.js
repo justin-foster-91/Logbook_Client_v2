@@ -4,6 +4,9 @@ import * as SF from './shipFunctions';
 class Ship {
   constructor(parts) {
     this.parts = parts;
+    this.onShipChange = (parts) => {
+      console.log("Ship was changed. If you want to remove this message, set this onShipChange callback.");
+    }
   }
 
   getFramePackage() {
@@ -38,6 +41,7 @@ class Ship {
     if(!Tables.getTierIdList().includes(tier)) throw new Error('Tier input did not match allowed tier options')
     
     this.parts.tierId = tier
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -49,6 +53,7 @@ class Ship {
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
     SF.updateExpansionBaysToMatchFrame(this.parts);
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -59,6 +64,7 @@ class Ship {
     if(idx+1 > powerCoreQuantity) throw new Error(`Power core number ${idx+1} may not exceed the allowed ${powerCoreQuantity} power cores`)
 
     this.parts.powerCoreIds[idx] = powerCore
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -66,6 +72,7 @@ class Ship {
     if(!Tables.getThrusterIdList().includes(thruster) && thruster !== null) throw new Error('Thrusters input did not match allowed thruster options')
 
     this.parts.thrustersId = thruster
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -85,11 +92,13 @@ class Ship {
     }
 
     this.parts.armorId = armor
+    this.onShipChange(this.parts)
     return this
   }
 
   setAblativeHPByPosition(pos, hp) {
     this.parts.ablativeArmorByPosition[pos] = hp
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -97,21 +106,25 @@ class Ship {
     if(!Tables.getComputerIdList().includes(comp) && comp !== null) throw new Error('Computer input did not match allowed computer options')
 
     this.parts.computerId = comp
+    this.onShipChange(this.parts)
     return this
   }
 
   setSecondaryComputer(comp) {
     this.parts.secondaryComputerId = comp
+    this.onShipChange(this.parts)
     return this
   }
 
   setNetworkNodeCount(count) {
     this.parts.ctNetworkNodes = count
+    this.onShipChange(this.parts)
     return this
   }
 
   setCrewQuarters(quarters) {
     this.parts.crewQuartersId = quarters
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -119,6 +132,7 @@ class Ship {
     if(!Tables.getDefensiveCounterIdList().includes(defense) && defense !== null) throw new Error('Defensive counter input did not match allowed defensive options')
 
     this.parts.defensiveCountermeasuresId = defense
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -126,6 +140,7 @@ class Ship {
     if(!Tables.getDriftEngineIdList().includes(engine) && engine !== null) throw new Error('Drift engine input did not match allowed engine options')
 
     this.parts.driftEngineId = engine
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -139,6 +154,7 @@ class Ship {
     if(idx+1 > expansionQuantity) throw new Error(`Expansion bay number ${idx+1} may not exceed the allowed ${expansionQuantity} expansions`)
   
     this.parts.expansionBayIds[idx] = expansion
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -146,6 +162,7 @@ class Ship {
     if(!Tables.getFortifiedHullIdList().includes(hull) && hull !== null) throw new Error('Fortified hull input did not match allowed hull options')
 
     this.parts.fortifiedHullId = hull
+    this.onShipChange(this.parts)
     return this
   }
 
@@ -153,6 +170,7 @@ class Ship {
     if(!Tables.getReinforcedBulkheadIdList().includes(bulkhead) && bulkhead !== null) throw new Error('Reinforced bulkhead input did not match allowed bulkhead options')
 
     this.parts.reinforcedBulkheadId = bulkhead
+    this.onShipChange(this.parts)
     return this
   }
 }
