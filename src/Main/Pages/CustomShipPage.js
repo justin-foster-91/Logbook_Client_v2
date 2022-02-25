@@ -31,6 +31,7 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
+
   // DESTRUCTURING
 
 

@@ -50,17 +50,10 @@ const updatePowerCoresToMatchFrame = (ship) => {
   const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
   let newCoreAmount = getCoreQuantityFromSize(size);
 
-
-  // change power cores to null if they don't fit the new frame
   ship.powerCoreIds.forEach((core, idx) => {
-    
-    if(core === null && idx === 0) ship.powerCoreIds[idx] = firstMatch
-    if(core !== null && !doesFrameSizeAllowCore(core, size)) {
-      if(idx === 0) ship.powerCoreIds[idx] = firstMatch
-      else ship.powerCoreIds[idx] = null;
-    }
+    if(core !== null && !doesFrameSizeAllowCore(core, size)) ship.powerCoreIds[idx] = null;   
+    if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
   });
-
 
   // reduce length of the power core list if moving to a smaller frame
   if (ship.powerCoreIds.length > newCoreAmount)
