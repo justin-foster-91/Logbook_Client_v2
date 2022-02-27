@@ -90,8 +90,7 @@ const updateExpansionBaysToMatchFrame = (ship) => {
 
   if(ship.expansionBayIds.length > expansions) ship.expansionBayIds.length = expansions
 
-  // FIXME: Array.prototype.map() expects a return value from arrow function
-  ship.expansionBayIds.map((expansion, idx) => {
+  ship.expansionBayIds.forEach((expansion, idx) => {
     if(expansion === null) ship.expansionBayIds[idx] = "Cargo Hold"
   })
 }
@@ -422,6 +421,16 @@ const bonusSplitter = (comp, bonus, nodes, isPrimary) => {
   return Array(nodes).fill(`+${bonus}`)
 }
 
+const copyExpansion = (ship, expansion, index) => {
+  let expansionArray = ship.expansionBayIds
+  const firstPiece = expansionArray.slice(0, index+1)
+  const lastPiece = expansionArray.slice(index+1)
+  const middlePiece = [expansion]
+
+  // console.log(firstPiece, lastPiece);
+  console.log([...firstPiece, ...middlePiece, ...lastPiece]);
+}
+
 
 
 export {
@@ -441,4 +450,5 @@ export {
   getTotalCompBPCosts,
   getTotalCompPCUCosts,
   combineComputerBonuses,
+  copyExpansion,
 };

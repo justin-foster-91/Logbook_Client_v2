@@ -144,16 +144,15 @@ class Ship {
     return this
   }
 
-  setExpansionBay(expansion, idx) {
+  setExpansionBay(expansion, idx, copy) {
     if(!Tables.getExpansionBayIdList().includes(expansion) && expansion !== null) throw new Error("Expansion bay input did not match allowed expansion options")
     if(idx === null) throw new Error("setExpansionBay(bay, idx) must take an index parameter")
-
-    //TODO: copy expansion insert
     
     // External bay exception
     // if(idx+1 > expansionQuantity) throw new Error(`Expansion bay number ${idx+1} may not exceed the allowed ${expansionQuantity} expansions`)
   
-    this.parts.expansionBayIds[idx] = expansion
+    if(!copy) this.parts.expansionBayIds[idx] = expansion
+    if(copy) SF.copyExpansion(this.parts, expansion, idx)
     this.onShipChange(this.parts)
     return this
   }

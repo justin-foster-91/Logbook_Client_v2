@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 
@@ -20,13 +20,20 @@ import * as Tables from '../References/metaTables'
 
 function ExpansionBaySelections() {
   const { customShipParts, ship } = useContext(CustomShipContext);
+  
 
   const { expansionBayIds } = customShipParts
+  // const [expansionCount, setExpansionCount] = useState(expansionBayIds.length)
+
   const size = ship.getSize()
   let { expansions: expansionCap } = ship.getFramePackage()
   if(typeof expansionCap === 'string') expansionCap = 'Unlimited'
-  const expansionCount = expansionBayIds.length
+  let expansionCount = expansionBayIds.length
   const allExpansionsShown = (expansionCount === expansionCap)
+
+  // useEffect(() => {
+  //   expansionCount = expansionBayIds.length
+  // }, [stateToggle])
 
 
   const handleExpansionBayChange = (ev) => {
@@ -44,9 +51,15 @@ function ExpansionBaySelections() {
     ship.setExpansionBay('Cargo Hold', expansionCount)
   }
 
+  //TODO: copies should be displayed on the render
   const handleCopy = (ev) => {
-    console.log(ev.target.name);
-    console.log(ev.target.value);
+    const expansionOption = ev.target.value
+    const expansionIndex = Number(ev.target.name)
+    // console.log(ev.target.name);
+    // console.log(ev.target.value);
+
+    if(expansionCount < expansionCap) ship.setExpansionBay(expansionOption, expansionIndex, true)
+    // setStateToggle(!stateToggle)
   }
 
   const handleDelete = (ev) => {
@@ -56,6 +69,8 @@ function ExpansionBaySelections() {
   return (
     <>
       <p>Expansions: {expansionCount}/{expansionCap}</p>
+      {expansionCap === "Unlimited" 
+      && <p><i>Supercolossal ships with increased width or length can support more expansion bays.</i></p>}
       {Array(expansionCount)
         .fill(1)
         .map((dropdown, idx) => {
@@ -95,7 +110,6 @@ function ExpansionBaySelections() {
       })}
       {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion {expansionCount+1}/{expansionCap}</button>}
       <br/>
-      Supercolossal ships with increased width or length can support more expansion bays.
     </>
   )}
 

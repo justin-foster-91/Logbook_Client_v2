@@ -33,9 +33,6 @@ function CustomShipPage() {
 
   // DESTRUCTURING
 
-  // TODO: updateExpansionBaysToMatchFrame return error
-
-
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
 
