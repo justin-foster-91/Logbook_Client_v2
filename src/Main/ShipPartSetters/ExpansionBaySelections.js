@@ -21,9 +21,7 @@ import * as Tables from '../References/metaTables'
 function ExpansionBaySelections() {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
-
   const { expansionBayIds } = customShipParts
-  // const [expansionCount, setExpansionCount] = useState(expansionBayIds.length)
 
   const size = ship.getSize()
   let { expansions: expansionCap } = ship.getFramePackage()
@@ -51,15 +49,13 @@ function ExpansionBaySelections() {
     ship.setExpansionBay('Cargo Hold', expansionCount)
   }
 
-  //TODO: copies should be displayed on the render
   const handleCopy = (ev) => {
+    if(expansionCap === 'Unlimited') expansionCap = Infinity
     const expansionOption = ev.target.value
     const expansionIndex = Number(ev.target.name)
-    // console.log(ev.target.name);
-    // console.log(ev.target.value);
 
+    // console.log(expansionCount < expansionCap);
     if(expansionCount < expansionCap) ship.setExpansionBay(expansionOption, expansionIndex, true)
-    // setStateToggle(!stateToggle)
   }
 
   const handleDelete = (ev) => {
@@ -108,7 +104,7 @@ function ExpansionBaySelections() {
             </div>
           );
       })}
-      {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion {expansionCount+1}/{expansionCap}</button>}
+      {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion</button>}
       <br/>
     </>
   )}

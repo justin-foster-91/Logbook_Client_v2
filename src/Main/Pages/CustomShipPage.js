@@ -20,6 +20,8 @@ function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { tierId, powerCoreIds } = customShipParts
 
+  const size = ship.getSize()
+
   const totalBPCosts = ship.getTotalBPCosts()
   const totalBPBudget = Tables.getTierData(tierId).buildPoints
 
@@ -33,14 +35,13 @@ function CustomShipPage() {
 
   // DESTRUCTURING
 
+  // TODO: conditionally render SetExpansionBays based off of expansion count -- Tiny
+  // TODO: delete button on expansions
+  // TODO: copy setter
+
+
   // TODO: cleanup capitalize function from utils
   // TODO: organize shipFunctions
-
-  // TODO: render only 3 expansion dropdowns unless there are more in the expansionIds array
-  // TODO: Show allowed expansion counter. Give button to add a new expansion dropdown
-  // TODO: conditionally render SetExpansionBays based off of expansion count
-  // TODO: remove the priming expansion array with set length
-  // TODO: empty expansions function as cargo holds
 
   // TODO: flexible accordion component for long descriptions
   // TODO: mystery -- how did temp hp on the 4 arcs get in the url?
@@ -75,6 +76,7 @@ function CustomShipPage() {
 
       <div className="partSetterList">
         {setterList.map((Setter, idx) => {
+          // size === "Tiny" && Setter === SetExpansionBays ? return :
           return (
             <div className="partSetterBlock" key={idx}>
               <Setter></Setter>

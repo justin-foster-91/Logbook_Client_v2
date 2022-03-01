@@ -15,6 +15,7 @@ function SetExpansionBays() {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { expansionBayIds } = customShipParts
   const size = ship.getSize()
+  let { expansions: expansionCap } = ship.getFramePackage()
 
   let pcuCostTotal = 0
   let bpCostTotal = 0

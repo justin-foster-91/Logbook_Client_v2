@@ -429,6 +429,7 @@ const copyExpansion = (ship, expansion, index) => {
 
   // console.log(firstPiece, lastPiece);
   console.log([...firstPiece, ...middlePiece, ...lastPiece]);
+  ship.expansionBayIds = [...firstPiece, ...middlePiece, ...lastPiece]
 }
 
 
