@@ -47,6 +47,7 @@ function CustomShipPage() {
   // TODO: mystery -- how did temp hp on the 4 arcs get in the url?
 
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
+  
 
   const [showJSON, setShowJSON] = useState();
 
