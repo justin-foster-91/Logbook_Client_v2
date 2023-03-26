@@ -86,10 +86,11 @@ const updateComputerToMatchFrame = (ship) => {
 
 const updateExpansionBaysToMatchFrame = (ship) => {
   // const size = findComponentByFrameId(ship.frameId, "size")
-  const { expansions } = getFramePackageFromShip(ship)
+  const { expansions: expansionCap } = getFramePackageFromShip(ship)
 
-  if(ship.expansionBayIds.length > expansions) ship.expansionBayIds.length = expansions
+  if(ship.expansionBayIds.length > expansionCap) ship.expansionBayIds.length = expansionCap
 
+  // Set "Cargo Hold" as default selection for any expansion not specified
   ship.expansionBayIds.forEach((expansion, idx) => {
     if(expansion === null) ship.expansionBayIds[idx] = "Cargo Hold"
   })
@@ -432,7 +433,11 @@ const copyExpansion = (ship, expansion, index) => {
   ship.expansionBayIds = [...firstPiece, ...middlePiece, ...lastPiece]
 }
 
+const removeExpansion = (ship, idx) => {
+  // const { expansions } = getFramePackageFromShip(ship)
 
+  ship.expansionBayIds.splice(idx, 1)
+}
 
 export {
   getCoreQuantityFromSize,
@@ -452,4 +457,5 @@ export {
   getTotalCompPCUCosts,
   combineComputerBonuses,
   copyExpansion,
+  removeExpansion,
 };

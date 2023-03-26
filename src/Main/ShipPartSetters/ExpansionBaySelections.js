@@ -59,7 +59,10 @@ function ExpansionBaySelections() {
   }
 
   const handleDelete = (ev) => {
+    const expansionId = ev.target.name;
+    console.log("DELETE: " + expansionId);
 
+    ship.deleteExpansionBay(expansionId);
   }
 
   return (

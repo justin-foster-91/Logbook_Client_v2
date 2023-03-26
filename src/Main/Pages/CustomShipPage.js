@@ -33,24 +33,13 @@ function CustomShipPage() {
   //   console.log(validateShip(customShipParts));
   // });
 
-  // DESTRUCTURING
-
-  // TODO: conditionally render SetExpansionBays based off of expansion count -- Tiny
-  // TODO: delete button on expansions
-  // TODO: copy setter
 
 
-  // TODO: cleanup capitalize function from utils
-  // TODO: organize shipFunctions
 
-  // TODO: flexible accordion component for long descriptions
-  // TODO: mystery -- how did temp hp on the 4 arcs get in the url?
+
+
 
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
-  
-  // bash commits
-  
-  
 
   const [showJSON, setShowJSON] = useState();
 
@@ -68,10 +57,10 @@ function CustomShipPage() {
     // SetCrewQuarters, 
     // SetDefensiveCounter,
     // SetDriftEngine,
-    SetExpansionBays,
+    // SetExpansionBays,
     // SetFortifiedHull,
     // SetReinforcedBulkheads,
-    // SetSecurity,
+    SetSecurity,
   ]
 
   return (
@@ -80,34 +69,38 @@ function CustomShipPage() {
 
       <div className="partSetterList">
         {setterList.map((Setter, idx) => {
-          // size === "Tiny" && Setter === SetExpansionBays ? return :
           return (
             <div className="partSetterBlock" key={idx}>
               <Setter></Setter>
             </div>
-          )
+          );
         })}
       </div>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
       <p>
         BP used: {totalBPCosts}; BP Budget: {totalBPBudget}
       </p>
       <p>
-        PCU used: {totalPCUCosts}; PCU Essentials: {essentialPCUCosts}; PCU Budget: {totalPCUBudget}
+        PCU used: {totalPCUCosts}; PCU Essentials: {essentialPCUCosts}; PCU
+        Budget: {totalPCUBudget}
       </p>
       <button onClick={() => printJSON()}>JSON ME</button>
       <br />
 
-      {showJSON && 
-      <pre style={{
-        textAlign: 'left', 
-        width: '300px', 
-        height: '300px',
-        margin: '0 auto'
-      }}>{JSON.stringify(customShipParts, null, 2)}
-      </pre>}
+      {showJSON && (
+        <pre
+          style={{
+            textAlign: "left",
+            width: "300px",
+            height: "300px",
+            margin: "0 auto",
+          }}
+        >
+          {JSON.stringify(customShipParts, null, 2)}
+        </pre>
+      )}
     </div>
   );
 }

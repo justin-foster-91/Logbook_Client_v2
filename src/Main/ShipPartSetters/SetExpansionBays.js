@@ -19,8 +19,8 @@ function SetExpansionBays() {
 
   let pcuCostTotal = 0
   let bpCostTotal = 0
-  // workaround for frame with 0 expansion bays
-  // may not be needed if this component is conditionally rendered based on expansion bay allowance
+
+  // This if condition may not be necessary with better checks when setting variables
   if(expansionBayIds.length){
     pcuCostTotal = expansionBayIds
       .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
@@ -31,6 +31,7 @@ function SetExpansionBays() {
       .reduce((total, bp) => total + bp);
   } 
   
+  if (expansionCap === 0) return '';
 
   return (
     <>
