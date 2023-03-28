@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 
-function SetTier() {
+function SetTier(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { tierId } = customShipParts;
   const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
+  const {currentPart} = props;
 
   const handleTierChange = (ev) => {
     const tierOption = ev.target.value;
@@ -16,7 +17,7 @@ function SetTier() {
 
   return (
     <>
-      <h3>Tier</h3>
+      <h3>{currentPart.name}</h3>
 
       <p></p>
 

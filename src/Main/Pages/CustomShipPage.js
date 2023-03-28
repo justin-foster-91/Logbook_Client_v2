@@ -15,6 +15,8 @@ import SetExpansionBays from "../ShipPartSetters/SetExpansionBays";
 import SetFortifiedHull from "../ShipPartSetters/SetFortifiedHull";
 import SetReinforcedBulkheads from "../ShipPartSetters/SetReinforcedBulkheads";
 import SetSecurity from '../ShipPartSetters/SetSecurity'
+import Sidebar from "../Components/Sidebar";
+import "./CustomShipPage.css";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -35,10 +37,6 @@ function CustomShipPage() {
 
 
 
-
-
-
-
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
   const [showJSON, setShowJSON] = useState();
@@ -48,60 +46,64 @@ function CustomShipPage() {
   };
 
   let setterList = [ 
-    SetTier, 
-    SetFrame, 
-    // SetPowerCore, 
-    // SetThrusters,
-    // SetArmor, 
-    // SetComputer,
-    // SetCrewQuarters, 
-    // SetDefensiveCounter,
-    // SetDriftEngine,
-    // SetExpansionBays,
-    // SetFortifiedHull,
-    // SetReinforcedBulkheads,
-    SetSecurity,
+    {comp: SetTier, name: "Tier"}, 
+    {comp: SetFrame, name: "Frame"}, 
+    {comp: SetPowerCore, name: "Power Core"}, 
+    {comp: SetThrusters, name: "Thrusters"},
+    {comp: SetArmor, name: "Armor"}, 
+    {comp: SetComputer, name: "Computer"},
+    {comp: SetCrewQuarters, name: "Crew Quarters"}, 
+    {comp: SetDefensiveCounter, name: "Defensive Counter"},
+    {comp: SetDriftEngine, name: "Drift Engine"},
+    {comp: SetExpansionBays, name: "Expansion Bays"},
+    {comp: SetFortifiedHull, name: "Fortified Hull"},
+    {comp: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
+    {comp: SetSecurity, name: "Security"},
   ]
 
   return (
-    <div className="customShipDisplay">
-      <h2>Custom Ship Page</h2>
+    <>
+      <Sidebar setterList={setterList}></Sidebar>
+      <div className="customShipDisplay">
+        <h2>Custom Ship Page</h2>
 
-      <div className="partSetterList">
-        {setterList.map((Setter, idx) => {
-          return (
-            <div className="partSetterBlock" key={idx}>
-              <Setter></Setter>
-            </div>
-          );
-        })}
+        <div className="partSetterList">
+          {setterList.map((part, idx) => {
+            const Setter = part.comp;
+            return (
+              <div id={part.name} className="partSetterBlock" key={idx}>
+                <Setter currentPart={part}></Setter>
+              </div>
+            );
+          })}
+        </div>
+
+        <br />
+        <br />
+        <p>
+          BP used: {totalBPCosts}; BP Budget: {totalBPBudget}
+        </p>
+        <p>
+          PCU used: {totalPCUCosts}; PCU Essentials: {essentialPCUCosts}; PCU
+          Budget: {totalPCUBudget}
+        </p>
+        <button onClick={() => printJSON()}>JSON ME</button>
+        <br />
+
+        {showJSON && (
+          <pre
+            style={{
+              textAlign: "left",
+              width: "300px",
+              height: "300px",
+              margin: "0 auto",
+            }}
+          >
+            {JSON.stringify(customShipParts, null, 2)}
+          </pre>
+        )}
       </div>
-
-      <br />
-      <br />
-      <p>
-        BP used: {totalBPCosts}; BP Budget: {totalBPBudget}
-      </p>
-      <p>
-        PCU used: {totalPCUCosts}; PCU Essentials: {essentialPCUCosts}; PCU
-        Budget: {totalPCUBudget}
-      </p>
-      <button onClick={() => printJSON()}>JSON ME</button>
-      <br />
-
-      {showJSON && (
-        <pre
-          style={{
-            textAlign: "left",
-            width: "300px",
-            height: "300px",
-            margin: "0 auto",
-          }}
-        >
-          {JSON.stringify(customShipParts, null, 2)}
-        </pre>
-      )}
-    </div>
+    </>
   );
 }
 
