@@ -12,7 +12,7 @@ function SetTier(props) {
   const handleTierChange = (ev) => {
     const tierOption = ev.target.value;
 
-    ship.setTier(tierOption)
+    ship.setTier({ reference: 'tierId', value: tierOption})
   };
 
   return (
