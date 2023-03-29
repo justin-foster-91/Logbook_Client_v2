@@ -27,6 +27,14 @@ const readableIds = (currentId) => {
   );
 };
 
+// powerCoreIds => Power Core Ids
+const splitCamelCase = (s) => {
+  let result = s.split(/([A-Z][a-z]+)/).filter(function(e){return e}).join(' ');
+  result = result[0].toUpperCase() + result.slice(1)
+
+  return result;
+}
+
 const sizeLetterToStringConverter = (letter) => {
   let sizeConverter = {
     T: "Tiny",
@@ -59,4 +67,4 @@ const treeTransform = (tree, transform, key) => {
   }
 }
 
-export { capitalizeEachWord, readableIds, sizeLetterToStringConverter, treeTransform };
+export { capitalizeEachWord, readableIds, splitCamelCase, sizeLetterToStringConverter, treeTransform };

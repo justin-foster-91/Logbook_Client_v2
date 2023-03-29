@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
+import { splitCamelCase } from "../References/utils";
 
 function SetTier() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
@@ -9,10 +10,32 @@ function SetTier() {
   const totalSecurityBP = null
   const totalSecurityPCU = null
 
-  const handleComputerCounterChange = (ev) => {
-    const clicked = ev.target.name
+  const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
 
-    console.log(clicked);
+  const handleComputerCounterChange = (ev) => {
+    const counterOption = ev.target.name
+    console.log(document.getElementById(`${counterOption}`).checked);
+
+    console.log(counterOption);
+
+    
+    // let parent = null;
+    // if (computerCounterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
+
+    // ship.setSecurity(counterOption, parent)
+  }
+
+  const checkboxRenders = () => {
+    return computerCounterTypes.map(box => {
+      return (
+      <>
+        <input type="checkbox" id={`${box}`} name={`${box}`} 
+          value={`${splitCamelCase(box)}`} 
+          onChange={handleComputerCounterChange}
+        />
+        <label htmlFor={`${box}`}>{`${splitCamelCase(box)}`}</label>
+      </>
+    )})
   }
 
 
@@ -28,25 +51,7 @@ function SetTier() {
 
       Computer Countermeasures
       <div>
-        <form onChange={handleComputerCounterChange}>
-          <input type="checkbox" id="alarm" name="alarm" value="Alarm"/>
-          <label htmlFor="alarm">Alarm</label>
-
-          <input type="checkbox" id="fakeShell" name="fakeShell" value="Fake Shell"/>
-          <label htmlFor="fakeShell">Fake Shell</label>
-
-          <input type="checkbox" id="feedback" name="feedback" value="Feedback"/>
-          <label htmlFor="feedback">Feedback</label>
-
-          <input type="checkbox" id="firewall" name="firewall" value="Firewall"/>
-          <label htmlFor="firewall">Firewall</label>
-
-          <input type="checkbox" id="lockout" name="lockout" value="Lockout"/>
-          <label htmlFor="lockout">Lockout</label>
-
-          <input type="checkbox" id="wipe" name="wipe" value="Wipe"/>
-          <label htmlFor="wipe">Wipe</label>
-        </form>
+        {checkboxRenders()}
       </div>
 
       {/* Shock Grid - dropdown */}

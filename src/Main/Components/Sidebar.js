@@ -6,9 +6,17 @@ function Sidebar(props) {
   const sidebarList = () => {
     return setterList.map(part => {
       return (
-      <div>
-        <a href={`#${part.name}`}>{part.name}</a>
-      </div>
+        // <button className="scrollLink" onClick={() => `window.location.href='#${part.name}'`}>
+        //   {part.name}
+        // </button>
+        
+        // <div>
+          <a href={`#${part.name}`} key={`${part.name}`}>
+            <div>
+              {part.name}
+            </div>
+          </a>
+        // </div>
     )})
   }
 

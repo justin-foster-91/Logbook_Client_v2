@@ -187,6 +187,17 @@ class Ship {
     return this;
   }
 
+  setSecurity(security, parent) {
+
+    // if (parent) {
+    //   this.parts.computerCountermeasures = security;
+    // }
+
+    // this.parts
+
+    // this.parts.
+  }
+
 
   // TODO: Should this be part of setExpansionBay()?
   deleteExpansionBay(idx) {

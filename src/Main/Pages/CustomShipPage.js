@@ -17,6 +17,8 @@ import SetReinforcedBulkheads from "../ShipPartSetters/SetReinforcedBulkheads";
 import SetSecurity from '../ShipPartSetters/SetSecurity'
 import Sidebar from "../Components/Sidebar";
 import "./CustomShipPage.css";
+import 'intersection-observer';
+import 'intersection-observer/intersection-observer.js'
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -30,6 +32,47 @@ function CustomShipPage() {
   const totalPCUCosts = ship.getTotalPCUCosts()
   const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
   const totalPCUBudget = ship.getTotalPCUBudget()
+
+  // var observer = new IntersectionObserver(function(entries) {
+  //   if(entries[0].isIntersecting === true)
+  //       console.log('Element is fully visible in screen');
+  // }, { threshold: [1] });
+
+  // observer.observe(document.querySelector("#element"));
+
+  let options = {
+    root: document.querySelector("#scrollArea"),
+    rootMargin: "0px",
+    threshold: 1.0,
+  };
+
+  let callback = (entries, observer) => {
+    entries.forEach((entry) => {
+      // Each entry describes an intersection change for one observed
+      // target element:
+      //   entry.boundingClientRect
+      //   entry.intersectionRatio
+      //   entry.intersectionRect
+      //   entry.isIntersecting
+      //   entry.rootBounds
+      //   entry.target
+      //   entry.time
+    });
+  };
+  
+  let observer = new IntersectionObserver(callback, options);
+  
+  let target = document.querySelector(".customShipDisplay");
+
+  // window.onload = function() {
+  //   observer.observe(target);
+  // }
+  
+  useEffect(() => {
+    // observer.observe(target);
+  })
+
+  
 
   // useEffect(() => {
   //   console.log(validateShip(customShipParts));
@@ -46,19 +89,19 @@ function CustomShipPage() {
   };
 
   let setterList = [ 
-    {comp: SetTier, name: "Tier"}, 
-    {comp: SetFrame, name: "Frame"}, 
-    {comp: SetPowerCore, name: "Power Core"}, 
-    {comp: SetThrusters, name: "Thrusters"},
-    {comp: SetArmor, name: "Armor"}, 
-    {comp: SetComputer, name: "Computer"},
-    {comp: SetCrewQuarters, name: "Crew Quarters"}, 
-    {comp: SetDefensiveCounter, name: "Defensive Counter"},
-    {comp: SetDriftEngine, name: "Drift Engine"},
-    {comp: SetExpansionBays, name: "Expansion Bays"},
-    {comp: SetFortifiedHull, name: "Fortified Hull"},
-    {comp: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
-    {comp: SetSecurity, name: "Security"},
+    {component: SetTier, name: "Tier"}, 
+    {component: SetFrame, name: "Frame"}, 
+    {component: SetPowerCore, name: "Power Core"}, 
+    {component: SetThrusters, name: "Thrusters"},
+    {component: SetArmor, name: "Armor"}, 
+    {component: SetComputer, name: "Computer"},
+    {component: SetCrewQuarters, name: "Crew Quarters"}, 
+    {component: SetDefensiveCounter, name: "Defensive Counter"},
+    {component: SetDriftEngine, name: "Drift Engine"},
+    {component: SetExpansionBays, name: "Expansion Bays"},
+    {component: SetFortifiedHull, name: "Fortified Hull"},
+    {component: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
+    {component: SetSecurity, name: "Security"},
   ]
 
   return (
@@ -69,7 +112,7 @@ function CustomShipPage() {
 
         <div className="partSetterList">
           {setterList.map((part, idx) => {
-            const Setter = part.comp;
+            const Setter = part.component;
             return (
               <div id={part.name} className="partSetterBlock" key={idx}>
                 <Setter currentPart={part}></Setter>
