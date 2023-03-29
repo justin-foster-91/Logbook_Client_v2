@@ -57,28 +57,27 @@ function CustomShipPage() {
     };
   
     let callback = (entries, observer) => {
-      // setPartHighlight(null)
-      let highest = null;
+      let highestPart = null;
       // console.log({entries});
   
       entries.forEach((entry) => {
-        // console.log("entry: ", entry);
-  
         if (entry.intersectionRatio === 1) {
           console.log("entry: ", entry.target.id);
-          if (entry.boundingClientRect.Top > highest || highest === null) highest = entry.target
+          if (!highestPart) {
+            highestPart = entry.target
+          }
         }
       });
   
-      console.log("Highest: ", highest);
-      if (!highest) return;
-      setPartHighlight(highest.id)
+      console.log("Highest: ", highestPart);
+      if (!highestPart) return;
+      setPartHighlight(highestPart.id)
     };
   
     let observer = new IntersectionObserver(callback, options);
 
     setterList.map(setter => observer.observe(document.getElementById(setter.name)))
-  }, [scrollPosition])
+  }, [])
 
 
 
