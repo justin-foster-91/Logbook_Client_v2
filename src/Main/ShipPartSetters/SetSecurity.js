@@ -14,27 +14,26 @@ function SetTier() {
 
   const handleComputerCounterChange = (ev) => {
     const counterOption = ev.target.name
-    console.log(document.getElementById(`${counterOption}`).checked);
-
-    console.log(counterOption);
-
+    const counterActive = document.getElementById(`${counterOption}`).checked
     
-    // let parent = null;
-    // if (computerCounterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
+    let parent = null;
+    if (computerCounterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
 
     // ship.setSecurity(counterOption, parent)
+
+    ship.setSecurity({ reference: counterOption, value: counterActive, parent})
   }
 
   const checkboxRenders = () => {
-    return computerCounterTypes.map(box => {
+    return computerCounterTypes.map((box, idx) => {
       return (
-      <>
-        <input type="checkbox" id={`${box}`} name={`${box}`} 
-          value={`${splitCamelCase(box)}`} 
+      <div key={idx}>
+        <input type="checkbox" id={box} name={box} 
+          value={splitCamelCase(box)} 
           onChange={handleComputerCounterChange}
         />
-        <label htmlFor={`${box}`}>{`${splitCamelCase(box)}`}</label>
-      </>
+        <label htmlFor={box}>{splitCamelCase(box)}</label>
+      </div>
     )})
   }
 

@@ -189,15 +189,18 @@ class Ship {
     return this;
   }
 
-  setSecurity(security, parent) {
+  setSecurity(security) {
+    const { reference, value, parent } = security;
 
-    // if (parent) {
-    //   this.parts.computerCountermeasures = security;
-    // }
-
-    // this.parts
-
-    // this.parts.
+    if (parent) {
+      this.parts[parent][reference] = value;
+    } else {
+      this.parts[reference] = value;
+    }
+    
+    this.onShipChange(this.parts);
+    console.log(security);
+    return this;
   }
 
 

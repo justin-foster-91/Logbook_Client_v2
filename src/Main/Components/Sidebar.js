@@ -1,29 +1,27 @@
 import React from 'react';
+import { useEffect } from 'react';
 
 function Sidebar(props) {
-  const {setterList} = props;
+  const {setterList, partHighlight} = props;
 
   const sidebarList = () => {
     return setterList.map(part => {
+      let highlight = false;
+      if (part.name === partHighlight) highlight = true;
+
       return (
-        // <button className="scrollLink" onClick={() => `window.location.href='#${part.name}'`}>
-        //   {part.name}
-        // </button>
-        
-        // <div>
-          <a href={`#${part.name}`} key={`${part.name}`}>
-            <div>
-              {part.name}
-            </div>
-          </a>
-        // </div>
+        <a href={part.name} key={part.name} >
+          <div className={highlight ? "sidebarHighlight" : ""}>
+            {part.name}
+          </div>
+        </a>
     )})
   }
 
 
   return (
     <div className='sidebar'>
-      SIDEBAR
+      <h3>Ship Parts</h3>
       {sidebarList()}
     </div>
   );

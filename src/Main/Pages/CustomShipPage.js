@@ -17,12 +17,11 @@ import SetReinforcedBulkheads from "../ShipPartSetters/SetReinforcedBulkheads";
 import SetSecurity from '../ShipPartSetters/SetSecurity'
 import Sidebar from "../Components/Sidebar";
 import "./CustomShipPage.css";
-import 'intersection-observer';
-import 'intersection-observer/intersection-observer.js'
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { tierId, powerCoreIds } = customShipParts
+  const [partHighlight, setPartHighlight] = useState();
 
   const size = ship.getSize()
 
@@ -33,50 +32,53 @@ function CustomShipPage() {
   const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
   const totalPCUBudget = ship.getTotalPCUBudget()
 
-  // var observer = new IntersectionObserver(function(entries) {
-  //   if(entries[0].isIntersecting === true)
-  //       console.log('Element is fully visible in screen');
-  // }, { threshold: [1] });
 
-  // observer.observe(document.querySelector("#element"));
-
-  let options = {
-    root: document.querySelector("#scrollArea"),
-    rootMargin: "0px",
-    threshold: 1.0,
+  const [scrollPosition, setSrollPosition] = useState(0);
+  const handleScroll = () => {
+      const position = window.pageYOffset;
+      setSrollPosition(position);
   };
-
-  let callback = (entries, observer) => {
-    entries.forEach((entry) => {
-      // Each entry describes an intersection change for one observed
-      // target element:
-      //   entry.boundingClientRect
-      //   entry.intersectionRatio
-      //   entry.intersectionRect
-      //   entry.isIntersecting
-      //   entry.rootBounds
-      //   entry.target
-      //   entry.time
-    });
-  };
-  
-  let observer = new IntersectionObserver(callback, options);
-  
-  let target = document.querySelector(".customShipDisplay");
-
-  // window.onload = function() {
-  //   observer.observe(target);
-  // }
   
   useEffect(() => {
-    // observer.observe(target);
-  })
-
+      window.addEventListener('scroll', handleScroll, { passive: true });
   
+      return () => {
+          window.removeEventListener('scroll', handleScroll);
+      };
+  }, []);
 
-  // useEffect(() => {
-  //   console.log(validateShip(customShipParts));
-  // });
+
+  // TODO: if no entry is 100% visible, select the one with greatest visibility %
+  useEffect(() => {
+    let options = {
+      // root: document.querySelector("#scrollArea"),
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+  
+    let callback = (entries, observer) => {
+      // setPartHighlight(null)
+      let highest = null;
+      // console.log({entries});
+  
+      entries.forEach((entry) => {
+        // console.log("entry: ", entry);
+  
+        if (entry.intersectionRatio === 1) {
+          console.log("entry: ", entry.target.id);
+          if (entry.boundingClientRect.Top > highest || highest === null) highest = entry.target
+        }
+      });
+  
+      console.log("Highest: ", highest);
+      if (!highest) return;
+      setPartHighlight(highest.id)
+    };
+  
+    let observer = new IntersectionObserver(callback, options);
+
+    setterList.map(setter => observer.observe(document.getElementById(setter.name)))
+  }, [scrollPosition])
 
 
 
@@ -106,8 +108,8 @@ function CustomShipPage() {
 
   return (
     <>
-      <Sidebar setterList={setterList}></Sidebar>
-      <div className="customShipDisplay">
+      <Sidebar setterList={setterList} partHighlight={partHighlight}></Sidebar>
+      <div className="customShipDisplay" id="customShipDisplay">
         <h2>Custom Ship Page</h2>
 
         <div className="partSetterList">
