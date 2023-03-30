@@ -32,56 +32,32 @@ function CustomShipPage() {
   const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
   const totalPCUBudget = ship.getTotalPCUBudget()
 
+  //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
-  const [scrollPosition, setSrollPosition] = useState(0);
+
   const handleScroll = () => {
-      const position = window.pageYOffset;
-      setSrollPosition(position);
+      let allPartBlocks = document.getElementsByClassName("partSetterBlock")
+      let highestPartBlockId = null;
+      Array.from(allPartBlocks).every(block => {
+        let blockY = block.getBoundingClientRect().y;
+
+        if (blockY < 0) return true;
+
+        highestPartBlockId = block.id
+        setPartHighlight(highestPartBlockId)
+        return false;
+      })
+      // console.log(highestPartBlockId);
   };
   
   useEffect(() => {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-  
-      return () => {
-          window.removeEventListener('scroll', handleScroll);
-      };
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
-
-
-  // TODO: if no entry is 100% visible, select the one with greatest visibility %
-  useEffect(() => {
-    let options = {
-      // root: document.querySelector("#scrollArea"),
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-  
-    let callback = (entries, observer) => {
-      let highestPart = null;
-      // console.log({entries});
-  
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio === 1) {
-          console.log("entry: ", entry.target.id);
-          if (!highestPart) {
-            highestPart = entry.target
-          }
-        }
-      });
-  
-      console.log("Highest: ", highestPart);
-      if (!highestPart) return;
-      setPartHighlight(highestPart.id)
-    };
-  
-    let observer = new IntersectionObserver(callback, options);
-
-    setterList.map(setter => observer.observe(document.getElementById(setter.name)))
-  }, [])
-
-
-
-  //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
   const [showJSON, setShowJSON] = useState();
 
