@@ -20,10 +20,27 @@
   transform: translate(11%);
 }
 
-.partSetterBlock {
+/* .partSetterList {
+  display: flex;
+  flex-direction: column;
+  
+} */
 
+.partSetterBlock {
+  border: 2px solid rgb(0, 119, 255);
+  border-radius: 5px;
+  margin: 5px;
+  /* padding: 0; */
 }
 
 .sidebarHighlight {
   background-color: green;
+}
+
+legend {
+  /* color: red; */
+}
+
+fieldset {
+  /* width: auto; */
 }

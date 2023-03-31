@@ -16,9 +16,14 @@ function SetFrame() {
 
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
-    // I may not need this later
+    // This may not be needed this later
     ship.setFrame(frameId)
   }, [])
+
+  const abbreviateSize = (size) => {
+    if (size === "Supercolossal") return "Sc";
+    return size[0];
+  }
 
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
@@ -34,7 +39,7 @@ function SetFrame() {
 
       <select value={frameId} onChange={handleFrameIdChange}>
         {frames.map((frame, idx) => (
-          <option key={idx}>{frame.type}</option>
+          <option key={idx}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
         ))}
       </select>
 

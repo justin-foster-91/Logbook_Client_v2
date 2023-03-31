@@ -35,19 +35,37 @@ function CustomShipPage() {
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
 
+  // const handleScroll = () => {
+  //     let allPartBlocks = document.getElementsByClassName("partSetterBlock")
+  //     let allPartTitles = allPartBlocks.map(part => part.firstChild)
+  //     let highestPartBlockId = null;
+  //     Array.from(allPartBlocks).every(block => {
+  //       let blockY = block.getBoundingClientRect().y;
+
+  //       if (blockY < 0) return true;
+
+  //       highestPartBlockId = block.id
+  //       setPartHighlight(highestPartBlockId)
+  //       return false;
+  //     })
+  //     // console.log(highestPartBlockId);
+  // };
+
   const handleScroll = () => {
-      let allPartBlocks = document.getElementsByClassName("partSetterBlock")
-      let highestPartBlockId = null;
-      Array.from(allPartBlocks).every(block => {
-        let blockY = block.getBoundingClientRect().y;
+    let allPartBlocks = document.getElementsByClassName("partSetterBlock")
+    let highestPartBlockId = null;
 
-        if (blockY < 0) return true;
+    Array.from(allPartBlocks).every(block => {
+      let blockTitle = block.querySelector("h3")
+      let blockTitleY = blockTitle.getBoundingClientRect().y;
 
-        highestPartBlockId = block.id
-        setPartHighlight(highestPartBlockId)
-        return false;
-      })
-      // console.log(highestPartBlockId);
+      if (blockTitleY < 0) return true;
+
+      highestPartBlockId = block.id
+      setPartHighlight(highestPartBlockId)
+      return false;
+    })
+    // console.log(highestPartBlockId);
   };
   
   useEffect(() => {

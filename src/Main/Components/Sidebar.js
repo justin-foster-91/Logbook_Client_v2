@@ -10,7 +10,7 @@ function Sidebar(props) {
       if (part.name === partHighlight) highlight = true;
 
       return (
-        <a href={part.name} key={part.name} >
+        <a href={`#${part.name}`} key={part.name} >
           <div className={highlight ? "sidebarHighlight" : ""}>
             {part.name}
           </div>
