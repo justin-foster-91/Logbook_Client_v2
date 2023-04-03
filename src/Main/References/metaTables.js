@@ -389,6 +389,14 @@ const antiHackingSystems = {
   "mk 4":	[12, "Starship Operations Manual pg. 300"],
 }
 
+const antiHackingSystemsAlt = {
+  // Anti-Hacking System:	[BP cost, source]
+  "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
+  "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
+  "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
+  "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
+}
+
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=Heavy&Family=Antipersonnel%20Weapon
 const antipersonnelWeapon = {
   // Heavy: BP cost 5 + item level of weapon
@@ -591,6 +599,7 @@ const getReinforcedBulkheadIdList = () => {
 export {
   sources,
   sizeMod,
+  shipTiers,
 
   getTierData, 
   getManeuverabilityData,

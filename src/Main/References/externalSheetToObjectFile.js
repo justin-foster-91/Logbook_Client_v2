@@ -6,13 +6,12 @@ const { parse } = require("csv-parse");
 const weapons = {}
 
 
-fs.createReadStream("C:\\Users\\jfost\\OneDrive\\Documents\\heavy.csv")
+fs.createReadStream("C:\\Users\\jfost\\OneDrive\\Documents\\LongarmWeapons.csv")
   .pipe(parse({ delimiter: ",", from_line: 2 }))
   .on("data", function (row) {
-    console.log(row);
 
-    // let weaponKey = row[0]
-    // row.shift()
+    let weaponKey = row[0]
+    row.shift()
 
     // row = {
     //   category: row[0],
@@ -28,15 +27,16 @@ fs.createReadStream("C:\\Users\\jfost\\OneDrive\\Documents\\heavy.csv")
     //   sfsLegal: row[10],
     // }
 
-    // weapons[weaponKey] = row;
+    weapons[weaponKey] = row;
   })
   .on("error", function (error) {
     console.log(error.message);
   })
   .on("end", function () {
     console.log("finished");
-    // console.log(weapons);
-    var writeStream = fs.createWriteStream("src\\Main\\References\\heavy.txt");
+    console.log(weapons);
+
+    var writeStream = fs.createWriteStream("D:\\Projects\\Logbook_Client_v2\\src\\Main\\References\\LongarmWeapons2.txt");
     writeStream.write(JSON.stringify(weapons));
     writeStream.end();
   });
