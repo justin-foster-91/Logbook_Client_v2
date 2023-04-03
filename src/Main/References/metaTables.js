@@ -369,7 +369,7 @@ const fortifiedHulls = {
 
 //https://www.aonsrd.com/StarshipBulkheads.aspx
 const reinforcedBulkheads = {
-// Bulkhead:	[Fortification %,	BP cost]
+// Bulkhead:	[Fortification %,	BP cost, source]
   "Mk 1":	[10,	2, "Starship Operations Manual pg. 21"],
   "Mk 2":	[20,	3, "Starship Operations Manual pg. 21"],
   "Mk 3":	[30,	5, "Starship Operations Manual pg. 21"],
@@ -377,6 +377,26 @@ const reinforcedBulkheads = {
   "Mk 5":	[50,	10, "Starship Operations Manual pg. 21"]
 }
 
+
+// Security
+
+// https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
+const antiHackingSystems = {
+  // Anti-Hacking System:	[BP cost, source]
+  "Mk 1":	[3, "Starship Operations Manual pg. 300"],
+  "Mk 2":	[6, "Starship Operations Manual pg. 300"],
+  "Mk 3":	[9, "Starship Operations Manual pg. 300"],
+  "mk 4":	[12, "Starship Operations Manual pg. 300"],
+}
+
+// https://www.aonsrd.com/Starship_Security.aspx?ItemName=Heavy&Family=Antipersonnel%20Weapon
+const antipersonnelWeapon = {
+  // Heavy: BP cost 5 + item level of weapon
+  // https://www.aonsrd.com/Weapons.aspx?Proficiency=Heavy
+
+  // Longarm : Bp cost = item level of weapon
+  // https://www.aonsrd.com/Weapons.aspx?Proficiency=Longarms
+}
 
 // <--- Data extractions --->
 const getTierData = (tierId) => {

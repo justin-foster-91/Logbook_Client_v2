@@ -3,6 +3,8 @@ import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import { splitCamelCase } from "../References/utils";
 
+// https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
+
 function SetTier() {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
   
@@ -42,7 +44,10 @@ function SetTier() {
     <>
       <h3>Security</h3>
       {/* Anti-Hacking Systems (dropdown) */}
+      {/*  increase the DC to hack into it by 1 * mark */}
+
       {/* Anti-Personnel Weapon (dropdown) */}
+      {/* Needs access to entire longarm and heavy weapons list */}
 
       <p></p>
       {/* Biometric Locks - check */}
