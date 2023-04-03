@@ -398,6 +398,10 @@ const antipersonnelWeapon = {
   // https://www.aonsrd.com/Weapons.aspx?Proficiency=Longarms
 }
 
+const longarmWeapons = {
+  
+}
+
 // <--- Data extractions --->
 const getTierData = (tierId) => {
   const array = shipTiers[tierId]

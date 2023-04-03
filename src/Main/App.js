@@ -13,8 +13,8 @@ function App() {
   return (
     <ShipsProvider>
       <CustomShipProvider>
-      <div className="App">
-        <main className="Routes">
+      <div className="App full-height">
+        <main className="Routes full-height">
             <Routes>
               <Route index element={<HangarPage/>}/>
               <Route path={'hangar'} element={<HangarPage/>}/>
