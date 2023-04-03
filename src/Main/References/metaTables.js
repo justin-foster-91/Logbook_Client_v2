@@ -1,5 +1,6 @@
 import { capitalizeEachWord } from "./utils";
 import frames from "../References/frames.json";
+import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelWeapons"
 
 const sources = {
 // source: [link, abbrev., sfsLegal]
@@ -389,13 +390,13 @@ const antiHackingSystems = {
   "mk 4":	[12, "Starship Operations Manual pg. 300"],
 }
 
-const antiHackingSystemsAlt = {
-  // Anti-Hacking System:	[BP cost, source]
-  "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
-  "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
-  "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
-  "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
-}
+// const antiHackingSystemsAlt = {
+//   // Anti-Hacking System:	[BP cost, source]
+//   "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
+//   "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
+//   "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
+//   "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
+// }
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=Heavy&Family=Antipersonnel%20Weapon
 const antipersonnelWeapon = {
@@ -530,6 +531,25 @@ const getReinforcedBulkheadData = (reinforcedBulkheadId, size) => {
   return {fortification: array[0], bpCost: (array[1] * sizeMod[size]), source: array[2]}
 }
 
+const getAntiHackingData = (antiHackingId) => {
+  // Anti-Hacking System:	[BP cost, source]
+  if(antiHackingId === null) return {bpCost: 0, source: null}
+
+  const array = antiHackingSystems[antiHackingId]
+
+  return {bpCost: array[0], source: array[1]}
+}
+
+const getAntiPersonnelData = (antiPersonnelId) => {
+  if (antiPersonnelId === null) return {category: null, level: null, damage: null, range: null, critical: null, special: null, sfsLegal: null}
+
+  if (getLongarmIdList.includes(antiPersonnelId)) {
+    return getLongarmData(antiPersonnelId)
+  } else {
+    return getHeavyData(antiPersonnelId)
+  }
+}
+
 
 
 // <--- ID extractions -->
@@ -596,6 +616,14 @@ const getReinforcedBulkheadIdList = () => {
   return Object.keys(reinforcedBulkheads).sort((a, b) => a + b)
 }
 
+const getAntiHackingIdList = () => {
+  return Object.keys(antiHackingSystems).sort((a, b) => a + b)
+}
+
+const getAntiPersonnelIdList = () => {
+  return [...getLongarmIdList(), ...getHeavyIdList()]
+}
+
 export {
   sources,
   sizeMod,
@@ -615,6 +643,8 @@ export {
   getExpansionBayData,
   getFortifiedHullData,
   getReinforcedBulkheadData,
+  getAntiHackingData,
+  getAntiPersonnelData,
 
   getTierIdList, 
   getFrameIdList,
@@ -629,4 +659,6 @@ export {
   getExpansionBayIdList,
   getFortifiedHullIdList,
   getReinforcedBulkheadIdList,
+  getAntiHackingIdList,
+  getAntiPersonnelIdList
 }

@@ -13129,7 +13129,18 @@ const getHeavyData = (heavyId) => {
   return {category: array[0], level: array[1], damage: array[3], range: array[4], critical: array[5], special: array[9], sfsLegal: array[10]}
 }
 
+const getLongarmIdList = () => {
+  return Object.keys(longarmWeaponsArray).sort((a, b) => a + b)
+}
+
+const getHeavyIdList = () => {
+  return Object.keys(heavyWeaponsArray).sort((a, b) => a + b)
+}
+
 export {
   getLongarmData,
-  getHeavyData
+  getHeavyData,
+
+  getLongarmIdList,
+  getHeavyIdList,
 }
