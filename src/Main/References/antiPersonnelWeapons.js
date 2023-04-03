@@ -1,562 +1,6770 @@
-
 const longarmWeapons = {
-  // Name, Category, Level, Price, Damage, Range, Critical, Capacity, Usage, Bulk, Special, SFS Legal
-  // Name: [Category, Level, Price, Damage, Range, Critical, Capacity, Usage, Bulk, Special, SFS Legal]
-  "Needler Rifle","--",1,110,1d6 P,60 ft.,injection DC +2,12 darts,1,1,"analog, injection",TRUE
-  "Caustolance, Liquidator","--",1,400,1d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE
-  "Needler Rifle, Tactical","--",1,200,1d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE
-  "Rackarack, Pulse","--",1,205,1d6 So,60 ft.,Nuisance,20 charges,2,1,"--",TRUE
-  "Dusk Rifle, Static","--",2,900,1d4 C & E,60 ft.,"--",20,2,2,"Hybrid, line, unwieldy",FALSE
-  "Meduza Rifle, Stinger ","--",2,720,1d8 A & S,40 ft.,Bind ,20 charges,2,1,"Analog, living ",TRUE
-  "Thasphalt Rifle, Light","--",2,880,1d10 B,40 ft.,Push (5 ft.) ,80 thasphalt,1,2,"Analog, force ",FALSE
-  "Formian Venomcaster, Tactical","--",3,"1,325",1d8 P,40 ft.,Injection DC +2,6 darts,1,1,"Analog, injection, unwieldy",TRUE
-  "Frost Maw, Growl-class","--",3,"1,350",1d8 C,15 ft.,Bind 1d4 rounds,20,2,1,"Aurora, blast, living, unwieldy",FALSE
-  "Net Gun, Wireframe","--",4,"1,750","--",30 ft.,"--",2 nets,1,1,Entangle ,TRUE
-  "Data Rifle, Giga","--",5,"3,150",1d8 B or P or S,100 ft.,Knockdown ,20 charges,2,1,"Boost 1d4, codework (capacity 20, usage 2), force, modal",FALSE
-  "Needler Rifle, Advanced","--",5,"3,000",1d8 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE
-  "Caustolance, Decimator","--",6,"4,500",2d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE
-  "Electrosystem Rifle, Buzzing","--",6,"4,500",2d10 E,60 ft.,Staggered,40 charges,4,1,"Blast, living, Swarm, unwieldy",FALSE
-  "Meduza Rifle, Blitz ","--",6,"3,950",2d8 A & S,60 ft.,Bind ,20 charges,4,1,"Analog, living ",TRUE
-  "Rackarack, Surge","--",6,"4,400",2d6 So,60 ft.,Nuisance,20 charges,2,1,Boost 1d4,TRUE
-  "Chimera Graft, Growl-class","--",7,"6,250",1d12 F,40 ft.,Burn 1d6,20 petrol,1,1,"Automatic, integrated (1 slot), harrying, living, regrowth",TRUE
-  "Dusk Rifle, Aurora","--",7,"6,500",2d4 C & E,60 ft.,"--",20,2,2,"Hybrid, line, unwieldy",FALSE
-  "EM Induction Rifle, Static","--",7,"7,000",1d8 E,30 ft.,"--",40 charges,8,3,"Analog, boost 1d4, clockwork (capacity 40, usage 8), line, unwieldy",FALSE
-  "Net Gun, Bolt","--",7,"5,250",3d4 E,30 ft.,Stunned ,2 nets,1,1,"Entangle, stun ",TRUE
-  "Recombinator Ray","--",8,"9,500",2d10 A,60 ft.,Corrode 1d6,80,8,1,Antibiological,TRUE
-  "Culling Ray, Lesser","--",8,"8,850",1d12 A & F,30 ft.,Irradiate,20 charges,1,2,"Blast, ignite 1d6",FALSE
-  "Digitizer Rifle, Silver ","--",8,"8,000",2d8 So,80 ft.,digitize 1d8 ,40 charges,2,1,"Bright, professional (vidgamer), relic",FALSE
-  "Thasphalt Rifle, Tactical","--",8,"8,500",2d10 B,60 ft.,Push (5 ft.) ,80 thasphalt,4,2,"Analog, force ",FALSE
-  "Formian Venomcaster, Advanced","--",9,"12,750",3d8 P,60 ft.,Injection DC +2,12 darts,1,1,"Analog, injection, unwieldy",TRUE
-  "Frost Maw, Snarl-class","--",9,"13,000",2d8 C,60 ft.,Bind 1d4 rounds,20,2,1,"Aurora, blast, living, unwieldy",FALSE
-  "Nanite Thrower, Tactical","--",9,"13,300","--",60 ft.,wound,10 nanites,1,1,deconstruct 2d6,TRUE
-  "Reality Rifle","--",10,"19,500",2d12 E,80 ft.,Confuse,40,8,2,"Mind-affecting, stun, subtle",TRUE
-  "Data Rifle, Tera","--",10,"17,900",3d8 B or P or S,100 ft.,Knockdown ,20 charges,2,1,"Boost 1d8, codework (capacity 20, usage 2), force, modal",FALSE
-  "Frost Maw, Roar-class","--",10,"19,000",4d8 C,80 ft.,Bind 1d4 rounds,20,2,1,"Aurora, blast, living, unwieldy",FALSE
-  "Meduza Rifle, Assault ","--",10,"17,200",3d8 A & S,70 ft.,Bind ,40 charges,5,1,"Analog, living ",TRUE
-  "Needler Rifle, Elite","--",10,"18,000",4d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE
-  "Chimera Graft, Snarl-class","--",11,"24,000",2d12 F,40 ft.,Burn 1d6,20 petrol,1,1,"Automatic, integrated (1 slot), harrying, living, regrowth",TRUE
-  "Caustolance, Executioner","--",12,"38,000",5d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE
-  "Culling Ray, Standard","--",12,"34,500",2d12 A & F,30 ft.,Irradiate,20 charges,2,2,"Blast, ignite 3d6",FALSE
-  "Dusk Rifle, Storm","--",12,"36,500",4d6 C & E,60 ft.,"--",40,4,2,"Hybrid, line, unwieldy",FALSE
-  "Electrosystem Rifle, Jolting","--",12,"37,500",4d10 E,60 ft.,Staggered,40 charges,5,1,"Blast, living, Swarm, unwieldy",FALSE
-  "EM Induction Rifle, Aurora","--",12,"36,400",3d8 E,60 ft.,"--",40 charges,8,3,"Analog, boost 1d8, clockwork (capacity 40, usage 8), line, unwieldy",FALSE
-  "Nanite Thrower, Advanced","--",12,"35,400","--",60 ft.,wound,10 nanites,1,1,deconstruct 3d6,TRUE
-  "Thasphalt Rifle, Advanced","--",12,"35,100",3d10 B,80 ft.,Push (10 ft.) ,80 thasphalt,8,2,"Analog, force ",FALSE
-  "Rackarack, Drum","--",13,"46,100",5d6 So,60 ft.,Nuisance,20 charges,2,1,Boost 2d4,TRUE
-  "Digitizer Rifle, Gold ","--",14,"65,000",5d8 So,80 ft.,digitize 2d8 ,80 charges,4,1,"Bright, professional (vidgamer), relic",FALSE
-  "Formian Venomcaster, Elite","--",14,"70,600",7d8 P,80 ft.,Injection DC +2,12 darts,1,1,"Analog, entangle, injection, unwieldy",TRUE
-  "Data Rifle, Peta","--",15,"113,300",5d8 B or P or S,120 ft.,Knockdown ,40 charges,4,1,"Boost 2d8, codework (capacity 40, usage 4), force, modal",FALSE
-  "Meduza Rifle, Commander ","--",15,"100,000",7d8 A & S,80 ft.,Bind ,80 charges,5,1,"Analog, living ",TRUE
-  "Nanite Thrower, Elite","--",15,"110,000","--",80 ft.,severe wound,10 nanites,2,1,deconstruct 4d6,TRUE
-  "Needler Rifle, Paragon","--",15,"110,000",8d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE
-  "Thasphalt Rifle, Elite","--",16,"175,000",4d10 B,100 ft.,Push (10 ft.) ,80 thasphalt,10,2,"Analog, force ",FALSE
-  "Chimera Graft, Roar-class","--",17,"218,000",4d12 F,40 ft.,Burn 1d6,20 petrol,1,1,"Automatic, integrated (1 slot), harrying, living, regrowth",TRUE
-  "Dusk Rifle, Tempest","--",17,"260,000",8d6 C & E,60 ft.,"--",40,4,2,"Hybrid, line, unwieldy",FALSE
-  "EM Induction Rifle, Storm","--",17,"255,000",6d8 E,90 ft.,"--",80 charges,16,3,"Analog, boost 3d8, clockwork (capacity 80, usage 16), line, unwieldy",FALSE
-  "Caustolance, Eradicator","--",18,"400,000",12d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE
-  "Culling Ray, Greater","--",18,"350,000",4d12 A & F,30 ft.,Irradiate,40 charges,4,2,"Blast, ignite 5d6",FALSE
-  "Electrosystem Rifle, Convulsion","--",18,"400,000",8d10 E,60 ft.,Stunned,40 charges,8,1,"Blast, living, Swarm, unwieldy",FALSE
-  "Formian Venomcaster, Paragon","--",18,"398,000",10d10 P,80 ft.,Injection DC +2,24 darts,1,1,"Analog, entangle, injection, unwieldy",TRUE
-  "Rackarack, Hammer","--",18,"371,000",6d10 So,60 ft.,Nuisance,40 charges,2,1,Boost 4d4,TRUE
-  "Meduza Rifle, Gorgon ","--",19,"500,000",11d8 A & S,100 ft.,Bind ,80 charges,8,1,"Analog, living ",TRUE
-  "Data Rifle, Exa","--",20,"875,000",11d8 B or P or S,120 ft.,Knockdown ,80 charges,8,1,"Boost 5d8, codework (capacity 40, usage 4), force, modal",FALSE
-  "Digitizer Rifle, Holofoil ","--",20,"900,000",10d8 So,160 ft.,digitize 4d8 ,100 charges,5,1,"Bright, professional (vidgamer), relic",FALSE
-  "Nanite Thrower, Paragon","--",20,"830,000","--",80 ft.,severe wound,10 nanites,2,1,deconstruct 5d6,TRUE
-  "Needler Rifle, Supreme","--",20,"850,000",16d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE
-  "Numbing Beam, Tactical",Cryo,1,370,1d6 C,50 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Ice Carbine, Subzero",Cryo,2,510,1d8 C & P,60 ft.,"--",20 charges,2,2,automatic,TRUE
-  "Void Rifle, Grave-Class",Cryo,2,"1,020",1d6 C,60 ft.,suffocate,20 charges,1,1,antibiological,TRUE
-  "Frailty Rifle, Atrophy-Class",Cryo,3,"1,650",1d6 C,60 ft.,"--",20 charges,2,1,necrotic,TRUE
-  "Freeze Ray, Hiemal",Cryo,3,"1,420",1d4 C,30 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Zero Rifle, Frostbite-Class",Cryo,4,"2,330",1d8 C,60 ft.,staggered,40 charges,2,1,"--",TRUE
-  "Numbing Beam, Advanced",Cryo,5,"3,050",1d8 C,50 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Frost Projector, Frostbite-Class",Cryo,6,"5,100",1d10 C,30 ft.,staggered,40 charges,2,1,integrated (2 slots),TRUE
-  "Void Rifle, Crypt-Class",Cryo,6,"4,400",1d8 C,60 ft.,suffocate,20 charges,1,1,antibiological,TRUE
-  "Frailty Rifle, Rot-Class",Cryo,7,"7,700",2d6 C,60 ft.,"--",20 charges,2,2,necrotic,TRUE
-  "Freeze Ray, Algid",Cryo,7,"6,300",2d4 C,30 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Zero Rifle, Hailstorm-Class",Cryo,8,"10,100",2d8 C,60 ft.,staggered,40 charges,2,2,"--",TRUE
-  "Ice Carbine, Gelid",Cryo,9,"12,400",3d8 C & P,60 ft.,"--",40 charges,2,2,automatic,TRUE
-  "Numbing Beam, Elite",Cryo,10,"18,000",3d6 C,80 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Freeze Ray, Glacial",Cryo,11,"24,800",5d4 C,40 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Void Rifle, Tomb-Class",Cryo,11,"26,300",2d10 C,80 ft.,suffocate,40 charges,2,1,antibiological,TRUE
-  "Frost Projector, Hailstorm-Class",Cryo,12,"42,000",2d10 C,30 ft.,staggered,40 charges,2,1,integrated (2 slots),TRUE
-  "Frailty Rifle, Blight-Class",Cryo,13,"57,200",4d6 C,60 ft.,"--",40 charges,4,2,necrotic,TRUE
-  "Ice Carbine, Ultracold",Cryo,13,"47,100",6d6 C & P,80 ft.,"--",40 charges,2,2,automatic,TRUE
-  "Zero Rifle, Blizzard-Class",Cryo,14,"79,800",4d8 C,60 ft.,staggered,80 charges,4,2,"--",TRUE
-  "Numbing Beam, Paragon",Cryo,15,"112,000",6d6 C,80 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Freeze Ray, Isothermal",Cryo,16,"165,000",5d8 C,40 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Void Rifle, Ossuary-Class",Cryo,16,"182,000",4d10 C,100 ft.,suffocate,40 charges,1,1,antibiological,TRUE
-  "Frailty Rifle, Epidemic-Class",Cryo,17,"297,000",7d6 C,60 ft.,"--",50 charges,5,2,necrotic,TRUE
-  "Ice Carbine, Absolute-Zero",Cryo,17,"218,000",11d6 C & P,80 ft.,"--",40 charges,2,2,automatic,TRUE
-  "Zero Rifle, Avalanche-Class",Cryo,18,"410,200",7d8 C,60 ft.,staggered,100 charges,5,2,"--",TRUE
-  "Frost Projector, Blizzard-Class",Cryo,19,"680,000",5d10 C,30 ft.,staggered,40 charges,2,1,integrated (2 slots),TRUE
-  "Void Rifle, Barrow-Class",Cryo,19,"606,000",6d10 C,100 ft.,suffocate,80 charges,2,1,antibiological,TRUE
-  "Freeze Ray, Hypothermic",Cryo,20,"818,000",5d12 C,50 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Degenerator Rifle, Military",Degenerator,17,"242,000",7d8 A & So,50 ft.,Degeneration 4d6,40 charges,5,2,Hybrid,TRUE
-  "Degenerator Rifle, Dominion",Degenerator,20,"810,000",10d8 A & So,50 ft.,Degeneration 5d6,80 charges,5,2,Hybrid,TRUE
-  "Disruption Rifle, Minor",Dimensional Disruption,9,"15,000",3d8 So,50 ft.,staggered,40 charges,5,2,"boost 1d8, relic",TRUE
-  "Disruption Rifle, Major",Dimensional Disruption,14,"80,000",6d8 So,40 ft.,staggered,40 charges,5,2,"boost 2d8, relic",TRUE
-  "Dross Gun, Scrapper",Disintegrator,2,720,1d6 A,15 ft.,"--",20 charges,1,1,penetrating,TRUE
-  "Dross Gun, Scoring",Disintegrator,5,"3,300",1d8 A,20 ft.,wound,20 charges,2,1,penetrating,TRUE
-  "Disintegrator Rifle, Liquidator",Disintegrator,6,"4,750",1d20 A,30 ft.,corrode 1d6,40 charges,4,2,"--",TRUE
-  "Dross Gun, Flux",Disintegrator,10,"19,200",2d12 A,20 ft.,severe wound,20 charges,4,1,penetrating,TRUE
-  "Disintegrator Rifle, Decimator",Disintegrator,11,"29,000",3d10 A,30 ft.,corrode 2d6,40 charges,4,2,"--",TRUE
-  "Disintegrator Rifle, Executioner",Disintegrator,16,"210,000",5d10 A,30 ft.,corrode 3d6,80 charges,8,2,"--",TRUE
-  "Disintegrator Rifle, Eradicator",Disintegrator,20,"745,000",5d20 A,30 ft.,corrode 4d6,80 charges,8,2,"--",TRUE
-  "Gulchgun",Flame,1,90,1d8 F,20 ft.,burn 1d6,4 shells,1,1,analog,TRUE
-  "Flame Rifle",Flame,2,490,1d6 F,25 ft.,burn 1d6,20 petrol,5,1,"line, unwieldy",TRUE
-  "Flare Rifle, Dazzler",Flame,3,445,2d4 F,60 ft.,burn 1d6,8 flares,1,1,"analog, bright, harrying",TRUE
-  "Blaze Rifle, Ifrit-Class",Flame,4,"1,900",1d10 F,40 ft.,burn 1d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Petrol Converter, Light",Flame,4,"2,150",1d8 F or A,40 ft.,"--",40 petrol,2,1,"analog, modal (disintegrator)",TRUE
-  "Dragon Rifle, Wyrmling",Flame,5,"3,020",1d8 F,6 ft.,burn 1d4,20 petrol,1,1,automatic,TRUE
-  "Flare Rifle, Vivifier",Flame,6,"3,600",1d10 F,80 ft.,burn 2d4,8 flares,1,1,"analog, bright, harrying",TRUE
-  "Blaze Rifle, Salamander-Class",Flame,7,"5,800",2d8 F,60 ft.,burn 2d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Petrol Converter, Tactical",Flame,7,"6,750",2d6 F or A,80 ft.,"--",40 petrol,4,1,"analog, modal (disintegrator)",TRUE
-  "Igniter, Ember",Flame,8,"9,900","--",80 ft.,burn 2d6,40 charges,4,1,ignite 2d6,TRUE
-  "Dragon Rifle, Drake",Flame,9,"13,400",3d6 F,60 ft.,burn 2d4,20 petrol,1,1,automatic,TRUE
-  "Flare Rifle, Coruscator",Flame,10,"15,700",5d4 F,80 ft.,burn 2d6,12 flares,2,1,"analog, bright, harrying",TRUE
-  "Petrol Converter, Advanced",Flame,10,"18,500",3d6 F or A,80 ft.,"--",40 petrol,1,1,"analog, modal (disintegrator)",TRUE
-  "Blaze Rifle, Hellhound-Class",Flame,11,"23,200",3d10 F,60 ft.,burn 3d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Igniter, Blaze",Flame,12,"34,200","--",80 ft.,burn 3d6,40 charges,4,1,ignite 3d6,TRUE
-  "Flare Rifle, Scorcher",Flame,13,"43,800",7d4 F,80 ft.,burn 3d6,12 flares,3,1,"analog, bright, harrying",TRUE
-  "Dragon Rifle, Wyvern",Flame,14,"72,200",6d6 F,80 ft.,burn 3d4,20 petrol,1,1,automatic,TRUE
-  "Petrol Converter, Elite",Flame,14,"76,500",5d6 F or A,80 ft.,"--",40 petrol,2,1,"analog, modal (disintegrator)",TRUE
-  "Igniter, Inferno",Flame,15,"108,000","--",80 ft.,burn 4d6,40 charges,4,1,ignite 4d6,TRUE
-  "Blaze Rifle, Firedrake-Class",Flame,16,"153,000",5d10 F,60 ft.,burn 4d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Flare Rifle, Nova",Flame,17,"201,000",12d4 F,100 ft.,burn 4d6,12 flares,4,1,"analog, bright, harrying",TRUE
-  "Igniter, Solar Flare",Flame,18,"360,000","--",80 ft.,burn 5d6,40 charges,4,1,ignite 5d6,TRUE
-  "Petrol Converter, Paragon",Flame,18,"385,000",9d6 F or A,80 ft.,"--",40 petrol,2,1,"analog, modal (disintegrator)",TRUE
-  "Dragon Rifle, True ",Flame,19,"559,000",11d6 F,100 ft.,burn 4d4,20 petrol,1,1,automatic,TRUE
-  "Blaze Rifle, Pheonix-Class",Flame,20,"765,000",9d10 F,80 ft.,burn 5d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Laser Rifle, Azimuth",Laser,1,425,1d8 F,120 ft.,burn 1d6,20 charges,1,1,"--",TRUE
-  "Serpent Laser, Azimuth",Laser,2,500,2d4 F,100 ft.,burn 1d4,20 charges,10,1,"--",TRUE
-  "Infinity Rifle, Tactical",Laser,3,"1,300",1d6 F,40 ft.,"--",20 charges,1,1,boost 1d6,TRUE
-  "Excavation Laser, Light",Laser,4,"2,050",1d10 F,60 ft.,"--",40 charges,2,2,"penetrating, professional (mining)",TRUE
-  "Serpent Laser, Corona",Laser,5,"2,700",2d6 F,100 ft.,burn 2d4,40 charges,20,1,"--",TRUE
-  "Laser Rifle, Corona",Laser,6,"4,650",2d6 F,120 ft.,burn 1d6,40 charges,1,1,"--",TRUE
-  "Infinity Rifle, Advanced",Laser,7,"6,100",2d4 F,60 ft.,"--",20 charges,1,1,boost 2d4,TRUE
-  "Serpent Laser, Aphelion",Laser,8,"8,800",2d8 F,120 ft.,burn 3d4,40 charges,20,1,"--",TRUE
-  "Laser Rifle, Aphelion",Laser,9,"14,300",3d6 F,120 ft.,burn 1d6,40 charges,1,1,"--",TRUE
-  "Infinity Rifle, Elite",Laser,10,"17,100",2d6 F,80 ft.,"--",20 charges,1,1,boost 2d6,TRUE
-  "Autobeam Rifle, Tactical",Laser,11,"26,900",5d4 F,60 ft.,burn 2d4,40 charges,4,2,automatic,TRUE
-  "Excavation Laser, Medium",Laser,12,"36,000",3d10 F,60 ft.,"--",40 charges,2,2,"penetrating, professional (mining)",TRUE
-  "Laser Rifle, Perihelion",Laser,13,"53,800",5d6 F,130 ft.,burn 2d6,100 charges,2,1,"--",TRUE
-  "Serpent Laser, Perihelion",Laser,14,"66,000",3d12 F,120 ft.,burn 4d4,40 charges,20,1,"--",TRUE
-  "Autobeam Rifle, Advanced",Laser,15,"95,500",7d4 F,60 ft.,burn 3d4,100 charges,10,2,automatic,TRUE
-  "Infinity Rifle, Paragon",Laser,16,"155,000",4d6 F,100 ft.,"--",20 charges,1,1,boost 4d6,TRUE
-  "Laser Rifle, Parallax",Laser,17,"248,000",8d6 F,150 ft.,burn 4d6,100 charges,2,1,"--",TRUE
-  "Excavation Laser, Heavy",Laser,18,"380,000",6d10 F,60 ft.,"--",80 charges,4,2,"penetrating, professional (mining)",TRUE
-  "Autobeam Rifle, Elite",Laser,19,"548,100",12d4 F,60 ft.,burn 5d4,100 charges,5,2,automatic,TRUE
-  "Laser Rifle, Zenith",Laser,20,"722,000",11d6 F,150 ft.,burn 5d6,100 charges,2,1,"--",TRUE
-  "Plasma Bolter, Tactical",Plasma,1,260,1d10 E & F,40 ft.,"--",20 charges,4,2,unwieldy,TRUE
-  "Nova Rifle, Red Star",Plasma,2,940,1d6 E & F,30 ft.,blind,20 charges,2,1,"line, unwieldy",TRUE
-  "Plasma Fork, 12-Notch",Plasma,3,"1,290",1d8 E & F,60 ft.,knockdown,20 charges,1,1,boost 1d4,TRUE
-  "Microfusion Rifle, Light",Plasma,4,"2,350",1d8 E & F,15 ft.,irradiate,40 charges,4,1,"blast, radioactive, unwieldy",TRUE
-  "Plasma Bolter, Advanced",Plasma,5,"3,010",2d8 E & F,60 ft.,wound,40 charges,8,2,unwieldy,TRUE
-  "Plasma Rifle, Red Star",Plasma,6,"4,600",1d10 E & F,40 ft.,burn 1d4,40 charges,4,2,"line, unwieldy",TRUE
-  "Nova Rifle, Yellow Star",Plasma,7,"6,800",2d6 E & F,60 ft.,blind,40 charges,4,1,"line, unwieldy",TRUE
-  "Plasma Fork, 15-Notch",Plasma,8,"8,850",1d10 E & F,80 ft.,knockdown,20 charges,1,1,boost 1d10,TRUE
-  "Plasma Bolter, Elite",Plasma,9,"14,000",3d10 E & F,60 ft.,wound,40 charges,4,2,unwieldy,TRUE
-  "Plasma Rifle, Yellow Star",Plasma,10,"16,800",2d10 E & F,40 ft.,burn 1d8,40 charges,4,2,"line, unwieldy",TRUE
-  "Nova Rifle, White Star",Plasma,11,"25,300",3d6 E & F,80 ft.,blind,40 charges,4,1,"line, unwieldy",TRUE
-  "Microfusion Rifle, Medium",Plasma,12,"40,800",3d8 E & F,30 ft.,irradiate,40 charges,4,1,"blast, radioactive, unwieldy",TRUE
-  "Plasma Caster, White Star",Plasma,13,"49,100",3d10 E & F,80 ft.,burn 1d10,100 charges,5,2,boost 1d10,TRUE
-  "Plasma Fork, 19-Notch",Plasma,14,"64,800",3d10 E & F,80 ft.,knockdown,40 charges,2,1,boost 2d10,TRUE
-  "Plasma Rifle, White Star",Plasma,15,"126,600",4d10 E & F,60 ft.,burn 2d8,40 charges,4,2,"line, unwieldy",TRUE
-  "Plasma Bolter, Paragon",Plasma,16,"170,000",9d8 E & F,60 ft.,wound,80 charges,4,2,unwieldy,TRUE
-  "Plasma Caster, Blue Star",Plasma,17,"275,000",5d10 E & F,80 ft.,burn 2d10,200 charges,10,2,boost 2d10,TRUE
-  "Microfusion Rifle, Heavy",Plasma,18,"410,000",5d8 E & F,40 ft.,irradiate,40 charges,4,1,"blast, radioactive, unwieldy",TRUE
-  "Plasma Fork, 22-Notch",Plasma,19,"750,000",6d10 E & F,100 ft.,knockdown,40 charges,2,1,boost 3d10,TRUE
-  "Plasma Rifle, Blue Star",Plasma,20,"935,000",8d10 E & F,100 ft.,burn 4d8,100 charges,10,2,"line, unwieldy",TRUE
-  "Hunting Rifle",Projectile,1,240,1d8 P,90 ft.,"--",6 rounds,1,1,analog,TRUE
-  "Scattergun, Utility",Projectile,1,235,1d4 P,15 ft.,"--",4 shells,1,1,"analog, blast",TRUE
-  "Autotarget Rifle",Projectile,2,755,1d6 P,60 ft.,"--",10 rounds,1,2,"analog, automatic",TRUE
-  "Acid Dart Rifle, Tactical",Projectile,2,485,1d8 A & P,80 ft.,corrode 1d4,10 darts,1,1,analog,TRUE
-  "Cinder Rifle, Truth-Sequence",Projectile,2,700,1d8 P,60 ft.,burn 1d6,10 rounds,1,2,"--",TRUE
-  "Crossbolter, Tactical",Projectile,2,475,1d10 P,70 ft.,"--",1 arrow,1,2,"Analog, unwieldy",TRUE
-  "Shield Rifle, Tactical",Projectile,2,900,1d8 E & P,80 ft.,Arc 1d4 ,12 rounds,1,2,Buttressing ,TRUE
-  "Huchket Rifle",Projectile,3,"1,400",1d10 P,80 ft.,wound,6 rounds,1,1,analog,TRUE
-  "Aeon Guard, Assault Rifle",Projectile,3,"1,400",1d8 P,80 ft.,"--",12 rounds,1,1,automatic,FALSE
-  "Kalo Shredder, Slipstream-Class",Projectile,3,"1,610",1d6 S,30 ft.,bleed 1d4,8 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Rail Gun, Tactical",Projectile,3,"1,150",1d8 P,60 ft.,"--",12 rounds,1,1,automatic,TRUE
-  "Breaching Gun, Utility",Projectile,4,"2,350",1d10 P,20 ft.,knockdown,4 shells,1,1,"analog, breach, penetrating",TRUE
-  "Vivara Rifle, Low-Flux",Projectile,4,"2,100",1d8 P,50 ft.,"--",6,1,1,Breakdown,TRUE
-  "Rocket Rifle",Projectile,5,"3,010",1d12 B,80 ft.,"--",5 mini-rockets,1,1,"analog, unwieldy",TRUE
-  "Rail Gun, Advanced",Projectile,6,"3,770",1d10 P,60 ft.,"--",15 rounds,1,1,automatic,TRUE
-  "Acid Dart Rifle, Dual",Projectile,7,"6,900",2d8 A & P,90 ft.,corrode 2d4,24 darts,2,1,analog,TRUE
-  "Aeon Guard, Accelerator Rifle",Projectile,7,"7,500",3d4 P,60 ft.,"--",16 rounds,1,2,automatic,FALSE
-  "Breaching Gun, Snub",Projectile,7,"6,800",2d10 P,20 ft.,knockdown,8 shells,2,1,"analog, breach, penetrating",TRUE
-  "Cinder Rifle, Salvation-Sequence",Projectile,7,"6,000",2d8 P,60 ft.,burn 1d6,14 rounds,1,2,"--",TRUE
-  "Kalo Shredder, Cascade-Class",Projectile,7,"6,630",2d6 S,40 ft.,bleed 1d6,16 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Seeker Rifle, Tactical",Projectile,7,"6,030",2d8 P,100 ft.,"--",8 rounds,1,1,analog,TRUE
-  "Shield Rifle, Advanced",Projectile,7,"6,820",2d8 E & P,80 ft.,Arc 2d4 ,12 rounds,1,2,Buttressing ,TRUE
-  "Crossbolter, Dual",Projectile,8,"8,250",2d10 P,70 ft.,"--",4 arrows,2,2,"Analog, unwieldy",TRUE
-  "Scattergun, Snub",Projectile,8,"8,300",1d12 P,15 ft.,"--",8 shells,1,1,"analog, blast",TRUE
-  "Vivara Rifle, Mid-Flux",Projectile,8,"7,500",2d8 P,60 ft.,"--",6,1,1,Breakdown,TRUE
-  "Magnetar Rifle, Tactical",Projectile,9,"11,800",2d8 P,60 ft.,"--",18 rounds,1,2,"analog, automatic",TRUE
-  "Combat Rifle",Projectile,10,"16,500",3d8 P,90 ft.,"--",12 rounds,1,1,analog,TRUE
-  "Aeon Guard, RPPR",Projectile,10,"21,000",2d12 B,100 ft.,knockdown,12 mini-rockets,1,2,"--",FALSE
-  "Breaching Gun, Impact",Projectile,11,"25,300",3d10 P,30 ft.,knockdown,12 shells,2,1,"analog, breach, penetrating",TRUE
-  "Cinder Rifle, Valor-Sequence",Projectile,11,"23,700",3d8 P,80 ft.,burn 2d6,20 rounds,1,2,"--",TRUE
-  "Kalo Shredder, Torrent-Class",Projectile,11,"26,700",4d6 S,40 ft.,bleed 3d4,24 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Acid Dart Rifle, Complex",Projectile,12,"39,200",4d8 A & P,90 ft.,corrode 4d4,48 darts,4,2,analog,TRUE
-  "Scattergun, Impact",Projectile,12,"30,400",2d12 P,15 ft.,"--",12 shells,1,2,"analog, blast",TRUE
-  "Shield Rifle, Elite",Projectile,12,"37,000",4d8 E & P,80 ft.,Arc 4d4 ,15 rounds,1,2,Buttressing ,TRUE
-  "Vivara Rifle, High-Flux",Projectile,12,"27,600",4d8 P,70 ft.,"--",6,1,1,Breakdown,FALSE
-  "Gyrojet Rifle, Tactical",Projectile,13,"54,000",3d12 B,100 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Magnetar Rifle, Advanced",Projectile,13,"53,700",4d8 P,60 ft.,"--",24 rounds,1,2,"analog, automatic",TRUE
-  "Kalo Shredder, Deluge-Class",Projectile,14,"74,300",6d6 S,60 ft.,bleed 4d4,36 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Seeker Rifle, Advanced",Projectile,14,"72,300",6d8 P,100 ft.,"--",18 rounds,1,1,analog,TRUE
-  "Breaching Gun, Vortex",Projectile,15,"119,000",6d10 P,30 ft.,knockdown,16 shells,2,1,"analog, breach, penetrating",TRUE
-  "Cinder Rifle, Glory-Sequence",Projectile,15,"102,200",6d8 P,80 ft.,burn 2d6,24 rounds,1,2,"--",TRUE
-  "Gyrojet Rifle, Advanced",Projectile,15,"122,800",5d12 B,120 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Scattergun, Vortex",Projectile,15,"91,900",3d12 P,30 ft.,"--",12 shells,1,2,"analog, blast",TRUE
-  "Magnetar Rifle, Elite",Projectile,16,"185,100",6d8 P,120 ft.,"--",36 rounds,1,2,"analog, automatic",TRUE
-  "Gyrojet Rifle, Elite",Projectile,17,"245,600",6d12 B,120 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Kalo Shredder, Monsoon-Class",Projectile,17,"784,000",12d6 S,60 ft.,bleed 4d6,48 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Seeker Rifle, Elite",Projectile,17,"242,500",9d8 P,100 ft.,"--",18 rounds,1,1,analog,TRUE
-  "Shield Rifle, Paragon",Projectile,17,"264,000",8d8 E & P,80 ft.,Arc 4d8 ,18 rounds,1,2,Buttressing ,TRUE
-  "Scattergun, Grapeshot",Projectile,18,"331,000",4d12 P,30 ft.,"--",12 shells,1,2,"analog, blast",TRUE
-  "Breaching Gun, Grapeshot",Projectile,19,"509,000",10d10 P,30 ft.,knockdown,20 shells,2,1,"analog, breach, penetrating",TRUE
-  "Magnetar Rifle, Paragon",Projectile,19,"612,600",8d8 P,120 ft.,"--",48 rounds,1,2,"analog, automatic",TRUE
-  "Gyrojet Rifle, Paragon",Projectile,20,"723,500",8d12 B,120 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Seeker Rifle, Paragon",Projectile,20,"809,200",12d8 P,100 ft.,"--",24 rounds,1,1,analog,TRUE
-  "Pulsecaster Rifle",Shock,1,100,1d6 E,50 ft.,"--",20 charges,1,1,nonlethal,TRUE
-  "Arc Emitter, Tactical",Shock,2,750,1d4 E,15 ft.,"--",20 charges,4,1,"blast, stun, unwieldy",TRUE
-  "Storm Coil, Live",Shock,3,"1,480",1d6 E,40 ft.,"--",20 charges,5,2,"line, unwieldy",TRUE
-  "Polarity Rifle, Static",Shock,4,"2,400",1d8 E,60 ft.,"--",40 charges,2,1,polarize 1d4,TRUE
-  "Surgecaster, Standard",Shock,5,"3,300",1d10 E,40 ft.,arc 1d10,20 charges,2,1,"boost 1d6, living",TRUE
-  "Arc Rifle, Static",Shock,6,"4,200",1d12 E,70 ft.,arc 1d6,40 charges,1,2,stun,TRUE
-  "Storm Coil, Jolt",Shock,7,"6,900",2d6 E,60 ft.,"--",40 charges,8,2,"line, unwieldy",TRUE
-  "Charge Emitter, Impulse",Shock,8,"10,900",3d4 E,20 ft.,staggered,20 charges,2,1,"integrated (1 slot), stun",TRUE
-  "Arc Emitter, Advanced",Shock,9,"13,200",2d4 E,30 ft.,"--",40 charges,10,1,"blast, stun, unwieldy",TRUE
-  "Polarity Rifle, Aurora",Shock,10,"21,000",2d8 E,80 ft.,"--",40 charges,2,1,polarize 1d10,TRUE
-  "Arc Rifle, Aurora",Shock,11,"24,500",2d12 E,70 ft.,arc 2d6,40 charges,1,2,stun,TRUE
-  "Storm Coil, Impulse",Shock,12,"35,200",4d6 E,80 ft.,"--",80 charges,10,2,"line, unwieldy",TRUE
-  "Charge Emitter, Jolt",Shock,13,"57,000",3d10 E,30 ft.,staggered,20 charges,2,1,"integrated (1 slot), stun",TRUE
-  "Surgecaster, Advanced",Shock,14,"83,000",3d10 E,60 ft.,arc 2d10,40 charges,2,1,"boost 1d10, living",TRUE
-  "Polarity Rifle, Storm",Shock,15,"137,000",4d8 E,80 ft.,"--",40 charges,2,1,polarize 2d8,TRUE
-  "Arc Rifle, Storm",Shock,16,"190,300",4d12 E,80 ft.,arc 4d6,80 charges,2,2,stun,TRUE
-  "Storm Coil, Surge",Shock,17,"261,000",7d6 E,120 ft.,"--",100 charges,10,2,"line, unwieldy",TRUE
-  "Charge Emitter, Surge",Shock,18,"435,000",5d10 E,40 ft.,staggered,80 charges,5,1,"integrated (1 slot), stun",TRUE
-  "Arc Rifle, Tempest",Shock,19,"622,000",6d12 E,80 ft.,arc 6d6,100 charges,2,2,stun,TRUE
-  "Polarity Rifle, Tempest",Shock,20,"1,000,000",8d8 E,80 ft.,"--",80 charges,2,1,polarize 3d8,TRUE
-  "Scrambler Rifle, Termite",Shock,3,"1,520",1d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Solo",Shock,4,"2,200",1d4 E,60 ft.,"--",20 charges,5,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Scrambler Rifle, Cockroach",Shock,8,"9,850",2d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Duet",Shock,8,"9,700",2d4 E,90 ft.,"--",40 charges,8,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Scrambler Rifle, Dragonfly",Shock,11,"24,900",3d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Quartet",Shock,13,"50,000",4d4 E,120 ft.,Deafen ,80 charges,10,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Scrambler Rifle, Locust",Shock,14,"82,600",4d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Orchestra",Shock,18,"380,000",7d4 E,200 ft.,Deafen ,100 charges,10,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Shout Rifle",Sonic,1,450,1d4 So,30 ft.,demoralize,20 charges,4,1,"blast, nonlethal, unwieldy",TRUE
-  "Boomer Rifle, Tremor",Sonic,2,520,1d8 So,40 ft.,deafen,12 shells,3,1,analog,TRUE
-  "Chordpocalypse, Thunderstrike",Sonic,2,765,1d6 So,30 ft.,Deafen ,20 charges,1,1,"Boost (1d4), polarize (1d4), professional (musician) ",TRUE
-  "Blindmark Rifle, Thunderstrike",Sonic,3,"1,400",2d4 So,60 ft.,"--",20 charges,2,1,"echo, stun",TRUE
-  "Vortex Rifle, Pulse",Sonic,3,"1,400",2d4 So,60 ft.,Nauseate ,20 charges,1,1,"Breach, underwater ",TRUE
-  "Staccato Rifle, Pulse",Sonic,4,"2,000",1d10 So,40 ft.,deafen,40 charges,1,2,automatic,TRUE
-  "Sonic Rifle, Thunderstrike",Sonic,5,"3,400",1d10 So,50 ft.,deafen,40 charges,2,1,"--",TRUE
-  "Boomer Rifle, Rumbler",Sonic,6,"4,100",2d6 So,40 ft.,deafen,12 shells,4,1,analog,TRUE
-  "Chordpocalypse, Shattering",Sonic,6,"4,280",1d8 So,30 ft.,Deafen ,20 charges,1,1,"Boost (1d6), polarize (1d6), professional (musician) ",TRUE
-  "Vortex Rifle, Surge",Sonic,6,"4,150",2d6 So,60 ft.,Nauseate ,20 charges,1,1,"Breach, underwater ",TRUE
-  "Streetsweeper, Thunderstrike",Sonic,7,"7,150",1d10 So,50 ft.,knockdown,40 charges,5,2,boost 1d6,TRUE
-  "Blindmark Rifle, LFD",Sonic,8,"9,800",2d8 So,80 ft.,"--",40 charges,5,1,"echo, stun",TRUE
-  "Staccato Rifle, Surge",Sonic,9,"13,000",2d10 So,60 ft.,deafen,40 charges,2,2,automatic,TRUE
-  "Chordpocalypse, Psychedelic",Sonic,10,"18,400",2d8 So,30 ft.,Deafen ,40 charges,2,1,"Boost (1d8), polarize (1d8), professional (musician) ",TRUE
-  "Sonic Rifle, LFD",Sonic,10,"17,000",2d10 So,50 ft.,deafen,40 charges,2,2,"--",TRUE
-  "Boomer Rifle, Concussive",Sonic,11,"24,000",4d6 So,40 ft.,knockdown,15 shells,5,1,analog,TRUE
-  "Streetsweeper, LFD",Sonic,12,"39,300",3d10 So,50 ft.,knockdown,40 charges,5,2,boost 1d8,TRUE
-  "Vortex Rifle, Drum",Sonic,12,"38,000",4d6 So,60 ft.,Nauseate ,20 charges,1,1,"Breach, underwater ",TRUE
-  "Blindmark Rifle, HFD",Sonic,13,"51,000",4d8 So,100 ft.,sicken,40 charges,8,1,"echo, stun",TRUE
-  "Chordpocalypse, Banshee",Sonic,14,"72,000",4d8 So,30 ft.,Deafen ,40 charges,2,1,"Boost (2d6), polarize (2d6), professional (musician) ",TRUE
-  "Sonic Rifle, HFD",Sonic,14,"80,200",4d10 So,50 ft.,deafen,80 charges,4,2,"--",TRUE
-  "Staccato Rifle, Drum",Sonic,15,"107,000",4d10 So,60 ft.,deafen,40 charges,2,2,automatic,TRUE
-  "Streetsweeper, HFD",Sonic,16,"195,000",5d10 So,50 ft.,knockdown,40 charges,4,2,boost 1d10,TRUE
-  "Boomer Rifle, Shockwave",Sonic,17,"230,000",8d6 So,40 ft.,knockdown,20 shells,5,1,analog,TRUE
-  "Vortex Rifle, Hammer",Sonic,17,"250,000",8d6 So,60 ft.,Nauseate ,40 charges,2,1,"Breach, underwater ",TRUE
-  "Chordpocalypse, Transcendent",Sonic,18,"372,000",7d8 So,40 ft.,Deafen ,80 charges,2,1,"Boost (2d8), polarize (2d8), professional (musician) ",TRUE
-  "Sonic Rifle, Banshee",Sonic,18,"364,500",6d10 So,50 ft.,deafen,100 charges,5,2,"--",TRUE
-  "Blindmark Rifle, Banshee",Sonic,19,"585,000",8d8 So,120 ft.,sicken,80 charges,10,1,"echo, stun",TRUE
-  "Staccato Rifle, Hammer",Sonic,20,"810,000",8d10 So,80 ft.,deafen,80 charges,4,2,automatic,TRUE
+  "Needler Rifle": {
+    "category": null,
+    "level": "1",
+    "price": "110",
+    "damage": "1d6 P",
+    "range": "60 ft.",
+    "critical": "injection DC +2",
+    "capacity": "12 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, injection",
+    "sfsLegal": true
+  },
+  "Caustolance, Liquidator": {
+    "category": null,
+    "level": "1",
+    "price": "400",
+    "damage": "1d6 A",
+    "range": "60 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Injection",
+    "sfsLegal": true
+  },
+  "Needler Rifle, Tactical": {
+    "category": null,
+    "level": "1",
+    "price": "200",
+    "damage": "1d6 P",
+    "range": "70 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "14 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection",
+    "sfsLegal": true
+  },
+  "Rackarack, Pulse": {
+    "category": null,
+    "level": "1",
+    "price": "205",
+    "damage": "1d6 So",
+    "range": "60 ft.",
+    "critical": "Nuisance",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Dusk Rifle, Static": {
+    "category": null,
+    "level": "2",
+    "price": "900",
+    "damage": "1d4 C & E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Hybrid, line, unwieldy",
+    "sfsLegal": false
+  },
+  "Meduza Rifle, Stinger ": {
+    "category": null,
+    "level": "2",
+    "price": "720",
+    "damage": "1d8 A & S",
+    "range": "40 ft.",
+    "critical": "Bind ",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Analog, living ",
+    "sfsLegal": true
+  },
+  "Thasphalt Rifle, Light": {
+    "category": null,
+    "level": "2",
+    "price": "880",
+    "damage": "1d10 B",
+    "range": "40 ft.",
+    "critical": "Push (5 ft.) ",
+    "capacity": "80 thasphalt",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Analog, force ",
+    "sfsLegal": false
+  },
+  "Formian Venomcaster, Tactical": {
+    "category": null,
+    "level": "3",
+    "price": "1,325",
+    "damage": "1d8 P",
+    "range": "40 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "6 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection, unwieldy",
+    "sfsLegal": true
+  },
+  "Frost Maw, Growl-class": {
+    "category": null,
+    "level": "3",
+    "price": "1,350",
+    "damage": "1d8 C",
+    "range": "15 ft.",
+    "critical": "Bind 1d4 rounds",
+    "capacity": "20",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Aurora, blast, living, unwieldy",
+    "sfsLegal": false
+  },
+  "Net Gun, Wireframe": {
+    "category": null,
+    "level": "4",
+    "price": "1,750",
+    "damage": null,
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "2 nets",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Entangle ",
+    "sfsLegal": true
+  },
+  "Data Rifle, Giga": {
+    "category": null,
+    "level": "5",
+    "price": "3,150",
+    "damage": "1d8 B or P or S",
+    "range": "100 ft.",
+    "critical": "Knockdown ",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost 1d4, codework (capacity 20, usage 2), force, modal",
+    "sfsLegal": false
+  },
+  "Needler Rifle, Advanced": {
+    "category": null,
+    "level": "5",
+    "price": "3,000",
+    "damage": "1d8 P",
+    "range": "70 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "14 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection",
+    "sfsLegal": true
+  },
+  "Caustolance, Decimator": {
+    "category": null,
+    "level": "6",
+    "price": "4,500",
+    "damage": "2d6 A",
+    "range": "60 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Injection",
+    "sfsLegal": true
+  },
+  "Electrosystem Rifle, Buzzing": {
+    "category": null,
+    "level": "6",
+    "price": "4,500",
+    "damage": "2d10 E",
+    "range": "60 ft.",
+    "critical": "Staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Blast, living, Swarm, unwieldy",
+    "sfsLegal": false
+  },
+  "Meduza Rifle, Blitz ": {
+    "category": null,
+    "level": "6",
+    "price": "3,950",
+    "damage": "2d8 A & S",
+    "range": "60 ft.",
+    "critical": "Bind ",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Analog, living ",
+    "sfsLegal": true
+  },
+  "Rackarack, Surge": {
+    "category": null,
+    "level": "6",
+    "price": "4,400",
+    "damage": "2d6 So",
+    "range": "60 ft.",
+    "critical": "Nuisance",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost 1d4",
+    "sfsLegal": true
+  },
+  "Chimera Graft, Growl-class": {
+    "category": null,
+    "level": "7",
+    "price": "6,250",
+    "damage": "1d12 F",
+    "range": "40 ft.",
+    "critical": "Burn 1d6",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Automatic, integrated (1 slot), harrying, living, regrowth",
+    "sfsLegal": true
+  },
+  "Dusk Rifle, Aurora": {
+    "category": null,
+    "level": "7",
+    "price": "6,500",
+    "damage": "2d4 C & E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Hybrid, line, unwieldy",
+    "sfsLegal": false
+  },
+  "EM Induction Rifle, Static": {
+    "category": null,
+    "level": "7",
+    "price": "7,000",
+    "damage": "1d8 E",
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "Analog, boost 1d4, clockwork (capacity 40, usage 8), line, unwieldy",
+    "sfsLegal": false
+  },
+  "Net Gun, Bolt": {
+    "category": null,
+    "level": "7",
+    "price": "5,250",
+    "damage": "3d4 E",
+    "range": "30 ft.",
+    "critical": "Stunned ",
+    "capacity": "2 nets",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Entangle, stun ",
+    "sfsLegal": true
+  },
+  "Recombinator Ray": {
+    "category": null,
+    "level": "8",
+    "price": "9,500",
+    "damage": "2d10 A",
+    "range": "60 ft.",
+    "critical": "Corrode 1d6",
+    "capacity": "80",
+    "usage": "8",
+    "bulk": "1",
+    "special": "Antibiological",
+    "sfsLegal": true
+  },
+  "Culling Ray, Lesser": {
+    "category": null,
+    "level": "8",
+    "price": "8,850",
+    "damage": "1d12 A & F",
+    "range": "30 ft.",
+    "critical": "Irradiate",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Blast, ignite 1d6",
+    "sfsLegal": false
+  },
+  "Digitizer Rifle, Silver ": {
+    "category": null,
+    "level": "8",
+    "price": "8,000",
+    "damage": "2d8 So",
+    "range": "80 ft.",
+    "critical": "digitize 1d8 ",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Bright, professional (vidgamer), relic",
+    "sfsLegal": false
+  },
+  "Thasphalt Rifle, Tactical": {
+    "category": null,
+    "level": "8",
+    "price": "8,500",
+    "damage": "2d10 B",
+    "range": "60 ft.",
+    "critical": "Push (5 ft.) ",
+    "capacity": "80 thasphalt",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Analog, force ",
+    "sfsLegal": false
+  },
+  "Formian Venomcaster, Advanced": {
+    "category": null,
+    "level": "9",
+    "price": "12,750",
+    "damage": "3d8 P",
+    "range": "60 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "12 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection, unwieldy",
+    "sfsLegal": true
+  },
+  "Frost Maw, Snarl-class": {
+    "category": null,
+    "level": "9",
+    "price": "13,000",
+    "damage": "2d8 C",
+    "range": "60 ft.",
+    "critical": "Bind 1d4 rounds",
+    "capacity": "20",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Aurora, blast, living, unwieldy",
+    "sfsLegal": false
+  },
+  "Nanite Thrower, Tactical": {
+    "category": null,
+    "level": "9",
+    "price": "13,300",
+    "damage": null,
+    "range": "60 ft.",
+    "critical": "wound",
+    "capacity": "10 nanites",
+    "usage": "1",
+    "bulk": "1",
+    "special": "deconstruct 2d6",
+    "sfsLegal": true
+  },
+  "Reality Rifle": {
+    "category": null,
+    "level": "10",
+    "price": "19,500",
+    "damage": "2d12 E",
+    "range": "80 ft.",
+    "critical": "Confuse",
+    "capacity": "40",
+    "usage": "8",
+    "bulk": "2",
+    "special": "Mind-affecting, stun, subtle",
+    "sfsLegal": true
+  },
+  "Data Rifle, Tera": {
+    "category": null,
+    "level": "10",
+    "price": "17,900",
+    "damage": "3d8 B or P or S",
+    "range": "100 ft.",
+    "critical": "Knockdown ",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost 1d8, codework (capacity 20, usage 2), force, modal",
+    "sfsLegal": false
+  },
+  "Frost Maw, Roar-class": {
+    "category": null,
+    "level": "10",
+    "price": "19,000",
+    "damage": "4d8 C",
+    "range": "80 ft.",
+    "critical": "Bind 1d4 rounds",
+    "capacity": "20",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Aurora, blast, living, unwieldy",
+    "sfsLegal": false
+  },
+  "Meduza Rifle, Assault ": {
+    "category": null,
+    "level": "10",
+    "price": "17,200",
+    "damage": "3d8 A & S",
+    "range": "70 ft.",
+    "critical": "Bind ",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "Analog, living ",
+    "sfsLegal": true
+  },
+  "Needler Rifle, Elite": {
+    "category": null,
+    "level": "10",
+    "price": "18,000",
+    "damage": "4d6 P",
+    "range": "70 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "14 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection",
+    "sfsLegal": true
+  },
+  "Chimera Graft, Snarl-class": {
+    "category": null,
+    "level": "11",
+    "price": "24,000",
+    "damage": "2d12 F",
+    "range": "40 ft.",
+    "critical": "Burn 1d6",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Automatic, integrated (1 slot), harrying, living, regrowth",
+    "sfsLegal": true
+  },
+  "Caustolance, Executioner": {
+    "category": null,
+    "level": "12",
+    "price": "38,000",
+    "damage": "5d6 A",
+    "range": "60 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Injection",
+    "sfsLegal": true
+  },
+  "Culling Ray, Standard": {
+    "category": null,
+    "level": "12",
+    "price": "34,500",
+    "damage": "2d12 A & F",
+    "range": "30 ft.",
+    "critical": "Irradiate",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Blast, ignite 3d6",
+    "sfsLegal": false
+  },
+  "Dusk Rifle, Storm": {
+    "category": null,
+    "level": "12",
+    "price": "36,500",
+    "damage": "4d6 C & E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Hybrid, line, unwieldy",
+    "sfsLegal": false
+  },
+  "Electrosystem Rifle, Jolting": {
+    "category": null,
+    "level": "12",
+    "price": "37,500",
+    "damage": "4d10 E",
+    "range": "60 ft.",
+    "critical": "Staggered",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "Blast, living, Swarm, unwieldy",
+    "sfsLegal": false
+  },
+  "EM Induction Rifle, Aurora": {
+    "category": null,
+    "level": "12",
+    "price": "36,400",
+    "damage": "3d8 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "Analog, boost 1d8, clockwork (capacity 40, usage 8), line, unwieldy",
+    "sfsLegal": false
+  },
+  "Nanite Thrower, Advanced": {
+    "category": null,
+    "level": "12",
+    "price": "35,400",
+    "damage": null,
+    "range": "60 ft.",
+    "critical": "wound",
+    "capacity": "10 nanites",
+    "usage": "1",
+    "bulk": "1",
+    "special": "deconstruct 3d6",
+    "sfsLegal": true
+  },
+  "Thasphalt Rifle, Advanced": {
+    "category": null,
+    "level": "12",
+    "price": "35,100",
+    "damage": "3d10 B",
+    "range": "80 ft.",
+    "critical": "Push (10 ft.) ",
+    "capacity": "80 thasphalt",
+    "usage": "8",
+    "bulk": "2",
+    "special": "Analog, force ",
+    "sfsLegal": false
+  },
+  "Rackarack, Drum": {
+    "category": null,
+    "level": "13",
+    "price": "46,100",
+    "damage": "5d6 So",
+    "range": "60 ft.",
+    "critical": "Nuisance",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost 2d4",
+    "sfsLegal": true
+  },
+  "Digitizer Rifle, Gold ": {
+    "category": null,
+    "level": "14",
+    "price": "65,000",
+    "damage": "5d8 So",
+    "range": "80 ft.",
+    "critical": "digitize 2d8 ",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Bright, professional (vidgamer), relic",
+    "sfsLegal": false
+  },
+  "Formian Venomcaster, Elite": {
+    "category": null,
+    "level": "14",
+    "price": "70,600",
+    "damage": "7d8 P",
+    "range": "80 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "12 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, entangle, injection, unwieldy",
+    "sfsLegal": true
+  },
+  "Data Rifle, Peta": {
+    "category": null,
+    "level": "15",
+    "price": "113,300",
+    "damage": "5d8 B or P or S",
+    "range": "120 ft.",
+    "critical": "Knockdown ",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Boost 2d8, codework (capacity 40, usage 4), force, modal",
+    "sfsLegal": false
+  },
+  "Meduza Rifle, Commander ": {
+    "category": null,
+    "level": "15",
+    "price": "100,000",
+    "damage": "7d8 A & S",
+    "range": "80 ft.",
+    "critical": "Bind ",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "Analog, living ",
+    "sfsLegal": true
+  },
+  "Nanite Thrower, Elite": {
+    "category": null,
+    "level": "15",
+    "price": "110,000",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": "severe wound",
+    "capacity": "10 nanites",
+    "usage": "2",
+    "bulk": "1",
+    "special": "deconstruct 4d6",
+    "sfsLegal": true
+  },
+  "Needler Rifle, Paragon": {
+    "category": null,
+    "level": "15",
+    "price": "110,000",
+    "damage": "8d6 P",
+    "range": "70 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "14 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection",
+    "sfsLegal": true
+  },
+  "Thasphalt Rifle, Elite": {
+    "category": null,
+    "level": "16",
+    "price": "175,000",
+    "damage": "4d10 B",
+    "range": "100 ft.",
+    "critical": "Push (10 ft.) ",
+    "capacity": "80 thasphalt",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Analog, force ",
+    "sfsLegal": false
+  },
+  "Chimera Graft, Roar-class": {
+    "category": null,
+    "level": "17",
+    "price": "218,000",
+    "damage": "4d12 F",
+    "range": "40 ft.",
+    "critical": "Burn 1d6",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Automatic, integrated (1 slot), harrying, living, regrowth",
+    "sfsLegal": true
+  },
+  "Dusk Rifle, Tempest": {
+    "category": null,
+    "level": "17",
+    "price": "260,000",
+    "damage": "8d6 C & E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Hybrid, line, unwieldy",
+    "sfsLegal": false
+  },
+  "EM Induction Rifle, Storm": {
+    "category": null,
+    "level": "17",
+    "price": "255,000",
+    "damage": "6d8 E",
+    "range": "90 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "16",
+    "bulk": "3",
+    "special": "Analog, boost 3d8, clockwork (capacity 80, usage 16), line, unwieldy",
+    "sfsLegal": false
+  },
+  "Caustolance, Eradicator": {
+    "category": null,
+    "level": "18",
+    "price": "400,000",
+    "damage": "12d6 A",
+    "range": "60 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Injection",
+    "sfsLegal": true
+  },
+  "Culling Ray, Greater": {
+    "category": null,
+    "level": "18",
+    "price": "350,000",
+    "damage": "4d12 A & F",
+    "range": "30 ft.",
+    "critical": "Irradiate",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Blast, ignite 5d6",
+    "sfsLegal": false
+  },
+  "Electrosystem Rifle, Convulsion": {
+    "category": null,
+    "level": "18",
+    "price": "400,000",
+    "damage": "8d10 E",
+    "range": "60 ft.",
+    "critical": "Stunned",
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "1",
+    "special": "Blast, living, Swarm, unwieldy",
+    "sfsLegal": false
+  },
+  "Formian Venomcaster, Paragon": {
+    "category": null,
+    "level": "18",
+    "price": "398,000",
+    "damage": "10d10 P",
+    "range": "80 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "24 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, entangle, injection, unwieldy",
+    "sfsLegal": true
+  },
+  "Rackarack, Hammer": {
+    "category": null,
+    "level": "18",
+    "price": "371,000",
+    "damage": "6d10 So",
+    "range": "60 ft.",
+    "critical": "Nuisance",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost 4d4",
+    "sfsLegal": true
+  },
+  "Meduza Rifle, Gorgon ": {
+    "category": null,
+    "level": "19",
+    "price": "500,000",
+    "damage": "11d8 A & S",
+    "range": "100 ft.",
+    "critical": "Bind ",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "1",
+    "special": "Analog, living ",
+    "sfsLegal": true
+  },
+  "Data Rifle, Exa": {
+    "category": null,
+    "level": "20",
+    "price": "875,000",
+    "damage": "11d8 B or P or S",
+    "range": "120 ft.",
+    "critical": "Knockdown ",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "1",
+    "special": "Boost 5d8, codework (capacity 40, usage 4), force, modal",
+    "sfsLegal": false
+  },
+  "Digitizer Rifle, Holofoil ": {
+    "category": null,
+    "level": "20",
+    "price": "900,000",
+    "damage": "10d8 So",
+    "range": "160 ft.",
+    "critical": "digitize 4d8 ",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "Bright, professional (vidgamer), relic",
+    "sfsLegal": false
+  },
+  "Nanite Thrower, Paragon": {
+    "category": null,
+    "level": "20",
+    "price": "830,000",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": "severe wound",
+    "capacity": "10 nanites",
+    "usage": "2",
+    "bulk": "1",
+    "special": "deconstruct 5d6",
+    "sfsLegal": true
+  },
+  "Needler Rifle, Supreme": {
+    "category": null,
+    "level": "20",
+    "price": "850,000",
+    "damage": "16d6 P",
+    "range": "70 ft.",
+    "critical": "Injection DC +2",
+    "capacity": "14 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Analog, injection",
+    "sfsLegal": true
+  },
+  "Numbing Beam, Tactical": {
+    "category": "Cryo",
+    "level": "1",
+    "price": "370",
+    "damage": "1d6 C",
+    "range": "50 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Ice Carbine, Subzero": {
+    "category": "Cryo",
+    "level": "2",
+    "price": "510",
+    "damage": "1d8 C & P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Void Rifle, Grave-Class": {
+    "category": "Cryo",
+    "level": "2",
+    "price": "1,020",
+    "damage": "1d6 C",
+    "range": "60 ft.",
+    "critical": "suffocate",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "antibiological",
+    "sfsLegal": true
+  },
+  "Frailty Rifle, Atrophy-Class": {
+    "category": "Cryo",
+    "level": "3",
+    "price": "1,650",
+    "damage": "1d6 C",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "necrotic",
+    "sfsLegal": true
+  },
+  "Freeze Ray, Hiemal": {
+    "category": "Cryo",
+    "level": "3",
+    "price": "1,420",
+    "damage": "1d4 C",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Zero Rifle, Frostbite-Class": {
+    "category": "Cryo",
+    "level": "4",
+    "price": "2,330",
+    "damage": "1d8 C",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Numbing Beam, Advanced": {
+    "category": "Cryo",
+    "level": "5",
+    "price": "3,050",
+    "damage": "1d8 C",
+    "range": "50 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Frost Projector, Frostbite-Class": {
+    "category": "Cryo",
+    "level": "6",
+    "price": "5,100",
+    "damage": "1d10 C",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "integrated (2 slots)",
+    "sfsLegal": true
+  },
+  "Void Rifle, Crypt-Class": {
+    "category": "Cryo",
+    "level": "6",
+    "price": "4,400",
+    "damage": "1d8 C",
+    "range": "60 ft.",
+    "critical": "suffocate",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "antibiological",
+    "sfsLegal": true
+  },
+  "Frailty Rifle, Rot-Class": {
+    "category": "Cryo",
+    "level": "7",
+    "price": "7,700",
+    "damage": "2d6 C",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "necrotic",
+    "sfsLegal": true
+  },
+  "Freeze Ray, Algid": {
+    "category": "Cryo",
+    "level": "7",
+    "price": "6,300",
+    "damage": "2d4 C",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Zero Rifle, Hailstorm-Class": {
+    "category": "Cryo",
+    "level": "8",
+    "price": "10,100",
+    "damage": "2d8 C",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Ice Carbine, Gelid": {
+    "category": "Cryo",
+    "level": "9",
+    "price": "12,400",
+    "damage": "3d8 C & P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Numbing Beam, Elite": {
+    "category": "Cryo",
+    "level": "10",
+    "price": "18,000",
+    "damage": "3d6 C",
+    "range": "80 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Freeze Ray, Glacial": {
+    "category": "Cryo",
+    "level": "11",
+    "price": "24,800",
+    "damage": "5d4 C",
+    "range": "40 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Void Rifle, Tomb-Class": {
+    "category": "Cryo",
+    "level": "11",
+    "price": "26,300",
+    "damage": "2d10 C",
+    "range": "80 ft.",
+    "critical": "suffocate",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "antibiological",
+    "sfsLegal": true
+  },
+  "Frost Projector, Hailstorm-Class": {
+    "category": "Cryo",
+    "level": "12",
+    "price": "42,000",
+    "damage": "2d10 C",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "integrated (2 slots)",
+    "sfsLegal": true
+  },
+  "Frailty Rifle, Blight-Class": {
+    "category": "Cryo",
+    "level": "13",
+    "price": "57,200",
+    "damage": "4d6 C",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "necrotic",
+    "sfsLegal": true
+  },
+  "Ice Carbine, Ultracold": {
+    "category": "Cryo",
+    "level": "13",
+    "price": "47,100",
+    "damage": "6d6 C & P",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Zero Rifle, Blizzard-Class": {
+    "category": "Cryo",
+    "level": "14",
+    "price": "79,800",
+    "damage": "4d8 C",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Numbing Beam, Paragon": {
+    "category": "Cryo",
+    "level": "15",
+    "price": "112,000",
+    "damage": "6d6 C",
+    "range": "80 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Freeze Ray, Isothermal": {
+    "category": "Cryo",
+    "level": "16",
+    "price": "165,000",
+    "damage": "5d8 C",
+    "range": "40 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Void Rifle, Ossuary-Class": {
+    "category": "Cryo",
+    "level": "16",
+    "price": "182,000",
+    "damage": "4d10 C",
+    "range": "100 ft.",
+    "critical": "suffocate",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "antibiological",
+    "sfsLegal": true
+  },
+  "Frailty Rifle, Epidemic-Class": {
+    "category": "Cryo",
+    "level": "17",
+    "price": "297,000",
+    "damage": "7d6 C",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "50 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "necrotic",
+    "sfsLegal": true
+  },
+  "Ice Carbine, Absolute-Zero": {
+    "category": "Cryo",
+    "level": "17",
+    "price": "218,000",
+    "damage": "11d6 C & P",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Zero Rifle, Avalanche-Class": {
+    "category": "Cryo",
+    "level": "18",
+    "price": "410,200",
+    "damage": "7d8 C",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Frost Projector, Blizzard-Class": {
+    "category": "Cryo",
+    "level": "19",
+    "price": "680,000",
+    "damage": "5d10 C",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "integrated (2 slots)",
+    "sfsLegal": true
+  },
+  "Void Rifle, Barrow-Class": {
+    "category": "Cryo",
+    "level": "19",
+    "price": "606,000",
+    "damage": "6d10 C",
+    "range": "100 ft.",
+    "critical": "suffocate",
+    "capacity": "80 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "antibiological",
+    "sfsLegal": true
+  },
+  "Freeze Ray, Hypothermic": {
+    "category": "Cryo",
+    "level": "20",
+    "price": "818,000",
+    "damage": "5d12 C",
+    "range": "50 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Degenerator Rifle, Military": {
+    "category": "Degenerator",
+    "level": "17",
+    "price": "242,000",
+    "damage": "7d8 A & So",
+    "range": "50 ft.",
+    "critical": "Degeneration 4d6",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Hybrid",
+    "sfsLegal": true
+  },
+  "Degenerator Rifle, Dominion": {
+    "category": "Degenerator",
+    "level": "20",
+    "price": "810,000",
+    "damage": "10d8 A & So",
+    "range": "50 ft.",
+    "critical": "Degeneration 5d6",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Hybrid",
+    "sfsLegal": true
+  },
+  "Disruption Rifle, Minor": {
+    "category": "Dimensional Disruption",
+    "level": "9",
+    "price": "15,000",
+    "damage": "3d8 So",
+    "range": "50 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "boost 1d8, relic",
+    "sfsLegal": true
+  },
+  "Disruption Rifle, Major": {
+    "category": "Dimensional Disruption",
+    "level": "14",
+    "price": "80,000",
+    "damage": "6d8 So",
+    "range": "40 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "boost 2d8, relic",
+    "sfsLegal": true
+  },
+  "Dross Gun, Scrapper": {
+    "category": "Disintegrator",
+    "level": "2",
+    "price": "720",
+    "damage": "1d6 A",
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Dross Gun, Scoring": {
+    "category": "Disintegrator",
+    "level": "5",
+    "price": "3,300",
+    "damage": "1d8 A",
+    "range": "20 ft.",
+    "critical": "wound",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Disintegrator Rifle, Liquidator": {
+    "category": "Disintegrator",
+    "level": "6",
+    "price": "4,750",
+    "damage": "1d20 A",
+    "range": "30 ft.",
+    "critical": "corrode 1d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Dross Gun, Flux": {
+    "category": "Disintegrator",
+    "level": "10",
+    "price": "19,200",
+    "damage": "2d12 A",
+    "range": "20 ft.",
+    "critical": "severe wound",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Disintegrator Rifle, Decimator": {
+    "category": "Disintegrator",
+    "level": "11",
+    "price": "29,000",
+    "damage": "3d10 A",
+    "range": "30 ft.",
+    "critical": "corrode 2d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Disintegrator Rifle, Executioner": {
+    "category": "Disintegrator",
+    "level": "16",
+    "price": "210,000",
+    "damage": "5d10 A",
+    "range": "30 ft.",
+    "critical": "corrode 3d6",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Disintegrator Rifle, Eradicator": {
+    "category": "Disintegrator",
+    "level": "20",
+    "price": "745,000",
+    "damage": "5d20 A",
+    "range": "30 ft.",
+    "critical": "corrode 4d6",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Gulchgun": {
+    "category": "Flame",
+    "level": "1",
+    "price": "90",
+    "damage": "1d8 F",
+    "range": "20 ft.",
+    "critical": "burn 1d6",
+    "capacity": "4 shells",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Flame Rifle": {
+    "category": "Flame",
+    "level": "2",
+    "price": "490",
+    "damage": "1d6 F",
+    "range": "25 ft.",
+    "critical": "burn 1d6",
+    "capacity": "20 petrol",
+    "usage": "5",
+    "bulk": "1",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Flare Rifle, Dazzler": {
+    "category": "Flame",
+    "level": "3",
+    "price": "445",
+    "damage": "2d4 F",
+    "range": "60 ft.",
+    "critical": "burn 1d6",
+    "capacity": "8 flares",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, bright, harrying",
+    "sfsLegal": true
+  },
+  "Blaze Rifle, Ifrit-Class": {
+    "category": "Flame",
+    "level": "4",
+    "price": "1,900",
+    "damage": "1d10 F",
+    "range": "40 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Petrol Converter, Light": {
+    "category": "Flame",
+    "level": "4",
+    "price": "2,150",
+    "damage": "1d8 F or A",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, modal (disintegrator)",
+    "sfsLegal": true
+  },
+  "Dragon Rifle, Wyrmling": {
+    "category": "Flame",
+    "level": "5",
+    "price": "3,020",
+    "damage": "1d8 F",
+    "range": "6 ft.",
+    "critical": "burn 1d4",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Flare Rifle, Vivifier": {
+    "category": "Flame",
+    "level": "6",
+    "price": "3,600",
+    "damage": "1d10 F",
+    "range": "80 ft.",
+    "critical": "burn 2d4",
+    "capacity": "8 flares",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, bright, harrying",
+    "sfsLegal": true
+  },
+  "Blaze Rifle, Salamander-Class": {
+    "category": "Flame",
+    "level": "7",
+    "price": "5,800",
+    "damage": "2d8 F",
+    "range": "60 ft.",
+    "critical": "burn 2d6",
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Petrol Converter, Tactical": {
+    "category": "Flame",
+    "level": "7",
+    "price": "6,750",
+    "damage": "2d6 F or A",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "1",
+    "special": "analog, modal (disintegrator)",
+    "sfsLegal": true
+  },
+  "Igniter, Ember": {
+    "category": "Flame",
+    "level": "8",
+    "price": "9,900",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": "burn 2d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "ignite 2d6",
+    "sfsLegal": true
+  },
+  "Dragon Rifle, Drake": {
+    "category": "Flame",
+    "level": "9",
+    "price": "13,400",
+    "damage": "3d6 F",
+    "range": "60 ft.",
+    "critical": "burn 2d4",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Flare Rifle, Coruscator": {
+    "category": "Flame",
+    "level": "10",
+    "price": "15,700",
+    "damage": "5d4 F",
+    "range": "80 ft.",
+    "critical": "burn 2d6",
+    "capacity": "12 flares",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, bright, harrying",
+    "sfsLegal": true
+  },
+  "Petrol Converter, Advanced": {
+    "category": "Flame",
+    "level": "10",
+    "price": "18,500",
+    "damage": "3d6 F or A",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, modal (disintegrator)",
+    "sfsLegal": true
+  },
+  "Blaze Rifle, Hellhound-Class": {
+    "category": "Flame",
+    "level": "11",
+    "price": "23,200",
+    "damage": "3d10 F",
+    "range": "60 ft.",
+    "critical": "burn 3d6",
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Igniter, Blaze": {
+    "category": "Flame",
+    "level": "12",
+    "price": "34,200",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": "burn 3d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "ignite 3d6",
+    "sfsLegal": true
+  },
+  "Flare Rifle, Scorcher": {
+    "category": "Flame",
+    "level": "13",
+    "price": "43,800",
+    "damage": "7d4 F",
+    "range": "80 ft.",
+    "critical": "burn 3d6",
+    "capacity": "12 flares",
+    "usage": "3",
+    "bulk": "1",
+    "special": "analog, bright, harrying",
+    "sfsLegal": true
+  },
+  "Dragon Rifle, Wyvern": {
+    "category": "Flame",
+    "level": "14",
+    "price": "72,200",
+    "damage": "6d6 F",
+    "range": "80 ft.",
+    "critical": "burn 3d4",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Petrol Converter, Elite": {
+    "category": "Flame",
+    "level": "14",
+    "price": "76,500",
+    "damage": "5d6 F or A",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, modal (disintegrator)",
+    "sfsLegal": true
+  },
+  "Igniter, Inferno": {
+    "category": "Flame",
+    "level": "15",
+    "price": "108,000",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": "burn 4d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "ignite 4d6",
+    "sfsLegal": true
+  },
+  "Blaze Rifle, Firedrake-Class": {
+    "category": "Flame",
+    "level": "16",
+    "price": "153,000",
+    "damage": "5d10 F",
+    "range": "60 ft.",
+    "critical": "burn 4d6",
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Flare Rifle, Nova": {
+    "category": "Flame",
+    "level": "17",
+    "price": "201,000",
+    "damage": "12d4 F",
+    "range": "100 ft.",
+    "critical": "burn 4d6",
+    "capacity": "12 flares",
+    "usage": "4",
+    "bulk": "1",
+    "special": "analog, bright, harrying",
+    "sfsLegal": true
+  },
+  "Igniter, Solar Flare": {
+    "category": "Flame",
+    "level": "18",
+    "price": "360,000",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": "burn 5d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "ignite 5d6",
+    "sfsLegal": true
+  },
+  "Petrol Converter, Paragon": {
+    "category": "Flame",
+    "level": "18",
+    "price": "385,000",
+    "damage": "9d6 F or A",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, modal (disintegrator)",
+    "sfsLegal": true
+  },
+  "Dragon Rifle, True ": {
+    "category": "Flame",
+    "level": "19",
+    "price": "559,000",
+    "damage": "11d6 F",
+    "range": "100 ft.",
+    "critical": "burn 4d4",
+    "capacity": "20 petrol",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Blaze Rifle, Pheonix-Class": {
+    "category": "Flame",
+    "level": "20",
+    "price": "765,000",
+    "damage": "9d10 F",
+    "range": "80 ft.",
+    "critical": "burn 5d6",
+    "capacity": "40 petrol",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Laser Rifle, Azimuth": {
+    "category": "Laser",
+    "level": "1",
+    "price": "425",
+    "damage": "1d8 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Serpent Laser, Azimuth": {
+    "category": "Laser",
+    "level": "2",
+    "price": "500",
+    "damage": "2d4 F",
+    "range": "100 ft.",
+    "critical": "burn 1d4",
+    "capacity": "20 charges",
+    "usage": "10",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Infinity Rifle, Tactical": {
+    "category": "Laser",
+    "level": "3",
+    "price": "1,300",
+    "damage": "1d6 F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "boost 1d6",
+    "sfsLegal": true
+  },
+  "Excavation Laser, Light": {
+    "category": "Laser",
+    "level": "4",
+    "price": "2,050",
+    "damage": "1d10 F",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "penetrating, professional (mining)",
+    "sfsLegal": true
+  },
+  "Serpent Laser, Corona": {
+    "category": "Laser",
+    "level": "5",
+    "price": "2,700",
+    "damage": "2d6 F",
+    "range": "100 ft.",
+    "critical": "burn 2d4",
+    "capacity": "40 charges",
+    "usage": "20",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Laser Rifle, Corona": {
+    "category": "Laser",
+    "level": "6",
+    "price": "4,650",
+    "damage": "2d6 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Infinity Rifle, Advanced": {
+    "category": "Laser",
+    "level": "7",
+    "price": "6,100",
+    "damage": "2d4 F",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "boost 2d4",
+    "sfsLegal": true
+  },
+  "Serpent Laser, Aphelion": {
+    "category": "Laser",
+    "level": "8",
+    "price": "8,800",
+    "damage": "2d8 F",
+    "range": "120 ft.",
+    "critical": "burn 3d4",
+    "capacity": "40 charges",
+    "usage": "20",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Laser Rifle, Aphelion": {
+    "category": "Laser",
+    "level": "9",
+    "price": "14,300",
+    "damage": "3d6 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Infinity Rifle, Elite": {
+    "category": "Laser",
+    "level": "10",
+    "price": "17,100",
+    "damage": "2d6 F",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "boost 2d6",
+    "sfsLegal": true
+  },
+  "Autobeam Rifle, Tactical": {
+    "category": "Laser",
+    "level": "11",
+    "price": "26,900",
+    "damage": "5d4 F",
+    "range": "60 ft.",
+    "critical": "burn 2d4",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Excavation Laser, Medium": {
+    "category": "Laser",
+    "level": "12",
+    "price": "36,000",
+    "damage": "3d10 F",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "penetrating, professional (mining)",
+    "sfsLegal": true
+  },
+  "Laser Rifle, Perihelion": {
+    "category": "Laser",
+    "level": "13",
+    "price": "53,800",
+    "damage": "5d6 F",
+    "range": "130 ft.",
+    "critical": "burn 2d6",
+    "capacity": "100 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Serpent Laser, Perihelion": {
+    "category": "Laser",
+    "level": "14",
+    "price": "66,000",
+    "damage": "3d12 F",
+    "range": "120 ft.",
+    "critical": "burn 4d4",
+    "capacity": "40 charges",
+    "usage": "20",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Autobeam Rifle, Advanced": {
+    "category": "Laser",
+    "level": "15",
+    "price": "95,500",
+    "damage": "7d4 F",
+    "range": "60 ft.",
+    "critical": "burn 3d4",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Infinity Rifle, Paragon": {
+    "category": "Laser",
+    "level": "16",
+    "price": "155,000",
+    "damage": "4d6 F",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "boost 4d6",
+    "sfsLegal": true
+  },
+  "Laser Rifle, Parallax": {
+    "category": "Laser",
+    "level": "17",
+    "price": "248,000",
+    "damage": "8d6 F",
+    "range": "150 ft.",
+    "critical": "burn 4d6",
+    "capacity": "100 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Excavation Laser, Heavy": {
+    "category": "Laser",
+    "level": "18",
+    "price": "380,000",
+    "damage": "6d10 F",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "penetrating, professional (mining)",
+    "sfsLegal": true
+  },
+  "Autobeam Rifle, Elite": {
+    "category": "Laser",
+    "level": "19",
+    "price": "548,100",
+    "damage": "12d4 F",
+    "range": "60 ft.",
+    "critical": "burn 5d4",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Laser Rifle, Zenith": {
+    "category": "Laser",
+    "level": "20",
+    "price": "722,000",
+    "damage": "11d6 F",
+    "range": "150 ft.",
+    "critical": "burn 5d6",
+    "capacity": "100 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Plasma Bolter, Tactical": {
+    "category": "Plasma",
+    "level": "1",
+    "price": "260",
+    "damage": "1d10 E & F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Nova Rifle, Red Star": {
+    "category": "Plasma",
+    "level": "2",
+    "price": "940",
+    "damage": "1d6 E & F",
+    "range": "30 ft.",
+    "critical": "blind",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Fork, 12-Notch": {
+    "category": "Plasma",
+    "level": "3",
+    "price": "1,290",
+    "damage": "1d8 E & F",
+    "range": "60 ft.",
+    "critical": "knockdown",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "boost 1d4",
+    "sfsLegal": true
+  },
+  "Microfusion Rifle, Light": {
+    "category": "Plasma",
+    "level": "4",
+    "price": "2,350",
+    "damage": "1d8 E & F",
+    "range": "15 ft.",
+    "critical": "irradiate",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "blast, radioactive, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Bolter, Advanced": {
+    "category": "Plasma",
+    "level": "5",
+    "price": "3,010",
+    "damage": "2d8 E & F",
+    "range": "60 ft.",
+    "critical": "wound",
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Rifle, Red Star": {
+    "category": "Plasma",
+    "level": "6",
+    "price": "4,600",
+    "damage": "1d10 E & F",
+    "range": "40 ft.",
+    "critical": "burn 1d4",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Nova Rifle, Yellow Star": {
+    "category": "Plasma",
+    "level": "7",
+    "price": "6,800",
+    "damage": "2d6 E & F",
+    "range": "60 ft.",
+    "critical": "blind",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Fork, 15-Notch": {
+    "category": "Plasma",
+    "level": "8",
+    "price": "8,850",
+    "damage": "1d10 E & F",
+    "range": "80 ft.",
+    "critical": "knockdown",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "boost 1d10",
+    "sfsLegal": true
+  },
+  "Plasma Bolter, Elite": {
+    "category": "Plasma",
+    "level": "9",
+    "price": "14,000",
+    "damage": "3d10 E & F",
+    "range": "60 ft.",
+    "critical": "wound",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Rifle, Yellow Star": {
+    "category": "Plasma",
+    "level": "10",
+    "price": "16,800",
+    "damage": "2d10 E & F",
+    "range": "40 ft.",
+    "critical": "burn 1d8",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Nova Rifle, White Star": {
+    "category": "Plasma",
+    "level": "11",
+    "price": "25,300",
+    "damage": "3d6 E & F",
+    "range": "80 ft.",
+    "critical": "blind",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Microfusion Rifle, Medium": {
+    "category": "Plasma",
+    "level": "12",
+    "price": "40,800",
+    "damage": "3d8 E & F",
+    "range": "30 ft.",
+    "critical": "irradiate",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "blast, radioactive, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Caster, White Star": {
+    "category": "Plasma",
+    "level": "13",
+    "price": "49,100",
+    "damage": "3d10 E & F",
+    "range": "80 ft.",
+    "critical": "burn 1d10",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "boost 1d10",
+    "sfsLegal": true
+  },
+  "Plasma Fork, 19-Notch": {
+    "category": "Plasma",
+    "level": "14",
+    "price": "64,800",
+    "damage": "3d10 E & F",
+    "range": "80 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "boost 2d10",
+    "sfsLegal": true
+  },
+  "Plasma Rifle, White Star": {
+    "category": "Plasma",
+    "level": "15",
+    "price": "126,600",
+    "damage": "4d10 E & F",
+    "range": "60 ft.",
+    "critical": "burn 2d8",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Bolter, Paragon": {
+    "category": "Plasma",
+    "level": "16",
+    "price": "170,000",
+    "damage": "9d8 E & F",
+    "range": "60 ft.",
+    "critical": "wound",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Caster, Blue Star": {
+    "category": "Plasma",
+    "level": "17",
+    "price": "275,000",
+    "damage": "5d10 E & F",
+    "range": "80 ft.",
+    "critical": "burn 2d10",
+    "capacity": "200 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "boost 2d10",
+    "sfsLegal": true
+  },
+  "Microfusion Rifle, Heavy": {
+    "category": "Plasma",
+    "level": "18",
+    "price": "410,000",
+    "damage": "5d8 E & F",
+    "range": "40 ft.",
+    "critical": "irradiate",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "blast, radioactive, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Fork, 22-Notch": {
+    "category": "Plasma",
+    "level": "19",
+    "price": "750,000",
+    "damage": "6d10 E & F",
+    "range": "100 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "boost 3d10",
+    "sfsLegal": true
+  },
+  "Plasma Rifle, Blue Star": {
+    "category": "Plasma",
+    "level": "20",
+    "price": "935,000",
+    "damage": "8d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 4d8",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Hunting Rifle": {
+    "category": "Projectile",
+    "level": "1",
+    "price": "240",
+    "damage": "1d8 P",
+    "range": "90 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Scattergun, Utility": {
+    "category": "Projectile",
+    "level": "1",
+    "price": "235",
+    "damage": "1d4 P",
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "4 shells",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, blast",
+    "sfsLegal": true
+  },
+  "Autotarget Rifle": {
+    "category": "Projectile",
+    "level": "2",
+    "price": "755",
+    "damage": "1d6 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "10 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Acid Dart Rifle, Tactical": {
+    "category": "Projectile",
+    "level": "2",
+    "price": "485",
+    "damage": "1d8 A & P",
+    "range": "80 ft.",
+    "critical": "corrode 1d4",
+    "capacity": "10 darts",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Cinder Rifle, Truth-Sequence": {
+    "category": "Projectile",
+    "level": "2",
+    "price": "700",
+    "damage": "1d8 P",
+    "range": "60 ft.",
+    "critical": "burn 1d6",
+    "capacity": "10 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Crossbolter, Tactical": {
+    "category": "Projectile",
+    "level": "2",
+    "price": "475",
+    "damage": "1d10 P",
+    "range": "70 ft.",
+    "critical": null,
+    "capacity": "1 arrow",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Shield Rifle, Tactical": {
+    "category": "Projectile",
+    "level": "2",
+    "price": "900",
+    "damage": "1d8 E & P",
+    "range": "80 ft.",
+    "critical": "Arc 1d4 ",
+    "capacity": "12 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Buttressing ",
+    "sfsLegal": true
+  },
+  "Huchket Rifle": {
+    "category": "Projectile",
+    "level": "3",
+    "price": "1,400",
+    "damage": "1d10 P",
+    "range": "80 ft.",
+    "critical": "wound",
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Aeon Guard, Assault Rifle": {
+    "category": "Projectile",
+    "level": "3",
+    "price": "1,400",
+    "damage": "1d8 P",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "12 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": false
+  },
+  "Kalo Shredder, Slipstream-Class": {
+    "category": "Projectile",
+    "level": "3",
+    "price": "1,610",
+    "damage": "1d6 S",
+    "range": "30 ft.",
+    "critical": "bleed 1d4",
+    "capacity": "8 flechettes",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, automatic, underwater",
+    "sfsLegal": true
+  },
+  "Rail Gun, Tactical": {
+    "category": "Projectile",
+    "level": "3",
+    "price": "1,150",
+    "damage": "1d8 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "12 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Breaching Gun, Utility": {
+    "category": "Projectile",
+    "level": "4",
+    "price": "2,350",
+    "damage": "1d10 P",
+    "range": "20 ft.",
+    "critical": "knockdown",
+    "capacity": "4 shells",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, breach, penetrating",
+    "sfsLegal": true
+  },
+  "Vivara Rifle, Low-Flux": {
+    "category": "Projectile",
+    "level": "4",
+    "price": "2,100",
+    "damage": "1d8 P",
+    "range": "50 ft.",
+    "critical": null,
+    "capacity": "6",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Breakdown",
+    "sfsLegal": true
+  },
+  "Rocket Rifle": {
+    "category": "Projectile",
+    "level": "5",
+    "price": "3,010",
+    "damage": "1d12 B",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "5 mini-rockets",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Rail Gun, Advanced": {
+    "category": "Projectile",
+    "level": "6",
+    "price": "3,770",
+    "damage": "1d10 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "15 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Acid Dart Rifle, Dual": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,900",
+    "damage": "2d8 A & P",
+    "range": "90 ft.",
+    "critical": "corrode 2d4",
+    "capacity": "24 darts",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Aeon Guard, Accelerator Rifle": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "7,500",
+    "damage": "3d4 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "16 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": false
+  },
+  "Breaching Gun, Snub": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,800",
+    "damage": "2d10 P",
+    "range": "20 ft.",
+    "critical": "knockdown",
+    "capacity": "8 shells",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, breach, penetrating",
+    "sfsLegal": true
+  },
+  "Cinder Rifle, Salvation-Sequence": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,000",
+    "damage": "2d8 P",
+    "range": "60 ft.",
+    "critical": "burn 1d6",
+    "capacity": "14 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Kalo Shredder, Cascade-Class": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,630",
+    "damage": "2d6 S",
+    "range": "40 ft.",
+    "critical": "bleed 1d6",
+    "capacity": "16 flechettes",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, automatic, underwater",
+    "sfsLegal": true
+  },
+  "Seeker Rifle, Tactical": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,030",
+    "damage": "2d8 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "8 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Shield Rifle, Advanced": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,820",
+    "damage": "2d8 E & P",
+    "range": "80 ft.",
+    "critical": "Arc 2d4 ",
+    "capacity": "12 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Buttressing ",
+    "sfsLegal": true
+  },
+  "Crossbolter, Dual": {
+    "category": "Projectile",
+    "level": "8",
+    "price": "8,250",
+    "damage": "2d10 P",
+    "range": "70 ft.",
+    "critical": null,
+    "capacity": "4 arrows",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Analog, unwieldy",
+    "sfsLegal": true
+  },
+  "Scattergun, Snub": {
+    "category": "Projectile",
+    "level": "8",
+    "price": "8,300",
+    "damage": "1d12 P",
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "8 shells",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, blast",
+    "sfsLegal": true
+  },
+  "Vivara Rifle, Mid-Flux": {
+    "category": "Projectile",
+    "level": "8",
+    "price": "7,500",
+    "damage": "2d8 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "6",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Breakdown",
+    "sfsLegal": true
+  },
+  "Magnetar Rifle, Tactical": {
+    "category": "Projectile",
+    "level": "9",
+    "price": "11,800",
+    "damage": "2d8 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "18 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Combat Rifle": {
+    "category": "Projectile",
+    "level": "10",
+    "price": "16,500",
+    "damage": "3d8 P",
+    "range": "90 ft.",
+    "critical": null,
+    "capacity": "12 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Aeon Guard, RPPR": {
+    "category": "Projectile",
+    "level": "10",
+    "price": "21,000",
+    "damage": "2d12 B",
+    "range": "100 ft.",
+    "critical": "knockdown",
+    "capacity": "12 mini-rockets",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": false
+  },
+  "Breaching Gun, Impact": {
+    "category": "Projectile",
+    "level": "11",
+    "price": "25,300",
+    "damage": "3d10 P",
+    "range": "30 ft.",
+    "critical": "knockdown",
+    "capacity": "12 shells",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, breach, penetrating",
+    "sfsLegal": true
+  },
+  "Cinder Rifle, Valor-Sequence": {
+    "category": "Projectile",
+    "level": "11",
+    "price": "23,700",
+    "damage": "3d8 P",
+    "range": "80 ft.",
+    "critical": "burn 2d6",
+    "capacity": "20 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Kalo Shredder, Torrent-Class": {
+    "category": "Projectile",
+    "level": "11",
+    "price": "26,700",
+    "damage": "4d6 S",
+    "range": "40 ft.",
+    "critical": "bleed 3d4",
+    "capacity": "24 flechettes",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, automatic, underwater",
+    "sfsLegal": true
+  },
+  "Acid Dart Rifle, Complex": {
+    "category": "Projectile",
+    "level": "12",
+    "price": "39,200",
+    "damage": "4d8 A & P",
+    "range": "90 ft.",
+    "critical": "corrode 4d4",
+    "capacity": "48 darts",
+    "usage": "4",
+    "bulk": "2",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Scattergun, Impact": {
+    "category": "Projectile",
+    "level": "12",
+    "price": "30,400",
+    "damage": "2d12 P",
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "12 shells",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, blast",
+    "sfsLegal": true
+  },
+  "Shield Rifle, Elite": {
+    "category": "Projectile",
+    "level": "12",
+    "price": "37,000",
+    "damage": "4d8 E & P",
+    "range": "80 ft.",
+    "critical": "Arc 4d4 ",
+    "capacity": "15 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Buttressing ",
+    "sfsLegal": true
+  },
+  "Vivara Rifle, High-Flux": {
+    "category": "Projectile",
+    "level": "12",
+    "price": "27,600",
+    "damage": "4d8 P",
+    "range": "70 ft.",
+    "critical": null,
+    "capacity": "6",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Breakdown",
+    "sfsLegal": false
+  },
+  "Gyrojet Rifle, Tactical": {
+    "category": "Projectile",
+    "level": "13",
+    "price": "54,000",
+    "damage": "3d12 B",
+    "range": "100 ft.",
+    "critical": "knockdown",
+    "capacity": "12 mini-rockets",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Magnetar Rifle, Advanced": {
+    "category": "Projectile",
+    "level": "13",
+    "price": "53,700",
+    "damage": "4d8 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "24 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Kalo Shredder, Deluge-Class": {
+    "category": "Projectile",
+    "level": "14",
+    "price": "74,300",
+    "damage": "6d6 S",
+    "range": "60 ft.",
+    "critical": "bleed 4d4",
+    "capacity": "36 flechettes",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, automatic, underwater",
+    "sfsLegal": true
+  },
+  "Seeker Rifle, Advanced": {
+    "category": "Projectile",
+    "level": "14",
+    "price": "72,300",
+    "damage": "6d8 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "18 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Breaching Gun, Vortex": {
+    "category": "Projectile",
+    "level": "15",
+    "price": "119,000",
+    "damage": "6d10 P",
+    "range": "30 ft.",
+    "critical": "knockdown",
+    "capacity": "16 shells",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, breach, penetrating",
+    "sfsLegal": true
+  },
+  "Cinder Rifle, Glory-Sequence": {
+    "category": "Projectile",
+    "level": "15",
+    "price": "102,200",
+    "damage": "6d8 P",
+    "range": "80 ft.",
+    "critical": "burn 2d6",
+    "capacity": "24 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Gyrojet Rifle, Advanced": {
+    "category": "Projectile",
+    "level": "15",
+    "price": "122,800",
+    "damage": "5d12 B",
+    "range": "120 ft.",
+    "critical": "knockdown",
+    "capacity": "12 mini-rockets",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Scattergun, Vortex": {
+    "category": "Projectile",
+    "level": "15",
+    "price": "91,900",
+    "damage": "3d12 P",
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "12 shells",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, blast",
+    "sfsLegal": true
+  },
+  "Magnetar Rifle, Elite": {
+    "category": "Projectile",
+    "level": "16",
+    "price": "185,100",
+    "damage": "6d8 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "36 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Gyrojet Rifle, Elite": {
+    "category": "Projectile",
+    "level": "17",
+    "price": "245,600",
+    "damage": "6d12 B",
+    "range": "120 ft.",
+    "critical": "knockdown",
+    "capacity": "12 mini-rockets",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Kalo Shredder, Monsoon-Class": {
+    "category": "Projectile",
+    "level": "17",
+    "price": "784,000",
+    "damage": "12d6 S",
+    "range": "60 ft.",
+    "critical": "bleed 4d6",
+    "capacity": "48 flechettes",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog, automatic, underwater",
+    "sfsLegal": true
+  },
+  "Seeker Rifle, Elite": {
+    "category": "Projectile",
+    "level": "17",
+    "price": "242,500",
+    "damage": "9d8 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "18 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Shield Rifle, Paragon": {
+    "category": "Projectile",
+    "level": "17",
+    "price": "264,000",
+    "damage": "8d8 E & P",
+    "range": "80 ft.",
+    "critical": "Arc 4d8 ",
+    "capacity": "18 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Buttressing ",
+    "sfsLegal": true
+  },
+  "Scattergun, Grapeshot": {
+    "category": "Projectile",
+    "level": "18",
+    "price": "331,000",
+    "damage": "4d12 P",
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "12 shells",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, blast",
+    "sfsLegal": true
+  },
+  "Breaching Gun, Grapeshot": {
+    "category": "Projectile",
+    "level": "19",
+    "price": "509,000",
+    "damage": "10d10 P",
+    "range": "30 ft.",
+    "critical": "knockdown",
+    "capacity": "20 shells",
+    "usage": "2",
+    "bulk": "1",
+    "special": "analog, breach, penetrating",
+    "sfsLegal": true
+  },
+  "Magnetar Rifle, Paragon": {
+    "category": "Projectile",
+    "level": "19",
+    "price": "612,600",
+    "damage": "8d8 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "48 rounds",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Gyrojet Rifle, Paragon": {
+    "category": "Projectile",
+    "level": "20",
+    "price": "723,500",
+    "damage": "8d12 B",
+    "range": "120 ft.",
+    "critical": "knockdown",
+    "capacity": "12 mini-rockets",
+    "usage": "1",
+    "bulk": "2",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Seeker Rifle, Paragon": {
+    "category": "Projectile",
+    "level": "20",
+    "price": "809,200",
+    "damage": "12d8 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "24 rounds",
+    "usage": "1",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Pulsecaster Rifle": {
+    "category": "Shock",
+    "level": "1",
+    "price": "100",
+    "damage": "1d6 E",
+    "range": "50 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Arc Emitter, Tactical": {
+    "category": "Shock",
+    "level": "2",
+    "price": "750",
+    "damage": "1d4 E",
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "blast, stun, unwieldy",
+    "sfsLegal": true
+  },
+  "Storm Coil, Live": {
+    "category": "Shock",
+    "level": "3",
+    "price": "1,480",
+    "damage": "1d6 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Polarity Rifle, Static": {
+    "category": "Shock",
+    "level": "4",
+    "price": "2,400",
+    "damage": "1d8 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "polarize 1d4",
+    "sfsLegal": true
+  },
+  "Surgecaster, Standard": {
+    "category": "Shock",
+    "level": "5",
+    "price": "3,300",
+    "damage": "1d10 E",
+    "range": "40 ft.",
+    "critical": "arc 1d10",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "boost 1d6, living",
+    "sfsLegal": true
+  },
+  "Arc Rifle, Static": {
+    "category": "Shock",
+    "level": "6",
+    "price": "4,200",
+    "damage": "1d12 E",
+    "range": "70 ft.",
+    "critical": "arc 1d6",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "stun",
+    "sfsLegal": true
+  },
+  "Storm Coil, Jolt": {
+    "category": "Shock",
+    "level": "7",
+    "price": "6,900",
+    "damage": "2d6 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Charge Emitter, Impulse": {
+    "category": "Shock",
+    "level": "8",
+    "price": "10,900",
+    "damage": "3d4 E",
+    "range": "20 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "integrated (1 slot), stun",
+    "sfsLegal": true
+  },
+  "Arc Emitter, Advanced": {
+    "category": "Shock",
+    "level": "9",
+    "price": "13,200",
+    "damage": "2d4 E",
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "10",
+    "bulk": "1",
+    "special": "blast, stun, unwieldy",
+    "sfsLegal": true
+  },
+  "Polarity Rifle, Aurora": {
+    "category": "Shock",
+    "level": "10",
+    "price": "21,000",
+    "damage": "2d8 E",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "polarize 1d10",
+    "sfsLegal": true
+  },
+  "Arc Rifle, Aurora": {
+    "category": "Shock",
+    "level": "11",
+    "price": "24,500",
+    "damage": "2d12 E",
+    "range": "70 ft.",
+    "critical": "arc 2d6",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "stun",
+    "sfsLegal": true
+  },
+  "Storm Coil, Impulse": {
+    "category": "Shock",
+    "level": "12",
+    "price": "35,200",
+    "damage": "4d6 E",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Charge Emitter, Jolt": {
+    "category": "Shock",
+    "level": "13",
+    "price": "57,000",
+    "damage": "3d10 E",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "integrated (1 slot), stun",
+    "sfsLegal": true
+  },
+  "Surgecaster, Advanced": {
+    "category": "Shock",
+    "level": "14",
+    "price": "83,000",
+    "damage": "3d10 E",
+    "range": "60 ft.",
+    "critical": "arc 2d10",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "boost 1d10, living",
+    "sfsLegal": true
+  },
+  "Polarity Rifle, Storm": {
+    "category": "Shock",
+    "level": "15",
+    "price": "137,000",
+    "damage": "4d8 E",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "polarize 2d8",
+    "sfsLegal": true
+  },
+  "Arc Rifle, Storm": {
+    "category": "Shock",
+    "level": "16",
+    "price": "190,300",
+    "damage": "4d12 E",
+    "range": "80 ft.",
+    "critical": "arc 4d6",
+    "capacity": "80 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "stun",
+    "sfsLegal": true
+  },
+  "Storm Coil, Surge": {
+    "category": "Shock",
+    "level": "17",
+    "price": "261,000",
+    "damage": "7d6 E",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Charge Emitter, Surge": {
+    "category": "Shock",
+    "level": "18",
+    "price": "435,000",
+    "damage": "5d10 E",
+    "range": "40 ft.",
+    "critical": "staggered",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "integrated (1 slot), stun",
+    "sfsLegal": true
+  },
+  "Arc Rifle, Tempest": {
+    "category": "Shock",
+    "level": "19",
+    "price": "622,000",
+    "damage": "6d12 E",
+    "range": "80 ft.",
+    "critical": "arc 6d6",
+    "capacity": "100 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "stun",
+    "sfsLegal": true
+  },
+  "Polarity Rifle, Tempest": {
+    "category": "Shock",
+    "level": "20",
+    "price": "1,000,000",
+    "damage": "8d8 E",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "polarize 3d8",
+    "sfsLegal": true
+  },
+  "Scrambler Rifle, Termite": {
+    "category": "Shock",
+    "level": "3",
+    "price": "1,520",
+    "damage": "1d6 E",
+    "range": "90 ft.",
+    "critical": "Confuse",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Scramble ",
+    "sfsLegal": true
+  },
+  "Trenarii Singing Coil, Solo": {
+    "category": "Shock",
+    "level": "4",
+    "price": "2,200",
+    "damage": "1d4 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Line, unwieldy, Professional (Musician)",
+    "sfsLegal": true
+  },
+  "Scrambler Rifle, Cockroach": {
+    "category": "Shock",
+    "level": "8",
+    "price": "9,850",
+    "damage": "2d6 E",
+    "range": "90 ft.",
+    "critical": "Confuse",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Scramble ",
+    "sfsLegal": true
+  },
+  "Trenarii Singing Coil, Duet": {
+    "category": "Shock",
+    "level": "8",
+    "price": "9,700",
+    "damage": "2d4 E",
+    "range": "90 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "Line, unwieldy, Professional (Musician)",
+    "sfsLegal": true
+  },
+  "Scrambler Rifle, Dragonfly": {
+    "category": "Shock",
+    "level": "11",
+    "price": "24,900",
+    "damage": "3d6 E",
+    "range": "90 ft.",
+    "critical": "Confuse",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Scramble ",
+    "sfsLegal": true
+  },
+  "Trenarii Singing Coil, Quartet": {
+    "category": "Shock",
+    "level": "13",
+    "price": "50,000",
+    "damage": "4d4 E",
+    "range": "120 ft.",
+    "critical": "Deafen ",
+    "capacity": "80 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Line, unwieldy, Professional (Musician)",
+    "sfsLegal": true
+  },
+  "Scrambler Rifle, Locust": {
+    "category": "Shock",
+    "level": "14",
+    "price": "82,600",
+    "damage": "4d6 E",
+    "range": "90 ft.",
+    "critical": "Confuse",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Scramble ",
+    "sfsLegal": true
+  },
+  "Trenarii Singing Coil, Orchestra": {
+    "category": "Shock",
+    "level": "18",
+    "price": "380,000",
+    "damage": "7d4 E",
+    "range": "200 ft.",
+    "critical": "Deafen ",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Line, unwieldy, Professional (Musician)",
+    "sfsLegal": true
+  },
+  "Shout Rifle": {
+    "category": "Sonic",
+    "level": "1",
+    "price": "450",
+    "damage": "1d4 So",
+    "range": "30 ft.",
+    "critical": "demoralize",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "1",
+    "special": "blast, nonlethal, unwieldy",
+    "sfsLegal": true
+  },
+  "Boomer Rifle, Tremor": {
+    "category": "Sonic",
+    "level": "2",
+    "price": "520",
+    "damage": "1d8 So",
+    "range": "40 ft.",
+    "critical": "deafen",
+    "capacity": "12 shells",
+    "usage": "3",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Chordpocalypse, Thunderstrike": {
+    "category": "Sonic",
+    "level": "2",
+    "price": "765",
+    "damage": "1d6 So",
+    "range": "30 ft.",
+    "critical": "Deafen ",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Boost (1d4), polarize (1d4), professional (musician) ",
+    "sfsLegal": true
+  },
+  "Blindmark Rifle, Thunderstrike": {
+    "category": "Sonic",
+    "level": "3",
+    "price": "1,400",
+    "damage": "2d4 So",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "echo, stun",
+    "sfsLegal": true
+  },
+  "Vortex Rifle, Pulse": {
+    "category": "Sonic",
+    "level": "3",
+    "price": "1,400",
+    "damage": "2d4 So",
+    "range": "60 ft.",
+    "critical": "Nauseate ",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Breach, underwater ",
+    "sfsLegal": true
+  },
+  "Staccato Rifle, Pulse": {
+    "category": "Sonic",
+    "level": "4",
+    "price": "2,000",
+    "damage": "1d10 So",
+    "range": "40 ft.",
+    "critical": "deafen",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Sonic Rifle, Thunderstrike": {
+    "category": "Sonic",
+    "level": "5",
+    "price": "3,400",
+    "damage": "1d10 So",
+    "range": "50 ft.",
+    "critical": "deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Boomer Rifle, Rumbler": {
+    "category": "Sonic",
+    "level": "6",
+    "price": "4,100",
+    "damage": "2d6 So",
+    "range": "40 ft.",
+    "critical": "deafen",
+    "capacity": "12 shells",
+    "usage": "4",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Chordpocalypse, Shattering": {
+    "category": "Sonic",
+    "level": "6",
+    "price": "4,280",
+    "damage": "1d8 So",
+    "range": "30 ft.",
+    "critical": "Deafen ",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Boost (1d6), polarize (1d6), professional (musician) ",
+    "sfsLegal": true
+  },
+  "Vortex Rifle, Surge": {
+    "category": "Sonic",
+    "level": "6",
+    "price": "4,150",
+    "damage": "2d6 So",
+    "range": "60 ft.",
+    "critical": "Nauseate ",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Breach, underwater ",
+    "sfsLegal": true
+  },
+  "Streetsweeper, Thunderstrike": {
+    "category": "Sonic",
+    "level": "7",
+    "price": "7,150",
+    "damage": "1d10 So",
+    "range": "50 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "boost 1d6",
+    "sfsLegal": true
+  },
+  "Blindmark Rifle, LFD": {
+    "category": "Sonic",
+    "level": "8",
+    "price": "9,800",
+    "damage": "2d8 So",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "echo, stun",
+    "sfsLegal": true
+  },
+  "Staccato Rifle, Surge": {
+    "category": "Sonic",
+    "level": "9",
+    "price": "13,000",
+    "damage": "2d10 So",
+    "range": "60 ft.",
+    "critical": "deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Chordpocalypse, Psychedelic": {
+    "category": "Sonic",
+    "level": "10",
+    "price": "18,400",
+    "damage": "2d8 So",
+    "range": "30 ft.",
+    "critical": "Deafen ",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost (1d8), polarize (1d8), professional (musician) ",
+    "sfsLegal": true
+  },
+  "Sonic Rifle, LFD": {
+    "category": "Sonic",
+    "level": "10",
+    "price": "17,000",
+    "damage": "2d10 So",
+    "range": "50 ft.",
+    "critical": "deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Boomer Rifle, Concussive": {
+    "category": "Sonic",
+    "level": "11",
+    "price": "24,000",
+    "damage": "4d6 So",
+    "range": "40 ft.",
+    "critical": "knockdown",
+    "capacity": "15 shells",
+    "usage": "5",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Streetsweeper, LFD": {
+    "category": "Sonic",
+    "level": "12",
+    "price": "39,300",
+    "damage": "3d10 So",
+    "range": "50 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "boost 1d8",
+    "sfsLegal": true
+  },
+  "Vortex Rifle, Drum": {
+    "category": "Sonic",
+    "level": "12",
+    "price": "38,000",
+    "damage": "4d6 So",
+    "range": "60 ft.",
+    "critical": "Nauseate ",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "1",
+    "special": "Breach, underwater ",
+    "sfsLegal": true
+  },
+  "Blindmark Rifle, HFD": {
+    "category": "Sonic",
+    "level": "13",
+    "price": "51,000",
+    "damage": "4d8 So",
+    "range": "100 ft.",
+    "critical": "sicken",
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "1",
+    "special": "echo, stun",
+    "sfsLegal": true
+  },
+  "Chordpocalypse, Banshee": {
+    "category": "Sonic",
+    "level": "14",
+    "price": "72,000",
+    "damage": "4d8 So",
+    "range": "30 ft.",
+    "critical": "Deafen ",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost (2d6), polarize (2d6), professional (musician) ",
+    "sfsLegal": true
+  },
+  "Sonic Rifle, HFD": {
+    "category": "Sonic",
+    "level": "14",
+    "price": "80,200",
+    "damage": "4d10 So",
+    "range": "50 ft.",
+    "critical": "deafen",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Staccato Rifle, Drum": {
+    "category": "Sonic",
+    "level": "15",
+    "price": "107,000",
+    "damage": "4d10 So",
+    "range": "60 ft.",
+    "critical": "deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Streetsweeper, HFD": {
+    "category": "Sonic",
+    "level": "16",
+    "price": "195,000",
+    "damage": "5d10 So",
+    "range": "50 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "boost 1d10",
+    "sfsLegal": true
+  },
+  "Boomer Rifle, Shockwave": {
+    "category": "Sonic",
+    "level": "17",
+    "price": "230,000",
+    "damage": "8d6 So",
+    "range": "40 ft.",
+    "critical": "knockdown",
+    "capacity": "20 shells",
+    "usage": "5",
+    "bulk": "1",
+    "special": "analog",
+    "sfsLegal": true
+  },
+  "Vortex Rifle, Hammer": {
+    "category": "Sonic",
+    "level": "17",
+    "price": "250,000",
+    "damage": "8d6 So",
+    "range": "60 ft.",
+    "critical": "Nauseate ",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Breach, underwater ",
+    "sfsLegal": true
+  },
+  "Chordpocalypse, Transcendent": {
+    "category": "Sonic",
+    "level": "18",
+    "price": "372,000",
+    "damage": "7d8 So",
+    "range": "40 ft.",
+    "critical": "Deafen ",
+    "capacity": "80 charges",
+    "usage": "2",
+    "bulk": "1",
+    "special": "Boost (2d8), polarize (2d8), professional (musician) ",
+    "sfsLegal": true
+  },
+  "Sonic Rifle, Banshee": {
+    "category": "Sonic",
+    "level": "18",
+    "price": "364,500",
+    "damage": "6d10 So",
+    "range": "50 ft.",
+    "critical": "deafen",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Blindmark Rifle, Banshee": {
+    "category": "Sonic",
+    "level": "19",
+    "price": "585,000",
+    "damage": "8d8 So",
+    "range": "120 ft.",
+    "critical": "sicken",
+    "capacity": "80 charges",
+    "usage": "10",
+    "bulk": "1",
+    "special": "echo, stun",
+    "sfsLegal": true
+  },
+  "Staccato Rifle, Hammer": {
+    "category": "Sonic",
+    "level": "20",
+    "price": "810,000",
+    "damage": "8d10 So",
+    "range": "80 ft.",
+    "critical": "deafen",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  }
 }
 
-const longarmWeaponsCopy = {
-  // Name, Category, Level, Price, Damage, Range, Critical, Capacity, Usage, Bulk, Special, SFS Legal
-  // Name: [Category, Level, Price, Damage, Range, Critical, Capacity, Usage, Bulk, Special, SFS Legal]
-  "Needler Rifle",["--",1,110,1d6 P,60 ft.,injection DC +2,12 darts,1,1,"analog, injection",TRUE]
-  "Caustolance, Liquidator",["--",1,400,1d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE]
-  "Needler Rifle, Tactical",["--",1,200,1d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE]
-  "Rackarack, Pulse",["--",1,205,1d6 So,60 ft.,Nuisance,20 charges,2,1,"--",TRUE]
-  "Dusk Rifle, Static",["--",2,900,1d4 C & E,60 ft.,"--",20,2,2,"Hybrid, line, unwieldy",FALSE]
-  "Meduza Rifle, Stinger ",["--",2,720,1d8 A & S,40 ft.,Bind ,20 charges,2,1,"Analog, living ",TRUE]
-  "Thasphalt Rifle, Light",["--",2,880,1d10 B,40 ft.,Push (5 ft.) ,80 thasphalt,1,2,"Analog, force ",FALSE]
-  "Formian Venomcaster, Tactical",["--",3,"1,325",1d8 P,40 ft.,Injection DC +2,6 darts,1,1,"Analog, injection, unwieldy",TRUE]
-  "Frost Maw, Growl-class",["--",3,"1,350",1d8 C,15 ft.,Bind 1d4 rounds,20,2,1,"Aurora, blast, living, unwieldy",FALSE]
-  "Net Gun, Wireframe",["--",4,"1,750","--",30 ft.,"--",2 nets,1,1,Entangle ,TRUE]
-  "Data Rifle, Giga",["--",5,"3,150",1d8 B or P or S,100 ft.,Knockdown ,20 charges,2,1,"Boost 1d4, codework (capacity 20, usage 2), force, modal",FALSE]
-  "Needler Rifle, Advanced",["--",5,"3,000",1d8 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE]
-  "Caustolance, Decimator",["--",6,"4,500",2d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE]
-  "Electrosystem Rifle, Buzzing",["--",6,"4,500",2d10 E,60 ft.,Staggered,40 charges,4,1,"Blast, living, Swarm, unwieldy",FALSE]
-  "Meduza Rifle, Blitz ",["--",6,"3,950",2d8 A & S,60 ft.,Bind ,20 charges,4,1,"Analog, living ",TRUE]
-  "Rackarack, Surge",["--",6,"4,400",2d6 So,60 ft.,Nuisance,20 charges,2,1,Boost 1d4,TRUE]
-  "Chimera Graft, Growl-class",["--",7,"6,250",1d12 F,40 ft.,Burn 1d6,20 petrol,1,1,"Automatic, integrated (1 slot), harrying, living, regrowth",TRUE]
-  "Dusk Rifle, Aurora",["--",7,"6,500",2d4 C & E,60 ft.,"--",20,2,2,"Hybrid, line, unwieldy",FALSE]
-  "EM Induction Rifle, Static",["--",7,"7,000",1d8 E,30 ft.,"--",40 charges,8,3,"Analog, boost 1d4, clockwork (capacity 40, usage 8), line, unwieldy",FALSE]
-  "Net Gun, Bolt",["--",7,"5,250",3d4 E,30 ft.,Stunned ,2 nets,1,1,"Entangle, stun ",TRUE]
-  "Recombinator Ray",["--",8,"9,500",2d10 A,60 ft.,Corrode 1d6,80,8,1,Antibiological,TRUE]
-  "Culling Ray, Lesser",["--",8,"8,850",1d12 A & F,30 ft.,Irradiate,20 charges,1,2,"Blast, ignite 1d6",FALSE]
-  "Digitizer Rifle, Silver ",["--",8,"8,000",2d8 So,80 ft.,digitize 1d8 ,40 charges,2,1,"Bright, professional (vidgamer), relic",FALSE]
-  "Thasphalt Rifle, Tactical",["--",8,"8,500",2d10 B,60 ft.,Push (5 ft.) ,80 thasphalt,4,2,"Analog, force ",FALSE]
-  "Formian Venomcaster, Advanced",["--",9,"12,750",3d8 P,60 ft.,Injection DC +2,12 darts,1,1,"Analog, injection, unwieldy",TRUE]
-  "Frost Maw, Snarl-class",["--",9,"13,000",2d8 C,60 ft.,Bind 1d4 rounds,20,2,1,"Aurora, blast, living, unwieldy",FALSE]
-  "Nanite Thrower, Tactical",["--",9,"13,300","--",60 ft.,wound,10 nanites,1,1,deconstruct 2d6,TRUE]
-  "Reality Rifle",["--",10,"19,500",2d12 E,80 ft.,Confuse,40,8,2,"Mind-affecting, stun, subtle",TRUE]
-  "Data Rifle, Tera",["--",10,"17,900",3d8 B or P or S,100 ft.,Knockdown ,20 charges,2,1,"Boost 1d8, codework (capacity 20, usage 2), force, modal",FALSE]
-  "Frost Maw, Roar-class",["--",10,"19,000",4d8 C,80 ft.,Bind 1d4 rounds,20,2,1,"Aurora, blast, living, unwieldy",FALSE]
-  "Meduza Rifle, Assault ",["--",10,"17,200",3d8 A & S,70 ft.,Bind ,40 charges,5,1,"Analog, living ",TRUE]
-  "Needler Rifle, Elite",["--",10,"18,000",4d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE]
-  "Chimera Graft, Snarl-class",["--",11,"24,000",2d12 F,40 ft.,Burn 1d6,20 petrol,1,1,"Automatic, integrated (1 slot), harrying, living, regrowth",TRUE]
-  "Caustolance, Executioner",["--",12,"38,000",5d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE]
-  "Culling Ray, Standard",["--",12,"34,500",2d12 A & F,30 ft.,Irradiate,20 charges,2,2,"Blast, ignite 3d6",FALSE]
-  "Dusk Rifle, Storm",["--",12,"36,500",4d6 C & E,60 ft.,"--",40,4,2,"Hybrid, line, unwieldy",FALSE]
-  "Electrosystem Rifle, Jolting",["--",12,"37,500",4d10 E,60 ft.,Staggered,40 charges,5,1,"Blast, living, Swarm, unwieldy",FALSE]
-  "EM Induction Rifle, Aurora",["--",12,"36,400",3d8 E,60 ft.,"--",40 charges,8,3,"Analog, boost 1d8, clockwork (capacity 40, usage 8), line, unwieldy",FALSE]
-  "Nanite Thrower, Advanced",["--",12,"35,400","--",60 ft.,wound,10 nanites,1,1,deconstruct 3d6,TRUE]
-  "Thasphalt Rifle, Advanced",["--",12,"35,100",3d10 B,80 ft.,Push (10 ft.) ,80 thasphalt,8,2,"Analog, force ",FALSE]
-  "Rackarack, Drum",["--",13,"46,100",5d6 So,60 ft.,Nuisance,20 charges,2,1,Boost 2d4,TRUE]
-  "Digitizer Rifle, Gold ",["--",14,"65,000",5d8 So,80 ft.,digitize 2d8 ,80 charges,4,1,"Bright, professional (vidgamer), relic",FALSE]
-  "Formian Venomcaster, Elite",["--",14,"70,600",7d8 P,80 ft.,Injection DC +2,12 darts,1,1,"Analog, entangle, injection, unwieldy",TRUE]
-  "Data Rifle, Peta",["--",15,"113,300",5d8 B or P or S,120 ft.,Knockdown ,40 charges,4,1,"Boost 2d8, codework (capacity 40, usage 4), force, modal",FALSE]
-  "Meduza Rifle, Commander ",["--",15,"100,000",7d8 A & S,80 ft.,Bind ,80 charges,5,1,"Analog, living ",TRUE]
-  "Nanite Thrower, Elite",["--",15,"110,000","--",80 ft.,severe wound,10 nanites,2,1,deconstruct 4d6,TRUE]
-  "Needler Rifle, Paragon",["--",15,"110,000",8d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE]
-  "Thasphalt Rifle, Elite",["--",16,"175,000",4d10 B,100 ft.,Push (10 ft.) ,80 thasphalt,10,2,"Analog, force ",FALSE]
-  "Chimera Graft, Roar-class",["--",17,"218,000",4d12 F,40 ft.,Burn 1d6,20 petrol,1,1,"Automatic, integrated (1 slot), harrying, living, regrowth",TRUE]
-  "Dusk Rifle, Tempest",["--",17,"260,000",8d6 C & E,60 ft.,"--",40,4,2,"Hybrid, line, unwieldy",FALSE]
-  "EM Induction Rifle, Storm",["--",17,"255,000",6d8 E,90 ft.,"--",80 charges,16,3,"Analog, boost 3d8, clockwork (capacity 80, usage 16), line, unwieldy",FALSE]
-  "Caustolance, Eradicator",["--",18,"400,000",12d6 A,60 ft.,Injection DC +2,20 charges,1,1,Injection,TRUE]
-  "Culling Ray, Greater",["--",18,"350,000",4d12 A & F,30 ft.,Irradiate,40 charges,4,2,"Blast, ignite 5d6",FALSE]
-  "Electrosystem Rifle, Convulsion",["--",18,"400,000",8d10 E,60 ft.,Stunned,40 charges,8,1,"Blast, living, Swarm, unwieldy",FALSE]
-  "Formian Venomcaster, Paragon",["--",18,"398,000",10d10 P,80 ft.,Injection DC +2,24 darts,1,1,"Analog, entangle, injection, unwieldy",TRUE]
-  "Rackarack, Hammer",["--",18,"371,000",6d10 So,60 ft.,Nuisance,40 charges,2,1,Boost 4d4,TRUE]
-  "Meduza Rifle, Gorgon ",["--",19,"500,000",11d8 A & S,100 ft.,Bind ,80 charges,8,1,"Analog, living ",TRUE]
-  "Data Rifle, Exa",["--",20,"875,000",11d8 B or P or S,120 ft.,Knockdown ,80 charges,8,1,"Boost 5d8, codework (capacity 40, usage 4), force, modal",FALSE]
-  "Digitizer Rifle, Holofoil ",["--",20,"900,000",10d8 So,160 ft.,digitize 4d8 ,100 charges,5,1,"Bright, professional (vidgamer), relic",FALSE]
-  "Nanite Thrower, Paragon",["--",20,"830,000","--",80 ft.,severe wound,10 nanites,2,1,deconstruct 5d6,TRUE]
-  "Needler Rifle, Supreme",["--",20,"850,000",16d6 P,70 ft.,Injection DC +2,14 darts,1,1,"Analog, injection",TRUE]
-  "Numbing Beam, Tactical",[Cryo,1,370,1d6 C,50 ft.,staggered,20 charges,1,1,nonlethal,TRUE]
-  "Ice Carbine, Subzero",[Cryo,2,510,1d8 C & P,60 ft.,"--",20 charges,2,2,automatic,TRUE]
-  "Void Rifle, Grave-Class",[Cryo,2,"1,020",1d6 C,60 ft.,suffocate,20 charges,1,1,antibiological,TRUE]
-  "Frailty Rifle, Atrophy-Class",Cryo,3,"1,650",1d6 C,60 ft.,"--",20 charges,2,1,necrotic,TRUE
-  "Freeze Ray, Hiemal",Cryo,3,"1,420",1d4 C,30 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Zero Rifle, Frostbite-Class",Cryo,4,"2,330",1d8 C,60 ft.,staggered,40 charges,2,1,"--",TRUE
-  "Numbing Beam, Advanced",Cryo,5,"3,050",1d8 C,50 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Frost Projector, Frostbite-Class",Cryo,6,"5,100",1d10 C,30 ft.,staggered,40 charges,2,1,integrated (2 slots),TRUE
-  "Void Rifle, Crypt-Class",Cryo,6,"4,400",1d8 C,60 ft.,suffocate,20 charges,1,1,antibiological,TRUE
-  "Frailty Rifle, Rot-Class",Cryo,7,"7,700",2d6 C,60 ft.,"--",20 charges,2,2,necrotic,TRUE
-  "Freeze Ray, Algid",Cryo,7,"6,300",2d4 C,30 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Zero Rifle, Hailstorm-Class",Cryo,8,"10,100",2d8 C,60 ft.,staggered,40 charges,2,2,"--",TRUE
-  "Ice Carbine, Gelid",Cryo,9,"12,400",3d8 C & P,60 ft.,"--",40 charges,2,2,automatic,TRUE
-  "Numbing Beam, Elite",Cryo,10,"18,000",3d6 C,80 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Freeze Ray, Glacial",Cryo,11,"24,800",5d4 C,40 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Void Rifle, Tomb-Class",Cryo,11,"26,300",2d10 C,80 ft.,suffocate,40 charges,2,1,antibiological,TRUE
-  "Frost Projector, Hailstorm-Class",Cryo,12,"42,000",2d10 C,30 ft.,staggered,40 charges,2,1,integrated (2 slots),TRUE
-  "Frailty Rifle, Blight-Class",Cryo,13,"57,200",4d6 C,60 ft.,"--",40 charges,4,2,necrotic,TRUE
-  "Ice Carbine, Ultracold",Cryo,13,"47,100",6d6 C & P,80 ft.,"--",40 charges,2,2,automatic,TRUE
-  "Zero Rifle, Blizzard-Class",Cryo,14,"79,800",4d8 C,60 ft.,staggered,80 charges,4,2,"--",TRUE
-  "Numbing Beam, Paragon",Cryo,15,"112,000",6d6 C,80 ft.,staggered,20 charges,1,1,nonlethal,TRUE
-  "Freeze Ray, Isothermal",Cryo,16,"165,000",5d8 C,40 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Void Rifle, Ossuary-Class",Cryo,16,"182,000",4d10 C,100 ft.,suffocate,40 charges,1,1,antibiological,TRUE
-  "Frailty Rifle, Epidemic-Class",Cryo,17,"297,000",7d6 C,60 ft.,"--",50 charges,5,2,necrotic,TRUE
-  "Ice Carbine, Absolute-Zero",Cryo,17,"218,000",11d6 C & P,80 ft.,"--",40 charges,2,2,automatic,TRUE
-  "Zero Rifle, Avalanche-Class",Cryo,18,"410,200",7d8 C,60 ft.,staggered,100 charges,5,2,"--",TRUE
-  "Frost Projector, Blizzard-Class",Cryo,19,"680,000",5d10 C,30 ft.,staggered,40 charges,2,1,integrated (2 slots),TRUE
-  "Void Rifle, Barrow-Class",Cryo,19,"606,000",6d10 C,100 ft.,suffocate,80 charges,2,1,antibiological,TRUE
-  "Freeze Ray, Hypothermic",Cryo,20,"818,000",5d12 C,50 ft.,staggered,20 charges,4,2,"line, unwieldy",TRUE
-  "Degenerator Rifle, Military",Degenerator,17,"242,000",7d8 A & So,50 ft.,Degeneration 4d6,40 charges,5,2,Hybrid,TRUE
-  "Degenerator Rifle, Dominion",Degenerator,20,"810,000",10d8 A & So,50 ft.,Degeneration 5d6,80 charges,5,2,Hybrid,TRUE
-  "Disruption Rifle, Minor",Dimensional Disruption,9,"15,000",3d8 So,50 ft.,staggered,40 charges,5,2,"boost 1d8, relic",TRUE
-  "Disruption Rifle, Major",Dimensional Disruption,14,"80,000",6d8 So,40 ft.,staggered,40 charges,5,2,"boost 2d8, relic",TRUE
-  "Dross Gun, Scrapper",Disintegrator,2,720,1d6 A,15 ft.,"--",20 charges,1,1,penetrating,TRUE
-  "Dross Gun, Scoring",Disintegrator,5,"3,300",1d8 A,20 ft.,wound,20 charges,2,1,penetrating,TRUE
-  "Disintegrator Rifle, Liquidator",Disintegrator,6,"4,750",1d20 A,30 ft.,corrode 1d6,40 charges,4,2,"--",TRUE
-  "Dross Gun, Flux",Disintegrator,10,"19,200",2d12 A,20 ft.,severe wound,20 charges,4,1,penetrating,TRUE
-  "Disintegrator Rifle, Decimator",Disintegrator,11,"29,000",3d10 A,30 ft.,corrode 2d6,40 charges,4,2,"--",TRUE
-  "Disintegrator Rifle, Executioner",Disintegrator,16,"210,000",5d10 A,30 ft.,corrode 3d6,80 charges,8,2,"--",TRUE
-  "Disintegrator Rifle, Eradicator",Disintegrator,20,"745,000",5d20 A,30 ft.,corrode 4d6,80 charges,8,2,"--",TRUE
-  "Gulchgun",Flame,1,90,1d8 F,20 ft.,burn 1d6,4 shells,1,1,analog,TRUE
-  "Flame Rifle",Flame,2,490,1d6 F,25 ft.,burn 1d6,20 petrol,5,1,"line, unwieldy",TRUE
-  "Flare Rifle, Dazzler",Flame,3,445,2d4 F,60 ft.,burn 1d6,8 flares,1,1,"analog, bright, harrying",TRUE
-  "Blaze Rifle, Ifrit-Class",Flame,4,"1,900",1d10 F,40 ft.,burn 1d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Petrol Converter, Light",Flame,4,"2,150",1d8 F or A,40 ft.,"--",40 petrol,2,1,"analog, modal (disintegrator)",TRUE
-  "Dragon Rifle, Wyrmling",Flame,5,"3,020",1d8 F,6 ft.,burn 1d4,20 petrol,1,1,automatic,TRUE
-  "Flare Rifle, Vivifier",Flame,6,"3,600",1d10 F,80 ft.,burn 2d4,8 flares,1,1,"analog, bright, harrying",TRUE
-  "Blaze Rifle, Salamander-Class",Flame,7,"5,800",2d8 F,60 ft.,burn 2d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Petrol Converter, Tactical",Flame,7,"6,750",2d6 F or A,80 ft.,"--",40 petrol,4,1,"analog, modal (disintegrator)",TRUE
-  "Igniter, Ember",Flame,8,"9,900","--",80 ft.,burn 2d6,40 charges,4,1,ignite 2d6,TRUE
-  "Dragon Rifle, Drake",Flame,9,"13,400",3d6 F,60 ft.,burn 2d4,20 petrol,1,1,automatic,TRUE
-  "Flare Rifle, Coruscator",Flame,10,"15,700",5d4 F,80 ft.,burn 2d6,12 flares,2,1,"analog, bright, harrying",TRUE
-  "Petrol Converter, Advanced",Flame,10,"18,500",3d6 F or A,80 ft.,"--",40 petrol,1,1,"analog, modal (disintegrator)",TRUE
-  "Blaze Rifle, Hellhound-Class",Flame,11,"23,200",3d10 F,60 ft.,burn 3d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Igniter, Blaze",Flame,12,"34,200","--",80 ft.,burn 3d6,40 charges,4,1,ignite 3d6,TRUE
-  "Flare Rifle, Scorcher",Flame,13,"43,800",7d4 F,80 ft.,burn 3d6,12 flares,3,1,"analog, bright, harrying",TRUE
-  "Dragon Rifle, Wyvern",Flame,14,"72,200",6d6 F,80 ft.,burn 3d4,20 petrol,1,1,automatic,TRUE
-  "Petrol Converter, Elite",Flame,14,"76,500",5d6 F or A,80 ft.,"--",40 petrol,2,1,"analog, modal (disintegrator)",TRUE
-  "Igniter, Inferno",Flame,15,"108,000","--",80 ft.,burn 4d6,40 charges,4,1,ignite 4d6,TRUE
-  "Blaze Rifle, Firedrake-Class",Flame,16,"153,000",5d10 F,60 ft.,burn 4d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Flare Rifle, Nova",Flame,17,"201,000",12d4 F,100 ft.,burn 4d6,12 flares,4,1,"analog, bright, harrying",TRUE
-  "Igniter, Solar Flare",Flame,18,"360,000","--",80 ft.,burn 5d6,40 charges,4,1,ignite 5d6,TRUE
-  "Petrol Converter, Paragon",Flame,18,"385,000",9d6 F or A,80 ft.,"--",40 petrol,2,1,"analog, modal (disintegrator)",TRUE
-  "Dragon Rifle, True ",Flame,19,"559,000",11d6 F,100 ft.,burn 4d4,20 petrol,1,1,automatic,TRUE
-  "Blaze Rifle, Pheonix-Class",Flame,20,"765,000",9d10 F,80 ft.,burn 5d6,40 petrol,2,1,"analog, unwieldy",TRUE
-  "Laser Rifle, Azimuth",Laser,1,425,1d8 F,120 ft.,burn 1d6,20 charges,1,1,"--",TRUE
-  "Serpent Laser, Azimuth",Laser,2,500,2d4 F,100 ft.,burn 1d4,20 charges,10,1,"--",TRUE
-  "Infinity Rifle, Tactical",Laser,3,"1,300",1d6 F,40 ft.,"--",20 charges,1,1,boost 1d6,TRUE
-  "Excavation Laser, Light",Laser,4,"2,050",1d10 F,60 ft.,"--",40 charges,2,2,"penetrating, professional (mining)",TRUE
-  "Serpent Laser, Corona",Laser,5,"2,700",2d6 F,100 ft.,burn 2d4,40 charges,20,1,"--",TRUE
-  "Laser Rifle, Corona",Laser,6,"4,650",2d6 F,120 ft.,burn 1d6,40 charges,1,1,"--",TRUE
-  "Infinity Rifle, Advanced",Laser,7,"6,100",2d4 F,60 ft.,"--",20 charges,1,1,boost 2d4,TRUE
-  "Serpent Laser, Aphelion",Laser,8,"8,800",2d8 F,120 ft.,burn 3d4,40 charges,20,1,"--",TRUE
-  "Laser Rifle, Aphelion",Laser,9,"14,300",3d6 F,120 ft.,burn 1d6,40 charges,1,1,"--",TRUE
-  "Infinity Rifle, Elite",Laser,10,"17,100",2d6 F,80 ft.,"--",20 charges,1,1,boost 2d6,TRUE
-  "Autobeam Rifle, Tactical",Laser,11,"26,900",5d4 F,60 ft.,burn 2d4,40 charges,4,2,automatic,TRUE
-  "Excavation Laser, Medium",Laser,12,"36,000",3d10 F,60 ft.,"--",40 charges,2,2,"penetrating, professional (mining)",TRUE
-  "Laser Rifle, Perihelion",Laser,13,"53,800",5d6 F,130 ft.,burn 2d6,100 charges,2,1,"--",TRUE
-  "Serpent Laser, Perihelion",Laser,14,"66,000",3d12 F,120 ft.,burn 4d4,40 charges,20,1,"--",TRUE
-  "Autobeam Rifle, Advanced",Laser,15,"95,500",7d4 F,60 ft.,burn 3d4,100 charges,10,2,automatic,TRUE
-  "Infinity Rifle, Paragon",Laser,16,"155,000",4d6 F,100 ft.,"--",20 charges,1,1,boost 4d6,TRUE
-  "Laser Rifle, Parallax",Laser,17,"248,000",8d6 F,150 ft.,burn 4d6,100 charges,2,1,"--",TRUE
-  "Excavation Laser, Heavy",Laser,18,"380,000",6d10 F,60 ft.,"--",80 charges,4,2,"penetrating, professional (mining)",TRUE
-  "Autobeam Rifle, Elite",Laser,19,"548,100",12d4 F,60 ft.,burn 5d4,100 charges,5,2,automatic,TRUE
-  "Laser Rifle, Zenith",Laser,20,"722,000",11d6 F,150 ft.,burn 5d6,100 charges,2,1,"--",TRUE
-  "Plasma Bolter, Tactical",Plasma,1,260,1d10 E & F,40 ft.,"--",20 charges,4,2,unwieldy,TRUE
-  "Nova Rifle, Red Star",Plasma,2,940,1d6 E & F,30 ft.,blind,20 charges,2,1,"line, unwieldy",TRUE
-  "Plasma Fork, 12-Notch",Plasma,3,"1,290",1d8 E & F,60 ft.,knockdown,20 charges,1,1,boost 1d4,TRUE
-  "Microfusion Rifle, Light",Plasma,4,"2,350",1d8 E & F,15 ft.,irradiate,40 charges,4,1,"blast, radioactive, unwieldy",TRUE
-  "Plasma Bolter, Advanced",Plasma,5,"3,010",2d8 E & F,60 ft.,wound,40 charges,8,2,unwieldy,TRUE
-  "Plasma Rifle, Red Star",Plasma,6,"4,600",1d10 E & F,40 ft.,burn 1d4,40 charges,4,2,"line, unwieldy",TRUE
-  "Nova Rifle, Yellow Star",Plasma,7,"6,800",2d6 E & F,60 ft.,blind,40 charges,4,1,"line, unwieldy",TRUE
-  "Plasma Fork, 15-Notch",Plasma,8,"8,850",1d10 E & F,80 ft.,knockdown,20 charges,1,1,boost 1d10,TRUE
-  "Plasma Bolter, Elite",Plasma,9,"14,000",3d10 E & F,60 ft.,wound,40 charges,4,2,unwieldy,TRUE
-  "Plasma Rifle, Yellow Star",Plasma,10,"16,800",2d10 E & F,40 ft.,burn 1d8,40 charges,4,2,"line, unwieldy",TRUE
-  "Nova Rifle, White Star",Plasma,11,"25,300",3d6 E & F,80 ft.,blind,40 charges,4,1,"line, unwieldy",TRUE
-  "Microfusion Rifle, Medium",Plasma,12,"40,800",3d8 E & F,30 ft.,irradiate,40 charges,4,1,"blast, radioactive, unwieldy",TRUE
-  "Plasma Caster, White Star",Plasma,13,"49,100",3d10 E & F,80 ft.,burn 1d10,100 charges,5,2,boost 1d10,TRUE
-  "Plasma Fork, 19-Notch",Plasma,14,"64,800",3d10 E & F,80 ft.,knockdown,40 charges,2,1,boost 2d10,TRUE
-  "Plasma Rifle, White Star",Plasma,15,"126,600",4d10 E & F,60 ft.,burn 2d8,40 charges,4,2,"line, unwieldy",TRUE
-  "Plasma Bolter, Paragon",Plasma,16,"170,000",9d8 E & F,60 ft.,wound,80 charges,4,2,unwieldy,TRUE
-  "Plasma Caster, Blue Star",Plasma,17,"275,000",5d10 E & F,80 ft.,burn 2d10,200 charges,10,2,boost 2d10,TRUE
-  "Microfusion Rifle, Heavy",Plasma,18,"410,000",5d8 E & F,40 ft.,irradiate,40 charges,4,1,"blast, radioactive, unwieldy",TRUE
-  "Plasma Fork, 22-Notch",Plasma,19,"750,000",6d10 E & F,100 ft.,knockdown,40 charges,2,1,boost 3d10,TRUE
-  "Plasma Rifle, Blue Star",Plasma,20,"935,000",8d10 E & F,100 ft.,burn 4d8,100 charges,10,2,"line, unwieldy",TRUE
-  "Hunting Rifle",Projectile,1,240,1d8 P,90 ft.,"--",6 rounds,1,1,analog,TRUE
-  "Scattergun, Utility",Projectile,1,235,1d4 P,15 ft.,"--",4 shells,1,1,"analog, blast",TRUE
-  "Autotarget Rifle",Projectile,2,755,1d6 P,60 ft.,"--",10 rounds,1,2,"analog, automatic",TRUE
-  "Acid Dart Rifle, Tactical",Projectile,2,485,1d8 A & P,80 ft.,corrode 1d4,10 darts,1,1,analog,TRUE
-  "Cinder Rifle, Truth-Sequence",Projectile,2,700,1d8 P,60 ft.,burn 1d6,10 rounds,1,2,"--",TRUE
-  "Crossbolter, Tactical",Projectile,2,475,1d10 P,70 ft.,"--",1 arrow,1,2,"Analog, unwieldy",TRUE
-  "Shield Rifle, Tactical",Projectile,2,900,1d8 E & P,80 ft.,Arc 1d4 ,12 rounds,1,2,Buttressing ,TRUE
-  "Huchket Rifle",Projectile,3,"1,400",1d10 P,80 ft.,wound,6 rounds,1,1,analog,TRUE
-  "Aeon Guard, Assault Rifle",Projectile,3,"1,400",1d8 P,80 ft.,"--",12 rounds,1,1,automatic,FALSE
-  "Kalo Shredder, Slipstream-Class",Projectile,3,"1,610",1d6 S,30 ft.,bleed 1d4,8 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Rail Gun, Tactical",Projectile,3,"1,150",1d8 P,60 ft.,"--",12 rounds,1,1,automatic,TRUE
-  "Breaching Gun, Utility",Projectile,4,"2,350",1d10 P,20 ft.,knockdown,4 shells,1,1,"analog, breach, penetrating",TRUE
-  "Vivara Rifle, Low-Flux",Projectile,4,"2,100",1d8 P,50 ft.,"--",6,1,1,Breakdown,TRUE
-  "Rocket Rifle",Projectile,5,"3,010",1d12 B,80 ft.,"--",5 mini-rockets,1,1,"analog, unwieldy",TRUE
-  "Rail Gun, Advanced",Projectile,6,"3,770",1d10 P,60 ft.,"--",15 rounds,1,1,automatic,TRUE
-  "Acid Dart Rifle, Dual",Projectile,7,"6,900",2d8 A & P,90 ft.,corrode 2d4,24 darts,2,1,analog,TRUE
-  "Aeon Guard, Accelerator Rifle",Projectile,7,"7,500",3d4 P,60 ft.,"--",16 rounds,1,2,automatic,FALSE
-  "Breaching Gun, Snub",Projectile,7,"6,800",2d10 P,20 ft.,knockdown,8 shells,2,1,"analog, breach, penetrating",TRUE
-  "Cinder Rifle, Salvation-Sequence",Projectile,7,"6,000",2d8 P,60 ft.,burn 1d6,14 rounds,1,2,"--",TRUE
-  "Kalo Shredder, Cascade-Class",Projectile,7,"6,630",2d6 S,40 ft.,bleed 1d6,16 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Seeker Rifle, Tactical",Projectile,7,"6,030",2d8 P,100 ft.,"--",8 rounds,1,1,analog,TRUE
-  "Shield Rifle, Advanced",Projectile,7,"6,820",2d8 E & P,80 ft.,Arc 2d4 ,12 rounds,1,2,Buttressing ,TRUE
-  "Crossbolter, Dual",Projectile,8,"8,250",2d10 P,70 ft.,"--",4 arrows,2,2,"Analog, unwieldy",TRUE
-  "Scattergun, Snub",Projectile,8,"8,300",1d12 P,15 ft.,"--",8 shells,1,1,"analog, blast",TRUE
-  "Vivara Rifle, Mid-Flux",Projectile,8,"7,500",2d8 P,60 ft.,"--",6,1,1,Breakdown,TRUE
-  "Magnetar Rifle, Tactical",Projectile,9,"11,800",2d8 P,60 ft.,"--",18 rounds,1,2,"analog, automatic",TRUE
-  "Combat Rifle",Projectile,10,"16,500",3d8 P,90 ft.,"--",12 rounds,1,1,analog,TRUE
-  "Aeon Guard, RPPR",Projectile,10,"21,000",2d12 B,100 ft.,knockdown,12 mini-rockets,1,2,"--",FALSE
-  "Breaching Gun, Impact",Projectile,11,"25,300",3d10 P,30 ft.,knockdown,12 shells,2,1,"analog, breach, penetrating",TRUE
-  "Cinder Rifle, Valor-Sequence",Projectile,11,"23,700",3d8 P,80 ft.,burn 2d6,20 rounds,1,2,"--",TRUE
-  "Kalo Shredder, Torrent-Class",Projectile,11,"26,700",4d6 S,40 ft.,bleed 3d4,24 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Acid Dart Rifle, Complex",Projectile,12,"39,200",4d8 A & P,90 ft.,corrode 4d4,48 darts,4,2,analog,TRUE
-  "Scattergun, Impact",Projectile,12,"30,400",2d12 P,15 ft.,"--",12 shells,1,2,"analog, blast",TRUE
-  "Shield Rifle, Elite",Projectile,12,"37,000",4d8 E & P,80 ft.,Arc 4d4 ,15 rounds,1,2,Buttressing ,TRUE
-  "Vivara Rifle, High-Flux",Projectile,12,"27,600",4d8 P,70 ft.,"--",6,1,1,Breakdown,FALSE
-  "Gyrojet Rifle, Tactical",Projectile,13,"54,000",3d12 B,100 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Magnetar Rifle, Advanced",Projectile,13,"53,700",4d8 P,60 ft.,"--",24 rounds,1,2,"analog, automatic",TRUE
-  "Kalo Shredder, Deluge-Class",Projectile,14,"74,300",6d6 S,60 ft.,bleed 4d4,36 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Seeker Rifle, Advanced",Projectile,14,"72,300",6d8 P,100 ft.,"--",18 rounds,1,1,analog,TRUE
-  "Breaching Gun, Vortex",Projectile,15,"119,000",6d10 P,30 ft.,knockdown,16 shells,2,1,"analog, breach, penetrating",TRUE
-  "Cinder Rifle, Glory-Sequence",Projectile,15,"102,200",6d8 P,80 ft.,burn 2d6,24 rounds,1,2,"--",TRUE
-  "Gyrojet Rifle, Advanced",Projectile,15,"122,800",5d12 B,120 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Scattergun, Vortex",Projectile,15,"91,900",3d12 P,30 ft.,"--",12 shells,1,2,"analog, blast",TRUE
-  "Magnetar Rifle, Elite",Projectile,16,"185,100",6d8 P,120 ft.,"--",36 rounds,1,2,"analog, automatic",TRUE
-  "Gyrojet Rifle, Elite",Projectile,17,"245,600",6d12 B,120 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Kalo Shredder, Monsoon-Class",Projectile,17,"784,000",12d6 S,60 ft.,bleed 4d6,48 flechettes,1,1,"analog, automatic, underwater",TRUE
-  "Seeker Rifle, Elite",Projectile,17,"242,500",9d8 P,100 ft.,"--",18 rounds,1,1,analog,TRUE
-  "Shield Rifle, Paragon",Projectile,17,"264,000",8d8 E & P,80 ft.,Arc 4d8 ,18 rounds,1,2,Buttressing ,TRUE
-  "Scattergun, Grapeshot",Projectile,18,"331,000",4d12 P,30 ft.,"--",12 shells,1,2,"analog, blast",TRUE
-  "Breaching Gun, Grapeshot",Projectile,19,"509,000",10d10 P,30 ft.,knockdown,20 shells,2,1,"analog, breach, penetrating",TRUE
-  "Magnetar Rifle, Paragon",Projectile,19,"612,600",8d8 P,120 ft.,"--",48 rounds,1,2,"analog, automatic",TRUE
-  "Gyrojet Rifle, Paragon",Projectile,20,"723,500",8d12 B,120 ft.,knockdown,12 mini-rockets,1,2,analog,TRUE
-  "Seeker Rifle, Paragon",Projectile,20,"809,200",12d8 P,100 ft.,"--",24 rounds,1,1,analog,TRUE
-  "Pulsecaster Rifle",Shock,1,100,1d6 E,50 ft.,"--",20 charges,1,1,nonlethal,TRUE
-  "Arc Emitter, Tactical",Shock,2,750,1d4 E,15 ft.,"--",20 charges,4,1,"blast, stun, unwieldy",TRUE
-  "Storm Coil, Live",Shock,3,"1,480",1d6 E,40 ft.,"--",20 charges,5,2,"line, unwieldy",TRUE
-  "Polarity Rifle, Static",Shock,4,"2,400",1d8 E,60 ft.,"--",40 charges,2,1,polarize 1d4,TRUE
-  "Surgecaster, Standard",Shock,5,"3,300",1d10 E,40 ft.,arc 1d10,20 charges,2,1,"boost 1d6, living",TRUE
-  "Arc Rifle, Static",Shock,6,"4,200",1d12 E,70 ft.,arc 1d6,40 charges,1,2,stun,TRUE
-  "Storm Coil, Jolt",Shock,7,"6,900",2d6 E,60 ft.,"--",40 charges,8,2,"line, unwieldy",TRUE
-  "Charge Emitter, Impulse",Shock,8,"10,900",3d4 E,20 ft.,staggered,20 charges,2,1,"integrated (1 slot), stun",TRUE
-  "Arc Emitter, Advanced",Shock,9,"13,200",2d4 E,30 ft.,"--",40 charges,10,1,"blast, stun, unwieldy",TRUE
-  "Polarity Rifle, Aurora",Shock,10,"21,000",2d8 E,80 ft.,"--",40 charges,2,1,polarize 1d10,TRUE
-  "Arc Rifle, Aurora",Shock,11,"24,500",2d12 E,70 ft.,arc 2d6,40 charges,1,2,stun,TRUE
-  "Storm Coil, Impulse",Shock,12,"35,200",4d6 E,80 ft.,"--",80 charges,10,2,"line, unwieldy",TRUE
-  "Charge Emitter, Jolt",Shock,13,"57,000",3d10 E,30 ft.,staggered,20 charges,2,1,"integrated (1 slot), stun",TRUE
-  "Surgecaster, Advanced",Shock,14,"83,000",3d10 E,60 ft.,arc 2d10,40 charges,2,1,"boost 1d10, living",TRUE
-  "Polarity Rifle, Storm",Shock,15,"137,000",4d8 E,80 ft.,"--",40 charges,2,1,polarize 2d8,TRUE
-  "Arc Rifle, Storm",Shock,16,"190,300",4d12 E,80 ft.,arc 4d6,80 charges,2,2,stun,TRUE
-  "Storm Coil, Surge",Shock,17,"261,000",7d6 E,120 ft.,"--",100 charges,10,2,"line, unwieldy",TRUE
-  "Charge Emitter, Surge",Shock,18,"435,000",5d10 E,40 ft.,staggered,80 charges,5,1,"integrated (1 slot), stun",TRUE
-  "Arc Rifle, Tempest",Shock,19,"622,000",6d12 E,80 ft.,arc 6d6,100 charges,2,2,stun,TRUE
-  "Polarity Rifle, Tempest",Shock,20,"1,000,000",8d8 E,80 ft.,"--",80 charges,2,1,polarize 3d8,TRUE
-  "Scrambler Rifle, Termite",Shock,3,"1,520",1d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Solo",Shock,4,"2,200",1d4 E,60 ft.,"--",20 charges,5,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Scrambler Rifle, Cockroach",Shock,8,"9,850",2d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Duet",Shock,8,"9,700",2d4 E,90 ft.,"--",40 charges,8,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Scrambler Rifle, Dragonfly",Shock,11,"24,900",3d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Quartet",Shock,13,"50,000",4d4 E,120 ft.,Deafen ,80 charges,10,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Scrambler Rifle, Locust",Shock,14,"82,600",4d6 E,90 ft.,Confuse,20 charges,2,1,Scramble ,TRUE
-  "Trenarii Singing Coil, Orchestra",Shock,18,"380,000",7d4 E,200 ft.,Deafen ,100 charges,10,2,"Line, unwieldy, Professional (Musician)",TRUE
-  "Shout Rifle",Sonic,1,450,1d4 So,30 ft.,demoralize,20 charges,4,1,"blast, nonlethal, unwieldy",TRUE
-  "Boomer Rifle, Tremor",Sonic,2,520,1d8 So,40 ft.,deafen,12 shells,3,1,analog,TRUE
-  "Chordpocalypse, Thunderstrike",Sonic,2,765,1d6 So,30 ft.,Deafen ,20 charges,1,1,"Boost (1d4), polarize (1d4), professional (musician) ",TRUE
-  "Blindmark Rifle, Thunderstrike",Sonic,3,"1,400",2d4 So,60 ft.,"--",20 charges,2,1,"echo, stun",TRUE
-  "Vortex Rifle, Pulse",Sonic,3,"1,400",2d4 So,60 ft.,Nauseate ,20 charges,1,1,"Breach, underwater ",TRUE
-  "Staccato Rifle, Pulse",Sonic,4,"2,000",1d10 So,40 ft.,deafen,40 charges,1,2,automatic,TRUE
-  "Sonic Rifle, Thunderstrike",Sonic,5,"3,400",1d10 So,50 ft.,deafen,40 charges,2,1,"--",TRUE
-  "Boomer Rifle, Rumbler",Sonic,6,"4,100",2d6 So,40 ft.,deafen,12 shells,4,1,analog,TRUE
-  "Chordpocalypse, Shattering",Sonic,6,"4,280",1d8 So,30 ft.,Deafen ,20 charges,1,1,"Boost (1d6), polarize (1d6), professional (musician) ",TRUE
-  "Vortex Rifle, Surge",Sonic,6,"4,150",2d6 So,60 ft.,Nauseate ,20 charges,1,1,"Breach, underwater ",TRUE
-  "Streetsweeper, Thunderstrike",Sonic,7,"7,150",1d10 So,50 ft.,knockdown,40 charges,5,2,boost 1d6,TRUE
-  "Blindmark Rifle, LFD",Sonic,8,"9,800",2d8 So,80 ft.,"--",40 charges,5,1,"echo, stun",TRUE
-  "Staccato Rifle, Surge",Sonic,9,"13,000",2d10 So,60 ft.,deafen,40 charges,2,2,automatic,TRUE
-  "Chordpocalypse, Psychedelic",Sonic,10,"18,400",2d8 So,30 ft.,Deafen ,40 charges,2,1,"Boost (1d8), polarize (1d8), professional (musician) ",TRUE
-  "Sonic Rifle, LFD",Sonic,10,"17,000",2d10 So,50 ft.,deafen,40 charges,2,2,"--",TRUE
-  "Boomer Rifle, Concussive",Sonic,11,"24,000",4d6 So,40 ft.,knockdown,15 shells,5,1,analog,TRUE
-  "Streetsweeper, LFD",Sonic,12,"39,300",3d10 So,50 ft.,knockdown,40 charges,5,2,boost 1d8,TRUE
-  "Vortex Rifle, Drum",Sonic,12,"38,000",4d6 So,60 ft.,Nauseate ,20 charges,1,1,"Breach, underwater ",TRUE
-  "Blindmark Rifle, HFD",Sonic,13,"51,000",4d8 So,100 ft.,sicken,40 charges,8,1,"echo, stun",TRUE
-  "Chordpocalypse, Banshee",Sonic,14,"72,000",4d8 So,30 ft.,Deafen ,40 charges,2,1,"Boost (2d6), polarize (2d6), professional (musician) ",TRUE
-  "Sonic Rifle, HFD",Sonic,14,"80,200",4d10 So,50 ft.,deafen,80 charges,4,2,"--",TRUE
-  "Staccato Rifle, Drum",Sonic,15,"107,000",4d10 So,60 ft.,deafen,40 charges,2,2,automatic,TRUE
-  "Streetsweeper, HFD",Sonic,16,"195,000",5d10 So,50 ft.,knockdown,40 charges,4,2,boost 1d10,TRUE
-  "Boomer Rifle, Shockwave",Sonic,17,"230,000",8d6 So,40 ft.,knockdown,20 shells,5,1,analog,TRUE
-  "Vortex Rifle, Hammer",Sonic,17,"250,000",8d6 So,60 ft.,Nauseate ,40 charges,2,1,"Breach, underwater ",TRUE
-  "Chordpocalypse, Transcendent",Sonic,18,"372,000",7d8 So,40 ft.,Deafen ,80 charges,2,1,"Boost (2d8), polarize (2d8), professional (musician) ",TRUE
-  "Sonic Rifle, Banshee",Sonic,18,"364,500",6d10 So,50 ft.,deafen,100 charges,5,2,"--",TRUE
-  "Blindmark Rifle, Banshee",Sonic,19,"585,000",8d8 So,120 ft.,sicken,80 charges,10,1,"echo, stun",TRUE
-  "Staccato Rifle, Hammer",Sonic,20,"810,000",8d10 So,80 ft.,deafen,80 charges,4,2,automatic,TRUE
+const heavyWeapons = {
+  "NIL Grenade Launcher, Merc": {
+    "category": null,
+    "level": "1",
+    "price": "280",
+    "damage": "by grenade",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "6 grenades",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Molecular Borer, Utility ": {
+    "category": null,
+    "level": "2",
+    "price": "800",
+    "damage": "2d4 C or F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Modal (cryo), professional (miner), shatter, unwieldy ",
+    "sfsLegal": false
+  },
+  "Psychic-Wave Cannon, I": {
+    "category": null,
+    "level": "2",
+    "price": "1,100",
+    "damage": "1d6",
+    "range": "30 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "blast, living, mind-affecting, unwieldy",
+    "sfsLegal": true
+  },
+  "Rubbish Cannon, Light": {
+    "category": null,
+    "level": "2",
+    "price": "750",
+    "damage": "1d8 B",
+    "range": "30 ft.",
+    "critical": "Knockdown",
+    "capacity": "Special",
+    "usage": "",
+    "bulk": "2",
+    "special": "Blast",
+    "sfsLegal": true
+  },
+  "Minelayer, Merc": {
+    "category": null,
+    "level": "3",
+    "price": "1,470",
+    "damage": null,
+    "range": "",
+    "critical": null,
+    "capacity": "8 grenades",
+    "usage": "1",
+    "bulk": "2",
+    "special": "mine",
+    "sfsLegal": true
+  },
+  "Acid Lancer, Corroder-Class": {
+    "category": null,
+    "level": "4",
+    "price": "2,000",
+    "damage": "2d4 A",
+    "range": "30 ft.",
+    "critical": "corrode 1d4",
+    "capacity": "20 caustrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "analog, boost 1d4, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Desperation Cannon, Rage-Bringer": {
+    "category": null,
+    "level": "4",
+    "price": "2,250",
+    "damage": "1d12 E & F",
+    "range": "100 ft.",
+    "critical": "Nuisance",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Bright, penetrating, unwieldy",
+    "sfsLegal": true
+  },
+  "Electrogel Jet, Sheet": {
+    "category": null,
+    "level": "4",
+    "price": "1,880",
+    "damage": "1d8 A & E",
+    "range": "30 ft.",
+    "critical": "Staggered",
+    "capacity": "20 caustrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Line, living, mire 1 round, regrowth, stun, unwieldy",
+    "sfsLegal": true
+  },
+  "Sclerite Harpooner, Lure": {
+    "category": null,
+    "level": "4",
+    "price": "2,000",
+    "damage": "2d6 P",
+    "range": "90 ft.",
+    "critical": "Embed 1d6",
+    "capacity": "25 sclerites",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Unwieldy",
+    "sfsLegal": true
+  },
+  "Psychic-Wave Cannon, II": {
+    "category": null,
+    "level": "5",
+    "price": "3,520",
+    "damage": "1d12",
+    "range": "40 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "blast, living, mind-affecting, unwieldy",
+    "sfsLegal": true
+  },
+  "Rocket Pauldron, Tactical": {
+    "category": null,
+    "level": "5",
+    "price": "3,000",
+    "damage": "1d10 B & F",
+    "range": "80 ft.",
+    "critical": "Knockdown ",
+    "capacity": "6 mini-rockets",
+    "usage": "3",
+    "bulk": "1",
+    "special": "Explode (10 ft.), integrated (2 slots), unwieldy ",
+    "sfsLegal": true
+  },
+  "Singularity Cannon, Light": {
+    "category": null,
+    "level": "5",
+    "price": "3,150",
+    "damage": "1d10 B",
+    "range": "50 ft.",
+    "critical": "Bind",
+    "capacity": "40",
+    "usage": "4",
+    "bulk": "2",
+    "special": "explode (5 ft.), force, gravitation (5 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Barrier Cannon, Sentry": {
+    "category": null,
+    "level": "6",
+    "price": "4,300",
+    "damage": null,
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "Blast, shield 1d12, unwieldy ",
+    "sfsLegal": true
+  },
+  "Cluster Launcher, Tactical": {
+    "category": null,
+    "level": "6",
+    "price": "4,150",
+    "damage": null,
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "8 grenades",
+    "usage": "1",
+    "bulk": "2",
+    "special": "cluster (5 ft.)",
+    "sfsLegal": true
+  },
+  "Molecular Borer, Industrial ": {
+    "category": null,
+    "level": "6",
+    "price": "4,800",
+    "damage": "3d6 C or F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Modal (cryo), professional (miner), shatter, unwieldy ",
+    "sfsLegal": false
+  },
+  "Vibrowave Generator, Light": {
+    "category": null,
+    "level": "6",
+    "price": "4,300",
+    "damage": "2d8 So",
+    "range": "30 ft.",
+    "critical": "Push (10 ft.)",
+    "capacity": "20",
+    "usage": "2",
+    "bulk": "3",
+    "special": "Blast, hybrid, unwieldy",
+    "sfsLegal": false
+  },
+  "Electrogel Jet, Ribbon": {
+    "category": null,
+    "level": "7",
+    "price": "6,500",
+    "damage": "2d8 A & E",
+    "range": "40 ft.",
+    "critical": "Staggered",
+    "capacity": "40 caustrol",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Line, living, mire 1 round, regrowth, stun, unwieldy",
+    "sfsLegal": true
+  },
+  "Minelayer, Squad": {
+    "category": null,
+    "level": "7",
+    "price": "6,930",
+    "damage": null,
+    "range": "",
+    "critical": null,
+    "capacity": "12 grenades",
+    "usage": "1",
+    "bulk": "2",
+    "special": "mine",
+    "sfsLegal": true
+  },
+  "Nauphage Cannon, Sticky": {
+    "category": null,
+    "level": "7",
+    "price": "7,200",
+    "damage": "2d10 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Entangle (1d4 rounds), living, Swarm, unwieldy",
+    "sfsLegal": true
+  },
+  "Dissolver, Macrergate": {
+    "category": null,
+    "level": "8",
+    "price": "10,000",
+    "damage": "2d8 A & F",
+    "range": "40 ft.",
+    "critical": "corrode 2d4",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "L",
+    "special": "Blast, living, Swarm, unwieldy",
+    "sfsLegal": true
+  },
+  "NIL Grenade Launcher, Squad": {
+    "category": null,
+    "level": "8",
+    "price": "9,400",
+    "damage": "by grenade",
+    "range": "70 ft.",
+    "critical": null,
+    "capacity": "12 grenades",
+    "usage": "1",
+    "bulk": "3",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Rubbish Cannon, Standard": {
+    "category": null,
+    "level": "8",
+    "price": "9,000",
+    "damage": "2d8 B",
+    "range": "30 ft.",
+    "critical": "Knockdown",
+    "capacity": "Special",
+    "usage": "",
+    "bulk": "2",
+    "special": "Blast",
+    "sfsLegal": true
+  },
+  "Acid Lancer, Melter-Class": {
+    "category": null,
+    "level": "9",
+    "price": "13,000",
+    "damage": "3d4 A",
+    "range": "30 ft.",
+    "critical": "corrode 2d4",
+    "capacity": "20 caustrol",
+    "usage": "5",
+    "bulk": "2",
+    "special": "analog, boost 1d6, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Sclerite Harpooner, Hook": {
+    "category": null,
+    "level": "9",
+    "price": "13,000",
+    "damage": "5d8 P",
+    "range": "120 ft.",
+    "critical": "Embed 1d8",
+    "capacity": "50 sclerites",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Unwieldy",
+    "sfsLegal": true
+  },
+  "Singularity Cannon, Heavy": {
+    "category": null,
+    "level": "9",
+    "price": "13,000",
+    "damage": "2d10 B",
+    "range": "50 ft.",
+    "critical": "Bind",
+    "capacity": "40",
+    "usage": "4",
+    "bulk": "2",
+    "special": "explode (5 ft.), force, gravitation (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "IMDS Missile Launcher": {
+    "category": null,
+    "level": "10",
+    "price": "18,200",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "1 missile",
+    "usage": "1",
+    "bulk": "2",
+    "special": null,
+    "sfsLegal": true
+  },
+  "Barrier Cannon, Defender": {
+    "category": null,
+    "level": "10",
+    "price": "18,500",
+    "damage": null,
+    "range": "15 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "16",
+    "bulk": "3",
+    "special": "Blast, shield 2d10, unwieldy",
+    "sfsLegal": true
+  },
+  "Desperation Cannon, Doom-Caller": {
+    "category": null,
+    "level": "10",
+    "price": "18,500",
+    "damage": "3d12 E & F",
+    "range": "100 ft.",
+    "critical": "Nuisance",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Bright, penetrating, unwieldy",
+    "sfsLegal": true
+  },
+  "Molecular Borer, Advanced ": {
+    "category": null,
+    "level": "10",
+    "price": "20,000",
+    "damage": "5d8 C or F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Modal (cryo), professional (miner), shatter, unwieldy ",
+    "sfsLegal": false
+  },
+  "Rocket Pauldron, Advanced": {
+    "category": null,
+    "level": "10",
+    "price": "18,200",
+    "damage": "2d10 B & F",
+    "range": "80 ft.",
+    "critical": "Knockdown ",
+    "capacity": "9 mini-rockets",
+    "usage": "3",
+    "bulk": "1",
+    "special": "Explode (10 ft.), integrated (2 slots), unwieldy ",
+    "sfsLegal": true
+  },
+  "Electrogel Jet, Rocket": {
+    "category": null,
+    "level": "11",
+    "price": "23,700",
+    "damage": "3d8 A & E",
+    "range": "50 ft.",
+    "critical": "Staggered",
+    "capacity": "40 caustrol",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Line, living, mire 1 round, regrowth, stun, unwieldy",
+    "sfsLegal": true
+  },
+  "Psychic-Wave Cannon, III": {
+    "category": null,
+    "level": "11",
+    "price": "28,200",
+    "damage": "2d12",
+    "range": "50 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "blast, living, mind-affecting, unwieldy",
+    "sfsLegal": true
+  },
+  "Vibrowave Generator, Heavy": {
+    "category": null,
+    "level": "11",
+    "price": "25,000",
+    "damage": "3d8 So",
+    "range": "30 ft.",
+    "critical": "Push (10 ft.)",
+    "capacity": "40",
+    "usage": "4",
+    "bulk": "3",
+    "special": "Blast, hybrid, unwieldy",
+    "sfsLegal": false
+  },
+  "Cluster Launcher, Advanced": {
+    "category": null,
+    "level": "12",
+    "price": "35,800",
+    "damage": null,
+    "range": "70 ft.",
+    "critical": null,
+    "capacity": "10 grenades",
+    "usage": "1",
+    "bulk": "3",
+    "special": "cluster (10 ft.)",
+    "sfsLegal": true
+  },
+  "Dissolver, Dinergate": {
+    "category": null,
+    "level": "13",
+    "price": "50,000",
+    "damage": "4d8 A & F",
+    "range": "40 ft.",
+    "critical": "corrode 4d4",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "L",
+    "special": "Blast, living, Swarm, unwieldy",
+    "sfsLegal": true
+  },
+  "Minelayer, Platoon": {
+    "category": null,
+    "level": "13",
+    "price": "51,400",
+    "damage": null,
+    "range": "",
+    "critical": null,
+    "capacity": "16 grenades",
+    "usage": "1",
+    "bulk": "2",
+    "special": "mine",
+    "sfsLegal": true
+  },
+  "Nauphage Cannon, Adhesion": {
+    "category": null,
+    "level": "13",
+    "price": "47,000",
+    "damage": "4d10 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "Entangle (2d4 rounds), living, Swarm, unwieldy",
+    "sfsLegal": true
+  },
+  "Novus missile launcher ": {
+    "category": null,
+    "level": "14",
+    "price": "71,500",
+    "damage": null,
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "3 missiles",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Guided",
+    "sfsLegal": true
+  },
+  "Thasphalt Deck Sweeper ": {
+    "category": null,
+    "level": "14",
+    "price": "81,000",
+    "damage": "4d12 B",
+    "range": "50 ft.",
+    "critical": "Push (5 ft.) ",
+    "capacity": "100 thasphalt",
+    "usage": "2",
+    "bulk": "2",
+    "special": "Analog, automatic, force ",
+    "sfsLegal": true
+  },
+  "Acid Lancer, Liquefier-Class": {
+    "category": null,
+    "level": "14",
+    "price": "75,000",
+    "damage": "8d4 A",
+    "range": "50 ft.",
+    "critical": "corrode 4d4",
+    "capacity": "40 caustrol",
+    "usage": "8",
+    "bulk": "2",
+    "special": "analog, boost 1d8, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Barrier Cannon, Guardian": {
+    "category": null,
+    "level": "14",
+    "price": "72,000",
+    "damage": null,
+    "range": "20 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "16",
+    "bulk": "3",
+    "special": "Blast, shield 3d12, unwieldy ",
+    "sfsLegal": true
+  },
+  "Molecular Borer, Elite ": {
+    "category": null,
+    "level": "14",
+    "price": "80,000",
+    "damage": "8d10 C or F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "Modal (cryo), professional (miner), shatter, unwieldy ",
+    "sfsLegal": false
+  },
+  "Rubbish Cannon, Heavy": {
+    "category": null,
+    "level": "14",
+    "price": "70,000",
+    "damage": "6d8 B",
+    "range": "30 ft.",
+    "critical": "Knockdown",
+    "capacity": "Special",
+    "usage": "",
+    "bulk": "2",
+    "special": "Blast",
+    "sfsLegal": true
+  },
+  "Sclerite Harpooner, Lodestone": {
+    "category": null,
+    "level": "14",
+    "price": "70,000",
+    "damage": "6d12 P",
+    "range": "150 ft.",
+    "critical": "Embed 1d12",
+    "capacity": "100 sclerites",
+    "usage": "10",
+    "bulk": "3",
+    "special": "Unwieldy",
+    "sfsLegal": true
+  },
+  "Singularity Cannon, Advanced": {
+    "category": null,
+    "level": "14",
+    "price": "76,750",
+    "damage": "3d10 B",
+    "range": "60 ft.",
+    "critical": "Bind",
+    "capacity": "80",
+    "usage": "6",
+    "bulk": "3",
+    "special": "explode (10 ft.), force, gravitation (15 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Cluster Launcher, Elite": {
+    "category": null,
+    "level": "15",
+    "price": "105,000",
+    "damage": null,
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "12 grenades",
+    "usage": "1",
+    "bulk": "3",
+    "special": "cluster (10 ft.)",
+    "sfsLegal": true
+  },
+  "Desperation Cannon, Sky-Piercer": {
+    "category": null,
+    "level": "15",
+    "price": "119,500",
+    "damage": "6d12 E & F",
+    "range": "100 ft.",
+    "critical": "Nuisance",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Bright, penetrating, unwieldy",
+    "sfsLegal": true
+  },
+  "Electrogel Jet, Smooth-channel": {
+    "category": null,
+    "level": "15",
+    "price": "99,900",
+    "damage": "6d8 A & E",
+    "range": "60 ft.",
+    "critical": "Staggered",
+    "capacity": "40 caustrol",
+    "usage": "4",
+    "bulk": "1",
+    "special": "Line, living, mire 1 round, regrowth, stun, unwieldy",
+    "sfsLegal": true
+  },
+  "Rocket Pauldron, Elite": {
+    "category": null,
+    "level": "15",
+    "price": "108,000",
+    "damage": "4d10 B & F",
+    "range": "80 ft.",
+    "critical": "Knockdown ",
+    "capacity": "12 mini-rockets",
+    "usage": "3",
+    "bulk": "1",
+    "special": "Explode (10 ft.), integrated (2 slots), unwieldy ",
+    "sfsLegal": true
+  },
+  "Psychic-Wave Cannon, IV": {
+    "category": null,
+    "level": "16",
+    "price": "198,000",
+    "damage": "4d12",
+    "range": "50 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "blast, living, mind-affecting, unwieldy",
+    "sfsLegal": true
+  },
+  "Vibrowave Generator, Assault": {
+    "category": null,
+    "level": "16",
+    "price": "175,000",
+    "damage": "7d8 So",
+    "range": "30 ft.",
+    "critical": "Push (10 ft.)",
+    "capacity": "80",
+    "usage": "4",
+    "bulk": "3",
+    "special": "Blast, hybrid, unwieldy",
+    "sfsLegal": false
+  },
+  "Minelayer, Command": {
+    "category": null,
+    "level": "17",
+    "price": "243,000",
+    "damage": null,
+    "range": "",
+    "critical": null,
+    "capacity": "20 grenades",
+    "usage": "1",
+    "bulk": "2",
+    "special": "mine",
+    "sfsLegal": true
+  },
+  "Thasphalt Carronade ": {
+    "category": null,
+    "level": "18",
+    "price": "375,000",
+    "damage": "8d12 B",
+    "range": "80 ft.",
+    "critical": "Knockdown ",
+    "capacity": "100 thasphalt",
+    "usage": "50",
+    "bulk": "3",
+    "special": "Analog, explode (10 ft.), force, unwieldy ",
+    "sfsLegal": false
+  },
+  "Barrier Cannon, Warden": {
+    "category": null,
+    "level": "18",
+    "price": "368,000",
+    "damage": null,
+    "range": "20 ft.",
+    "critical": null,
+    "capacity": "100 charges",
+    "usage": "25",
+    "bulk": "3",
+    "special": "Blast, shield 5d12, unwieldy ",
+    "sfsLegal": true
+  },
+  "Cluster Launcher, Paragon": {
+    "category": null,
+    "level": "18",
+    "price": "360,000",
+    "damage": null,
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "16 grenades",
+    "usage": "1",
+    "bulk": "3",
+    "special": "cluster (15 ft.)",
+    "sfsLegal": true
+  },
+  "Dissolver, Ergatoid": {
+    "category": null,
+    "level": "18",
+    "price": "380,000",
+    "damage": "9d8 A & F",
+    "range": "40 ft.",
+    "critical": "corrode 9d4",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "L",
+    "special": "Blast, living, Swarm, unwieldy",
+    "sfsLegal": true
+  },
+  "Molecular Borer, Paragon ": {
+    "category": null,
+    "level": "18",
+    "price": "400,000",
+    "damage": "11d12 C or F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Modal (cryo), professional (miner), shatter, unwieldy",
+    "sfsLegal": false
+  },
+  "Acid Lancer, Disintegrator-Class": {
+    "category": null,
+    "level": "19",
+    "price": "550,000",
+    "damage": "8d8 A",
+    "range": "50 ft.",
+    "critical": "corrode 6d4",
+    "capacity": "40 caustrol",
+    "usage": "10",
+    "bulk": "2",
+    "special": "analog, boost 1d10, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Desperation Cannon, Titan-Killer": {
+    "category": null,
+    "level": "19",
+    "price": "565,000",
+    "damage": "9d12 E & F",
+    "range": "100 ft.",
+    "critical": "Nuisance",
+    "capacity": "100 charges",
+    "usage": "20",
+    "bulk": "2",
+    "special": "Bright, penetrating, unwieldy",
+    "sfsLegal": true
+  },
+  "Nauphage Cannon, Anchor": {
+    "category": null,
+    "level": "19",
+    "price": "570,000",
+    "damage": "8d10 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "Entangle (2d4 rounds), living, Swarm, unwieldy",
+    "sfsLegal": true
+  },
+  "Singularity Cannon, Paragon": {
+    "category": null,
+    "level": "19",
+    "price": "555,000",
+    "damage": "6d10 B",
+    "range": "70 ft.",
+    "critical": "Bind",
+    "capacity": "80",
+    "usage": "8",
+    "bulk": "3",
+    "special": "explode (10 ft.), force, gravitation (20 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Psychic-Wave Cannon, V": {
+    "category": null,
+    "level": "20",
+    "price": "990,000",
+    "damage": "7d12",
+    "range": "60 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "blast, living, mind-affecting, unwieldy",
+    "sfsLegal": true
+  },
+  "Rocket Pauldron, Paragon": {
+    "category": null,
+    "level": "20",
+    "price": "817,000",
+    "damage": "7d10 B & F",
+    "range": "100 ft.",
+    "critical": "Knockdown ",
+    "capacity": "12 mini-rockets",
+    "usage": "3",
+    "bulk": "1",
+    "special": "Explode (10 ft.), integrated AR (2 slots), unwieldy ",
+    "sfsLegal": true
+  },
+  "Hailcannon, Subzero": {
+    "category": "Cryo",
+    "level": "1",
+    "price": "275",
+    "damage": "1d8 C & P",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Ice Launcher, Aufeis": {
+    "category": "Cryo",
+    "level": "2",
+    "price": "760",
+    "damage": "1d12 B & C",
+    "range": "60 ft.",
+    "critical": "knockdown",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Coolant Sprayer, Hiemal": {
+    "category": "Cryo",
+    "level": "3",
+    "price": "1,600",
+    "damage": "1d4 C",
+    "range": "20 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "blast, entangle (1d4 rounds), unwieldy",
+    "sfsLegal": true
+  },
+  "Energy Converter, Tactical": {
+    "category": "Cryo",
+    "level": "4",
+    "price": "2,400",
+    "damage": "1d6 C",
+    "range": "90 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "3",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Ice Launcher, Iceberg": {
+    "category": "Cryo",
+    "level": "5",
+    "price": "3,100",
+    "damage": "2d8 B & C",
+    "range": "60 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Hailcannon, Gelid": {
+    "category": "Cryo",
+    "level": "6",
+    "price": "4,350",
+    "damage": "2d8 C & P",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Coolant Sprayer, Algid": {
+    "category": "Cryo",
+    "level": "7",
+    "price": "7,400",
+    "damage": "1d6 C",
+    "range": "30 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "blast, entangle (1d4 rounds), unwieldy",
+    "sfsLegal": true
+  },
+  "Ice Launcher, Floe": {
+    "category": "Cryo",
+    "level": "8",
+    "price": "9,430",
+    "damage": "3d12 B & C",
+    "range": "60 ft.",
+    "critical": "knockdown",
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Hailcannon, Ultracold": {
+    "category": "Cryo",
+    "level": "9",
+    "price": "14,300",
+    "damage": "4d8 C & P",
+    "range": "80 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Energy Converter, Advanced": {
+    "category": "Cryo",
+    "level": "10",
+    "price": "20,900",
+    "damage": "2d8 C",
+    "range": "90 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "3",
+    "special": "explode (15 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Frailty Cannon, Murder-Class": {
+    "category": "Cryo",
+    "level": "10",
+    "price": "20,900",
+    "damage": "3d6 C",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, necrotic",
+    "sfsLegal": true
+  },
+  "Zero Cannon, Tactical": {
+    "category": "Cryo",
+    "level": "11",
+    "price": "23,000",
+    "damage": "3d8 C",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Coolant Sprayer, Glacial": {
+    "category": "Cryo",
+    "level": "12",
+    "price": "41,000",
+    "damage": "2d6 C",
+    "range": "40 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "blast, entangle (2d4 rounds), unwieldy",
+    "sfsLegal": true
+  },
+  "Hailcannon, Absolute-Zero": {
+    "category": "Cryo",
+    "level": "13",
+    "price": "50,800",
+    "damage": "6d8 C & P",
+    "range": "80 ft.",
+    "critical": "staggered",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Zero Cannon, Advanced": {
+    "category": "Cryo",
+    "level": "14",
+    "price": "81,400",
+    "damage": "5d8 C",
+    "range": "60 ft.",
+    "critical": "staggered",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Frailty Cannon, Massacre-Class": {
+    "category": "Cryo",
+    "level": "15",
+    "price": "132,000",
+    "damage": "6d6 C",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "50 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, necrotic",
+    "sfsLegal": true
+  },
+  "Ice Launcher, Glacier": {
+    "category": "Cryo",
+    "level": "15",
+    "price": "108,000",
+    "damage": "8d12 B & C",
+    "range": "60 ft.",
+    "critical": "knockdown",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Energy Converter, Elite": {
+    "category": "Cryo",
+    "level": "16",
+    "price": "198,000",
+    "damage": "3d10 C",
+    "range": "100 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "3",
+    "special": "explode (20 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Coolant Sprayer, Isothermal": {
+    "category": "Cryo",
+    "level": "17",
+    "price": "290,000",
+    "damage": "3d6 C",
+    "range": "40 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "blast, entangle (2d4 rounds), unwieldy",
+    "sfsLegal": true
+  },
+  "Zero Cannon, Elite": {
+    "category": "Cryo",
+    "level": "18",
+    "price": "412,800",
+    "damage": "8d8 C",
+    "range": "80 ft.",
+    "critical": "staggered",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Frailty Cannon, Extinction-Class": {
+    "category": "Cryo",
+    "level": "19",
+    "price": "660,000",
+    "damage": "9d6 C",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "50 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, necrotic",
+    "sfsLegal": true
+  },
+  "Hailcannon, Clathrate": {
+    "category": "Cryo",
+    "level": "19",
+    "price": "565,000",
+    "damage": "14d8 C & P",
+    "range": "100 ft.",
+    "critical": "staggered",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Ice Launcher, Icecap": {
+    "category": "Cryo",
+    "level": "20",
+    "price": "892,000",
+    "damage": "14d12 B & C",
+    "range": "60 ft.",
+    "critical": "knockdown",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Mutation Gun": {
+    "category": "Degenerator",
+    "level": "18",
+    "price": "400,000",
+    "damage": "7d10 A & So",
+    "range": "60 ft.",
+    "critical": "Mutation",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "Antibiological, hybrid",
+    "sfsLegal": true
+  },
+  "Heavy Degenerator": {
+    "category": "Degenerator",
+    "level": "19",
+    "price": "550,000",
+    "damage": "9d10 A & So",
+    "range": "60 ft.",
+    "critical": "Degeneration 6d6",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "4",
+    "special": "Hybrid",
+    "sfsLegal": true
+  },
+  "Disintegrator Cannon, Liquidator": {
+    "category": "Disintegrator",
+    "level": "6",
+    "price": "4,800",
+    "damage": "1d20 A",
+    "range": "40 ft.",
+    "critical": "corrode 1d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Nanite Decoupler, Caustic": {
+    "category": "Disintegrator",
+    "level": "9",
+    "price": "15,000",
+    "damage": "2d6 A",
+    "range": "60 ft.",
+    "critical": "corrode 1d6",
+    "capacity": "10 nanites",
+    "usage": "2",
+    "bulk": "3",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Disintegrator Cannon, Decimator": {
+    "category": "Disintegrator",
+    "level": "11",
+    "price": "29,500",
+    "damage": "3d10 A",
+    "range": "40 ft.",
+    "critical": "corrode 2d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Disintegrator Cannon, Executioner": {
+    "category": "Disintegrator",
+    "level": "16",
+    "price": "220,000",
+    "damage": "5d10 A",
+    "range": "40 ft.",
+    "critical": "corrode 3d6",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Nanite Decoupler, Vitriolic": {
+    "category": "Disintegrator",
+    "level": "19",
+    "price": "650,000",
+    "damage": "2d20 A",
+    "range": "80 ft.",
+    "critical": "corrode 3d6",
+    "capacity": "10 nanites",
+    "usage": "5",
+    "bulk": "3",
+    "special": "explode (20 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Disintegrator Cannon, Eradicator": {
+    "category": "Disintegrator",
+    "level": "20",
+    "price": "765,000",
+    "damage": "5d20 A",
+    "range": "40 ft.",
+    "critical": "corrode 4d6",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Agitator, Ember": {
+    "category": "Flame",
+    "level": "1",
+    "price": "330",
+    "damage": "1d8 F",
+    "range": "60 ft.",
+    "critical": "burn 1d4",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "boost 1d4",
+    "sfsLegal": true
+  },
+  "Flamethrower, Ifrit-Class": {
+    "category": "Flame",
+    "level": "2",
+    "price": "780",
+    "damage": "1d6 F",
+    "range": "15 ft.",
+    "critical": "burn 1d6",
+    "capacity": "20 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "analog, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Burner, Ifrit-Class": {
+    "category": "Flame",
+    "level": "3",
+    "price": "1,300",
+    "damage": "1d10 F",
+    "range": "30 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Radcannon, Electromagnetic": {
+    "category": "Flame",
+    "level": "4",
+    "price": "2,150",
+    "damage": "1d8 F",
+    "range": "30 ft.",
+    "critical": "irradiate",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, radioactive, unwieldy",
+    "sfsLegal": true
+  },
+  "Flame Launcher, Fireball": {
+    "category": "Flame",
+    "level": "5",
+    "price": "3,250",
+    "damage": "1d8 F",
+    "range": "60 ft.",
+    "critical": "burn 1d6",
+    "capacity": "20 petrol",
+    "usage": "2",
+    "bulk": "2",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Agitator, Blaze": {
+    "category": "Flame",
+    "level": "6",
+    "price": "4,300",
+    "damage": "2d6 F",
+    "range": "80 ft.",
+    "critical": "burn 2d4",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "boost 1d6",
+    "sfsLegal": true
+  },
+  "Flamethrower, Pyre-Class": {
+    "category": "Flame",
+    "level": "6",
+    "price": "4,200",
+    "damage": "1d10 F",
+    "range": "30 ft.",
+    "critical": "burn 1d8",
+    "capacity": "20 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "analog, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Burner, Salamander-Class": {
+    "category": "Flame",
+    "level": "7",
+    "price": "6,050",
+    "damage": "2d10 F",
+    "range": "40 ft.",
+    "critical": "burn 2d6",
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Flamethrower, Salamander-Class": {
+    "category": "Flame",
+    "level": "8",
+    "price": "8,600",
+    "damage": "2d6 F",
+    "range": "30 ft.",
+    "critical": "burn 2d6",
+    "capacity": "20 petrol",
+    "usage": "5",
+    "bulk": "2",
+    "special": "analog, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Flame Launcher, Immolation": {
+    "category": "Flame",
+    "level": "9",
+    "price": "14,200",
+    "damage": "2d8 F",
+    "range": "80 ft.",
+    "critical": "burn 2d6",
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Radcannon, Neutron": {
+    "category": "Flame",
+    "level": "10",
+    "price": "18,700",
+    "damage": "3d6 F",
+    "range": "50 ft.",
+    "critical": "irradiate",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, radioactive, unwieldy",
+    "sfsLegal": true
+  },
+  "Burner, Hellhound-Class": {
+    "category": "Flame",
+    "level": "11",
+    "price": "23,800",
+    "damage": "3d10 F",
+    "range": "50 ft.",
+    "critical": "burn 3d6",
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Flamethrower, Hellhound-Class": {
+    "category": "Flame",
+    "level": "12",
+    "price": "35,100",
+    "damage": "4d6 F",
+    "range": "30 ft.",
+    "critical": "burn 4d6",
+    "capacity": "40 petrol",
+    "usage": "8",
+    "bulk": "2",
+    "special": "analog, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Agitator, Inferno": {
+    "category": "Flame",
+    "level": "13",
+    "price": "50,800",
+    "damage": "6d6 F",
+    "range": "80 ft.",
+    "critical": "burn 3d4",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "boost 2d6",
+    "sfsLegal": true
+  },
+  "Flame Launcher, Supernova": {
+    "category": "Flame",
+    "level": "14",
+    "price": "79,800",
+    "damage": "5d8 F",
+    "range": "120 ft.",
+    "critical": "burn 3d6",
+    "capacity": "40 petrol",
+    "usage": "5",
+    "bulk": "2",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Flamethrower, Firedrake-Class": {
+    "category": "Flame",
+    "level": "15",
+    "price": "128,000",
+    "damage": "6d6 F",
+    "range": "30 ft.",
+    "critical": "burn 6d6",
+    "capacity": "40 petrol",
+    "usage": "10",
+    "bulk": "2",
+    "special": "analog, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Burner, Firedrake-Class": {
+    "category": "Flame",
+    "level": "16",
+    "price": "158,000",
+    "damage": "6d10 F",
+    "range": "60 ft.",
+    "critical": "burn 4d6",
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Radcannon, Rapid-Decay": {
+    "category": "Flame",
+    "level": "17",
+    "price": "264,000",
+    "damage": "7d8 F",
+    "range": "60 ft.",
+    "critical": "irradiate",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, radioactive, unwieldy",
+    "sfsLegal": true
+  },
+  "Flamethrower, Phoenix-Class": {
+    "category": "Flame",
+    "level": "18",
+    "price": "367,500",
+    "damage": "9d6 F",
+    "range": "30 ft.",
+    "critical": "burn 9d6",
+    "capacity": "40 petrol",
+    "usage": "10",
+    "bulk": "2",
+    "special": "analog, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Agitator, Solar Flare": {
+    "category": "Flame",
+    "level": "19",
+    "price": "580,000",
+    "damage": "12d6 F",
+    "range": "100 ft.",
+    "critical": "burn 4d4",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "boost 5d6",
+    "sfsLegal": true
+  },
+  "Burner, Pheonic-Class": {
+    "category": "Flame",
+    "level": "20",
+    "price": "795,000",
+    "damage": "10d10 F",
+    "range": "75 ft.",
+    "critical": "burn 5d6",
+    "capacity": "40 petrol",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Artillery Laser, Azimuth": {
+    "category": "Laser",
+    "level": "1",
+    "price": "425",
+    "damage": "1d10 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Rotolaser, Tactical": {
+    "category": "Laser",
+    "level": "2",
+    "price": "720",
+    "damage": "1d8 F",
+    "range": "100 ft.",
+    "critical": "burn 1d4",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Automatic",
+    "sfsLegal": true
+  },
+  "Dazzler, Flash": {
+    "category": "Laser",
+    "level": "3",
+    "price": "1,420",
+    "damage": "1d10 F",
+    "range": "120 ft.",
+    "critical": "blind",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Convergent Laser, Single-Wave": {
+    "category": "Laser",
+    "level": "4",
+    "price": "2,100",
+    "damage": "1d12 F",
+    "range": "100 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Divergent Laser, Single-Wave": {
+    "category": "Laser",
+    "level": "5",
+    "price": "3,430",
+    "damage": "1d8 F",
+    "range": "60 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Artillery Laser, Corona": {
+    "category": "Laser",
+    "level": "6",
+    "price": "4,650",
+    "damage": "2d8 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Rotolaser, Advanced": {
+    "category": "Laser",
+    "level": "7",
+    "price": "6,040",
+    "damage": "2d8 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "Automatic",
+    "sfsLegal": true
+  },
+  "Apocalypse Beam, Corona": {
+    "category": "Laser",
+    "level": "8",
+    "price": "9,500",
+    "damage": "3d6 F",
+    "range": "60 ft.",
+    "critical": "Burn 1d6 ",
+    "capacity": "40 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Line, sniper (150 ft.), unwieldy ",
+    "sfsLegal": true
+  },
+  "Dazzler, Strobe": {
+    "category": "Laser",
+    "level": "8",
+    "price": "9,420",
+    "damage": "2d12 F",
+    "range": "150 ft.",
+    "critical": "blind",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Artillery Laser, Aphelion": {
+    "category": "Laser",
+    "level": "9",
+    "price": "14,300",
+    "damage": "3d8 F",
+    "range": "120 ft.",
+    "critical": "burn 1d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Autobeam Artillery, Tactical": {
+    "category": "Laser",
+    "level": "10",
+    "price": "19,400",
+    "damage": "2d8 F",
+    "range": "120 ft.",
+    "critical": "burn 1d8",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Convergent Laser, Multiwave": {
+    "category": "Laser",
+    "level": "11",
+    "price": "24,500",
+    "damage": "4d10 F",
+    "range": "120 ft.",
+    "critical": "burn 3d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Divergent Laser, Multiwave": {
+    "category": "Laser",
+    "level": "12",
+    "price": "41,200",
+    "damage": "4d8 F",
+    "range": "80 ft.",
+    "critical": "burn 2d6",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Artillery Laser, Perihelion": {
+    "category": "Laser",
+    "level": "13",
+    "price": "53,800",
+    "damage": "4d8 F",
+    "range": "130 ft.",
+    "critical": "burn 2d6",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Apocalypse Beam, Perihelion": {
+    "category": "Laser",
+    "level": "14",
+    "price": "75,000",
+    "damage": "7d6 F",
+    "range": "60 ft.",
+    "critical": "Burn 2d6 ",
+    "capacity": "80 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "Line, sniper (200 ft.), unwieldy ",
+    "sfsLegal": true
+  },
+  "Dazzler, Sunspot": {
+    "category": "Laser",
+    "level": "14",
+    "price": "71,500",
+    "damage": "4d12 F",
+    "range": "150 ft.",
+    "critical": "blind",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "nonlethal",
+    "sfsLegal": true
+  },
+  "Convergent Laser, Wide-Spectrum": {
+    "category": "Laser",
+    "level": "15",
+    "price": "118,000",
+    "damage": "7d10 F",
+    "range": "120 ft.",
+    "critical": "burn 4d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Autobeam Artillery, Advanced": {
+    "category": "Laser",
+    "level": "16",
+    "price": "145,700",
+    "damage": "4d8 F",
+    "range": "120 ft.",
+    "critical": "burn 2d8",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Artillery Laser, Parallax": {
+    "category": "Laser",
+    "level": "17",
+    "price": "248,000",
+    "damage": "7d8 F",
+    "range": "150 ft.",
+    "critical": "burn 4d6",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Divergent Laser, Wide-Spectrum": {
+    "category": "Laser",
+    "level": "18",
+    "price": "414,000",
+    "damage": "7d8 F",
+    "range": "90 ft.",
+    "critical": "burn 3d6",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Autobeam Artillery, Elite": {
+    "category": "Laser",
+    "level": "19",
+    "price": "543,300",
+    "damage": "6d8 F",
+    "range": "120 ft.",
+    "critical": "burn 2d10",
+    "capacity": "40 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Apocalypse Beam, Zenith": {
+    "category": "Laser",
+    "level": "20",
+    "price": "875,000",
+    "damage": "14d6 F",
+    "range": "60 ft.",
+    "critical": "Burn 4d6 ",
+    "capacity": "100 charges",
+    "usage": "20",
+    "bulk": "2",
+    "special": "Line, sniper (250 ft.), unwieldy ",
+    "sfsLegal": true
+  },
+  "Artillery Laser, Zenith": {
+    "category": "Laser",
+    "level": "20",
+    "price": "722,000",
+    "damage": "9d8 F",
+    "range": "150 ft.",
+    "critical": "burn 5d6",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Conqueror, Red Star": {
+    "category": "Plasma",
+    "level": "1",
+    "price": "430",
+    "damage": "1d10 E & F",
+    "range": "60 ft.",
+    "critical": "wound",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Hydra Cannon, Python-Series": {
+    "category": "Plasma",
+    "level": "2",
+    "price": "1,070",
+    "damage": "1d6 E & F",
+    "range": "20 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, shape 1, unwieldy",
+    "sfsLegal": true
+  },
+  "Scalegraser, Python-series": {
+    "category": "Plasma",
+    "level": "2",
+    "price": "850",
+    "damage": "1d10 E & F",
+    "range": "60 ft.",
+    "critical": "second arc 1d6",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "breakdown, first arc 1d6, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Array, Red Star": {
+    "category": "Plasma",
+    "level": "3",
+    "price": "1,380",
+    "damage": "1d10 E & F",
+    "range": "80 ft.",
+    "critical": "burn 1d4",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Starheart Cannon, Red Star": {
+    "category": "Plasma",
+    "level": "3",
+    "price": "1,300",
+    "damage": "1d6 E & F",
+    "range": "100 ft.",
+    "critical": "blind",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "bright, explode (5 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Conqueror, Yellow Star": {
+    "category": "Plasma",
+    "level": "4",
+    "price": "2,400",
+    "damage": "1d12 E & F",
+    "range": "80 ft.",
+    "critical": "wound",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Aurora Cannon, Hydrogen": {
+    "category": "Plasma",
+    "level": "5",
+    "price": "3,100",
+    "damage": "2d4 E & F",
+    "range": "100 ft.",
+    "critical": "blind",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "aurora",
+    "sfsLegal": true
+  },
+  "Plasma Flare, Luminous": {
+    "category": "Plasma",
+    "level": "5",
+    "price": "2,950",
+    "damage": "2d6 E & F",
+    "range": "80 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "bright, unwieldy",
+    "sfsLegal": false
+  },
+  "Hydra Cannon, Viper-Series": {
+    "category": "Plasma",
+    "level": "6",
+    "price": "4,800",
+    "damage": "2d6 E & F",
+    "range": "25 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, shape 2, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Array, Yellow Star": {
+    "category": "Plasma",
+    "level": "7",
+    "price": "6,300",
+    "damage": "2d10 E & F",
+    "range": "80 ft.",
+    "critical": "burn 2d4",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Scalegraser, Viper-series": {
+    "category": "Plasma",
+    "level": "7",
+    "price": "6,500",
+    "damage": "2d10 E & F",
+    "range": "60 ft.",
+    "critical": "second arc 1d8",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "breakdown, first arc 1d8, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Cannon, Red Star": {
+    "category": "Plasma",
+    "level": "8",
+    "price": "8,650",
+    "damage": "2d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 1d8",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "explode (5 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Starheart Cannon, Yellow Star": {
+    "category": "Plasma",
+    "level": "8",
+    "price": "9,050",
+    "damage": "3d6 E & F",
+    "range": "100 ft.",
+    "critical": "blind",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "bright, explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Conqueror, White Star": {
+    "category": "Plasma",
+    "level": "9",
+    "price": "15,200",
+    "damage": "3d12 E & F",
+    "range": "80 ft.",
+    "critical": "wound",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Flare, Radiant": {
+    "category": "Plasma",
+    "level": "9",
+    "price": "13,275",
+    "damage": "5d6 E & F",
+    "range": "100 ft.",
+    "critical": "wound",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "bright, unwieldy",
+    "sfsLegal": false
+  },
+  "Aurora Cannon, Electron": {
+    "category": "Plasma",
+    "level": "10",
+    "price": "18,200",
+    "damage": "6d4 E & F",
+    "range": "120 ft.",
+    "critical": "blind",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "aurora",
+    "sfsLegal": true
+  },
+  "Plasma Array, White Star": {
+    "category": "Plasma",
+    "level": "11",
+    "price": "26,400",
+    "damage": "3d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 3d4",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Hydra Cannon, Asp-Series": {
+    "category": "Plasma",
+    "level": "12",
+    "price": "41,000",
+    "damage": "4d6 E & F",
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, shape 3, unwieldy",
+    "sfsLegal": true
+  },
+  "Scalegraser, Asp-series": {
+    "category": "Plasma",
+    "level": "12",
+    "price": "36,000",
+    "damage": "3d10 E & F",
+    "range": "60 ft.",
+    "critical": "second arc 1d10",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "breakdown, first arc 1d10, unwieldy",
+    "sfsLegal": true
+  },
+  "Conqueror, Blue Star": {
+    "category": "Plasma",
+    "level": "13",
+    "price": "52,000",
+    "damage": "5d10 E & F",
+    "range": "100 ft.",
+    "critical": "wound",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Flare, Brilliant": {
+    "category": "Plasma",
+    "level": "13",
+    "price": "53,100",
+    "damage": "8d6 E & F",
+    "range": "100 ft.",
+    "critical": "wound",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "bright, unwieldy",
+    "sfsLegal": false
+  },
+  "Starheart Cannon, White Star": {
+    "category": "Plasma",
+    "level": "13",
+    "price": "48,100",
+    "damage": "5d6 E & F",
+    "range": "100 ft.",
+    "critical": "blind",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "bright, explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Cannon, Yellow Star": {
+    "category": "Plasma",
+    "level": "14",
+    "price": "62,800",
+    "damage": "4d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 2d8",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "explode (5 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Array, Blue Star": {
+    "category": "Plasma",
+    "level": "15",
+    "price": "109,000",
+    "damage": "5d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 4d4",
+    "capacity": "20 charges",
+    "usage": "1",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Plasma Cannon, White Star": {
+    "category": "Plasma",
+    "level": "16",
+    "price": "189,200",
+    "damage": "6d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 3d8",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "explode (5 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Aurora Cannon, Proton": {
+    "category": "Plasma",
+    "level": "17",
+    "price": "258,000",
+    "damage": "15d4 E & F",
+    "range": "120 ft.",
+    "critical": "blind",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "aurora",
+    "sfsLegal": true
+  },
+  "Plasma Flare, Incandescent": {
+    "category": "Plasma",
+    "level": "17",
+    "price": "265,500",
+    "damage": "13d6 E & F",
+    "range": "100 ft.",
+    "critical": "wound",
+    "capacity": "100 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "bright, unwieldy",
+    "sfsLegal": false
+  },
+  "Scalegraser, Cobra-series": {
+    "category": "Plasma",
+    "level": "17",
+    "price": "260,000",
+    "damage": "6d10 E & F",
+    "range": "60 ft.",
+    "critical": "second arc 2d10",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "1",
+    "special": "breakdown, first arc 2d10, unwieldy",
+    "sfsLegal": true
+  },
+  "Conqueror, Violet Star": {
+    "category": "Plasma",
+    "level": "18",
+    "price": "590,000",
+    "damage": "10d10 E & F",
+    "range": "100 ft.",
+    "critical": "wound",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Starheart Cannon, Blue Star": {
+    "category": "Plasma",
+    "level": "18",
+    "price": "360,000",
+    "damage": "9d6 E & F",
+    "range": "100 ft.",
+    "critical": "blind",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "bright, explode (15 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Hydra Cannon, Cobra-Series": {
+    "category": "Plasma",
+    "level": "19",
+    "price": "642,000",
+    "damage": "10d6 E & F",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "blast, shape 4, unwieldy",
+    "sfsLegal": true
+  },
+  "Plasma Cannon, Blue Star": {
+    "category": "Plasma",
+    "level": "20",
+    "price": "950,000",
+    "damage": "8d10 E & F",
+    "range": "100 ft.",
+    "critical": "burn 4d8",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Reaction Cannon, Light": {
+    "category": "Projectile",
+    "level": "1",
+    "price": "250",
+    "damage": "1d10 P",
+    "range": "90 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Dart Cannon, Light": {
+    "category": "Projectile",
+    "level": "2",
+    "price": "690",
+    "damage": "1d8 P",
+    "range": "120 ft.",
+    "critical": "embed 1d6",
+    "capacity": "50 darts",
+    "usage": "10",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Rail Cannon, Tactical": {
+    "category": "Projectile",
+    "level": "3",
+    "price": "1,410",
+    "damage": "1d10 P",
+    "range": "60 ft.",
+    "critical": "bleed 1d4",
+    "capacity": "20 rounds",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Machine Gun, Squad": {
+    "category": "Projectile",
+    "level": "4",
+    "price": "2,060",
+    "damage": "1d10 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Dart Cannon, Tactical": {
+    "category": "Projectile",
+    "level": "5",
+    "price": "2,800",
+    "damage": "1d12 P",
+    "range": "130 ft.",
+    "critical": "embed 1d8",
+    "capacity": "50 darts",
+    "usage": "10",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "X-Gen Gun, Tactical": {
+    "category": "Projectile",
+    "level": "6",
+    "price": "4,240",
+    "damage": "1d12 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "80 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Reaction Cannon, Tactical": {
+    "category": "Projectile",
+    "level": "7",
+    "price": "6,100",
+    "damage": "2d10 P",
+    "range": "90 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Dart Cannon, Heavy": {
+    "category": "Projectile",
+    "level": "8",
+    "price": "9,650",
+    "damage": "2d12 P",
+    "range": "140 ft.",
+    "critical": "embed 1d8",
+    "capacity": "50 darts",
+    "usage": "10",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Machine Gun, Light": {
+    "category": "Projectile",
+    "level": "8",
+    "price": "8,600",
+    "damage": "2d10 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "60 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "X-Gen Gun, Advanced": {
+    "category": "Projectile",
+    "level": "9",
+    "price": "13,100",
+    "damage": "2d12 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "100 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Reaction Cannon, Heavy": {
+    "category": "Projectile",
+    "level": "10",
+    "price": "16,750",
+    "damage": "3d10 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Stellar Cannon, Light": {
+    "category": "Projectile",
+    "level": "10",
+    "price": "19,200",
+    "damage": "2d12 P",
+    "range": "30 ft.",
+    "critical": "wound",
+    "capacity": "18 shells",
+    "usage": "6",
+    "bulk": "2",
+    "special": "blast",
+    "sfsLegal": true
+  },
+  "Crossbolter, Advanced": {
+    "category": "Projectile",
+    "level": "11",
+    "price": "21,900",
+    "damage": "4d10 P",
+    "range": "70 ft.",
+    "critical": null,
+    "capacity": "12 arrows",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Dart Cannon, Advanced": {
+    "category": "Projectile",
+    "level": "11",
+    "price": "22,300",
+    "damage": "3d12 P",
+    "range": "150 ft.",
+    "critical": "embed 1d10",
+    "capacity": "50 darts",
+    "usage": "10",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Machine Gun, Medium": {
+    "category": "Projectile",
+    "level": "11",
+    "price": "23,100",
+    "damage": "3d10 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "60 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Rail Cannon, Advanced": {
+    "category": "Projectile",
+    "level": "12",
+    "price": "37,000",
+    "damage": "3d10 P",
+    "range": "80 ft.",
+    "critical": "bleed 2d4",
+    "capacity": "40 rounds",
+    "usage": "8",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "X-Gen Gun, Elite": {
+    "category": "Projectile",
+    "level": "13",
+    "price": "53,700",
+    "damage": "4d12 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "100 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Crossbolter, Elite": {
+    "category": "Projectile",
+    "level": "14",
+    "price": "71,400",
+    "damage": "6d10 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "30 arrows",
+    "usage": "6",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Reaction Cannon, Advanced": {
+    "category": "Projectile",
+    "level": "14",
+    "price": "73,000",
+    "damage": "6d10 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Dart Cannon, Elite": {
+    "category": "Projectile",
+    "level": "15",
+    "price": "118,000",
+    "damage": "6d12 P",
+    "range": "150 ft.",
+    "critical": "embed 2d12",
+    "capacity": "50 darts",
+    "usage": "5",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Stellar Cannon, Heavy": {
+    "category": "Projectile",
+    "level": "15",
+    "price": "122,800",
+    "damage": "4d12 P",
+    "range": "30 ft.",
+    "critical": "wound",
+    "capacity": "32 shells",
+    "usage": "8",
+    "bulk": "2",
+    "special": "blast",
+    "sfsLegal": true
+  },
+  "Rail Cannon, Elite": {
+    "category": "Projectile",
+    "level": "16",
+    "price": "176,000",
+    "damage": "8d10 P",
+    "range": "80 ft.",
+    "critical": "bleed 3d6",
+    "capacity": "50 rounds",
+    "usage": "10",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Machine Gun, Heavy": {
+    "category": "Projectile",
+    "level": "17",
+    "price": "220,300",
+    "damage": "7d10 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "100 rounds",
+    "usage": "4",
+    "bulk": "2",
+    "special": "analog, automatic",
+    "sfsLegal": true
+  },
+  "Reaction Cannon, Elite": {
+    "category": "Projectile",
+    "level": "17",
+    "price": "244,000",
+    "damage": "8d10 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "Crossbolter, Paragon": {
+    "category": "Projectile",
+    "level": "18",
+    "price": "327,200",
+    "damage": "10d10 P",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 arrows",
+    "usage": "8",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Dart Cannon, Paragon": {
+    "category": "Projectile",
+    "level": "19",
+    "price": "584,000",
+    "damage": "9d12 P",
+    "range": "150 ft.",
+    "critical": "embed 3d12",
+    "capacity": "50 darts",
+    "usage": "5",
+    "bulk": "2",
+    "special": "unwieldy",
+    "sfsLegal": true
+  },
+  "Rail Cannon, Paragon": {
+    "category": "Projectile",
+    "level": "19",
+    "price": "591,000",
+    "damage": "12d10 P",
+    "range": "100 ft.",
+    "critical": "bleed 4d6",
+    "capacity": "60 rounds",
+    "usage": "10",
+    "bulk": "2",
+    "special": "line, unwieldy",
+    "sfsLegal": true
+  },
+  "Reaction Cannon, Paragon": {
+    "category": "Projectile",
+    "level": "20",
+    "price": "810,000",
+    "damage": "12d10 P",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "6 rounds",
+    "usage": "1",
+    "bulk": "3",
+    "special": "penetrating",
+    "sfsLegal": true
+  },
+  "X-Gen Gun, Paragon": {
+    "category": "Projectile",
+    "level": "20",
+    "price": "826,000",
+    "damage": "9d12 P",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "100 rounds",
+    "usage": "2",
+    "bulk": "2",
+    "special": "automatic",
+    "sfsLegal": true
+  },
+  "Arc Caster, Static": {
+    "category": "Shock",
+    "level": "1",
+    "price": "375",
+    "damage": "1d8 E",
+    "range": "60 ft.",
+    "critical": "second arc 1d6",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "first arc 1d6, unwieldy",
+    "sfsLegal": true
+  },
+  "Stormcaller, Sheet": {
+    "category": "Shock",
+    "level": "2",
+    "price": "1,100",
+    "damage": "1d8 E",
+    "range": "30 ft.",
+    "critical": null,
+    "capacity": "20 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "flexible line, living, unwieldy",
+    "sfsLegal": true
+  },
+  "Anacite Ion Cannon, Static": {
+    "category": "Shock",
+    "level": "3",
+    "price": "1,550",
+    "damage": "1d10 E",
+    "range": "20 ft.",
+    "critical": "staggered",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "line, lockdown, unwieldy",
+    "sfsLegal": true
+  },
+  "Colossus Coil, Corona": {
+    "category": "Shock",
+    "level": "3",
+    "price": "1,450",
+    "damage": "1d8 E",
+    "range": "80 ft.",
+    "critical": "arc 1d6",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "boost 1d8",
+    "sfsLegal": true
+  },
+  "Cathode Cannon, Tactical": {
+    "category": "Shock",
+    "level": "4",
+    "price": "2,040",
+    "damage": "1d10 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy, wide line",
+    "sfsLegal": true
+  },
+  "Arc Caster, Aurora": {
+    "category": "Shock",
+    "level": "5",
+    "price": "3,160",
+    "damage": "2d6 E",
+    "range": "60 ft.",
+    "critical": "second arc 1d6",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "first arc 1d6, unwieldy",
+    "sfsLegal": true
+  },
+  "Shock Caster, Static": {
+    "category": "Shock",
+    "level": "6",
+    "price": "4,620",
+    "damage": "1d12 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "explode (10 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Stormcaller, Ribbon": {
+    "category": "Shock",
+    "level": "7",
+    "price": "7,700",
+    "damage": "2d8 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "flexible line, living, unwieldy",
+    "sfsLegal": true
+  },
+  "Anacite Ion Cannon, Aurora": {
+    "category": "Shock",
+    "level": "8",
+    "price": "10,900",
+    "damage": "2d10 E",
+    "range": "45 ft.",
+    "critical": "staggered",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "line, lockdown, unwieldy",
+    "sfsLegal": true
+  },
+  "Cathode Cannon, Advanced": {
+    "category": "Shock",
+    "level": "8",
+    "price": "9,300",
+    "damage": "2d12 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy, wide line",
+    "sfsLegal": true
+  },
+  "Colossus Coil, Brush": {
+    "category": "Shock",
+    "level": "9",
+    "price": "13,800",
+    "damage": "3d8 E",
+    "range": "100 ft.",
+    "critical": "arc 2d6",
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "boost 1d8",
+    "sfsLegal": true
+  },
+  "Shock Caster, Aurora": {
+    "category": "Shock",
+    "level": "10",
+    "price": "19,100",
+    "damage": "2d12 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "explode (15 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Arc Caster, Storm": {
+    "category": "Shock",
+    "level": "11",
+    "price": "25,600",
+    "damage": "5d6 E",
+    "range": "80 ft.",
+    "critical": "second arc 2d6",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "first arc 2d6, unwieldy",
+    "sfsLegal": true
+  },
+  "Cathode Cannon, Elite": {
+    "category": "Shock",
+    "level": "12",
+    "price": "35,300",
+    "damage": "3d12 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy, wide line",
+    "sfsLegal": true
+  },
+  "Anacite Ion Cannon, Storm": {
+    "category": "Shock",
+    "level": "13",
+    "price": "52,900",
+    "damage": "4d10 E",
+    "range": "75 ft.",
+    "critical": "staggered",
+    "capacity": "80 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "line, lockdown, unwieldy",
+    "sfsLegal": true
+  },
+  "Stormcaller, Rocket": {
+    "category": "Shock",
+    "level": "13",
+    "price": "57,000",
+    "damage": "4d8 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "flexible line, living, unwieldy",
+    "sfsLegal": true
+  },
+  "Colossus Coil, Streamer Arc": {
+    "category": "Shock",
+    "level": "14",
+    "price": "76,400",
+    "damage": "5d8 E",
+    "range": "100 ft.",
+    "critical": "arc 3d6",
+    "capacity": "40 charges",
+    "usage": "8",
+    "bulk": "3",
+    "special": "boost 2d8",
+    "sfsLegal": true
+  },
+  "Cathode Cannon, Paragon": {
+    "category": "Shock",
+    "level": "15",
+    "price": "109,000",
+    "damage": "6d12 E",
+    "range": "100 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy, wide line",
+    "sfsLegal": true
+  },
+  "Shock Caster, Storm": {
+    "category": "Shock",
+    "level": "16",
+    "price": "164,800",
+    "damage": "5d12 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "explode (20 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Arc Caster, Tempest": {
+    "category": "Shock",
+    "level": "17",
+    "price": "262,000",
+    "damage": "10d6 E",
+    "range": "80 ft.",
+    "critical": "second arc 4d6",
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "first arc 4d6, unwieldy",
+    "sfsLegal": true
+  },
+  "Anacite Ion Cannon, Tempest": {
+    "category": "Shock",
+    "level": "18",
+    "price": "441,000",
+    "damage": "6d10 E",
+    "range": "100 ft.",
+    "critical": "staggered",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "line, lockdown, unwieldy",
+    "sfsLegal": true
+  },
+  "Cathode Cannon, Shockstorm": {
+    "category": "Shock",
+    "level": "18",
+    "price": "647,000",
+    "damage": "7d12 E",
+    "range": "120 ft.",
+    "critical": null,
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "unwieldy, wide line",
+    "sfsLegal": true
+  },
+  "Stormcaller, Smooth-Channel": {
+    "category": "Shock",
+    "level": "18",
+    "price": "440,000",
+    "damage": "8d8 E",
+    "range": "60 ft.",
+    "critical": null,
+    "capacity": "40 charges",
+    "usage": "5",
+    "bulk": "2",
+    "special": "flexible line, living, unwieldy",
+    "sfsLegal": true
+  },
+  "Colossus Coil, Multistream": {
+    "category": "Shock",
+    "level": "19",
+    "price": "888,000",
+    "damage": "10d8 E",
+    "range": "120 ft.",
+    "critical": "arc 4d6",
+    "capacity": "80 charges",
+    "usage": "10",
+    "bulk": "3",
+    "special": "boost 3d8",
+    "sfsLegal": true
+  },
+  "Shock Caster, Tempest": {
+    "category": "Shock",
+    "level": "20",
+    "price": "735,000",
+    "damage": "7d12 E",
+    "range": "40 ft.",
+    "critical": null,
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "explode (20 ft.), unwieldy",
+    "sfsLegal": true
+  },
+  "Shout Projector, Exhorter": {
+    "category": "Sonic",
+    "level": "1",
+    "price": "420",
+    "damage": "1d6 So",
+    "range": "30 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "explode (10 ft.), integrated (2 slots), nonlethal, unwieldy",
+    "sfsLegal": true
+  },
+  "Dirge Cannon, Harmonic": {
+    "category": "Sonic",
+    "level": "2",
+    "price": "900",
+    "damage": "1d8 So",
+    "range": "20 ft.",
+    "critical": "Deafen",
+    "capacity": "20 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "antibiological, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Sonic Bolter, Light": {
+    "category": "Sonic",
+    "level": "3",
+    "price": "1,480",
+    "damage": "1d10 So",
+    "range": "60 ft.",
+    "critical": "Sicken",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "antibiological, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Resonator, Diffraction": {
+    "category": "Sonic",
+    "level": "4",
+    "price": "2,080",
+    "damage": "1d8 So",
+    "range": "60 ft.",
+    "critical": "Deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "boost 1d8, penetrating",
+    "sfsLegal": true
+  },
+  "Screamer, Thunderstrike": {
+    "category": "Sonic",
+    "level": "5",
+    "price": "3,350",
+    "damage": "1d10 So",
+    "range": "30 ft.",
+    "critical": "deafen",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Shout Projector, Damper": {
+    "category": "Sonic",
+    "level": "6",
+    "price": "4,750",
+    "damage": "2d6 So",
+    "range": "40 ft.",
+    "critical": "Demoralize",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "explode (10 ft.), integrated (2 slots), nonlethal, unwieldy",
+    "sfsLegal": true
+  },
+  "Dirge Cannon, Resonant": {
+    "category": "Sonic",
+    "level": "7",
+    "price": "4,270",
+    "damage": "2d6 So",
+    "range": "30 ft.",
+    "critical": "Deafen",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "antibiological, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Sonic Bolter, Heavy": {
+    "category": "Sonic",
+    "level": "8",
+    "price": "10,100",
+    "damage": "2d10 So",
+    "range": "80 ft.",
+    "critical": "Sicken",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "antibiological, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Screamer, LFD": {
+    "category": "Sonic",
+    "level": "9",
+    "price": "14,000",
+    "damage": "2d10 So",
+    "range": "60 ft.",
+    "critical": "deafen",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Resonator, Refraction": {
+    "category": "Sonic",
+    "level": "10",
+    "price": "18,300",
+    "damage": "2d8 So",
+    "range": "80 ft.",
+    "critical": "Deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "boost 2d8, penetrating",
+    "sfsLegal": true
+  },
+  "Shout Projector, Pacifier": {
+    "category": "Sonic",
+    "level": "11",
+    "price": "22,800",
+    "damage": "3d8 So",
+    "range": "60 ft.",
+    "critical": "Demoralize",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "explode (15 ft.), integrated (2 slots), nonlethal, unwieldy",
+    "sfsLegal": true
+  },
+  "Sonic Bolter, Assault": {
+    "category": "Sonic",
+    "level": "12",
+    "price": "38,000",
+    "damage": "3d12 So",
+    "range": "80 ft.",
+    "critical": "Sicken",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "antibiological, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Dirge Cannon, Anharmonic": {
+    "category": "Sonic",
+    "level": "13",
+    "price": "49,900",
+    "damage": "5d6 So",
+    "range": "40 ft.",
+    "critical": "Deafen",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "antibiological, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Resonator, Linear": {
+    "category": "Sonic",
+    "level": "14",
+    "price": "73,800",
+    "damage": "4d8 So",
+    "range": "100 ft.",
+    "critical": "Deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "boost 3d8, penetrating",
+    "sfsLegal": true
+  },
+  "Screamer, HFD": {
+    "category": "Sonic",
+    "level": "15",
+    "price": "107,500",
+    "damage": "4d10 So",
+    "range": "60 ft.",
+    "critical": "deafen",
+    "capacity": "100 charges",
+    "usage": "10",
+    "bulk": "2",
+    "special": "blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Dirge Cannon, Parametric": {
+    "category": "Sonic",
+    "level": "16",
+    "price": "172,000",
+    "damage": "7d6 So",
+    "range": "50 ft.",
+    "critical": "Deafen",
+    "capacity": "80 charges",
+    "usage": "4",
+    "bulk": "3",
+    "special": "antibiological, blast, unwieldy",
+    "sfsLegal": true
+  },
+  "Shout Projector, Riot": {
+    "category": "Sonic",
+    "level": "17",
+    "price": "304,000",
+    "damage": "5d8 So",
+    "range": "60 ft.",
+    "critical": "Demoralize",
+    "capacity": "40 charges",
+    "usage": "4",
+    "bulk": "2",
+    "special": "explode (15 ft.), integrated (4 slots), nonlethal, unwieldy",
+    "sfsLegal": true
+  },
+  "Sonic Bolter, Devastator": {
+    "category": "Sonic",
+    "level": "18",
+    "price": "398,000",
+    "damage": "3d12 So",
+    "range": "90 ft.",
+    "critical": "Sicken",
+    "capacity": "20 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "antibiological, line, unwieldy",
+    "sfsLegal": true
+  },
+  "Resonator, Phased": {
+    "category": "Sonic",
+    "level": "19",
+    "price": "565,000",
+    "damage": "8d8 So",
+    "range": "110 ft.",
+    "critical": "Deafen",
+    "capacity": "40 charges",
+    "usage": "2",
+    "bulk": "2",
+    "special": "boost 5d8, penetrating",
+    "sfsLegal": true
+  },
+  "Shout Projector, Crackdown": {
+    "category": "Sonic",
+    "level": "20",
+    "price": "918,000",
+    "damage": "9d8 So",
+    "range": "80 ft.",
+    "critical": "Demoralize",
+    "capacity": "80 charges",
+    "usage": "8",
+    "bulk": "2",
+    "special": "explode (20 ft.), integrated (4 slots), nonlethal, unwieldy",
+    "sfsLegal": true
+  }
+}
+
+export {
+  longarmWeapons,
+  heavyWeapons,
 }
