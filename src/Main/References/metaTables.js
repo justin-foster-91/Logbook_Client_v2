@@ -566,85 +566,565 @@ const thrusters = {
 
 // https://www.aonsrd.com/Starship_Armor.aspx
 const armor = {
-  // Armor: [acBonus, tempHP, tlPenalty, turnDistance, bpCost, source]
-  "Mk 1": [+1, null, null, null, 1, "Starfinder Core Rulebook pg. 297"],
-  "Mk 2": [+2, null, null, null, 2, "Starfinder Core Rulebook pg. 297"],
-  "Mk 3": [+3, null, null, null, 3, "Starfinder Core Rulebook pg. 297"],
-  "Mk 4": [+4, null, null, null, 5, "Starfinder Core Rulebook pg. 297"],
-  "Mk 5": [+5, null, -1, null, 7, "Starfinder Core Rulebook pg. 297"],
-  "Mk 6": [+6, null, -1, null, 9, "Starfinder Core Rulebook pg. 297"],
-  "Mk 7": [+7, null, -1, null, 12, "Starfinder Core Rulebook pg. 297"],
-  "Mk 8": [+8, null, -1, null, 15, "Starfinder Core Rulebook pg. 297"],
-  "Mk 9": [+9, null, -2, +1, 18, "Starfinder Core Rulebook pg. 297"],
-  "Mk 10": [+10, null, -2, +1, 21, "Starfinder Core Rulebook pg. 297"],
-  "Mk 11": [+11, null, -2, +1, 25, "Starfinder Core Rulebook pg. 297"],
-  "Mk 12": [+12, null, -3, +2, 30, "Starfinder Core Rulebook pg. 297"],
-  "Mk 13": [+13, null, -3, +2, 35, "Starfinder Core Rulebook pg. 297"],
-  "Mk 14": [+14, null, -3, +2, 40, "Starfinder Core Rulebook pg. 297"],
-  "Mk 15": [+15, null, -4, +3, 45, "Starfinder Core Rulebook pg. 297"],
-  "Energy-Absorbent Plating": [null, null, null, null, 4, "Starfinder #27: Deceivers' Moon pg. 47"],
-  "Basic ablative armor 1": [null, 8, null, null, 2, "Starship Operations Manual pg. 20"],
-  "Basic ablative armor 2": [null, 16, null, null, 3, "Starship Operations Manual pg. 20"],
-  "Basic ablative armor 3": [null, 24, null, null, 4, "Starship Operations Manual pg. 20"],
-  "Basic ablative armor 4": [null, 32, null, null, 5, "Starship Operations Manual pg. 20"],
-  "Basic ablative armor 5": [null, 40, null, null, 6, "Starship Operations Manual pg. 20"],
-  "Light ablative armor 1": [null, 52, -1, null, 8, "Starship Operations Manual pg. 20"],
-  "Light ablative armor 2": [null, 64, -1, null, 10, "Starship Operations Manual pg. 20"],
-  "Light ablative armor 3": [null, 76, -1, null, 12, "Starship Operations Manual pg. 20"],
-  "Light ablative armor 4": [null, 88, -1, null, 13, "Starship Operations Manual pg. 20"],
-  "Light ablative armor 5": [null, 100, -1, null, 14, "Starship Operations Manual pg. 20"],
-  "Medium ablative armor 1": [null, 120, -2, +1, 16, "Starship Operations Manual pg. 20"],
-  "Medium ablative armor 2": [null, 140, -2, +1, 17, "Starship Operations Manual pg. 20"],
-  "Medium ablative armor 3": [null, 160, -2, +1, 19, "Starship Operations Manual pg. 20"],
-  "Medium ablative armor 4": [null, 180, -2, +1, 21, "Starship Operations Manual pg. 20"],
-  "Medium ablative armor 5": [null, 200, -2, +1, 22, "Starship Operations Manual pg. 20"],
-  "Heavy ablative armor 1": [null, 240, -2, +2, 24, "Starship Operations Manual pg. 20"],
-  "Heavy ablative armor 2": [null, 280, -2, +2, 27, "Starship Operations Manual pg. 20"],
-  "Heavy ablative armor 3": [null, 320, -2, +2, 29, "Starship Operations Manual pg. 20"],
-  "Heavy ablative armor 4": [null, 360, -2, +2, 31, "Starship Operations Manual pg. 20"],
-  "Heavy ablative armor 5": [null, 400, -2, +2, 34, "Starship Operations Manual pg. 20"],
-  "Superior ablative armor 1": [null, 460, -3, +2, 38, "Starship Operations Manual pg. 20"],
-  "Superior ablative armor 2": [null, 520, -4, +2, 45, "Starship Operations Manual pg. 20"],
-  "Passive interposed defenses 1": [null, 10, null, null, 3, "Starfinder #42: Whispers of the Eclipse pg. 49"],
-  "Passive interposed defenses 2": [null, 20, null, null, 5, "Starfinder #42: Whispers of the Eclipse pg. 49"],
-  "Passive interposed defenses 3": [null, 32, null, null, 10, "Starfinder #42: Whispers of the Eclipse pg. 49"],
-  "Active interposed defenses 1": [null, 50, null, null, 14, "Starfinder #42: Whispers of the Eclipse pg. 49"],
-  "Active interposed defenses 2": [null, 100, null, null, 22, "Starfinder #42: Whispers of the Eclipse pg. 49"],
-  "Active interposed defenses 3": [null, 160, null, null, 29, "Starfinder #42: Whispers of the Eclipse pg. 49"]
+  'Mk 1': {
+    acBonus: 1,
+    tempHP: null,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 2': {
+    acBonus: 2,
+    tempHP: null,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 3': {
+    acBonus: 3,
+    tempHP: null,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 4': {
+    acBonus: 4,
+    tempHP: null,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 5,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 5': {
+    acBonus: 5,
+    tempHP: null,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 7,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 6': {
+    acBonus: 6,
+    tempHP: null,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 9,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 7': {
+    acBonus: 7,
+    tempHP: null,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 12,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 8': {
+    acBonus: 8,
+    tempHP: null,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 15,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 9': {
+    acBonus: 9,
+    tempHP: null,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 18,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 10': {
+    acBonus: 10,
+    tempHP: null,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 21,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 11': {
+    acBonus: 11,
+    tempHP: null,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 25,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 12': {
+    acBonus: 12,
+    tempHP: null,
+    tlPenalty: -3,
+    turnDistance: 2,
+    bpCost: 30,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 13': {
+    acBonus: 13,
+    tempHP: null,
+    tlPenalty: -3,
+    turnDistance: 2,
+    bpCost: 35,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 14': {
+    acBonus: 14,
+    tempHP: null,
+    tlPenalty: -3,
+    turnDistance: 2,
+    bpCost: 40,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 15': {
+    acBonus: 15,
+    tempHP: null,
+    tlPenalty: -4,
+    turnDistance: 3,
+    bpCost: 45,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Energy-Absorbent Plating': {
+    acBonus: null,
+    tempHP: null,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 4,
+    source: "Starfinder #27: Deceivers' Moon pg. 47"
+  },
+  'Basic ablative armor 1': {
+    acBonus: null,
+    tempHP: 8,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 2,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Basic ablative armor 2': {
+    acBonus: null,
+    tempHP: 16,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Basic ablative armor 3': {
+    acBonus: null,
+    tempHP: 24,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 4,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Basic ablative armor 4': {
+    acBonus: null,
+    tempHP: 32,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Basic ablative armor 5': {
+    acBonus: null,
+    tempHP: 40,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 6,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Light ablative armor 1': {
+    acBonus: null,
+    tempHP: 52,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 8,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Light ablative armor 2': {
+    acBonus: null,
+    tempHP: 64,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 10,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Light ablative armor 3': {
+    acBonus: null,
+    tempHP: 76,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 12,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Light ablative armor 4': {
+    acBonus: null,
+    tempHP: 88,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 13,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Light ablative armor 5': {
+    acBonus: null,
+    tempHP: 100,
+    tlPenalty: -1,
+    turnDistance: null,
+    bpCost: 14,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Medium ablative armor 1': {
+    acBonus: null,
+    tempHP: 120,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 16,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Medium ablative armor 2': {
+    acBonus: null,
+    tempHP: 140,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 17,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Medium ablative armor 3': {
+    acBonus: null,
+    tempHP: 160,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 19,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Medium ablative armor 4': {
+    acBonus: null,
+    tempHP: 180,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 21,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Medium ablative armor 5': {
+    acBonus: null,
+    tempHP: 200,
+    tlPenalty: -2,
+    turnDistance: 1,
+    bpCost: 22,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Heavy ablative armor 1': {
+    acBonus: null,
+    tempHP: 240,
+    tlPenalty: -2,
+    turnDistance: 2,
+    bpCost: 24,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Heavy ablative armor 2': {
+    acBonus: null,
+    tempHP: 280,
+    tlPenalty: -2,
+    turnDistance: 2,
+    bpCost: 27,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Heavy ablative armor 3': {
+    acBonus: null,
+    tempHP: 320,
+    tlPenalty: -2,
+    turnDistance: 2,
+    bpCost: 29,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Heavy ablative armor 4': {
+    acBonus: null,
+    tempHP: 360,
+    tlPenalty: -2,
+    turnDistance: 2,
+    bpCost: 31,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Heavy ablative armor 5': {
+    acBonus: null,
+    tempHP: 400,
+    tlPenalty: -2,
+    turnDistance: 2,
+    bpCost: 34,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Superior ablative armor 1': {
+    acBonus: null,
+    tempHP: 460,
+    tlPenalty: -3,
+    turnDistance: 2,
+    bpCost: 38,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Superior ablative armor 2': {
+    acBonus: null,
+    tempHP: 520,
+    tlPenalty: -4,
+    turnDistance: 2,
+    bpCost: 45,
+    source: 'Starship Operations Manual pg. 20'
+  },
+  'Passive interposed defenses 1': {
+    acBonus: null,
+    tempHP: 10,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 3,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 49'
+  },
+  'Passive interposed defenses 2': {
+    acBonus: null,
+    tempHP: 20,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 5,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 49'
+  },
+  'Passive interposed defenses 3': {
+    acBonus: null,
+    tempHP: 32,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 10,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 49'
+  },
+  'Active interposed defenses 1': {
+    acBonus: null,
+    tempHP: 50,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 14,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 49'
+  },
+  'Active interposed defenses 2': {
+    acBonus: null,
+    tempHP: 100,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 22,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 49'
+  },
+  'Active interposed defenses 3': {
+    acBonus: null,
+    tempHP: 160,
+    tlPenalty: null,
+    turnDistance: null,
+    bpCost: 29,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 49'
+  }
 }
 
 // https://www.aonsrd.com/Starship_Computers.aspx
 const computers = {
-  // Name: [Bonus, Nodes, PCU cost, BP cost, source]
-  "Basic Computer": [+0, 0, 0, 0, "Starfinder Core Rulebook pg. 297"],
-  "Mk 1 Mononode": [+1, 1, 10, 1, "Starfinder Core Rulebook pg. 297"],
-  "Mk 1 Duonode": [+1, 2, 10, 2, "Starfinder Core Rulebook pg. 297"],
-  "Mk 1 Trinode": [+1, 3, 10, 3, "Starfinder Core Rulebook pg. 297"],
-  "Mk 1 Tetranode": [+1, 4, 10, 4, "Starfinder Core Rulebook pg. 297"],
-  "Mk 2 Mononode": [+2, 1, 15, 4, "Starfinder Core Rulebook pg. 297"],
-  "Mk 2 Duonode": [+2, 2, 15, 8, "Starfinder Core Rulebook pg. 297"],
-  "Mk 2 Trinode": [+2, 3, 15, 12, "Starfinder Core Rulebook pg. 297"],
-  "Mk 2 Tetranode": [+2, 4, 15, 16, "Starfinder Core Rulebook pg. 297"],
-  "Mk 3 Mononode": [+3, 1, 20, 9, "Starfinder Core Rulebook pg. 297"],
-  "Mk 3 Duonode": [+3, 2, 20, 18, "Starfinder Core Rulebook pg. 297"],
-  "Mk 3 Trinode": [+3, 3, 20, 27, "Starfinder Core Rulebook pg. 297"],
-  "Mk 3 Tetranode": [+3, 4, 20, 36, "Starfinder Core Rulebook pg. 297"],
-  "Mk 4 Mononode": [+4, 1, 25, 16, "Starfinder Core Rulebook pg. 297"],
-  "Mk 4 Duonode": [+4, 2, 25, 32, "Starfinder Core Rulebook pg. 297"],
-  "Mk 4 Trinode": [+4, 3, 25, 48, "Starfinder Core Rulebook pg. 297"],
-  "Mk 5 Mononode": [+5, 1, 30, 25, "Starfinder Core Rulebook pg. 297"],
-  "Mk 5 Duonode": [+5, 2, 30, 50, "Starfinder Core Rulebook pg. 297"],
-  "Mk 5 Trinode": [+5, 3, 30, 75, "Starfinder Core Rulebook pg. 297"],
-  "Mk 6 Mononode": [+6, 1, 35, 36, "Starfinder Core Rulebook pg. 297"],
-  "Mk 6 Duonode": [+6, 2, 35, 72, "Starfinder Core Rulebook pg. 297"],
-  "Mk 7 Mononode": [+7, 1, 40, 49, "Starfinder Core Rulebook pg. 297"],
-  "Mk 7 Duonode": [+7, 2, 40, 98, "Starfinder Core Rulebook pg. 297"],
-  "Mk 8 Mononode": [+8, 1, 45, 64, "Starfinder Core Rulebook pg. 297"],
-  "Mk 8 Duonode": [+8, 2, 45, 128, "Starfinder Core Rulebook pg. 297"],
-  "Mk 9 Mononode": [+9, 1, 50, 81, "Starfinder Core Rulebook pg. 297"],
-  "Mk 9 Duonode": [+9, 2, 50, 162, "Starfinder Core Rulebook pg. 297"],
-  "Mk 10 Mononode": [+10, 1, 55, 100, "Starfinder Core Rulebook pg. 297"],
-  "Mk 10 Duonode": [+10, 2, 55, 200, "Starfinder Core Rulebook pg. 297"]
+  'Basic Computer': {
+    bonus: 0,
+    nodes: 0,
+    pcuCost: 0,
+    bpCost: 0,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 1 Mononode': {
+    bonus: 1,
+    nodes: 1,
+    pcuCost: 10,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 1 Duonode': {
+    bonus: 1,
+    nodes: 2,
+    pcuCost: 10,
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 1 Trinode': {
+    bonus: 1,
+    nodes: 3,
+    pcuCost: 10,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 1 Tetranode': {
+    bonus: 1,
+    nodes: 4,
+    pcuCost: 10,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 2 Mononode': {
+    bonus: 2,
+    nodes: 1,
+    pcuCost: 15,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 2 Duonode': {
+    bonus: 2,
+    nodes: 2,
+    pcuCost: 15,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 2 Trinode': {
+    bonus: 2,
+    nodes: 3,
+    pcuCost: 15,
+    bpCost: 12,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 2 Tetranode': {
+    bonus: 2,
+    nodes: 4,
+    pcuCost: 15,
+    bpCost: 16,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 3 Mononode': {
+    bonus: 3,
+    nodes: 1,
+    pcuCost: 20,
+    bpCost: 9,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 3 Duonode': {
+    bonus: 3,
+    nodes: 2,
+    pcuCost: 20,
+    bpCost: 18,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 3 Trinode': {
+    bonus: 3,
+    nodes: 3,
+    pcuCost: 20,
+    bpCost: 27,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 3 Tetranode': {
+    bonus: 3,
+    nodes: 4,
+    pcuCost: 20,
+    bpCost: 36,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 4 Mononode': {
+    bonus: 4,
+    nodes: 1,
+    pcuCost: 25,
+    bpCost: 16,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 4 Duonode': {
+    bonus: 4,
+    nodes: 2,
+    pcuCost: 25,
+    bpCost: 32,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 4 Trinode': {
+    bonus: 4,
+    nodes: 3,
+    pcuCost: 25,
+    bpCost: 48,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 5 Mononode': {
+    bonus: 5,
+    nodes: 1,
+    pcuCost: 30,
+    bpCost: 25,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 5 Duonode': {
+    bonus: 5,
+    nodes: 2,
+    pcuCost: 30,
+    bpCost: 50,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 5 Trinode': {
+    bonus: 5,
+    nodes: 3,
+    pcuCost: 30,
+    bpCost: 75,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 6 Mononode': {
+    bonus: 6,
+    nodes: 1,
+    pcuCost: 35,
+    bpCost: 36,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 6 Duonode': {
+    bonus: 6,
+    nodes: 2,
+    pcuCost: 35,
+    bpCost: 72,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 7 Mononode': {
+    bonus: 7,
+    nodes: 1,
+    pcuCost: 40,
+    bpCost: 49,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 7 Duonode': {
+    bonus: 7,
+    nodes: 2,
+    pcuCost: 40,
+    bpCost: 98,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 8 Mononode': {
+    bonus: 8,
+    nodes: 1,
+    pcuCost: 45,
+    bpCost: 64,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 8 Duonode': {
+    bonus: 8,
+    nodes: 2,
+    pcuCost: 45,
+    bpCost: 128,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 9 Mononode': {
+    bonus: 9,
+    nodes: 1,
+    pcuCost: 50,
+    bpCost: 81,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 9 Duonode': {
+    bonus: 9,
+    nodes: 2,
+    pcuCost: 50,
+    bpCost: 162,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 10 Mononode': {
+    bonus: 10,
+    nodes: 1,
+    pcuCost: 55,
+    bpCost: 100,
+    source: 'Starfinder Core Rulebook pg. 297'
+  },
+  'Mk 10 Duonode': {
+    bonus: 10,
+    nodes: 2,
+    pcuCost: 55,
+    bpCost: 200,
+    source: 'Starfinder Core Rulebook pg. 297'
+  }
 }
 
 const networkNodes = {
@@ -856,20 +1336,19 @@ const getArmorData = (armorId, size) => {
   if(size === undefined) throw new Error("getArmorData(armorId, size) must take in a size parameter")
   if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
-  const array = armor[armorId]
+  let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
+  bpCost = (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (bpCost * sizeMod[size]) : bpCost
 
-  return {acBonus: array[0], tempHP: array[1], tlPenalty: array[2], turnDistance: array[3], 
-    bpCost: (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (array[4] * sizeMod[size]) : array[4], 
-    source: array[5]}
+  return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
 }
 
 const getComputerData = (computerId) => {
   if(computerId === null) return {bonus: 0, nodes: 0, pcuCost: 0, bpCost: 0, source: null}
 
   computerId = capitalizeEachWord(computerId)
-  const array = computers[computerId]
+  const { bonus, nodes, pcuCost, bpCost, source } = computers[computerId]
 
-  return {bonus: array[0], nodes: array[1], pcuCost: array[2], bpCost: array[3], source: array[4]}
+  return {bonus, nodes, pcuCost, bpCost, source}
 }
 
 const getNetworkNodeData = (nodeId, size) => { 
@@ -1043,6 +1522,15 @@ export {
   powerCores,
   thrusters,
   armor,
+  computers,
+  networkNodes,
+  crewQuarters,
+  defensiveCounter,
+  driftEngines,
+  expansionBays,
+  fortifiedHulls,
+  reinforcedBulkheads,
+  antiHackingSystems,
 
   getSourceData,
   getTierData, 

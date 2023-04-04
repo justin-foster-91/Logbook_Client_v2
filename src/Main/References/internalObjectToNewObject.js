@@ -1,10 +1,10 @@
 import * as Tables from './metaTables'
 
 
-  // Thruster: [size, speed, pilotingModifier, pcuCost, bpCost, source]
+  // Name: [Bonus, Nodes, PCU cost, BP cost, source]
 
 // const { shipTiers } = Tables;
-const table = Tables.thrusters;
+const table = Tables.computers;
 
 const dataKeys = Object.keys(table)
 const newObj = {}
@@ -14,12 +14,11 @@ dataKeys.map(oneKey => {
 
   newObj[oneKey] = {
     // This will vary by table
-    size: table[oneKey][0],
-    speed: table[oneKey][1],
-    pilotingModifier: table[oneKey][2],
-    pcuCost: table[oneKey][3],
-    bpCost: table[oneKey][4],
-    source: table[oneKey][5],
+    bonus: table[oneKey][0],
+    nodes: table[oneKey][1],
+    pcuCost: table[oneKey][2],
+    bpCost: table[oneKey][3],
+    source: table[oneKey][4],
 
   }
 })
