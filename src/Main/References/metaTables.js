@@ -160,68 +160,408 @@ const sizeMod = {
 
 // https://www.aonsrd.com/Starship_PowerCores.aspx
 const powerCores = {
-  // Power Core: [[Sizes], pcuProvided, bpCost, source]
-  "Micron Light": [["T"], 50, 4, "Starfinder Core Rulebook pg. 296"],
-  "Micron Heavy": [["T"], 70, 6, "Starfinder Core Rulebook pg. 296"],
-  "Micron Ultra": [["T"], 80, 8, "Starfinder Core Rulebook pg. 296"],
-  "Arcus Light": [["T", "S"], 75, 7, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Brown": [["T", "S"], 90, 9, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Black": [["T", "S"], 120, 12, "Starfinder Core Rulebook pg. 296"],
-  "Pulse White": [["T", "S"], 140, 14, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Gray": [["T", "S", "M"], 100, 10, "Starfinder Core Rulebook pg. 296"],
-  "Arcus Heavy": [["T", "S", "M"], 130, 13, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Green": [["T", "S", "M"], 150, 15, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Red": [["T", "S", "M"], 175, 17, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Blue": [["T", "S", "M"], 200, 20, "Starfinder Core Rulebook pg. 296"],
-  "Arcus Ultra": [["S", "M", "L"], 150, 15, "Starfinder Core Rulebook pg. 296"],
-  "Arcus Maximum": [["S", "M", "L"], 200, 20, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Orange": [["S", "M", "L"], 250, 25, "Starfinder Core Rulebook pg. 296"],
-  "Pulse Prismatic": [["S", "M", "L"], 300, 30, "Starfinder Core Rulebook pg. 296"],
-  "Nova Light": [["M", "L", "H"], 150, 15, "Starfinder Core Rulebook pg. 296"],
-  "Nova Heavy": [["M", "L", "H"], 200, 20, "Starfinder Core Rulebook pg. 296"],
-  "Nova Ultra": [["M", "L", "H"], 300, 30, "Starfinder Core Rulebook pg. 296"],
-  "Gateway Light": [["L", "H", "G"], 300, 30, "Starfinder Core Rulebook pg. 296"],
-  "Gateway Heavy": [["L", "H", "G"], 400, 40, "Starfinder Core Rulebook pg. 296"],
-  "Gateway Ultra": [["H", "G", "C"], 500, 50, "Starfinder Core Rulebook pg. 296"],
-  "Titan Light": [["Sc"], 700, 50, "Starfinder #6: Empire of Bones pg. 45"],
-  "Titan Heavy": [["Sc"], 950, 60, "Starfinder #6: Empire of Bones pg. 45"],
-  "Titan Ultra": [["Sc"], 1200, 70, "Starfinder #6: Empire of Bones pg. 45"]
+  'Micron Light': {
+    sizes: [ 'T' ],
+    pcuProvided: 50,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Micron Heavy': {
+    sizes: [ 'T' ],
+    pcuProvided: 70,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Micron Ultra': {
+    sizes: [ 'T' ],
+    pcuProvided: 80,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Arcus Light': {
+    sizes: [ 'T', 'S' ],
+    pcuProvided: 75,
+    bpCost: 7,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Brown': {
+    sizes: [ 'T', 'S' ],
+    pcuProvided: 90,
+    bpCost: 9,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Black': {
+    sizes: [ 'T', 'S' ],
+    pcuProvided: 120,
+    bpCost: 12,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse White': {
+    sizes: [ 'T', 'S' ],
+    pcuProvided: 140,
+    bpCost: 14,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Gray': {
+    sizes: [ 'T', 'S', 'M' ],
+    pcuProvided: 100,
+    bpCost: 10,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Arcus Heavy': {
+    sizes: [ 'T', 'S', 'M' ],
+    pcuProvided: 130,
+    bpCost: 13,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Green': {
+    sizes: [ 'T', 'S', 'M' ],
+    pcuProvided: 150,
+    bpCost: 15,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Red': {
+    sizes: [ 'T', 'S', 'M' ],
+    pcuProvided: 175,
+    bpCost: 17,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Blue': {
+    sizes: [ 'T', 'S', 'M' ],
+    pcuProvided: 200,
+    bpCost: 20,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Arcus Ultra': {
+    sizes: [ 'S', 'M', 'L' ],
+    pcuProvided: 150,
+    bpCost: 15,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Arcus Maximum': {
+    sizes: [ 'S', 'M', 'L' ],
+    pcuProvided: 200,
+    bpCost: 20,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Orange': {
+    sizes: [ 'S', 'M', 'L' ],
+    pcuProvided: 250,
+    bpCost: 25,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Pulse Prismatic': {
+    sizes: [ 'S', 'M', 'L' ],
+    pcuProvided: 300,
+    bpCost: 30,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Nova Light': {
+    sizes: [ 'M', 'L', 'H' ],
+    pcuProvided: 150,
+    bpCost: 15,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Nova Heavy': {
+    sizes: [ 'M', 'L', 'H' ],
+    pcuProvided: 200,
+    bpCost: 20,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Nova Ultra': {
+    sizes: [ 'M', 'L', 'H' ],
+    pcuProvided: 300,
+    bpCost: 30,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Gateway Light': {
+    sizes: [ 'L', 'H', 'G' ],
+    pcuProvided: 300,
+    bpCost: 30,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Gateway Heavy': {
+    sizes: [ 'L', 'H', 'G' ],
+    pcuProvided: 400,
+    bpCost: 40,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Gateway Ultra': {
+    sizes: [ 'H', 'G', 'C' ],
+    pcuProvided: 500,
+    bpCost: 50,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  'Titan Light': {
+    sizes: [ 'Sc' ],
+    pcuProvided: 700,
+    bpCost: 50,
+    source: 'Starfinder #6: Empire of Bones pg. 45'
+  },
+  'Titan Heavy': {
+    sizes: [ 'Sc' ],
+    pcuProvided: 950,
+    bpCost: 60,
+    source: 'Starfinder #6: Empire of Bones pg. 45'
+  },
+  'Titan Ultra': {
+    sizes: [ 'Sc' ],
+    pcuProvided: 1200,
+    bpCost: 70,
+    source: 'Starfinder #6: Empire of Bones pg. 45'
+  }
 }
 
 // https://www.aonsrd.com/Starship_Thrusters.aspx
 const thrusters = {
-  // Thruster: [size, speed, pilotingModifier, pcuCost, bpCost, source]
-  "T6": ["T", 6, +1, 20, 3, "Starfinder Core Rulebook pg. 296"],
-  "T8": ["T", 8, +0, 25, 4, "Starfinder Core Rulebook pg. 296"],
-  "T10": ["T", 10, +0, 30, 5, "Starfinder Core Rulebook pg. 296"],
-  "T12": ["T", 12, -1, 35, 6, "Starfinder Core Rulebook pg. 296"],
-  "T14": ["T", 14, -2, 40, 7, "Starfinder Core Rulebook pg. 296"],
-  "S6": ["S", 6, +1, 30, 3, "Starfinder Core Rulebook pg. 296"],
-  "S8": ["S", 8, +0, 40, 4, "Starfinder Core Rulebook pg. 296"],
-  "S10": ["S", 10, +0, 50, 5, "Starfinder Core Rulebook pg. 296"],
-  "S12": ["S", 12, -1, 60, 6, "Starfinder Core Rulebook pg. 296"],
-  "M4": ["M", 4, +2, 40, 2, "Starfinder Core Rulebook pg. 296"],
-  "M6": ["M", 6, +1, 50, 3, "Starfinder Core Rulebook pg. 296"],
-  "M8": ["M", 8, +0, 60, 4, "Starfinder Core Rulebook pg. 296"],
-  "M10": ["M", 10, +0, 70, 5, "Starfinder Core Rulebook pg. 296"],
-  "M12": ["M", 12, -1, 80, 6, "Starfinder Core Rulebook pg. 296"],
-  "L4": ["L", 4, +2, 60, 4, "Starfinder Core Rulebook pg. 296"],
-  "L6": ["L", 6, +1, 80, 6, "Starfinder Core Rulebook pg. 296"],
-  "L8": ["L", 8, +0, 100, 8, "Starfinder Core Rulebook pg. 296"],
-  "L10": ["L", 10, +0, 120, 10, "Starfinder Core Rulebook pg. 296"],
-  "H4": ["H", 4, +2, 80, 4, "Starfinder Core Rulebook pg. 296"],
-  "H6": ["H", 6, +1, 120, 6, "Starfinder Core Rulebook pg. 296"],
-  "H8": ["H", 8, +0, 140, 8, "Starfinder Core Rulebook pg. 296"],
-  "H10": ["H", 10, +0, 160, 10, "Starfinder Core Rulebook pg. 296"],
-  "G4": ["G", 4, +2, 120, 8, "Starfinder Core Rulebook pg. 296"],
-  "G6": ["G", 6, +1, 180, 12, "Starfinder Core Rulebook pg. 296"],
-  "G8": ["G", 8, +0, 240, 16, "Starfinder Core Rulebook pg. 296"],
-  "C4": ["C", 4, +2, 200, 8, "Starfinder Core Rulebook pg. 296"],
-  "C6": ["C", 6, +1, 300, 12, "Starfinder Core Rulebook pg. 296"],
-  "C8": ["C", 8, +0, 400, 16, "Starfinder Core Rulebook pg. 296"],
-  "SC4": ["Sc", 4, +1, 300, 16, "Starfinder #6: Empire of Bones pg. 45"],
-  "SC6": ["Sc", 6, +0, 400, 20, "Starfinder #6: Empire of Bones pg. 45"],
-  "SC8": ["Sc", 8, -1, 500, 24, "Starfinder #6: Empire of Bones pg. 45"]
+  T6: {
+    size: 'T',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 20,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  T8: {
+    size: 'T',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 25,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  T10: {
+    size: 'T',
+    speed: 10,
+    pilotingModifier: 0,
+    pcuCost: 30,
+    bpCost: 5,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  T12: {
+    size: 'T',
+    speed: 12,
+    pilotingModifier: -1,
+    pcuCost: 35,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  T14: {
+    size: 'T',
+    speed: 14,
+    pilotingModifier: -2,
+    pcuCost: 40,
+    bpCost: 7,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  S6: {
+    size: 'S',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 30,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  S8: {
+    size: 'S',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 40,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  S10: {
+    size: 'S',
+    speed: 10,
+    pilotingModifier: 0,
+    pcuCost: 50,
+    bpCost: 5,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  S12: {
+    size: 'S',
+    speed: 12,
+    pilotingModifier: -1,
+    pcuCost: 60,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  M4: {
+    size: 'M',
+    speed: 4,
+    pilotingModifier: 2,
+    pcuCost: 40,
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  M6: {
+    size: 'M',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 50,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  M8: {
+    size: 'M',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 60,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  M10: {
+    size: 'M',
+    speed: 10,
+    pilotingModifier: 0,
+    pcuCost: 70,
+    bpCost: 5,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  M12: {
+    size: 'M',
+    speed: 12,
+    pilotingModifier: -1,
+    pcuCost: 80,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  L4: {
+    size: 'L',
+    speed: 4,
+    pilotingModifier: 2,
+    pcuCost: 60,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  L6: {
+    size: 'L',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 80,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  L8: {
+    size: 'L',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 100,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  L10: {
+    size: 'L',
+    speed: 10,
+    pilotingModifier: 0,
+    pcuCost: 120,
+    bpCost: 10,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  H4: {
+    size: 'H',
+    speed: 4,
+    pilotingModifier: 2,
+    pcuCost: 80,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  H6: {
+    size: 'H',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 120,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  H8: {
+    size: 'H',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 140,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  H10: {
+    size: 'H',
+    speed: 10,
+    pilotingModifier: 0,
+    pcuCost: 160,
+    bpCost: 10,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  G4: {
+    size: 'G',
+    speed: 4,
+    pilotingModifier: 2,
+    pcuCost: 120,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  G6: {
+    size: 'G',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 180,
+    bpCost: 12,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  G8: {
+    size: 'G',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 240,
+    bpCost: 16,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  C4: {
+    size: 'C',
+    speed: 4,
+    pilotingModifier: 2,
+    pcuCost: 200,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  C6: {
+    size: 'C',
+    speed: 6,
+    pilotingModifier: 1,
+    pcuCost: 300,
+    bpCost: 12,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  C8: {
+    size: 'C',
+    speed: 8,
+    pilotingModifier: 0,
+    pcuCost: 400,
+    bpCost: 16,
+    source: 'Starfinder Core Rulebook pg. 296'
+  },
+  SC4: {
+    size: 'Sc',
+    speed: 4,
+    pilotingModifier: 1,
+    pcuCost: 300,
+    bpCost: 16,
+    source: 'Starfinder #6: Empire of Bones pg. 45'
+  },
+  SC6: {
+    size: 'Sc',
+    speed: 6,
+    pilotingModifier: 0,
+    pcuCost: 400,
+    bpCost: 20,
+    source: 'Starfinder #6: Empire of Bones pg. 45'
+  },
+  SC8: {
+    size: 'Sc',
+    speed: 8,
+    pilotingModifier: -1,
+    pcuCost: 500,
+    bpCost: 24,
+    source: 'Starfinder #6: Empire of Bones pg. 45'
+  }
 }
 
 // https://www.aonsrd.com/Starship_Armor.aspx
@@ -499,17 +839,17 @@ const getSizeData = (size) => {
 const getPowerCoreData = (powerCoreId) => {
   if(powerCoreId === null) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null};
 
-  const array = powerCores[capitalizeEachWord(powerCoreId)]
+  const { sizes, pcuProvided, bpCost, source } = powerCores[capitalizeEachWord(powerCoreId)]
 
-  return {sizes: array[0], pcuProvided: array[1], bpCost: array[2], source: array[3]}
+  return {sizes, pcuProvided, bpCost, source}
 }
 
 const getThrusterData = (thrustersId) => {
   if(thrustersId === null) return {size: null, speed: 0, pilotingModifier: 0, pcuCost: 0, bpCost: 0, source: null};
 
-  const array = thrusters[thrustersId]
+  const { size, speed, pilotingModifier, pcuCost, bpCost, source } = thrusters[thrustersId]
 
-  return {size: array[0], speed: array[1], pilotingModifier: array[2], pcuCost: array[3], bpCost: array[4], source: array[5]}
+  return {size, speed, pilotingModifier, pcuCost, bpCost, source}
 }
 
 const getArmorData = (armorId, size) => {
@@ -701,6 +1041,8 @@ export {
   maneuverability,
   sizeMod,
   powerCores,
+  thrusters,
+  armor,
 
   getSourceData,
   getTierData, 

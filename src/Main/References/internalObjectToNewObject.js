@@ -1,10 +1,10 @@
 import * as Tables from './metaTables'
 
 
-  // Maneuverability:	[Distance Between Turns,	Piloting Check Modifier]
+  // Thruster: [size, speed, pilotingModifier, pcuCost, bpCost, source]
 
 // const { shipTiers } = Tables;
-const table = Tables.maneuverability;
+const table = Tables.thrusters;
 
 const dataKeys = Object.keys(table)
 const newObj = {}
@@ -14,11 +14,16 @@ dataKeys.map(oneKey => {
 
   newObj[oneKey] = {
     // This will vary by table
-    turnDistance: table[oneKey][0],
-    pilotingModifier: table[oneKey][1],
+    size: table[oneKey][0],
+    speed: table[oneKey][1],
+    pilotingModifier: table[oneKey][2],
+    pcuCost: table[oneKey][3],
+    bpCost: table[oneKey][4],
+    source: table[oneKey][5],
 
   }
 })
+
 
 console.log(newObj);
 
