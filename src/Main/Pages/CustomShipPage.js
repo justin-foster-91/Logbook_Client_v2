@@ -96,7 +96,7 @@ function CustomShipPage() {
     {component: SetExpansionBays, name: "Expansion Bays"},
     {component: SetFortifiedHull, name: "Fortified Hull"},
     {component: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
-    {component: SetSecurity, name: "Security"},
+    // {component: SetSecurity, name: "Security"},
   ]
 
   return (

@@ -3,49 +3,99 @@ import frames from "../References/frames.json";
 import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelWeapons"
 
 const sources = {
-// source: [link, abbrev., sfsLegal]
-// an item can have multiple sources**
-  "Starfinder Core Rulebook": ["https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook", "CRB", true],
-  "Pact Worlds": ["https://paizo.com/products/btpy9zkn?Starfinder-Pact-Worlds", "PW", true],
-  "Starship Operations Manual": ["https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual", "COM", false],
-  "Starfinder #6: Empire of Bones": ["https://paizo.com/products/btpya1ai/", "EoB", false],
-  "Starfinder #7: The Reach of Empire": ["https://paizo.com/products/btpya1rp?Starfinder-Adventure-Path-7-The-Reach-of-Empire", "RotE", false],
-  "Starfinder #19: Fate of the Fifth": ["https://paizo.com/products/btq01wtb?Starfinder-Adventure-Path-19-Fate-of-the-Fifth", "FotF", false],
-  "Starfinder #20: The Last Refuge": ["https://paizo.com/products/btq01zo2?Starfinder-Adventure-Path-20-The-Last-Refuge", "TLR", false],
-  "Starfinder #27: Deceivers' Moon": ["https://paizo.com/products/btq0216g?Starfinder-Adventure-Path-27-Deceivers-Moon", "DM", false],
-  "Starfinder #42: Whispers of the Eclipse": ["https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse", "WotE", false],
-  "Near Space": ["https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space", "NS", false],
-  "Tech Revolution": ["https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution", "TR", false],
-  "Alien Archive": ["https://paizo.com/products/btq01wt9?Starfinder-Alien-Archive-3", "AA", false],
-  "Alien Archive 2": ["https://paizo.com/products/btpya20r?Starfinder-Alien-Archive-2", "AA2", false],
+  // an item can have multiple sources
+  'Starfinder Core Rulebook': {
+    link: 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook',
+    abbrev: 'CRB',
+    sfsLegal: true
+  },
+  'Pact Worlds': {
+    link: 'https://paizo.com/products/btpy9zkn?Starfinder-Pact-Worlds',
+    abbrev: 'PW',
+    sfsLegal: true
+  },
+  'Starship Operations Manual': {
+    link: 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual',
+    abbrev: 'COM',
+    sfsLegal: false
+  },
+  'Starfinder #6: Empire of Bones': {
+    link: 'https://paizo.com/products/btpya1ai/',
+    abbrev: 'EoB',
+    sfsLegal: false
+  },
+  'Starfinder #7: The Reach of Empire': {
+    link: 'https://paizo.com/products/btpya1rp?Starfinder-Adventure-Path-7-The-Reach-of-Empire',
+    abbrev: 'RotE',
+    sfsLegal: false
+  },
+  'Starfinder #19: Fate of the Fifth': {
+    link: 'https://paizo.com/products/btq01wtb?Starfinder-Adventure-Path-19-Fate-of-the-Fifth',
+    abbrev: 'FotF',
+    sfsLegal: false
+  },
+  'Starfinder #20: The Last Refuge': {
+    link: 'https://paizo.com/products/btq01zo2?Starfinder-Adventure-Path-20-The-Last-Refuge',
+    abbrev: 'TLR',
+    sfsLegal: false
+  },
+  "Starfinder #27: Deceivers' Moon": {
+    link: 'https://paizo.com/products/btq0216g?Starfinder-Adventure-Path-27-Deceivers-Moon',
+    abbrev: 'DM',
+    sfsLegal: false
+  },
+  'Starfinder #42: Whispers of the Eclipse': {
+    link: 'https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse',
+    abbrev: 'WotE',
+    sfsLegal: false
+  },
+  'Near Space': {
+    link: 'https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space',
+    abbrev: 'NS',
+    sfsLegal: false
+  },
+  'Tech Revolution': {
+    link: 'https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution',
+    abbrev: 'TR',
+    sfsLegal: false
+  },
+  'Alien Archive': {
+    link: 'https://paizo.com/products/btq01wt9?Starfinder-Alien-Archive-3',
+    abbrev: 'AA',
+    sfsLegal: false
+  },
+  'Alien Archive 2': {
+    link: 'https://paizo.com/products/btpya20r?Starfinder-Alien-Archive-2',
+    abbrev: 'AA2',
+    sfsLegal: false
+  }
 }
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
 const shipTiers = {
-  // Tier: [buildPoints, hpIncrements]
-  "1/4": [25, 0],
-  "1/3": [30, 0],
-  "1/2": [40, 0],
-  "1": [55, 0],
-  "2": [75, 0],
-  "3": [95, 0],
-  "4": [115, 1],
-  "5": [135, 1],
-  "6": [155, 1],
-  "7": [180, 1],
-  "8": [205, 2],
-  "9": [230, 2],
-  "10": [270, 2],
-  "11": [310, 2],
-  "12": [350, 3],
-  "13": [400, 3],
-  "14": [450, 3],
-  "15": [500, 3],
-  "16": [600, 4],
-  "17": [700, 4],
-  "18": [800, 4],
-  "19": [900, 4],
-  "20": [1000, 5],
+  '1/4': { buildPoints: 25, hpIncrement: 0 },
+  '1/3': { buildPoints: 30, hpIncrement: 0 },
+  '1/2': { buildPoints: 40, hpIncrement: 0 },
+  '1': { buildPoints: 55, hpIncrement: 0 },
+  '2': { buildPoints: 75, hpIncrement: 0 },
+  '3': { buildPoints: 95, hpIncrement: 0 },
+  '4': { buildPoints: 115, hpIncrement: 1 },
+  '5': { buildPoints: 135, hpIncrement: 1 },
+  '6': { buildPoints: 155, hpIncrement: 1 },
+  '7': { buildPoints: 180, hpIncrement: 1 },
+  '8': { buildPoints: 205, hpIncrement: 2 },
+  '9': { buildPoints: 230, hpIncrement: 2 },
+  '10': { buildPoints: 270, hpIncrement: 2 },
+  '11': { buildPoints: 310, hpIncrement: 2 },
+  '12': { buildPoints: 350, hpIncrement: 3 },
+  '13': { buildPoints: 400, hpIncrement: 3 },
+  '14': { buildPoints: 450, hpIncrement: 3 },
+  '15': { buildPoints: 500, hpIncrement: 3 },
+  '16': { buildPoints: 600, hpIncrement: 4 },
+  '17': { buildPoints: 700, hpIncrement: 4 },
+  '18': { buildPoints: 800, hpIncrement: 4 },
+  '19': { buildPoints: 900, hpIncrement: 4 },
+  '20': { buildPoints: 1000, hpIncrement: 5 },
 }
 
 const shipSize = {
@@ -412,10 +462,17 @@ const longarmWeapons = {
 }
 
 // <--- Data extractions --->
-const getTierData = (tierId) => {
-  const array = shipTiers[tierId]
+const getSourceData = (source) => {
+  const {link, abbrev, sfsLegal} = sources[source];
 
-  return {buildPoints: array[0], hpIncrementMultiplier: array[1]}
+  return {link, abbrev, sfsLegal};
+}
+
+const getTierData = (tierId) => {
+  // const array = shipTiers[tierId]
+  const {buildPoints, hpIncrement} = shipTiers[tierId];
+
+  return {buildPoints, hpIncrementMultiplier: hpIncrement}
 }
 
 const getManeuverabilityData = (type) => {
@@ -553,6 +610,10 @@ const getAntiPersonnelData = (antiPersonnelId) => {
 
 
 // <--- ID extractions -->
+const getSourceIdList = () => {
+  return Object.keys(sources).sort((a, b) => a + b)
+}
+
 const getTierIdList = () => {
   return Object
     .keys(shipTiers)
@@ -629,6 +690,7 @@ export {
   sizeMod,
   shipTiers,
 
+  getSourceData,
   getTierData, 
   getManeuverabilityData,
   getSizeData,
@@ -646,6 +708,7 @@ export {
   getAntiHackingData,
   getAntiPersonnelData,
 
+  getSourceIdList,
   getTierIdList, 
   getFrameIdList,
   getPowerCoreIdList, 

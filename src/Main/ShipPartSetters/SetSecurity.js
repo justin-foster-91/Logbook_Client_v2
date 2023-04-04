@@ -5,8 +5,14 @@ import { splitCamelCase } from "../References/utils";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
-function SetTier() {
+function SetSecurity(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+
+  const { antiHackingSystemsId, antiPersonnelWeaponId } = customShipParts;
+  // TODO: need to know when the ID is from a longarm vs a heavy weapon
+  // category, level, price, damage, range, critical, capacity, usage, bulk, special, sfsLegal
+  const {  } = Tables.getAntiPersonnelData(antiPersonnelWeaponId);
+  const { currentPart } = props;
   
   // const {  } = customShipParts;
   const totalSecurityBP = null
@@ -39,15 +45,40 @@ function SetTier() {
     )})
   }
 
+  const handleAntiPersonnelChange = (ev) => {
+    const antiPersonnelOption = ev.target.value;
+    console.log(antiPersonnelOption);
+
+    // ship.setSecurity({ reference: 'tierId', value: tierOption})
+  };
+
+  const handleAntiHackingChange = (ev) => {
+    const antiHackingOption = ev.target.value;
+    console.log(antiHackingOption);
+
+    // ship.setSecurity({ reference: 'tierId', value: tierOption})
+  }
 
   return (
     <>
-      <h3>Security</h3>
-      {/* Anti-Hacking Systems (dropdown) */}
+      <h3>{currentPart.name}</h3>
+      Anti-Hacking Systems (dropdown) <br/>
       {/*  increase the DC to hack into it by 1 * mark */}
+      <select value={antiHackingSystemsId} onChange={handleAntiHackingChange}>
+        {Tables.getAntiHackingIdList().map((weapon, idx) => (
+          <option key={idx}>{weapon}</option>
+        ))}
+      </select>
 
-      {/* Anti-Personnel Weapon (dropdown) */}
+      <p></p>
+
+      Anti-Personnel Weapon <br/>
       {/* Needs access to entire longarm and heavy weapons list */}
+      <select value={antiPersonnelWeaponId} onChange={handleAntiPersonnelChange}>
+        {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
+          <option key={idx}>{weapon}</option>
+        ))}
+      </select>
 
       <p></p>
       {/* Biometric Locks - check */}
@@ -76,4 +107,4 @@ function SetTier() {
   );
 }
 
-export default SetTier;
+export default SetSecurity;
