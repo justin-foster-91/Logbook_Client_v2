@@ -14,8 +14,6 @@ function SetFrame() {
   let specialName = null
   if(specialAbility)specialName = Object.keys(specialAbility)[0]
 
-  // FIXME: default should be "Light Freighter"
-
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
     // This may not be needed this later
@@ -28,7 +26,7 @@ function SetFrame() {
   }
 
   const handleFrameIdChange = (ev) => {
-    const frameOption = ev.target.selectedOptions[0].id;
+    const frameOption = ev.target.value;
     
     ship.setFrame(frameOption)
   };
@@ -39,9 +37,9 @@ function SetFrame() {
 
       <p></p>
 
-      <select value={`${frameId} [${abbreviateSize(size)}]`} onChange={handleFrameIdChange}>
+      <select onChange={handleFrameIdChange}>
         {frames.map((frame, idx) => (
-          <option key={idx} id={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
+          <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
         ))}
       </select>
 

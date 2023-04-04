@@ -11,7 +11,7 @@ const PowerCoreSelections = () => {
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
   const handlePowerCoreChange = (event) => {
-    const coreIndex = event.target.name;
+    const coreIndex = Number(event.target.name);
     let coreOption = event.target.value;
     if (coreOption === "None") coreOption = null;
 
