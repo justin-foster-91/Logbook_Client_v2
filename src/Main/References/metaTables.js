@@ -1128,152 +1128,717 @@ const computers = {
 }
 
 const networkNodes = {
-  // Name:	[Bonus,	Node Maximum,	PCU Cost,	BP Cost]
-  "Mk 4":	[+4,	2,	8,	4],
-  "Mk 5":	[+5,	2,	10,	5],
-  "Mk 6":	[+6,	3,	11,	6],
-  "Mk 7":	[+7,	3,	13,	7],
-  "Mk 8":	[+8,	4,	15,	8],
-  "Mk 9":	[+9,	4,	17,	9],
-  "Mk 10":	[+10,	5,	19,	10]
+  'Mk 4': { bonus: 4, nodeMax: 2, pcuCost: 8, bpCost: 4 },
+  'Mk 5': { bonus: 5, nodeMax: 2, pcuCost: 10, bpCost: 5 },
+  'Mk 6': { bonus: 6, nodeMax: 3, pcuCost: 11, bpCost: 6 },
+  'Mk 7': { bonus: 7, nodeMax: 3, pcuCost: 13, bpCost: 7 },
+  'Mk 8': { bonus: 8, nodeMax: 4, pcuCost: 15, bpCost: 8 },
+  'Mk 9': { bonus: 9, nodeMax: 4, pcuCost: 17, bpCost: 9 },
+  'Mk 10': { bonus: 10, nodeMax: 5, pcuCost: 19, bpCost: 10 }
 }
 
 // https://www.aonsrd.com/Starship_CrewQuarters.aspx?ItemName=All
 const crewQuarters = {
-// Quality: [bpCost, source, description] 
-  "Common": [0, "Starfinder Core Rulebook pg. 298", "Common crew quarters are the most basic type. They consist of simple bunks (sometimes folding out from the side of a hallway) or other similarly austere places to rest. Crew members who sleep in common quarters usually keep their personal possessions in a footlocker. Common crew quarters also include a communal bathroom (which includes a military-style shower) and a tiny galley (big enough to prepare only the most basic of meals). Starships with crews numbering in the dozens or hundreds often have massive barracks where crew members sleep in shifts."],
-  "Good": [2, "Starfinder Core Rulebook pg. 298", "Good crew quarters are a bit more upscale than common crew quarters. They consist of dormitory-style rooms that can hold one or two small beds (larger starships usually require lower-ranking crew members to share these quarters) and sometimes a personal closet or drawer space for each occupant. Good crew quarters also include one or two shared bathrooms with multiple sinks and shower stalls, and a dining space with an attached galley. Crews of larger starships eat in this dining space in shifts."],
-  "Luxurious": [5, "Starfinder Core Rulebook pg. 298", "Luxurious crew quarters are the pinnacle of comfort. They consist of private rooms for each crew member, with personal bathrooms (including showers with high water pressure) and furnishings that match the resident's tastes. Some luxurious crew quarters also feature a kitchenette, gaming areas, or intimate meeting spaces."]
+  Common: {
+    bpCost: 0,
+    source: 'Starfinder Core Rulebook pg. 298',
+    description: 'Common crew quarters are the most basic type. They consist of simple bunks (sometimes folding out from the side of a hallway) or other similarly austere places to rest. Crew members who sleep in common quarters usually keep their personal possessions in a footlocker. Common crew quarters also include a communal bathroom (which includes a military-style shower) and a tiny galley (big enough to prepare only the most basic of meals). Starships with crews numbering in the dozens or hundreds often have massive barracks where crew members sleep in shifts.'
+  },
+  Good: {
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 298',
+    description: 'Good crew quarters are a bit more upscale than common crew quarters. They consist of dormitory-style rooms that can hold one or two small beds (larger starships usually require lower-ranking crew members to share these quarters) and sometimes a personal closet or drawer space for each occupant. Good crew quarters also include one or two shared bathrooms with multiple sinks and shower stalls, and a dining space with an attached galley. Crews of larger starships eat in this dining space in shifts.'
+  },
+  Luxurious: {
+    bpCost: 5,
+    source: 'Starfinder Core Rulebook pg. 298',
+    description: "Luxurious crew quarters are the pinnacle of comfort. They consist of private rooms for each crew member, with personal bathrooms (including showers with high water pressure) and furnishings that match the resident's tastes. Some luxurious crew quarters also feature a kitchenette, gaming areas, or intimate meeting spaces."
+  }
 }
 
 // https://aonsrd.com/Starship_DefCounters.aspx
 const defensiveCounter = {
-  // Name:	[TL bonus,	PCU cost,	BP cost, source]
-  "Mk 1": [+1,	1,	2, "Starfinder Core Rulebook pg. 298"],
-  "Mk 2": [+2,	1,	3, "Starfinder Core Rulebook pg. 298"],
-  "Mk 3": [+3,	2,	4, "Starfinder Core Rulebook pg. 298"],
-  "Mk 4": [+4,	3,	6, "Starfinder Core Rulebook pg. 298"],
-  "Mk 5": [+5,	4,	8, "Starfinder Core Rulebook pg. 298"],
-  "Mk 6": [+6,	5,	11, "Starfinder Core Rulebook pg. 298"],
-  "Mk 7": [+7,	7,	14, "Starfinder Core Rulebook pg. 298"],
-  "Mk 8": [+8,	9,	18, "Starfinder Core Rulebook pg. 298"],
-  "Mk 9": [+9,	11,	22, "Starfinder Core Rulebook pg. 298"],
-  "Mk 10": [+10,	13,	27, "Starfinder Core Rulebook pg. 298"],
-  "Mk 11": [+11,	16,	33, "Starfinder Core Rulebook pg. 298"],
-  "Mk 12": [+12,	20,	40, "Starfinder Core Rulebook pg. 298"],
-  "Mk 13": [+13,	25,	50, "Starfinder Core Rulebook pg. 298"],
-  "Mk 14": [+14,	32,	65, "Starfinder Core Rulebook pg. 298"],
-  "Mk 15": [+15,	45,	90, "Starfinder Core Rulebook pg. 298"]
+  'Mk 1': {
+    tlBonus: 1,
+    pcuCost: 1,
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 2': {
+    tlBonus: 2,
+    pcuCost: 1,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 3': {
+    tlBonus: 3,
+    pcuCost: 2,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 4': {
+    tlBonus: 4,
+    pcuCost: 3,
+    bpCost: 6,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 5': {
+    tlBonus: 5,
+    pcuCost: 4,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 6': {
+    tlBonus: 6,
+    pcuCost: 5,
+    bpCost: 11,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 7': {
+    tlBonus: 7,
+    pcuCost: 7,
+    bpCost: 14,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 8': {
+    tlBonus: 8,
+    pcuCost: 9,
+    bpCost: 18,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 9': {
+    tlBonus: 9,
+    pcuCost: 11,
+    bpCost: 22,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 10': {
+    tlBonus: 10,
+    pcuCost: 13,
+    bpCost: 27,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 11': {
+    tlBonus: 11,
+    pcuCost: 16,
+    bpCost: 33,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 12': {
+    tlBonus: 12,
+    pcuCost: 20,
+    bpCost: 40,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 13': {
+    tlBonus: 13,
+    pcuCost: 25,
+    bpCost: 50,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 14': {
+    tlBonus: 14,
+    pcuCost: 32,
+    bpCost: 65,
+    source: 'Starfinder Core Rulebook pg. 298'
+  },
+  'Mk 15': {
+    tlBonus: 15,
+    pcuCost: 45,
+    bpCost: 90,
+    source: 'Starfinder Core Rulebook pg. 298'
+  }
 }
 
 // https://www.aonsrd.com/Starship_DriftEngines.aspx
 // https://aonsrd.com/StarshipInterstellar.aspx
 const driftEngines = {
-  // Drift Engine:	[Rating, 	Minimum PCU,	Maximum Size,	BP Cost, source, special]
-  "Signal Basic":	[1,	75,	null,	2, "Starfinder Core Rulebook pg. 298", null],
-  "Signal Booster":	[2,	100,	"Huge",	5, "Starfinder Core Rulebook pg. 298", null],
-  "Signal Major":	[3,	150,	"Large",	10, "Starfinder Core Rulebook pg. 298", null],
-  "Signal Superior":	[4,	175,	"Large",	15, "Starfinder Core Rulebook pg. 298", null],
-  "Signal Ultra":	[5,	200,	"Medium",	20, "Starfinder Core Rulebook pg. 298", null],
-  "Archon Drive":	[1,	150,	null,	15,	"Starship Operations Manual pg. 9", "Restricted (Church of Iomedae, Knights of Golarion)"],
-  "Chaos Sail":	[1,	75,	null,	4,	"Starship Operations Manual pg. 9", "Restricted (Church of Besmara)"],
-  "Constellation Orrery":	[2,	150,	"Huge",	10,	"Starship Operations Manual pg. 10", "Restricted (Church of Ibra)"],
-  "Elemental Engine":	[1,	100,	null,	5,	"Starship Operations Manual pg. 10", "Restricted (Elemental Plane)"],
-  "First Drive":	[3,	175,	"Large",	12,	"Starship Operations Manual pg. 10", "Restricted (Eldest, fey)"],
-  "Fold Gates":	["Special",	200,	"Huge",	0,	"Starship Operations Manual pg. 10", "Journeying between a pair of fold gates is limited to predetermined destinations—those locations with functioning fold gates (determined by the GM)."],
-  "Helldrive":	[1,	100,	null,	10,	"Starship Operations Manual pg. 11", "Restricted (Church of Asmodeus, Hellknights)"],
-  "Planar Aperture Drive":	[2,	150,	null,	15,	"Starship Operations Manual pg. 11", "Restricted (Tetrad, witchwyrds)"],
-  "Shadow Engine":	[1,	75,	null,	3,	"Starship Operations Manual pg. 11", "Painful, Restricted (Church of Zon-Kuthon, velstracs)", ],
-  "Onos drive":	[1/2,	150,	"Medium",	10,	"Starfinder #42: Whispers of the Eclipse pg. 50", "Restricted (Azlanti Star Empire)", ]
+  'Signal Basic': {
+    rating: 1,
+    minPcu: 75,
+    maxSize: null,
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 298',
+    special: null
+  },
+  'Signal Booster': {
+    rating: 2,
+    minPcu: 100,
+    maxSize: 'Huge',
+    bpCost: 5,
+    source: 'Starfinder Core Rulebook pg. 298',
+    special: null
+  },
+  'Signal Major': {
+    rating: 3,
+    minPcu: 150,
+    maxSize: 'Large',
+    bpCost: 10,
+    source: 'Starfinder Core Rulebook pg. 298',
+    special: null
+  },
+  'Signal Superior': {
+    rating: 4,
+    minPcu: 175,
+    maxSize: 'Large',
+    bpCost: 15,
+    source: 'Starfinder Core Rulebook pg. 298',
+    special: null
+  },
+  'Signal Ultra': {
+    rating: 5,
+    minPcu: 200,
+    maxSize: 'Medium',
+    bpCost: 20,
+    source: 'Starfinder Core Rulebook pg. 298',
+    special: null
+  },
+  'Archon Drive': {
+    rating: 1,
+    minPcu: 150,
+    maxSize: null,
+    bpCost: 15,
+    source: 'Starship Operations Manual pg. 9',
+    special: 'Restricted (Church of Iomedae, Knights of Golarion)'
+  },
+  'Chaos Sail': {
+    rating: 1,
+    minPcu: 75,
+    maxSize: null,
+    bpCost: 4,
+    source: 'Starship Operations Manual pg. 9',
+    special: 'Restricted (Church of Besmara)'
+  },
+  'Constellation Orrery': {
+    rating: 2,
+    minPcu: 150,
+    maxSize: 'Huge',
+    bpCost: 10,
+    source: 'Starship Operations Manual pg. 10',
+    special: 'Restricted (Church of Ibra)'
+  },
+  'Elemental Engine': {
+    rating: 1,
+    minPcu: 100,
+    maxSize: null,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 10',
+    special: 'Restricted (Elemental Plane)'
+  },
+  'First Drive': {
+    rating: 3,
+    minPcu: 175,
+    maxSize: 'Large',
+    bpCost: 12,
+    source: 'Starship Operations Manual pg. 10',
+    special: 'Restricted (Eldest, fey)'
+  },
+  'Fold Gates': {
+    rating: 'Special',
+    minPcu: 200,
+    maxSize: 'Huge',
+    bpCost: 0,
+    source: 'Starship Operations Manual pg. 10',
+    special: 'Journeying between a pair of fold gates is limited to predetermined destinations—those locations with functioning fold gates (determined by the GM).'  },
+  Helldrive: {
+    rating: 1,
+    minPcu: 100,
+    maxSize: null,
+    bpCost: 10,
+    source: 'Starship Operations Manual pg. 11',
+    special: 'Restricted (Church of Asmodeus, Hellknights)'
+  },
+  'Planar Aperture Drive': {
+    rating: 2,
+    minPcu: 150,
+    maxSize: null,
+    bpCost: 15,
+    source: 'Starship Operations Manual pg. 11',
+    special: 'Restricted (Tetrad, witchwyrds)'
+  },
+  'Shadow Engine': {
+    rating: 1,
+    minPcu: 75,
+    maxSize: null,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 11',
+    special: 'Painful, Restricted (Church of Zon-Kuthon, velstracs)'
+  },
+  'Onos drive': {
+    rating: 0.5,
+    minPcu: 150,
+    maxSize: 'Medium',
+    bpCost: 10,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 50',
+    special: 'Restricted (Azlanti Star Empire)'
+  }
 }
 
 //https://www.aonsrd.com/Starship_ExpBays.aspx?ItemName=All&Family=None
 const expansionBays = {
-// Name:	[PCU cost,	BP cost, source, description]
-  "Aeon Comm":	[5,	3, "Starfinder #7: The Reach of Empire pg. 47", "An aeon comm is a cylindrical booth constructed of resonant crystal that allows remote observation of and communication to space around an aeon stone. A pedestal in the center of the booth can hold one aeon stone, and as an action, a user can mystically connect that stone to the nearest stone of the same type with a system-wide range. Alternatively, a user can attune the booth to a known aeon stone of the same type in the same system. In either case, the booth creates an invisible magical sensor centered on the targeted aeon stone. The booth's crystal reflects the targeted stone's visual and auditory surroundings as if the user were standing at the stone's location. This view doesn't move unless the targeted stone does, but a viewer can turn within the booth to observe the area as desired. A user within the booth can activate the aeon comm's communication function to speak through the targeted aeon stone, and unlike with technological system-wide communications, the message is transmitted instantaneously."],
-  "Amenities":	[4,	2, "Near Space pg. 114", "In luxury cruise liners, residential starships, and other Huge or larger starships with large crews, some expansion bays are devoted to businesses that serve the population. An amenity might be a high-end restaurant or spa, a night club or theater, or a shopping center. If using downtime rules, an amenity can provide a +1 bonus to all skill checks for one downtime activity, selected when the amenity is installed."],
-  "Arcane Laboratory":	[1,	1, "Starfinder Core Rulebook pg. 299", "An arcane laboratory contains all the tools and space necessary to craft magic items (see page 235), though the crafter must still provide the necessary raw materials. Such a laboratory reduces the crafting time by half."],
-  "Arcane Mortuary":	[1,	2, "Starship Operations Manual pg. 24 & Starfinder #6: Empire of Bones pg. 49", "An arcane mortuary contains equipment that aids spellcasters in creating undead. A spellcaster using this mortuary must still provide any special materials required for undead creation. Undead created in an arcane mortuary have 10% more Hit Points than a typical undead creature of the same CR. An arcane mortuary can also store up to five Medium or smaller corpses without them deteriorating due to time. One Large corpse can be stored in place of two Medium ones."],
-  "Biological Experimentation Chamber":	[5,	9, "Starfinder #27: Deceivers' Moon pg. 47", "Gray starships are often equipped with a room designed for the study of—and experimentation on—biological creatures. A biological experimentation chamber can be used as either a medical bay or a life science lab but can only be used on organisms that have first been subjected to examination in the chamber, a painful and invasive process that takes 1 hour."],
-  "Booster Thruster Housing":	[0,	3, "Starship Operations Manual pg. 24", "When properly reinforced to absorb the strain, an expansion bay along a starship's aft or sides can house additional thrusters and fuel tanks (the thrusters must be purchased separately and be an appropriate size for the starship) as well as separate fuel tanks. During starship combat, the pilot can activate these additional thrusters before moving the starship during the helm phase as part of their crew action. When activated, the additional boosters increase the starship's speed by an amount equal to the boosters' listed speed divided by 4 (rounded down) and increase the DC of Piloting checks to perform stunts that round by an equal amount. The boosters' supplemental fuel supply can power them for 5 rounds, after which the thrusters need 24 hours to recharge from the ship's power core. A starship can have only one such additional booster active at a time."],
-  "Breaching Pod, Autonomous Combatants":	[5,	7, "Starship Operations Manual pg. 24", "These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \nExpended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \nBy increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "],
-  "Breaching Pod":	[5,	5, "Starship Operations Manual pg. 24", "These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \nExpended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \nBy increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "],
-  "Breaching Pod, Skilled Autonomous Combatants":	[5,	9, "Starship Operations Manual pg. 24", "These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \nExpended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \nBy increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "],
-  "Breaching Pod, Specialized Autonomous Combatants":	[5,	11, "Starship Operations Manual pg. 24", "These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \nExpended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \nBy increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "],
-  "Brig":	[1,	1, "Pact Worlds pg. 153", "A brig contains all the necessary restraints and security systems to incarcerate up to eight Medium creatures."],
-  "Cargo Hold":	[0,	0, "Starfinder Core Rulebook pg. 298", "Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion."],
-  "Combat Training Facility, Advanced":	[5,	8, "Starship Operations Manual pg. 24", "This specialized gym and miniature arena provides an array of holographic threats, tactical dilemmas, and automated combat simulations that help crew members practice close-quarters tactics and self-defense. This facility also adds several caches of weapons and armor spread throughout the starship, ensuring that the crew always have essential armaments close at hand in the event of an emergency. A basic combat training facility improves the crew's battle readiness, treating them as skilled (and granting a bonus) when resolving boarding events (page 40). Specialized and elite combat training facilities incorporate much more complicated simulations and rigorous protocols, and the crew are treated as specialized or elite, respectively, when resolving boarding encounters. "],
-  "Combat Training Facility, Basic":	[3,	3, "Starship Operations Manual pg. 24", "This specialized gym and miniature arena provides an array of holographic threats, tactical dilemmas, and automated combat simulations that help crew members practice close-quarters tactics and self-defense. This facility also adds several caches of weapons and armor spread throughout the starship, ensuring that the crew always have essential armaments close at hand in the event of an emergency. A basic combat training facility improves the crew's battle readiness, treating them as skilled (and granting a bonus) when resolving boarding events (page 40). Specialized and elite combat training facilities incorporate much more complicated simulations and rigorous protocols, and the crew are treated as specialized or elite, respectively, when resolving boarding encounters. "],
-  "Combat Training Facility, Elite":	[5,	10, "Starship Operations Manual pg. 24", "This specialized gym and miniature arena provides an array of holographic threats, tactical dilemmas, and automated combat simulations that help crew members practice close-quarters tactics and self-defense. This facility also adds several caches of weapons and armor spread throughout the starship, ensuring that the crew always have essential armaments close at hand in the event of an emergency. A basic combat training facility improves the crew's battle readiness, treating them as skilled (and granting a bonus) when resolving boarding events (page 40). Specialized and elite combat training facilities incorporate much more complicated simulations and rigorous protocols, and the crew are treated as specialized or elite, respectively, when resolving boarding encounters. "],
-  "Conference and Meeting Rooms":	[1,	1, "Near Space pg. 114", "Installed with top-notch telecommunication equipment (including integral system-wide comm units), this high-end office space is often featured in starships used to transport government officials or top business leaders. Starships with this expansion bay can even host sizable conferences."],
-  "Corpse Recycler":	[2,	2, "Starship Operations Manual pg. 24 & Starfinder #6: Empire of Bones pg. 49", "A corpse recycler allows a starship crew to render bodies into parts for necrografts. In a process that takes 1 hour, a carcass fed into the recycler produces a number of necrograft UPBs equal to 10 × the CR of the creature from which the corpse originated. These UPBs can be used only to create necrografts."],
-  "Cryo-chamber":	[10,	5, "Starship Operations Manual pg. 25", "This high-tech chamber allows biological organisms to enter a form of stasis via a rapid freezing process and be sustained in pods for a long duration. Cryo-chambers can be set to keep an organism in stasis for a set duration, indefinitely, or until certain conditions are met, such as arrival at a navigational milestone or if the vessel comes under attack. During the days before Drift travel, most starship crews used these chambers to survive the months-long trips between destinations. Some exploration ships still use cryo-chambers in lieu of crew quarters, particularly those that regularly travel in the Vast. The Azlanti Star Empire has developed its own variation on the cryo-chamber, which is more compact but virtually unknown outside of Azlanti space. \nA cryo-chamber can hold up to eight Medium or smaller creatures or four Large creatures in stasis for as long as the systems have adequate power. A cryo-chamber can instead be outfitted to hold a single Huge or Gargantuan creature, and two cryo-chambers can be combined to hold a single Colossal creature. \nWhile in stasis in a cryo-chamber, a creature no longer advances on affliction tracks, and doesn't suffer from starvation, thirst, or sleep deprivation. Placing a creature in stasis or removing it from stasis takes 1 hour, after which the creature is sickened for 1 day unless it succeeds at a DC 25 Fortitude save"],
-  "Cultural Preparation Facility":	[3,	2, "Starfinder #27: Deceivers' Moon pg. 47", "This expansion bay serves as a training facility and database for agents preparing to infiltrate a group or species. Clothing and personal items can be crafted in half the normal time at a cultural preparation facility, though the crafter must still provide the necessary raw materials. The facility's computer system also trains personnel in the languages and accents, cultural behaviors, social norms, and even body language and facial expressions of the group the users expect to infiltrate. To use this aspect of a cultural preparation facility, a creature chooses a single species or cultural group and then spends three 8-hour sessions (which can be over the course of several days) within the facility. After this time, for 1 day, the creature has a +2 circumstance bonus on Culture checks relating to the chosen species or cultural group. In addition, the creature can replace one of the languages it knows (except for Common, their racial tongue, or the language of their home planet) with a language spoken by the chosen species or cultural group. At the GM's discretion, the cultural preparation facility might not be able to teach a rare or unusual language."],
-  "Decoy Husk":	[15,	4, "Starfinder #20: The Last Refuge pg. 48", "A decoy husk is a living case that can be regrown when ejected from a starship, expands to mimic that vessel and flies in another direction. This expansion takes up one bay in a Small starship, two in a Medium or Large vessel, three in a Huge starship, four in a Gargantuan craft, and five in a Colossal one. Super-colossal vessels cannot install or use this expansion. Once a decoy husk has been deployed, it cannot be recovered, and it takes the deploying vessel a week to grow another decoy. \nA crew member must deploy the decoy as a crew action during the helm phase. Other vessels that fail a Computers check (DC = 10 + the deploying crew member's Computers bonus) to scan the deploying vessel and its decoy cannot tell the two apart, although this scan can be repeated during each helm phase. The decoy moves in an evasive trajectory chosen by the deploying crew and at the deploying vessel's speed, and it generates Shield Points equal to its cost in Build Points, but these shields falsely mimic those of the deploying starship when scanned. The decoy can't attack, and it has a number of Hull Points equal to 20% of the deploying starship's Hull Points. \nA decoy husk can also be used as weapon. If it enters the hex of another vessel, a crew member aboard the deploying starship can make a gunnery check against the target's TL. On a hit, the decoy explodes, dealing damage according to its size—Small: 5d8; Medium: 5d10; Large: 10d8; Huge: 2d6 x 10; Colossal: 2d8 x 10. If the attack misses, the decoy is still destroyed in the resulting explosion."],
-  "Dedicated Computer Housing":	[0,	2, "Starship Operations Manual pg. 25", "An expansion bay can be outfitted with power conduits and wires needed to house an additional mononode computer core (which must be purchased separately). This additional computer has an integrated control module (ICM) that is dedicated to a single starship combat crew action (for example, an engineer's checks to divert or a gunner's check to fire at will), chosen when the computer is installed. The ICM grants its flat circumstance bonus once per round to the check for the chosen starship combat action. This bonus does not stack with the circumstance bonus granted by the main computer's ICM."],
-  "Docking Canopy":	[15,	4, "Starfinder #20: The Last Refuge pg. 48", "A docking canopy is a branch- or vine-like formation that allows up to four Tiny or two Small starships to attach to a Huge or larger biomechanical starship. The canopy takes up two expansion bays, and one can fulfill the hangar requirement for a carrier-class vessel. The starships attached to the docking canopy move with the larger ship, and the canopy provides a narrow passage between each docked starship and the larger vessel. Moving through this passage to the vessel to which the docking canopy is attached or back to the attached smaller ship takes 1 round of starship combat or 10 minutes. In addition, if the larger starship benefits from self-repair while vessels are docked, an engineer attending the process can amass the repair capabilities of the starship and any docked biomechanical craft as a pool of Hull Points; the engineer can then distribute these Hull Points among the starships linked by the docking canopy. \nA docking canopy doesn't enclose docked ships the way a hangar bay does. Therefore, a science officer can use the target system crew action to target a docked vessel instead of a specific system on the starship that has the docking canopy as an expansion."],
-  "Drift Booster":	[40,	20, "Starfinder #6: Empire of Bones pg. 46", "A Drift booster is a rail for launching smaller ships into the Drift from within a Supercolossal vessel's hangar bay. A smaller ship that launches from within the Supercolossal vessel's hangar bay using the Drift booster can temporarily raise its Drift engine rating by 1. This increase lasts only as long as the smaller ship stays in the Drift and on the same course after launching using the Drift booster. If the boosted ship changes course or leaves the Drift, this temporary increase ends."],
-  "Drift Shadow Projector":	[5,	15, "Pact Worlds pg. 153", "Created by the Hellknights to aid them in capturing enemy vessels, this device creates an area of “Drift shadow” when activated. The Drift shadow extends out to a range of 10 hexes from the activating ship, and each vessel in this area treats the Drift rating of its engine as if it were 2 lower. If this reduces the engine's rating to less than 1, that vessel cannot enter the Drift while in the shadow. Ships attempting enter normal space from the Drift into an area of Drift shadow are affected in the same way. Shadows created by multiple vessels stack, making it impossible for any ship to enter or exit the Drift."],
-  "Drift Stasis Unit":	[15,	10, "Starfinder #7: The Reach of Empire pg. 47", "Used in the Azlanti Star Empire for moving large numbers of troops efficiently, a Drift stasis unit holds living creatures in a state of suspended animation ideal for long periods of Drift travel. Placing creatures into stasis or removing them from stasis takes 1 hour. An unwilling creature can be placed in a Drift stasis unit only if it is unconscious. While in stasis, a creature is unconscious and doesn't need to breathe, drink, or eat. One stasis unit can hold 32 Medium creatures in stasis for 30 days with no ill effects. (A Large creature counts as 2 Medium ones for this purpose.) \nAfter 30 days, creatures held in stasis are at risk of Drift stasis sickness, a disease with the parameters shown in the stat block below. "],
-  "Drone Tube":	[15,	5, "Starfinder #7: The Reach of Empire pg. 47", "A drone tube is a hangar modification designed to facilitate the use of automated drones, such as the Klokworx drone. A drone tube can be installed only in an existing hangar bay and doesn't take up additional expansion bays. If a hangar bay has a drone tube, the bay can hold one additional Tiny starship, but five of those ships must be drones. One hangar bay can hold up to two drone tubes and thereby hold up to ten drones. \nEach drone tube can launch up to two drones per round of starship combat. To launch a drone, a science officer can take an action during the helm phase to attempt a Computers check (DC = 10 + the tier of the launching ship). If the science officer succeeds, up to two drones emerge in different hexes adjacent to the launching ship, and the drones can act last in the helm and gunnery phases of that same round. On a failure, the drones still emerge but don't act until the next round. In either case, each round after a drone is launched, the drone attempts its own Piloting check to determine when it acts. \nThe drone tube also facilitates the launching ship's communications with its drones in combination with the vessel's sensors. A science officer on a ship that has active drones can take an action during the helm phase to aid drone attacks. If the science officer succeeds at a Computers check (DC = 10 + 1-1/2 × the launching ship's tier), up to five of the ship's drones can use that science officer's ranks in the Computers skill plus the officer's Intelligence modifier for gunnery checks during the next gunnery phase. \nA science officer can take an action during the helm phase to jam drone communications. Doing so takes an improve countermeasures action, targeting the drone-launching ship. Succeeding at this check means the target's drones can't benefit from an action to aid drone attacks until the next round."],
-  "Drop Pod, Colossal":	[10,	10, "Starship Operations Manual pg. 25", "A drop pod is a reinforced vehicle designed to transport a group of soldiers or small vehicles from a starship orbiting high above a planet to that planet's surface. Each drop pod is a single-use device equipped with heat shields to deflect the heat of atmospheric entry as well as thrusters strong enough to make small course corrections and slow the rate of descent before reaching the surface."],
-  "Drop Pod":	[5,	5, "Starship Operations Manual pg. 25", "A typical expansion bay can store and launch one Gargantuan drop pod that can hold up to four Huge creatures, eight Large creatures, or 16 Medium or smaller creatures or vehicles. Alternatively, an expansion bay can be outfitted with two Huge drop pods. A Colossal drop pod takes up two expansion bays, costs twice as many PCU and BP, and doubles the number of creatures and vehicles the pod can carry (or allows the drop pod to carry up to four Gargantuan creatures). "],
-  "Escape Pods":	[2,	1, "Starfinder Core Rulebook pg. 299", "Escape pods give the crew of a severely damaged or destroyed starship a way to avoid imminent death. An escape pod fits one Medium or smaller creature and has enough supplies and life-support capacity for that creature to survive for 7 days. It is also fitted with a distress beacon that is easily identified by long-range scanners. An escape pod has heat shields that allow it to crash-land on a planet with an atmosphere, but no means of propulsion. A single expansion bay can be converted into six escape pods."],
-  "External Expansion Bay":	[0,	3, "Starship Operations Manual pg. 25", "A starship can increase its number of expansion bays by attaching additional modules to its exterior or towing them. The additional mass and volume of external expansion bays reduce the starship's maneuverability; increase the turn distance of a starship by 1 for every three external expansion bays it has, rounded up. External expansion bays can be installed only on a Small or larger starship, and the number of external expansion bays cannot exceed the number of expansion bays provided by the starship's base frame."],
-  "Fuel Synthesizer":	[4,	1, "Starfinder #42: Whispers of the Eclipse pg. 50", "The empire developed miniaturized fuelprocessing plants that extracted usable hydrocarbons for fuel and compressible gases for thrusters. When paired with a robotic appendage system (Starship Operations Manual 29) to retrieve and load material, a ship could travel from planet to planet, processing its own fuel."],
-  "Ghost Drive":	[10,	5, "Starship Operations Manual pg. 26 & Starfinder #6: Empire of Bones pg. 49", "A ghost drive can be installed only on a Large or smaller starship. During the helm phase, as a crew action, a science officer can attempt a Computers check (DC = 10 + 1-1/2 × the starship's tier) to activate the ghost drive. If the check is successful, the ghost drive becomes active and the vessel in which it is installed becomes insubstantial. \nAn active ghost drive has several effects in starship combat. The drive pulls power from the thrusters, so the insubstantial starship's speed is 2 lower and its distance between turns is 1 higher. An insubstantial starship can move through hexes containing enemy starships without allowing those foes to make free attacks; conversely, the insubstantial starship can't make free attacks on ships that pass through its hex. The starship's science officer can freely deactivate the ghost drive at the beginning of the helm phase; otherwise, the effect continues indefinitely."],
-  "Guest Quarters":	[1,	1, "Starfinder Core Rulebook pg. 299", "Starships that function as passenger vessels require spaces apart from their crew quarters for their guests to sleep. A single expansion bay can be converted into common quarters (usually simple bunks or hammocks) for six passengers, good quarters (usually a comfortable bed, a desk with a chair, and a small set of drawers) for four passengers, or luxurious quarters (usually a large bed, a wardrobe, a couch, a desk with a nice chair, and a private washroom) for two passengers."],
-  "Habitat Simulator":	[4,	6, "Starfinder #27: Deceivers' Moon pg. 47", "This expansion bay can be configured to duplicate various environments, simulating them down to the smallest detail. The simulator is primarily used to clandestinely move creatures without their knowledge. For example, the grays have transplanted individuals threatened by natural disaster or environmental concerns without revealing their own existence. When used for this purpose, the simulator even slowly changes the appearance of stars in the sky until they match the night sky of the location to which the creatures in the simulator will be moved. The bay can also be used to covertly observe creatures in a simulation of their natural environment, benefiting from greater control over environmental effects such as weather. A habitat simulator can hold up to four Medium creatures (while still providing a believable simulation) and takes up 3 expansion bays. The simulator can sustain a particular environment for 1 month before it needs to be cleaned out, refreshed, and resupplied."],
-  "Hanger Bay":	[30,	10, "Starfinder Core Rulebook pg. 299", "A hangar bay can be installed only in a Gargantuan or larger starship and takes up 4 expansion bays. A hangar bay provides a place for up to 8 Tiny starships to dock."],
-  "Healing Pods":	[2,	3, "Starship Operations Manual pg. 26 & Starfinder #20: The Last Refuge pg. 48", "Healing pods can be installed only in a biomechanical starship. \nA biomechanical starship can channel energy from its self-repair mechanism to its parts, including its healing pods. These pods benefit any creature that rests in them whenever the biomechanical starship's self-repair criteria are met. A creature that does so regains twice the number of ability points or Hit Points it would by healing naturally. Resting in a healing pod also grants a creature a +2 circumstance bonus to Constitution checks for long-term stability and saving throws against diseases, drugs, and poisons for 24 hours. A healing pods expansion bay contains six pods that can each accommodate a Medium or smaller creature. A Large pod can be installed in place of two Medium ones."],
-  "Hive Bay":	[5,	10, "Pact Worlds pg. 153", "Xenowarden capital ships have the ability to launch pod ships to use as shuttles or other short-range vessels. A hive bay can launch up to two pod ships. For each pod launched in this way, the arkship loses 15 Hull Points and takes a –2 penalty to its AC and TL, and all crew actions take a –2 penalty. As long as the capital ship has an unoccupied slot in a hive bay, it can reabsorb a pod ship to regain these Hull Points and negate the penalties. If the pod returns damaged, the capital vessel regains 1 fewer Hull Point for every 2 points of Hull Point damage taken by the pod ship. The penalties are negated regardless of the pod ship's condition."],
-  "Hydroponic Garden":	[0,	5, "Pact Worlds pg. 153", "This space holds an entirely self-sustaining garden, complete with oxygen recycling, food production, and lighting that fosters advanced growth. A hydroponic garden takes up two expansion bays and can provide food for up to 10 Medium-sized creatures indefinitely, even if the rest of the vessel is without full power or propulsion. Multiple hydroponic gardens can be linked together to form one massive garden space."],
-  "Imperial Shrine":	[1,	1, "Starfinder #7: The Reach of Empire pg. 47", "A shrine venerating the history and legacy of the Azlanti Star Empire encourages patriotism and obedience among imperial citizens and servants. Once per starship combat, during a captain action that targets fellow crew members, the captain of a vessel that has an imperial shrine can evoke the Aeon Throne. If the captain does so, provided the targeted crew members are Azlanti citizens or have positive associations with the Aeon Throne, the captain gains a +4 circumstance modifier to the skill check the captain action requires."],
-  "Industry":	[40,	10, "Near Space pg. 114", "As functioning factories or industrial centers, some starships allow a specific Profession skill to be used to make money during voyages (or, at a GM's discretion, a set of linked Professions), though money earned is not collected until the starship makes port at a major settlement. For example, mining starships often feature a refinery, since miners can efficiently purify the metals or other mined substances onboard before transporting the refined product. Starships with industry bays can go directly to a construction or market area on another planet to sell goods without needing to return to a home planet first."],
-  "Launch Tubes":	[10,	5, "Pact Worlds pg. 153", "Designed to fit on Medium and Large vessels, these tubes allow a ship to carry a single smaller vessel that can be launched at the start of any helm phase. A launch tube takes up two expansion bays and can hold one Tiny starship. If a vessel needs to dock in a launch tube during combat, it occurs at the end of the helm phase and requires a successful DC 10 Piloting skill check; this check takes a –1 penalty for each hex the smaller ship has moved this round. A failed check means that the ship doesn't dock with the larger vessel."],
-  "Life Boats":	[5,	3, "Starfinder Core Rulebook pg. 299", "A life boat is a more sophisticated version of an escape pod. It has room for one Large creature, or two Medium or smaller creatures, and enough supplies to last those passengers 15 days (or 30 days of supplies for one Medium or smaller creature). While it has the same kind of distress beacon as an escape pod, a life boat also has an on-board computer that automatically detects the nearest hospitable celestial body and minimal thrusters to get the craft there (though a life boat can't participate in starship combat). A single expansion bay can be converted into two life boats."],
-  "Medical Bay":	[4,	8, "Starfinder Core Rulebook pg. 299", "A medical bay functions as a medical lab (see page 220)."],
-  "Park":	[1,	2, "Near Space pg. 114", "Parks are common on starships designed to spend years between ports and include native plant life from one or more planets with compatible biomes. Parks are lighted, irrigated, and ventilated to replicate terrestrial conditions. Many crew members stationed on starships for long periods avoid cabin fever by spending time in a park expansion bay. Parks typically include a hydroponic system for plants as well as benches, walkways, and sometimes games or playgrounds if families are on board. Abilities that require a natural or wild environment (such as a trailblazer weapon's ability to ignore natural cover) function within a park."],
-  "Passenger Seating":	[0,	0, "Starfinder Core Rulebook pg. 299", "An expansion bay can be converted into rows of seating for passengers at no cost. A single expansion bay can hold seating for 16 Medium passengers (though seats can be built for larger creatures). This upgrade is appropriate only for taking many passengers on short trips; starships on journeys lasting multiple days should instead have guest quarters installed."],
-  "Power Core Housing":	[0,	10, "Starfinder Core Rulebook pg. 299", "An expansion bay can be set aside for an additional power core (which must be purchased separately) and the associated wiring and safety apparatuses. A power core housing can be installed on only a Medium or larger starship."],
-  "Quantum Defender":	["Special", 	"Special", "Starship Operations Manual pg. 26 & Starfinder #7: The Reach of Empire pg. 47", "A quantum defender enables a starship to enter an unpredictable quantum state for a short time, enabling it to phase in and out of existence at just the right time to avoid harm. During the helm phase, as a crew action, a science officer can activate the quantum defender by succeeding at a Computers check (DC = 10 + 1-1/2 × the starship's tier). While the quantum defender is active, if an attack would normally hit the ship, the attacker must reroll the gunnery check and take the lower result. After that reroll, or at the end of a round during which no such reroll occurs, the ship returns to its normal state as the quantum defender deactivates. \nA quantum defender's BP cost is equal to 4 × the starship's size category (for the purpose of this calculation, Tiny = 1, Small = 2, Medium = 3, etc.) or 10 BP, whichever is greater. A quantum defender's PCU requirement is either 20 or is equal to 5 × the starship's size category, whichever is greater."],
-  "Quick-skip Module":	[10,	5, "Tech Revolution pg. 50", "Essentially a miniature onos drive, a quick-skip module can be activated at a moment's notice to skip a starship forward a short distance. During the helm phase, as a crew action, a science officer can activate the quick-skip module by succeeding at a Computers check (DC = 10 + 1-1/2 × the starship's tier). If successful, the ship moves 1d3+2 hexes in the direction of its facing, moving safely past any obstacles or ships in its way. If this movement would end in a hex occupied by an object, including another ship, the skipping ship and the object take damage equal to 5 × the skipping ship's tier, and the skip ends in the nearest unoccupied hex."],
-  "Recreation Suite, Gym":	[0,	1, "Starfinder Core Rulebook pg. 299", "A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center."],
-  "Recreation Suite, HAC":	[3,	1, "Starfinder Core Rulebook pg. 299", "A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center."],
-  "Recreation Suite, Trivid Den":	[1,	1, "Starfinder Core Rulebook pg. 299", "A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center."],
-  "Recycling System":	[2,	1, "Starfinder #6: Empire of Bones pg. 46", "A recycling system enables a Supercolossal starship to be nearly self-sustaining, operating independently for decades or even centuries. A combination of smelters, biomass processors, manufacturing, and UPB converters allows the ship to convert almost all its waste into goods and materials."],
-  "Sample Acquisition Bay":	[7,	10, "Starfinder #27: Deceivers' Moon pg. 47", "This bay is equipped with a hybrid tractor beam that quickly pulls a target into the vessel. This beam can target a Large or smaller creature (or object of similar size) that is within 500 feet and visible to the starship's sensors. However, the beam can't be activated if the vessel is in starship combat. While within the beam, the target's molecules are phased slightly, rendering the target incorporeal. The beam moves the target from its original position into the bay (or vice versa) over 2 rounds. If the target is conscious and unwilling, it can attempt a Fortitude saving throw (DC = 10 + 1-1/2 × the starship's tier) when it is first struck with the beam to negate its effect."],
-  "Science Lab":	[2,	1, "Starfinder Core Rulebook pg. 299", "A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted."],
-  "Sealed Environment Chamber":	[2,	1, "Starfinder Core Rulebook pg. 299", "Occasionally, a starship will need to host an alien or other creature whose biology is radically different from that of the crew. The passenger might be able to breathe only methane gas or can survive in only below-freezing temperatures. In such a case, a sealed environment chamber is required for the passenger to remain comfortable (and alive)."],
-  "Shuttle Bay":	[10,	4, "Starfinder Core Rulebook pg. 299", "A shuttle bay can be installed only in a Huge or larger starship and takes up two expansion bays. A shuttle bay provides a place for a Small or smaller starship to dock."],
-  "Smuggler Compartment":	[4,	2, "Starfinder Core Rulebook pg. 299", "Smuggler compartments are cargo holds hidden behind false bulkheads and are shielded from most scanning, allowing a starship equipped with them to haul illegal goods without detection. A smuggler compartment can contain 10 tons of goods, with no item being larger than Medium. A creature on the starship must succeed at a DC 20 Perception check to detect a basic smuggler compartment on the starship. A creature scanning the starship must succeed at a DC 20 Computers check to detect one (this additional check is part of the science officer's scan action in starship combat; see page 325). For each Build Point spent over the base cost, these DCs increase by 5 (maximum DC 50), though the amount of power the compartment uses also increases by 1."],
-  "Surveying Sensors":	[3,	3, "Starship Operations Manual pg. 26", "This room of specialized analytical equipment and sensory technology augments a starship's sensors when scanning planetary bodies, spatial anomalies, debris, and similar phenomena. When scanning such targets, the science officer doubles the bonus to Computers checks granted by the starship's sensors (maximum +8). The surveying sensors also double the range of the starship's sensors to 500 feet while in atmosphere or on planets. The augmented sensors provide no special benefits during starship combat."],
-  "Synthesis Bay":	[2,	1, "Starfinder Core Rulebook pg. 300", "A synthesis bay contains all the space and tools required to craft drugs, medicine, or poison (see page 235), though the crafter must still provide the necessary raw materials. A synthesis bay reduces the crafting time by half."],
-  "Tactical Sensor Tank":	[2,	1, "Starfinder #6: Empire of Bones pg. 46", "A tactical sensor tank (TST) allows a Supercolossal ship to coordinate the sensor readings of multiple escort craft into a unified picture of surrounding space and then share this information with each starship. Science officers can use a TST to link the sensors of any number of allied vessels in range of the TST-equipped ship's sensors. The sensor range for all linked ships extends as far as the farthest-reaching range among them, since the TST system collects data from linked vessels, correlates possible sensor targets, and sends that information to all linked ships."],
-  "Tech Workshop": [3,	1, "Starfinder Core Rulebook pg. 1", "A tech workshop contains all the space and tools necessary to craft technological items (see page 235), though the crafter must still provide the necessary raw materials. Such a workshop reduces the crafting time by half."],
-  "Telelith Matrix":	[10,	8, "Alien Archive 3 pg. 111", "A telelith matrix contains bizarre fibers that flex when they build up enough energy. When they do, they can hurl the connected starship through a temporary wormhole. A telelith matrix takes 1 expansion bay, consumes 10 PCUs, and costs 8 Build Points. A telelith matrix works only in starships of Large or smaller size. \nAllows for Telelith Gambit (Stunt)"],
-  "Thrusters Primer":	[5,	1, "Starship Operations Manual pg. 27", "By dedicating additional space to the thrusters and related systems, a starship can vastly decrease the amount of time needed for its thrusters to warm up and engage. The thrusters primer reduces the time needed to start the thrusters from 1 minute per size category to 1 round per size category, allowing even immense starships to finish the ignition sequence in less than a minute. During the first engineering phase of starship combat, a thrusters primer grants a short boost to a starship's propulsion, automatically increasing the starship's speed by 2 as though the engineer had used the divert action to direct power to the engines."],
-  "Vault":	[3,	2, "Near Space pg. 114", "Some crews need a secure vault to store valuables. Breaking into a vault generally requires two skill checks (determined by the GM, though Computers and Engineering are common) with a DC equal to 10 + 1-1/2 × the ship's tier. Failing either check by 5 or more sets off alarms, alerting the whole ship."]
+  'Aeon Comm': {
+    pcuCost: 5,
+    bpCost: 3,
+    source: 'Starfinder #7: The Reach of Empire pg. 47',
+    description: "An aeon comm is a cylindrical booth constructed of resonant crystal that allows remote observation of and communication to space around an aeon stone. A pedestal in the center of the booth can hold one aeon stone, and as an action, a user can mystically connect that stone to the nearest stone of the same type with a system-wide range. Alternatively, a user can attune the booth to a known aeon stone of the same type in the same system. In either case, the booth creates an invisible magical sensor centered on the targeted aeon stone. The booth's crystal reflects the targeted stone's visual and auditory surroundings as if the user were standing at the stone's location. This view doesn't move unless the targeted stone does, but a viewer can turn within the booth to observe the area as desired. A user within the booth can activate the aeon comm's communication function to speak through the targeted aeon stone, and unlike with technological system-wide communications, the message is transmitted instantaneously."
+  },
+  Amenities: {
+    pcuCost: 4,
+    bpCost: 2,
+    source: 'Near Space pg. 114',
+    description: 'In luxury cruise liners, residential starships, and other Huge or larger starships with large crews, some expansion bays are devoted to businesses that serve the population. An amenity might be a high-end restaurant or spa, a night club or theater, or a shopping center. If using downtime rules, an amenity can provide a +1 bonus to all skill checks for one downtime activity, selected when the amenity is installed.'
+  },
+  'Arcane Laboratory': {
+    pcuCost: 1,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'An arcane laboratory contains all the tools and space necessary to craft magic items (see page 235), though the crafter must still provide the necessary raw materials. Such a laboratory reduces the crafting time by half.'
+  },
+  'Arcane Mortuary': {
+    pcuCost: 1,
+    bpCost: 2,
+    source: 'Starship Operations Manual pg. 24 & Starfinder #6: Empire of Bones pg. 49',
+    description: 'An arcane mortuary contains equipment that aids spellcasters in creating undead. A spellcaster using this mortuary must still provide any special materials required for undead creation. Undead created in an arcane mortuary have 10% more Hit Points than a typical undead creature of the same CR. An arcane mortuary can also store up to five Medium or smaller corpses without them deteriorating due to time. One Large corpse can be stored in place of two Medium ones.'     
+  },
+  'Biological Experimentation Chamber': {
+    pcuCost: 5,
+    bpCost: 9,
+    source: "Starfinder #27: Deceivers' Moon pg. 47",
+    description: 'Gray starships are often equipped with a room designed for the study of—and experimentation on—biological creatures. A biological experimentation chamber can be used as either a medical bay or a life science lab but can only be used on organisms that have first been subjected to examination in the chamber, a painful and invasive process that takes 1 hour.'
+  },
+  'Booster Thruster Housing': {
+    pcuCost: 0,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 24',
+    description: "When properly reinforced to absorb the strain, an expansion bay along a starship's aft or sides can house additional thrusters and fuel tanks (the thrusters must be purchased separately and be an appropriate size for the starship) as well as separate fuel tanks. During starship combat, the pilot can activate these additional thrusters before moving the starship during the helm phase as part of their crew action. When activated, the additional boosters increase the starship's speed by an amount equal to the boosters' listed speed divided by 4 (rounded down) and increase the DC of Piloting checks to perform stunts that round by an equal amount. The boosters' supplemental fuel supply can power them for 5 rounds, after which the thrusters need 24 hours to recharge from the ship's power core. A starship can have only one such additional booster active at a time."
+  },
+  'Breaching Pod, Autonomous Combatants': {
+    pcuCost: 5,
+    bpCost: 7,
+    source: 'Starship Operations Manual pg. 24',
+    description: 'These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \n' +
+    "Expended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \n" +
+    "By increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "
+  },
+  'Breaching Pod': {
+    pcuCost: 5,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 24',
+    description: 'These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \n' +
+    "Expended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \n" +
+    "By increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "
+  },
+  'Breaching Pod, Skilled Autonomous Combatants': {
+    pcuCost: 5,
+    bpCost: 9,
+    source: 'Starship Operations Manual pg. 24',
+    description: 'These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \n' +
+    "Expended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \n" +
+    "By increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "
+  },
+  'Breaching Pod, Specialized Autonomous Combatants': {
+    pcuCost: 5,
+    bpCost: 11,
+    source: 'Starship Operations Manual pg. 24',
+    description: 'These high-speed pods can each transport up to two Huge creatures, four Large creatures, or eight Medium or smaller creatures at high velocity toward another vessel with the intention of forcefully boarding that starship. A breaching pod travels in the same way as a long-range tracking weapon with a speed of 8, but its size and composition make it unable to pierce functioning shields. When a breaching pod strikes an unshielded quadrant, it deals 1d6 damage to the target, bypassing any Damage Threshold. The occupants—protected in robust safety harnesses so as to avoid damage from the collision—can then disembark and begin boarding combat on the following round, though the breaching pod is damaged to the point of being inoperable. A breaching pod that fails to hit its target functions as an escape pod and can be retrieved for reuse. Outside of starship combat, a breaching pod can serve as a crude shuttle to dock with a disabled or willing vessel without destroying the pod. \n' +
+    "Expended breaching pods are replaced automatically whenever the starship is upgraded to the next tier. A breaching pod can also be replaced as though the crew were repairing damage to the starship, using the breaching pod's BP cost as the number of Hull Points to be repaired. A starship that also has a tech workshop expansion bay halves the time needed to replace a breaching pod. \n" +
+    "By increasing a breaching pod's BP cost to 7, the pod is automatically outfitted with robotic combatants that function as a typical boarding crew. By increasing the price to 9 or 11 BP, the robots function as skilled or specialized combatants, respectively, for the purpose of calculating their boarding attack modifier. "
+  },
+  Brig: {
+    pcuCost: 1,
+    bpCost: 1,
+    source: 'Pact Worlds pg. 153',
+    description: 'A brig contains all the necessary restraints and security systems to incarcerate up to eight Medium creatures.'
+  },
+  'Cargo Hold': {
+    pcuCost: 0,
+    bpCost: 0,
+    source: 'Starfinder Core Rulebook pg. 298',
+    description: "Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion."
+  },
+  'Combat Training Facility, Advanced': {
+    pcuCost: 5,
+    bpCost: 8,
+    source: 'Starship Operations Manual pg. 24',
+    description: "This specialized gym and miniature arena provides an array of holographic threats, tactical dilemmas, and automated combat simulations that help crew members practice close-quarters tactics and self-defense. This facility also adds several caches of weapons and armor spread throughout the starship, ensuring that the crew always have essential armaments close at hand in the event of an emergency. A basic combat training facility improves the crew's battle readiness, treating them as skilled (and granting a bonus) when resolving boarding events (page 40). Specialized and elite combat training facilities incorporate much more complicated simulations and rigorous protocols, and the crew are treated as specialized or elite, respectively, when resolving boarding encounters. "
+  },
+  'Combat Training Facility, Basic': {
+    pcuCost: 3,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 24',
+    description: "This specialized gym and miniature arena provides an array of holographic threats, tactical dilemmas, and automated combat simulations that help crew members practice close-quarters tactics and self-defense. This facility also adds several caches of weapons and armor spread throughout the starship, ensuring that the crew always have essential armaments close at hand in the event of an emergency. A basic combat training facility improves the crew's battle readiness, treating them as skilled (and granting a bonus) when resolving boarding events (page 40). Specialized and elite combat training facilities incorporate much more complicated simulations and rigorous protocols, and the crew are treated as specialized or elite, respectively, when resolving boarding encounters. "
+  },
+  'Combat Training Facility, Elite': {
+    pcuCost: 5,
+    bpCost: 10,
+    source: 'Starship Operations Manual pg. 24',
+    description: "This specialized gym and miniature arena provides an array of holographic threats, tactical dilemmas, and automated combat simulations that help crew members practice close-quarters tactics and self-defense. This facility also adds several caches of weapons and armor spread throughout the starship, ensuring that the crew always have essential armaments close at hand in the event of an emergency. A basic combat training facility improves the crew's battle readiness, treating them as skilled (and granting a bonus) when resolving boarding events (page 40). Specialized and elite combat training facilities incorporate much more complicated simulations and rigorous protocols, and the crew are treated as specialized or elite, respectively, when resolving boarding encounters. "
+  },
+  'Conference and Meeting Rooms': {
+    pcuCost: 1,
+    bpCost: 1,
+    source: 'Near Space pg. 114',
+    description: 'Installed with top-notch telecommunication equipment (including integral system-wide comm units), this high-end office space is often featured in starships used to transport government officials or top business leaders. Starships with this expansion bay can even host sizable conferences.'
+  },
+  'Corpse Recycler': {
+    pcuCost: 2,
+    bpCost: 2,
+    source: 'Starship Operations Manual pg. 24 & Starfinder #6: Empire of Bones pg. 49',
+    description: 'A corpse recycler allows a starship crew to render bodies into parts for necrografts. In a process that takes 1 hour, a carcass fed into the recycler produces a number of necrograft UPBs equal to 10 x the CR of the creature from which the corpse originated. These UPBs can be used only to create necrografts.'
+  },
+  'Cryo-chamber': {
+    pcuCost: 10,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 25',
+    description: 'This high-tech chamber allows biological organisms to enter a form of stasis via a rapid freezing process and be sustained in pods for a long duration. Cryo-chambers can be set to keep an organism in stasis for a set duration, indefinitely, or until certain conditions are met, such as arrival at a navigational milestone or if the vessel comes under attack. During the days before Drift travel, most starship crews used these chambers to survive the months-long trips between destinations. Some exploration ships still use cryo-chambers in lieu of crew quarters, particularly those that regularly travel in the Vast. The Azlanti Star Empire has developed its own variation on the cryo-chamber, which is more compact but virtually unknown outside of Azlanti space. \n' +
+    'A cryo-chamber can hold up to eight Medium or smaller creatures or four Large creatures in stasis for as long as the systems have adequate power. A cryo-chamber can instead be outfitted to hold a single Huge or Gargantuan creature, and two cryo-chambers can be combined to hold a single Colossal creature. \n' +        
+    "While in stasis in a cryo-chamber, a creature no longer advances on affliction tracks, and doesn't suffer from starvation, thirst, or sleep deprivation. Placing a creature in stasis or removing it from stasis takes 1 hour, after which the creature is sickened for 1 day unless it succeeds at a DC 25 Fortitude save"    
+  },
+  'Cultural Preparation Facility': {
+    pcuCost: 3,
+    bpCost: 2,
+    source: "Starfinder #27: Deceivers' Moon pg. 47",
+    description: "This expansion bay serves as a training facility and database for agents preparing to infiltrate a group or species. Clothing and personal items can be crafted in half the normal time at a cultural preparation facility, though the crafter must still provide the necessary raw materials. The facility's computer system also trains personnel in the languages and accents, cultural behaviors, social norms, and even body language and facial expressions of the group the users expect to infiltrate. To use this aspect of a cultural preparation facility, a creature chooses a single species or cultural group and then spends three 8-hour sessions (which can be over the course of several days) within the facility. After this time, for 1 day, the creature has a +2 circumstance bonus on Culture checks relating to the chosen species or cultural group. In addition, the creature can replace one of the languages it knows (except for Common, their racial tongue, or the language of their home planet) with a language spoken by the chosen species or cultural group. At the GM's discretion, the cultural preparation facility might not be able to teach a rare or unusual language."
+  },
+  'Decoy Husk': {
+    pcuCost: 15,
+    bpCost: 4,
+    source: 'Starfinder #20: The Last Refuge pg. 48',
+    description: 'A decoy husk is a living case that can be regrown when ejected from a starship, expands to mimic that vessel and flies in another direction. This expansion takes up one bay in a Small starship, two in a Medium or Large vessel, three in a Huge starship, four in a Gargantuan craft, and five in a Colossal one. Super-colossal vessels cannot install or use this expansion. Once a decoy husk has been deployed, it cannot be recovered, and it takes the deploying vessel a week to grow another decoy. \n' +
+    "A crew member must deploy the decoy as a crew action during the helm phase. Other vessels that fail a Computers check (DC = 10 + the deploying crew member's Computers bonus) to scan the deploying vessel and its decoy cannot tell the two apart, although this scan can be repeated during each helm phase. The decoy moves in an evasive trajectory chosen by the deploying crew and at the deploying vessel's speed, and it generates Shield Points equal to its cost in Build Points, but these shields falsely mimic those of the deploying starship when scanned. The decoy can't attack, and it has a number of Hull Points equal to 20% of the deploying starship's Hull Points. \n" +
+    "A decoy husk can also be used as weapon. If it enters the hex of another vessel, a crew member aboard the deploying starship can make a gunnery check against the target's TL. On a hit, the decoy explodes, dealing damage according to its size—Small: 5d8; Medium: 5d10; Large: 10d8; Huge: 2d6 x 10; Colossal: 2d8 x 10. If the attack misses, the decoy is still destroyed in the resulting explosion."
+  },
+  'Dedicated Computer Housing': {
+    pcuCost: 0,
+    bpCost: 2,
+    source: 'Starship Operations Manual pg. 25',
+    description: "An expansion bay can be outfitted with power conduits and wires needed to house an additional mononode computer core (which must be purchased separately). This additional computer has an integrated control module (ICM) that is dedicated to a single starship combat crew action (for example, an engineer's checks to divert or a gunner's check to fire at will), chosen when the computer is installed. The ICM grants its flat circumstance bonus once per round to the check for the chosen starship combat action. This bonus does not stack with the circumstance bonus granted by the main computer's ICM."
+  },
+  'Docking Canopy': {
+    pcuCost: 15,
+    bpCost: 4,
+    source: 'Starfinder #20: The Last Refuge pg. 48',
+    description: 'A docking canopy is a branch- or vine-like formation that allows up to four Tiny or two Small starships to attach to a Huge or larger biomechanical starship. The canopy takes up two expansion bays, and one can fulfill the hangar requirement for a carrier-class vessel. The starships attached to the docking canopy move with the larger ship, and the canopy provides a narrow passage between each docked starship and the larger vessel. Moving through this passage to the vessel to which the docking canopy is attached or back to the attached smaller ship takes 1 round of starship combat or 10 minutes. In addition, if the larger starship benefits from self-repair while vessels are docked, an engineer attending the process can amass the repair capabilities of the starship and any docked biomechanical craft as a pool of Hull Points; the engineer can then distribute these Hull Points among the starships linked by the docking canopy. \n' +
+    "A docking canopy doesn't enclose docked ships the way a hangar bay does. Therefore, a science officer can use the target system crew action to target a docked vessel instead of a specific system on the starship that has the docking canopy as an expansion."
+  },
+  'Drift Booster': {
+    pcuCost: 40,
+    bpCost: 20,
+    source: 'Starfinder #6: Empire of Bones pg. 46',
+    description: "A Drift booster is a rail for launching smaller ships into the Drift from within a Supercolossal vessel's hangar bay. A smaller ship that launches from within the Supercolossal vessel's hangar bay using the Drift booster can temporarily raise its Drift engine rating by 1. This increase lasts only as long as the smaller ship stays in the Drift and on the same course after launching using the Drift booster. If the boosted ship changes course or leaves the Drift, this temporary increase ends."
+  },
+  'Drift Shadow Projector': {
+    pcuCost: 5,
+    bpCost: 15,
+    source: 'Pact Worlds pg. 153',
+    description: "Created by the Hellknights to aid them in capturing enemy vessels, this device creates an area of “Drift shadow” when activated. The Drift shadow extends out to a range of 10 hexes from the activating ship, and each vessel in this area treats the Drift rating of its engine as if it were 2 lower. If this reduces the engine's rating to less than 1, that vessel cannot enter the Drift while in the shadow. Ships attempting enter normal space from the Drift into an area of Drift shadow are affected in the same way. Shadows created by multiple vessels stack, making it impossible for any ship to enter or exit the Drift."
+  },
+  'Drift Stasis Unit': {
+    pcuCost: 15,
+    bpCost: 10,
+    source: 'Starfinder #7: The Reach of Empire pg. 47',
+    description: "Used in the Azlanti Star Empire for moving large numbers of troops efficiently, a Drift stasis unit holds living creatures in a state of suspended animation ideal for long periods of Drift travel. Placing creatures into stasis or removing them from stasis takes 1 hour. An unwilling creature can be placed in a Drift stasis unit only if it is unconscious. While in stasis, a creature is unconscious and doesn't need to breathe, drink, or eat. One stasis unit can hold 32 Medium creatures in stasis for 30 days with no ill effects. (A Large creature counts as 2 Medium ones for this purpose.) \n" +
+    'After 30 days, creatures held in stasis are at risk of Drift stasis sickness, a disease with the parameters shown in the stat block below. '
+  },
+  'Drone Tube': {
+    pcuCost: 15,
+    bpCost: 5,
+    source: 'Starfinder #7: The Reach of Empire pg. 47',
+    description: "A drone tube is a hangar modification designed to facilitate the use of automated drones, such as the Klokworx drone. A drone tube can be installed only in an existing hangar bay and doesn't take up additional expansion bays. If a hangar bay has a drone tube, the bay can hold one additional Tiny starship, but five of those ships must be drones. One hangar bay can hold up to two drone tubes and thereby hold up to ten drones. \n" +
+    "Each drone tube can launch up to two drones per round of starship combat. To launch a drone, a science officer can take an action during the helm phase to attempt a Computers check (DC = 10 + the tier of the launching ship). If the science officer succeeds, up to two drones emerge in different hexes adjacent to the launching ship, and the drones can act last in the helm and gunnery phases of that same round. On a failure, the drones still emerge but don't act until the next round. In either case, each round after a drone is launched, the drone attempts its own Piloting check to determine when it acts. \n" +
+    "The drone tube also facilitates the launching ship's communications with its drones in combination with the vessel's sensors. A science officer on a ship that has active drones can take an action during the helm phase to aid drone attacks. If the science officer succeeds at a Computers check (DC = 10 + 1-1/2 x the launching ship's tier), up to five of the ship's drones can use that science officer's ranks in the Computers skill plus the officer's Intelligence modifier for gunnery checks during the next gunnery phase. \n" +
+    "A science officer can take an action during the helm phase to jam drone communications. Doing so takes an improve countermeasures action, targeting the drone-launching ship. Succeeding at this check means the target's drones can't benefit from an action to aid drone attacks until the next round."
+  },
+  'Drop Pod, Colossal': {
+    pcuCost: 10,
+    bpCost: 10,
+    source: 'Starship Operations Manual pg. 25',
+    description: "A drop pod is a reinforced vehicle designed to transport a group of soldiers or small vehicles from a starship orbiting high above a planet to that planet's surface. Each drop pod is a single-use device equipped with heat shields to deflect the heat of atmospheric entry as well as thrusters strong enough to make small course corrections and slow the rate of descent before reaching the surface."
+  },
+  'Drop Pod': {
+    pcuCost: 5,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 25',
+    description: 'A typical expansion bay can store and launch one Gargantuan drop pod that can hold up to four Huge creatures, eight Large creatures, or 16 Medium or smaller creatures or vehicles. Alternatively, an expansion bay can be outfitted with two Huge drop pods. A Colossal drop pod takes up two expansion bays, costs twice as many PCU and BP, and doubles the number of creatures and vehicles the pod can carry (or allows the drop pod to carry up to four Gargantuan creatures). ' 
+  },
+  'Escape Pods': {
+    pcuCost: 2,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'Escape pods give the crew of a severely damaged or destroyed starship a way to avoid imminent death. An escape pod fits one Medium or smaller creature and has enough supplies and life-support capacity for that creature to survive for 7 days. It is also fitted with a distress beacon that is easily identified by long-range scanners. An escape pod has heat shields that allow it to crash-land on a planet with an atmosphere, but no means of propulsion. A single expansion bay can be converted into six escape pods.'
+  },
+  'External Expansion Bay': {
+    pcuCost: 0,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 25',
+    description: "A starship can increase its number of expansion bays by attaching additional modules to its exterior or towing them. The additional mass and volume of external expansion bays reduce the starship's maneuverability; increase the turn distance of a starship by 1 for every three external expansion bays it has, rounded up. External expansion bays can be installed only on a Small or larger starship, and the number of external expansion bays cannot exceed the number of expansion bays provided by the starship's base frame."
+  },
+  'Fuel Synthesizer': {
+    pcuCost: 4,
+    bpCost: 1,
+    source: 'Starfinder #42: Whispers of the Eclipse pg. 50',
+    description: 'The empire developed miniaturized fuelprocessing plants that extracted usable hydrocarbons for fuel and compressible gases for thrusters. When paired with a robotic appendage system (Starship Operations Manual 29) to retrieve and load material, a ship could travel from planet to planet, processing its own fuel.'
+  },
+  'Ghost Drive': {
+    pcuCost: 10,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 26 & Starfinder #6: Empire of Bones pg. 49',
+    description: "A ghost drive can be installed only on a Large or smaller starship. During the helm phase, as a crew action, a science officer can attempt a Computers check (DC = 10 + 1-1/2 x the starship's tier) to activate the ghost drive. If the check is successful, the ghost drive becomes active and the vessel in which it is installed becomes insubstantial. \n" +
+    "An active ghost drive has several effects in starship combat. The drive pulls power from the thrusters, so the insubstantial starship's speed is 2 lower and its distance between turns is 1 higher. An insubstantial starship can move through hexes containing enemy starships without allowing those foes to make free attacks; conversely, the insubstantial starship can't make free attacks on ships that pass through its hex. The starship's science officer can freely deactivate the ghost drive at the beginning of the helm phase; otherwise, the effect continues indefinitely."
+  },
+  'Guest Quarters': {
+    pcuCost: 1,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'Starships that function as passenger vessels require spaces apart from their crew quarters for their guests to sleep. A single expansion bay can be converted into common quarters (usually simple bunks or hammocks) for six passengers, good quarters (usually a comfortable bed, a desk with a chair, and a small set of drawers) for four passengers, or luxurious quarters (usually a large bed, a wardrobe, a couch, a desk with a nice chair, and a private washroom) for two passengers.'
+  },
+  'Habitat Simulator': {
+    pcuCost: 4,
+    bpCost: 6,
+    source: "Starfinder #27: Deceivers' Moon pg. 47",
+    description: 'This expansion bay can be configured to duplicate various environments, simulating them down to the smallest detail. The simulator is primarily used to clandestinely move creatures without their knowledge. For example, the grays have transplanted individuals threatened by natural disaster or environmental concerns without revealing their own existence. When used for this purpose, the simulator even slowly changes the appearance of stars in the sky until they match the night sky of the location to which the creatures in the simulator will be moved. The bay can also be used to covertly observe creatures in a simulation of their natural environment, benefiting from greater control over environmental effects such as weather. A habitat simulator can hold up to four Medium creatures (while still providing a believable simulation) and takes up 3 expansion bays. The simulator can sustain a particular environment for 1 month before it needs to be cleaned out, refreshed, and resupplied.'
+  },
+  'Hanger Bay': {
+    pcuCost: 30,
+    bpCost: 10,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A hangar bay can be installed only in a Gargantuan or larger starship and takes up 4 expansion bays. A hangar bay provides a place for up to 8 Tiny starships to dock.'
+  },
+  'Healing Pods': {
+    pcuCost: 2,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 26 & Starfinder #20: The Last Refuge pg. 48',
+    description: 'Healing pods can be installed only in a biomechanical starship. \n' +
+      "A biomechanical starship can channel energy from its self-repair mechanism to its parts, including its healing pods. These pods benefit any creature that rests in them whenever the biomechanical starship's self-repair criteria are met. A creature that does so regains twice the number of ability points or Hit Points it would by healing naturally. Resting in a healing pod also grants a creature a +2 circumstance bonus to Constitution checks for long-term stability and saving throws against diseases, drugs, and poisons for 24 hours. A healing pods expansion bay contains six pods that can each accommodate a Medium or smaller creature. A Large pod can be installed in place of two Medium ones."
+  },
+  'Hive Bay': {
+    pcuCost: 5,
+    bpCost: 10,
+    source: 'Pact Worlds pg. 153',
+    description: "Xenowarden capital ships have the ability to launch pod ships to use as shuttles or other short-range vessels. A hive bay can launch up to two pod ships. For each pod launched in this way, the arkship loses 15 Hull Points and takes a -2 penalty to its AC and TL, and all crew actions take a -2 penalty. As long as the capital ship has an unoccupied slot in a hive bay, it can reabsorb a pod ship to regain these Hull Points and negate the penalties. If the pod returns damaged, the capital vessel regains 1 fewer Hull Point for every 2 points of Hull Point damage taken by the pod ship. The penalties are negated regardless of the pod ship's condition."
+  },
+  'Hydroponic Garden': {
+    pcuCost: 0,
+    bpCost: 5,
+    source: 'Pact Worlds pg. 153',
+    description: 'This space holds an entirely self-sustaining garden, complete with oxygen recycling, food production, and lighting that fosters advanced growth. A hydroponic garden takes up two expansion bays and can provide food for up to 10 Medium-sized creatures indefinitely, even if the rest of the vessel is without full power or propulsion. Multiple hydroponic gardens can be linked together to form one massive garden space.'
+  },
+  'Imperial Shrine': {
+    pcuCost: 1,
+    bpCost: 1,
+    source: 'Starfinder #7: The Reach of Empire pg. 47',
+    description: 'A shrine venerating the history and legacy of the Azlanti Star Empire encourages patriotism and obedience among imperial citizens and servants. Once per starship combat, during a captain action that targets fellow crew members, the captain of a vessel that has an imperial shrine can evoke the Aeon Throne. If the captain does so, provided the targeted crew members are Azlanti citizens or have positive associations with the Aeon Throne, the captain gains a +4 circumstance modifier to the skill check the captain action requires.'
+  },
+  Industry: {
+    pcuCost: 40,
+    bpCost: 10,
+    source: 'Near Space pg. 114',
+    description: "As functioning factories or industrial centers, some starships allow a specific Profession skill to be used to make money during voyages (or, at a GM's discretion, a set of linked Professions), though money earned is not collected until the starship makes port at a major settlement. For example, mining starships often feature a refinery, since miners can efficiently purify the metals or other mined substances onboard before transporting the refined product. Starships with industry bays can go directly to a construction or market area on another planet to sell goods without needing to return to a home planet first."
+  },
+  'Launch Tubes': {
+    pcuCost: 10,
+    bpCost: 5,
+    source: 'Pact Worlds pg. 153',
+    description: "Designed to fit on Medium and Large vessels, these tubes allow a ship to carry a single smaller vessel that can be launched at the start of any helm phase. A launch tube takes up two expansion bays and can hold one Tiny starship. If a vessel needs to dock in a launch tube during combat, it occurs at the end of the helm phase and requires a successful DC 10 Piloting skill check; this check takes a -1 penalty for each hex the smaller ship has moved this round. A failed check means that the ship doesn't dock with the larger vessel."
+  },
+  'Life Boats': {
+    pcuCost: 5,
+    bpCost: 3,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: "A life boat is a more sophisticated version of an escape pod. It has room for one Large creature, or two Medium or smaller creatures, and enough supplies to last those passengers 15 days (or 30 days of supplies for one Medium or smaller creature). While it has the same kind of distress beacon as an escape pod, a life boat also has an on-board computer that automatically detects the nearest hospitable celestial body and minimal thrusters to get the craft there (though a life boat can't participate in starship combat). A single expansion bay can be converted into two life boats."
+  },
+  'Medical Bay': {
+    pcuCost: 4,
+    bpCost: 8,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A medical bay functions as a medical lab (see page 220).'
+  },
+  Park: {
+    pcuCost: 1,
+    bpCost: 2,
+    source: 'Near Space pg. 114',
+    description: "Parks are common on starships designed to spend years between ports and include native plant life from one or more planets with compatible biomes. Parks are lighted, irrigated, and ventilated to replicate terrestrial conditions. Many crew members stationed on starships for long periods avoid cabin fever by spending time in a park expansion bay. Parks typically include a hydroponic system for plants as well as benches, walkways, and sometimes games or playgrounds if families are on board. Abilities that require a natural or wild environment (such as a trailblazer weapon's ability to ignore natural cover) function within a park."
+  },
+  'Passenger Seating': {
+    pcuCost: 0,
+    bpCost: 0,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'An expansion bay can be converted into rows of seating for passengers at no cost. A single expansion bay can hold seating for 16 Medium passengers (though seats can be built for larger creatures). This upgrade is appropriate only for taking many passengers on short trips; starships on journeys lasting multiple days should instead have guest quarters installed.'
+  },
+  'Power Core Housing': {
+    pcuCost: 0,
+    bpCost: 10,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'An expansion bay can be set aside for an additional power core (which must be purchased separately) and the associated wiring and safety apparatuses. A power core housing can be installed on only a Medium or larger starship.'
+  },
+  'Quantum Defender': {
+    pcuCost: 'Special',
+    bpCost: 'Special',
+    source: 'Starship Operations Manual pg. 26 & Starfinder #7: The Reach of Empire pg. 47',
+    description: "A quantum defender enables a starship to enter an unpredictable quantum state for a short time, enabling it to phase in and out of existence at just the right time to avoid harm. During the helm phase, as a crew action, a science officer can activate the quantum defender by succeeding at a Computers check (DC = 10 + 1-1/2 x the starship's tier). While the quantum defender is active, if an attack would normally hit the ship, the attacker must reroll the gunnery check and take the lower result. After that reroll, or at the end of a round during which no such reroll occurs, the ship returns to its normal state as the quantum defender deactivates. \n" +
+    "A quantum defender's BP cost is equal to 4 x the starship's size category (for the purpose of this calculation, Tiny = 1, Small = 2, Medium = 3, etc.) or 10 BP, whichever is greater. A quantum defender's PCU requirement is either 20 or is equal to 5 x the starship's size category, whichever is greater."
+  },
+  'Quick-skip Module': {
+    pcuCost: 10,
+    bpCost: 5,
+    source: 'Tech Revolution pg. 50',
+    description: "Essentially a miniature onos drive, a quick-skip module can be activated at a moment's notice to skip a starship forward a short distance. During the helm phase, as a crew action, a science officer can activate the quick-skip module by succeeding at a Computers check (DC = 10 + 1-1/2 x the starship's tier). If successful, the ship moves 1d3+2 hexes in the direction of its facing, moving safely past any obstacles or ships in its way. If this movement would end in a hex occupied by an object, including another ship, the skipping ship and the object take damage equal to 5 x the skipping ship's tier, and the skip ends in the nearest unoccupied hex."
+  },
+  'Recreation Suite, Gym': {
+    pcuCost: 0,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center.'
+  },
+  'Recreation Suite, HAC': {
+    pcuCost: 3,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center.'
+  },
+  'Recreation Suite, Trivid Den': {
+    pcuCost: 1,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center.'
+  },
+  'Recycling System': {
+    pcuCost: 2,
+    bpCost: 1,
+    source: 'Starfinder #6: Empire of Bones pg. 46',
+    description: 'A recycling system enables a Supercolossal starship to be nearly self-sustaining, operating independently for decades or even centuries. A combination of smelters, biomass processors, manufacturing, and UPB converters allows the ship to convert almost all its waste into goods and materials.'
+  },
+  'Sample Acquisition Bay': {
+    pcuCost: 7,
+    bpCost: 10,
+    source: "Starfinder #27: Deceivers' Moon pg. 47",
+    description: "This bay is equipped with a hybrid tractor beam that quickly pulls a target into the vessel. This beam can target a Large or smaller creature (or object of similar size) that is within 500 feet and visible to the starship's sensors. However, the beam can't be activated if the vessel is in starship combat. While within the beam, the target's molecules are phased slightly, rendering the target incorporeal. The beam moves the target from its original position into the bay (or vice versa) over 2 rounds. If the target is conscious and unwilling, it can attempt a Fortitude saving throw (DC = 10 + 1-1/2 x the starship's tier) when it is first struck with the beam to negate its effect."
+  },
+  'Science Lab': {
+    pcuCost: 2,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted.'
+  },
+  'Sealed Environment Chamber': {
+    pcuCost: 2,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'Occasionally, a starship will need to host an alien or other creature whose biology is radically different from that of the crew. The passenger might be able to breathe only methane gas or can survive in only below-freezing temperatures. In such a case, a sealed environment chamber is required for the passenger to remain comfortable (and alive).'
+  },
+  'Shuttle Bay': {
+    pcuCost: 10,
+    bpCost: 4,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: 'A shuttle bay can be installed only in a Huge or larger starship and takes up two expansion bays. A shuttle bay provides a place for a Small or smaller starship to dock.'
+  },
+  'Smuggler Compartment': {
+    pcuCost: 4,
+    bpCost: 2,
+    source: 'Starfinder Core Rulebook pg. 299',
+    description: "Smuggler compartments are cargo holds hidden behind false bulkheads and are shielded from most scanning, allowing a starship equipped with them to haul illegal goods without detection. A smuggler compartment can contain 10 tons of goods, with no item being larger than Medium. A creature on the starship must succeed at a DC 20 Perception check to detect a basic smuggler compartment on the starship. A creature scanning the starship must succeed at a DC 20 Computers check to detect one (this additional check is part of the science officer's scan action in starship combat; see page 325). For each Build Point spent over the base cost, these DCs increase by 5 (maximum DC 50), though the amount of power the compartment uses also increases by 1."
+  },
+  'Surveying Sensors': {
+    pcuCost: 3,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 26',
+    description: "This room of specialized analytical equipment and sensory technology augments a starship's sensors when scanning planetary bodies, spatial anomalies, debris, and similar phenomena. When scanning such targets, the science officer doubles the bonus to Computers checks granted by the starship's sensors (maximum +8). The surveying sensors also double the range of the starship's sensors to 500 feet while in atmosphere or on planets. The augmented sensors provide no special benefits during starship combat."
+  },
+  'Synthesis Bay': {
+    pcuCost: 2,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 300',
+    description: 'A synthesis bay contains all the space and tools required to craft drugs, medicine, or poison (see page 235), though the crafter must still provide the necessary raw materials. A synthesis bay reduces the crafting time by half.'
+  },
+  'Tactical Sensor Tank': {
+    pcuCost: 2,
+    bpCost: 1,
+    source: 'Starfinder #6: Empire of Bones pg. 46',
+    description: "A tactical sensor tank (TST) allows a Supercolossal ship to coordinate the sensor readings of multiple escort craft into a unified picture of surrounding space and then share this information with each starship. Science officers can use a TST to link the sensors of any number of allied vessels in range of the TST-equipped ship's sensors. The sensor range for all linked ships extends as far as the farthest-reaching range among them, since the TST system collects data from linked vessels, correlates possible sensor targets, and sends that information to all linked ships."
+  },
+  'Tech Workshop': {
+    pcuCost: 3,
+    bpCost: 1,
+    source: 'Starfinder Core Rulebook pg. 1',
+    description: 'A tech workshop contains all the space and tools necessary to craft technological items (see page 235), though the crafter must still provide the necessary raw materials. Such a workshop reduces the crafting time by half.'
+  },
+  'Telelith Matrix': {
+    pcuCost: 10,
+    bpCost: 8,
+    source: 'Alien Archive 3 pg. 111',
+    description: 'A telelith matrix contains bizarre fibers that flex when they build up enough energy. When they do, they can hurl the connected starship through a temporary wormhole. A telelith matrix takes 1 expansion bay, consumes 10 PCUs, and costs 8 Build Points. A telelith matrix works only in starships of Large or smaller size. \n' +
+      'Allows for Telelith Gambit (Stunt)'
+  },
+  'Thrusters Primer': {
+    pcuCost: 5,
+    bpCost: 1,
+    source: 'Starship Operations Manual pg. 27',
+    description: "By dedicating additional space to the thrusters and related systems, a starship can vastly decrease the amount of time needed for its thrusters to warm up and engage. The thrusters primer reduces the time needed to start the thrusters from 1 minute per size category to 1 round per size category, allowing even immense starships to finish the ignition sequence in less than a minute. During the first engineering phase of starship combat, a thrusters primer grants a short boost to a starship's propulsion, automatically increasing the starship's speed by 2 as though the engineer had used the divert action to direct power to the engines."
+  },
+  Vault: {
+    pcuCost: 3,
+    bpCost: 2,
+    source: 'Near Space pg. 114',
+    description: "Some crews need a secure vault to store valuables. Breaking into a vault generally requires two skill checks (determined by the GM, though Computers and Engineering are common) with a DC equal to 10 + 1-1/2 x the ship's tier. Failing either check by 5 or more sets off alarms, alerting the whole ship."      
+  }
 }
 
 //https://www.aonsrd.com/StarshipHulls.aspx
 const fortifiedHulls = {
-  // Material:	[CT bonus,	BP cost, source]
-  "Steel composite":	[1,	2, "Starship Operations Manual pg. 21"],
-  "Adamantine alloy":	[2,	4, "Starship Operations Manual pg. 21"],
-  "Nanocarbon plate":	[3,	6, "Starship Operations Manual pg. 21"],
-  "Polycarbon plate":	[4,	9, "Starship Operations Manual pg. 21"],
-  "Pure adamantine":	[5,	12, "Starship Operations Manual pg. 21"]
+  'Steel composite': {
+    ctBonus: 1,
+    bpCost: 2,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Adamantine alloy': {
+    ctBonus: 2,
+    bpCost: 4,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Nanocarbon plate': {
+    ctBonus: 3,
+    bpCost: 6,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Polycarbon plate': {
+    ctBonus: 4,
+    bpCost: 9,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Pure adamantine': {
+    ctBonus: 5,
+    bpCost: 12,
+    source: 'Starship Operations Manual pg. 21'
+  }
 }
 
 //https://www.aonsrd.com/StarshipBulkheads.aspx
 const reinforcedBulkheads = {
-// Bulkhead:	[Fortification %,	BP cost, source]
-  "Mk 1":	[10,	2, "Starship Operations Manual pg. 21"],
-  "Mk 2":	[20,	3, "Starship Operations Manual pg. 21"],
-  "Mk 3":	[30,	5, "Starship Operations Manual pg. 21"],
-  "Mk 4":	[40,	7, "Starship Operations Manual pg. 21"],
-  "Mk 5":	[50,	10, "Starship Operations Manual pg. 21"]
+  'Mk 1': {
+    fortification: 10,
+    bpCost: 2,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Mk 2': {
+    fortification: 20,
+    bpCost: 3,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Mk 3': {
+    fortification: 30,
+    bpCost: 5,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Mk 4': {
+    fortification: 40,
+    bpCost: 7,
+    source: 'Starship Operations Manual pg. 21'
+  },
+  'Mk 5': {
+    fortification: 50,
+    bpCost: 10,
+    source: 'Starship Operations Manual pg. 21'
+  }
 }
 
 
@@ -1281,7 +1846,6 @@ const reinforcedBulkheads = {
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 const antiHackingSystems = {
-  // Anti-Hacking System:	[BP cost, source]
   "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
   "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
   "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
@@ -1355,74 +1919,80 @@ const getNetworkNodeData = (nodeId, size) => {
   if(size === undefined) throw new Error("getNetworkNodeData(nodeId, size) must take in a size parameter")
   if(nodeId === null || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
-  const array = networkNodes[nodeId]
+  const { bonus, nodeMax, pcuCost, bpCost } = networkNodes[nodeId]
 
-  return {bonus: array[0], nodeMax: array[1], pcuCost: array[2], bpCost: array[3]}
+  return {bonus, nodeMax, pcuCost, bpCost}
 }
 
 const getQuartersData = (quartersId) => {
-  const array = crewQuarters[quartersId]
+  const { bpCost, source, description } = crewQuarters[quartersId]
 
-  return {bpCost: array[0], source: array[1], description: array[2]}
+  return {bpCost, source, description}
 }
 
 const getDefensiveCounterData = (defensiveCounterId) => {
   if(defensiveCounterId === null) return {tlBonus: 0, pcuCost: 0, bpCost: 0, source: null}
 
-  const array = defensiveCounter[defensiveCounterId]
+  const { tlBonus, pcuCost, bpCost, source } = defensiveCounter[defensiveCounterId]
 
-  return {tlBonus: array[0], pcuCost: array[1], bpCost: array[2], source: array[3]}
+  return {tlBonus, pcuCost, bpCost, source}
 }
 
 const getDriftEngineData = (driftEngineId, size) => {
   if(size === undefined) throw new Error("getDriftEngineData(driftEngines, size) must take in a size parameter")
   if(driftEngineId === null) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
 
-  const array = driftEngines[driftEngineId]
+  let { rating, minPCU, maxSize, bpCost, source, special } = driftEngines[driftEngineId]
+  bpCost = bpCost * sizeMod[size]
 
-  return {rating: array[0], minPCU: array[1], maxSize: array[2], bpCost: (array[3] * sizeMod[size]), source: array[4], special: array[5]}
+  return {rating, minPCU, maxSize, bpCost, source, special}
 }
 
 const getExpansionBayData = (expansionBayId, size) => {
   if(size === undefined) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
   if(expansionBayId === null || expansionBayId === undefined) return {pcuCost: 0, bpCost: 0, source: null}
 
-  const array = expansionBays[expansionBayId]
+  const { pcuCost, bpCost, source } = expansionBays[expansionBayId]
 
   if(expansionBayId === "Quantum Defender") {
-    return {pcuCost: Math.max(20, (5 * sizeMod[size])), bpCost: Math.max(10, (4 * sizeMod[size])), source: array[2]}
+    return {pcuCost: Math.max(20, (5 * sizeMod[size])), bpCost: Math.max(10, (4 * sizeMod[size])), source}
   }
-  if(expansionBayId === "Decoy Husk") return {pcuCost: (array[0] + sizeMod[size]), bpCost: (array[1] * sizeMod[size]), source: array[2]}
+  if(expansionBayId === "Decoy Husk") {
+    return {pcuCost: (pcuCost + sizeMod[size]), bpCost: (bpCost * sizeMod[size]), source}
+  }
   
-  return {pcuCost: array[0], bpCost: array[1], source: array[2]}
+  return {pcuCost, bpCost, source}
 }
 
 const getFortifiedHullData = (fortifiedHullId, size) => {
   if(size === undefined) throw new Error("getFortifiedHullData(fortifiedHullId, size) must take in a size parameter")
   if(fortifiedHullId === null) return {ctBonus: 0, bpCost: 0, source: null}
 
-  const array = fortifiedHulls[fortifiedHullId]
+  let { ctBonus, bpCost, source } = fortifiedHulls[fortifiedHullId]
+  ctBonus = ctBonus * sizeMod[size]
+  bpCost = bpCost * sizeMod[size]
 
-  return {ctBonus: (array[0] * sizeMod[size]), bpCost: (array[1] * sizeMod[size]), source: array[2]}
+  return {ctBonus, bpCost, source}
 }
 
 const getReinforcedBulkheadData = (reinforcedBulkheadId, size) => {
   if(size === undefined) throw new Error("getReinforcedBulkeadData(reinforcedBulkheadId, size) must take in a size parameter")
   if(reinforcedBulkheadId === null) return {fortification: 0, bpCost: 0, source: null}
 
-  const array = reinforcedBulkheads[reinforcedBulkheadId]
+  let { fortification, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
+  bpCost = bpCost * sizeMod[size]
 
   //fortification is a %
-  return {fortification: array[0], bpCost: (array[1] * sizeMod[size]), source: array[2]}
+  return {fortification, bpCost, source}
 }
 
 const getAntiHackingData = (antiHackingId) => {
   // Anti-Hacking System:	[BP cost, source]
   if(antiHackingId === null) return {bpCost: 0, source: null}
 
-  const array = antiHackingSystems[antiHackingId]
+  const { bpCost, source } = antiHackingSystems[antiHackingId]
 
-  return {bpCost: array[0], source: array[1]}
+  return {bpCost, source}
 }
 
 const getAntiPersonnelData = (antiPersonnelId) => {
@@ -1514,23 +2084,23 @@ const getAntiPersonnelIdList = () => {
 }
 
 export {
-  sources,
-  shipTiers,
-  shipSize,
-  maneuverability,
+  // sources,
+  // shipTiers,
+  // shipSize,
+  // maneuverability,
   sizeMod,
-  powerCores,
-  thrusters,
-  armor,
-  computers,
-  networkNodes,
-  crewQuarters,
-  defensiveCounter,
-  driftEngines,
-  expansionBays,
-  fortifiedHulls,
-  reinforcedBulkheads,
-  antiHackingSystems,
+  // powerCores,
+  // thrusters,
+  // armor,
+  // computers,
+  // networkNodes,
+  // crewQuarters,
+  // defensiveCounter,
+  // driftEngines,
+  // expansionBays,
+  // fortifiedHulls,
+  // reinforcedBulkheads,
+  // antiHackingSystems,
 
   getSourceData,
   getTierData, 

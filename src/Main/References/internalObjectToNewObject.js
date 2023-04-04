@@ -1,28 +1,22 @@
 import * as Tables from './metaTables'
 
+  // Anti-Hacking System:	[BP cost, source]
 
-  // Name: [Bonus, Nodes, PCU cost, BP cost, source]
-
-// const { shipTiers } = Tables;
-const table = Tables.computers;
+const table = Tables.antiHackingSystems;
 
 const dataKeys = Object.keys(table)
 const newObj = {}
 
-dataKeys.map(oneKey => {
+dataKeys.forEach(oneKey => {
   // console.log(table[oneKey]);
 
   newObj[oneKey] = {
     // This will vary by table
-    bonus: table[oneKey][0],
-    nodes: table[oneKey][1],
-    pcuCost: table[oneKey][2],
-    bpCost: table[oneKey][3],
-    source: table[oneKey][4],
+    bpCost: table[oneKey][0],
+    source: table[oneKey][1]
 
   }
 })
-
 
 console.log(newObj);
 
