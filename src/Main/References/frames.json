@@ -249,7 +249,7 @@
 	"minimumCrew": 1,
 	"maximumCrew": 6,
 	"cost": 20,
-	"specialAbility": {"Drift Resistant (Ex)": "An Oma's body must be specially refitted to accommodate Drift travel installing a Drift engine in an oma increases the price of the engine by 50%."}
+	"specialAbility": {"Drift Resistant (Ex)": "An Oma's body must be specially refitted to accommodate Drift travel; installing a Drift engine in an oma increases the price of the engine by 50%."}
 }, {
 	"type": "Destroyer",
 	"source": "Starfinder Core Rulebook pg. 295",

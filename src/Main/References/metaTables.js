@@ -99,24 +99,52 @@ const shipTiers = {
 }
 
 const shipSize = {
-  // Size: [Length, Weight, AC and TL Modifier]
-  "Tiny": ["20-60 ft.", "2-40 tons", +2],
-  "Small": ["60-120 ft.", "30-250 tons", +1],
-  "Medium": ["120-300 ft.", "50-2,500 tons", +0],
-  "Large": ["300-800 ft.", "2,000-50,000 tons", -1],
-  "Huge": ["800-2,000 ft.", "40,000-640,000 tons", -2],
-  "Gargantuan": ["2,000-15,000 ft.", "600,000 tons to 250 megatons", -4],
-  "Colossal": ["Over 15,000 ft.", "200-2,000 megatons", -8],
-  "Supercolossal": ["Over 6 miles", "Over 2,000 megatons", -8]
+  Tiny: { length: '20-60 ft.', weight: '2-40 tons', acMod: 2, tlMod: 2 },
+  Small: { length: '60-120 ft.', weight: '30-250 tons', acMod: 1, tlMod: 1 },
+  Medium: {
+    length: '120-300 ft.',
+    weight: '50-2,500 tons',
+    acMod: 0,
+    tlMod: 0
+  },
+  Large: {
+    length: '300-800 ft.',
+    weight: '2,000-50,000 tons',
+    acMod: -1,
+    tlMod: -1
+  },
+  Huge: {
+    length: '800-2,000 ft.',
+    weight: '40,000-640,000 tons',
+    acMod: -2,
+    tlMod: -2
+  },
+  Gargantuan: {
+    length: '2,000-15,000 ft.',
+    weight: '600,000 tons to 250 megatons',
+    acMod: -4,
+    tlMod: -4
+  },
+  Colossal: {
+    length: 'Over 15,000 ft.',
+    weight: '200-2,000 megatons',
+    acMod: -8,
+    tlMod: -8
+  },
+  Supercolossal: {
+    length: 'Over 6 miles',
+    weight: 'Over 2,000 megatons',
+    acMod: -8,
+    tlMod: -8
+  }
 }
 
 const maneuverability = {
-  // Maneuverability:	[Distance Between Turns,	Piloting Check Modifier]
-  "Clumsy":	[4,	-2],
-  "Poor":	[3,	-1],
-  "Average":	[2,	0],
-  "Good":	[1,	+1],
-  "Perfect":	[0, +2]
+  Clumsy: { turnDistance: 4, pilotingModifier: -2 },
+  Poor: { turnDistance: 3, pilotingModifier: -1 },
+  Average: { turnDistance: 2, pilotingModifier: 0 },
+  Good: { turnDistance: 1, pilotingModifier: 1 },
+  Perfect: { turnDistance: 0, pilotingModifier: 2 }
 }
 
 const sizeMod = {
@@ -434,57 +462,38 @@ const reinforcedBulkheads = {
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 const antiHackingSystems = {
   // Anti-Hacking System:	[BP cost, source]
-  "Mk 1":	[3, "Starship Operations Manual pg. 300"],
-  "Mk 2":	[6, "Starship Operations Manual pg. 300"],
-  "Mk 3":	[9, "Starship Operations Manual pg. 300"],
-  "mk 4":	[12, "Starship Operations Manual pg. 300"],
+  "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
+  "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
+  "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
+  "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
 }
 
-// const antiHackingSystemsAlt = {
-//   // Anti-Hacking System:	[BP cost, source]
-//   "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
-//   "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
-//   "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
-//   "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
-// }
 
-// https://www.aonsrd.com/Starship_Security.aspx?ItemName=Heavy&Family=Antipersonnel%20Weapon
-const antipersonnelWeapon = {
-  // Heavy: BP cost 5 + item level of weapon
-  // https://www.aonsrd.com/Weapons.aspx?Proficiency=Heavy
-
-  // Longarm : Bp cost = item level of weapon
-  // https://www.aonsrd.com/Weapons.aspx?Proficiency=Longarms
-}
-
-const longarmWeapons = {
-  
-}
 
 // <--- Data extractions --->
 const getSourceData = (source) => {
-  const {link, abbrev, sfsLegal} = sources[source];
+  const { link, abbrev, sfsLegal } = sources[source];
 
   return {link, abbrev, sfsLegal};
 }
 
 const getTierData = (tierId) => {
   // const array = shipTiers[tierId]
-  const {buildPoints, hpIncrement} = shipTiers[tierId];
+  const { buildPoints, hpIncrement } = shipTiers[tierId];
 
   return {buildPoints, hpIncrementMultiplier: hpIncrement}
 }
 
 const getManeuverabilityData = (type) => {
-  const array = maneuverability[type]
+  const { turnDistance, pilotingModifier } = maneuverability[type]
 
-  return {turnDistance: array[0], pilotingModifier: array[1]}
+  return {turnDistance, pilotingModifier}
 }
 
 const getSizeData = (size) => {
-  const array = shipSize[size]
+  const { length, weight, acMod, tlMod } = shipSize[size]
 
-  return {length: array[0], weight: array[1], acMod: array[2], tlMod: array[2]}
+  return {length, weight, acMod, tlMod}
 }
 
 const getPowerCoreData = (powerCoreId) => {
@@ -687,8 +696,11 @@ const getAntiPersonnelIdList = () => {
 
 export {
   sources,
-  sizeMod,
   shipTiers,
+  shipSize,
+  maneuverability,
+  sizeMod,
+  powerCores,
 
   getSourceData,
   getTierData, 

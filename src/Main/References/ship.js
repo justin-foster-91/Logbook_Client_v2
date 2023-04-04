@@ -48,8 +48,6 @@ class Ship {
     if (!Tables.getFrameIdList().includes(frame))
       throw new Error("Frame input did not match allowed frame options");
 
-    // console.log(frame);
-
     this.parts.frameId = frame;
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
@@ -57,7 +55,6 @@ class Ship {
     SF.updateExpansionBaysToMatchFrame(this.parts);
     this.onShipChange(this.parts);
 
-    console.log("New part: ", this.parts.frameId);
     return this;
   }
 

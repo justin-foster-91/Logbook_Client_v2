@@ -17,8 +17,6 @@ function SetFrame() {
   // FIXME: default should be "Light Freighter"
 
   useEffect(() => {
-    // console.log("start frame: ", customShipParts.frameId);
-    console.log("frameId: ", frameId);
     // Running setFrame on render to initialize later components that depend on the frame 
     // This may not be needed this later
     ship.setFrame(frameId)
@@ -32,13 +30,7 @@ function SetFrame() {
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.selectedOptions[0].id;
     
-    // console.log(ev.target.selectedOptions[0].id);
-    // console.log(ev.target);
-    // console.log(ev.target.innerHTML);
-
     ship.setFrame(frameOption)
-    console.log("frame option: ", frameOption);
-    console.log("frame: ", ship.frameId);
   };
 
   return (
