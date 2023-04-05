@@ -20,9 +20,11 @@ function Sidebar(props) {
 
 
   return (
-    <div className='sidebar'>
-      <h3>Ship Parts</h3>
-      {sidebarList()}
+    <div className='sidebarWrapper'>
+      <div className='sidebar'>
+        <h3>Ship Parts</h3>
+        {sidebarList()}
+      </div>
     </div>
   );
 }
