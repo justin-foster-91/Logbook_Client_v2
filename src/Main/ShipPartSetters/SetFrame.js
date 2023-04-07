@@ -46,11 +46,11 @@ function SetFrame() {
       <p></p>
 
       <div>Size: {size}; Maneuverability: {maneuverability}</div>
-      <div>
+      <span>
         HP {hp}; DT {dt}; CT{" "}
         {ct}; Expansion Bays {expansions}; Minimum Crew {minCrew}; Maximum Crew{" "}
         {maxCrew}
-      </div>
+      </span>
 
       <fieldset>
         <legend>Maneuverability</legend>

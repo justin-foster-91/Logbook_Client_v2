@@ -30,9 +30,10 @@ function SetTier(props) {
 
       <p></p>
 
-      <div>
-        BP Budget: {buildPoints}; HP Increments: {hpIncrementMultiplier}
-      </div>
+      <span>
+        <div>BP Budget: {buildPoints};</div> 
+        <div>HP Increments: {hpIncrementMultiplier}</div>
+      </span>
     </>
   );
 }
