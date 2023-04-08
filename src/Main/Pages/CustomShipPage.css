@@ -3,10 +3,15 @@ h2, h3 {
   margin: 0;
 }
 
-/* h2::before, h2::after {
-  content: "'";
-} */
+@font-face {
+  font-family: 'SansationRegular';
+  src: local('SansationRegular'), url('../Assets/Fonts/Sansation/SansationRegular-OgJP.ttf') format('truetype');
+}
 
+body {
+  font-family: 'SansationRegular';
+
+}
 
 .sidebarWrapper {
   height: 100%;
