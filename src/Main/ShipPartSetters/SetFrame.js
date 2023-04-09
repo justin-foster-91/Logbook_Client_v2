@@ -38,11 +38,13 @@ function SetFrame(props) {
     <>
       <h3>{currentPart.name.toUpperCase()}</h3>
 
-      <select onChange={handleFrameIdChange}>
-        {frames.map((frame, idx) => (
-          <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
-        ))}
-      </select>
+      <div className="dropdownBlock">
+        <select onChange={handleFrameIdChange}>
+          {frames.map((frame, idx) => (
+            <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
+          ))}
+        </select>
+      </div>
 
       <div className="row">
         <div>Size: {size}</div>

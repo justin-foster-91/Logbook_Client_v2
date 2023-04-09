@@ -26,27 +26,28 @@ function NonPrimaryComputers(props) {
 
   return (
     <>
-      Secondary Computer
-      <br />
-      <select
-        value={secondaryComputerId}
-        onChange={handleSecondaryComputerChange}
-      >
-        <option key={-1}>Basic Computer</option>
-        {Tables.getComputerIdList().map(
-          (computer, idx) =>
-            computer.split(" ")[1] < 4 && (
-              <option key={idx}>{computer}</option>
-            )
-        )}
-      </select>
 
-      <p></p>
+      <div className="dropdownBlock">
+        <div>Secondary Computer</div>
+
+        <select
+          value={secondaryComputerId}
+          onChange={handleSecondaryComputerChange}
+        >
+          <option key={-1}>Basic Computer</option>
+          {Tables.getComputerIdList().map(
+            (computer, idx) =>
+              computer.split(" ")[1] < 4 && (
+                <option key={idx}>{computer}</option>
+              )
+          )}
+        </select>
+      </div>
       
       {isMononode &&
-      <div>
+      <div className="dropdownBlock">
         <label htmlFor="networkNodes">Network Nodes</label>
-        <br/>
+
         <select value={ctNetworkNodes} onChange={handleNodeChange}>
           {Array(nodeMax+1).fill(1).map((node, idx) => 
             <option key={idx}>{idx}</option>

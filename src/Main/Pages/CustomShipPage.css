@@ -77,21 +77,23 @@ body {
   margin-top: 1rem;
 }
 
-.powerCoreBlock {
+.ablativeArmor form {
+  display: flex;
+  flex-direction: row;
+}
+
+.ablativeArmor button {
+  height: fit-content;
+  align-self: end;
+  margin: .3rem 0 .3rem 0;
+}
+
+.dropdownBlock {
   display: flex;
   flex-direction: column;
-}
-
-.powerCoreBlock div {
   padding: .3rem 0 .3rem 0;
-}
-
-.powerCoreBlock select {
   width: fit-content;
-}
-
-.ablativeArcs {
-  padding-right: 1rem;
+  margin-right: .3rem;
 }
 
 .note {

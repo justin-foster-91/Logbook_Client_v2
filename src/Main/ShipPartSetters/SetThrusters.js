@@ -23,15 +23,17 @@ function SetThrusters(props) {
     <>
       <h3>{currentPart.name.toUpperCase()}</h3>
 
-      <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>
-        {/* <option key="None">None</option> */}
-        {Tables.getThrusterIdList().map((thruster, idx) =>
-          SF.doesFrameSizeAllowThruster(thruster, size) 
-          && <option key={idx} value={thruster}>
-            {thruster} Thrusters
-          </option>
-        )}
-      </select>
+      <div className="dropdownBlock">
+        <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>
+          {/* <option key="None">None</option> */}
+          {Tables.getThrusterIdList().map((thruster, idx) =>
+            SF.doesFrameSizeAllowThruster(thruster, size) 
+            && <option key={idx} value={thruster}>
+              {thruster} Thrusters
+            </option>
+          )}
+        </select>
+      </div>
 
       {/* TODO: */}
       <div>Special Material:</div>

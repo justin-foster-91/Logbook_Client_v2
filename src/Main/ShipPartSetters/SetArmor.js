@@ -52,45 +52,49 @@ function SetArmor(props) {
     );
   }
 
+  const createDropdownItem = (armor, idx) => {
+    if (armor.includes("Mk"))
+      return (
+        <option key={idx} value={armor}>
+          {armor} Armor (+{Tables.getArmorData(armor, size).acBonus} AC)
+        </option>
+      );
+    if (armor.includes("Energy"))
+      return (
+        <option key={idx} value={armor}>
+          {armor}
+        </option>
+      );
+    if (armor.includes("ablative")) {
+      if (Tables.getArmorData(armor, size).tempHP <= hp * 2)
+        return (
+          <option key={idx} value={armor}>
+            {armor} (+{Tables.getArmorData(armor, size).tempHP} THP)
+          </option>
+        );
+    }
+    return (
+      <option key={idx} value={armor}>
+        {armor} (+{Tables.getArmorData(armor, size).tempHP} THP)
+      </option>
+    );
+  }
+
   return (
     <>
       <h3>{currentPart.name.toUpperCase()}</h3>
 
-      <select
-        value={
-          armorId ? armorId : "None"
-        }
-        onChange={handleArmorChange}
-      >
-        <option key="None">None</option>
-        {Tables.getArmorIdList().map((armor, idx) => {
-          if (armor.includes("Mk"))
-            return (
-              <option key={idx} value={armor}>
-                {armor} Armor (+{Tables.getArmorData(armor, size).acBonus} AC)
-              </option>
-            );
-          if (armor.includes("Energy"))
-            return (
-              <option key={idx} value={armor}>
-                {armor}
-              </option>
-            );
-          if (armor.includes("ablative")) {
-            if (Tables.getArmorData(armor, size).tempHP <= hp * 2)
-              return (
-                <option key={idx} value={armor}>
-                  {armor} (+{Tables.getArmorData(armor, size).tempHP} THP)
-                </option>
-              );
+      <div className="dropdownBlock">
+        <select
+          value={
+            armorId ? armorId : "None"
           }
-          return (
-            <option key={idx} value={armor}>
-              {armor} (+{Tables.getArmorData(armor, size).tempHP} THP)
-            </option>
-          );
-        })}
-      </select>
+          onChange={handleArmorChange}
+        >
+          <option key="None">None</option>
+          {Tables.getArmorIdList().map((armor, idx) => createDropdownItem(armor, idx))}
+        </select>
+      </div>
 
       {/* TODO: */}
       <div>Special Material:</div>
@@ -102,8 +106,7 @@ function SetArmor(props) {
         </div>
       }
 
-      {armorId 
-      && armorId.includes("ablative") 
+      {armorId && armorId.includes("ablative") 
       && <AblativeArmor size={size}></AblativeArmor>}
 
       <div className="row">

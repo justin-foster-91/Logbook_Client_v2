@@ -54,26 +54,32 @@ function SetComputer(props) {
   return (
     <>
       <h3>{currentPart.name.toUpperCase()}</h3>
-      <p></p>
-      Primary Computer
-      <br />
-      <select value={computerId} onChange={handleComputerChange}>
-        {Tables.getComputerIdList().map((computer, idx) =>
-          renderComputerOptions(computer, idx)
-        )}
-      </select>
-      <p></p>
+
+      <div className="dropdownBlock">
+        <div>Primary Computer</div>
+
+        <select value={computerId} onChange={handleComputerChange}>
+          {Tables.getComputerIdList().map((computer, idx) =>
+            renderComputerOptions(computer, idx)
+          )}
+        </select>
+      </div>
+
       {isSupercolossal && 
         <NonPrimaryComputers
           isMononode={isMononode}
         ></NonPrimaryComputers>
       }
-      <p></p>
-      <div>
-        Bonus: {bonusList}; Nodes: {totalNodes}; Tier: {computerTier}
+
+      <div className="row">
+        <div>Bonus: {bonusList}</div>
+        <div>Nodes: {totalNodes}</div>
+        <div>Tier: {computerTier}</div>
       </div>
-      <div>
-        PCU Cost: {totalCompPCUCosts}; BP Cost: {totalCompBPCosts}
+
+      <div className="row totals">
+        <div>PCU Cost: {totalCompPCUCosts}</div>
+        <div>BP Cost: {totalCompBPCosts}</div>
       </div>
     </>
   );

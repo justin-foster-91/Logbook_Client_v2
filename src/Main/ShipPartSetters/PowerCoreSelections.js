@@ -22,7 +22,7 @@ const PowerCoreSelections = () => {
     .fill(1)
     .map((dropdown, idx) => {
       return (
-        <div key={"powerCore" + idx} className="powerCoreBlock">
+        <div key={"powerCore" + idx} className="dropdownBlock">
           <div>Power Core {idx + 1}</div>
 
           <select

@@ -19,11 +19,13 @@ function SetTier(props) {
     <>
       <h3>{currentPart.name.toUpperCase()}</h3>
 
-      <select value={tierId} onChange={handleTierChange}>
-        {Tables.getTierIdList().map((tier, idx) => (
-          <option key={idx}>{tier}</option>
-        ))}
-      </select>
+      <div className="dropdownBlock">
+        <select value={tierId} onChange={handleTierChange}>
+          {Tables.getTierIdList().map((tier, idx) => (
+            <option key={idx}>{tier}</option>
+          ))}
+        </select>
+      </div>
 
       <div className="row totals">
         <div>BP Budget: {buildPoints}</div> 

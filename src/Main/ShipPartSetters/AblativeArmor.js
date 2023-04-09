@@ -41,50 +41,56 @@ function AblativeArmor() {
   };
 
   return (
-    <div className="ablativeArcs">
+    <div className="ablativeArmor">
       <form>
-        <label htmlFor="forward">Forward:</label>
-        <input
-          type="number"
-          id="forward"
-          name="forward"
-          value={forward}
-          required
-          onChange={handleTempHPChange}
-        />
-
-        <label htmlFor="port">Port:</label>
-        <input
-          type="number"
-          id="port"
-          name="port"
-          value={port}
-          required
-          onChange={handleTempHPChange}
-        />
-
-        <label htmlFor="starboard">Starboard:</label>
-        <input
-          type="number"
-          id="starboard"
-          name="starboard"
-          value={starboard}
-          required
-          onChange={handleTempHPChange}
-        />
-
-        <label htmlFor="aft">Aft:</label>
-        <input
-          type="number"
-          id="aft"
-          name="aft"
-          value={aft}
-          required
-          onChange={handleTempHPChange}
-        />
+        <div className="dropdownBlock">
+          <label htmlFor="forward">Forward:</label>
+          <input
+            type="number"
+            id="forward"
+            name="forward"
+            value={forward}
+            required
+            onChange={handleTempHPChange}
+          />
+        </div>
+        <div className="dropdownBlock">
+          <label htmlFor="port">Port:</label>
+          <input
+            type="number"
+            id="port"
+            name="port"
+            value={port}
+            required
+            onChange={handleTempHPChange}
+          />
+        </div>
+        <div className="dropdownBlock">
+          <label htmlFor="starboard">Starboard:</label>
+          <input
+            type="number"
+            id="starboard"
+            name="starboard"
+            value={starboard}
+            required
+            onChange={handleTempHPChange}
+          />
+        </div>
+        <div className="dropdownBlock">
+          <label htmlFor="aft">Aft:</label>
+          <input
+            type="number"
+            id="aft"
+            name="aft"
+            value={aft}
+            required
+            onChange={handleTempHPChange}
+          />
+        </div>
 
         <button onClick={setArcHPValues}>Balance All HP</button>
       </form>
+
       <div className="row">
         <div>Used: {usedHP}</div>
         <div>Allowed: {maxHP}</div>
