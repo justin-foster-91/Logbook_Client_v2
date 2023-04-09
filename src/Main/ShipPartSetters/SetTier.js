@@ -18,9 +18,7 @@ function SetTier(props) {
 
   return (
     <>
-      <h3>{currentPart.name}</h3>
-
-      <p></p>
+      <h3>{currentPart.name.toUpperCase()}</h3>
 
       <select value={tierId} onChange={handleTierChange}>
         {Tables.getTierIdList().map((tier, idx) => (
@@ -28,12 +26,10 @@ function SetTier(props) {
         ))}
       </select>
 
-      <p></p>
-
-      <span>
-        <div>BP Budget: {buildPoints};</div> 
+      <div className="row totals">
+        <div>BP Budget: {buildPoints}</div> 
         <div>HP Increments: {hpIncrementMultiplier}</div>
-      </span>
+      </div>
     </>
   );
 }

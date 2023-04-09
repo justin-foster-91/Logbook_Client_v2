@@ -1,5 +1,5 @@
 h2, h3 {
-  padding: 10px;
+  padding: .5rem;
   margin: 0;
 }
 
@@ -15,7 +15,7 @@ body {
 
 .sidebarWrapper {
   height: 100%;
-  width: 10svw;
+  width: 9svw;
   position: fixed;
   background-image: url("../Assets/Images/Base_ship.jpg");
   background-size: cover;
@@ -40,42 +40,46 @@ body {
   color: #C9C5BE;
 }
 
-
-
 .customShipDisplay {
   width: 90svw;
-  transform: translate(10svw);
+  transform: translate(9svw);
   background-color: #001129;
   color: #C9C5BE;
   text-align: start;
 }
 
 .customShipDisplay h2 {
-  padding: 10px;
+  padding: 1.5rem;
 }
 
 .partSetterList {
-  padding: 10px;
+  /* padding: 1rem; */
 }
 
 .partSetterBlock {
-  border: 1px solid #7e7e7e;
+  border: .1rem solid #7e7e7e;
   /* margin: 5px; */
-  padding: 10px;
+  padding: 1rem;
+  margin: 1rem
 }
 
-span {
+.partSetterBlock .row {
   display: flex;
   flex-direction: row;
 }
 
-span div {
-  /* justify-content: space-between; */
+.partSetterBlock .row div {
+  padding: .1rem;
+  margin: .1rem 1rem .1rem 0;
 }
 
+.totals {
+  margin-top: 1rem;
+}
 
 .sidebarHighlight {
-  background-color: #1c3c69f6;
+  background-color: #b4792cd3;
+  color: black;
 }
 
 legend {
@@ -83,6 +87,6 @@ legend {
 }
 
 fieldset {
-  /* width: auto; */
-  border: 1px solid #7e7e7e;
+  width: fit-content;
+  border: .1rem solid #7e7e7e;
 }

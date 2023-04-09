@@ -4,15 +4,18 @@ import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables';
 
-function SetFrame() {
+function SetFrame(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost, specialAbility } = ship.getFramePackage()
   const { length, weight, acMod } = Tables.getSizeData(size)
   const { turnDistance, pilotingModifier } = Tables.getManeuverabilityData(maneuverability)
+  const { currentPart } = props;
+
   let specialName = null
   if(specialAbility)specialName = Object.keys(specialAbility)[0]
+  if (!dt) dt = 'n/a'
 
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
@@ -33,9 +36,7 @@ function SetFrame() {
 
   return (
     <>
-      <h3>Frame</h3>
-
-      <p></p>
+      <h3>{currentPart.name.toUpperCase()}</h3>
 
       <select onChange={handleFrameIdChange}>
         {frames.map((frame, idx) => (
@@ -43,38 +44,47 @@ function SetFrame() {
         ))}
       </select>
 
-      <p></p>
-
-      <div>Size: {size}; Maneuverability: {maneuverability}</div>
-      <span>
-        HP {hp}; DT {dt}; CT{" "}
-        {ct}; Expansion Bays {expansions}; Minimum Crew {minCrew}; Maximum Crew{" "}
-        {maxCrew}
-      </span>
+      <div className="row">
+        <div>Size: {size}</div>
+        <div>Maneuverability: {maneuverability}</div>
+      </div>
+      
+      <div className="row">
+        <div>HP: {hp}</div>
+        <div>DT: {dt}</div>
+        <div>CT: {ct}</div>
+        <div>Expansion Bays: {expansions}</div>
+        <div>Minimum Crew: {minCrew}</div>
+        <div>Maximum Crew: {maxCrew}</div>
+      </div>
 
       <fieldset>
         <legend>Maneuverability</legend>
-        <div>
-          Turn Distance: {turnDistance}; 
-          Piloting Mod: {pilotingModifier > 0 && '+'}{pilotingModifier}
+        <div className="row">
+          <div>Turn Distance: {turnDistance}</div>
+          <div>Piloting Mod: {pilotingModifier > 0 && '+'}{pilotingModifier}</div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>Size</legend>
-        <div>
-          Length: {length}; Weight: {weight}; AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}
+        <div className="row">
+          <div>Length: {length}</div> 
+          <div>Weight: {weight}</div> 
+          <div>AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}</div>
         </div>
       </fieldset>
 
       {specialAbility &&
-      <fieldset>
-        <legend>Special Ability</legend>
-        <div><b>{specialName}</b> {specialAbility[specialName]}</div>
-      </fieldset>}
+        <fieldset>
+          <legend>Special Ability</legend>
+          <div><b>{specialName}</b> {specialAbility[specialName]}</div>
+        </fieldset>
+      }
 
-
-      <div>BP Cost: {bpCost}</div>
+      <div className="row totals">
+        <div>BP Cost: {bpCost}</div>
+      </div>
     </>
   );
 }
