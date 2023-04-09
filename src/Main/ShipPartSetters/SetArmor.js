@@ -4,12 +4,13 @@ import AblativeArmor from "./AblativeArmor";
 import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
 
-function SetArmor() {
+function SetArmor(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { armorId } = customShipParts;
   const { size, hp } = SF.getFramePackageFromShip(customShipParts);
   const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getArmorData(armorId, size);
+  const { currentPart } = props;
 
   const handleArmorChange = (ev) => {
     let armorOption = ev.target.value;
@@ -19,15 +20,15 @@ function SetArmor() {
   };
 
   const renderArmorBonus = () => {
-    if (!acBonus && !tempHP) return "AC/Temp HP: 0; ";
-    if (acBonus) return `Bonus AC: ${acBonus}; `;
-    else return `Temp HP: ${tempHP}; `;
+    if (!acBonus && !tempHP) return "AC/Temp HP: 0";
+    if (acBonus) return `Bonus AC: ${acBonus}`;
+    else return `Temp HP: ${tempHP}`;
   };
 
   const renderSpecial = () => {
-    if (tlPenalty && turnDistance)
-      return `${tlPenalty} TL; +${turnDistance} turn distance`;
-    if (tlPenalty) return `${tlPenalty} TL`;
+    if (turnDistance) return <>{tlPenalty} TL; +{turnDistance} turn distance</>;
+
+    if (tlPenalty) return <>{tlPenalty} TL</>;
 
     return "n/a";
   };
@@ -53,8 +54,8 @@ function SetArmor() {
 
   return (
     <>
-      <h3>Armor</h3>
-      <p></p>
+      <h3>{currentPart.name.toUpperCase()}</h3>
+
       <select
         value={
           armorId ? armorId : "None"
@@ -90,24 +91,30 @@ function SetArmor() {
           );
         })}
       </select>
-      <br />
-      {/* TODO: */}
-      Special Material:
 
-      <p></p>
-      <div>
-        {armorId && renderArmorDescription()}
-      </div>
-      <p></p>
+      {/* TODO: */}
+      <div>Special Material:</div>
+      {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
+
+      {armorId && 
+        <div className="note">
+          {renderArmorDescription()}
+        </div>
+      }
+
       {armorId 
       && armorId.includes("ablative") 
       && <AblativeArmor size={size}></AblativeArmor>}
-      <p></p>
-      <div>
-        {renderArmorBonus()}
-        Special: {renderSpecial()}
+
+      <div className="row">
+        <div>{renderArmorBonus()}</div>
+        <div className="row special">Special: {renderSpecial()}</div>
       </div>
-      BP cost: {bpCost}
+
+      <div className="row totals">
+        <div>BP cost: {bpCost}</div>
+      </div>
+      
     </>
   );
 }

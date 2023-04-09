@@ -90,12 +90,12 @@ class Ship {
     const arcList = ["forward", "port", "starboard", "aft"];
 
     // if armor is not ablative, empty ablative hp values
-    if (armor === null || !armor.includes("ablative")) {
+    if (!armor?.includes("ablative")) {
       arcList.map((arc) => this.setAblativeHPByPosition(arc, 0));
     }
 
     // if armor is ablative, balance hp values
-    if (armor.includes("ablative")) {
+    if (armor?.includes("ablative")) {
       arcList.map((arc) => this.setAblativeHPByPosition(arc, balancedHP));
     }
 
@@ -106,6 +106,9 @@ class Ship {
 
   setAblativeHPByPosition(pos, hp) {
     this.parts.ablativeArmorByPosition[pos] = hp;
+
+    // TODO: -1 piloting check if hp is not balanced
+
     this.onShipChange(this.parts);
     return this;
   }

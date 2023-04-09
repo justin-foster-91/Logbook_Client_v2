@@ -9,7 +9,6 @@ function SetTier(props) {
   const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
   const { currentPart } = props;
   
-
   const handleTierChange = (ev) => {
     const tierOption = ev.target.value;
 

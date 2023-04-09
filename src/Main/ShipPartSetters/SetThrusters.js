@@ -3,12 +3,14 @@ import * as Tables from "../References/metaTables";
 import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 
-function SetThrusters() {
+function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { thrustersId } = customShipParts;
   const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
   const { size } = SF.getFramePackageFromShip(customShipParts);
+  const { currentPart } = props;
+
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value;
@@ -19,8 +21,8 @@ function SetThrusters() {
 
   return (
     <>
-      <h3>Thrusters</h3>
-      <p></p>
+      <h3>{currentPart.name.toUpperCase()}</h3>
+
       <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>
         {/* <option key="None">None</option> */}
         {Tables.getThrusterIdList().map((thruster, idx) =>
@@ -30,15 +32,24 @@ function SetThrusters() {
           </option>
         )}
       </select>
-      <br />
+
       {/* TODO: */}
-      Special Material:
-      <p></p>
-      The maximum speed of a starship’s thrusters may grant a bonus or impart a penalty to Piloting checks to fly the vessel.
-      <div>
-        Speed (in hexes): {speed}; Piloting Modifier: {pilotingModifier}
+      <div>Special Material:</div>
+      {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
+
+      <div className="note">
+        The maximum speed of a starship's thrusters may grant a bonus or impart a penalty to Piloting checks to fly the vessel.
       </div>
-      PCU cost: {pcuCost}; BP cost: {bpCost}
+
+      <div className="row">
+        <div>Speed (in hexes): {speed}</div>
+        <div>Piloting Modifier: {pilotingModifier}</div>
+      </div>
+
+      <div className="row totals">
+        <div>PCU cost: {pcuCost}</div>
+        <div>BP cost: {bpCost}</div>
+      </div>
     </>
   );
 }

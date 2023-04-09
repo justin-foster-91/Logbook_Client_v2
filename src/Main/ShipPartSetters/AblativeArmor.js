@@ -41,7 +41,7 @@ function AblativeArmor() {
   };
 
   return (
-    <div>
+    <div className="ablativeArcs">
       <form>
         <label htmlFor="forward">Forward:</label>
         <input
@@ -83,15 +83,18 @@ function AblativeArmor() {
           onChange={handleTempHPChange}
         />
 
-        <br />
         <button onClick={setArcHPValues}>Balance All HP</button>
       </form>
-      Used: {usedHP} -- Allowed: {maxHP}
-      <br />
-      {isCorrectTotalHP() || `Your total HP must add up to ${maxHP}`}
-      <br />
+      <div className="row">
+        <div>Used: {usedHP}</div>
+        <div>Allowed: {maxHP}</div>
+      </div>
+
+      {isCorrectTotalHP() || 
+        <div className="note">Your total HP must add up to {maxHP}</div>}
+
       {isBalanced() ||
-        "NOTE: The ship has a -1 penalty to Piloting because temporary HP from ablative armor is not balanced."}
+        <div className="note">NOTE: The ship has a -1 penalty to Piloting because temporary HP from ablative armor is not balanced.</div>}
     </div>
   );
 }

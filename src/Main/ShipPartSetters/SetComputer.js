@@ -4,7 +4,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import NonPrimaryComputers from "./NonPrimaryComputers";
 import * as SF from "../References/shipFunctions";
 
-function SetComputer() {
+function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const [isSupercolossal, setIsSupercolossal] = useState(false);
   const [isMononode, setIsMononode] = useState(true)
@@ -13,6 +13,8 @@ function SetComputer() {
   const { nodes } = Tables.getComputerData(computerId);
   const size = ship.getSize();
   const { nodes: secondaryNodes } = Tables.getComputerData(secondaryComputerId)
+  const { currentPart } = props;
+
   const totalCompBPCosts = SF.getTotalCompBPCosts(customShipParts)
   const totalCompPCUCosts = SF.getTotalCompPCUCosts(customShipParts)
   const totalNodes = nodes + secondaryNodes + ctNetworkNodes
@@ -51,7 +53,7 @@ function SetComputer() {
 
   return (
     <>
-      <h3>Computer</h3>
+      <h3>{currentPart.name.toUpperCase()}</h3>
       <p></p>
       Primary Computer
       <br />

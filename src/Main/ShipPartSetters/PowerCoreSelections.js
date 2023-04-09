@@ -22,9 +22,9 @@ const PowerCoreSelections = () => {
     .fill(1)
     .map((dropdown, idx) => {
       return (
-        <div key={"powerCore" + idx}>
-          Power Core {idx + 1}
-          <br />
+        <div key={"powerCore" + idx} className="powerCoreBlock">
+          <div>Power Core {idx + 1}</div>
+
           <select
             value={
               powerCoreIds[idx] ? powerCoreIds[idx] : "None"
@@ -43,10 +43,11 @@ const PowerCoreSelections = () => {
                 )
             )}
           </select>
-          <br />
+
           {/* TODO: */}
-          Special Material:
-          <p></p>
+          <div>Special Material:</div>
+          {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
+
         </div>
       );
     });

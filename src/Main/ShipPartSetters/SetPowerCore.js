@@ -3,11 +3,12 @@ import * as Tables from "../References/metaTables";
 import PowerCoreSelections from "./PowerCoreSelections";
 import { CustomShipContext } from "../Context/shipContext";
 
-function SetPowerCore() {
+function SetPowerCore(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { powerCoreIds } = customShipParts;
-  const { size } = ship.getSize();
+  const size = ship.getSize();
+  const { currentPart } = props;
 
   const pcuProvided = powerCoreIds
     .map((core) => Tables.getPowerCoreData(core).pcuProvided)
@@ -19,19 +20,20 @@ function SetPowerCore() {
 
   return (
     <>
-      <h3>Power Core</h3>
+      <h3>{currentPart.name.toUpperCase()}</h3>
 
-      <p></p>
       {size === "Supercolossal" &&
-        "**A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**"}
-      <p></p>
+        <div className="note">
+          **A Supercolossal ship may have up to 5 Colossal sized cores OR 1 Supercolossal core with up to 4 Huge/Gargantuan cores.**
+        </div>
+      }
 
       <PowerCoreSelections></PowerCoreSelections>
 
-      <p></p>
-
-      <div>PCU Budget: {pcuProvided}</div>
-      <div>BP Cost: {bpCost}</div>
+      <div className="row totals">
+        <div>PCU Budget: {pcuProvided}</div>
+        <div>BP Cost: {bpCost}</div>
+      </div>
     </>
   );
 }
