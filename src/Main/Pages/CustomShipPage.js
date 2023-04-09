@@ -91,7 +91,7 @@ function CustomShipPage() {
     {component: SetArmor, name: "Armor"}, 
     {component: SetComputer, name: "Computer"},
     {component: SetCrewQuarters, name: "Crew Quarters"}, 
-    {component: SetDefensiveCounter, name: "Defensive Counter"},
+    {component: SetDefensiveCounter, name: "Defensive Countermeasures"},
     {component: SetDriftEngine, name: "Drift Engine"},
     {component: SetExpansionBays, name: "Expansion Bays"},
     {component: SetFortifiedHull, name: "Fortified Hull"},
@@ -116,17 +116,18 @@ function CustomShipPage() {
           })}
         </div>
 
-        <br />
-        <br />
-        <p>
-          BP used: {totalBPCosts}; BP Budget: {totalBPBudget}
-        </p>
-        <p>
-          PCU used: {totalPCUCosts}; PCU Essentials: {essentialPCUCosts}; PCU
-          Budget: {totalPCUBudget}
-        </p>
+        <div className="row totals">
+          <div>BP used: {totalBPCosts}</div>
+          <div>BP Budget: {totalBPBudget}</div>
+        </div>
+        
+        <div className="row totals">
+          <div>PCU used: {totalPCUCosts}</div>
+          <div>PCU Essentials: {essentialPCUCosts}</div>
+          <div>Budget: {totalPCUBudget}</div>
+        </div>
+
         <button onClick={() => printJSON()}>JSON ME</button>
-        <br />
 
         {showJSON && (
           <pre

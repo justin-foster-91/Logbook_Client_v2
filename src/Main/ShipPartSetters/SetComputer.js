@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
-import NonPrimaryComputers from "./NonPrimaryComputers";
+import NonPrimaryComputers from "../Components/NonPrimaryComputers";
 import * as SF from "../References/shipFunctions";
+import PartTitle from "../Components/PartTitle";
 
 function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -53,7 +54,7 @@ function SetComputer(props) {
 
   return (
     <>
-      <h3>{currentPart.name.toUpperCase()}</h3>
+      <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <div>Primary Computer</div>

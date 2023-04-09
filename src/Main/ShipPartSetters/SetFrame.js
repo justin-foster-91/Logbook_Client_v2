@@ -3,6 +3,7 @@ import frames from "../References/frames.json";
 import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables';
+import PartTitle from "../Components/PartTitle";
 
 function SetFrame(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -36,7 +37,7 @@ function SetFrame(props) {
 
   return (
     <>
-      <h3>{currentPart.name.toUpperCase()}</h3>
+      <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <select onChange={handleFrameIdChange}>

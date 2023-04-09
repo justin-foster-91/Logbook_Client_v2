@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
+import PartTitle from '../Components/PartTitle';
 
-function SetCrewQuarters() {
+function SetCrewQuarters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { crewQuartersId } = customShipParts
   const { bpCost, description } = Tables.getQuartersData(crewQuartersId)
+  const { currentPart } = props;
 
   const handleQuartersChange = (ev) => {
     const quartersOption = ev.target.value;
@@ -15,22 +17,20 @@ function SetCrewQuarters() {
 
   return (
     <>
-      <h3>Crew Quarters</h3>
+      <PartTitle currentPart={currentPart} />
 
-      <p></p>
+      <div className="dropdownBlock">
+        <select value={crewQuartersId} onChange={handleQuartersChange}>
+          {Tables.getQuartersIdList().map((quarters, idx) => (
+            <option key={idx}>{quarters}</option>
+          ))}
+        </select>
+      </div>
 
-      <select value={crewQuartersId} onChange={handleQuartersChange}>
-        {Tables.getQuartersIdList().map((quarters, idx) => (
-          <option key={idx}>{quarters}</option>
-        ))}
-      </select>
-      <br/>
-      {description}
+      <div className="note">{description}</div>
 
-      <p></p>
-
-      <div>
-        BP Cost: {bpCost}
+      <div className="row totals">
+        <div>BP Cost: {bpCost}</div>
       </div>
     </>
   );

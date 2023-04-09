@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
-import PowerCoreSelections from "./PowerCoreSelections";
+import PowerCoreSelections from "../Components/PowerCoreSelections";
 import { CustomShipContext } from "../Context/shipContext";
+import PartTitle from "../Components/PartTitle";
 
 function SetPowerCore(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -20,7 +21,7 @@ function SetPowerCore(props) {
 
   return (
     <>
-      <h3>{currentPart.name.toUpperCase()}</h3>
+      <PartTitle currentPart={currentPart} />
 
       {size === "Supercolossal" &&
         <div className="note">

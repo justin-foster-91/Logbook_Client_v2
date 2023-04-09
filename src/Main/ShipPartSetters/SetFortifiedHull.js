@@ -1,14 +1,16 @@
 import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
+import PartTitle from '../Components/PartTitle';
 
 //TODO: track the CT bonus
 
-function SetFortifiedHull() {
+function SetFortifiedHull(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { fortifiedHullId } = customShipParts
   const size = ship.getSize()
   const { ctBonus, bpCost } = Tables.getFortifiedHullData(fortifiedHullId, size)
+  const { currentPart } = props;
 
   const handleFortifiedHullChange = (ev) => {
     let hullsOption = ev.target.value;
@@ -19,23 +21,23 @@ function SetFortifiedHull() {
 
   return (
     <>
-      <h3>Fortified Hull</h3>
+      <PartTitle currentPart={currentPart} />
 
-      <p></p>
-
-      <select value={fortifiedHullId ? fortifiedHullId : "None"} onChange={handleFortifiedHullChange}>
-        <option key={"None"}>None</option>
-        {Tables.getFortifiedHullIdList().map((hull, idx) => (
-          <option key={idx}>{hull}</option>
-        ))}
-      </select>
-      <br/>
+      <div className="dropdownBlock">
+        <select value={fortifiedHullId ? fortifiedHullId : "None"} onChange={handleFortifiedHullChange}>
+          <option key={"None"}>None</option>
+          {Tables.getFortifiedHullIdList().map((hull, idx) => (
+            <option key={idx}>{hull}</option>
+          ))}
+        </select>
+      </div>
       
-
-      <p></p>
-        CT Bonus: {ctBonus}
-      <div>
-        BP Cost: {bpCost}
+      <div className='row'>
+        <div>CT Bonus: {ctBonus}</div>
+      </div>
+        
+      <div className='row totals'>
+        <div>BP Cost: {bpCost}</div>
       </div>
     </>
   );

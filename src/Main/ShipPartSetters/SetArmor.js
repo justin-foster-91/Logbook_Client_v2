@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
-import AblativeArmor from "./AblativeArmor";
+import AblativeArmor from "../Components/AblativeArmor";
 import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
+import PartTitle from "../Components/PartTitle";
 
 function SetArmor(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -82,7 +83,7 @@ function SetArmor(props) {
 
   return (
     <>
-      <h3>{currentPart.name.toUpperCase()}</h3>
+      <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <select

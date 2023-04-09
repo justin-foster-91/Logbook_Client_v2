@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
+import PartTitle from "../Components/PartTitle";
 
 function SetTier(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -17,7 +18,7 @@ function SetTier(props) {
 
   return (
     <>
-      <h3>{currentPart.name.toUpperCase()}</h3>
+      <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <select value={tierId} onChange={handleTierChange}>

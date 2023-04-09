@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
-import ExpansionBaySelections from './ExpansionBaySelections';
+import ExpansionBaySelections from '../Components/ExpansionBaySelections';
+import PartTitle from '../Components/PartTitle';
 
 // TODO: carrier frame must have 1 hangar expansion
 // TODO: track stat changes and exceptions of each expansion type
@@ -11,11 +12,12 @@ import ExpansionBaySelections from './ExpansionBaySelections';
 //Shuttle 3 (usually cargo holds or passenger seating)
 //Carrier 10 (must have at least 1 hanger bay)
 
-function SetExpansionBays() {
+function SetExpansionBays(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { expansionBayIds } = customShipParts
   const size = ship.getSize()
   let { expansions: expansionCap } = ship.getFramePackage()
+  const { currentPart } = props;
 
   let pcuCostTotal = 0
   let bpCostTotal = 0
@@ -35,17 +37,13 @@ function SetExpansionBays() {
 
   return (
     <>
-      <h3>Expansion Bays</h3>
-
-      <p></p>
+      <PartTitle currentPart={currentPart} />
 
       <ExpansionBaySelections></ExpansionBaySelections>      
 
-      <p></p>
-
-      <div>
-        Total PCU Costs: {pcuCostTotal}; 
-        Total BP Costs: {bpCostTotal}
+      <div className='row totals'>
+        <div>Total PCU Costs: {pcuCostTotal}</div>
+        <div>Total BP Costs: {bpCostTotal}</div>
       </div>
     </>
   );

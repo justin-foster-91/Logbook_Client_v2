@@ -67,21 +67,23 @@ function ExpansionBaySelections() {
 
   return (
     <>
-      <p>Expansions: {expansionCount}/{expansionCap}</p>
+      <div className='row'>Expansions: {expansionCount}/{expansionCap}</div>
+
       {expansionCap === "Unlimited" 
-      && <p><i>Supercolossal ships with increased width or length can support more expansion bays.</i></p>}
+      && <div className='note'><i>Supercolossal ships with increased width or length can support more expansion bays.</i></div>}
+
       {Array(expansionCount)
         .fill(1)
         .map((dropdown, idx) => {
           const { pcuCost, bpCost } = Tables.getExpansionBayData(expansionBayIds[idx], size)
           const indexValue = expansionBayIds[idx] ? expansionBayIds[idx] : "None"
           return (
-            <div key={"expansionBay" + idx}>
-              Expansion Bay {idx + 1} 
-              <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
-              <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
-
-              <br />
+            <div key={"expansionBay" + idx} className='dropdownBlock'>
+              <div className='row'>
+                <div>Expansion Bay {idx + 1}</div>
+                <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
+                <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
+              </div>
 
               <select
                 value={indexValue}
@@ -96,19 +98,16 @@ function ExpansionBaySelections() {
                 )}
               </select>
 
-              <br />
-
-              <div>
-                PCU Cost: {pcuCost}; 
-                BP Cost: {bpCost}
+              <div className='row'>
+                <div>PCU Cost: {pcuCost}</div>
+                <div>BP Cost: {bpCost}</div>
               </div>
 
-              <br/>
             </div>
           );
       })}
+
       {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion</button>}
-      <br/>
     </>
   )}
 

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import { splitCamelCase } from "../References/utils";
+import PartTitle from "../Components/PartTitle";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
@@ -61,28 +62,29 @@ function SetSecurity(props) {
 
   return (
     <>
-      <h3>{currentPart.name}</h3>
-      Anti-Hacking Systems (dropdown) <br/>
-      {/*  increase the DC to hack into it by 1 * mark */}
-      <select value={antiHackingSystemsId} onChange={handleAntiHackingChange}>
-        {Tables.getAntiHackingIdList().map((weapon, idx) => (
-          <option key={idx}>{weapon}</option>
-        ))}
-      </select>
+      <PartTitle currentPart={currentPart} />
 
-      <p></p>
+      <div className="dropdownBlock">
+        <div>Anti-Hacking Systems (dropdown)</div>
+        {/*  increase the DC to hack into it by 1 * mark */}
+        <select value={antiHackingSystemsId} onChange={handleAntiHackingChange}>
+          {Tables.getAntiHackingIdList().map((weapon, idx) => (
+            <option key={idx}>{weapon}</option>
+          ))}
+        </select>
+      </div>
 
-      Anti-Personnel Weapon <br/>
-      {/* Needs access to entire longarm and heavy weapons list */}
-      <select value={antiPersonnelWeaponId} onChange={handleAntiPersonnelChange}>
-        {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
-          <option key={idx}>{weapon}</option>
-        ))}
-      </select>
+      <div className="dropdownBlock">
+        <div>Anti-Personnel Weapon</div>
+        {/* Needs access to entire longarm and heavy weapons list */}
+        <select value={antiPersonnelWeaponId} onChange={handleAntiPersonnelChange}>
+          {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
+            <option key={idx}>{weapon}</option>
+          ))}
+        </select>
+      </div>
 
-      <p></p>
       {/* Biometric Locks - check */}
-      <p></p>
 
       Computer Countermeasures
       <div>
@@ -98,10 +100,9 @@ function SetSecurity(props) {
       {/* Reconfiguration System - check */}
 
 
-      <p></p>
-
-      <div>
-        Total BP Cost: {totalSecurityBP}; Total PCU Cost: {totalSecurityPCU}
+      <div className="row totals">
+        <div>Total BP Cost: {totalSecurityBP}</div>
+        <div>Total PCU Cost: {totalSecurityPCU}</div>
       </div>
     </>
   );

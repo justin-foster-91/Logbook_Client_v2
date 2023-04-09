@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
+import PartTitle from '../Components/PartTitle';
 
-function SetDefensiveCounters() {
+function SetDefensiveCounters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { defensiveCountermeasuresId: defensiveId } = customShipParts
   const { tlBonus, pcuCost, bpCost } = Tables.getDefensiveCounterData(defensiveId)
+  const { currentPart } = props;
 
   const handleDefensiveCounterChange = (ev) => {
     let defensiveOption = ev.target.value;
@@ -16,25 +18,24 @@ function SetDefensiveCounters() {
 
   return (
     <>
-      <h3>Defensive Countermeasures</h3>
+      <PartTitle currentPart={currentPart} />
 
-      <p></p>
-
-      <select value={defensiveId ? defensiveId : "None"} onChange={handleDefensiveCounterChange}>
-        <option key="None">None</option>
-        {Tables.getDefensiveCounterIdList().map((defense, idx) => (
-          <option key={idx} value={defense}>{defense} Defenses</option>
-        ))}
-      </select>
-
-      <p></p>
-
-      <div>
-        TL Bonus: {`+${tlBonus}`}
+      <div className='dropdownBlock'>
+        <select value={defensiveId ? defensiveId : "None"} onChange={handleDefensiveCounterChange}>
+          <option key="None">None</option>
+          {Tables.getDefensiveCounterIdList().map((defense, idx) => (
+            <option key={idx} value={defense}>{defense} Defenses</option>
+          ))}
+        </select>
       </div>
-      <div>
-        PCU Cost: {pcuCost}; 
-        BP Cost: {bpCost}
+
+      <div className='row'>
+        <div>TL Bonus: {`+${tlBonus}`}</div>
+      </div>
+
+      <div className='row totals'>
+        <div>PCU Cost: {pcuCost}</div>
+        <div>BP Cost: {bpCost}</div>
       </div>
     </>
   );

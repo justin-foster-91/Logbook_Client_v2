@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
+import PartTitle from "../Components/PartTitle";
 
 function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -21,7 +22,7 @@ function SetThrusters(props) {
 
   return (
     <>
-      <h3>{currentPart.name.toUpperCase()}</h3>
+      <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>

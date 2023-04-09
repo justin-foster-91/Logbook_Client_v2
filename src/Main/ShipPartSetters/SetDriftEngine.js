@@ -1,13 +1,15 @@
 import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
+import PartTitle from '../Components/PartTitle';
 
-function SetDriftEngine() {
+function SetDriftEngine(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { driftEngineId, frameId } = customShipParts
   const size = ship.getSize()
   const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size)
+  const { currentPart } = props;
   const pcuBudget = ship.getTotalPCUBudget()
   let modifiedBPCost = 0;
   if(frameId === "Oma") modifiedBPCost = Math.ceil(bpCost*1.5)
@@ -35,29 +37,34 @@ function SetDriftEngine() {
 
   return (
     <>
-      <h3>Drift Engines</h3>
+      <PartTitle currentPart={currentPart} />
 
-      <p></p>
-      <select value={driftEngineId ? driftEngineId : "None"} onChange={handleDriftEngineChange}>
-        <option key="None">None</option>
-        {Tables.getDriftEngineIdList().map((engine, idx) => 
-          isWithinBudget(engine) && 
-          isWithinMaxSize(engine) && 
-          <option key={idx} value={engine}>
-            {engine}
-          </option>
-        )}
-      </select>
-
-      <p></p>
-      {special && <>Note: <i>{special}</i></>}
-      <div>
-        Engine Rating: {rating}
+      <div className="dropdownBlock">
+        <select value={driftEngineId ? driftEngineId : "None"} onChange={handleDriftEngineChange}>
+          <option key="None">None</option>
+          {Tables.getDriftEngineIdList().map((engine, idx) => 
+            isWithinBudget(engine) && 
+            isWithinMaxSize(engine) && 
+            <option key={idx} value={engine}>
+              {engine}
+            </option>
+          )}
+        </select>
       </div>
-      <div>
-        BP Cost: {modifiedBPCost 
+
+      {special && 
+        <div className='note'>Note: <i>{special}</i></div>
+      }
+
+      <div className='row'>
+        <div>Engine Rating: {rating}</div>
+      </div>
+
+      <div className='row totals'>
+        <div>BP Cost: {modifiedBPCost 
           ? <>{modifiedBPCost} <i>(Oma 50% increase)</i></> 
           : bpCost}
+        </div>
       </div>
     </>
   );
