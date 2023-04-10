@@ -34,22 +34,8 @@ function CustomShipPage() {
 
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
+  // https://www.aonsrd.com/Rules.aspx?ID=183
 
-  // const handleScroll = () => {
-  //     let allPartBlocks = document.getElementsByClassName("partSetterBlock")
-  //     let allPartTitles = allPartBlocks.map(part => part.firstChild)
-  //     let highestPartBlockId = null;
-  //     Array.from(allPartBlocks).every(block => {
-  //       let blockY = block.getBoundingClientRect().y;
-
-  //       if (blockY < 0) return true;
-
-  //       highestPartBlockId = block.id
-  //       setPartHighlight(highestPartBlockId)
-  //       return false;
-  //     })
-  //     // console.log(highestPartBlockId);
-  // };
 
   const handleScroll = () => {
     let allPartBlocks = document.getElementsByClassName("partSetterBlock")
@@ -65,7 +51,6 @@ function CustomShipPage() {
       setPartHighlight(highestPartBlockId)
       return false;
     })
-    // console.log(highestPartBlockId);
   };
   
   useEffect(() => {
@@ -124,7 +109,7 @@ function CustomShipPage() {
         <div className="row totals">
           <div>PCU used: {totalPCUCosts}</div>
           <div>PCU Essentials: {essentialPCUCosts}</div>
-          <div>Budget: {totalPCUBudget}</div>
+          <div>PCU Budget: {totalPCUBudget}</div>
         </div>
 
         <button onClick={() => printJSON()}>JSON ME</button>
