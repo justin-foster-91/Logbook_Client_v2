@@ -39,7 +39,7 @@ function Sidebar(props) {
   }
 
   return (
-    <div className='sidebarWrapper'>
+    <aside className='sidebarWrapper'>
       <div className='sidebar'>
         <h3>Ship Parts</h3>
         {sidebarList()}
@@ -55,7 +55,7 @@ function Sidebar(props) {
           <div>PCU Budget: {totalPCUBudget}</div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
 

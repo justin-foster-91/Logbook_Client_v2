@@ -1,5 +1,5 @@
-h2, h3 {
-  padding: .5rem 0 1rem 0;
+h1, h2, h3 {
+  padding: .5rem 0 1rem .5rem;
   margin: 0;
 }
 
@@ -10,7 +10,6 @@ h2, h3 {
 
 body {
   font-family: 'SansationRegular';
-
 }
 
 .sidebarWrapper {
@@ -31,11 +30,11 @@ body {
   flex-direction: column;
 }
 
-.sidebar a {
+.sidebar > a {
   text-align: start;
 }
 
-.sidebar a:link, a:visited, a:hover, a:active{
+.sidebar :is(a:link, a:visited, a:hover, a:active){
   text-decoration: none;
   color: #C9C5BE;
 }
@@ -48,16 +47,12 @@ body {
   text-align: start;
 }
 
-.customShipDisplay h2 {
-  padding: 1.5rem;
-}
-
-.customShipDisplay .row {
+.customShipDisplay .row, .partSetterBlock .row {
   display: flex;
   flex-direction: row;
 }
 
-.customShipDisplay .row div {
+.customShipDisplay .row div, .partSetterBlock .row div {
   padding: .1rem;
   margin: .1rem 0 .1rem 1rem;
 }
@@ -71,16 +66,6 @@ body {
   /* margin: 5px; */
   padding: 1rem;
   margin: 1rem
-}
-
-.partSetterBlock .row {
-  display: flex;
-  flex-direction: row;
-}
-
-.partSetterBlock .row div {
-  padding: .1rem;
-  margin: .1rem 1rem .1rem 0;
 }
 
 .totals {

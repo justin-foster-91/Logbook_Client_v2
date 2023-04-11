@@ -87,16 +87,16 @@ function CustomShipPage() {
   return (
     <>
       <Sidebar setterList={setterList} partHighlight={partHighlight}></Sidebar>
-      <div className="customShipDisplay" id="customShipDisplay">
-        <h2>Custom Ship Page</h2>
+      <main className="customShipDisplay" id="customShipDisplay">
+        <h1>Custom Ship Page</h1>
 
         <div className="partSetterList">
           {setterList.map((part, idx) => {
             const Setter = part.component;
             return (
-              <div id={part.name} className="partSetterBlock" key={idx}>
+              <section id={part.name} className="partSetterBlock" key={idx}>
                 <Setter currentPart={part}></Setter>
-              </div>
+              </section>
             );
           })}
         </div>
@@ -126,7 +126,7 @@ function CustomShipPage() {
             {JSON.stringify(customShipParts, null, 2)}
           </pre>
         )}
-      </div>
+      </main>
     </>
   );
 }
