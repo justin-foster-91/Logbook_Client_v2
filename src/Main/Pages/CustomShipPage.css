@@ -14,7 +14,7 @@ body {
 
 .sidebarWrapper {
   height: 100%;
-  min-width: 9svw;
+  min-width: 14svw;
   position: fixed;
   background-image: url("../Assets/Images/Base_ship.jpg");
   background-size: cover;
@@ -40,8 +40,8 @@ body {
 }
 
 .customShipDisplay {
-  width: 90svw;
-  transform: translate(9svw);
+  width: 85svw;
+  transform: translate(14svw);
   background-color: #001129;
   color: #C9C5BE;
   text-align: start;

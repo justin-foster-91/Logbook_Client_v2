@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import PartTitle from '../Components/PartTitle';
+import PartTotals from '../Components/PartTotals';
 
 function SetDriftEngine(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -57,15 +58,16 @@ function SetDriftEngine(props) {
       }
 
       <div className='row'>
-        <div>Engine Rating: {rating}</div>
+        <div><strong>Engine Rating</strong>: {rating}</div>
       </div>
 
-      <div className='row totals'>
+      <PartTotals part={currentPart} bpCost={bpCost} modifiedBPCost={modifiedBPCost} />
+      {/* <div className='row totals'>
         <div>BP Cost: {modifiedBPCost 
           ? <>{modifiedBPCost} <i>(Oma 50% increase)</i></> 
           : bpCost}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

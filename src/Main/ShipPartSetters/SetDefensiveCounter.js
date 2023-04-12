@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import PartTitle from '../Components/PartTitle';
+import PartTotals from '../Components/PartTotals';
 
 function SetDefensiveCounters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -30,13 +31,10 @@ function SetDefensiveCounters(props) {
       </div>
 
       <div className='row'>
-        <div>TL Bonus: {`+${tlBonus}`}</div>
+        <div><strong>TL Bonus</strong>: +{tlBonus}</div>
       </div>
 
-      <div className='row totals'>
-        <div>PCU Cost: {pcuCost}</div>
-        <div>BP Cost: {bpCost}</div>
-      </div>
+      <PartTotals pcuCost={pcuCost} bpCost={bpCost} />
     </>
   );
 }

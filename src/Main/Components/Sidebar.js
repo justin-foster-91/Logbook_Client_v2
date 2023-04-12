@@ -38,7 +38,7 @@ function Sidebar(props) {
       if (name === partHighlight) highlight = true;
 
       let shortName = null;
-      if (name === "Defensive Countermeasures") shortName = "Defensive Counter"
+      // if (name === "Defensive Countermeasures") shortName = "Defensive Counter"
 
       return (
         <a href={`#${name}`} key={name} >

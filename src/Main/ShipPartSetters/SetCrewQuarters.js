@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import PartTitle from '../Components/PartTitle';
+import PartTotals from '../Components/PartTotals';
 
 function SetCrewQuarters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -29,9 +30,7 @@ function SetCrewQuarters(props) {
 
       <div className="note">{description}</div>
 
-      <div className="row totals">
-        <div>BP Cost: {bpCost}</div>
-      </div>
+      <PartTotals bpCost={bpCost} />
     </>
   );
 }
