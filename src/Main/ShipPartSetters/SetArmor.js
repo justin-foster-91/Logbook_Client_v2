@@ -4,6 +4,7 @@ import AblativeArmor from "../Components/AblativeArmor";
 import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
 import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
 
 function SetArmor(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -21,36 +22,26 @@ function SetArmor(props) {
   };
 
   const renderArmorBonus = () => {
-    if (!acBonus && !tempHP) return "AC/Temp HP: 0";
-    if (acBonus) return `Bonus AC: ${acBonus}`;
-    else return `Temp HP: ${tempHP}`;
+    if (!acBonus && !tempHP) return <><strong>AC/Temp HP</strong>: n/a</>;
+    if (acBonus) return <><strong>Bonus AC</strong>: {acBonus}</>;
+    return <><strong>Temp HP</strong>: {tempHP}</>;
   };
 
   const renderSpecial = () => {
     if (turnDistance) return <>{tlPenalty} TL; +{turnDistance} turn distance</>;
-
     if (tlPenalty) return <>{tlPenalty} TL</>;
-
-    return "n/a";
+    return <>n/a</>;
   };
 
   const renderArmorDescription = () => {
     if (armorId.includes("Mk"))
-      return (
-        'Standard armor with a bonus to AC'
-      );
+      return "Standard armor with a bonus to AC";
     if (armorId.includes("Energy"))
-      return (
-        'Energy-absorbent plating can store some of the energy that strikes the hull, redirecting that energy to power the ship’s systems with an Engineering check.'
-      );
+      return "Energy-absorbent plating can store some of the energy that strikes the hull, redirecting that energy to power the ship's systems with an Engineering check.";
     if (armorId.includes("ablative")) {
-      return (
-        'Destructible armor that confers a temporary HP bonus to each arc.'
-      )
+      return "Destructible armor that confers a temporary HP bonus to each arc.";
     }
-    return (
-      "Interposed defenses grant temporary HP that doesn't need to be distributed into quadrants, instead providing a single pool to draw from regardless of which arc an attack strikes."
-    );
+    return "Interposed defenses grant temporary HP that doesn't need to be distributed into quadrants, instead providing a single pool to draw from regardless of which arc an attack strikes.";
   }
 
   const createDropdownItem = (armor, idx) => {
@@ -112,13 +103,10 @@ function SetArmor(props) {
 
       <div className="row">
         <div>{renderArmorBonus()}</div>
-        <div className="row special">Special: {renderSpecial()}</div>
+        <div className="row special"><strong>Special</strong>: {renderSpecial()}</div>
       </div>
 
-      <div className="row totals">
-        <div>BP cost: {bpCost}</div>
-      </div>
-      
+      <PartTotals bpCost={bpCost}></PartTotals>
     </>
   );
 }

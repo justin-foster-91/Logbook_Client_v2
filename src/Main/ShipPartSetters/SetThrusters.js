@@ -3,6 +3,9 @@ import * as Tables from "../References/metaTables";
 import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
+import PowerIcon from "../IconRefs/PowerIcon";
+import BuildIcon from "../IconRefs/BuildIcon";
 
 function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -45,14 +48,11 @@ function SetThrusters(props) {
       </div>
 
       <div className="row">
-        <div>Speed (in hexes): {speed}</div>
-        <div>Piloting Modifier: {pilotingModifier}</div>
+        <div><strong>Speed (in hexes)</strong>: {speed}</div>
+        <div><strong>Piloting Modifier</strong>: {pilotingModifier}</div>
       </div>
 
-      <div className="row totals">
-        <div>PCU cost: {pcuCost}</div>
-        <div>BP cost: {bpCost}</div>
-      </div>
+      <PartTotals pcuCost={pcuCost} bpCost={bpCost} />
     </>
   );
 }

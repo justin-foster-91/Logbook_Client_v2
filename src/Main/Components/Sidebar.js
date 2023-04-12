@@ -50,14 +50,14 @@ function Sidebar(props) {
   }
 
   return (
-    <aside className='sidebarWrapper'>
+    <nav className='sidebarWrapper'>
       <div className='sidebar'>
         <h3>Ship Parts</h3>
         {sidebarList()}
 
         <PointTotals />
       </div>
-    </aside>
+    </nav>
   );
 }
 

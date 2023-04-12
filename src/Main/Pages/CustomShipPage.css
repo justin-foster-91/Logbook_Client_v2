@@ -54,7 +54,7 @@ body {
 
 .customShipDisplay .row div, .partSetterBlock .row div {
   padding: .1rem;
-  margin: .1rem 0 .1rem 1rem;
+  margin: .1rem 1rem .1rem .1rem;
 }
 
 .partSetterList {
@@ -65,12 +65,17 @@ body {
   border: .1rem solid #7e7e7e;
   /* margin: 5px; */
   padding: 1rem;
-  margin: 1rem
+  margin: 1rem;
 }
 
-.customShipDisplay .totals {
+.partSetterBlock .totals {
   border-top: .1rem solid #7e7e7e;
   padding-top: 1rem;
+  justify-content: flex-end;
+}
+
+.partSetterList :first-child > .totals  {
+  justify-content: flex-start;
 }
 
 .totals {
@@ -91,7 +96,7 @@ body {
 .dropdownBlock {
   display: flex;
   flex-direction: column;
-  padding: .3rem 0 .3rem 0;
+  padding: .3rem 0 .5rem 0;
   width: fit-content;
   margin-right: .3rem;
 }
@@ -101,7 +106,7 @@ body {
 }
 
 .note {
-  padding-top: 1rem;
+  padding: 1rem 0 1rem;
 }
 
 select {
@@ -122,8 +127,10 @@ select {
 
 .icon {
   color: white;
-  width: 3rem;
-  /* height: 1.5rem; */
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 legend {

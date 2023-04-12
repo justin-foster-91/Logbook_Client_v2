@@ -4,6 +4,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import NonPrimaryComputers from "../Components/NonPrimaryComputers";
 import * as SF from "../References/shipFunctions";
 import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
 
 function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -73,15 +74,12 @@ function SetComputer(props) {
       }
 
       <div className="row">
-        <div>Bonus: {bonusList}</div>
-        <div>Nodes: {totalNodes}</div>
-        <div>Tier: {computerTier}</div>
+        <div><strong>Skill Bonus</strong>: {bonusList}</div>
+        <div><strong>Nodes</strong>: {totalNodes}</div>
+        <div><strong>Tier</strong>: {computerTier}</div>
       </div>
 
-      <div className="row totals">
-        <div>PCU Cost: {totalCompPCUCosts}</div>
-        <div>BP Cost: {totalCompBPCosts}</div>
-      </div>
+      <PartTotals pcuCost={totalCompPCUCosts} bpCost={totalCompBPCosts}/>
     </>
   );
 }

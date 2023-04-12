@@ -3,6 +3,8 @@ import * as Tables from "../References/metaTables";
 import PowerCoreSelections from "../Components/PowerCoreSelections";
 import { CustomShipContext } from "../Context/shipContext";
 import PartTitle from "../Components/PartTitle";
+import PowerIcon from "../IconRefs/PowerIcon";
+import PartTotals from "../Components/PartTotals";
 
 function SetPowerCore(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -31,10 +33,12 @@ function SetPowerCore(props) {
 
       <PowerCoreSelections></PowerCoreSelections>
 
-      <div className="row totals">
-        <div>PCU Budget: {pcuProvided}</div>
-        <div>BP Cost: {bpCost}</div>
+      <div className="row">
+        <PowerIcon />
+        <div><strong>PCU Budget</strong>: {pcuProvided}</div>
       </div>
+
+      <PartTotals bpCost={bpCost} />
     </>
   );
 }

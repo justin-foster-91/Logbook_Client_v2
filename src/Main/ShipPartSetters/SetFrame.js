@@ -4,6 +4,7 @@ import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables';
 import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
 
 function SetFrame(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -48,46 +49,44 @@ function SetFrame(props) {
       </div>
 
       <div className="row">
-        <div>Size: {size}</div>
-        <div>Maneuverability: {maneuverability}</div>
+        <div><strong>Size</strong>: {size}</div>
+        <div><strong>Maneuverability</strong>: {maneuverability}</div>
       </div>
       
       <div className="row">
-        <div>HP: {hp}</div>
-        <div>DT: {dt}</div>
-        <div>CT: {ct}</div>
-        <div>Expansion Bays: {expansions}</div>
-        <div>Minimum Crew: {minCrew}</div>
-        <div>Maximum Crew: {maxCrew}</div>
+        <div><strong>HP</strong>: {hp}</div>
+        <div><strong>DT</strong>: {dt}</div>
+        <div><strong>CT</strong>: {ct}</div>
+        <div><strong>Expansion Bays</strong>: {expansions}</div>
+        <div><strong>Minimum Crew</strong>: {minCrew}</div>
+        <div><strong>Maximum Crew</strong>: {maxCrew}</div>
       </div>
 
       <fieldset>
         <legend>Maneuverability</legend>
         <div className="row">
-          <div>Turn Distance: {turnDistance}</div>
-          <div>Piloting Mod: {pilotingModifier > 0 && '+'}{pilotingModifier}</div>
+          <div><strong>Turn Distance</strong>: {turnDistance}</div>
+          <div><strong>Piloting Mod</strong>: {pilotingModifier > 0 && '+'}{pilotingModifier}</div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>Size</legend>
         <div className="row">
-          <div>Length: {length}</div> 
-          <div>Weight: {weight}</div> 
-          <div>AC and TL Mod: {acMod > 0 ? `+${acMod}` : acMod}</div>
+          <div><strong>Length</strong>: {length}</div> 
+          <div><strong>Weight</strong>: {weight}</div> 
+          <div><strong>AC and TL Mod</strong>: {acMod > 0 ? `+${acMod}` : acMod}</div>
         </div>
       </fieldset>
 
       {specialAbility &&
         <fieldset>
           <legend>Special Ability</legend>
-          <div><b>{specialName}</b> {specialAbility[specialName]}</div>
+          <div><strong>{specialName}</strong> {specialAbility[specialName]}</div>
         </fieldset>
       }
 
-      <div className="row totals">
-        <div>BP Cost: {bpCost}</div>
-      </div>
+      <PartTotals bpCost={bpCost} />
     </>
   );
 }
