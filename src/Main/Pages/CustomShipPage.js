@@ -79,7 +79,7 @@ function CustomShipPage() {
     <>
       <Sidebar setterList={setterList} partHighlight={partHighlight}></Sidebar>
       <main className="customShipDisplay" id="customShipDisplay">
-        <h1>Custom Ship Page</h1>
+        <h1>Custom Ship</h1>
 
         <div className="partSetterList">
           {setterList.map((part, idx) => {

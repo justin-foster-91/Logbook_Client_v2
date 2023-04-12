@@ -30,7 +30,7 @@ function SetCrewQuarters(props) {
 
       <div className="note">{description}</div>
 
-      <PartTotals bpCost={bpCost} />
+      <PartTotals part={currentPart} bpCost={bpCost} />
     </>
   );
 }

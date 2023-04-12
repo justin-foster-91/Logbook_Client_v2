@@ -64,7 +64,6 @@ class Ship {
     if (idx === null)
       throw new Error("setPowerCore(powerCore, idx) must take an index parameter");
 
-    console.log({powerCore, idx});
     const powerCoreQuantity = SF.getCoreQuantityFromSize(this.getSize());
     if (idx + 1 > powerCoreQuantity)
       throw new Error(`Power core number ${idx + 1} may not exceed the allowed ${powerCoreQuantity} power cores`);

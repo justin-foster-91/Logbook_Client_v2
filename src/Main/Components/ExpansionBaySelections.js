@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
-import * as Tables from '../References/metaTables'
+import * as Tables from '../References/metaTables';
+import PartTotals from './PartTotals';
 
   //Booster Thruster Housing: adds an additional thruster slot
   //Dedicated Computer Housing: adds an additional mononode computer slot
@@ -67,7 +68,7 @@ function ExpansionBaySelections() {
 
   return (
     <>
-      <div className='row'>Expansions: {expansionCount}/{expansionCap}</div>
+      <div className='row'>Slots Used: {expansionCount}/{expansionCap}</div>
 
       {expansionCap === "Unlimited" 
       && <div className='note'><i>Supercolossal ships with increased width or length can support more expansion bays.</i></div>}
@@ -79,10 +80,12 @@ function ExpansionBaySelections() {
           const indexValue = expansionBayIds[idx] ? expansionBayIds[idx] : "None"
           return (
             <div key={"expansionBay" + idx} className='dropdownBlock'>
-              <div className='row'>
-                <div>Expansion Bay {idx + 1}</div>
-                <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
-                <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
+              <div className='row spaced'>
+                <div><strong>Expansion Bay {idx + 1}</strong></div>
+                <div>
+                  <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
+                  <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
+                </div>
               </div>
 
               <select
@@ -98,10 +101,7 @@ function ExpansionBaySelections() {
                 )}
               </select>
 
-              <div className='row'>
-                <div>PCU Cost: {pcuCost}</div>
-                <div>BP Cost: {bpCost}</div>
-              </div>
+              <PartTotals part={expansionBayIds[idx]} pcuCost={pcuCost} bpCost={bpCost} />
 
             </div>
           );

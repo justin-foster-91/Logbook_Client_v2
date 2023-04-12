@@ -52,7 +52,7 @@ function SetThrusters(props) {
         <div><strong>Piloting Modifier</strong>: {pilotingModifier}</div>
       </div>
 
-      <PartTotals pcuCost={pcuCost} bpCost={bpCost} />
+      <PartTotals part={currentPart} pcuCost={pcuCost} bpCost={bpCost} />
     </>
   );
 }

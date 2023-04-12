@@ -86,7 +86,7 @@ function SetFrame(props) {
         </fieldset>
       }
 
-      <PartTotals bpCost={bpCost} />
+      <PartTotals part={currentPart} bpCost={bpCost} />
     </>
   );
 }

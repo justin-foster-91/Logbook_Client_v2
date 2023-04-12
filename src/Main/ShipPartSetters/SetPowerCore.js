@@ -38,7 +38,7 @@ function SetPowerCore(props) {
         <div><strong>PCU Budget</strong>: {pcuProvided}</div>
       </div>
 
-      <PartTotals bpCost={bpCost} />
+      <PartTotals part={currentPart} bpCost={bpCost} />
     </>
   );
 }

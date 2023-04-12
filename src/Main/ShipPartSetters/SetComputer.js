@@ -79,7 +79,7 @@ function SetComputer(props) {
         <div><strong>Tier</strong>: {computerTier}</div>
       </div>
 
-      <PartTotals pcuCost={totalCompPCUCosts} bpCost={totalCompBPCosts}/>
+      <PartTotals part={currentPart} pcuCost={totalCompPCUCosts} bpCost={totalCompBPCosts}/>
     </>
   );
 }

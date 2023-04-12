@@ -34,7 +34,7 @@ function SetDefensiveCounters(props) {
         <div><strong>TL Bonus</strong>: +{tlBonus}</div>
       </div>
 
-      <PartTotals pcuCost={pcuCost} bpCost={bpCost} />
+      <PartTotals part={currentPart} pcuCost={pcuCost} bpCost={bpCost} />
     </>
   );
 }

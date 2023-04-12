@@ -3,6 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import ExpansionBaySelections from '../Components/ExpansionBaySelections';
 import PartTitle from '../Components/PartTitle';
+import PartTotals from '../Components/PartTotals';
 
 // TODO: carrier frame must have 1 hangar expansion
 // TODO: track stat changes and exceptions of each expansion type
@@ -41,10 +42,7 @@ function SetExpansionBays(props) {
 
       <ExpansionBaySelections></ExpansionBaySelections>      
 
-      <div className='row totals'>
-        <div>Total PCU Costs: {pcuCostTotal}</div>
-        <div>Total BP Costs: {bpCostTotal}</div>
-      </div>
+      <PartTotals part={currentPart} pcuCost={pcuCostTotal} bpCost={bpCostTotal} />
     </>
   );
 }

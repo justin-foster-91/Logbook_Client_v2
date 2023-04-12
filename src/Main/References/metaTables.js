@@ -1255,7 +1255,7 @@ const defensiveCounter = {
 const driftEngines = {
   'Signal Basic': {
     rating: 1,
-    minPcu: 75,
+    minPCU: 75,
     maxSize: null,
     bpCost: 2,
     source: 'Starfinder Core Rulebook pg. 298',
@@ -1263,7 +1263,7 @@ const driftEngines = {
   },
   'Signal Booster': {
     rating: 2,
-    minPcu: 100,
+    minPCU: 100,
     maxSize: 'Huge',
     bpCost: 5,
     source: 'Starfinder Core Rulebook pg. 298',
@@ -1271,7 +1271,7 @@ const driftEngines = {
   },
   'Signal Major': {
     rating: 3,
-    minPcu: 150,
+    minPCU: 150,
     maxSize: 'Large',
     bpCost: 10,
     source: 'Starfinder Core Rulebook pg. 298',
@@ -1279,7 +1279,7 @@ const driftEngines = {
   },
   'Signal Superior': {
     rating: 4,
-    minPcu: 175,
+    minPCU: 175,
     maxSize: 'Large',
     bpCost: 15,
     source: 'Starfinder Core Rulebook pg. 298',
@@ -1287,7 +1287,7 @@ const driftEngines = {
   },
   'Signal Ultra': {
     rating: 5,
-    minPcu: 200,
+    minPCU: 200,
     maxSize: 'Medium',
     bpCost: 20,
     source: 'Starfinder Core Rulebook pg. 298',
@@ -1295,7 +1295,7 @@ const driftEngines = {
   },
   'Archon Drive': {
     rating: 1,
-    minPcu: 150,
+    minPCU: 150,
     maxSize: null,
     bpCost: 15,
     source: 'Starship Operations Manual pg. 9',
@@ -1303,7 +1303,7 @@ const driftEngines = {
   },
   'Chaos Sail': {
     rating: 1,
-    minPcu: 75,
+    minPCU: 75,
     maxSize: null,
     bpCost: 4,
     source: 'Starship Operations Manual pg. 9',
@@ -1311,7 +1311,7 @@ const driftEngines = {
   },
   'Constellation Orrery': {
     rating: 2,
-    minPcu: 150,
+    minPCU: 150,
     maxSize: 'Huge',
     bpCost: 10,
     source: 'Starship Operations Manual pg. 10',
@@ -1319,7 +1319,7 @@ const driftEngines = {
   },
   'Elemental Engine': {
     rating: 1,
-    minPcu: 100,
+    minPCU: 100,
     maxSize: null,
     bpCost: 5,
     source: 'Starship Operations Manual pg. 10',
@@ -1327,7 +1327,7 @@ const driftEngines = {
   },
   'First Drive': {
     rating: 3,
-    minPcu: 175,
+    minPCU: 175,
     maxSize: 'Large',
     bpCost: 12,
     source: 'Starship Operations Manual pg. 10',
@@ -1335,14 +1335,14 @@ const driftEngines = {
   },
   'Fold Gates': {
     rating: 'Special',
-    minPcu: 200,
+    minPCU: 200,
     maxSize: 'Huge',
     bpCost: 0,
     source: 'Starship Operations Manual pg. 10',
     special: 'Journeying between a pair of fold gates is limited to predetermined destinations—those locations with functioning fold gates (determined by the GM).'  },
   Helldrive: {
     rating: 1,
-    minPcu: 100,
+    minPCU: 100,
     maxSize: null,
     bpCost: 10,
     source: 'Starship Operations Manual pg. 11',
@@ -1350,7 +1350,7 @@ const driftEngines = {
   },
   'Planar Aperture Drive': {
     rating: 2,
-    minPcu: 150,
+    minPCU: 150,
     maxSize: null,
     bpCost: 15,
     source: 'Starship Operations Manual pg. 11',
@@ -1358,7 +1358,7 @@ const driftEngines = {
   },
   'Shadow Engine': {
     rating: 1,
-    minPcu: 75,
+    minPCU: 75,
     maxSize: null,
     bpCost: 3,
     source: 'Starship Operations Manual pg. 11',
@@ -1366,7 +1366,7 @@ const driftEngines = {
   },
   'Onos drive': {
     rating: 0.5,
-    minPcu: 150,
+    minPCU: 150,
     maxSize: 'Medium',
     bpCost: 10,
     source: 'Starfinder #42: Whispers of the Eclipse pg. 50',

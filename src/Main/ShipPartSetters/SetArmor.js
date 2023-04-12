@@ -106,7 +106,7 @@ function SetArmor(props) {
         <div className="row special"><strong>Special</strong>: {renderSpecial()}</div>
       </div>
 
-      <PartTotals bpCost={bpCost}></PartTotals>
+      <PartTotals part={currentPart} bpCost={bpCost} />
     </>
   );
 }

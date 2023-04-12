@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import PartTitle from '../Components/PartTitle';
@@ -12,10 +12,12 @@ function SetDriftEngine(props) {
   const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size)
   const { currentPart } = props;
   const pcuBudget = ship.getTotalPCUBudget()
-  let modifiedBPCost = 0;
-  if(frameId === "Oma") modifiedBPCost = Math.ceil(bpCost*1.5)
+  const [modifiedBPCost, setModifiedBPCost] = useState();
   
-
+  useEffect(() => {
+    if(frameId === "Oma") setModifiedBPCost(Math.ceil(bpCost*1.5))
+  }, [frameId, bpCost])
+  
   const handleDriftEngineChange = (ev) => {
     let engineOption = ev.target.value;
     if(engineOption === "None") engineOption = null
@@ -26,14 +28,14 @@ function SetDriftEngine(props) {
   const isWithinBudget = (engine) => {
     const { minPCU } = Tables.getDriftEngineData(engine, size)
 
-    return minPCU <= pcuBudget
+    return minPCU <= pcuBudget;
   }
 
   const isWithinMaxSize = (engine) => {
     let { maxSize } = Tables.getDriftEngineData(engine, size)
     if(maxSize === null) maxSize = 'Supercolossal'
 
-    return Tables.sizeMod[size] <= Tables.sizeMod[maxSize]
+    return Tables.sizeMod[size] <= Tables.sizeMod[maxSize];
   }
 
   return (
@@ -61,13 +63,7 @@ function SetDriftEngine(props) {
         <div><strong>Engine Rating</strong>: {rating}</div>
       </div>
 
-      <PartTotals part={currentPart} bpCost={bpCost} modifiedBPCost={modifiedBPCost} />
-      {/* <div className='row totals'>
-        <div>BP Cost: {modifiedBPCost 
-          ? <>{modifiedBPCost} <i>(Oma 50% increase)</i></> 
-          : bpCost}
-        </div>
-      </div> */}
+      <PartTotals part={currentPart} modifiedBPCost={modifiedBPCost} />
     </>
   );
 }

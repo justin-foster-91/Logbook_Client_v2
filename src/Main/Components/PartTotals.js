@@ -1,35 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CustomShipContext } from "../Context/shipContext";
 import PowerIcon from "../IconRefs/PowerIcon";
 import BuildIcon from "../IconRefs/BuildIcon";
 
 function PartTotals(props) {
+  const { ship } = useContext(CustomShipContext);
+
   const { part, pcuCost, bpCost, modifiedBPCost } = props;
-  // how much of this can I snag from ship context?
 
   const renderBP = () => {
-    if (bpCost !== undefined) {
-      return (
-        <>
+    if (bpCost === undefined && modifiedBPCost === undefined) return;
+
+    if (part?.name === "Drift Engine") return renderOmaBP()
+
+    return (
+      <div className='iconPair'>
+        <BuildIcon />
+        <div>{bpCost}</div>
+      </div>
+    );
+  }
+
+  const renderOmaBP = () => {
+    return (
+      <>
+        <div><em>(Oma 50% increase)</em></div>
+        <div className='iconPair'>
           <BuildIcon />
-          {/* conditional cost if Oma frame && make a text note when it happens */}
-          <div>{bpCost}</div>
-          <div>
-            BP Cost: {modifiedBPCost ? (<>{modifiedBPCost} <em>(Oma 50% increase)</em></>) : bpCost}
-          </div>
-        </>
-      );
-    }
+          <div>{modifiedBPCost}</div>
+        </div>
+        
+      </>
+    )
   }
 
   const renderPCU = () => {
-    if (pcuCost !== undefined) {
-      return (
-        <>
-          <PowerIcon />
-          <div>{pcuCost}</div>
-        </>
-      );
-    }
+    if (pcuCost === undefined) return;
+
+    return (
+      <div className='iconPair'>
+        <PowerIcon />
+        <div>{pcuCost}</div>
+      </div>
+    );
   }
 
 
