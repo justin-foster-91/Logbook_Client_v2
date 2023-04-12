@@ -28,7 +28,9 @@ function SetThrusters(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={thrustersId ? thrustersId : "None"} onChange={handleThrusterChange}>
+        <select value={thrustersId ? thrustersId : "None"} 
+          onChange={handleThrusterChange}
+        >
           {/* <option key="None">None</option> */}
           {Tables.getThrusterIdList().map((thruster, idx) =>
             SF.doesFrameSizeAllowThruster(thruster, size) 

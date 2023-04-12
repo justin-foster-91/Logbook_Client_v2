@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import frames from "../References/frames.json";
 import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
@@ -8,6 +8,7 @@ import PartTotals from "../Components/PartTotals";
 
 function SetFrame(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
+  const [specialName, setSpecialName] = useState(null);
   
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
   let {size, maneuverability, hp, dt, ct, expansions, minCrew, maxCrew, bpCost, specialAbility } = ship.getFramePackage()
@@ -15,9 +16,9 @@ function SetFrame(props) {
   const { turnDistance, pilotingModifier } = Tables.getManeuverabilityData(maneuverability)
   const { currentPart } = props;
 
-  let specialName = null
-  if(specialAbility)specialName = Object.keys(specialAbility)[0]
-  if (!dt) dt = 'n/a'
+  useEffect(() => {
+    if (specialAbility) setSpecialName(Object.keys(specialAbility)[0])
+  }, [specialAbility])
 
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
@@ -55,7 +56,7 @@ function SetFrame(props) {
       
       <div className="row">
         <div><strong>HP</strong>: {hp}</div>
-        <div><strong>DT</strong>: {dt}</div>
+        <div><strong>DT</strong>: {dt || "n/a"}</div>
         <div><strong>CT</strong>: {ct}</div>
         <div><strong>Expansion Bays</strong>: {expansions}</div>
         <div><strong>Minimum Crew</strong>: {minCrew}</div>
