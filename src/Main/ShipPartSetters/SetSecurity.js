@@ -3,6 +3,7 @@ import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import { splitCamelCase } from "../References/utils";
 import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
@@ -102,10 +103,7 @@ function SetSecurity(props) {
       {/* Reconfiguration System - check */}
 
 
-      <div className="row totals">
-        <div>Total BP Cost: {totalSecurityBP}</div>
-        <div>Total PCU Cost: {totalSecurityPCU}</div>
-      </div>
+      <PartTotals totalBP={totalSecurityBP} totalPCU={totalSecurityPCU} />
     </>
   );
 }

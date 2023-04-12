@@ -1852,6 +1852,64 @@ const antiHackingSystems = {
   "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
 }
 
+// https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
+const computerModules = {
+  "Spell Chip": {cost: '110% of component spell gem', sfsLegal: true},
+  "Control, Complex": {cost: '10% of controlled device', sfsLegal: true},
+  "Rakmodoi Computers, Skill": {cost: "10% of computer's base price", sfsLegal: true},
+  "Secure Data, Average": {cost: '10 credits', sfsLegal: true},
+  "Secure Data, Large": {cost: 'Varies', sfsLegal: true},
+  "Secure Data, Specific": {cost: '1 credit', sfsLegal: true},
+}
+
+const computerUpgrades = {
+  "Artificial Personality":	{cost: "10% of computer's base price", sfsLegal: true},
+  "Hardened":	{cost: "50% of computer's base price", sfsLegal: true},
+  "Miniaturization": {cost: "10% of computer's base price", sfsLegal: true},
+  "Security":	{cost: "Varies", sfsLegal: true},
+  "Self-Charging": {cost: "10% of computer's base price", sfsLegal: true},
+  "Telepathic User Interface": {cost: "10% of computer's base price", sfsLegal: true},
+  "Rakmodoi Computers, Arms":	{cost: 500, sfsLegal: true},
+  "Rakmodoi Computers, Mobility Unit, Claws":	{cost: "100 x computer's bulk", sfsLegal: true},
+  "Rakmodoi Computers, Mobility Unit, Legs": {cost: "100 x computer's bulk", sfsLegal: true},
+  "Rakmodoi Computers, Mobility Unit, Tail": {cost: "100 x computer's bulk", sfsLegal: true},
+  "Rakmodoi Computers, Mystic Comm": {cost: 4000, sfsLegal: true},
+  "Range, I (100 feet)": {cost: "5 credits", sfsLegal: true},
+  "Range, II (1 mile)":	{cost: "50 credits", sfsLegal: true},
+  "Range, III (planet wide)": {cost: "100 credits", sfsLegal: true},
+}
+
+const computerCountermeasures = {
+  "Alarm": {cost: "10 credits", sfsLegal: true},
+  "Fake Shell": {cost: "50% of computer's base price + 10% of price of control and data modules", sfsLegal: true},
+  "Feedbackk": {cost: "500 credits", sfsLegal: true},
+  "Firewall": {cost: "20% of computer's base price", sfsLegal: true},
+  "Lockout": {cost: "	100 credits", sfsLegal: true},
+  "Shock Grid": {cost: "Varies", sfsLegal: true},
+  "Wipe": {cost: "10 credits", sfsLegal: true},
+}
+
+const shockGrid = {
+  1:	{DC: 20,	damage: "8d6",	price: 500},
+  2:	{DC: 22,	damage: "10d6",	price: 2000},
+  3:	{DC: 24,	damage: "12d6",	price: 5000},
+  4:	{DC: 27,	damage: "14d6",	price: 20000},
+  5:	{DC: 30,	damage: "16d6",	price: 50000},
+}
+
+// https://www.aonsrd.com/Computers.aspx
+const computerTier = {
+  1: {price: 50, hackDC: 17},
+  2: {price: 250, hackDC: 21},
+  3: {price: 1250, hackDC: 25},
+  4: {price: 5000, hackDC: 29},
+  5: {price: 10000, hackDC: 33},
+  6: {price: 20000, hackDC: 37},
+  7: {price: 40000, hackDC: 41},
+  8: {price: 80000, hackDC: 45},
+  9: {price: 160000, hackDC: 49},
+  10: {price: 320000, hackDC: 53},
+}
 
 
 // <--- Data extractions --->

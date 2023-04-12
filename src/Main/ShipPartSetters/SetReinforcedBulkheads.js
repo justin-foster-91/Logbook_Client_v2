@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import PartTitle from '../Components/PartTitle';
+import PartTotals from '../Components/PartTotals';
 
 //TODO: track the fortification %
 
@@ -33,12 +34,10 @@ function SetReinforcedBulkheads(props) {
       </div>
       
       <div className='row'>
-        <div>Fortification: {fortification}%</div>
+        <div><strong>Fortification</strong>: {fortification}%</div>
       </div>
         
-      <div className='row totals'>
-        <div>BP Cost: {bpCost}</div>
-      </div>
+      <PartTotals part={currentPart} bpCost={bpCost} />
     </>
   );
 }
