@@ -36,13 +36,13 @@ function SetSecurity(props) {
   const checkboxRenders = () => {
     return computerCounterTypes.map((box, idx) => {
       return (
-      <div key={idx}>
-        <input type="checkbox" id={box} name={box} 
-          value={splitCamelCase(box)} 
-          onChange={handleComputerCounterChange}
-        />
-        <label htmlFor={box}>{splitCamelCase(box)}</label>
-      </div>
+        <div key={idx}>
+          <input type="checkbox" id={box} name={box} 
+            value={splitCamelCase(box)} 
+            onChange={handleComputerCounterChange}
+          />
+          <label htmlFor={box}>{splitCamelCase(box)}</label>
+        </div>
     )})
   }
 
@@ -86,9 +86,11 @@ function SetSecurity(props) {
 
       {/* Biometric Locks - check */}
 
-      Computer Countermeasures
       <div>
-        {checkboxRenders()}
+        <div>Computer Countermeasures</div>
+        <div className="row">
+          {checkboxRenders()}
+        </div>
       </div>
 
       {/* Shock Grid - dropdown */}

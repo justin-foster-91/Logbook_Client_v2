@@ -17,20 +17,11 @@ import SetReinforcedBulkheads from "../ShipPartSetters/SetReinforcedBulkheads";
 import SetSecurity from '../ShipPartSetters/SetSecurity'
 import Sidebar from "../Components/Sidebar";
 import "./CustomShipPage.css";
+import PointTotals from "../Components/PointTotals";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const { tierId, powerCoreIds } = customShipParts
   const [partHighlight, setPartHighlight] = useState();
-
-  const size = ship.getSize()
-
-  const totalBPCosts = ship.getTotalBPCosts()
-  const totalBPBudget = Tables.getTierData(tierId).buildPoints
-
-  const totalPCUCosts = ship.getTotalPCUCosts()
-  const essentialPCUCosts = SF.getEssentialPCUCosts(customShipParts)
-  const totalPCUBudget = ship.getTotalPCUBudget()
 
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
@@ -81,7 +72,7 @@ function CustomShipPage() {
     {component: SetExpansionBays, name: "Expansion Bays"},
     {component: SetFortifiedHull, name: "Fortified Hull"},
     {component: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
-    // {component: SetSecurity, name: "Security"},
+    {component: SetSecurity, name: "Security"},
   ]
 
   return (
@@ -101,16 +92,7 @@ function CustomShipPage() {
           })}
         </div>
 
-        <div className="row totals">
-          <div>BP used: {totalBPCosts}</div>
-          <div>BP Budget: {totalBPBudget}</div>
-        </div>
-        
-        <div className="row totals">
-          <div>PCU used: {totalPCUCosts}</div>
-          <div>PCU Essentials: {essentialPCUCosts}</div>
-          <div>PCU Budget: {totalPCUBudget}</div>
-        </div>
+        <PointTotals />
 
         <button onClick={() => printJSON()}>JSON ME</button>
 

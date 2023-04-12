@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import PartTitle from "../Components/PartTitle";
+import powerIcon from '../Assets/Icons/noun-power-5648181.png';
+
 
 function SetTier(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -29,7 +31,9 @@ function SetTier(props) {
       </div>
 
       <div className="row totals">
-        <div>BP Budget: {buildPoints}</div> 
+        {/* <i class="fa-solid fa-user"></i> */}
+        <div>Build Points: {buildPoints}</div> 
+        {/* <img src={powerIcon} alt='power' className='icon'/> */}
         <div>HP Increments: {hpIncrementMultiplier}</div>
       </div>
     </>

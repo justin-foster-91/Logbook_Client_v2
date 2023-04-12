@@ -14,7 +14,7 @@ body {
 
 .sidebarWrapper {
   height: 100%;
-  width: 9svw;
+  min-width: 9svw;
   position: fixed;
   background-image: url("../Assets/Images/Base_ship.jpg");
   background-size: cover;
@@ -68,6 +68,11 @@ body {
   margin: 1rem
 }
 
+.customShipDisplay .totals {
+  border-top: .1rem solid #7e7e7e;
+  padding-top: 1rem;
+}
+
 .totals {
   margin-top: 1rem;
 }
@@ -91,6 +96,10 @@ body {
   margin-right: .3rem;
 }
 
+.dropdownBlock > .row {
+  padding: .3rem 0 .3rem 0;
+}
+
 .note {
   padding-top: 1rem;
 }
@@ -105,6 +114,16 @@ select {
 .sidebarHighlight {
   background-color: #b4792cd3;
   color: black;
+}
+
+.invalid {
+  color: red;
+}
+
+.icon {
+  color: white;
+  width: 3rem;
+  /* height: 1.5rem; */
 }
 
 legend {

@@ -1,15 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as SF from "../References/shipFunctions";
 import * as Tables from '../References/metaTables'
-import PointTotals from './PointTotals';
 
-function Sidebar(props) {
+function PointTotals(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const [validBP, setValidBP] = useState(true);
   const [validPCU, setValidPCU] = useState(true);
 
-  const {setterList, partHighlight} = props;
   const { tierId, powerCoreIds } = customShipParts
 
 
@@ -30,35 +28,20 @@ function Sidebar(props) {
     else setValidPCU(true);
   }, [totalPCUCosts, totalPCUBudget])
 
-  const sidebarList = () => {
-    return setterList.map(part => {
-      let { name } = part;
-
-      let highlight = false;
-      if (name === partHighlight) highlight = true;
-
-      let shortName = null;
-      if (name === "Defensive Countermeasures") shortName = "Defensive Counter"
-
-      return (
-        <a href={`#${name}`} key={name} >
-          <div className={highlight ? "sidebarHighlight" : ""}>
-            {shortName || name}
-          </div>
-        </a>
-    )})
-  }
-
   return (
-    <aside className='sidebarWrapper'>
-      <div className='sidebar'>
-        <h3>Ship Parts</h3>
-        {sidebarList()}
-
-        <PointTotals />
+    <>
+      <div className="row totals">
+        <div className={validBP || "invalid"}>BP used: {totalBPCosts}</div>
+        <div>BP Budget: {totalBPBudget}</div>
       </div>
-    </aside>
+
+      <div className="row totals">
+        <div className={validPCU || "invalid"}>PCU used: {totalPCUCosts}</div>
+        <div>PCU Essentials: {essentialPCUCosts}</div>
+        <div>PCU Budget: {totalPCUBudget}</div>
+      </div>
+    </>
   );
 }
 
-export default Sidebar;
+export default PointTotals;
