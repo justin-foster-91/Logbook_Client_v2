@@ -6,9 +6,14 @@ import * as Utils from '../References/utils'
 function NonPrimaryComputers(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
-  let { computerId, secondaryComputerId, ctNetworkNodes } = customShipParts;
+  const { computerId, secondaryComputerId, ctNetworkNodes } = customShipParts;
   const { isMononode } = props
-  const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
+
+  const compIdString = Utils.capitalizeEachWord(computerId).split(' ')
+  const Mk = compIdString[0];
+  const x = compIdString[1];
+
+  // const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
   const { nodeMax } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
 
@@ -28,7 +33,7 @@ function NonPrimaryComputers(props) {
     <>
 
       <div className="dropdownBlock">
-        <div>Secondary Computer</div>
+        <div><strong>Secondary Computer</strong></div>
 
         <select
           value={secondaryComputerId}
@@ -46,7 +51,7 @@ function NonPrimaryComputers(props) {
       
       {isMononode &&
       <div className="dropdownBlock">
-        <label htmlFor="networkNodes">Network Nodes</label>
+        <label htmlFor="networkNodes"><strong>Network Nodes</strong></label>
 
         <select value={ctNetworkNodes} onChange={handleNodeChange}>
           {Array(nodeMax+1).fill(1).map((node, idx) => 

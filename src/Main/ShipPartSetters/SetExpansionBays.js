@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
 import ExpansionBaySelections from '../Components/ExpansionBaySelections';
@@ -17,24 +17,28 @@ function SetExpansionBays(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { expansionBayIds } = customShipParts
   const size = ship.getSize()
-  let { expansions: expansionCap } = ship.getFramePackage()
+  const { expansions: expansionCap } = ship.getFramePackage()
   const { currentPart } = props;
+  const [pcuCostTotal, setPcuCostTotal] = useState(0)
+  const [bpCostTotal, setBpCostTotal] = useState(0)
 
-  let pcuCostTotal = 0
-  let bpCostTotal = 0
-
-  // This if condition may not be necessary with better checks when setting variables
-  if(expansionBayIds.length){
-    pcuCostTotal = expansionBayIds
-      .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
-      .reduce((total, pcu) => total + pcu);
-
-    bpCostTotal = expansionBayIds
-      .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
-      .reduce((total, bp) => total + bp);
-  } 
+  useEffect(() => {
+    // This if condition may not be necessary with better checks when setting variables
+    if(expansionBayIds.length){
+      setPcuCostTotal(expansionBayIds
+        .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+        .reduce((total, pcu) => total + pcu));
   
-  if (expansionCap === 0) return '';
+      setBpCostTotal(expansionBayIds
+        .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+        .reduce((total, bp) => total + bp));
+    } 
+  }, [expansionBayIds, size])
+
+  useEffect(() => {
+    if (expansionCap === 0) return;
+  }, [expansionCap])
+  
 
   return (
     <>

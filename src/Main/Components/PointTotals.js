@@ -31,12 +31,12 @@ function PointTotals(props) {
   return (
     <>
       <div className="row totals">
-        <div className={validBP || "invalid"}>BP used: {totalBPCosts}</div>
+        <div className={validBP ? "" : "invalid"}>BP used: {totalBPCosts}</div>
         <div>BP Budget: {totalBPBudget}</div>
       </div>
 
       <div className="row totals">
-        <div className={validPCU || "invalid"}>PCU used: {totalPCUCosts}</div>
+        <div className={validPCU ? "" : "invalid"}>PCU used: {totalPCUCosts}</div>
         <div>PCU Essentials: {essentialPCUCosts}</div>
         <div>PCU Budget: {totalPCUBudget}</div>
       </div>

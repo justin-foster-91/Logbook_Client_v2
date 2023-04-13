@@ -25,7 +25,7 @@ function SetFortifiedHull(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={fortifiedHullId ? fortifiedHullId : "None"} onChange={handleFortifiedHullChange}>
+        <select value={fortifiedHullId || "None"} onChange={handleFortifiedHullChange}>
           <option key={"None"}>None</option>
           {Tables.getFortifiedHullIdList().map((hull, idx) => (
             <option key={idx}>{hull}</option>

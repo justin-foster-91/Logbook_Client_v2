@@ -10,6 +10,8 @@ const PowerCoreSelections = () => {
   const size = ship.getSize();
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
+  // TODO: Only allow 1 supercolossal core
+
   const handlePowerCoreChange = (event) => {
     const coreIndex = Number(event.target.name);
     let coreOption = event.target.value;
@@ -23,7 +25,7 @@ const PowerCoreSelections = () => {
     .map((dropdown, idx) => {
       return (
         <div key={"powerCore" + idx} className="dropdownBlock">
-          <div>Power Core {idx + 1}</div>
+          <div><strong>Power Core {idx + 1}</strong></div>
 
           <select
             value={

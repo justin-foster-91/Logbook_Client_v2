@@ -68,7 +68,8 @@ function SetSecurity(props) {
       <div className="dropdownBlock">
         <div>Anti-Hacking Systems (dropdown)</div>
         {/*  increase the DC to hack into it by 1 * mark */}
-        <select value={antiHackingSystemsId} onChange={handleAntiHackingChange}>
+        <select value={antiHackingSystemsId || "None"} onChange={handleAntiHackingChange}>
+          <option key={"None"}>None</option>
           {Tables.getAntiHackingIdList().map((weapon, idx) => (
             <option key={idx}>{weapon}</option>
           ))}
@@ -77,8 +78,8 @@ function SetSecurity(props) {
 
       <div className="dropdownBlock">
         <div>Anti-Personnel Weapon</div>
-        {/* Needs access to entire longarm and heavy weapons list */}
-        <select value={antiPersonnelWeaponId} onChange={handleAntiPersonnelChange}>
+        <select value={antiPersonnelWeaponId || "None"} onChange={handleAntiPersonnelChange}>
+          <option key={"None"}>None</option>
           {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
             <option key={idx}>{weapon}</option>
           ))}

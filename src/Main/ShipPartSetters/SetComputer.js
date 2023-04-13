@@ -58,7 +58,7 @@ function SetComputer(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <div>Primary Computer</div>
+        <div><strong>Primary Computer</strong></div>
 
         <select value={computerId} onChange={handleComputerChange}>
           {Tables.getComputerIdList().map((computer, idx) =>

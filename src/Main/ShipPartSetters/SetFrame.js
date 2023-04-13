@@ -76,7 +76,7 @@ function SetFrame(props) {
         <div className="row">
           <div><strong>Length</strong>: {length}</div> 
           <div><strong>Weight</strong>: {weight}</div> 
-          <div><strong>AC and TL Mod</strong>: {acMod > 0 ? `+${acMod}` : acMod}</div>
+          <div><strong>AC and TL Mod</strong>: {acMod > 0 && '+'}{acMod}</div>
         </div>
       </fieldset>
 
