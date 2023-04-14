@@ -38,9 +38,9 @@ const HangarPage = () => {
         <button>Ship Templates</button>
       </Link>
       <br/>
-      <Link to="/template_converter">
+      {/* <Link to="/template_converter">
         <button>Converter</button>
-      </Link>
+      </Link> */}
 
     </div>
   );

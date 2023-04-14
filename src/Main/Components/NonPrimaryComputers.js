@@ -9,12 +9,8 @@ function NonPrimaryComputers(props) {
   const { computerId, secondaryComputerId, ctNetworkNodes } = customShipParts;
   const { isMononode } = props
 
-  const compIdString = Utils.capitalizeEachWord(computerId).split(' ')
-  const Mk = compIdString[0];
-  const x = compIdString[1];
-
-  // const [Mk, x] = Utils.capitalizeEachWord(computerId).split(' ')
-  const networkNodeId = `${Mk} ${x}`
+  const mkNumber = Utils.capitalizeEachWord(computerId).split(' ')[1]
+  const networkNodeId = `Mk ${mkNumber}`
   const { nodeMax } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
 
   const handleSecondaryComputerChange = (ev) => {

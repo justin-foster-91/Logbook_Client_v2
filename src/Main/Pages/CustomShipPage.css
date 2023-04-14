@@ -43,6 +43,7 @@ body {
 
 .sidebar > a {
   text-align: start;
+  padding: .1rem .2rem .1rem .2rem;
 }
 
 .sidebar :is(a:link, a:visited, a:hover, a:active){
