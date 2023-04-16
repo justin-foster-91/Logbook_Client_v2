@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
-import * as Utils from "../References/utils";
+// import * as Utils from "../References/utils";
 import * as SF from "../References/shipFunctions";
 import { ShipsContext } from "../Context/shipContext";
-import TemplateConverter from './TemplateConverter'
+// import TemplateConverter from './TemplateConverter'
 import "./HangarPage.css";
 
 // Statikete: EMP Dispersal (Ex) "When a starship built with a statikete frame is hit with an EMP weapon, it reduces the duration of that weapon’s effect by half, rounded down to a minimum of 0 rounds."
