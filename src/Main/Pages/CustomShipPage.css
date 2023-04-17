@@ -10,19 +10,6 @@ h1 {
   justify-content: center;
 }
 
-/* .sidebar > h3 {
-  padding-left: 0;
-} */
-
-@font-face {
-  font-family: 'SansationRegular';
-  src: local('SansationRegular'), url('../Assets/Fonts/Sansation/SansationRegular-OgJP.ttf') format('truetype');
-}
-
-body {
-  font-family: 'SansationRegular';
-}
-
 .sidebarWrapper {
   height: 100%;
   width: 14svw;

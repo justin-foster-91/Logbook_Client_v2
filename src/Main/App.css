@@ -13,6 +13,15 @@
   }
 }
 
+@font-face {
+  font-family: 'SansationRegular';
+  src: local('SansationRegular'), url('./Assets/Fonts/Sansation/SansationRegular-OgJP.ttf') format('truetype');
+}
+
+body {
+  font-family: 'SansationRegular';
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
