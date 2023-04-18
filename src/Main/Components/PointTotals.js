@@ -4,6 +4,8 @@ import * as SF from "../References/shipFunctions";
 import * as Tables from '../References/metaTables'
 import { render } from '@testing-library/react';
 
+// TODO: tooltip explaining what the numbers mean in sidebar
+
 function PointTotals(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const [validBP, setValidBP] = useState(true);

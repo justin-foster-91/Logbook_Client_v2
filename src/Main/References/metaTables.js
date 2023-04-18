@@ -1849,7 +1849,7 @@ const antiHackingSystems = {
   "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
   "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
   "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
-  "mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
+  "Mk 4":	{bpCost: 12, source: "Starship Operations Manual pg. 300"},
 }
 
 // https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
@@ -1889,7 +1889,7 @@ const computerCountermeasures = {
   "Wipe": {cost: "10 credits", sfsLegal: true},
 }
 
-const shockGrid = {
+const computerShockGrid = {
   1:	{DC: 20,	damage: "8d6",	price: 500},
   2:	{DC: 22,	damage: "10d6",	price: 2000},
   3:	{DC: 24,	damage: "12d6",	price: 5000},
@@ -1898,7 +1898,7 @@ const shockGrid = {
 }
 
 // https://www.aonsrd.com/Computers.aspx
-const computerTier = {
+const computerTiers = {
   1: {price: 50, hackDC: 17},
   2: {price: 250, hackDC: 21},
   3: {price: 1250, hackDC: 25},
@@ -2063,6 +2063,46 @@ const getAntiPersonnelData = (antiPersonnelId) => {
   }
 }
 
+const getComputerModuleData = (computerModuleId) => {
+  if (computerModuleId === null) return {cost: 0, sfsLegal: null}
+
+  const { cost, sfsLegal } = computerModules[computerModuleId]
+
+  return {cost, sfsLegal}
+}
+
+const getComputerUpgradeData = (computerUpgradeId) => {
+  if (computerUpgradeId === null) return {cost: 0, sfsLegal: null}
+
+  const { cost, sfsLegal } = computerUpgrades[computerUpgradeId]
+
+  return {cost, sfsLegal}
+}
+
+const getComputerCountermeasureData = (computerCountermeasureId) => {
+  if (computerCountermeasureId === null) return {cost: 0, sfsLegal: null}
+
+  const { cost, sfsLegal } = computerCountermeasures[computerCountermeasureId]
+
+  return {cost, sfsLegal}
+}
+
+const getComputerShockGridData = (computerShockGridId) => {
+  if (computerShockGridId === null) return {DC: null, damage: null, price: null}
+
+  const { DC, damage, price } = computerShockGrid[computerShockGridId]
+
+  return {DC, damage, price}
+}
+
+const getComputerTierData = (computerTierId) => {
+  if (computerTierId === null) return {price: null, hackDC: null}
+
+  const { price, hackDC } = computerTiers[computerTierId]
+
+  return {price, hackDC}
+}
+
 
 
 // <--- ID extractions -->
@@ -2141,6 +2181,26 @@ const getAntiPersonnelIdList = () => {
   return [...getLongarmIdList(), ...getHeavyIdList()]
 }
 
+const getComputerModuleIdList = () => {
+  return Object.keys(computerModules).sort((a, b) => a + b)
+}
+
+const getComputerUpgradeIdList = () => {
+  return Object.keys(computerUpgrades).sort((a, b) => a + b)
+}
+
+const getComputerCountermeasureIdList = () => {
+  return Object.keys(computerCountermeasures).sort((a, b) => a + b)
+}
+
+const getComputerShockGridIdList = () => {
+  return Object.keys(computerShockGrid).sort((a, b) => a - b)
+}
+
+const getComputerTierIdList = () => {
+  return Object.keys(computerTiers).sort((a, b) => a + b)
+}
+
 export {
   // sources,
   // shipTiers,
@@ -2177,6 +2237,11 @@ export {
   getReinforcedBulkheadData,
   getAntiHackingData,
   getAntiPersonnelData,
+  getComputerModuleData,
+  getComputerUpgradeData,
+  getComputerCountermeasureData,
+  getComputerShockGridData,
+  getComputerTierData,
 
   getSourceIdList,
   getTierIdList, 
@@ -2193,5 +2258,10 @@ export {
   getFortifiedHullIdList,
   getReinforcedBulkheadIdList,
   getAntiHackingIdList,
-  getAntiPersonnelIdList
+  getAntiPersonnelIdList,
+  getComputerModuleIdList,
+  getComputerUpgradeIdList,
+  getComputerCountermeasureIdList,
+  getComputerShockGridIdList,
+  getComputerTierIdList
 }

@@ -7,10 +7,12 @@ import PartTotals from "../Components/PartTotals";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
+// TODO: tooltip on computer countermeasures to specify no BP cost
+
 function SetSecurity(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
-  const { antiHackingSystemsId, antiPersonnelWeaponId } = customShipParts;
+  const { antiHackingSystemsId, antiPersonnelWeaponId, computerCountermeasures } = customShipParts;
   // TODO: need to know when the ID is from a longarm vs a heavy weapon
   // category, level, price, damage, range, critical, capacity, usage, bulk, special, sfsLegal
   const {  } = Tables.getAntiPersonnelData(antiPersonnelWeaponId);
@@ -20,7 +22,8 @@ function SetSecurity(props) {
   const totalSecurityBP = null
   const totalSecurityPCU = null
 
-  const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
+  const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe", "shockGrid"]
+  const checkboxList = ["Biometric Locks", "Self-Destruct System", "Emergency Accelerator", "Holographic Mantle", "Reconfiguration System"]
 
   const handleComputerCounterChange = (ev) => {
     const counterOption = ev.target.name
@@ -61,12 +64,22 @@ function SetSecurity(props) {
     // ship.setSecurity({ reference: 'tierId', value: tierOption})
   }
 
+  const handleCheckboxChange = (ev) => {
+    const checkboxOption = ev.target.name
+    const checkboxActive = document.getElementById(`${checkboxOption}`).checked
+    console.log({checkboxOption, checkboxActive});
+
+    // ship.setSecurity(counterOption, parent)
+
+    // ship.setSecurity({ reference: biometricOption, value: biometricActive, parent})  
+  }
+
   return (
     <>
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <div>Anti-Hacking Systems (dropdown)</div>
+        <div>Anti-Hacking Systems</div>
         {/*  increase the DC to hack into it by 1 * mark */}
         <select value={antiHackingSystemsId || "None"} onChange={handleAntiHackingChange}>
           <option key={"None"}>None</option>
@@ -86,23 +99,43 @@ function SetSecurity(props) {
         </select>
       </div>
 
-      {/* Biometric Locks - check */}
+      <p></p>
+
+      {/* Cloaking - dropdown */}
+      {/* Normal and Gray included */}
 
       <div>
+      {/* TODO: border with legend */}
         <div>Computer Countermeasures</div>
         <div className="row">
           {checkboxRenders()}
         </div>
+        <div className="row">
+          <div>Shock Grid</div>
+          <select value={computerCountermeasures?.shockGrid || "None"} onChange={handleComputerCounterChange}>
+            <option key={"None"}>None</option>
+            {Tables.getComputerShockGridIdList().map((tier, idx) => (
+              
+              <option key={idx} value={tier}>Rank {tier} (DC {Tables.getComputerShockGridData(tier).DC}, Damage {Tables.getComputerShockGridData(tier).damage})
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {/* Shock Grid - dropdown */}
+      <p></p>
 
-
-      {/* Self-Destruct System - check */}
-      {/* Emergency Accelerator - check */}
-      {/* Holographic Mantle - check */}
-      {/* Reconfiguration System - check */}
-
+      <div>
+        {checkboxList.map((box, idx) => (
+          <div className="row">
+            <input type="checkbox" id={box} name={box} 
+              // value={splitCamelCase(box)} 
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor={box}>{box}</label>
+          </div>
+        ))}
+      </div>
 
       <PartTotals totalBP={totalSecurityBP} totalPCU={totalSecurityPCU} />
     </>
