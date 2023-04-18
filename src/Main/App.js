@@ -17,8 +17,8 @@ function App() {
         <main className="Routes full-height">
             <Routes>
               <Route index element={<HangarPage/>}/>
-              <Route path={'hangar'} element={<HangarPage/>}/>
-              <Route path={'templates'} element={<TemplatePage/>}/>
+              {/* <Route path={'hangar'} element={<HangarPage/>}/> */}
+              {/* <Route path={'templates'} element={<TemplatePage/>}/> */}
               <Route path={'custom_ship'} element={<CustomShipPage/>}/>
               <Route path={'template_converter'} element={<TemplateConverter/>}/>
             </Routes>

@@ -36,18 +36,18 @@ const TemplateBreakdown = (props) => {
 
   return (
     <div className="templateRender">
-      <div className="shipKeyPoints">
-        <b>
-          {shipName} (Tier {tierId} [{size}] {frameId})
-        </b>
+      <div className="shipKeyPoints row">
+        <div><strong>{shipName} </strong></div>
+        <div>(Tier {tierId} [{size}] {frameId})</div>
       </div>
+      
       <div>
         {showFrameComponents().map((pair, idx) => {
           let partKey = pair[0]
           let partValue = pair[1]
           return (
             <div key={idx}>
-              <b>{partKey}:</b>{" "}
+              <strong>{partKey}:</strong>{" "}
               {/* Check if the value in an array */}
               {typeof partValue === "object"
                 ? partValue

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 // import * as Utils from "../References/utils";
 import * as SF from "../References/shipFunctions";
@@ -16,31 +16,35 @@ const HangarPage = () => {
   const { userShips } = useContext(ShipsContext);
 
   return (
-    <div className="hangarDisplay full-height">
-      <h2>Hangar Page</h2>
+    <div className="hangarWrapper">
+      <div className="hangarDisplay full-height">
+        <h2>Hangar Page</h2>
 
-      {/* Display ships that have been selected */}
-      {userShips.map((ship, idx) => {
-        return (
-          <div className="hangarShips" key={ship.shipName + idx}>
-            {/* TODO: double check this replace usage */}
-            {ship.shipName} (Tier {ship.tierId} [
-            {SF.findComponentByFrameId(ship.frameId.replace("-", " "), "size")}]{" "}
-            {ship.frameId})
-          </div>
-        );
-      })}
+        {/* Display ships that are present in the hangar */}
+        {userShips.map((ship, idx) => {
+          return (
+            <div className="hangarShips hangarCard" key={ship.shipName + idx}>
+              <div className="row">
+                <div>{ship.shipName}</div>
+                <div>(Tier {ship.tierId} [{SF.findComponentByFrameId(ship.frameId, "size")}]{" "}
+                  {ship.frameId})
+                </div>
+              </div>
+            </div>
+          );
+        })}
 
-      <TemplatePage />
+        <TemplatePage />
 
-      {/* <Link to="/templates">
-        <button>Ship Templates</button>
-      </Link> */}
-      <br/>
-      {/* <Link to="/template_converter">
-        <button>Converter</button>
-      </Link> */}
+        {/* <Link to="/templates">
+          <button>Ship Templates</button>
+        </Link> */}
+        <br/>
+        {/* <Link to="/template_converter">
+          <button>Converter</button>
+        </Link> */}
 
+      </div>
     </div>
   );
 };

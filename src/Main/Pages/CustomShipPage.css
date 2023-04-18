@@ -20,17 +20,22 @@ h1 {
 
 .sidebar {
   padding-top: 5svh;
-  height: 100%;
+  height: inherit;
   width: 100%;
   background-color: #001129b4;
   color: #C9C5BE;
   display: flex;
   flex-direction: column;
+  font-size: large;
 }
 
 .sidebar > a {
   text-align: start;
-  padding: .1rem .2rem .1rem .2rem;
+  padding: 0 .2rem 0 .2rem;
+}
+
+.sidebar h3 {
+  text-align: center;
 }
 
 .sidebar :is(a:link, a:visited, a:hover, a:active){
@@ -44,11 +49,6 @@ h1 {
   background-color: #001129;
   color: #C9C5BE;
   text-align: start;
-}
-
-.customShipDisplay .row, .partSetterBlock .row {
-  display: flex;
-  flex-direction: row;
 }
 
 .customShipDisplay .row div, .partSetterBlock .row div {
@@ -79,6 +79,7 @@ h1 {
 
 .totals {
   margin-top: 1rem;
+  flex-direction: column;
 }
 
 .ablativeArmor form {

@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  height: 100svh;
+  background-image: url("./Assets/Images/Carrier.jpg");
+  background-size: cover;
 }
 
 .App-logo {
@@ -20,6 +23,7 @@
 
 body {
   font-family: 'SansationRegular';
+  box-sizing: border-box;
 }
 
 .App-header {
@@ -44,4 +48,9 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }

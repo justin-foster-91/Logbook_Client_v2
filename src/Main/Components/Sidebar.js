@@ -52,7 +52,11 @@ function Sidebar(props) {
   return (
     <nav className='sidebarWrapper'>
       <div className='sidebar'>
-        <h3>Ship Parts</h3>
+        
+          <a href="#top">
+            <h3>Ship Parts</h3>
+          </a>
+        
         {sidebarList()}
 
         <PointTotals />
