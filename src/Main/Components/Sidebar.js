@@ -59,7 +59,7 @@ function Sidebar(props) {
         
         {sidebarList()}
 
-        <PointTotals />
+        <PointTotals layout={"summary"}/>
       </div>
     </nav>
   );

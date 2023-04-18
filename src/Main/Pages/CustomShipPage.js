@@ -92,7 +92,7 @@ function CustomShipPage() {
           })}
         </div>
 
-        <PointTotals />
+        <PointTotals layout={"full"}/>
 
         <button onClick={() => printJSON()}>JSON ME</button>
 

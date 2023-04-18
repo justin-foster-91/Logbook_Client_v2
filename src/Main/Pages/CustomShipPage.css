@@ -12,14 +12,14 @@ h1 {
 
 .sidebarWrapper {
   height: 100%;
-  width: 14svw;
+  width: 20vw;
   position: fixed;
   background-image: url("../Assets/Images/Base_ship.jpg");
   background-size: cover;
 }
 
 .sidebar {
-  padding-top: 5svh;
+  padding-top: 5vh;
   height: inherit;
   width: 100%;
   background-color: #001129b4;
@@ -44,8 +44,8 @@ h1 {
 }
 
 .customShipDisplay {
-  width: 85svw;
-  transform: translate(14svw);
+  width: 79.5vw;
+  transform: translate(20svw);
   background-color: #001129;
   color: #C9C5BE;
   text-align: start;
@@ -68,18 +68,39 @@ h1 {
 }
 
 .partSetterBlock .totals {
-  border-top: .1rem solid #7e7e7e;
+  
   padding-top: 1rem;
   justify-content: flex-end;
+  flex-direction: row;
+}
+
+.partSetterBlock .totals:not(:empty) {
+  border-top: .1rem solid #7e7e7e;
+  margin-top: 1rem;
 }
 
 .partSetterList :first-child > .totals  {
   justify-content: flex-start;
 }
 
-.totals {
-  margin-top: 1rem;
+.finalTotals {
+  display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sidebar > .finalTotals .row {
+  align-self: flex-end;
+  gap: .2rem;
+}
+
+.sidebar > .finalTotals .totals div:first-child {
+  margin-right: 1rem;
+}
+
+.customShipDisplay > .finalTotals > .totals {
+  justify-content: center;
 }
 
 .ablativeArmor form {
@@ -151,12 +172,8 @@ select {
   margin: 0 !important;
   display: flex;
   flex-direction: row;
-  /* justify-content: flex-end; */
-}
-
-/* .OmaBP :first-child {
   justify-content: flex-end;
-} */
+}
 
 legend {
   /* color: red; */
