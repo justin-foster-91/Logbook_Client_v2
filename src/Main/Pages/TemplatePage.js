@@ -30,10 +30,8 @@ const TemplatePage = () => {
       <p></p>
 
       {/* Display details of selected template */}
-      {selectedTemplate.shipName ? (
+      {selectedTemplate.shipName && (
         <TemplateBreakdown {...selectedTemplate} />
-      ) : (
-        <div></div>
       )}
 
       <p></p>
@@ -45,11 +43,9 @@ const TemplatePage = () => {
       <p></p>
 
       <Link to="/hangar">
-        <button>Cancel</button>
+        {/* <button>Cancel</button> */}
         <button
-          onClick={() =>
-            setUserShips((userShips) => userShips.concat([selectedTemplate]))
-          }
+          onClick={() => setUserShips((userShips) => userShips.concat([selectedTemplate]))}
         >
           Add Ship
         </button>

@@ -2,6 +2,8 @@ import React from "react";
 import * as Utils from "../References/utils";
 import * as SF from "../References/shipFunctions";
 
+// TODO: display as stat-block style instead of component list
+
 const TemplateBreakdown = (props) => {
   const { frameId, shipName, tierId } = props
   const size = SF.findComponentByFrameId(frameId, "size");
@@ -49,8 +51,8 @@ const TemplateBreakdown = (props) => {
               {/* Check if the value in an array */}
               {typeof partValue === "object"
                 ? partValue
-                    .filter((element) => element !== null)
-                    .join(", ")
+                  .filter((element) => element !== null)
+                  .join(", ")
                 : partValue}
             </div>
           );
