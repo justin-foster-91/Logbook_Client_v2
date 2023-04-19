@@ -81,7 +81,7 @@ function ExpansionBaySelections() {
           return (
             <div key={"expansionBay" + idx} className='dropdownBlock'>
               <div className='row spaced'>
-                <div><strong>Expansion Bay {idx + 1}</strong></div>
+                <label htmlFor={`expansionBay${idx + 1}`}><strong>Expansion Bay {idx + 1}</strong></label>
                 <div>
                   <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
                   <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
@@ -89,6 +89,7 @@ function ExpansionBaySelections() {
               </div>
 
               <select
+                id={`expansionBay${idx + 1}`}
                 value={indexValue}
                 name={idx}
                 onChange={handleExpansionBayChange}

@@ -42,7 +42,8 @@ function SetFrame(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select onChange={handleFrameIdChange}>
+        <label htmlFor="frameId" className="hidden">Frame Type</label>
+        <select id="frameId" onChange={handleFrameIdChange}>
           {frames.map((frame, idx) => (
             <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
           ))}

@@ -25,7 +25,12 @@ function SetReinforcedBulkheads(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className='dropdownBlock'>
-        <select value={reinforcedBulkheadId ? reinforcedBulkheadId : "None"} onChange={handleReinforcedBulkheadsChange}>
+        <label htmlFor="reinforcedBulkheads" className='hidden'>Reinforced Bulkheads</label>
+        <select 
+          id="reinforcedBulkheads" 
+          value={reinforcedBulkheadId ? reinforcedBulkheadId : "None"} 
+          onChange={handleReinforcedBulkheadsChange}
+        >
           <option key={"None"}>None</option>
           {Tables.getReinforcedBulkheadIdList().map((bulkhead, idx) => (
             <option key={idx} value={bulkhead}>{bulkhead} Bulkhead</option>

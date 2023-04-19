@@ -1880,13 +1880,13 @@ const computerUpgrades = {
 }
 
 const computerCountermeasures = {
-  "Alarm": {cost: "10 credits", sfsLegal: true},
-  "Fake Shell": {cost: "50% of computer's base price + 10% of price of control and data modules", sfsLegal: true},
-  "Feedbackk": {cost: "500 credits", sfsLegal: true},
-  "Firewall": {cost: "20% of computer's base price", sfsLegal: true},
-  "Lockout": {cost: "	100 credits", sfsLegal: true},
+  "Alarm": {cost: "Tier of computer", sfsLegal: true},
+  "Fake Shell": {cost: "Tier of computer", sfsLegal: true},
+  "Feedbackk": {cost: "Tier of computer", sfsLegal: true},
+  "Firewall": {cost: "Tier of computer", sfsLegal: true},
+  "Lockout": {cost: "Tier of computer", sfsLegal: true},
   "Shock Grid": {cost: "Varies", sfsLegal: true},
-  "Wipe": {cost: "10 credits", sfsLegal: true},
+  "Wipe": {cost: "Tier of computer", sfsLegal: true},
 }
 
 const computerShockGrid = {
@@ -1922,6 +1922,15 @@ const cloakingTechnology = {
   "Gray, Budget": {bpCost: 20, pcuCost: 25, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
   "Gray, Basic": {bpCost: 30, pcuCost: 40, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
   "Gray, Advanced": {bpCost: 45, pcuCost: 75, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
+}
+
+// https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
+const securityCheckboxes = {
+  "Biometric Locks": {bpCost: 5, pcuCost: null, sfsLegal: true, source: "Starfinder Core Rulebook pg. 300"},
+  "Self-Destruct System": {bpCost: "5 * size category", pcuCost: null, sfsLegal: true, source: "Starfinder Core Rulebook pg. 300"},
+  "Emergency Accelerator": {bpCost: "4 * size category", pcuCost: 5, sfsLegal: false, source: "Starship Operations Manual pg. 27"},
+  "Holographic Mantle": {bpCost: 12, pcuCost: 10, sfsLegal: false, source: "Starship Operations Manual pg. 27"},
+  "Reconfiguration System": {bpCost: 30, pcuCost: 50, sfsLegal: false, source: "Starship Operations Manual pg. 27"},
 }
 
 
@@ -2124,6 +2133,14 @@ const getCloakingData = (cloakingId) => {
   return {bpCost, pcuCost, sfsLegal, source}
 }
 
+const getSecurityCheckboxData = (securityCheckboxId) => {
+  if (securityCheckboxId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
+
+  const { bpCost, pcuCost, sfsLegal, source } = securityCheckboxes[securityCheckboxId]
+
+  return {bpCost, pcuCost, sfsLegal, source}
+}
+
 
 
 // <--- ID extractions -->
@@ -2199,6 +2216,7 @@ const getAntiHackingIdList = () => {
 }
 
 const getAntiPersonnelIdList = () => {
+  // TODO: need to change the sorting to divide longarm and heavy weapons
   return [...getLongarmIdList(), ...getHeavyIdList()]
 }
 
@@ -2225,6 +2243,10 @@ const getComputerTierIdList = () => {
 const getCloakingIdList = () => {
   // Need data in non-alphabetical order
   return Object.keys(cloakingTechnology)
+}
+
+const getSecurityCheckboxIdList = () => {
+  return Object.keys(computerTiers).sort((a, b) => a + b)
 }
 
 export {
@@ -2269,6 +2291,7 @@ export {
   getComputerShockGridData,
   getComputerTierData,
   getCloakingData,
+  getSecurityCheckboxData,
 
   getSourceIdList,
   getTierIdList, 

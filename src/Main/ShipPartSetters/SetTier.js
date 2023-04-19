@@ -22,7 +22,8 @@ function SetTier(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={tierId} onChange={handleTierChange}>
+        <label htmlFor="tierId" className="hidden">Tier Number</label>
+        <select id="tierId" value={tierId} onChange={handleTierChange}>
           {Tables.getTierIdList().map((tier, idx) => (
             <option key={idx}>{tier}</option>
           ))}

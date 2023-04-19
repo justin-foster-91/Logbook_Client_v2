@@ -29,9 +29,10 @@ function NonPrimaryComputers(props) {
     <>
 
       <div className="dropdownBlock">
-        <div><strong>Secondary Computer</strong></div>
+        <label htmlFor="secondaryComputer"><strong>Secondary Computer</strong></label>
 
         <select
+          id="secondaryComputer"
           value={secondaryComputerId}
           onChange={handleSecondaryComputerChange}
         >
@@ -49,7 +50,7 @@ function NonPrimaryComputers(props) {
       <div className="dropdownBlock">
         <label htmlFor="networkNodes"><strong>Network Nodes</strong></label>
 
-        <select value={ctNetworkNodes} onChange={handleNodeChange}>
+        <select id="networkNodes" value={ctNetworkNodes} onChange={handleNodeChange}>
           {Array(nodeMax+1).fill(1).map((node, idx) => 
             <option key={idx}>{idx}</option>
           )}

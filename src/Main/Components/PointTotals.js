@@ -44,17 +44,17 @@ function PointTotals(props) {
     if (layout === "full") {
       setRenderBP(
         <>
-          <div className={validBP ? "" : "invalid"}><strong>BP used</strong>: {totalBPCosts}</div>
-          <div><strong>BP Budget</strong>: {totalBPBudget}</div>
+          <span className={validBP ? "" : "invalid"}><strong>BP used</strong>: {totalBPCosts}</span>
+          <span><strong>BP Budget</strong>: {totalBPBudget}</span>
         </>
       )
     } else {
       setRenderBP(
         <>
-          <div><strong>BP</strong>:</div>
-          <div className={validBP ? "" : "invalid"}>{totalBPCosts}</div>
-          <div>/</div>
-          <div>{totalBPBudget}</div>
+          <span><strong>BP</strong>:</span>
+          <span className={validBP ? "" : "invalid"}>{totalBPCosts}</span>
+          <span>/</span>
+          <span>{totalBPBudget}</span>
         </>
       )
     }
@@ -64,20 +64,20 @@ function PointTotals(props) {
     if (layout === "full") {
       setRenderPCU(
         <>
-          <div className={validPCU ? "" : "invalid"}><strong>PCU used</strong>: {totalPCUCosts}</div>
-          <div><strong>PCU Essentials</strong>: {essentialPCUCosts}</div>
-          <div><strong>PCU Budget</strong>: {totalPCUBudget}</div>
+          <span className={validPCU ? "" : "warning"}><strong>PCU used</strong>: {totalPCUCosts}</span>
+          <span className={validEssentialPCU ? "" : "invalid"}><strong>PCU Essentials</strong>: {essentialPCUCosts}</span>
+          <span><strong>PCU Budget</strong>: {totalPCUBudget}</span>
         </>
       )
     } else {
       setRenderPCU(
         <>
-          <div><strong>PCU</strong>:</div>
-          <div className={validPCU ? "" : "invalid"}>{totalPCUCosts}</div>
-          <div>/</div>
-          <div className={validEssentialPCU ? "" : "invalid"}>{essentialPCUCosts}</div>
-          <div>/</div>
-          <div>{totalPCUBudget}</div>
+          <span><strong>PCU</strong>:</span>
+          <span className={validPCU ? "" : "warning"}>{totalPCUCosts}</span>
+          <span>/</span>
+          <span className={validEssentialPCU ? "" : "invalid"}>{essentialPCUCosts}</span>
+          <span>/</span>
+          <span>{totalPCUBudget}</span>
         </>
       )
     }

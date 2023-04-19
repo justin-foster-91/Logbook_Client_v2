@@ -25,12 +25,11 @@ const PowerCoreSelections = () => {
     .map((dropdown, idx) => {
       return (
         <div key={"powerCore" + idx} className="dropdownBlock">
-          <div><strong>Power Core {idx + 1}</strong></div>
+          <label htmlFor={`powerCore${idx + 1}`}><strong>Power Core {idx + 1}</strong></label>
 
           <select
-            value={
-              powerCoreIds[idx] ? powerCoreIds[idx] : "None"
-            }
+            id={`powerCore${idx + 1}`}
+            value={powerCoreIds[idx] ? powerCoreIds[idx] : "None"}
             name={idx}
             onChange={handlePowerCoreChange}
           >

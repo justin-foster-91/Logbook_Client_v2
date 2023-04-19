@@ -12,7 +12,7 @@ h1 {
 
 .sidebarWrapper {
   height: 100%;
-  width: 20vw;
+  width: 20%;
   position: fixed;
   background-image: url("../Assets/Images/Base_ship.jpg");
   background-size: cover;
@@ -44,16 +44,16 @@ h1 {
 }
 
 .customShipDisplay {
-  width: 79vw;
-  transform: translate(20svw);
+  width: 80%;
+  transform: translate(25%);
   background-color: #001129;
   color: #C9C5BE;
   text-align: start;
 }
 
-.customShipDisplay .row div, .partSetterBlock .row div {
-  padding: .1rem;
-  margin: .1rem 1rem .1rem .1rem;
+.customShipDisplay .row :is(div, label), .partSetterBlock .row :is(div, label) {
+  /* padding: .1rem; */
+  margin: .1rem 1rem .1rem 0;
 }
 
 .partSetterList {
@@ -92,11 +92,11 @@ h1 {
 
 .sidebar > .finalTotals .row {
   align-self: flex-end;
-  gap: .2rem;
+  gap: .1rem;
 }
 
-.sidebar > .finalTotals .totals div:first-child {
-  margin-right: 1rem;
+.sidebar > .finalTotals .totals span:first-child {
+  margin-right: .5rem;
 }
 
 .customShipDisplay > .finalTotals > .totals {
@@ -122,10 +122,13 @@ h1 {
   margin-right: .3rem;
 }
 
+.dropdownBlock select {
+  color: #c7c2bb;
+}
+
 .dropdownBlock > .totals {
-  border-top: 0;
-  margin: 0;
-  
+  border-top: 0 !important;
+  margin: 0 !important;
 }
 
 .dropdownBlock > .row  {
@@ -154,6 +157,10 @@ select {
 
 .invalid {
   color: red;
+}
+
+.warning {
+  color: 	yellow;
 }
 
 .icon {

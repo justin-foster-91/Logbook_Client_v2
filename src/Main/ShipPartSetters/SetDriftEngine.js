@@ -43,7 +43,12 @@ function SetDriftEngine(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={driftEngineId ? driftEngineId : "None"} onChange={handleDriftEngineChange}>
+        <label htmlFor="driftEngine" className="hidden">Drift Engine</label>
+        <select 
+          id="driftEngine" 
+          value={driftEngineId ? driftEngineId : "None"} 
+          onChange={handleDriftEngineChange}
+        >
           <option key="None">None</option>
           {Tables.getDriftEngineIdList().map((engine, idx) => 
             isWithinBudget(engine) && 

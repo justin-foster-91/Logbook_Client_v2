@@ -22,7 +22,12 @@ function SetDefensiveCounters(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className='dropdownBlock'>
-        <select value={defensiveId ? defensiveId : "None"} onChange={handleDefensiveCounterChange}>
+        <label htmlFor="defensiveCounter" className='hidden'>Defensive Countermeasures</label>
+        <select 
+          id="defensiveCounter" 
+          value={defensiveId ? defensiveId : "None"} 
+          onChange={handleDefensiveCounterChange}
+        >
           <option key="None">None</option>
           {Tables.getDefensiveCounterIdList().map((defense, idx) => (
             <option key={idx} value={defense}>{defense} Defenses</option>

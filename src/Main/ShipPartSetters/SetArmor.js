@@ -57,7 +57,10 @@ function SetArmor(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={armorId ? armorId : "None"}
+        <label htmlFor="armor" className="hidden">Armor Type</label>
+        <select 
+          id="armor"
+          value={armorId ? armorId : "None"}
           onChange={handleArmorChange}
         >
           <option key="None">None</option>

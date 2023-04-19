@@ -21,7 +21,8 @@ function SetCrewQuarters(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={crewQuartersId} onChange={handleQuartersChange}>
+        <label htmlFor="quarters" className='hidden'>Crew Quarters</label>
+        <select id="quarters" value={crewQuartersId} onChange={handleQuartersChange}>
           {Tables.getQuartersIdList().map((quarters, idx) => (
             <option key={idx}>{quarters}</option>
           ))}

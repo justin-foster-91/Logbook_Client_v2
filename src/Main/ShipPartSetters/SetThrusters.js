@@ -28,7 +28,10 @@ function SetThrusters(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <select value={thrustersId ? thrustersId : "None"} 
+        <label htmlFor="thrusters" className="hidden">Thruster Type</label>
+        <select 
+          id="thrusters"
+          value={thrustersId ? thrustersId : "None"} 
           onChange={handleThrusterChange}
         >
           {/* <option key="None">None</option> */}

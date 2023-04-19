@@ -27,7 +27,7 @@ function SetSecurity(props) {
   const totalSecurityBP = null
   const totalSecurityPCU = null
 
-  const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe", "shockGrid"]
+  const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
   const checkboxList = ["Biometric Locks", "Self-Destruct System", "Emergency Accelerator", "Holographic Mantle", "Reconfiguration System"]
 
   const handleComputerCounterChange = (ev) => {
@@ -91,9 +91,13 @@ function SetSecurity(props) {
       <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
-        <div>Anti-Hacking Systems</div>
+        <label htmlFor="antiHackingSystems">Anti-Hacking Systems</label>
         {/*  increase the DC to hack into it by 1 * mark */}
-        <select value={antiHackingSystemsId || "None"} onChange={handleAntiHackingChange}>
+        <select 
+          id="antiHackingSystems" 
+          value={antiHackingSystemsId || "None"} 
+          onChange={handleAntiHackingChange}
+        >
           <option key={"None"}>None</option>
           {Tables.getAntiHackingIdList().map((weapon, idx) => (
             <option key={idx}>{weapon}</option>
@@ -101,9 +105,19 @@ function SetSecurity(props) {
         </select>
       </div>
 
+      {/* TODO: radio buttons for longarm and heavy weapon that changes dropdown data */}
       <div className="dropdownBlock">
         <div>Anti-Personnel Weapon</div>
-        <select value={antiPersonnelWeaponId || "None"} onChange={handleAntiPersonnelChange}>
+
+        {/* <input type="radio" id="longarm" name="antiPersonnelWeapon" value="longarm" />
+        <label htmlFor="longarm">Longarm</label> */}
+        
+        <label htmlFor="antiPersonnelWeapon" className="hidden">Anti-Personnel Weapon</label>
+        <select 
+          id="antiPersonnelWeapon" 
+          value={antiPersonnelWeaponId || "None"} 
+          onChange={handleAntiPersonnelChange}
+        >
           <option key={"None"}>None</option>
           {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
             <option key={idx}>{weapon}</option>
@@ -111,9 +125,10 @@ function SetSecurity(props) {
         </select>
       </div>
 
+      {/* TODO: radio buttons for normal and gray cloaking that change dropdown data? */}
       <div className="dropdownBlock">
-        <div>Cloaking</div>
-        <select value={cloakingId || "None"} onChange={handleCloakingIdChange}>
+        <label htmlFor="cloaking">Cloaking</label>
+        <select id="cloaking" value={cloakingId || "None"} onChange={handleCloakingIdChange}>
           <option key={"None"}>None</option>
           {Tables.getCloakingIdList().map((cloak, idx) => (
             <option key={idx}>{cloak}</option>
@@ -126,15 +141,18 @@ function SetSecurity(props) {
       {/* Cloaking - dropdown */}
       {/* Normal and Gray included */}
 
-      <div>
-      {/* TODO: border with legend */}
-        <div>Computer Countermeasures</div>
+      <fieldset>
+        <legend>Computer Countermeasures</legend>
         <div className="row">
           {checkboxRenders()}
         </div>
-        <div className="row">
-          <div>Shock Grid</div>
-          <select value={computerCountermeasures?.shockGrid || "None"} onChange={handleComputerCounterChange}>
+        <div className="dropdownBlock">
+          <label htmlFor="shockGrid">Shock Grid</label>
+          <select 
+            id="shockGrid" 
+            value={computerCountermeasures?.shockGrid || "None"} 
+            onChange={handleComputerCounterChange}
+          >
             <option key={"None"}>None</option>
             {Tables.getComputerShockGridIdList().map((tier, idx) => (
               
@@ -143,7 +161,7 @@ function SetSecurity(props) {
             ))}
           </select>
         </div>
-      </div>
+      </fieldset>
 
       <p></p>
 
