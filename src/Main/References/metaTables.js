@@ -1911,6 +1911,19 @@ const computerTiers = {
   10: {price: 320000, hackDC: 53},
 }
 
+// https://www.aonsrd.com/Starship_Security.aspx?ItemName=Advanced&Family=Cloaking
+// https://www.aonsrd.com/Starship_Security.aspx?ItemName=Advanced&Family=Gray%20Cloaking%20Device
+const cloakingTechnology = {
+  "Cut-Rate": {bpCost: 10, pcuCost: 15, sfsLegal: false, source: "Near Space pg. 114"},
+  "Budget": {bpCost: 15, pcuCost: 25, sfsLegal: false, source: "Near Space pg. 114"},
+  "Basic": {bpCost: 25, pcuCost: 40, sfsLegal: false, source: "Near Space pg. 114"},
+  "Advanced": {bpCost: 40, pcuCost: 75, sfsLegal: false, source: "Near Space pg. 114"},
+  "Gray, Cut-Rate": {bpCost: 15, pcuCost: 15, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
+  "Gray, Budget": {bpCost: 20, pcuCost: 25, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
+  "Gray, Basic": {bpCost: 30, pcuCost: 40, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
+  "Gray, Advanced": {bpCost: 45, pcuCost: 75, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
+}
+
 
 // <--- Data extractions --->
 const getSourceData = (source) => {
@@ -2103,6 +2116,14 @@ const getComputerTierData = (computerTierId) => {
   return {price, hackDC}
 }
 
+const getCloakingData = (cloakingId) => {
+  if (cloakingId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
+
+  const { bpCost, pcuCost, sfsLegal, source } = cloakingTechnology[cloakingId]
+
+  return {bpCost, pcuCost, sfsLegal, source}
+}
+
 
 
 // <--- ID extractions -->
@@ -2201,6 +2222,11 @@ const getComputerTierIdList = () => {
   return Object.keys(computerTiers).sort((a, b) => a + b)
 }
 
+const getCloakingIdList = () => {
+  // Need data in non-alphabetical order
+  return Object.keys(cloakingTechnology)
+}
+
 export {
   // sources,
   // shipTiers,
@@ -2242,6 +2268,7 @@ export {
   getComputerCountermeasureData,
   getComputerShockGridData,
   getComputerTierData,
+  getCloakingData,
 
   getSourceIdList,
   getTierIdList, 
@@ -2263,5 +2290,6 @@ export {
   getComputerUpgradeIdList,
   getComputerCountermeasureIdList,
   getComputerShockGridIdList,
-  getComputerTierIdList
+  getComputerTierIdList,
+  getCloakingIdList
 }

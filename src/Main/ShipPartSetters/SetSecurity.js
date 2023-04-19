@@ -9,10 +9,15 @@ import PartTotals from "../Components/PartTotals";
 
 // TODO: tooltip on computer countermeasures to specify no BP cost
 
+
+// Normal Cloaking: Sensors capable of detecting a cloaked starship can do so only when the cloaked starship has entered the sensor’s first range increment. Engaging a Drift engine or thrusters or beginning starship combat immediately negates the cloaking ability, whereupon the ship reappears and can be detected normally.
+
+// Gray Cloaking: Sensors capable of detecting a cloaked starship can do so only when the cloaked starship has entered the sensor’s first range increment. Engaging a Drift engine or firing a starship weapon immediately negates the cloaking ability, whereupon the ship reappears and can be detected normally. However, a starship hidden with a gray cloaking device can move, though at a maximum speed of 10 hexes for Tiny and Small starships, 8 hexes for Medium and Large starships, and 6 hexes for Huge and larger starships.
+
 function SetSecurity(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
 
-  const { antiHackingSystemsId, antiPersonnelWeaponId, computerCountermeasures } = customShipParts;
+  const { antiHackingSystemsId, antiPersonnelWeaponId, computerCountermeasures, cloakingId } = customShipParts;
   // TODO: need to know when the ID is from a longarm vs a heavy weapon
   // category, level, price, damage, range, critical, capacity, usage, bulk, special, sfsLegal
   const {  } = Tables.getAntiPersonnelData(antiPersonnelWeaponId);
@@ -64,6 +69,13 @@ function SetSecurity(props) {
     // ship.setSecurity({ reference: 'tierId', value: tierOption})
   }
 
+  const handleCloakingIdChange = (ev) => {
+    const cloakingOption = ev.target.value;
+    console.log(cloakingOption);
+
+    // ship.setSecurity({ reference: 'tierId', value: tierOption})
+  }
+
   const handleCheckboxChange = (ev) => {
     const checkboxOption = ev.target.name
     const checkboxActive = document.getElementById(`${checkboxOption}`).checked
@@ -95,6 +107,16 @@ function SetSecurity(props) {
           <option key={"None"}>None</option>
           {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
             <option key={idx}>{weapon}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="dropdownBlock">
+        <div>Cloaking</div>
+        <select value={cloakingId || "None"} onChange={handleCloakingIdChange}>
+          <option key={"None"}>None</option>
+          {Tables.getCloakingIdList().map((cloak, idx) => (
+            <option key={idx}>{cloak}</option>
           ))}
         </select>
       </div>
