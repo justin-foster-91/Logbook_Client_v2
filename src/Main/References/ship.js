@@ -194,7 +194,26 @@ class Ship {
   }
 
   setSecurity(security) {
-    const { reference, value, parent } = security;
+    const targetTranslation = {
+      "Biometric Locks": "hasBiometricLocks",
+      "Self-Destruct System": "hasSelfDestructSystem",
+      "Emergency Accelerator": "hasEmergencyAccelerator",
+      "Holographic Mantle": "hasHolographicMantle",
+      "Reconfiguration System": "hasReconfigurationSystem",
+      "shockGrid": "shockGridId",
+      "Anti-Hacking Systems": "antiHackingSystemsId",
+      "Anti-Personnel Weapon": "antiPersonnelWeaponId",
+      "Cloaking Device": "cloakingId",
+    }
+
+    const translationKeys = Object.keys(targetTranslation);
+
+    let { reference, value, parent } = security;
+
+    if (translationKeys.includes(reference)) {
+      reference = targetTranslation[reference];
+      console.log(reference);
+    }
 
     if (parent) {
       this.parts[parent][reference] = value;
@@ -203,7 +222,6 @@ class Ship {
     }
     
     this.onShipChange(this.parts);
-    console.log(security);
     return this;
   }
 

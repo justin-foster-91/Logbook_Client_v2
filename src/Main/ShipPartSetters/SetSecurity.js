@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import { splitCamelCase } from "../References/utils";
@@ -7,8 +7,6 @@ import PartTotals from "../Components/PartTotals";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
-// TODO: tooltip on computer countermeasures to specify no BP cost
-
 
 // Normal Cloaking: Sensors capable of detecting a cloaked starship can do so only when the cloaked starship has entered the sensor’s first range increment. Engaging a Drift engine or thrusters or beginning starship combat immediately negates the cloaking ability, whereupon the ship reappears and can be detected normally.
 
@@ -16,12 +14,15 @@ import PartTotals from "../Components/PartTotals";
 
 function SetSecurity(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
+  const [antiPersonnelCheckbox, setAntiPersonnelCheckbox] = useState(null);
 
   const { antiHackingSystemsId, antiPersonnelWeaponId, computerCountermeasures, cloakingId } = customShipParts;
   // TODO: need to know when the ID is from a longarm vs a heavy weapon
   // category, level, price, damage, range, critical, capacity, usage, bulk, special, sfsLegal
-  const {  } = Tables.getAntiPersonnelData(antiPersonnelWeaponId);
+  // const {  } = Tables.getAntiPersonnelData(antiPersonnelWeaponId);
   const { currentPart } = props;
+  // const { fortification, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
+  const { bpCost: antiHackingBpCost } = Tables.getAntiHackingData(antiHackingSystemsId);
   
   // const {  } = customShipParts;
   const totalSecurityBP = null
@@ -30,7 +31,7 @@ function SetSecurity(props) {
   const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
   const checkboxList = ["Biometric Locks", "Self-Destruct System", "Emergency Accelerator", "Holographic Mantle", "Reconfiguration System"]
 
-  const handleComputerCounterChange = (ev) => {
+  const handleComputerCheckboxChange = (ev) => {
     const counterOption = ev.target.name
     const counterActive = document.getElementById(`${counterOption}`).checked
     
@@ -42,48 +43,83 @@ function SetSecurity(props) {
     ship.setSecurity({ reference: counterOption, value: counterActive, parent})
   }
 
+  const handleComputerShockChange = (ev) => {
+    const shockOption = ev.target.value;
+
+    ship.setSecurity({ reference: "shockGrid", value: shockOption, parent: "computerCountermeasures"})
+  }
+
+  const handleAntiPersonnelChange = (ev) => {
+    const antiPersonnelOption = ev.target.value;
+
+    ship.setSecurity({ reference: "Anti-Personnel Weapon", value: antiPersonnelOption})
+  };
+
+  const handleAntiPersonnelCheckboxChange = (ev) => {
+    const checkboxOption = ev.target.value;
+    const longarmActive = document.getElementById(`longarm`).checked
+    const heavyActive = document.getElementById(`heavy`).checked
+    const targetActive = document.getElementById(`${checkboxOption}`).checked
+
+    if (longarmActive && heavyActive) {
+      if (checkboxOption === "longarm") {
+        document.getElementById(`heavy`).checked = false
+        ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
+      } else {
+        document.getElementById(`longarm`).checked = false
+        ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
+      }
+    }
+
+    if (!longarmActive && !heavyActive) {
+      ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
+    }
+
+    if (targetActive) {
+      setAntiPersonnelCheckbox(checkboxOption)
+    } else {
+      setAntiPersonnelCheckbox(null)
+    }
+  }
+
+  const handleAntiHackingChange = (ev) => {
+    const antiHackingOption = ev.target.value;
+
+    ship.setSecurity({ reference: "Anti-Hacking Systems", value: antiHackingOption})
+  }
+
+  const handleCloakingIdChange = (ev) => {
+    const cloakingOption = ev.target.value;
+
+    ship.setSecurity({ reference: "Cloaking Device", value: cloakingOption})
+  }
+
+  const handleCheckboxChange = (ev) => {
+    const checkboxOption = ev.target.name
+    const checkboxActive = document.getElementById(`${checkboxOption}`).checked
+
+    ship.setSecurity({ reference: checkboxOption, value: checkboxActive})
+
+    // ship.setSecurity({ reference: biometricOption, value: biometricActive, parent})  
+  }
+
   const checkboxRenders = () => {
     return computerCounterTypes.map((box, idx) => {
       return (
         <div key={idx}>
           <input type="checkbox" id={box} name={box} 
             value={splitCamelCase(box)} 
-            onChange={handleComputerCounterChange}
+            onChange={handleComputerCheckboxChange}
           />
           <label htmlFor={box}>{splitCamelCase(box)}</label>
         </div>
     )})
   }
 
-  const handleAntiPersonnelChange = (ev) => {
-    const antiPersonnelOption = ev.target.value;
-    console.log(antiPersonnelOption);
+  const antiPersonnelSelection = () => {
+    const getter = (antiPersonnelCheckbox === "longarm") ? Tables.getLongarmIdList : Tables.getHeavyIdList
 
-    // ship.setSecurity({ reference: 'tierId', value: tierOption})
-  };
-
-  const handleAntiHackingChange = (ev) => {
-    const antiHackingOption = ev.target.value;
-    console.log(antiHackingOption);
-
-    // ship.setSecurity({ reference: 'tierId', value: tierOption})
-  }
-
-  const handleCloakingIdChange = (ev) => {
-    const cloakingOption = ev.target.value;
-    console.log(cloakingOption);
-
-    // ship.setSecurity({ reference: 'tierId', value: tierOption})
-  }
-
-  const handleCheckboxChange = (ev) => {
-    const checkboxOption = ev.target.name
-    const checkboxActive = document.getElementById(`${checkboxOption}`).checked
-    console.log({checkboxOption, checkboxActive});
-
-    // ship.setSecurity(counterOption, parent)
-
-    // ship.setSecurity({ reference: biometricOption, value: biometricActive, parent})  
+    return getter().map((weapon, idx) => <option key={idx}>{weapon}</option>)
   }
 
   return (
@@ -103,27 +139,68 @@ function SetSecurity(props) {
             <option key={idx}>{weapon}</option>
           ))}
         </select>
+        <PartTotals part={currentPart} bpCost={antiHackingBpCost} />
       </div>
 
       {/* TODO: radio buttons for longarm and heavy weapon that changes dropdown data */}
-      <div className="dropdownBlock">
-        <div>Anti-Personnel Weapon</div>
+      <fieldset>
+        <legend>Anti-Personnel Weapon</legend>
 
-        {/* <input type="radio" id="longarm" name="antiPersonnelWeapon" value="longarm" />
-        <label htmlFor="longarm">Longarm</label> */}
+        <div className="row">
+          <input 
+            type="checkbox" 
+            id="longarm" 
+            name="antiPersonnelWeapon" 
+            value="longarm" 
+            onChange={handleAntiPersonnelCheckboxChange}
+          />
+          <label htmlFor="longarm">Longarm</label>
+          <div></div>
+          <input 
+            type="checkbox" 
+            id="heavy" 
+            name="antiPersonnelWeapon" 
+            value="heavy" 
+            onChange={handleAntiPersonnelCheckboxChange}
+          />
+          <label htmlFor="heavy">Heavy</label>
+        </div>
         
-        <label htmlFor="antiPersonnelWeapon" className="hidden">Anti-Personnel Weapon</label>
-        <select 
-          id="antiPersonnelWeapon" 
-          value={antiPersonnelWeaponId || "None"} 
-          onChange={handleAntiPersonnelChange}
-        >
-          <option key={"None"}>None</option>
-          {Tables.getAntiPersonnelIdList().map((weapon, idx) => (
-            <option key={idx}>{weapon}</option>
-          ))}
-        </select>
-      </div>
+        <div className="dropdownBlock">
+          <label htmlFor="antiPersonnelWeapon" className="hidden">Anti-Personnel Weapon</label>
+          <select 
+            id="antiPersonnelWeapon" 
+            value={antiPersonnelWeaponId || "None"} 
+            onChange={handleAntiPersonnelChange}
+            disabled={!antiPersonnelCheckbox}
+          >
+            <option key={"None"}>None</option>
+            {antiPersonnelSelection()}
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Computer Countermeasures</legend>
+        <div className="row">
+          {checkboxRenders()}
+        </div>
+        <div className="dropdownBlock">
+          <label htmlFor="shockGrid">Shock Grid</label>
+          <select 
+            id="shockGrid" 
+            value={computerCountermeasures?.shockGridId || "None"} 
+            onChange={handleComputerShockChange}
+          >
+            <option key={"None"}>None</option>
+            {Tables.getComputerShockGridIdList().map((tier, idx) => (
+              
+              <option key={idx} value={tier}>Rank {tier} (DC {Tables.getComputerShockGridData(tier).DC}, Damage {Tables.getComputerShockGridData(tier).damage})
+              </option>
+            ))}
+          </select>
+        </div>
+      </fieldset>
 
       {/* TODO: radio buttons for normal and gray cloaking that change dropdown data? */}
       <div className="dropdownBlock">
@@ -136,38 +213,9 @@ function SetSecurity(props) {
         </select>
       </div>
 
-      <p></p>
-
-      {/* Cloaking - dropdown */}
-      {/* Normal and Gray included */}
-
-      <fieldset>
-        <legend>Computer Countermeasures</legend>
-        <div className="row">
-          {checkboxRenders()}
-        </div>
-        <div className="dropdownBlock">
-          <label htmlFor="shockGrid">Shock Grid</label>
-          <select 
-            id="shockGrid" 
-            value={computerCountermeasures?.shockGrid || "None"} 
-            onChange={handleComputerCounterChange}
-          >
-            <option key={"None"}>None</option>
-            {Tables.getComputerShockGridIdList().map((tier, idx) => (
-              
-              <option key={idx} value={tier}>Rank {tier} (DC {Tables.getComputerShockGridData(tier).DC}, Damage {Tables.getComputerShockGridData(tier).damage})
-              </option>
-            ))}
-          </select>
-        </div>
-      </fieldset>
-
-      <p></p>
-
       <div>
         {checkboxList.map((box, idx) => (
-          <div className="row">
+          <div className="row" key={box}>
             <input type="checkbox" id={box} name={box} 
               // value={splitCamelCase(box)} 
               onChange={handleCheckboxChange}

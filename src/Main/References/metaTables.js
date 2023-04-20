@@ -2075,15 +2075,15 @@ const getAntiHackingData = (antiHackingId) => {
   return {bpCost, source}
 }
 
-const getAntiPersonnelData = (antiPersonnelId) => {
-  if (antiPersonnelId === null) return {category: null, level: null, damage: null, range: null, critical: null, special: null, sfsLegal: null}
+// const getAntiPersonnelData = (antiPersonnelId) => {
+//   if (antiPersonnelId === null) return {category: null, level: null, damage: null, range: null, critical: null, special: null, sfsLegal: null}
 
-  if (getLongarmIdList.includes(antiPersonnelId)) {
-    return getLongarmData(antiPersonnelId)
-  } else {
-    return getHeavyData(antiPersonnelId)
-  }
-}
+//   if (getLongarmIdList.includes(antiPersonnelId)) {
+//     return getLongarmData(antiPersonnelId)
+//   } else {
+//     return getHeavyData(antiPersonnelId)
+//   }
+// }
 
 const getComputerModuleData = (computerModuleId) => {
   if (computerModuleId === null) return {cost: 0, sfsLegal: null}
@@ -2215,10 +2215,10 @@ const getAntiHackingIdList = () => {
   return Object.keys(antiHackingSystems).sort((a, b) => a + b)
 }
 
-const getAntiPersonnelIdList = () => {
-  // TODO: need to change the sorting to divide longarm and heavy weapons
-  return [...getLongarmIdList(), ...getHeavyIdList()]
-}
+// const getAntiPersonnelIdList = () => {
+//   // TODO: need to change the sorting to divide longarm and heavy weapons
+//   // return [...getLongarmIdList(), ...getHeavyIdList()]
+// }
 
 const getComputerModuleIdList = () => {
   return Object.keys(computerModules).sort((a, b) => a + b)
@@ -2284,7 +2284,9 @@ export {
   getFortifiedHullData,
   getReinforcedBulkheadData,
   getAntiHackingData,
-  getAntiPersonnelData,
+  // getAntiPersonnelData,
+  getLongarmData,
+  getHeavyData,
   getComputerModuleData,
   getComputerUpgradeData,
   getComputerCountermeasureData,
@@ -2308,7 +2310,9 @@ export {
   getFortifiedHullIdList,
   getReinforcedBulkheadIdList,
   getAntiHackingIdList,
-  getAntiPersonnelIdList,
+  // getAntiPersonnelIdList,
+  getLongarmIdList, 
+  getHeavyIdList,
   getComputerModuleIdList,
   getComputerUpgradeIdList,
   getComputerCountermeasureIdList,
