@@ -147,7 +147,7 @@ const maneuverability = {
   Perfect: { turnDistance: 0, pilotingModifier: 2 }
 }
 
-const sizeMod = {
+const sizeCategory = {
   "Tiny": 1, 
   "Small": 2, 
   "Medium": 3, 
@@ -1981,7 +1981,7 @@ const getArmorData = (armorId, size) => {
   if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
-  bpCost = (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (bpCost * sizeMod[size]) : bpCost
+  bpCost = (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (bpCost * sizeCategory[size]) : bpCost
 
   return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
 }
@@ -2023,7 +2023,7 @@ const getDriftEngineData = (driftEngineId, size) => {
   if(driftEngineId === null) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
 
   let { rating, minPCU, maxSize, bpCost, source, special } = driftEngines[driftEngineId]
-  bpCost = bpCost * sizeMod[size]
+  bpCost = bpCost * sizeCategory[size]
 
   return {rating, minPCU, maxSize, bpCost, source, special}
 }
@@ -2035,10 +2035,10 @@ const getExpansionBayData = (expansionBayId, size) => {
   const { pcuCost, bpCost, source } = expansionBays[expansionBayId]
 
   if(expansionBayId === "Quantum Defender") {
-    return {pcuCost: Math.max(20, (5 * sizeMod[size])), bpCost: Math.max(10, (4 * sizeMod[size])), source}
+    return {pcuCost: Math.max(20, (5 * sizeCategory[size])), bpCost: Math.max(10, (4 * sizeCategory[size])), source}
   }
   if(expansionBayId === "Decoy Husk") {
-    return {pcuCost: (pcuCost + sizeMod[size]), bpCost: (bpCost * sizeMod[size]), source}
+    return {pcuCost: (pcuCost + sizeCategory[size]), bpCost: (bpCost * sizeCategory[size]), source}
   }
   
   return {pcuCost, bpCost, source}
@@ -2049,8 +2049,8 @@ const getFortifiedHullData = (fortifiedHullId, size) => {
   if(fortifiedHullId === null) return {ctBonus: 0, bpCost: 0, source: null}
 
   let { ctBonus, bpCost, source } = fortifiedHulls[fortifiedHullId]
-  ctBonus = ctBonus * sizeMod[size]
-  bpCost = bpCost * sizeMod[size]
+  ctBonus = ctBonus * sizeCategory[size]
+  bpCost = bpCost * sizeCategory[size]
 
   return {ctBonus, bpCost, source}
 }
@@ -2060,7 +2060,7 @@ const getReinforcedBulkheadData = (reinforcedBulkheadId, size) => {
   if(reinforcedBulkheadId === null) return {fortification: 0, bpCost: 0, source: null}
 
   let { fortification, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
-  bpCost = bpCost * sizeMod[size]
+  bpCost = bpCost * sizeCategory[size]
 
   //fortification is a %
   return {fortification, bpCost, source}
@@ -2128,15 +2128,19 @@ const getComputerTierData = (computerTierId) => {
 const getCloakingData = (cloakingId) => {
   if (cloakingId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
 
+
   const { bpCost, pcuCost, sfsLegal, source } = cloakingTechnology[cloakingId]
 
   return {bpCost, pcuCost, sfsLegal, source}
 }
 
-const getSecurityCheckboxData = (securityCheckboxId) => {
+const getSecurityCheckboxData = (securityCheckboxId, size) => {
+  if(size === undefined) throw new Error("getSecurityCheckboxData(securityCheckboxId, size) must take in a size parameter")
   if (securityCheckboxId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
 
-  const { bpCost, pcuCost, sfsLegal, source } = securityCheckboxes[securityCheckboxId]
+  let { bpCost, pcuCost, sfsLegal, source } = securityCheckboxes[securityCheckboxId]
+  if (securityCheckboxId === "Self-Destruct System") bpCost = Number(bpCost[0]) * sizeCategory[size]
+  if (securityCheckboxId === "Emergency Accelerator") bpCost = Number(bpCost[0]) * sizeCategory[size]
 
   return {bpCost, pcuCost, sfsLegal, source}
 }
@@ -2254,7 +2258,7 @@ export {
   // shipTiers,
   // shipSize,
   // maneuverability,
-  sizeMod,
+  sizeCategory as sizeMod,
   // powerCores,
   // thrusters,
   // armor,

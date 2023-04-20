@@ -212,7 +212,6 @@ class Ship {
 
     if (translationKeys.includes(reference)) {
       reference = targetTranslation[reference];
-      console.log(reference);
     }
 
     if (parent) {

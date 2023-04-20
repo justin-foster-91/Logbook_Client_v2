@@ -9,6 +9,7 @@ let defaultSelections = {
 	"antiPersonnelWeaponId": null,
 	"armorId": null,
 	"armorMaterialId": null,
+	"cloakingId": null,
 	"computerCountermeasures": {
 		"alarm": false,
 		"fakeShell": false,

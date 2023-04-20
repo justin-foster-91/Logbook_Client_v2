@@ -6772,6 +6772,7 @@ const getLongarmData = (longarmId) => {
 }
 
 const getHeavyData = (heavyId) => {
+  console.log(heavyWeapons[heavyId]);
   const { category, level, damage, range, critical, special, sfsLegal } = heavyWeapons[heavyId]
 
   return {category, level, damage, range, critical, special, sfsLegal}

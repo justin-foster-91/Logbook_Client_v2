@@ -133,6 +133,12 @@ h1 {
   margin: 0 !important;
 }
 
+.row > .totals {
+  border-top: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .dropdownBlock > .row  {
   padding: .3rem 0 .3rem 0;
 }
