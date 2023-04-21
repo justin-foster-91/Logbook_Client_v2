@@ -2139,6 +2139,8 @@ const getSecurityCheckboxData = (securityCheckboxId, size) => {
   if (securityCheckboxId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
 
   let { bpCost, pcuCost, sfsLegal, source } = securityCheckboxes[securityCheckboxId]
+
+  // Self-Destruct & Emergency Accelerator are table's bp cost * ship size mod
   if (securityCheckboxId === "Self-Destruct System") bpCost = Number(bpCost[0]) * sizeCategory[size]
   if (securityCheckboxId === "Emergency Accelerator") bpCost = Number(bpCost[0]) * sizeCategory[size]
 

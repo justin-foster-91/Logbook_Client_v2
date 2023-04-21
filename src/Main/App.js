@@ -1,9 +1,9 @@
 import './App.css';
 import { Routes, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import HangarPage from './Pages/HangarPage';
-import TemplatePage from './Pages/TemplatePage';
-import CustomShipPage from './Pages/CustomShipPage';
+import HangarPage from './Pages/HangarPage/HangarPage';
+import TemplatePage from './Pages/HangarPage/TemplateOptions';
+import CustomShipPage from './Pages/CustomShipPage/CustomShipPage';
 import { ShipsProvider, CustomShipProvider } from "./Context/shipContext";
 import TemplateConverter from './Pages/TemplateConverter';
 
