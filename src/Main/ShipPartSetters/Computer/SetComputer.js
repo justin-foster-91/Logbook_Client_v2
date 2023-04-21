@@ -3,8 +3,8 @@ import * as Tables from "../../References/metaTables";
 import { CustomShipContext } from "../../Context/shipContext";
 import NonPrimaryComputers from "./NonPrimaryComputers";
 import * as SF from "../../References/shipFunctions";
-import PartTitle from "../../Components/PartTitle";
-import PartTotals from "../../Components/PartTotals";
+import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
 
 function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables'
-import PartTitle from '../Components/PartTitle';
-import PartTotals from '../Components/PartTotals';
+import PartTitle from './Components/PartTitle';
+import PartTotals from './Components/PartTotals';
 
 function SetDriftEngine(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

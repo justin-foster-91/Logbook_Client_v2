@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
-import PartTitle from "../Components/PartTitle";
-import PartTotals from "../Components/PartTotals";
+import PartTitle from "./Components/PartTitle";
+import PartTotals from "./Components/PartTotals";
 import PowerIcon from "../IconRefs/PowerIcon";
 import BuildIcon from "../IconRefs/BuildIcon";
 

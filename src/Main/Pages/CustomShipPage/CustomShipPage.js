@@ -17,7 +17,7 @@ import SetReinforcedBulkheads from "../../ShipPartSetters/SetReinforcedBulkheads
 import SetSecurity from '../../ShipPartSetters/Security/SetSecurity'
 import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
-import PointTotals from "../../Components/PointTotals";
+import PointTotals from "../../ShipPartSetters/Components/PointTotals";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);

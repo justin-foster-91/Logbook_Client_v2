@@ -3,7 +3,7 @@ import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../../References/metaTables";
 import { splitCamelCase } from "../../References/utils";
 
-import PartTotals from "../../Components/PartTotals";
+import PartTotals from "../Components/PartTotals";
 
 function CompCounter(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);

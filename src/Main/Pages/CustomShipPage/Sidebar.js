@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as SF from "../../References/shipFunctions";
 import * as Tables from '../../References/metaTables'
-import PointTotals from '../../Components/PointTotals';
+import PointTotals from '../../ShipPartSetters/Components/PointTotals';
 
 function Sidebar(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

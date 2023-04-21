@@ -3,8 +3,8 @@ import frames from "../References/frames.json";
 import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from '../References/metaTables';
-import PartTitle from "../Components/PartTitle";
-import PartTotals from "../Components/PartTotals";
+import PartTitle from "./Components/PartTitle";
+import PartTotals from "./Components/PartTotals";
 
 function SetFrame(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

@@ -3,8 +3,8 @@ import * as Tables from "../../References/metaTables";
 import AblativeArmor from "./AblativeArmor";
 import { CustomShipContext } from "../../Context/shipContext";
 import * as SF from "../../References/shipFunctions";
-import PartTitle from "../../Components/PartTitle";
-import PartTotals from "../../Components/PartTotals";
+import PartTitle from "../Components/PartTitle";
+import PartTotals from "../Components/PartTotals";
 
 function SetArmor(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

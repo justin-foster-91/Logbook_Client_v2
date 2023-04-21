@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import * as Tables from "../../References/metaTables";
 import PowerCoreSelections from "./PowerCoreSelections";
 import { CustomShipContext } from "../../Context/shipContext";
-import PartTitle from "../../Components/PartTitle";
+import PartTitle from "../Components/PartTitle";
 import PowerIcon from "../../IconRefs/PowerIcon";
-import PartTotals from "../../Components/PartTotals";
+import PartTotals from "../Components/PartTotals";
 
 function SetPowerCore(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import * as Tables from "../References/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
-import PartTitle from "../Components/PartTitle";
+import PartTitle from "./Components/PartTitle";
 import BuildIcon from "../IconRefs/BuildIcon";
 
 function SetTier(props) {

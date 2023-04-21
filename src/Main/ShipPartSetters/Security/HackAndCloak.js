@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../../References/metaTables";
-import PartTotals from "../../Components/PartTotals";
+import PartTotals from "../Components/PartTotals";
 
 
 // Normal Cloaking: Sensors capable of detecting a cloaked starship can do so only when the cloaked starship has entered the sensor’s first range increment. Engaging a Drift engine or thrusters or beginning starship combat immediately negates the cloaking ability, whereupon the ship reappears and can be detected normally.

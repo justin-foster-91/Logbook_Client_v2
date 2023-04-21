@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../../References/metaTables";
-import PartTotals from "../../Components/PartTotals";
+import PartTotals from "../Components/PartTotals";
 
 function SecurityCheckboxes(props) {
   const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
