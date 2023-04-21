@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import SetTier from "../../ShipPartSetters/SetTier";
 import SetFrame from "../../ShipPartSetters/SetFrame";
-import SetPowerCore from "../../ShipPartSetters/SetPowerCore/SetPowerCore";
+import SetPowerCore from "../../ShipPartSetters/PowerCore/SetPowerCore";
 import * as SF from "../../References/shipFunctions";
 import SetThrusters from "../../ShipPartSetters/SetThrusters";
-import SetArmor from "../../ShipPartSetters/SetArmor/SetArmor";
+import SetArmor from "../../ShipPartSetters/Armor/SetArmor";
 import { CustomShipContext } from "../../Context/shipContext";
-import SetComputer from "../../ShipPartSetters/SetComputer/SetComputer";
+import SetComputer from "../../ShipPartSetters/Computer/SetComputer";
 import * as Tables from '../../References/metaTables'
 import SetCrewQuarters from "../../ShipPartSetters/SetCrewQuarters";
 import SetDefensiveCounter from "../../ShipPartSetters/SetDefensiveCounter";
 import SetDriftEngine from "../../ShipPartSetters/SetDriftEngine";
-import SetExpansionBays from "../../ShipPartSetters/SetExpansionBays/SetExpansionBays";
+import SetExpansionBays from "../../ShipPartSetters/ExpansionBays/SetExpansionBays";
 import SetFortifiedHull from "../../ShipPartSetters/SetFortifiedHull";
 import SetReinforcedBulkheads from "../../ShipPartSetters/SetReinforcedBulkheads";
-import SetSecurity from '../../ShipPartSetters/SetSecurity'
+import SetSecurity from '../../ShipPartSetters/Security/SetSecurity'
 import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
 import PointTotals from "../../Components/PointTotals";
