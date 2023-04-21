@@ -27,6 +27,9 @@ function CustomShipPage() {
 
   // https://www.aonsrd.com/Rules.aspx?ID=183
 
+  // TODO: show the ship stat block in sidebar or at bottom of page
+  // TODO: collapse expansion listings in stat block by type e.x. (Cargo Hold x7)
+
 
   const handleScroll = () => {
     let allPartBlocks = document.getElementsByClassName("partSetterBlock")

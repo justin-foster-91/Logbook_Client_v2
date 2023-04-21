@@ -19,6 +19,8 @@ import PartTotals from '../../Components/PartTotals';
 
   // Standard expansion bay flavor text / description on an accordion
 
+  // TODO: fill all unused expansions with cargo hold by default
+
 function ExpansionBaySelections() {
   const { customShipParts, ship } = useContext(CustomShipContext);
   

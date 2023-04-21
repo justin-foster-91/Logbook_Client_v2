@@ -5,7 +5,7 @@ import PartTotals from "../../Components/PartTotals";
 
 function AntiPersonnel(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [antiPersonnelCheckbox, setAntiPersonnelCheckbox] = useState(null);
+  const [antiPersonnelRadio, setAntiPersonnelRadio] = useState(null);
   const [antiPersonnelBpCost, setAntiPersonnelBpCost] = useState(0);
 
   const { antiPersonnelWeaponId } = customShipParts;
@@ -14,93 +14,55 @@ function AntiPersonnel(props) {
   useEffect(() => {
     if (!antiPersonnelWeaponId) return;
 
-    const longarmActive = document.getElementById(`longarm`).checked
-    const heavyActive = document.getElementById(`heavy`).checked
-
-    if (!longarmActive && !heavyActive) {
-      const longarmWeapons = Tables.getLongarmIdList()
-      const heavyWeapons = Tables.getHeavyIdList()
-
-      if (longarmWeapons.indexOf(antiPersonnelWeaponId) >= 0) {
-        document.getElementById(`longarm`).checked = true
-        setAntiPersonnelCheckbox("longarm")
-      } else {
-        document.getElementById(`heavy`).checked = true
-        setAntiPersonnelCheckbox("heavy")
-      } 
-    }
-
-    // TODO: are the active variables still correct at this point?
-
     if (document.getElementById(`longarm`).checked) {
       setAntiPersonnelBpCost(5 + Number(Tables.getLongarmData(antiPersonnelWeaponId).level));
     } else {
       setAntiPersonnelBpCost(5 + Number(Tables.getHeavyData(antiPersonnelWeaponId).level));
     }
-    
-  }, [antiPersonnelWeaponId])
+  }, [antiPersonnelWeaponId, antiPersonnelRadio])
 
-  const handleAntiPersonnelChange = (ev) => {
+  const antiPersonnelSelection = () => {
+    const getter = (antiPersonnelRadio === "longarm") ? Tables.getLongarmIdList : Tables.getHeavyIdList
+
+    return getter().map((weapon, idx) => <option key={idx}>{weapon}</option>)
+  }
+
+  const handleDropdownChange = (ev) => {
     const antiPersonnelOption = ev.target.value;
 
     ship.setSecurity({ reference: "Anti-Personnel Weapon", value: antiPersonnelOption})
   };
 
-  const handleAntiPersonnelCheckboxChange = (ev) => {
-    const checkboxOption = ev.target.value;
-    const longarmActive = document.getElementById(`longarm`).checked
-    const heavyActive = document.getElementById(`heavy`).checked
-    const targetActive = document.getElementById(`${checkboxOption}`).checked
+  const handleRadioChange = (ev) => {
+    const radioOption = ev.target.value;
+    console.log(radioOption);
 
-    if (longarmActive && heavyActive) {
-      if (checkboxOption === "longarm") {
-        document.getElementById(`heavy`).checked = false
-        ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
-      } else {
-        document.getElementById(`longarm`).checked = false
-        ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
-      }
-    }
-
-    if (!longarmActive && !heavyActive) {
-      ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
-    }
-
-    if (targetActive) {
-      setAntiPersonnelCheckbox(checkboxOption)
-    } else {
-      setAntiPersonnelCheckbox(null)
-    }
-  }
-
-  const antiPersonnelSelection = () => {
-    const getter = (antiPersonnelCheckbox === "longarm") ? Tables.getLongarmIdList : Tables.getHeavyIdList
-
-    return getter().map((weapon, idx) => <option key={idx}>{weapon}</option>)
+    ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
+    setAntiPersonnelBpCost(0)
+    setAntiPersonnelRadio(radioOption)
   }
 
   return (
     <>
-      {/* TODO: radio buttons for longarm and heavy weapon that changes dropdown data */}
       <fieldset>
         <legend>Anti-Personnel Weapon</legend>
 
         <div className="row">
           <input 
-            type="checkbox" 
+            type="radio" 
             id="longarm" 
-            name="antiPersonnelWeapon" 
+            name="weaponRadio" 
             value="longarm" 
-            onChange={handleAntiPersonnelCheckboxChange}
+            onChange={handleRadioChange}
           />
           <label htmlFor="longarm">Longarm</label>
-          <div></div>
+          
           <input 
-            type="checkbox" 
+            type="radio" 
             id="heavy" 
-            name="antiPersonnelWeapon" 
+            name="weaponRadio" 
             value="heavy" 
-            onChange={handleAntiPersonnelCheckboxChange}
+            onChange={handleRadioChange}
           />
           <label htmlFor="heavy">Heavy</label>
         </div>
@@ -110,14 +72,14 @@ function AntiPersonnel(props) {
           <select 
             id="antiPersonnelWeapon" 
             value={antiPersonnelWeaponId || "None"} 
-            onChange={handleAntiPersonnelChange}
-            disabled={!antiPersonnelCheckbox}
+            onChange={handleDropdownChange}
+            disabled={!antiPersonnelRadio}
           >
-            <option key={"None"}>None</option>
+            <option key={"None"} value={null}>None</option>
             {antiPersonnelSelection()}
           </select>
           <PartTotals part={currentPart} bpCost={antiPersonnelBpCost} />
-        </div>        
+        </div>
       </fieldset>
     </>
   );
