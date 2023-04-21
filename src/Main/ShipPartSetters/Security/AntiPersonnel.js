@@ -5,41 +5,45 @@ import PartTotals from "../../Components/PartTotals";
 
 function AntiPersonnel(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [antiPersonnelRadio, setAntiPersonnelRadio] = useState(null);
-  const [antiPersonnelBpCost, setAntiPersonnelBpCost] = useState(0);
+  const [radioSelection, setRadioSelection] = useState(null);
+  const [bpCost, setBpCost] = useState(0);
 
-  const { antiPersonnelWeaponId } = customShipParts;
+  const { antiPersonnelWeaponId: weaponId } = customShipParts;
   const { currentPart } = props;
 
+
   useEffect(() => {
-    if (!antiPersonnelWeaponId) return;
+    if (!weaponId) return;
 
-    if (document.getElementById(`longarm`).checked) {
-      setAntiPersonnelBpCost(5 + Number(Tables.getLongarmData(antiPersonnelWeaponId).level));
+    if (radioSelection === "longarm") {
+      setBpCost(5 + Number(Tables.getLongarmData(weaponId).level));
     } else {
-      setAntiPersonnelBpCost(5 + Number(Tables.getHeavyData(antiPersonnelWeaponId).level));
+      setBpCost(5 + Number(Tables.getHeavyData(weaponId).level));
     }
-  }, [antiPersonnelWeaponId, antiPersonnelRadio])
+  }, [weaponId, radioSelection])
 
-  const antiPersonnelSelection = () => {
-    const getter = (antiPersonnelRadio === "longarm") ? Tables.getLongarmIdList : Tables.getHeavyIdList
+  const renderDropdownSelection = () => {
+    const getter = (radioSelection === "longarm") ? Tables.getLongarmIdList : Tables.getHeavyIdList
 
-    return getter().map((weapon, idx) => <option key={idx}>{weapon}</option>)
+    return getter().map((weapon, idx) => <option key={idx} value={weapon}>{weapon}</option>)
   }
 
   const handleDropdownChange = (ev) => {
-    const antiPersonnelOption = ev.target.value;
+    let option = ev.target.value;
+    if (option === "None") {
+      option = null;
+      setBpCost(0)
+    }
 
-    ship.setSecurity({ reference: "Anti-Personnel Weapon", value: antiPersonnelOption})
+    ship.setSecurity({ reference: "Anti-Personnel Weapon", value: option})
   };
 
   const handleRadioChange = (ev) => {
     const radioOption = ev.target.value;
-    console.log(radioOption);
 
     ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
-    setAntiPersonnelBpCost(0)
-    setAntiPersonnelRadio(radioOption)
+    setBpCost(0)
+    setRadioSelection(radioOption)
   }
 
   return (
@@ -71,14 +75,14 @@ function AntiPersonnel(props) {
           <label htmlFor="antiPersonnelWeapon" className="hidden">Anti-Personnel Weapon</label>
           <select 
             id="antiPersonnelWeapon" 
-            value={antiPersonnelWeaponId || "None"} 
+            value={weaponId || "None"} 
             onChange={handleDropdownChange}
-            disabled={!antiPersonnelRadio}
+            disabled={!radioSelection}
           >
-            <option key={"None"} value={null}>None</option>
-            {antiPersonnelSelection()}
+            <option key={"None"}>None</option>
+            {renderDropdownSelection()}
           </select>
-          <PartTotals part={currentPart} bpCost={antiPersonnelBpCost} />
+          <PartTotals part={currentPart} bpCost={bpCost} />
         </div>
       </fieldset>
     </>

@@ -4,7 +4,6 @@ import Ship from '../References/ship';
 
 
 export const ShipsContext = createContext({userShips: [], setUserShips: ()=>{}});
-
 export const ShipsProvider = ({children}) => {
   const [userShips, setUserShips] = useState([]);
 
@@ -13,7 +12,6 @@ export const ShipsProvider = ({children}) => {
 
 
 export const CustomShipContext = createContext({customShip: {}, setCustomShip: ()=>{}, ship: new Ship()})
-
 export const CustomShipProvider = ({children}) => {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
   const ship = new Ship(customShipParts)
