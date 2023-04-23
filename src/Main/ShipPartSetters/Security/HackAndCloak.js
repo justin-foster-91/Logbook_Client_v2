@@ -10,62 +10,50 @@ import PartTotals from "../Components/PartTotals";
 
 function HackAndCloak(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [cloakingBpCost, setCloakingBpCost] = useState(0);
-
 
   const { antiHackingSystemsId, cloakingId } = customShipParts;
   const { currentPart } = props;
-  const { bpCost } = Tables.getAntiHackingData(antiHackingSystemsId);
+  const { bpCost: hackingBpCost } = Tables.getAntiHackingData(antiHackingSystemsId);
+  const { bpCost: cloakingBpCost } = Tables.getCloakingData(cloakingId);
 
-  useEffect(() => {
-    if (!cloakingId) return;
-    if (!Tables.getCloakingData(cloakingId)) return;
+  const handleDropdownChange = (ev) => {
+    let option = ev.target.value;
+    if (option === "None") option = null;
 
-    const { bpCost, pcuCost, sfsLegal, source } = Tables.getCloakingData(cloakingId);
-
-    setCloakingBpCost(bpCost)
-
-  }, [cloakingId])
-
-  const handleAntiHackingChange = (ev) => {
-    const antiHackingOption = ev.target.value;
-
-    ship.setSecurity({ reference: "Anti-Hacking Systems", value: antiHackingOption})
-  }
-
-  const handleCloakingIdChange = (ev) => {
-    const cloakingOption = ev.target.value;
-
-    ship.setSecurity({ reference: "Cloaking Device", value: cloakingOption})
+    ship.setSecurity({ reference: ev.target.id, value: option})
   }
 
   return (
     <>
       <div className="dropdownBlock">
-        <label htmlFor="antiHackingSystems">Anti-Hacking Systems</label>
+        <label htmlFor="Anti-Hacking Systems">Anti-Hacking Systems</label>
         {/*  increase the DC to hack into it by 1 * mark */}
         <select 
-          id="antiHackingSystems" 
+          id="Anti-Hacking Systems" 
           value={antiHackingSystemsId || "None"} 
-          onChange={handleAntiHackingChange}
+          onChange={handleDropdownChange}
         >
           <option key={"None"}>None</option>
           {Tables.getAntiHackingIdList().map((weapon, idx) => (
             <option key={idx}>{weapon}</option>
           ))}
         </select>
-        <PartTotals part={currentPart} bpCost={bpCost} />
+        <PartTotals part={currentPart} bpCost={hackingBpCost} />
       </div>
 
-      {/* TODO: radio buttons for normal and gray cloaking that change dropdown data? */}
       <div className="dropdownBlock">
-        <label htmlFor="cloaking">Cloaking</label>
-        <select id="cloaking" value={cloakingId || "None"} onChange={handleCloakingIdChange}>
+        <label htmlFor="Cloaking Device">Cloaking</label>
+        <select 
+          id="Cloaking Device" 
+          value={cloakingId || "None"} 
+          onChange={handleDropdownChange}
+        >
           <option key={"None"}>None</option>
           {Tables.getCloakingIdList().map((cloak, idx) => (
             <option key={idx}>{cloak}</option>
           ))}
         </select>
+
         <PartTotals part={currentPart} bpCost={cloakingBpCost} />
       </div>
     </>
