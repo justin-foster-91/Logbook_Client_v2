@@ -2,64 +2,80 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import { splitCamelCase } from "../../References/utils";
-
+import {readableIds} from "../../References/utils";
 import PartTotals from "../Components/PartTotals";
 
+
+
 function CompCounter(props) {
-  const { customShipParts, setCustomShipParts, ship } = useContext(CustomShipContext);
-  const [computerCounterTotalBpCost, setComputerCounterTotalBpCost] = useState(0);
+  const { customShipParts, ship } = useContext(CustomShipContext);
+  const [totalBpCost, setTotalBpCost] = useState(0);
 
 
-  const { antiHackingSystemsId, antiPersonnelWeaponId, computerCountermeasures, cloakingId } = customShipParts;
+  const { computerCountermeasures, tierId } = customShipParts;
   const { currentPart } = props;
 
-  const computerCounterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
+  const computerTier = Math.max(Math.floor(tierId / 2), 1);
+
+  // TODO: total bp cost should increase when use goes back up to tier and increases it
+  // json is source of truth, so base costs off of json, not user actions
+
+
+  const counterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
   
-  useEffect(() => {
-    // console.log(computerCountermeasures);
-    const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
-    const compCounterList = Object.keys(computerCountermeasures)
+  // useEffect(() => {
+  //   // console.log(computerCountermeasures);
+  //   const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
+  //   const compCounterList = Object.keys(computerCountermeasures)
 
-    // console.log(compCounterList);
+  //   // console.log(compCounterList);
 
-  }, [computerCountermeasures])
+  // }, [computerCountermeasures])
 
-  useEffect(() => {
-    // console.log(computerCountermeasures);
-    const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
-    const compCounterList = Object.keys(computerCountermeasures)
+  // useEffect(() => {
+  //   const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
 
-    // console.log(compCounterList);
+  
+  //   const alarmCost = alarm && Tables.getComputerCountermeasureData("Alarm", computerTier).cost
+  //   console.log(alarmCost);
+  // }, [computerCountermeasures, computerTier])
 
-  }, [computerCountermeasures])
 
   const checkboxRenders = () => {
-    return computerCounterTypes.map((box, idx) => {
+    return counterTypes.map((box, idx) => {
       return (
         <div key={idx}>
           <input type="checkbox" id={box} name={box} 
             // Tables.getComputerCountermeasureData(box)
-            value={{box} && splitCamelCase(box)} 
-            onChange={handleComputerCheckboxChange}
+            value={splitCamelCase(box)} 
+            onChange={handleCheckboxChange}
           />
           <label htmlFor={box}>{splitCamelCase(box)}</label>
         </div>
     )})
   }
 
-  const handleComputerCheckboxChange = (ev) => {
+  const handleCheckboxChange = (ev) => {
     const counterOption = ev.target.name
-    const counterActive = document.getElementById(`${counterOption}`).checked
+    const counterActive = ev.target.checked
+
+    const selectionCost = Tables.getComputerCountermeasureData(readableIds(counterOption), computerTier).cost
     
     let parent = null;
-    if (computerCounterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
+    if (counterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
 
-    // ship.setSecurity(counterOption, parent)
+    if (counterActive) {
+      setTotalBpCost(totalBpCost + selectionCost)
+    } else {
+      setTotalBpCost(totalBpCost - selectionCost)
+    }
+    // console.log(Tables.getComputerCountermeasureData(readableIds(counterOption), computerTier).cost);
+    // console.log({totalBpCost});
 
     ship.setSecurity({ reference: counterOption, value: counterActive, parent})
   }
 
-  const handleComputerShockChange = (ev) => {
+  const handleShockChange = (ev) => {
     const shockOption = ev.target.value;
 
     ship.setSecurity({ reference: "shockGrid", value: shockOption, parent: "computerCountermeasures"})
@@ -77,7 +93,7 @@ function CompCounter(props) {
           <select 
             id="shockGrid" 
             value={computerCountermeasures?.shockGridId || "None"} 
-            onChange={handleComputerShockChange}
+            onChange={handleShockChange}
           >
             <option key={"None"}>None</option>
             {Tables.getComputerShockGridIdList().map((tier, idx) => (
@@ -87,6 +103,7 @@ function CompCounter(props) {
             ))}
           </select>
         </div>
+        <PartTotals part={currentPart} bpCost={totalBpCost} />
       </fieldset>
     </>
   );

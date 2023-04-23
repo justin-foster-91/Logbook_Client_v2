@@ -1882,7 +1882,7 @@ const computerUpgrades = {
 const computerCountermeasures = {
   "Alarm": {cost: "Tier of computer", sfsLegal: true},
   "Fake Shell": {cost: "Tier of computer", sfsLegal: true},
-  "Feedbackk": {cost: "Tier of computer", sfsLegal: true},
+  "Feedback": {cost: "Tier of computer", sfsLegal: true},
   "Firewall": {cost: "Tier of computer", sfsLegal: true},
   "Lockout": {cost: "Tier of computer", sfsLegal: true},
   "Shock Grid": {cost: "Varies", sfsLegal: true},
@@ -2101,10 +2101,16 @@ const getComputerUpgradeData = (computerUpgradeId) => {
   return {cost, sfsLegal}
 }
 
-const getComputerCountermeasureData = (computerCountermeasureId) => {
+const getComputerCountermeasureData = (computerCountermeasureId, compTier) => {
+  if(compTier === undefined) throw new Error("getComputerCountermeasureData(computerCountermeasureId, compTier) must take in a computer tier parameter")
+
+  console.log({computerCountermeasureId});
   if (computerCountermeasureId === null) return {cost: 0, sfsLegal: null}
 
-  const { cost, sfsLegal } = computerCountermeasures[computerCountermeasureId]
+  const { sfsLegal } = computerCountermeasures[computerCountermeasureId]
+
+  let cost = compTier;
+  // if (computerCountermeasureId === "Shock Grid") cost = compTier * 'mk'
 
   return {cost, sfsLegal}
 }
