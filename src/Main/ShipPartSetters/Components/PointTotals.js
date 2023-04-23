@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as SF from "../../References/shipFunctions";
-import * as Tables from '../../References/metaTables'
+import * as Tables from '../CustomRefs/metaTables'
 import { render } from '@testing-library/react';
 
 // TODO: tooltip explaining what the numbers mean in sidebar

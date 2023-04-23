@@ -1,4 +1,4 @@
-import * as Tables from "./metaTables";
+import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as SF from "./shipFunctions";
 
 class Ship {

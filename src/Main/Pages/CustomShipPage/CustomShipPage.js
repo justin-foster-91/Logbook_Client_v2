@@ -7,7 +7,7 @@ import SetThrusters from "../../ShipPartSetters/SetThrusters";
 import SetArmor from "../../ShipPartSetters/Armor/SetArmor";
 import { CustomShipContext } from "../../Context/shipContext";
 import SetComputer from "../../ShipPartSetters/Computer/SetComputer";
-import * as Tables from '../../References/metaTables'
+import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
 import SetCrewQuarters from "../../ShipPartSetters/SetCrewQuarters";
 import SetDefensiveCounter from "../../ShipPartSetters/SetDefensiveCounter";
 import SetDriftEngine from "../../ShipPartSetters/SetDriftEngine";

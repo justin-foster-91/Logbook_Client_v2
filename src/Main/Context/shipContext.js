@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import defaultSelections from '../References/defaultShipSelection';
+import defaultSelections from '../ShipPartSetters/CustomRefs/defaultShipSelection';
 import Ship from '../References/ship';
 
 

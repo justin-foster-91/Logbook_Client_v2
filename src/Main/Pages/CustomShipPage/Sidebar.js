@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as SF from "../../References/shipFunctions";
-import * as Tables from '../../References/metaTables'
+import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
 import PointTotals from '../../ShipPartSetters/Components/PointTotals';
 
 function Sidebar(props) {

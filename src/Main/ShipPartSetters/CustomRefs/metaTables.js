@@ -1,5 +1,5 @@
-import { capitalizeEachWord } from "./utils";
-import frames from "../References/frames.json";
+import { capitalizeEachWord } from "../../References/utils";
+import frames from "./frames";
 import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelWeapons"
 
 const sources = {

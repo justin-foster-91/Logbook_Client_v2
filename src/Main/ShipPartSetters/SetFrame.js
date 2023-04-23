@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import frames from "../References/frames.json";
+import frames from "./CustomRefs/frames";
 import * as Utils from "../References/utils";
 import { CustomShipContext } from "../Context/shipContext";
-import * as Tables from '../References/metaTables';
+import * as Tables from './CustomRefs/metaTables';
 import PartTitle from "./Components/PartTitle";
 import PartTotals from "./Components/PartTotals";
 

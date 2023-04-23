@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
-import * as Tables from "../../References/metaTables";
+import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
 
 function SecurityCheckboxes(props) {

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { CustomShipContext } from "../Context/shipContext";
-import * as Tables from '../References/metaTables'
+import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 

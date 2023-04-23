@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import * as Tables from "../../References/metaTables";
+import * as Tables from "../CustomRefs/metaTables";
 import PowerCoreSelections from "./PowerCoreSelections";
 import { CustomShipContext } from "../../Context/shipContext";
 import PartTitle from "../Components/PartTitle";

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import * as Tables from "../../References/metaTables";
+import * as Tables from "../CustomRefs/metaTables";
 import AblativeArmor from "./AblativeArmor";
 import { CustomShipContext } from "../../Context/shipContext";
 import * as SF from "../../References/shipFunctions";

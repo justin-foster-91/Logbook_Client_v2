@@ -1,6 +1,6 @@
-import * as Tables from "./metaTables";
+import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as Utils from "./utils";
-import frames from "./frames.json";
+import frames from "../ShipPartSetters/CustomRefs/frames";
 import Ship from './ship'
 
 // TODO: add in bonus core from expansion

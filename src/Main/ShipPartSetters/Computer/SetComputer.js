@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import * as Tables from "../../References/metaTables";
+import * as Tables from "../CustomRefs/metaTables";
 import { CustomShipContext } from "../../Context/shipContext";
 import NonPrimaryComputers from "./NonPrimaryComputers";
 import * as SF from "../../References/shipFunctions";
