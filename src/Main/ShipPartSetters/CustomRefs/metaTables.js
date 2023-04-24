@@ -2115,12 +2115,15 @@ const getComputerCountermeasureData = (computerCountermeasureId, compTier) => {
   return {cost, sfsLegal}
 }
 
-const getComputerShockGridData = (computerShockGridId) => {
-  if (computerShockGridId === null) return {DC: null, damage: null, price: null}
+const getComputerShockGridData = (computerShockGridId, compTier) => {
+  if(computerShockGridId === undefined) throw new Error("getComputerShockGridData(computerShockGridId, compTier) must take in a computer tier parameter")
+
+  if (computerShockGridId === null) return {DC: null, damage: null, cost: 0}
 
   const { DC, damage, price } = computerShockGrid[computerShockGridId]
+  const cost = compTier * computerShockGridId
 
-  return {DC, damage, price}
+  return {DC, damage, cost}
 }
 
 const getComputerTierData = (computerTierId) => {

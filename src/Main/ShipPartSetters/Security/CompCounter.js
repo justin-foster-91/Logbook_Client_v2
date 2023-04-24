@@ -1,25 +1,18 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import { splitCamelCase } from "../../References/utils";
-import {readableIds} from "../../References/utils";
 import PartTotals from "../Components/PartTotals";
-
-
 
 function CompCounter(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  // const [totalBpCost, setTotalBpCost] = useState(0);
-
 
   const { computerCountermeasures, tierId } = customShipParts;
-  const { alarm, fakeShell, feedback, firewall, lockout, wipe } = computerCountermeasures;
+  const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
   const { currentPart } = props;
 
   const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
 
-  // TODO: total bp cost should increase when use goes back up to tier and increases it
-  // json is source of truth, so base costs off of json, not user actions
   const alarmCost = alarm && Tables.getComputerCountermeasureData("Alarm", computerTier).cost
   const fakeShellCost = fakeShell && Tables.getComputerCountermeasureData("Fake Shell", computerTier).cost
   const feedbackCost = feedback && Tables.getComputerCountermeasureData("Feedback", computerTier).cost
@@ -27,30 +20,11 @@ function CompCounter(props) {
   const lockoutCost = lockout && Tables.getComputerCountermeasureData("Lockout", computerTier).cost
   const wipeCost = wipe && Tables.getComputerCountermeasureData("Wipe", computerTier).cost
 
-  const totalBpCost = alarmCost + fakeShellCost + feedbackCost + firewallCost + lockoutCost + wipeCost
+  const shockGridCost = shockGridId && Tables.getComputerShockGridData(shockGridId, computerTier).cost
 
+  const totalBpCost = alarmCost + fakeShellCost + feedbackCost + firewallCost + lockoutCost + wipeCost + shockGridCost
 
   const counterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
-
-
-  
-  // useEffect(() => {
-  //   // console.log(computerCountermeasures);
-  //   const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
-  //   const compCounterList = Object.keys(computerCountermeasures)
-
-  //   // console.log(compCounterList);
-
-  // }, [computerCountermeasures])
-
-  // useEffect(() => {
-  //   const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;
-
-  
-  //   const alarmCost = alarm && Tables.getComputerCountermeasureData("Alarm", computerTier).cost
-  //   console.log(alarmCost);
-  // }, [computerCountermeasures, computerTier])
-
 
   const checkboxRenders = () => {
     return counterTypes.map((box, idx) => {
@@ -69,25 +43,16 @@ function CompCounter(props) {
   const handleCheckboxChange = (ev) => {
     const counterOption = ev.target.name
     const counterActive = ev.target.checked
-
-    const selectionCost = Tables.getComputerCountermeasureData(readableIds(counterOption), computerTier).cost
     
     let parent = null;
     if (counterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
-
-    // if (counterActive) {
-    //   setTotalBpCost(totalBpCost + selectionCost)
-    // } else {
-    //   setTotalBpCost(totalBpCost - selectionCost)
-    // }
-    // console.log(Tables.getComputerCountermeasureData(readableIds(counterOption), computerTier).cost);
-    // console.log({totalBpCost});
 
     ship.setSecurity({ reference: counterOption, value: counterActive, parent})
   }
 
   const handleShockChange = (ev) => {
-    const shockOption = ev.target.value;
+    let shockOption = ev.target.value;
+    if (shockOption === "None") shockOption = null;
 
     ship.setSecurity({ reference: "shockGrid", value: shockOption, parent: "computerCountermeasures"})
   }
