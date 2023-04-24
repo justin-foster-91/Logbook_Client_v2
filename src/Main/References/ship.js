@@ -35,11 +35,11 @@ class Ship {
 
 
   setTier(tier) {
-    const { reference, value } = tier;
+    const value = tier;
     if (!Tables.getTierIdList().includes(value))
       throw new Error("Tier input did not match allowed tier options");
 
-    this.parts[reference] = value;
+    this.parts.tierId = value;
     this.onShipChange(this.parts);
     return this;
   }

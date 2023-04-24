@@ -9,19 +9,30 @@ import PartTotals from "../Components/PartTotals";
 
 function CompCounter(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [totalBpCost, setTotalBpCost] = useState(0);
+  // const [totalBpCost, setTotalBpCost] = useState(0);
 
 
   const { computerCountermeasures, tierId } = customShipParts;
+  const { alarm, fakeShell, feedback, firewall, lockout, wipe } = computerCountermeasures;
   const { currentPart } = props;
 
   const computerTier = Math.max(Math.floor(tierId / 2), 1);
 
   // TODO: total bp cost should increase when use goes back up to tier and increases it
   // json is source of truth, so base costs off of json, not user actions
+  const alarmCost = alarm && Tables.getComputerCountermeasureData("Alarm", computerTier).cost
+  const fakeShellCost = fakeShell && Tables.getComputerCountermeasureData("Fake Shell", computerTier).cost
+  const feedbackCost = feedback && Tables.getComputerCountermeasureData("Feedback", computerTier).cost
+  const firewallCost = firewall && Tables.getComputerCountermeasureData("Firewall", computerTier).cost
+  const lockoutCost = lockout && Tables.getComputerCountermeasureData("Lockout", computerTier).cost
+  const wipeCost = wipe && Tables.getComputerCountermeasureData("Wipe", computerTier).cost
+
+  const totalBpCost = alarmCost + fakeShellCost + feedbackCost + firewallCost + lockoutCost + wipeCost
 
 
   const counterTypes = ["alarm", "fakeShell", "feedback", "firewall", "lockout", "wipe"]
+
+
   
   // useEffect(() => {
   //   // console.log(computerCountermeasures);
@@ -64,11 +75,11 @@ function CompCounter(props) {
     let parent = null;
     if (counterTypes.indexOf(counterOption) >= 0) parent = "computerCountermeasures"
 
-    if (counterActive) {
-      setTotalBpCost(totalBpCost + selectionCost)
-    } else {
-      setTotalBpCost(totalBpCost - selectionCost)
-    }
+    // if (counterActive) {
+    //   setTotalBpCost(totalBpCost + selectionCost)
+    // } else {
+    //   setTotalBpCost(totalBpCost - selectionCost)
+    // }
     // console.log(Tables.getComputerCountermeasureData(readableIds(counterOption), computerTier).cost);
     // console.log({totalBpCost});
 

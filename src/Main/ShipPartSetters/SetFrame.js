@@ -22,7 +22,7 @@ function SetFrame(props) {
 
   useEffect(() => {
     // Running setFrame on render to initialize later components that depend on the frame 
-    // This may not be needed this later
+    // This may not be needed later
     ship.setFrame(frameId)
   }, [])
 
