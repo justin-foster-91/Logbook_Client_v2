@@ -21,7 +21,7 @@ function SetComputer(props) {
   const totalCompPCUCosts = SF.getTotalCompPCUCosts(customShipParts)
   const totalNodes = nodes + secondaryNodes + ctNetworkNodes
   const bonusList = SF.combineComputerBonuses(customShipParts, size)
-  const computerTier = Math.max(Math.floor(tierId / 2), 1);
+  const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
 
   useEffect(() => {
     if (size === "Supercolossal") {

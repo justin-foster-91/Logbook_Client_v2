@@ -16,7 +16,7 @@ function CompCounter(props) {
   const { alarm, fakeShell, feedback, firewall, lockout, wipe } = computerCountermeasures;
   const { currentPart } = props;
 
-  const computerTier = Math.max(Math.floor(tierId / 2), 1);
+  const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
 
   // TODO: total bp cost should increase when use goes back up to tier and increases it
   // json is source of truth, so base costs off of json, not user actions
