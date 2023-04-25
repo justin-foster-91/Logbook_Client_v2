@@ -1,6 +1,7 @@
 import React, { useState, createContext } from "react";
 import defaultSelections from '../ShipPartSetters/CustomRefs/defaultShipSelection';
 import Ship from '../References/ship';
+import * as Utils from '../References/utils';
 
 
 export const ShipsContext = createContext({userShips: [], setUserShips: ()=>{}});
@@ -15,6 +16,7 @@ export const CustomShipContext = createContext({customShip: {}, setCustomShip: (
 export const CustomShipProvider = ({children}) => {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
   const ship = new Ship(customShipParts)
+
   ship.onShipChange = (parts) => setCustomShipParts({...parts})
 
   return (<CustomShipContext.Provider value={{customShipParts, setCustomShipParts, ship}}>{children}</CustomShipContext.Provider>)

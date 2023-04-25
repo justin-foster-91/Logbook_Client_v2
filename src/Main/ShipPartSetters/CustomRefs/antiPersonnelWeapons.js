@@ -6766,7 +6766,7 @@ const heavyWeapons = {
 
 // <--- Data extractions --->
 const getLongarmData = (longarmId) => {
-  if (!longarmId) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
+  if (!longarmId || !longarmWeapons[longarmId]) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
 
   const { category, level, damage, range, critical, special, sfsLegal } = longarmWeapons[longarmId]
 
@@ -6774,7 +6774,7 @@ const getLongarmData = (longarmId) => {
 }
 
 const getHeavyData = (heavyId) => {
-  if (!heavyId) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
+  if (!heavyId || !heavyWeapons[heavyId]) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
 
   const { category, level, damage, range, critical, special, sfsLegal } = heavyWeapons[heavyId]
 

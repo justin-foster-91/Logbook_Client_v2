@@ -1,12 +1,20 @@
 import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as SF from "./shipFunctions";
+import * as Utils from "./utils";
 
 class Ship {
   constructor(parts) {
     this.parts = parts;
+
     this.onShipChange = (parts) => {
       console.log("Ship was changed. If you want to remove this message, set this onShipChange callback.");
     };
+
+    if (parts) {
+      const frameId = Utils.capitalizeEachWord(parts.frameId);
+
+      this.setFrame(frameId)
+    }
   }
 
   getFramePackage() {

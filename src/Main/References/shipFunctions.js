@@ -442,19 +442,10 @@ const removeExpansion = (ship, idx) => {
 }
 
 const getTotalSecurityBpCosts = (shipParts) => {
-
-  const { antiPersonnelWeaponId: weaponId, computerCountermeasures: compCounter } = shipParts;
-
   const antiPersonnelCost = getAntiPersonnelCosts(shipParts);
   const compCounterCost = getCompCounterCosts(shipParts);
   const hackAndCloakCost = getHackAndCloakCosts(shipParts);
   const checkboxBpCosts = getSecurityCheckboxBpCosts(shipParts);
-
-  //biometric locks
-  //self-destruct system
-  //emergency accelerator
-  //holographic mantle
-  //reconfiguration system
 
   const totalSecurityBpCosts = antiPersonnelCost + compCounterCost + hackAndCloakCost + checkboxBpCosts;
 
@@ -466,12 +457,13 @@ const getAntiPersonnelCosts = (shipParts) => {
 
   if (!weaponId) return 0;
   
-  // const longarmLevel = personnelWeapons.getLongarmData(weaponId).level 
+  const longarmLevel = personnelWeapons.getLongarmData(weaponId).level
+  const heavyLevel = personnelWeapons.getHeavyData(weaponId).level
 
-  if (personnelWeapons.getLongarmData(weaponId).level !== 0) {
-    return Number(personnelWeapons.getLongarmData(weaponId).level)
-  } else if (personnelWeapons.getHeavyData(weaponId).level !== 0) {
-    return 5 + Number(personnelWeapons.getHeavyData(weaponId).level)
+  if (longarmLevel !== 0) {
+    return Number(longarmLevel)
+  } else if (heavyLevel !== 0) {
+    return 5 + Number(heavyLevel)
   } else {
     //weaponId didn't match any valid inputs
     return 0;
