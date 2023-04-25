@@ -99,7 +99,8 @@ const updateExpansionBaysToMatchFrame = (ship) => {
 
 const updateAntiPersonnelToMatchTier = (ship) => {
   let { antiPersonnelWeaponId: weaponId, tierId } = ship
-  tierId = Number(tierId)
+  if (tierId === "1/4" || tierId === "1/3" || tierId === "1/2") tierId = 0;
+  tierId = parseInt(tierId);
 
   if (!weaponId) return;
 
