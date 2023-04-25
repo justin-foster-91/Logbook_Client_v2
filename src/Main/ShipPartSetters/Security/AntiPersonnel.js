@@ -8,25 +8,31 @@ function AntiPersonnel(props) {
   const [radioSelection, setRadioSelection] = useState(null);
   const [bpCost, setBpCost] = useState(0);
 
-  const { antiPersonnelWeaponId: weaponId } = customShipParts;
+  const { antiPersonnelWeaponId: weaponId, tierId } = customShipParts;
   const { currentPart } = props;
 
 
   useEffect(() => {
-    if (!weaponId || !radioSelection) return;
+    if (!weaponId || !radioSelection) return setBpCost(0);
 
     if (radioSelection === "longarm" && Tables.getLongarmData(weaponId).level !== 0) {
-      setBpCost(Number(Tables.getLongarmData(weaponId).level));
+      setBpCost(Tables.getLongarmData(weaponId).level);
     } 
     if (radioSelection === "heavy" && Tables.getHeavyData(weaponId).level !== 0) {
-      setBpCost(5 + Number(Tables.getHeavyData(weaponId).level));
+      setBpCost(5 + Tables.getHeavyData(weaponId).level);
     } 
   }, [weaponId, radioSelection])
 
   const renderDropdownSelection = () => {
-    const getter = (radioSelection === "longarm") ? Tables.getLongarmIdList : Tables.getHeavyIdList
+    const getter = (radioSelection === "longarm") ? Tables.getLongarmIdList(tierId) : Tables.getHeavyIdList(tierId)
 
-    return getter().map((weapon, idx) => <option key={idx} value={weapon}>{weapon}</option>)
+    return getter.map((weapon, idx) => { 
+      const data = (radioSelection === "longarm") ? Tables.getLongarmData(weapon) : Tables.getHeavyData(weapon)
+
+      return <option key={idx} value={weapon}>
+        {weapon} (Lvl {data.level}; {data.damage})
+      </option>
+    })
   }
 
   const handleDropdownChange = (ev) => {

@@ -97,6 +97,23 @@ const updateExpansionBaysToMatchFrame = (ship) => {
   })
 }
 
+const updateAntiPersonnelToMatchTier = (ship) => {
+  let { antiPersonnelWeaponId: weaponId, tierId } = ship
+  tierId = Number(tierId)
+
+  if (!weaponId) return;
+
+  const foundLongarm = personnelWeapons.getLongarmIdList().indexOf(weaponId) >= 0
+  const foundHeavy = personnelWeapons.getHeavyIdList().indexOf(weaponId) >= 0
+  const foundWeapon = foundLongarm || foundHeavy
+  if (!foundWeapon) ship.antiPersonnelWeaponId = null
+
+  const longarmLevel = personnelWeapons.getLongarmData(weaponId).level
+  const heavyLevel = personnelWeapons.getHeavyData(weaponId).level
+  if (foundLongarm && longarmLevel > tierId) ship.antiPersonnelWeaponId = null;
+  if (foundHeavy && heavyLevel > tierId) ship.antiPersonnelWeaponId = null;
+}
+
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
 const validateShip = (ship) => {
@@ -535,6 +552,7 @@ export {
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,
   updateExpansionBaysToMatchFrame,
+  updateAntiPersonnelToMatchTier,
   validateShip,
   getFramePackageFromShip,
   getTotalBPCosts,

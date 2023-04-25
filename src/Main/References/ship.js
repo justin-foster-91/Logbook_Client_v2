@@ -12,8 +12,10 @@ class Ship {
 
     if (parts) {
       const frameId = Utils.capitalizeEachWord(parts.frameId);
+      const tierId = parts.tierId
 
       this.setFrame(frameId)
+      this.setTier(tierId)
     }
   }
 
@@ -43,11 +45,12 @@ class Ship {
 
 
   setTier(tier) {
-    const value = tier;
-    if (!Tables.getTierIdList().includes(value))
+    tier = tier.toString();
+    if (!Tables.getTierIdList().includes(tier))
       throw new Error("Tier input did not match allowed tier options");
 
-    this.parts.tierId = value;
+    this.parts.tierId = tier;
+    SF.updateAntiPersonnelToMatchTier(this.parts);
     this.onShipChange(this.parts);
     return this;
   }

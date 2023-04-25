@@ -6768,7 +6768,8 @@ const heavyWeapons = {
 const getLongarmData = (longarmId) => {
   if (!longarmId || !longarmWeapons[longarmId]) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
 
-  const { category, level, damage, range, critical, special, sfsLegal } = longarmWeapons[longarmId]
+  let { category, level, damage, range, critical, special, sfsLegal } = longarmWeapons[longarmId]
+  level = Number(level)
 
   return {category, level, damage, range, critical, special, sfsLegal}
 }
@@ -6776,17 +6777,32 @@ const getLongarmData = (longarmId) => {
 const getHeavyData = (heavyId) => {
   if (!heavyId || !heavyWeapons[heavyId]) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
 
-  const { category, level, damage, range, critical, special, sfsLegal } = heavyWeapons[heavyId]
+  let { category, level, damage, range, critical, special, sfsLegal } = heavyWeapons[heavyId]
+  level = Number(level)
 
   return {category, level, damage, range, critical, special, sfsLegal}
 }
 
-const getLongarmIdList = () => {
-  return Object.keys(longarmWeapons).sort()
+const getLongarmIdList = (shipTier) => {
+  if (shipTier) {
+    return Object.keys(longarmWeapons)
+      .filter(weapon => Number(longarmWeapons[weapon].level) <= shipTier)
+      .sort()
+  } else {
+    return Object.keys(longarmWeapons)
+      .sort()
+  }
 }
 
-const getHeavyIdList = () => {
-  return Object.keys(heavyWeapons).sort()
+const getHeavyIdList = (shipTier) => {
+  if (shipTier) {
+    return Object.keys(heavyWeapons)
+      .filter(weapon => Number(heavyWeapons[weapon].level) <= shipTier)
+      .sort()
+  } else {
+    return Object.keys(heavyWeapons)
+      .sort()
+  }
 }
 
 export {
