@@ -1972,7 +1972,7 @@ const securityCheckboxes = {
     sfsLegal: true,
     source: "Starfinder Core Rulebook pg. 300",
     description:
-      <p>Used most often as a last resort, a self-destruct system completely destroys the starship on which it is installed (as if the ship had taken damage equal to twice its Hull Points), often killing everyone on board. A starship in a hex adjacent to a starship that self-destructs takes an amount of damage equal to half the destroyed starship's maximum Hull Points; this damage can be mitigated by shields. A self-destruct system can be activated only by creatures on the starship (by turning a set of keys, typing in a specific passcode, or other physical means known only to high-ranking members of the crew) and can't be activated remotely via hacking. The activating creatures set a time delay for the destruction (at least 1 round of starship combat). The cost of a self-destruct system depends on the size category of the ship (for the purposes of this calculation, Tiny = 1, Small = 2, Medium = 3, Large = 4, and so on).</p>,
+      <p>Used most often as a last resort, a self-destruct system completely destroys the starship on which it is installed (as if the ship had taken damage equal to twice its Hull Points), often killing everyone on board. A starship in a hex adjacent to a starship that self-destructs takes an amount of damage equal to half the destroyed starship's maximum Hull Points; this damage can be mitigated by shields. A self-destruct system can be activated only by creatures on the starship (by turning a set of keys, typing in a specific passcode, or other physical means known only to high-ranking members of the crew) and can't be activated remotely via hacking. The activating creatures set a time delay for the destruction (at least 1 round of starship combat).</p>,
   },
   "Emergency Accelerator": {
     bpCost: "4 * size category",
@@ -2208,15 +2208,15 @@ const getCloakingData = (cloakingId) => {
 
 const getSecurityCheckboxData = (securityCheckboxId, size) => {
   if(!size) throw new Error("getSecurityCheckboxData(securityCheckboxId, size) must take in a size parameter")
-  if (!securityCheckboxId) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
+  if (!securityCheckboxId) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null, description: null}
 
-  let { bpCost, pcuCost, sfsLegal, source } = securityCheckboxes[securityCheckboxId]
+  let { bpCost, pcuCost, sfsLegal, source, description } = securityCheckboxes[securityCheckboxId]
 
   // Self-Destruct & Emergency Accelerator are table's bp cost * ship size mod
   if (securityCheckboxId === "Self-Destruct System") bpCost = Number(bpCost[0]) * sizeCategory[size]
   if (securityCheckboxId === "Emergency Accelerator") bpCost = Number(bpCost[0]) * sizeCategory[size]
 
-  return {bpCost, pcuCost, sfsLegal, source}
+  return {bpCost, pcuCost, sfsLegal, source, description}
 }
 
 

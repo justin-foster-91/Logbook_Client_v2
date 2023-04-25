@@ -46,7 +46,6 @@ function SecurityCheckboxes(props) {
       return <PartTotals 
         part={currentPart} 
         bpCost={securityCheckbox[box].active ? securityCheckbox[box].data.bpCost : 0} 
-        pcuCost={securityCheckbox[box].active ? securityCheckbox[box].data.pcuCost : 0}
       />
     } else {
       return <PartTotals 
@@ -70,7 +69,7 @@ function SecurityCheckboxes(props) {
             
             {partTotalsRender(box)}
 
-            <div></div>
+            <div>{securityCheckbox[box].data.description}</div>
           </div>
         ))}
       </div>
