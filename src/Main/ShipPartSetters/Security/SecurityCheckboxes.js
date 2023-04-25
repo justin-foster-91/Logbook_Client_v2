@@ -86,6 +86,8 @@ function SecurityCheckboxes(props) {
             <label htmlFor={box}>{box}</label>
             
             {partTotalsRender(box)}
+
+            <div></div>
           </div>
         ))}
       </div>

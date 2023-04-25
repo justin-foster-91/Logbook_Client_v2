@@ -10,7 +10,7 @@ function SetReinforcedBulkheads(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { reinforcedBulkheadId } = customShipParts
   const size = ship.getSize()
-  const { fortification, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
+  const { fortPercent, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
   const { currentPart } = props
 
   const handleReinforcedBulkheadsChange = (ev) => {
@@ -39,7 +39,7 @@ function SetReinforcedBulkheads(props) {
       </div>
       
       <div className='row'>
-        <div><strong>Fortification</strong>: {fortification}%</div>
+        <div><strong>Fortification</strong>: {fortPercent}%</div>
       </div>
         
       <PartTotals part={currentPart} bpCost={bpCost} />

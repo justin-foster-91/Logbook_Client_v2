@@ -2029,7 +2029,7 @@ const getSizeData = (size) => {
 }
 
 const getPowerCoreData = (powerCoreId) => {
-  if(powerCoreId === null) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null};
+  if(!powerCoreId) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null};
 
   const { sizes, pcuProvided, bpCost, source } = powerCores[capitalizeEachWord(powerCoreId)]
 
@@ -2037,7 +2037,7 @@ const getPowerCoreData = (powerCoreId) => {
 }
 
 const getThrusterData = (thrustersId) => {
-  if(thrustersId === null) return {size: null, speed: 0, pilotingModifier: 0, pcuCost: 0, bpCost: 0, source: null};
+  if(!thrustersId) return {size: null, speed: 0, pilotingModifier: 0, pcuCost: 0, bpCost: 0, source: null};
 
   const { size, speed, pilotingModifier, pcuCost, bpCost, source } = thrusters[thrustersId]
 
@@ -2046,7 +2046,7 @@ const getThrusterData = (thrustersId) => {
 
 const getArmorData = (armorId, size) => {
   if(size === undefined) throw new Error("getArmorData(armorId, size) must take in a size parameter")
-  if(armorId === null) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
+  if(!armorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
   bpCost = (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (bpCost * sizeCategory[size]) : bpCost
@@ -2055,7 +2055,7 @@ const getArmorData = (armorId, size) => {
 }
 
 const getComputerData = (computerId) => {
-  if(computerId === null) return {bonus: 0, nodes: 0, pcuCost: 0, bpCost: 0, source: null}
+  if(!computerId) return {bonus: 0, nodes: 0, pcuCost: 0, bpCost: 0, source: null}
 
 
   computerId = capitalizeEachWord(computerId)
@@ -2065,7 +2065,7 @@ const getComputerData = (computerId) => {
 }
 
 const getComputerHackDC = (computerTier) => {
-  if(computerTier === null) return { hackDC: null }
+  if(!computerTier) return { hackDC: null }
 
   const { hackDC } = computerTiers[computerTier]
 
@@ -2074,7 +2074,7 @@ const getComputerHackDC = (computerTier) => {
 
 const getNetworkNodeData = (nodeId, size) => { 
   if(size === undefined) throw new Error("getNetworkNodeData(nodeId, size) must take in a size parameter")
-  if(nodeId === null || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
+  if(!nodeId || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
   const { bonus, nodeMax, pcuCost, bpCost } = networkNodes[nodeId]
 
@@ -2088,7 +2088,7 @@ const getQuartersData = (quartersId) => {
 }
 
 const getDefensiveCounterData = (defensiveCounterId) => {
-  if(defensiveCounterId === null) return {tlBonus: 0, pcuCost: 0, bpCost: 0, source: null}
+  if(!defensiveCounterId) return {tlBonus: 0, pcuCost: 0, bpCost: 0, source: null}
 
   const { tlBonus, pcuCost, bpCost, source } = defensiveCounter[defensiveCounterId]
 
@@ -2097,7 +2097,7 @@ const getDefensiveCounterData = (defensiveCounterId) => {
 
 const getDriftEngineData = (driftEngineId, size) => {
   if(size === undefined) throw new Error("getDriftEngineData(driftEngines, size) must take in a size parameter")
-  if(driftEngineId === null) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
+  if(!driftEngineId) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
 
   let { rating, minPCU, maxSize, bpCost, source, special } = driftEngines[driftEngineId]
   bpCost = bpCost * sizeCategory[size]
@@ -2107,7 +2107,7 @@ const getDriftEngineData = (driftEngineId, size) => {
 
 const getExpansionBayData = (expansionBayId, size) => {
   if(size === undefined) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
-  if(expansionBayId === null || expansionBayId === undefined) return {pcuCost: 0, bpCost: 0, source: null}
+  if(!expansionBayId) return {pcuCost: 0, bpCost: 0, source: null}
 
   const { pcuCost, bpCost, source } = expansionBays[expansionBayId]
 
@@ -2123,7 +2123,7 @@ const getExpansionBayData = (expansionBayId, size) => {
 
 const getFortifiedHullData = (fortifiedHullId, size) => {
   if(size === undefined) throw new Error("getFortifiedHullData(fortifiedHullId, size) must take in a size parameter")
-  if(fortifiedHullId === null) return {ctBonus: 0, bpCost: 0, source: null}
+  if(!fortifiedHullId) return {ctBonus: 0, bpCost: 0, source: null}
 
   let { ctBonus, bpCost, source } = fortifiedHulls[fortifiedHullId]
   ctBonus = ctBonus * sizeCategory[size]
@@ -2134,36 +2134,24 @@ const getFortifiedHullData = (fortifiedHullId, size) => {
 
 const getReinforcedBulkheadData = (reinforcedBulkheadId, size) => {
   if(size === undefined) throw new Error("getReinforcedBulkeadData(reinforcedBulkheadId, size) must take in a size parameter")
-  if(reinforcedBulkheadId === null) return {fortification: 0, bpCost: 0, source: null}
+  if(reinforcedBulkheadId === null) return {fortPercent: 0, bpCost: 0, source: null}
 
-  let { fortification, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
+  let { fortification: fortPercent, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
   bpCost = bpCost * sizeCategory[size]
 
-  //fortification is a %
-  return {fortification, bpCost, source}
+  return {fortPercent, bpCost, source}
 }
 
 const getAntiHackingData = (antiHackingId) => {
-  // Anti-Hacking System:	[BP cost, source]
-  if(antiHackingId === null) return {bpCost: 0, source: null}
+  if(!antiHackingId) return {bpCost: 0, source: null}
 
   const { bpCost, source } = antiHackingSystems[antiHackingId]
 
   return {bpCost, source}
 }
 
-// const getAntiPersonnelData = (antiPersonnelId) => {
-//   if (antiPersonnelId === null) return {category: null, level: null, damage: null, range: null, critical: null, special: null, sfsLegal: null}
-
-//   if (getLongarmIdList.includes(antiPersonnelId)) {
-//     return getLongarmData(antiPersonnelId)
-//   } else {
-//     return getHeavyData(antiPersonnelId)
-//   }
-// }
-
 const getComputerModuleData = (computerModuleId) => {
-  if (computerModuleId === null) return {cost: 0, sfsLegal: null}
+  if (!computerModuleId) return {cost: 0, sfsLegal: null}
 
   const { cost, sfsLegal } = computerModules[computerModuleId]
 
@@ -2171,7 +2159,7 @@ const getComputerModuleData = (computerModuleId) => {
 }
 
 const getComputerUpgradeData = (computerUpgradeId) => {
-  if (computerUpgradeId === null) return {cost: 0, sfsLegal: null}
+  if (!computerUpgradeId) return {cost: 0, sfsLegal: null}
 
   const { cost, sfsLegal } = computerUpgrades[computerUpgradeId]
 
@@ -2181,7 +2169,7 @@ const getComputerUpgradeData = (computerUpgradeId) => {
 const getComputerCountermeasureData = (computerCountermeasureId, compTier) => {
   if(compTier === undefined) throw new Error("getComputerCountermeasureData(computerCountermeasureId, compTier) must take in a computer tier parameter")
 
-  if (computerCountermeasureId === null) return {cost: 0, sfsLegal: null, description: null}
+  if (!computerCountermeasureId) return {cost: 0, sfsLegal: null, description: null}
 
   const { sfsLegal, description } = computerCountermeasures[computerCountermeasureId]
 
@@ -2191,9 +2179,9 @@ const getComputerCountermeasureData = (computerCountermeasureId, compTier) => {
 }
 
 const getComputerShockGridData = (computerShockGridId, compTier) => {
-  if(computerShockGridId === undefined) throw new Error("getComputerShockGridData(computerShockGridId, compTier) must take in a computer tier parameter")
+  if(compTier === undefined) throw new Error("getComputerShockGridData(computerShockGridId, compTier) must take in a computer tier parameter")
 
-  if (computerShockGridId === null) return {DC: null, damage: null, cost: 0}
+  if (!computerShockGridId) return {DC: null, damage: null, cost: 0}
 
   const { DC, damage } = computerShockGrid[computerShockGridId]
   const cost = compTier * computerShockGridId
@@ -2202,7 +2190,7 @@ const getComputerShockGridData = (computerShockGridId, compTier) => {
 }
 
 const getComputerTierData = (computerTierId) => {
-  if (computerTierId === null) return {price: null, hackDC: null}
+  if (!computerTierId) return {price: null, hackDC: null}
 
   const { price, hackDC } = computerTiers[computerTierId]
 
@@ -2210,7 +2198,7 @@ const getComputerTierData = (computerTierId) => {
 }
 
 const getCloakingData = (cloakingId) => {
-  if (cloakingId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null, type: null}
+  if (!cloakingId) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null, type: null}
 
 
   const { bpCost, pcuCost, sfsLegal, source, type } = cloakingTechnology[cloakingId]
@@ -2219,8 +2207,8 @@ const getCloakingData = (cloakingId) => {
 }
 
 const getSecurityCheckboxData = (securityCheckboxId, size) => {
-  if(size === undefined) throw new Error("getSecurityCheckboxData(securityCheckboxId, size) must take in a size parameter")
-  if (securityCheckboxId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
+  if(!size) throw new Error("getSecurityCheckboxData(securityCheckboxId, size) must take in a size parameter")
+  if (!securityCheckboxId) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
 
   let { bpCost, pcuCost, sfsLegal, source } = securityCheckboxes[securityCheckboxId]
 

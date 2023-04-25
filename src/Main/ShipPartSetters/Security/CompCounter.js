@@ -84,7 +84,7 @@ function CompCounter(props) {
             <option key={"None"}>None</option>
             {Tables.getComputerShockGridIdList().map((tier, idx) => (
               
-              <option key={idx} value={tier}>Rank {tier} (DC {Tables.getComputerShockGridData(tier).DC}, Damage {Tables.getComputerShockGridData(tier).damage})
+              <option key={idx} value={tier}>Rank {tier} (DC {Tables.getComputerShockGridData(tier, computerTier).DC}, Damage {Tables.getComputerShockGridData(tier, computerTier).damage})
               </option>
             ))}
           </select>
