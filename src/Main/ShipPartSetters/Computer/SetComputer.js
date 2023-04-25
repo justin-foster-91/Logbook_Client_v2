@@ -22,6 +22,7 @@ function SetComputer(props) {
   const totalNodes = nodes + secondaryNodes + ctNetworkNodes
   const bonusList = SF.combineComputerBonuses(customShipParts, size)
   const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
+  const hackDC = Tables.getComputerHackDC(computerTier)
 
   useEffect(() => {
     if (size === "Supercolossal") {
@@ -77,6 +78,7 @@ function SetComputer(props) {
         <div><strong>Skill Bonus</strong>: {bonusList}</div>
         <div><strong>Nodes</strong>: {totalNodes}</div>
         <div><strong>Tier</strong>: {computerTier}</div>
+        <div><strong>Hack DC</strong>: {hackDC}</div>
       </div>
 
       <PartTotals part={currentPart} pcuCost={totalCompPCUCosts} bpCost={totalCompBPCosts}/>

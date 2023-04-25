@@ -1862,6 +1862,7 @@ const computerModules = {
   "Secure Data, Specific": {cost: '1 credit', sfsLegal: true},
 }
 
+// https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
 const computerUpgrades = {
   "Artificial Personality":	{cost: "10% of computer's base price", sfsLegal: true},
   "Hardened":	{cost: "50% of computer's base price", sfsLegal: true},
@@ -1879,16 +1880,46 @@ const computerUpgrades = {
   "Range, III (planet wide)": {cost: "100 credits", sfsLegal: true},
 }
 
+// https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
 const computerCountermeasures = {
-  "Alarm": {cost: "Tier of computer", sfsLegal: true},
-  "Fake Shell": {cost: "Tier of computer", sfsLegal: true},
-  "Feedback": {cost: "Tier of computer", sfsLegal: true},
-  "Firewall": {cost: "Tier of computer", sfsLegal: true},
-  "Lockout": {cost: "Tier of computer", sfsLegal: true},
-  "Shock Grid": {cost: "Varies", sfsLegal: true},
-  "Wipe": {cost: "Tier of computer", sfsLegal: true},
-}
+  Alarm: {
+    cost: "Tier of computer",
+    sfsLegal: true,
+    description: "One of simplest countermeasures, this program sends an alert to a specific individual or station if someone attempts to breach the system. If the computer has a control module connected to an actual alarm, this countermeasure can trigger that alarm. If the computer controls a robot, trap, or weapon, an alarm can also activate them.",
+  },
+  "Fake Shell": {
+    cost: "Tier of computer",
+    sfsLegal: true,
+    description: "This particularly cunning countermeasure creates an entirely fake network and system directory for anyone accessing the system that fails to bypass this countermeasure. The phony network has cloned control modules and data modules to make it appear to be the actual system, but the control modules do not actually work and the data modules contain garbage files. A character can uncover this ruse with a successful Computers check with a DC equal to the system's DC + 5. See Detect Fake Shell on page 138 for more information.",
+  },
+  Feedback: {
+    cost: "Tier of computer",
+    sfsLegal: true,
+    description: "This countermeasure unleashes insidious virus software into any system that tries to hack it, causing damage to that system and its programming. If you fail a check to hack the computer by 5 or more, any device used in the attempt to break into the system is infected and becomes unreliable, resulting in a -5 penalty to all skill checks involving the infected equipment. You can remove a virus from an infected system if you succeed at a Computers check with the same DC as hacking the computer that has the feedback countermeasure. At the GM's discretion, feedback viruses can have other effects instead, such as granting a +5 circumstance bonus to anyone attempting to hack the infected system.",
+  },
+  Firewall: {
+    cost: "Tier of computer",
+    sfsLegal: true,
+    description: "This countermeasure does nothing to the intruder but instead partitions off modules behind an additional layer of security. Accessing the hidden modules requires another successful Computers check, usually with a DC equal to the original DC + 2. A computer can have multiple firewalls to block off multiple modules, but no one module can be protected by more than a single firewall.",
+  },
+  Lockout: {
+    cost: "Tier of computer",
+    sfsLegal: true,
+    description: "A lockout countermeasure freezes a system if a user repeatedly fails attempts to access it, causing it to become entirely inaccessible. Generally, this does not mean that the system is powered down, and other modules and countermeasures can still take automated actions. Lockouts last a specified period of time, typically 10 minutes, 1 hour, or 1 day, but any time frame can be specified. A lockout cannot be disabled, even by a user with the correct passwords and credentials. It is possible to bypass a lockout by accessing physical components of the computer, requiring a successful Engineering check with the same DC as the check to hack the computer. \nA standard lockout activates if there are three failed attempts to access or hack the computer within 24 hours and costs 100 credits. A lockout can be set to allow a different number of failed attempts before activating or to last a different amount of time. If the computer has an alarm, it can be set to inform a specific terminal or communication device when each failed attempt occurs and when the lockout is activated.",
+  },
+  "Shock Grid": {
+    cost: "Varies",
+    sfsLegal: true,
+    description: "The computer and its surrounding environment are protected by a grid of conductive material that transmits a shock to anyone who fails to access the system. This has two settings: one meant to stun and one meant to kill. Normally, the stun setting happens first, with a warning about lethal force should the intruder make another attempt. The stun setting forces all creatures within 10 feet of the terminal to succeed at a Fortitude saving throw or be stunned for 1 round. The lethal setting affects nearby creatures like the stun setting but also deals electricity damage to all creatures within 10 feet of the computer, allowing a Reflex save for half damage. The save DC, damage dealt, and price all depend upon the rank of the shock grid, as indicated on the below table. Each rank added counts as one countermeasure when determining the total number of countermeasures a system can have. Only computers fixed permanently to a floor or similar surface can have shock grids.",
+  },
+  Wipe: {
+    cost: "Tier of computer",
+    sfsLegal: true,
+    description: "The system deletes specified data when an unauthorized breach is detected. This usually causes a number of data modules to be deleted from the system. Unless the owner is incredibly paranoid, this countermeasure is usually set to trigger only after two or more failed attempts to enter the system (so as to prevent accidental deletion due to a failed password attempt). Wipes don't definitively remove data, however, unless the physical module containing the data is destroyed. Information deleted through a wipe can be recovered with 8 hours of work and a successful Computers check (DC = 10 + the DC to hack the computer). A wipe countermeasure costs 10 credits.",
+  },
+};
 
+// https://www.aonsrd.com/ComputerMods.aspx?ItemName=Shock%20Grid&Family=None
 const computerShockGrid = {
   1:	{DC: 20,	damage: "8d6",	price: 500},
   2:	{DC: 22,	damage: "10d6",	price: 2000},
@@ -1989,10 +2020,19 @@ const getArmorData = (armorId, size) => {
 const getComputerData = (computerId) => {
   if(computerId === null) return {bonus: 0, nodes: 0, pcuCost: 0, bpCost: 0, source: null}
 
+
   computerId = capitalizeEachWord(computerId)
   const { bonus, nodes, pcuCost, bpCost, source } = computers[computerId]
 
   return {bonus, nodes, pcuCost, bpCost, source}
+}
+
+const getComputerHackDC = (computerTier) => {
+  if(computerTier === null) return { hackDC: null }
+
+  const { hackDC } = computerTiers[computerTier]
+
+  return hackDC;
 }
 
 const getNetworkNodeData = (nodeId, size) => { 
@@ -2104,15 +2144,13 @@ const getComputerUpgradeData = (computerUpgradeId) => {
 const getComputerCountermeasureData = (computerCountermeasureId, compTier) => {
   if(compTier === undefined) throw new Error("getComputerCountermeasureData(computerCountermeasureId, compTier) must take in a computer tier parameter")
 
-  console.log({computerCountermeasureId});
-  if (computerCountermeasureId === null) return {cost: 0, sfsLegal: null}
+  if (computerCountermeasureId === null) return {cost: 0, sfsLegal: null, description: null}
 
-  const { sfsLegal } = computerCountermeasures[computerCountermeasureId]
+  const { sfsLegal, description } = computerCountermeasures[computerCountermeasureId]
 
   let cost = compTier;
-  // if (computerCountermeasureId === "Shock Grid") cost = compTier * 'mk'
 
-  return {cost, sfsLegal}
+  return {cost, sfsLegal, description}
 }
 
 const getComputerShockGridData = (computerShockGridId, compTier) => {
@@ -2120,7 +2158,7 @@ const getComputerShockGridData = (computerShockGridId, compTier) => {
 
   if (computerShockGridId === null) return {DC: null, damage: null, cost: 0}
 
-  const { DC, damage, price } = computerShockGrid[computerShockGridId]
+  const { DC, damage } = computerShockGrid[computerShockGridId]
   const cost = compTier * computerShockGridId
 
   return {DC, damage, cost}
@@ -2291,6 +2329,7 @@ export {
   getThrusterData,
   getArmorData,
   getComputerData,
+  getComputerHackDC,
   getNetworkNodeData,
   getQuartersData,
   getDefensiveCounterData,

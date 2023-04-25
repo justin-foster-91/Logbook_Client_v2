@@ -3,6 +3,7 @@ import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import { splitCamelCase } from "../../References/utils";
 import PartTotals from "../Components/PartTotals";
+import * as Utils from "../../References/utils";
 
 function CompCounter(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -28,6 +29,7 @@ function CompCounter(props) {
 
   const checkboxRenders = () => {
     return counterTypes.map((box, idx) => {
+      // console.log(Utils.readableIds(box));
       return (
         <div key={idx}>
           <input type="checkbox" id={box} name={box} 
@@ -36,6 +38,8 @@ function CompCounter(props) {
             onChange={handleCheckboxChange}
           />
           <label htmlFor={box}>{splitCamelCase(box)}</label>
+          {/* <div>{Tables.getComputerCountermeasureData(Utils.readableIds(box), computerTier).description}</div>
+          <br/> */}
         </div>
     )})
   }
@@ -61,7 +65,7 @@ function CompCounter(props) {
     <>
       <fieldset>
         <legend>Computer Countermeasures</legend>
-        <div className="row">
+        <div>
           {checkboxRenders()}
         </div>
         <div className="dropdownBlock">

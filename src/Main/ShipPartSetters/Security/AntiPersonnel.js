@@ -11,14 +11,18 @@ function AntiPersonnel(props) {
   const { antiPersonnelWeaponId: weaponId } = customShipParts;
   const { currentPart } = props;
 
+  // TODO: need to adjust default selections if there's already a weapon selected on load
+
 
   useEffect(() => {
-    if (!weaponId) return;
+    if (!weaponId || !radioSelection) return;
 
-    if (radioSelection === "longarm") {
-      setBpCost(5 + Number(Tables.getLongarmData(weaponId).level));
-    } else {
+    if (radioSelection === "longarm" && Tables.getLongarmIdList().indexOf(weaponId) >= 0) {
+      setBpCost(Number(Tables.getLongarmData(weaponId).level));
+    } else if (radioSelection === "heavy" && Tables.getHeavyIdList().indexOf(weaponId) >= 0) {
       setBpCost(5 + Number(Tables.getHeavyData(weaponId).level));
+    } else {
+      setBpCost(0);
     }
   }, [weaponId, radioSelection])
 

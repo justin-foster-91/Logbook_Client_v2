@@ -2,6 +2,7 @@ import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as Utils from "./utils";
 import frames from "../ShipPartSetters/CustomRefs/frames";
 import Ship from './ship'
+import * as personnelWeapons from "../ShipPartSetters/CustomRefs/antiPersonnelWeapons";
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -228,7 +229,8 @@ const validatePowerCores = (ship) => {
 
 const validateArmor = (ship) => {
   // let { size } = getFramePackageFromShip(ship)
-  ship = new Ship(ship)
+
+  // ship = new Ship(ship)
 
   const { forward, port, starboard, aft } = ship.parts.ablativeArmorByPosition
   const totalUsedTempHP = forward + port + starboard + aft
@@ -310,6 +312,7 @@ const getTotalBPCosts = (ship) => {
 };
 
 const getTotalPCUCosts = (ship) => {
+  //FIXME: ship or shipParts or Ship (import)?
   const { thrustersId } = ship
 
   const pcuExpenses = [
@@ -439,6 +442,98 @@ const removeExpansion = (ship, idx) => {
   ship.expansionBayIds.splice(idx, 1)
 }
 
+const getTotalSecurityBpCosts = (shipParts) => {
+
+  const { antiPersonnelWeaponId: weaponId, computerCountermeasures: compCounter } = shipParts;
+
+  const antiPersonnelCost = getAntiPersonnelCosts(shipParts);
+  const compCounterCost = getCompCounterCosts(shipParts);
+  const hackAndCloakCost = getHackAndCloakCosts(shipParts);
+  const checkboxBpCosts = getSecurityCheckboxBpCosts(shipParts);
+
+  //biometric locks
+  //self-destruct system
+  //emergency accelerator
+  //holographic mantle
+  //reconfiguration system
+
+  const totalSecurityBpCosts = antiPersonnelCost + compCounterCost + hackAndCloakCost + checkboxBpCosts;
+  console.log({totalSecurityBpCosts});
+  return totalSecurityBpCosts;
+}
+
+const getAntiPersonnelCosts = (shipParts) => {
+  const { antiPersonnelWeaponId: weaponId } = shipParts;
+
+  if (!weaponId) return 0;
+
+  if (personnelWeapons.getLongarmIdList().indexOf(weaponId) >= 0) {
+    return Number(Tables.getLongarmData(weaponId).level)
+  } else if (personnelWeapons.getHeavyIdList().indexOf(weaponId) >= 0) {
+    return 5 + Number(Tables.getHeavyData(weaponId).level)
+  } else {
+    //weaponId didn't match any valid inputs
+    return 0;
+  }
+}
+
+const getCompCounterCosts = (shipParts) => {
+  const { computerCountermeasures: compCounter, tierId } = shipParts;
+
+  const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
+  let totalCost = 0;
+
+  Object.keys(compCounter).forEach((counter) => {
+    let counterReadable = Utils.readableIds(counter);
+    
+    if (counterReadable !== "Shock Grid" && compCounter[counter]) {
+      totalCost += Tables.getComputerCountermeasureData(counterReadable, computerTier).cost
+    } 
+
+    if (counterReadable === "Shock Grid" && compCounter[counter]) {
+      totalCost += Tables.getComputerShockGridData(compCounter[counter], computerTier).cost
+    }
+  })
+
+  return totalCost;
+}
+
+const getHackAndCloakCosts = (shipParts) => {
+  const { antiHackingSystemsId, cloakingId } = shipParts;
+
+  const { bpCost: hackingBpCost } = Tables.getAntiHackingData(antiHackingSystemsId);
+  const { bpCost: cloakingBpCost } = Tables.getCloakingData(cloakingId);
+
+  return hackingBpCost + cloakingBpCost;
+}
+
+const getSecurityCheckboxBpCosts = (shipParts) => {
+  const { hasBiometricLocks, hasSelfDestructSystem, hasEmergencyAccelerator, hasHolographicMantle, hasReconfigurationSystem, frameId } = shipParts;
+
+  const size = findComponentByFrameId(frameId, "size")
+
+  console.log(hasBiometricLocks);
+  const biometricBpCost = hasBiometricLocks && Tables.getSecurityCheckboxData("Biometric Locks", size).bpCost;
+  const selfDestructBpCost = hasSelfDestructSystem && Tables.getSecurityCheckboxData("Self-Destruct System", size).bpCost;
+  const emergencyBpCost = hasEmergencyAccelerator && Tables.getSecurityCheckboxData("Emergency Accelerator", size).bpCost;
+  const holographicBpCost = hasHolographicMantle && Tables.getSecurityCheckboxData("Holographic Mantle", size).bpCost;
+  const reconfigurationBpCost = hasReconfigurationSystem && Tables.getSecurityCheckboxData("Reconfiguration System", size).bpCost;
+
+  return biometricBpCost + selfDestructBpCost + emergencyBpCost + holographicBpCost + reconfigurationBpCost;
+}
+
+const getSecurityCheckboxPcuCosts = (shipParts) => {
+  const { hasEmergencyAccelerator, hasHolographicMantle, hasReconfigurationSystem, frameId } = shipParts;
+
+  const size = findComponentByFrameId(frameId, "size")
+
+  const emergencyPcuCost = hasEmergencyAccelerator && Tables.getSecurityCheckboxData("Emergency Accelerator", size).pcuCost;
+  const holographicPcuCost = hasHolographicMantle && Tables.getSecurityCheckboxData("Holographic Mantle", size).pcuCost;
+  const reconfigurationPcuCost = hasReconfigurationSystem && Tables.getSecurityCheckboxData("Reconfiguration System", size).pcuCost;
+
+  return emergencyPcuCost + holographicPcuCost + reconfigurationPcuCost;
+}
+
 export {
   getCoreQuantityFromSize,
   doesFrameSizeAllowCore,
@@ -458,4 +553,6 @@ export {
   combineComputerBonuses,
   copyExpansion,
   removeExpansion,
+  getTotalSecurityBpCosts,
+  getSecurityCheckboxPcuCosts
 };

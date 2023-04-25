@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { CustomShipContext } from "../../Context/shipContext";
 import PartTitle from "../Components/PartTitle";
 import PartTotals from "../Components/PartTotals";
 import AntiPersonnel from "./AntiPersonnel";
 import CompCounter from "./CompCounter";
 import HackAndCloak from "./HackAndCloak";
 import SecurityCheckboxes from "./SecurityCheckboxes";
+import * as SF from "../../References/shipFunctions";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
+// TODO: change layouts of the different costs to look more organized
+// possibly list all cost right aligned or at least in a column with other costs of same type
+
 function SetSecurity(props) {
+  const { customShipParts, ship } = useContext(CustomShipContext);
   const { currentPart } = props;
 
-  const totalSecurityBP = null
-  const totalSecurityPCU = null
+  const totalSecurityBP = SF.getTotalSecurityBpCosts(customShipParts);
+  const totalSecurityPCU = SF.getSecurityCheckboxPcuCosts(customShipParts);
 
   return (
     <>
@@ -23,7 +29,7 @@ function SetSecurity(props) {
       <HackAndCloak currentPart={currentPart}/>
       <SecurityCheckboxes currentPart={currentPart}/>
 
-      <PartTotals totalBP={totalSecurityBP} totalPCU={totalSecurityPCU} />
+      <PartTotals part={currentPart} bpCost={totalSecurityBP} pcuCost={totalSecurityPCU} />
     </>
   );
 }

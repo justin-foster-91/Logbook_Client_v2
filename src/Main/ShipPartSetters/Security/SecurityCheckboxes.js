@@ -17,6 +17,11 @@ function SecurityCheckboxes(props) {
   const holographicBpCost = Tables.getSecurityCheckboxData("Holographic Mantle", size).bpCost;
   const reconfigurationBpCost = Tables.getSecurityCheckboxData("Reconfiguration System", size).bpCost;
 
+  // PCU costs for accelerator, holographic mantle, and reconfiguration system
+  const emergencyPcuCost = Tables.getSecurityCheckboxData("Emergency Accelerator", size).pcuCost;
+  const holographicPcuCost = Tables.getSecurityCheckboxData("Holographic Mantle", size).pcuCost;
+  const reconfigurationPcuCost = Tables.getSecurityCheckboxData("Reconfiguration System", size).pcuCost;
+
   const securityCheckboxList = [
     "Biometric Locks", 
     "Self-Destruct System", 
@@ -41,11 +46,32 @@ function SecurityCheckboxes(props) {
     if (box === "Reconfiguration System") return reconfigurationBpCost;
   }
 
+  const securityCheckboxPcuCost = (box) => {
+    if (box === "Emergency Accelerator") return emergencyPcuCost;
+    if (box === "Holographic Mantle") return holographicPcuCost;
+    if (box === "Reconfiguration System") return reconfigurationPcuCost;
+  }
+
   const handleCheckboxChange = (ev) => {
     const checkboxOption = ev.target.name
     const checkboxActive = ev.target.checked
 
     ship.setSecurity({ reference: checkboxOption, value: checkboxActive})
+  }
+
+  const partTotalsRender = (box) => {
+    if (box === "Biometric Locks" || box === "Self-Destruct System") {
+      return <PartTotals 
+        part={currentPart} 
+        bpCost={securityCheckboxActive[box] ? securityCheckboxBpCost(box) : 0} 
+      />
+    } else {
+      return <PartTotals 
+        part={currentPart} 
+        bpCost={securityCheckboxActive[box] ? securityCheckboxBpCost(box) : 0} 
+        pcuCost={securityCheckboxActive[box] ? securityCheckboxPcuCost(box) : 0}
+      />
+    }
   }
 
   return (
@@ -59,9 +85,7 @@ function SecurityCheckboxes(props) {
             />
             <label htmlFor={box}>{box}</label>
             
-            <PartTotals 
-              part={currentPart} 
-              bpCost={securityCheckboxActive[box] ? securityCheckboxBpCost(box) : 0} />
+            {partTotalsRender(box)}
           </div>
         ))}
       </div>
