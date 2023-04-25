@@ -32,15 +32,21 @@ function CompCounter(props) {
       // console.log(Utils.readableIds(box));
       return (
         <div key={idx}>
-          <input type="checkbox" id={box} name={box} 
-            // Tables.getComputerCountermeasureData(box)
-            value={splitCamelCase(box)} 
-            onChange={handleCheckboxChange}
-          />
-          <label htmlFor={box}>{splitCamelCase(box)}</label>
-          {/* <div>{Tables.getComputerCountermeasureData(Utils.readableIds(box), computerTier).description}</div>
-          <br/> */}
+          <div>
+            <input type="checkbox" id={box} name={box} 
+              // Tables.getComputerCountermeasureData(box)
+              value={splitCamelCase(box)} 
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor={box}>{splitCamelCase(box)}</label>
+            {/* <PartTotals bpCost={} /> */}
+          </div>
+          <div>
+            {Tables.getComputerCountermeasureData(Utils.readableIds(box), computerTier).description}
+          </div>
+          <br/>
         </div>
+        
     )})
   }
 

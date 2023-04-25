@@ -431,8 +431,7 @@ const copyExpansion = (ship, expansion, index) => {
   const lastPiece = expansionArray.slice(index+1)
   const middlePiece = [expansion]
 
-  // console.log(firstPiece, lastPiece);
-  console.log([...firstPiece, ...middlePiece, ...lastPiece]);
+  // console.log([...firstPiece, ...middlePiece, ...lastPiece]);
   ship.expansionBayIds = [...firstPiece, ...middlePiece, ...lastPiece]
 }
 
@@ -458,7 +457,7 @@ const getTotalSecurityBpCosts = (shipParts) => {
   //reconfiguration system
 
   const totalSecurityBpCosts = antiPersonnelCost + compCounterCost + hackAndCloakCost + checkboxBpCosts;
-  console.log({totalSecurityBpCosts});
+
   return totalSecurityBpCosts;
 }
 
@@ -466,11 +465,13 @@ const getAntiPersonnelCosts = (shipParts) => {
   const { antiPersonnelWeaponId: weaponId } = shipParts;
 
   if (!weaponId) return 0;
+  
+  // const longarmLevel = personnelWeapons.getLongarmData(weaponId).level 
 
-  if (personnelWeapons.getLongarmIdList().indexOf(weaponId) >= 0) {
-    return Number(Tables.getLongarmData(weaponId).level)
-  } else if (personnelWeapons.getHeavyIdList().indexOf(weaponId) >= 0) {
-    return 5 + Number(Tables.getHeavyData(weaponId).level)
+  if (personnelWeapons.getLongarmData(weaponId).level !== 0) {
+    return Number(personnelWeapons.getLongarmData(weaponId).level)
+  } else if (personnelWeapons.getHeavyData(weaponId).level !== 0) {
+    return 5 + Number(personnelWeapons.getHeavyData(weaponId).level)
   } else {
     //weaponId didn't match any valid inputs
     return 0;
@@ -512,7 +513,6 @@ const getSecurityCheckboxBpCosts = (shipParts) => {
 
   const size = findComponentByFrameId(frameId, "size")
 
-  console.log(hasBiometricLocks);
   const biometricBpCost = hasBiometricLocks && Tables.getSecurityCheckboxData("Biometric Locks", size).bpCost;
   const selfDestructBpCost = hasSelfDestructSystem && Tables.getSecurityCheckboxData("Self-Destruct System", size).bpCost;
   const emergencyBpCost = hasEmergencyAccelerator && Tables.getSecurityCheckboxData("Emergency Accelerator", size).bpCost;

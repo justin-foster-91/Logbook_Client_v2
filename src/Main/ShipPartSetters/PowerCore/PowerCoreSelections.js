@@ -16,6 +16,8 @@ const PowerCoreSelections = () => {
     const coreIndex = Number(event.target.name);
     let coreOption = event.target.value;
     if (coreOption === "None") coreOption = null;
+    
+    console.log(coreOption);
 
     ship.setPowerCore(coreOption, coreIndex)
   };
@@ -29,7 +31,7 @@ const PowerCoreSelections = () => {
 
           <select
             id={`powerCore${idx + 1}`}
-            value={powerCoreIds[idx] ? powerCoreIds[idx] : "None"}
+            value={powerCoreIds[idx] || "None"}
             name={idx}
             onChange={handlePowerCoreChange}
           >

@@ -1890,7 +1890,7 @@ const computerCountermeasures = {
   "Fake Shell": {
     cost: "Tier of computer",
     sfsLegal: true,
-    description: "This particularly cunning countermeasure creates an entirely fake network and system directory for anyone accessing the system that fails to bypass this countermeasure. The phony network has cloned control modules and data modules to make it appear to be the actual system, but the control modules do not actually work and the data modules contain garbage files. A character can uncover this ruse with a successful Computers check with a DC equal to the system's DC + 5. See Detect Fake Shell on page 138 for more information.",
+    description: "This particularly cunning countermeasure creates an entirely fake network and system directory for anyone accessing the system that fails to bypass this countermeasure. The phony network has cloned control modules and data modules to make it appear to be the actual system, but the control modules do not actually work and the data modules contain garbage files. A character can uncover this ruse with a successful Computers check with a DC equal to the system's DC + 5. See Detect Fake Shell on page 138 (CRB) for more information.",
   },
   Feedback: {
     cost: "Tier of computer",
@@ -1905,7 +1905,8 @@ const computerCountermeasures = {
   Lockout: {
     cost: "Tier of computer",
     sfsLegal: true,
-    description: "A lockout countermeasure freezes a system if a user repeatedly fails attempts to access it, causing it to become entirely inaccessible. Generally, this does not mean that the system is powered down, and other modules and countermeasures can still take automated actions. Lockouts last a specified period of time, typically 10 minutes, 1 hour, or 1 day, but any time frame can be specified. A lockout cannot be disabled, even by a user with the correct passwords and credentials. It is possible to bypass a lockout by accessing physical components of the computer, requiring a successful Engineering check with the same DC as the check to hack the computer. \nA standard lockout activates if there are three failed attempts to access or hack the computer within 24 hours and costs 100 credits. A lockout can be set to allow a different number of failed attempts before activating or to last a different amount of time. If the computer has an alarm, it can be set to inform a specific terminal or communication device when each failed attempt occurs and when the lockout is activated.",
+    description: "A lockout countermeasure freezes a system if a user repeatedly fails attempts to access it, causing it to become entirely inaccessible. Generally, this does not mean that the system is powered down, and other modules and countermeasures can still take automated actions. Lockouts last a specified period of time, typically 10 minutes, 1 hour, or 1 day, but any time frame can be specified. A lockout cannot be disabled, even by a user with the correct passwords and credentials. It is possible to bypass a lockout by accessing physical components of the computer, requiring a successful Engineering check with the same DC as the check to hack the computer. " 
+    + "\nA standard lockout activates if there are three failed attempts to access or hack the computer within 24 hours. A lockout can be set to allow a different number of failed attempts before activating or to last a different amount of time. If the computer has an alarm, it can be set to inform a specific terminal or communication device when each failed attempt occurs and when the lockout is activated.",
   },
   "Shock Grid": {
     cost: "Varies",
@@ -1915,7 +1916,7 @@ const computerCountermeasures = {
   Wipe: {
     cost: "Tier of computer",
     sfsLegal: true,
-    description: "The system deletes specified data when an unauthorized breach is detected. This usually causes a number of data modules to be deleted from the system. Unless the owner is incredibly paranoid, this countermeasure is usually set to trigger only after two or more failed attempts to enter the system (so as to prevent accidental deletion due to a failed password attempt). Wipes don't definitively remove data, however, unless the physical module containing the data is destroyed. Information deleted through a wipe can be recovered with 8 hours of work and a successful Computers check (DC = 10 + the DC to hack the computer). A wipe countermeasure costs 10 credits.",
+    description: "The system deletes specified data when an unauthorized breach is detected. This usually causes a number of data modules to be deleted from the system. Unless the owner is incredibly paranoid, this countermeasure is usually set to trigger only after two or more failed attempts to enter the system (so as to prevent accidental deletion due to a failed password attempt). Wipes don't definitively remove data, however, unless the physical module containing the data is destroyed. Information deleted through a wipe can be recovered with 8 hours of work and a successful Computers check (DC = 10 + the DC to hack the computer).",
   },
 };
 
@@ -1945,24 +1946,60 @@ const computerTiers = {
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=Advanced&Family=Cloaking
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=Advanced&Family=Gray%20Cloaking%20Device
 const cloakingTechnology = {
-  "Cut-Rate": {bpCost: 10, pcuCost: 15, sfsLegal: false, source: "Near Space pg. 114"},
-  "Budget": {bpCost: 15, pcuCost: 25, sfsLegal: false, source: "Near Space pg. 114"},
-  "Basic": {bpCost: 25, pcuCost: 40, sfsLegal: false, source: "Near Space pg. 114"},
-  "Advanced": {bpCost: 40, pcuCost: 75, sfsLegal: false, source: "Near Space pg. 114"},
-  "Gray, Cut-Rate": {bpCost: 15, pcuCost: 15, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
-  "Gray, Budget": {bpCost: 20, pcuCost: 25, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
-  "Gray, Basic": {bpCost: 30, pcuCost: 40, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
-  "Gray, Advanced": {bpCost: 45, pcuCost: 75, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48"},
+  "Cut-Rate": {bpCost: 10, pcuCost: 15, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
+  "Budget": {bpCost: 15, pcuCost: 25, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
+  "Basic": {bpCost: 25, pcuCost: 40, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
+  "Advanced": {bpCost: 40, pcuCost: 75, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
+  "Gray, Cut-Rate": {bpCost: 15, pcuCost: 15, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48", type: "Gray"},
+  "Gray, Budget": {bpCost: 20, pcuCost: 25, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48", type: "Gray"},
+  "Gray, Basic": {bpCost: 30, pcuCost: 40, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48", type: "Gray"},
+  "Gray, Advanced": {bpCost: 45, pcuCost: 75, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 48", type: "Gray"},
 }
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 const securityCheckboxes = {
-  "Biometric Locks": {bpCost: 5, pcuCost: null, sfsLegal: true, source: "Starfinder Core Rulebook pg. 300"},
-  "Self-Destruct System": {bpCost: "5 * size category", pcuCost: null, sfsLegal: true, source: "Starfinder Core Rulebook pg. 300"},
-  "Emergency Accelerator": {bpCost: "4 * size category", pcuCost: 5, sfsLegal: false, source: "Starship Operations Manual pg. 27"},
-  "Holographic Mantle": {bpCost: 12, pcuCost: 10, sfsLegal: false, source: "Starship Operations Manual pg. 27"},
-  "Reconfiguration System": {bpCost: 30, pcuCost: 50, sfsLegal: false, source: "Starship Operations Manual pg. 27"},
-}
+  "Biometric Locks": {
+    bpCost: 5,
+    pcuCost: null,
+    sfsLegal: true,
+    source: "Starfinder Core Rulebook pg. 300",
+    description:
+      "The systems of a starship with biometric locks can only be used by certain creatures, designated when the locks are installed; this list can be updated by any creature who can gain access to the ship's computer systems. A successful Computers check (DC = 20 + 1-1/2 x the tier of the starship) can bypass these locks.",
+  },
+  "Self-Destruct System": {
+    bpCost: "5 * size category",
+    pcuCost: null,
+    sfsLegal: true,
+    source: "Starfinder Core Rulebook pg. 300",
+    description:
+      "Used most often as a last resort, a self-destruct system completely destroys the starship on which it is installed (as if the ship had taken damage equal to twice its Hull Points), often killing everyone on board. A starship in a hex adjacent to a starship that self-destructs takes an amount of damage equal to half the destroyed starship's maximum Hull Points; this damage can be mitigated by shields. A self-destruct system can be activated only by creatures on the starship (by turning a set of keys, typing in a specific passcode, or other physical means known only to high-ranking members of the crew) and can't be activated remotely via hacking. The activating creatures set a time delay for the destruction (at least 1 round of starship combat). The cost of a self-destruct system depends on the size category of the ship (for the purposes of this calculation, Tiny = 1, Small = 2, Medium = 3, Large = 4, and so on).",
+  },
+  "Emergency Accelerator": {
+    bpCost: "4 * size category",
+    pcuCost: 5,
+    sfsLegal: false,
+    source: "Starship Operations Manual pg. 27",
+    description:
+      "This system allows a starship to rapidly accelerate to a speed that makes combat between starships no longer possible. A starship that successfully engages an emergency accelerator escapes any battle it is in. To accomplish this, the emergency accelerator draws on power from across the starship's many systems, making the starship highly vulnerable for a short period before the acceleration takes effect. An emergency accelerator cannot be activated if the power core or engines have any critical damage conditions; if these systems gain such a condition while the accelerator is active, the accelerator shuts off." +
+      "The engineer can activate an emergency accelerator as a crew action during the engineering phase. For the rest of the round, the ship has no shields and cannot fire weapons. If the emergency accelerator is still active at the end of the gunnery phase, the ship immediately moves 100 hexes in a straight line in any direction, which ends the starship combat and allows the vessel to escape. After using an emergency accelerator, the ship's power core gains the glitching critical damage condition and must be repaired before the accelerator can be used again.",
+  },
+  "Holographic Mantle": {
+    bpCost: 12,
+    pcuCost: 10,
+    sfsLegal: false,
+    source: "Starship Operations Manual pg. 27",
+    description:
+      "A starship equipped with a holographic mantle can appear as another vessel of the same size or one size category larger. This appearance is entirely illusory, but unlike a reconfiguration system, the ship does not physically change its shape. The sophisticated hull-mounted projectors of a holographic mantle fool a purely visual inspection, unless the viewer succeeds at a Perception check (DC = 25 + 1-1/2 x the tier of the disguised starship). The system also transmits false transponder information that raises the DC of scan actions against the disguised ship by 5. If an opponent fails their Computers check to perform a scan by 5 or less, the science officer aboard the disguised ship can give false basic information to the scanning ship. A holographic mantle requires 10 minutes to properly calibrate and activate, and it shuts down and can't be used if the ship's sensors gain a critical damage condition.",
+  },
+  "Reconfiguration System": {
+    bpCost: 30,
+    pcuCost: 50,
+    sfsLegal: false,
+    source: "Starship Operations Manual pg. 27",
+    description:
+      "Reptoids pioneered this hybrid technology and keep it secret, despite the efforts of many governments and other organizations. A reconfiguration system enables a starship to physically change shape; it can appear to be any other vessel of the same size without changing any of the ship's statistics. In addition, the reconfigured ship mimics the transponders and scan profile of the ship it is impersonating. When the reconfigured ship is scanned, the first piece of information the scanning science officer obtains is always false, conforming to the ship the reconfigured vessel is pretending to be rather than what the reconfigured ship actually is. It takes only a few moments for this system to reconfigure a starship that's out of combat, but it cannot function if the ship's sensors have a critical damage condition. However, if the ship's sensors gain a critical damage condition while the ship is reconfigured, the vessel remains in its reconfigured state.",
+  },
+};
 
 
 // <--- Data extractions --->
@@ -2173,12 +2210,12 @@ const getComputerTierData = (computerTierId) => {
 }
 
 const getCloakingData = (cloakingId) => {
-  if (cloakingId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null}
+  if (cloakingId === null) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null, type: null}
 
 
-  const { bpCost, pcuCost, sfsLegal, source } = cloakingTechnology[cloakingId]
+  const { bpCost, pcuCost, sfsLegal, source, type } = cloakingTechnology[cloakingId]
 
-  return {bpCost, pcuCost, sfsLegal, source}
+  return {bpCost, pcuCost, sfsLegal, source, type}
 }
 
 const getSecurityCheckboxData = (securityCheckboxId, size) => {
