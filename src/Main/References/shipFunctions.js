@@ -303,9 +303,8 @@ const getFramePackageFromShip = (ship) => {
 const getTotalBPCosts = (ship) => {
   const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
   const { size } = getFramePackageFromShip(ship)
-  const driftEngineBPCost = ship.frameId === "Oma" 
-    ? Math.ceil(Tables.getDriftEngineData(ship.driftEngineId, size).bpCost * 1.5)
-    : Tables.getDriftEngineData(ship.driftEngineId, size).bpCost
+  const { frameId } = ship;
+  const driftEngineBPCost = Tables.getDriftEngineData(ship.driftEngineId, size, frameId).bpCost
 
   const bpExpenses = [
     getFramePackageFromShip(ship).bpCost,

@@ -7,7 +7,6 @@ class Ship {
     this.parts = parts;
 
     this.onShipChange = (parts) => {
-      console.log("Ship was changed. If you want to remove this message, set this onShipChange callback.");
     };
 
     if (parts) {

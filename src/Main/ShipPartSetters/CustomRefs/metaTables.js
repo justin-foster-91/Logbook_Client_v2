@@ -2045,7 +2045,7 @@ const getThrusterData = (thrustersId) => {
 }
 
 const getArmorData = (armorId, size) => {
-  if(size === undefined) throw new Error("getArmorData(armorId, size) must take in a size parameter")
+  if(!size) throw new Error("getArmorData(armorId, size) must take in a size parameter")
   if(!armorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
@@ -2073,7 +2073,7 @@ const getComputerHackDC = (computerTier) => {
 }
 
 const getNetworkNodeData = (nodeId, size) => { 
-  if(size === undefined) throw new Error("getNetworkNodeData(nodeId, size) must take in a size parameter")
+  if(!size) throw new Error("getNetworkNodeData(nodeId, size) must take in a size parameter")
   if(!nodeId || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
   const { bonus, nodeMax, pcuCost, bpCost } = networkNodes[nodeId]
@@ -2095,18 +2095,19 @@ const getDefensiveCounterData = (defensiveCounterId) => {
   return {tlBonus, pcuCost, bpCost, source}
 }
 
-const getDriftEngineData = (driftEngineId, size) => {
-  if(size === undefined) throw new Error("getDriftEngineData(driftEngines, size) must take in a size parameter")
+const getDriftEngineData = (driftEngineId, size, frameId) => {
+  if(!size || !frameId) throw new Error("getDriftEngineData(driftEngines, size, frameId) must take in a size and frameId parameter")
   if(!driftEngineId) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
 
   let { rating, minPCU, maxSize, bpCost, source, special } = driftEngines[driftEngineId]
   bpCost = bpCost * sizeCategory[size]
+  if (frameId === "Oma") bpCost = (Math.ceil(bpCost*1.5))
 
   return {rating, minPCU, maxSize, bpCost, source, special}
 }
 
 const getExpansionBayData = (expansionBayId, size) => {
-  if(size === undefined) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
+  if(!size) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
   if(!expansionBayId) return {pcuCost: 0, bpCost: 0, source: null}
 
   const { pcuCost, bpCost, source } = expansionBays[expansionBayId]
@@ -2122,7 +2123,7 @@ const getExpansionBayData = (expansionBayId, size) => {
 }
 
 const getFortifiedHullData = (fortifiedHullId, size) => {
-  if(size === undefined) throw new Error("getFortifiedHullData(fortifiedHullId, size) must take in a size parameter")
+  if(!size) throw new Error("getFortifiedHullData(fortifiedHullId, size) must take in a size parameter")
   if(!fortifiedHullId) return {ctBonus: 0, bpCost: 0, source: null}
 
   let { ctBonus, bpCost, source } = fortifiedHulls[fortifiedHullId]
@@ -2133,8 +2134,8 @@ const getFortifiedHullData = (fortifiedHullId, size) => {
 }
 
 const getReinforcedBulkheadData = (reinforcedBulkheadId, size) => {
-  if(size === undefined) throw new Error("getReinforcedBulkeadData(reinforcedBulkheadId, size) must take in a size parameter")
-  if(reinforcedBulkheadId === null) return {fortPercent: 0, bpCost: 0, source: null}
+  if(!size) throw new Error("getReinforcedBulkeadData(reinforcedBulkheadId, size) must take in a size parameter")
+  if(!reinforcedBulkheadId) return {fortPercent: 0, bpCost: 0, source: null}
 
   let { fortification: fortPercent, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
   bpCost = bpCost * sizeCategory[size]

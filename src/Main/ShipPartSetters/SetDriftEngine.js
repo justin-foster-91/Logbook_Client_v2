@@ -9,14 +9,15 @@ function SetDriftEngine(props) {
 
   const { driftEngineId, frameId } = customShipParts
   const size = ship.getSize()
-  const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size)
+  const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size, frameId)
   const { currentPart } = props;
   const pcuBudget = ship.getTotalPCUBudget()
-  const [modifiedBPCost, setModifiedBPCost] = useState();
+  const [note, setNote] = useState(null);
   
   useEffect(() => {
-    if(frameId === "Oma") setModifiedBPCost(Math.ceil(bpCost*1.5))
-  }, [frameId, bpCost])
+    if (frameId === "Oma") setNote(<div><em>(Oma 50% increase)</em></div>)
+    else setNote(null)
+  }, [frameId])
   
   const handleDriftEngineChange = (ev) => {
     let engineOption = ev.target.value;
@@ -26,13 +27,13 @@ function SetDriftEngine(props) {
   }
 
   const isWithinBudget = (engine) => {
-    const { minPCU } = Tables.getDriftEngineData(engine, size)
+    const { minPCU } = Tables.getDriftEngineData(engine, size, frameId)
 
     return minPCU <= pcuBudget;
   }
 
   const isWithinMaxSize = (engine) => {
-    let { maxSize } = Tables.getDriftEngineData(engine, size)
+    let { maxSize } = Tables.getDriftEngineData(engine, size, frameId)
     if(maxSize === null) maxSize = 'Supercolossal'
 
     return Tables.sizeMod[size] <= Tables.sizeMod[maxSize];
@@ -68,7 +69,7 @@ function SetDriftEngine(props) {
         <div><strong>Engine Rating</strong>: {rating}</div>
       </div>
 
-      <PartTotals part={currentPart} modifiedBPCost={modifiedBPCost} />
+      <PartTotals part={currentPart} bpCost={bpCost} note={note} />
     </>
   );
 }

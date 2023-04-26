@@ -4,14 +4,15 @@ import PowerIcon from "../../IconRefs/PowerIcon";
 import BuildIcon from "../../IconRefs/BuildIcon";
 
 function PartTotals(props) {
-  const { ship } = useContext(CustomShipContext);
+  const { ship, customShipParts } = useContext(CustomShipContext);
 
-  const { part, pcuCost, bpCost, modifiedBPCost } = props;
+  const { frameId } = customShipParts
+  const { part, pcuCost, bpCost, note } = props;
 
   const renderBP = () => {
-    if (bpCost === undefined && modifiedBPCost === undefined) return;
+    if (bpCost === undefined) return;
 
-    if (part?.name === "Drift Engine") return renderOmaBP()
+    // if (part?.name === "Drift Engine" && frameId === "Oma") re/turn renderOmaBP()
 
     return (
       <div className='iconPair'>
@@ -21,18 +22,18 @@ function PartTotals(props) {
     );
   }
 
-  const renderOmaBP = () => {
-    return (
-      <>
-        <div><em>(Oma 50% increase)</em></div>
-        <div className='iconPair'>
-          <BuildIcon />
-          <div>{modifiedBPCost}</div>
-        </div>
+  // const renderOmaBP = () => {
+  //   return (
+  //     <>
+  //       <div><em>(Oma 50% increase)</em></div>
+  //       <div className='iconPair'>
+  //         <BuildIcon />
+  //         <div>{bpCost}</div>
+  //       </div>
         
-      </>
-    )
-  }
+  //     </>
+  //   )
+  // }
 
   const renderPCU = () => {
     if (pcuCost === undefined) return;
@@ -48,6 +49,7 @@ function PartTotals(props) {
 
   return (
     <div className="row totals">
+      {note}
       {renderPCU()}
       {renderBP()}
     </div>
