@@ -1,7 +1,7 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 
-const driftEngine = (ship, engine) => {
+const isValidDriftEngine = (ship, engine) => {
   const { frameId, powerCoreIds } = ship;
   const frameSize = SF.findComponentByFrameId(frameId, "size")
   const maxPower = Tables.getPowerCoreData(powerCoreIds[0]).pcuProvided
@@ -16,5 +16,5 @@ const driftEngine = (ship, engine) => {
 }
 
 export {
-  driftEngine
+  isValidDriftEngine
 }

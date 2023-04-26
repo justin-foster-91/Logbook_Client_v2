@@ -10,8 +10,8 @@ function AntiPersonnel(props) {
 
   const { antiPersonnelWeaponId: weaponId, tierId } = customShipParts;
   const { currentPart } = props;
+  const size = ship.getSize()
 
-  // TODO: An antipersonnel weapon must be mounted near the boarding ramp of a Medium or smaller starship
 
   //An antipersonnel weapon must be mounted near the boarding ramp of a Medium or smaller starship. This weapon can be any longarm whose item level is equal to or less than the starship’s tier. By spending 5 additional Build Points, the installed weapon can be a heavy weapon (of creature scale, not starship scale). When an antipersonnel weapon is activated, if a hostile creature approaches within the weapon’s range increment, it begins firing with an attack roll modifier equal to the ship’s tier (minimum 1). It fires once per round during combat until its ammunition is depleted or the hostile creature is disabled or flees. The weapon can’t detect invisible (or similarly hidden) creatures. This weapon can’t be removed and used by characters. Anyone with access to the starship’s computer system can activate or deactivate the weapon, as well designate what kind of targets are considered hostile. Once installed, this weapon can’t be removed from the starship without destroying it.
 
@@ -32,6 +32,7 @@ function AntiPersonnel(props) {
     return getter.map((weapon, idx) => { 
       const data = (radioSelection === "longarm") ? Tables.getLongarmData(weapon) : Tables.getHeavyData(weapon)
 
+      if (Tables.sizeCategory[size] > 3) return null;
       return <option key={idx} value={weapon}>
         {weapon} (Lvl {data.level}; {data.damage})
       </option>

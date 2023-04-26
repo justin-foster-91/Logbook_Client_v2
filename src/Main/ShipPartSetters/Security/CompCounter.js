@@ -5,12 +5,8 @@ import { splitCamelCase } from "../../References/utils";
 import PartTotals from "../Components/PartTotals";
 import * as Utils from "../../References/utils";
 
-// a computer can have a number of countermeasures equal to its tier.
-
 function CompCounter(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  // const [totalBpCost, setTotalBpCost] = useState(0)
-  // const [slotsUsed, setSlotsUsed] = useState(0)
 
   const { computerCountermeasures, tierId } = customShipParts;
   const { alarm, fakeShell, feedback, firewall, lockout, wipe, shockGridId } = computerCountermeasures;

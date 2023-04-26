@@ -3,7 +3,7 @@ import * as Utils from "./utils";
 import frames from "../ShipPartSetters/CustomRefs/frames";
 import Ship from './ship'
 import * as personnelWeapons from "../ShipPartSetters/CustomRefs/antiPersonnelWeapons";
-import * as Valid from "../ShipPartSetters/CustomRefs/optionValidation";
+import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -86,7 +86,7 @@ const updateComputerToMatchFrame = (ship) => {
 }
 
 const updateDriftEngineToMatchFrame = (ship) => {
-  if (!Valid.driftEngine(ship, ship.driftEngineId)) ship.driftEngineId = null;
+  if (!Validate.isValidDriftEngine(ship, ship.driftEngineId)) ship.driftEngineId = null;
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {

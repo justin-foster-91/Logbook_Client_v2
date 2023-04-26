@@ -3,7 +3,8 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
-import * as Valid from './CustomRefs/optionValidation';
+// import * as Valid from './CustomRefs/optionValidation';
+import { isValidDriftEngine } from './CustomRefs/optionValidation';
 
 function SetDriftEngine(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -39,7 +40,7 @@ function SetDriftEngine(props) {
         >
           <option key="None">None</option>
           {Tables.getDriftEngineIdList().map((engine, idx) => 
-            Valid.driftEngine(ship.parts, engine) && 
+            isValidDriftEngine(ship.parts, engine) && 
             <option key={idx} value={engine}>
               {engine}
             </option>
