@@ -62,6 +62,7 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
+    SF.updateDriftEngineToMatchFrame(this.parts);
     SF.updateExpansionBaysToMatchFrame(this.parts);
     this.onShipChange(this.parts);
 

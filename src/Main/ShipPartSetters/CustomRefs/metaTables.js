@@ -1,6 +1,7 @@
 import { capitalizeEachWord } from "../../References/utils";
 import frames from "./frames";
-import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelWeapons"
+import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelWeapons";
+import Ship from "../../References/ship";
 
 const sources = {
   // an item can have multiple sources
@@ -2096,6 +2097,8 @@ const getDefensiveCounterData = (defensiveCounterId) => {
 }
 
 const getDriftEngineData = (driftEngineId, size, frameId) => {
+  // const size = Ship.getSize()
+
   if(!size || !frameId) throw new Error("getDriftEngineData(driftEngines, size, frameId) must take in a size and frameId parameter")
   if(!driftEngineId) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
 
@@ -2333,7 +2336,7 @@ export {
   // shipTiers,
   // shipSize,
   // maneuverability,
-  sizeCategory as sizeMod,
+  sizeCategory,
   // powerCores,
   // thrusters,
   // armor,

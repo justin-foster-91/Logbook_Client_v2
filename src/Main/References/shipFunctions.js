@@ -3,6 +3,7 @@ import * as Utils from "./utils";
 import frames from "../ShipPartSetters/CustomRefs/frames";
 import Ship from './ship'
 import * as personnelWeapons from "../ShipPartSetters/CustomRefs/antiPersonnelWeapons";
+import * as Valid from "../ShipPartSetters/CustomRefs/optionValidation";
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
@@ -57,8 +58,7 @@ const updatePowerCoresToMatchFrame = (ship) => {
   });
 
   // reduce length of the power core list if moving to a smaller frame
-  if (ship.powerCoreIds.length > newCoreAmount)
-  ship.powerCoreIds.length = newCoreAmount;
+  if (ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
 };
 
 const updateThrustersToMatchFrame = (ship) => {
@@ -83,6 +83,10 @@ const updateComputerToMatchFrame = (ship) => {
   } else{
     if(ship.secondaryComputerId !== 'Basic Computer') ship.secondaryComputerId = 'Basic Computer'
   }
+}
+
+const updateDriftEngineToMatchFrame = (ship) => {
+  if (!Valid.driftEngine(ship, ship.driftEngineId)) ship.driftEngineId = null;
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {
@@ -551,6 +555,7 @@ export {
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,
+  updateDriftEngineToMatchFrame,
   updateExpansionBaysToMatchFrame,
   updateAntiPersonnelToMatchTier,
   validateShip,

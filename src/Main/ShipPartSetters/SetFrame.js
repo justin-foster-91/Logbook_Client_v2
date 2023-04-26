@@ -16,13 +16,6 @@ function SetFrame(props) {
   const { turnDistance, pilotingModifier } = Tables.getManeuverabilityData(maneuverability)
   const { currentPart } = props;
 
-  // useEffect(() => {
-  //   // Running setFrame on render to initialize later components that depend on the frame 
-  //   // This may not be needed this later
-  //   // This may not be needed later
-  //   ship.setFrame(frameId)
-  // }, [])
-
   useEffect(() => {
     if (specialAbility) setSpecialName(Object.keys(specialAbility)[0])
   }, [specialAbility])

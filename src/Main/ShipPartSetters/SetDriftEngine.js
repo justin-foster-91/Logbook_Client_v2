@@ -3,6 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
+import * as Valid from './CustomRefs/optionValidation';
 
 function SetDriftEngine(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -11,7 +12,6 @@ function SetDriftEngine(props) {
   const size = ship.getSize()
   const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size, frameId)
   const { currentPart } = props;
-  const pcuBudget = ship.getTotalPCUBudget()
   const [note, setNote] = useState(null);
   
   useEffect(() => {
@@ -24,19 +24,6 @@ function SetDriftEngine(props) {
     if(engineOption === "None") engineOption = null
 
     ship.setDriftEngine(engineOption)
-  }
-
-  const isWithinBudget = (engine) => {
-    const { minPCU } = Tables.getDriftEngineData(engine, size, frameId)
-
-    return minPCU <= pcuBudget;
-  }
-
-  const isWithinMaxSize = (engine) => {
-    let { maxSize } = Tables.getDriftEngineData(engine, size, frameId)
-    if(maxSize === null) maxSize = 'Supercolossal'
-
-    return Tables.sizeMod[size] <= Tables.sizeMod[maxSize];
   }
 
   return (
@@ -52,8 +39,7 @@ function SetDriftEngine(props) {
         >
           <option key="None">None</option>
           {Tables.getDriftEngineIdList().map((engine, idx) => 
-            isWithinBudget(engine) && 
-            isWithinMaxSize(engine) && 
+            Valid.driftEngine(ship.parts, engine) && 
             <option key={idx} value={engine}>
               {engine}
             </option>
