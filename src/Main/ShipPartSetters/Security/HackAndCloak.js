@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
+import AccordionText from '../Components/AccordionText';
 
 function HackAndCloak(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -30,7 +31,7 @@ function HackAndCloak(props) {
 
   return (
     <>
-      <div className="dropdownBlock">
+      <div className="dropdownBlock full">
         <label htmlFor="Anti-Hacking Systems">Anti-Hacking Systems</label>
         {/*  increase the DC to hack into it by 1 * mark */}
         <select 
@@ -45,11 +46,12 @@ function HackAndCloak(props) {
         </select>
         <PartTotals part={currentPart} bpCost={hackingBpCost} />
 
-        <div>The additions help to prevent unwanted scoundrels from absconding with a starship. Security systems require an operational power core to function, but they consume a negligible amount of PCU.</div>
-        <div>By increasing the security of the starship's computer, these systems increase the DC to hack into it by 1 (see page 139 CRB)</div>
+        <AccordionText>
+          <p>By increasing the security of the starship's computer, these systems increase the DC to hack into it by 1 (see page 139 CRB)</p>
+        </AccordionText>
       </div>
 
-      <div className="dropdownBlock">
+      <div className="dropdownBlock full">
         <label htmlFor="Cloaking Device">Cloaking</label>
         <select 
           id="Cloaking Device" 
@@ -64,7 +66,7 @@ function HackAndCloak(props) {
 
         <PartTotals part={currentPart} bpCost={cloakingBpCost} />
 
-        <div>{renderCloakDescription()}</div>
+        <AccordionText>{renderCloakDescription()}</AccordionText>
       </div>
     </>
   );

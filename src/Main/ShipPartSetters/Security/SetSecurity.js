@@ -7,6 +7,7 @@ import CompCounter from "./CompCounter";
 import HackAndCloak from "./HackAndCloak";
 import SecurityCheckboxes from "./SecurityCheckboxes";
 import * as SF from "../../References/shipFunctions";
+import AccordionText from "../Components/AccordionText";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
@@ -23,6 +24,10 @@ function SetSecurity(props) {
   return (
     <>
       <PartTitle currentPart={currentPart} />
+
+      <AccordionText>
+        <p>The additions below help to prevent unwanted scoundrels from absconding with a starship. Security systems require an operational power core to function, but they consume a negligible amount of PCU.</p>
+      </AccordionText>
 
       <AntiPersonnel currentPart={currentPart}/>
       <CompCounter currentPart={currentPart}/>

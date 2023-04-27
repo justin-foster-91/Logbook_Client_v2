@@ -3,6 +3,7 @@ import * as Tables from "./CustomRefs/metaTables";
 import { CustomShipContext } from "../Context/shipContext";
 import PartTitle from "./Components/PartTitle";
 import BuildIcon from "../IconRefs/BuildIcon";
+import AccordionText from "./Components/AccordionText";
 
 function SetTier(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -20,6 +21,14 @@ function SetTier(props) {
   return (
     <>
       <PartTitle currentPart={currentPart} />
+
+      <AccordionText>
+        <>
+          <p>This is the designation of the starship and its power level. </p>
+          <p>If you are creating a PC starship, determine the characters' APL by adding together the characters' levels and dividing by the number of characters. That number is their ship's tier.</p>
+          <p>If designing enemy starships, decide the difficulty of the encounter (see Designing Starship Encounters on page 326) and choose the enemy ship's tier.</p>
+        </>
+      </AccordionText>
 
       <div className="dropdownBlock">
         <label htmlFor="tierId" className="hidden">Tier Number</label>

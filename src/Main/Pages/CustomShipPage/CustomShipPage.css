@@ -148,7 +148,7 @@ h1 {
 }
 
 .note {
-  padding: 1rem 0 1rem;
+  padding: .5rem 0 .5rem;
 }
 
 select {
@@ -200,6 +200,10 @@ fieldset {
   margin-bottom: .5rem;
 }
 
+.special {
+  width: auto !important;
+}
+
 select:disabled {
   opacity: .5;
   /* color: red; */
@@ -225,7 +229,7 @@ select:disabled {
 }
 
 .full {
-  
+  width: auto;
 }
 
 .snipped {

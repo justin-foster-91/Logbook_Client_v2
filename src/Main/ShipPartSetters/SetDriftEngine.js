@@ -5,6 +5,7 @@ import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 // import * as Valid from './CustomRefs/optionValidation';
 import { isValidDriftEngine } from './CustomRefs/optionValidation';
+import AccordionText from './Components/AccordionText';
 
 function SetDriftEngine(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -30,6 +31,13 @@ function SetDriftEngine(props) {
   return (
     <>
       <PartTitle currentPart={currentPart} />
+
+      <AccordionText>
+        <>
+          <p>These engines let you travel to and from the Drift (see page 290, CRB). The better the engine rating, the faster you can reach distant destinations. Drift engines have a PCU requirement and a maximum frame size. The cost in Build Points is based on the starship's size category. See the table below for the statistics of the various Drift engines.</p>
+          <p>For a starship to engage its Drift engines to either enter or exit the Drift, its conventional thrusters must be turned off for 1 minute.</p>
+        </>
+      </AccordionText>
 
       <div className="dropdownBlock">
         <label htmlFor="driftEngine" className="hidden">Drift Engine</label>

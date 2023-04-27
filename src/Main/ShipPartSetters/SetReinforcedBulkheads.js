@@ -3,8 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
-
-//TODO: track the fortification %
+import AccordionText from './Components/AccordionText';
 
 function SetReinforcedBulkheads(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -23,6 +22,12 @@ function SetReinforcedBulkheads(props) {
   return (
     <>
       <PartTitle currentPart={currentPart} />
+
+      <AccordionText>
+        <p>
+        By dramatically strengthening a starship's bulkheads and other interior walls, its designer can reduce the odds of catastrophic system damage when the starship sustains damage. Whenever the starship would sustain critical damage, there is a percent chance based on the reinforced bulkhead's fortification rating that the critical damage effect is negated (though the attack still deals damage to the starship). The cost of reinforced bulkheads is based on the starship's size category.
+        </p>
+      </AccordionText>
 
       <div className='dropdownBlock'>
         <label htmlFor="reinforcedBulkheads" className='hidden'>Reinforced Bulkheads</label>

@@ -3,6 +3,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
+import AccordionText from './Components/AccordionText';
 
 //TODO: track the CT bonus
 
@@ -23,6 +24,10 @@ function SetFortifiedHull(props) {
   return (
     <>
       <PartTitle currentPart={currentPart} />
+
+      <AccordionText>
+        <p>By reinforcing critical starship systems with extra-thick armor, a starship's designer can limit catastrophic failures caused by incoming attacks. A starship can incorporate one fortified hull upgrade, which increases the vessel's Critical Threshold (CT) value by an amount based on the fortified hull's material and the starship's size category. A fortified hull is a passive system that requires no PCU to function.</p>
+      </AccordionText>
 
       <div className="dropdownBlock">
         <label htmlFor="fortifiedHull" className='hidden'>Fortified Hull</label>

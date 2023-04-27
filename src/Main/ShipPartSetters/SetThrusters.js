@@ -7,6 +7,7 @@ import PartTotals from "./Components/PartTotals";
 import PowerIcon from "../IconRefs/PowerIcon";
 import BuildIcon from "../IconRefs/BuildIcon";
 import SpecialMaterials from "./Components/SpecialMaterials";
+import AccordionText from "./Components/AccordionText";
 
 function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -28,6 +29,13 @@ function SetThrusters(props) {
     <>
       <PartTitle currentPart={currentPart} />
 
+      <AccordionText>
+        <>
+          <p>Ships rely on conventional thrusters to move between locations in a system, to navigate the reaches of the Drift once they arrive there, to explore, and to engage in combat They are designed for ships of a specific size (specified in the Size column of the table below), and they can't be installed in a ship of an incorrect size. The maximum speed of a starship's thrusters either grants a bonus or imparts a penalty to Piloting checks to fly the vessel, as noted on the table below.</p>
+          <p>Thrusters are also used when landing on and taking off from a planet. Large and smaller Starships generally have little difficulty landing on and taking off from a planet with low gravity or standard gravity (unless there are atmospheric conditions such as high winds or storms). The GM determines whether or not a starship's pilot must attempt a Piloting check to land a starship with a speed lower than 8 on a planet with high gravity, with failure meaning it might crash. Due to their sheer size, Huge and larger starships can't land on planets, and must use shuttles or other means to ferry crew and goods to a planet and back.</p>
+        </>
+      </AccordionText>
+
       <div className="dropdownBlock">
         <label htmlFor="thrusters" className="hidden">Thruster Type</label>
         <select 
@@ -44,12 +52,9 @@ function SetThrusters(props) {
           )}
         </select>
       </div>
-
-      {/* TODO: */}
-      <div>Special Material:</div>
+      
       <SpecialMaterials part="Thrusters"/>
-      {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
-
+      
       <div className="note">
         The maximum speed of a starship's thrusters may grant a bonus or impart a penalty to Piloting checks to fly the vessel.
       </div>

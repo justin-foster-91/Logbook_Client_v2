@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as Tables from '../CustomRefs/metaTables';
+import AccordionText from './AccordionText';
 
 // specialMaterial = {
 //   type: {
@@ -16,6 +17,7 @@ import * as Tables from '../CustomRefs/metaTables';
 
 function SpecialMaterials(props) {
   const [checkedRadio, setCheckedRadio] = useState("None");
+  const [description, setDescription] = useState(null);
 
   const { part: shipPart } = props
   const materials = Tables.specialMaterial
@@ -32,7 +34,6 @@ function SpecialMaterials(props) {
   // Inubrix weapon mount: Mounting a light, heavy, capital, or spinal weapon with inubrix increases its cost by 2 BP, 6 BP, 10 BP, or 10 BP, respectively.
   // Adamantine weapon mount: Mounting an adamantine alloy weapon increases its BP cost by an amount equal to half the weapon's damage dice. If a weapon's damage is multiplied, multiply the cost increase by an equal amount.
   // Adamantine Armor: Adamantine alloy increases a starship's size category by 1 for the purpose of calculating the cost of its armor; the value of a Supercolossal ship's size category increases from 8 to 9 for this purpose.
-  // Armor: special materials only on standard armor
 
   useEffect(() => {
     const allowedPartProps = ["Power Core", "Thrusters", "Armor", "Defensive Countermeasure", "Sensors", "Weapon Mount"]
@@ -64,35 +65,63 @@ function SpecialMaterials(props) {
     setCheckedRadio(radioOption);
   }
 
-  const renderAllRadios = () => {
+  const renderAllRadios = () => {   
     return (
-      <div className='row'>
-        {renderRadioButton("None")}
-        {allSpecialsForShipPart().map((material, idx) => {
-          return renderRadioButton(material)
-        })}
-      </div>
+      <fieldset className='special'>
+        <legend>Special Material</legend>
+        <div className='row'>
+          {renderRadioButton("None")}
+          {allSpecialsForShipPart().map((material, idx) => {
+            return renderRadioButton(material)
+          })}
+        </div>
+        {description 
+          && <AccordionText>
+            {description}
+          </AccordionText>}
+      </fieldset>
     )
   }
 
   const renderRadioButton = (material) => {
+    // console.log(shipPart);
     return (
-      <div key={material}>
+      <div key={`${shipPart}:${material}`}>
         <input 
           type="radio" 
-          id={material} 
-          name="special" 
+          id={`${shipPart}:${material}`} 
+          name={shipPart} 
           value={material} 
           onChange={handleRadioChange}
           checked={checkedRadio === material}
         />
-        <label htmlFor={material}>{material}</label>
+        <label htmlFor={`${shipPart}:${material}`}>{material}</label>
       </div>
     )
   }
 
+  const renderAccordion = () => {
+    let text = null
+    if (checkedRadio !== "None") {
+      text = <p>{materials[checkedRadio].shipComponent[shipPart].description}</p>;
+    }
+
+    return (
+      text ? <AccordionText> {text}</AccordionText>: ''
+    )
+  }
+
+  useEffect(() => {
+    if (checkedRadio !== "None") {
+      setDescription(materials[checkedRadio].shipComponent[shipPart].description)
+    } else {
+      setDescription(null)
+    }
+  }, [checkedRadio, materials, shipPart])
+
   return (
     <>
+      {/* <div>Special Material:</div> */}
       {renderAllRadios()}
     </>
   );

@@ -151,10 +151,12 @@ function CompCounter(props) {
 
   return (
     <>
-      <fieldset>
+      <fieldset className='full'>
         <legend>Computer Countermeasures</legend>
         <div><strong>Slots</strong>: {slotsUsed()}/{slotsAllowed}</div>
-        <div className='note'>A computer can have a number of countermeasures equal to the computer's tier. Each rank of added Shock Grid counts as one countermeasure when determining the total number of countermeasures a system can have.</div>
+        <AccordionText>
+          <p>A computer can have a number of countermeasures equal to the computer's tier. Each rank of added Shock Grid counts as one countermeasure when determining the total number of countermeasures a system can have.</p>
+        </AccordionText>
 
         <div>
           {checkboxRenders()}

@@ -5,6 +5,7 @@ import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables';
 import PartTitle from "./Components/PartTitle";
 import PartTotals from "./Components/PartTotals";
+import AccordionText from "./Components/AccordionText";
 
 function SetFrame(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -34,6 +35,10 @@ function SetFrame(props) {
   return (
     <>
       <PartTitle currentPart={currentPart} />
+
+      <AccordionText>
+        <p>Each starship has a base frame that determines its size, maneuverability, starting weapon mounts, hull strength, room for expansion, and other capacities. Although two ships that use the same frame might look radically different, they both have some of these base statistics in common. The frame of a starship includes all life support and artificial gravity systems necessary to keep the crew (and any passengers) alive and comfortable. The starship's frame is also built with a transponder that is essentially the ship's “address” for standard system-wide and unlimited-range communications (see page 430, CRB); this transponder can be turned off, during which time the starship can't send or receive messages, but neither can it be tracked down by conventional means.</p>
+      </AccordionText>
 
       <div className="dropdownBlock">
         <label htmlFor="frameId" className="hidden">Frame Type</label>

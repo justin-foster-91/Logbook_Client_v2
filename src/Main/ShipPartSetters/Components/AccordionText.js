@@ -4,21 +4,37 @@ import DownArrowIcon from '../../IconRefs/DownArrowIcon';
 
 function AccordionText(props) {
   const [expanded, setExpanded] = useState(false);
+  // const [fullText, setFullText] = useState(null);
   const ref = useRef(null);
+
+  // TODO: this works by triggering useWindowSize() to run
+  // needed for ref to update when window size changes
+  // revisit a more optimal solution
   const size = useWindowSize();
 
-  useEffect(() => {
-    // console.log('width', ref.current ? ref.current.offsetWidth : 0);
-    console.log(ref.current.offsetWidth);
-  }, [ref, size]);
+  // let fullText = props.children
+  const fullText = (typeof props.children === "string") ? <p>{props.children}</p> : props.children
 
-  let fullText = props.children
+
+  const sliceByWindowSize = (str) => {
+    return str.slice(0, ref.current?.offsetWidth/8)
+  }
 
   const snipText = () => {
-    let text = props.children.props.children;
-    if (typeof text !== "string") text = text[0].props.children
+    let stringInput = props?.children;
+    if (!stringInput) return;
 
-    return <p>{text.slice(0, ref.current?.offsetWidth/8)}...</p>;
+    if (typeof stringInput === "string") {
+      return <p>{sliceByWindowSize(stringInput)}...</p>;
+    }
+
+    let stringInTag = stringInput.props.children;
+    if (typeof stringInTag === "string") {
+      return <p>{sliceByWindowSize(stringInTag)}...</p>;
+    }
+
+    let stringInSiblingTags = stringInTag[0].props.children
+    return <p>{sliceByWindowSize(stringInSiblingTags)}...</p>;
   }
 
   const handleAccordionClick = () => {

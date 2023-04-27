@@ -61,8 +61,8 @@ function SecurityCheckboxes(props) {
     <>
       <div>
         {Object.keys(securityCheckbox).map((box, idx) => (
-          <>
-            <div className="row" key={box}>
+          <div key={box}>
+            <div className="row">
               <input type="checkbox" id={box} name={box} 
                 checked={securityCheckbox[box].active}
                 onChange={handleCheckboxChange}
@@ -70,14 +70,11 @@ function SecurityCheckboxes(props) {
               <label htmlFor={box}>{box}</label>
               
               {partTotalsRender(box)}
-              {/* <AccordionText>
-                {securityCheckbox[box].data.description}
-              </AccordionText> */}
             </div>
-            <AccordionText>
+            <AccordionText key={box+idx}>
               {securityCheckbox[box].data.description}
             </AccordionText>
-          </>
+          </div>
         ))}
       </div>
     </>
