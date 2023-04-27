@@ -405,6 +405,15 @@ const getTotalAC = () => {
   */
 }
 
+const getTotalSpecialMaterialCosts = () => {
+  // armorMaterialId
+  // defensiveCountermeasuresMaterialId
+  // powerCoreSpecialMaterials []
+  // sensorsMaterialId
+  // thrustersMaterialId
+  // weaponMounts per weapon, per arc
+}
+
 const combineComputerBonuses = (ship, size) => {
   const { 
     computerId: primary, 

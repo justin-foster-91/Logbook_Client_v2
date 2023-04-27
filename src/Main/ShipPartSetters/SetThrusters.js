@@ -6,6 +6,7 @@ import PartTitle from "./Components/PartTitle";
 import PartTotals from "./Components/PartTotals";
 import PowerIcon from "../IconRefs/PowerIcon";
 import BuildIcon from "../IconRefs/BuildIcon";
+import SpecialMaterials from "./Components/SpecialMaterials";
 
 function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -46,6 +47,7 @@ function SetThrusters(props) {
 
       {/* TODO: */}
       <div>Special Material:</div>
+      <SpecialMaterials part="Thrusters"/>
       {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
 
       <div className="note">
