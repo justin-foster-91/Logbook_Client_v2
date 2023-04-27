@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
+import AccordionText from '../Components/AccordionText';
 
 function SecurityCheckboxes(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -60,17 +61,23 @@ function SecurityCheckboxes(props) {
     <>
       <div>
         {Object.keys(securityCheckbox).map((box, idx) => (
-          <div className="row" key={box}>
-            <input type="checkbox" id={box} name={box} 
-              checked={securityCheckbox[box].active}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor={box}>{box}</label>
-            
-            {partTotalsRender(box)}
-
-            <div>{securityCheckbox[box].data.description}</div>
-          </div>
+          <>
+            <div className="row" key={box}>
+              <input type="checkbox" id={box} name={box} 
+                checked={securityCheckbox[box].active}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor={box}>{box}</label>
+              
+              {partTotalsRender(box)}
+              {/* <AccordionText>
+                {securityCheckbox[box].data.description}
+              </AccordionText> */}
+            </div>
+            <AccordionText>
+              {securityCheckbox[box].data.description}
+            </AccordionText>
+          </>
         ))}
       </div>
     </>

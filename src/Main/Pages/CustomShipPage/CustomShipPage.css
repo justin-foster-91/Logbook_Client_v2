@@ -207,12 +207,15 @@ select:disabled {
 
 .accordion {
   background-color: rgba(128, 128, 128, 0.116);
+  /* margin-bottom: 2rem; */
   /* width: 100%; */
   /* max-width: 68vw; */
+  margin: 0 !important;
 }
 
-.accordion .icon {
-  position: absolute;
+.iconWrapper .icon {
+  position: relative;
+  transform: translate(0, -4px);
 }
 
 .accordion p {
@@ -229,12 +232,14 @@ select:disabled {
   /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; */
+  /* width: 70vw; sort of works, but not responsive */
 }
 
 .iconWrapper {
   display: flex;
   justify-content: flex-end;
   padding: 0 .1rem .1rem 0;
+  margin: 0 !important;
 }
 
 /* div {

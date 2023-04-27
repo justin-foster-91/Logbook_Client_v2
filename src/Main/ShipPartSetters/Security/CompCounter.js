@@ -104,7 +104,6 @@ function CompCounter(props) {
           <AccordionText>
             {counters[box].data.description}
           </AccordionText>
-          <br/>
         </div>
         
     )})
@@ -174,8 +173,11 @@ function CompCounter(props) {
               renderShockGridRanks(tier, idx)
             ))}
           </select>
-          <div>{counters.shockGrid.data.description}</div>
+          
         </div>
+        <AccordionText>
+          {counters.shockGrid.data.description}
+        </AccordionText>
         <PartTotals part={currentPart} bpCost={totalBpCost} />
       </fieldset>
     </>
