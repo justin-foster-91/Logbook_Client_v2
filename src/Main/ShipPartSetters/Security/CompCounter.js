@@ -17,6 +17,7 @@ function CompCounter(props) {
 
   const shockTable = Tables.getComputerShockGridData(shockGridId, computerTier);
 
+  // TODO: construct this from ID list
   const counters = {
     alarm: {
       active: alarm,

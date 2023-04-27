@@ -28,7 +28,7 @@ function SetReinforcedBulkheads(props) {
         <label htmlFor="reinforcedBulkheads" className='hidden'>Reinforced Bulkheads</label>
         <select 
           id="reinforcedBulkheads" 
-          value={reinforcedBulkheadId ? reinforcedBulkheadId : "None"} 
+          value={reinforcedBulkheadId || "None"} 
           onChange={handleReinforcedBulkheadsChange}
         >
           <option key={"None"}>None</option>

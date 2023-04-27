@@ -2002,6 +2002,26 @@ const securityCheckboxes = {
   },
 };
 
+// https://aonsrd.com/Starship_Sensors.aspx
+const sensors = {
+  "Observation Sensors": {range: null, modifier: null, bpCost: 4, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 49"},
+  "System-Wide Sensors": {range: null, modifier: null, bpCost: 3, sfsLegal: false, source: "Galaxy Exploration Manual pg. 35"},
+  "Sensor Drones": {range: null, modifier: null, bpCost: 1, sfsLegal: false, source: "Galaxy Exploration Manual pg. 35"},
+  "Cut-Rate": {range: "Short", modifier: -2, bpCost: 1, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Budget Short-Range": {range: "Short", modifier: 0, bpCost: 2, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Basic Short-Range": {range: "Short", modifier: 2, bpCost: 3, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Advanced Short-Range": {range: "Short", modifier: 4, bpCost: 4, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Ultra Short-Range": {range: "Short", modifier: 6, bpCost: 6, sfsLegal: false, source: "Near Space pg. 114"},
+  "Budget Medium-Range": {range: "Medium", modifier: 0, bpCost: 3, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Basic Medium-Range": {range: "Medium", modifier: 2, bpCost: 5, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Advanced Medium-Range": {range: "Medium", modifier: 4, bpCost: 8, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Ultra Medium-Range": {range: "Medium", modifier: 6, bpCost: 12, sfsLegal: false, source: "Near Space pg. 114"},
+  "Budget Long-Range": {range: "Long", modifier: 0, bpCost: 6, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Basic Long-Range": {range: "Long", modifier: 2, bpCost: 10, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Advanced Long-Range": {range: "Long", modifier: 4, bpCost: 14, sfsLegal: true, source: "Starfinder Core Rulebook pg. 301"},
+  "Ultra Long-Range": {range: "Long", modifier: 6, bpCost: 20, sfsLegal: false, source: "Near Space pg. 114"},
+}
+
 
 // <--- Data extractions --->
 const getSourceData = (source) => {
@@ -2223,6 +2243,14 @@ const getSecurityCheckboxData = (securityCheckboxId, size) => {
   return {bpCost, pcuCost, sfsLegal, source, description}
 }
 
+const getSensorsData = (sensorId) => {
+  if (!sensorId) return {range: null, modifier: null, bpCost: 0, sfsLegal: null, source: null}
+
+  const { range, modifier, bpCost, sfsLegal, source } = sensors[sensorId]
+
+  return {range, modifier, bpCost, sfsLegal, source}
+}
+
 
 
 // <--- ID extractions -->
@@ -2331,6 +2359,10 @@ const getSecurityCheckboxIdList = () => {
   return Object.keys(computerTiers).sort((a, b) => a + b)
 }
 
+const getSensorsIdList = () => {
+  return Object.keys(sensors)
+}
+
 export {
   // sources,
   // shipTiers,
@@ -2377,6 +2409,7 @@ export {
   getComputerTierData,
   getCloakingData,
   getSecurityCheckboxData,
+  getSensorsData,
 
   getSourceIdList,
   getTierIdList, 
@@ -2401,5 +2434,7 @@ export {
   getComputerCountermeasureIdList,
   getComputerShockGridIdList,
   getComputerTierIdList,
-  getCloakingIdList
+  getCloakingIdList,
+  getSecurityCheckboxIdList,
+  getSensorsIdList,
 }

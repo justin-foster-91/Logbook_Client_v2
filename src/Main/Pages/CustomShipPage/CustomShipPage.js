@@ -18,6 +18,7 @@ import SetSecurity from '../../ShipPartSetters/Security/SetSecurity'
 import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
+import SetSensors from "../../ShipPartSetters/SetSensors";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -76,6 +77,7 @@ function CustomShipPage() {
     {component: SetFortifiedHull, name: "Fortified Hull"},
     {component: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
     {component: SetSecurity, name: "Security"},
+    {component: SetSensors, name: "Sensors"},
   ]
 
   return (
