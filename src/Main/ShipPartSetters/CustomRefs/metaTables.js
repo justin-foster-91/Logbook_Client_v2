@@ -1,6 +1,6 @@
 import { capitalizeEachWord } from "../../References/utils";
 import frames from "./frames";
-import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelWeapons";
+import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelData";
 import Ship from "../../References/ship";
 
 const sources = {

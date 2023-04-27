@@ -2,7 +2,7 @@ import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as Utils from "./utils";
 import frames from "../ShipPartSetters/CustomRefs/frames";
 import Ship from './ship'
-import * as personnelWeapons from "../ShipPartSetters/CustomRefs/antiPersonnelWeapons";
+import * as personnelWeapons from "../ShipPartSetters/CustomRefs/antiPersonnelData";
 import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
 
 // TODO: add in bonus core from expansion

@@ -45,8 +45,9 @@ class Ship {
 
   setTier(tier) {
     tier = tier.toString();
-    if (!Tables.getTierIdList().includes(tier))
+    if (!Tables.getTierIdList().includes(tier)) {
       throw new Error("Tier input did not match allowed tier options");
+    }
 
     this.parts.tierId = tier;
     SF.updateAntiPersonnelToMatchTier(this.parts);
@@ -55,8 +56,9 @@ class Ship {
   }
 
   setFrame(frame) {
-    if (!Tables.getFrameIdList().includes(frame))
+    if (!Tables.getFrameIdList().includes(frame)) {
       throw new Error("Frame input did not match allowed frame options");
+    }
 
     this.parts.frameId = frame;
     SF.updatePowerCoresToMatchFrame(this.parts);
@@ -70,10 +72,12 @@ class Ship {
   }
 
   setPowerCore(powerCore, idx) {
-    if (!Tables.getPowerCoreIdList().includes(powerCore) && powerCore !== null)
+    if (!Tables.getPowerCoreIdList().includes(powerCore) && powerCore !== null) {
       throw new Error("Power core input did not match allowed power core options");
-    if (idx === null)
+    }
+    if (idx === null) {
       throw new Error("setPowerCore(powerCore, idx) must take an index parameter");
+    }
 
     const powerCoreQuantity = SF.getCoreQuantityFromSize(this.getSize());
     if (idx + 1 > powerCoreQuantity)
@@ -85,8 +89,9 @@ class Ship {
   }
 
   setThrusters(thruster) {
-    if (!Tables.getThrusterIdList().includes(thruster) && thruster !== null)
+    if (!Tables.getThrusterIdList().includes(thruster) && thruster !== null) {
       throw new Error("Thrusters input did not match allowed thruster options");
+    }
 
     this.parts.thrustersId = thruster;
     this.onShipChange(this.parts);
@@ -94,8 +99,9 @@ class Ship {
   }
 
   setArmor(armor) {
-    if (!Tables.getArmorIdList().includes(armor) && armor !== null)
+    if (!Tables.getArmorIdList().includes(armor) && armor !== null) {
       throw new Error("Armor input did not match allowed armor options");
+    }
     const balancedHP = Tables.getArmorData(armor, this.getSize()).tempHP / 4;
     const arcList = ["forward", "port", "starboard", "aft"];
 
@@ -124,8 +130,9 @@ class Ship {
   }
 
   setComputer(comp) {
-    if (!Tables.getComputerIdList().includes(comp) && comp !== null)
+    if (!Tables.getComputerIdList().includes(comp) && comp !== null) {
       throw new Error("Computer input did not match allowed computer options");
+    }
 
     this.parts.computerId = comp;
     this.onShipChange(this.parts);
@@ -151,11 +158,9 @@ class Ship {
   }
 
   setDefensiveCounters(defense) {
-    if (
-      !Tables.getDefensiveCounterIdList().includes(defense) &&
-      defense !== null
-    )
+    if (!Tables.getDefensiveCounterIdList().includes(defense) && defense !== null) {
       throw new Error("Defensive counter input did not match allowed defensive options");
+    }
 
     this.parts.defensiveCountermeasuresId = defense;
     this.onShipChange(this.parts);
@@ -163,8 +168,9 @@ class Ship {
   }
 
   setDriftEngine(engine) {
-    if (!Tables.getDriftEngineIdList().includes(engine) && engine !== null)
+    if (!Tables.getDriftEngineIdList().includes(engine) && engine !== null) {
       throw new Error("Drift engine input did not match allowed engine options");
+    }
 
     this.parts.driftEngineId = engine;
     this.onShipChange(this.parts);
@@ -172,10 +178,12 @@ class Ship {
   }
 
   setExpansionBay(expansion, idx, copy) {
-    if (!Tables.getExpansionBayIdList().includes(expansion) && expansion !== null)
+    if (!Tables.getExpansionBayIdList().includes(expansion) && expansion !== null) {
       throw new Error("Expansion bay input did not match allowed expansion options");
-    if (idx === null)
+    }
+    if (idx === null) {
       throw new Error("setExpansionBay(bay, idx) must take an index parameter");
+    }
 
     // External bay exception
     // if(idx+1 > expansionQuantity) throw new Error(`Expansion bay number ${idx+1} may not exceed the allowed ${expansionQuantity} expansions`)
@@ -186,9 +194,18 @@ class Ship {
     return this;
   }
 
+    // TODO: Should this be part of setExpansionBay()?
+    deleteExpansionBay(idx) {
+      SF.removeExpansion(this.parts, idx);
+  
+      this.onShipChange(this.parts);
+      return this;
+    }
+
   setFortifiedHull(hull) {
-    if (!Tables.getFortifiedHullIdList().includes(hull) && hull !== null)
+    if (!Tables.getFortifiedHullIdList().includes(hull) && hull !== null) {
       throw new Error("Fortified hull input did not match allowed hull options");
+    }
 
     this.parts.fortifiedHullId = hull;
     this.onShipChange(this.parts);
@@ -196,8 +213,9 @@ class Ship {
   }
 
   setReinforcedBulkheads(bulkhead) {
-    if (!Tables.getReinforcedBulkheadIdList().includes(bulkhead) &&bulkhead !== null)
+    if (!Tables.getReinforcedBulkheadIdList().includes(bulkhead) &&bulkhead !== null) {
       throw new Error("Reinforced bulkhead input did not match allowed bulkhead options");
+    }
 
     this.parts.reinforcedBulkheadId = bulkhead;
     this.onShipChange(this.parts);
@@ -205,6 +223,10 @@ class Ship {
   }
 
   setSecurity(security) {
+    // if (!Tables.getSecurityIdList().includes(security) && security !== null) {
+    //   throw new Error("Security input did not match allowed security options");
+    // }
+
     const targetTranslation = {
       "Biometric Locks": "hasBiometricLocks",
       "Self-Destruct System": "hasSelfDestructSystem",
@@ -236,23 +258,15 @@ class Ship {
   }
 
   setSensors(sensor) {
-    if (!Tables.getSensorsIdList().includes(sensor) && sensor !== null)
+    if (!Tables.getSensorsIdList().includes(sensor) && sensor !== null) {
       throw new Error("Sensor input did not match allowed sensor options");
+    }
 
-    console.log({sensor});
     this.parts.sensorsId = sensor;
     this.onShipChange(this.parts);
     return this;
   }
 
-
-  // TODO: Should this be part of setExpansionBay()?
-  deleteExpansionBay(idx) {
-    SF.removeExpansion(this.parts, idx);
-
-    this.onShipChange(this.parts);
-    return this;
-  }
 }
 
 export default Ship;

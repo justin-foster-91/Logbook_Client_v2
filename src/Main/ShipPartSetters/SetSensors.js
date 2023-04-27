@@ -14,7 +14,6 @@ function SetSensors(props) {
     let sensorOption = ev.target.value;
     if(sensorOption === "None") sensorOption = null
 
-    console.log({sensorOption});
     ship.setSensors(sensorOption)
   }
 
