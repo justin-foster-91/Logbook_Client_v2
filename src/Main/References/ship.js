@@ -235,6 +235,16 @@ class Ship {
     return this;
   }
 
+  setSensors(sensor) {
+    if (!Tables.getSensorsIdList().includes(sensor) && sensor !== null)
+      throw new Error("Sensor input did not match allowed sensor options");
+
+    console.log({sensor});
+    this.parts.sensorsId = sensor;
+    this.onShipChange(this.parts);
+    return this;
+  }
+
 
   // TODO: Should this be part of setExpansionBay()?
   deleteExpansionBay(idx) {

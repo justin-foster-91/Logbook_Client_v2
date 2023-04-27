@@ -7,11 +7,15 @@ import PartTotals from './Components/PartTotals';
 function SetSensors(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { sensorsId } = customShipParts
-  const { range, modifier, bpCost, sfsLegal, source } = Tables.getSensorsData()
+  const { range, modifier, bpCost, sfsLegal, source } = Tables.getSensorsData(sensorsId)
   const { currentPart } = props
 
   const handleSensorChange = (ev) => {
+    let sensorOption = ev.target.value;
+    if(sensorOption === "None") sensorOption = null
 
+    console.log({sensorOption});
+    ship.setSensors(sensorOption)
   }
 
   return (
@@ -31,6 +35,11 @@ function SetSensors(props) {
           ))}
         </select>
       </div>
+
+      {/* TODO: */}
+      <div>Special Material:</div>
+      {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
+      <br/>
       
       <div className='row'>
         <div><strong>Range</strong>: {range || "n/a"}</div>
