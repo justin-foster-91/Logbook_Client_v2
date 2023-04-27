@@ -4,6 +4,7 @@ import * as Tables from "../CustomRefs/metaTables";
 import { splitCamelCase } from "../../References/utils";
 import PartTotals from "../Components/PartTotals";
 import * as Utils from "../../References/utils";
+import AccordionText from '../Components/AccordionText';
 
 function CompCounter(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -100,9 +101,9 @@ function CompCounter(props) {
             <label htmlFor={box} className={disabled ? "warning" : ""}>{splitCamelCase(box)}</label>
             {/* <PartTotals bpCost={} /> */}
           </div>
-          <div>
-            {Tables.getComputerCountermeasureData(Utils.readableIds(box), computerTier).description}
-          </div>
+          <AccordionText>
+            {counters[box].data.description}
+          </AccordionText>
           <br/>
         </div>
         

@@ -1886,7 +1886,7 @@ const computerCountermeasures = {
   Alarm: {
     cost: "Tier of computer",
     sfsLegal: true,
-    description: <p>One of simplest countermeasures, this program sends an alert to a specific individual or station if someone attempts to breach the system. If the computer has a control module connected to an actual alarm, this countermeasure can trigger that alarm. If the computer controls a robot, trap, or weapon, an alarm can also activate them.</p>,
+    description: <div>One of simplest countermeasures, this program sends an alert to a specific individual or station if someone attempts to breach the system. If the computer has a control module connected to an actual alarm, this countermeasure can trigger that alarm. If the computer controls a robot, trap, or weapon, an alarm can also activate them.</div>,
   },
   "Fake Shell": {
     cost: "Tier of computer",
