@@ -7,10 +7,7 @@ function AccordionText(props) {
   // const [fullText, setFullText] = useState(null);
   const ref = useRef(null);
 
-  // TODO: this works by triggering useWindowSize() to run
-  // needed for ref to update when window size changes
-  // revisit a more optimal solution
-  const size = useWindowSize();
+  useWindowSize();
 
   // let fullText = props.children
   const fullText = (typeof props.children === "string") ? <p>{props.children}</p> : props.children
@@ -25,16 +22,16 @@ function AccordionText(props) {
     if (!stringInput) return;
 
     if (typeof stringInput === "string") {
-      return <p>{sliceByWindowSize(stringInput)}...</p>;
+      return <p>{sliceByWindowSize(stringInput)}...  <br/>(read more)</p>;
     }
 
     let stringInTag = stringInput.props.children;
     if (typeof stringInTag === "string") {
-      return <p>{sliceByWindowSize(stringInTag)}...</p>;
+      return <p>{sliceByWindowSize(stringInTag)}...  <br/>(read more)</p>;
     }
 
     let stringInSiblingTags = stringInTag[0].props.children
-    return <p>{sliceByWindowSize(stringInSiblingTags)}...</p>;
+    return <p>{sliceByWindowSize(stringInSiblingTags)}...  <br/>(read more)</p>;
   }
 
   const handleAccordionClick = () => {

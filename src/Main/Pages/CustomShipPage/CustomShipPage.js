@@ -19,6 +19,7 @@ import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
 import SetSensors from "../../ShipPartSetters/SetSensors";
+import SetSources from "../../ShipPartSetters/SetSources";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -38,6 +39,7 @@ function CustomShipPage() {
 
     Array.from(allPartBlocks).every(block => {
       let blockTitle = block.querySelector("h3")
+      if (!blockTitle) throw new Error ("No h3 found in partSetterBlock")
       let blockTitleY = blockTitle.getBoundingClientRect().y;
 
       if (blockTitleY < 0) return true;
@@ -64,6 +66,7 @@ function CustomShipPage() {
   };
 
   let setterList = [ 
+    {component: SetSources, name: "Sources"},
     {component: SetTier, name: "Tier"}, 
     {component: SetFrame, name: "Frame"}, 
     {component: SetPowerCore, name: "Power Core"}, 
@@ -78,6 +81,7 @@ function CustomShipPage() {
     {component: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
     {component: SetSecurity, name: "Security"},
     {component: SetSensors, name: "Sensors"},
+    
   ]
 
   return (

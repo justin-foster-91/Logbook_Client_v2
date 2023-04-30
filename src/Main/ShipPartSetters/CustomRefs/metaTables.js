@@ -1,7 +1,6 @@
 import { capitalizeEachWord } from "../../References/utils";
 import frames from "./frames";
 import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelData";
-import Ship from "../../References/ship";
 
 const sources = {
   // an item can have multiple sources
@@ -10,15 +9,15 @@ const sources = {
     abbrev: 'CRB',
     sfsLegal: true
   },
-  'Pact Worlds': {
-    link: 'https://paizo.com/products/btpy9zkn?Starfinder-Pact-Worlds',
-    abbrev: 'PW',
-    sfsLegal: true
-  },
   'Starship Operations Manual': {
     link: 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual',
     abbrev: 'COM',
     sfsLegal: false
+  },
+  'Pact Worlds': {
+    link: 'https://paizo.com/products/btpy9zkn?Starfinder-Pact-Worlds',
+    abbrev: 'PW',
+    sfsLegal: true
   },
   'Starfinder #6: Empire of Bones': {
     link: 'https://paizo.com/products/btpya1ai/',
@@ -2481,7 +2480,7 @@ const getSensorsIdList = () => {
 }
 
 export {
-  // sources,
+  sources,
   // shipTiers,
   // shipSize,
   // maneuverability,

@@ -225,7 +225,8 @@ select:disabled {
 .accordion p {
   padding: .1rem;
   margin: .1rem;
-  
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
 }
 
 .full {
@@ -233,9 +234,11 @@ select:disabled {
 }
 
 .snipped {
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  /* width: 100%;
+  height: 60px; */
   /* width: 70vw; sort of works, but not responsive */
 }
 
