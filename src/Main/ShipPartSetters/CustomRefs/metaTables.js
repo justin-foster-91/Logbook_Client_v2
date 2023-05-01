@@ -2411,13 +2411,15 @@ const getTierIdList = () => {
 }
 
 const getFrameIdList = () => {
-  const frameList = frames.map(frame => frame.type)
+  const frameList = frames.sort((a,b) => {
+    return sizeCategory[a.size] - sizeCategory[b.size]
+  }).map(frame => frame.type)
 
   // sort frames by size
     // search through frames object for each items and check size, then sort on those sizes?
     // sort the frames object by size first before making the frameList?
     // refactor frames object to contain their type as the key?
-    
+
 
   // console.log(frameList);
 

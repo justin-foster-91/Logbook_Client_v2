@@ -14,17 +14,25 @@ export const ShipsProvider = ({children}) => {
 
 
 export const CustomShipContext = createContext({
-  customShip: {}, 
-  setCustomShip: ()=>{}, 
+  customShipParts: {}, 
+  setCustomShipParts: ()=>{}, 
   ship: new Ship(), 
-  sources: {}
+  activeSources: {},
+  setActiveSources: ()=>{}
 })
 export const CustomShipProvider = ({children}) => {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
-  const [sources, setSources] = useState({})
   const ship = new Ship(customShipParts)
+
+  const sourceList = Object.keys(Tables.sources)
+  const [activeSources, setActiveSources] = useState(
+    sourceList.reduce((accum, cur) => {
+      accum[cur] = true;
+      return accum;
+    }, {})
+  )
 
   ship.onShipChange = (parts) => setCustomShipParts({...parts})
 
-  return (<CustomShipContext.Provider value={{customShipParts, setCustomShipParts, ship}}>{children}</CustomShipContext.Provider>)
+  return (<CustomShipContext.Provider value={{customShipParts, setCustomShipParts, ship, activeSources, setActiveSources}}>{children}</CustomShipContext.Provider>)
 }

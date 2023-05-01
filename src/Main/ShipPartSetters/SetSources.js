@@ -8,40 +8,29 @@ import SFS from '../Assets/Images/Starfinder_Society.png';
 // TODO: There are Base Frames from DC and AA that Archives of Nethys indicates aren't legal, but Paizo refs indicate should be
 
 // Allowed: CRB, AA, PW, DC, AA2
-// Not Allowed: NS, SOM, EoB, DM, WotE,RotE, FotF, TLR, TR
+// Not Allowed: NS, SOM, EoB, DM, WotE, RotE, FotF, TLR, TR
 
 // All supercolossals are in SOM/EoB
 
 
 function SetSources(props) {
-  const [checkedList, setCheckedList] = useState({})
-  const { customShipParts, ship } = useContext(CustomShipContext);
-  const { sources } = Tables
-  const sourceList = Object.keys(sources)
+  const { customShipParts, ship, activeSources, setActiveSources } = useContext(CustomShipContext);
 
-  useEffect(() => {
-    sourceList.forEach(source => {
-      setCheckedList(checkedList => ({
-        ...checkedList,
-        [source]: true
-      }))
-    })
-  }, []) // can't fill dependency and can't remove it
-
+  const { sources: sourceTable } = Tables
+  const sourceList = Object.keys(sourceTable)
+  
   const isSfsLegal = (source) => {
-    return sources[source].sfsLegal;
+    return sourceTable[source].sfsLegal;
   }
-  // console.log(Society);
 
   const handleClick = (ev) => {
     const checkbox = ev.target.name
     const checked = ev.target.checked
 
-    setCheckedList(checkedList => ({
-      ...checkedList,
+    setActiveSources(activeSources => ({
+      ...activeSources,
       [checkbox]: checked
     }))
-    console.log(checkedList);
   }
 
   const renderCheckboxes = () => {
@@ -50,17 +39,17 @@ function SetSources(props) {
         <div className='row' key={source}>
           <input type="checkbox" id={source} name={source} 
             onChange={handleClick} 
-            checked={checkedList[source] || false}
+            checked={activeSources[source]}
           />
-          {isSfsLegal(source) && <img className='sfsLogo' src={SFS} alt='SFS' />}
+          {isSfsLegal(source) && <img className='sfsLogo' src={SFS} alt='[SFS Legal] ' />}
           <label htmlFor={source}>{source}</label>
           <a 
-            href={sources[source].link} 
+            href={sourceTable[source].link} 
             target="_blank" 
             rel="noopener noreferrer" 
             className="inputImg"
           >
-              {sources[source].abbrev}
+            {sourceTable[source].abbrev}
           </a>
         </div>
       )
