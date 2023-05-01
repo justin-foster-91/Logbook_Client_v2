@@ -284,8 +284,8 @@ const formatExpansions = (defaultString) => {
 };
 
 const getFramePackage = (ship) => {
-  let { tierId } = ship;
-  let frameId = Utils.capitalizeEachWord(ship.frameId);
+  let { tierId, frameId } = ship;
+  // let frameId = Utils.capitalizeEachWord(ship.frameId);
 
   let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
 

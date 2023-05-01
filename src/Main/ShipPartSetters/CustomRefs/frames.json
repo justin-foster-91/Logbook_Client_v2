@@ -566,4 +566,134 @@
 	"maximumCrew": 5000,
 	"cost": 350,
 	"specialAbility": null
+}, {
+	"type": "Starship Drone",
+	"source": "Drift Crisis pg. 147",
+	"size": "Tiny",
+	"maneuverability": "Perfect",
+	"hp": {
+		"increment": 5,
+		"startTotal": 15
+	},
+	"dt": null,
+	"ct": 3,
+	"mounts": {},
+	"expansions": null,
+	"minimumCrew": 0,
+	"maximumCrew": 0,
+	"cost": 3,
+	"specialAbility": "A starship made with the starship drone base frame has no life support, artificial gravity, or crew quarters. All its components are accessible from outside the ship, usually through maintenance hatches and other access ports. A starship drone is usually equipped with a VI, or virtual intelligence system. The ship's VI obeys instructions according to its programming, but it can navigate and use onboard systems when supervision isn't available."
+}, {
+	"type": "Light Hauler",
+	"source": "Source Drift Crisis pg. 103",
+	"size": "Small",
+	"maneuverability": "Average",
+	"hp": {
+		"increment": 10,
+		"startTotal": 50
+	},
+	"dt": null,
+	"ct": 10,
+	"mounts": {
+		"forwardArc": {
+			"light": 2
+		},
+		"portArc": {
+			"light": 1
+		},
+		"starboardArc": {
+			"light": 1
+		}
+	},
+	"expansions": 1,
+	"minimumCrew": 1,
+	"maximumCrew": 6,
+	"cost": 10,
+	"specialAbility": "Expanded Engine Bay A light hauler has an expanded engine bay that can accommodate engines designed for Medium-sized starships to give it the power necessary to tow vessels larger than itself. While fitted with Medium-sized thrusters and not towing a ship, the light hauler's speed increases by 2."
+}, {
+	"type": "Tanker",
+	"source": "Source Drift Crisis pg. 103",
+	"size": "Large",
+	"maneuverability": "Clumsy",
+	"hp": {
+		"increment": 15,
+		"startTotal": 100
+	},
+	"dt": null,
+	"ct": 20,
+	"mounts": {
+		"forwardArc": {
+			"heavy": 1
+		},
+		"turret": {
+			"light": 2
+		}
+	},
+	"expansions": 2,
+	"minimumCrew": 4,
+	"maximumCrew": 10,
+	"cost": 20,
+	"specialAbility": null
+}, {
+	"type": "Heavy Hauler",
+	"source": "Source Drift Crisis pg. 103",
+	"size": "Large",
+	"maneuverability": "Poor",
+	"hp": {
+		"increment": 20,
+		"startTotal": 140
+	},
+	"dt": null,
+	"ct": 28,
+	"mounts": {
+		"forwardArc": {
+			"heavy": 1,
+			"light": 1
+		},
+		"portArc": {
+			"heavy": 1
+		},
+		"starboardArc": {
+			"heavy": 1
+		},
+		"turret": {
+
+		}
+	},
+	"expansions": 2,
+	"minimumCrew": 6,
+	"maximumCrew": 20,
+	"cost": 40,
+	"specialAbility": "Expanded Engine Bay A heavy hauler has an expanded engine bay that can accommodate engines designed for Huge-sized starships to give it the power necessary to tow vessels larger than itself. While fitted with Huge-sized thrusters and not towing a ship, the heavy hauler's speed increases by 2."
+}, {
+	"type": "Supertanker",
+	"source": "Source Drift Crisis pg. 103",
+	"size": "Gargantuan",
+	"maneuverability": "Clumsy",
+	"hp": {
+		"increment": 25,
+		"startTotal": 200
+	},
+	"dt": null,
+	"ct": 40,
+	"mounts": {
+		"forwardArc": {
+			"heavy": 2
+		},
+		"portArc": {
+			"light": 2
+		},
+		"starboardArc": {
+			"light": 2
+		},
+		"turret": {
+			"heavy": 1,
+			"light": 1
+		}
+	},
+	"expansions": 4,
+	"minimumCrew": 10,
+	"maximumCrew": 40,
+	"cost": 100,
+	"specialAbility": null
 }]

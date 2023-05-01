@@ -2,6 +2,15 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
+import SFS from '../Assets/Images/Starfinder_Society.png';
+
+// https://paizo.com/starfindersociety/characteroptions
+// TODO: There are Base Frames from DC and AA that Archives of Nethys indicates aren't legal, but Paizo refs indicate should be
+
+// Allowed: CRB, AA, PW, DC, AA2
+// Not Allowed: NS, SOM, EoB, DM, WotE,RotE, FotF, TLR, TR
+
+// All supercolossals are in SOM/EoB
 
 
 function SetSources(props) {
@@ -18,6 +27,11 @@ function SetSources(props) {
       }))
     })
   }, []) // can't fill dependency and can't remove it
+
+  const isSfsLegal = (source) => {
+    return sources[source].sfsLegal;
+  }
+  // console.log(Society);
 
   const handleClick = (ev) => {
     const checkbox = ev.target.name
@@ -38,6 +52,7 @@ function SetSources(props) {
             onChange={handleClick} 
             checked={checkedList[source] || false}
           />
+          {isSfsLegal(source) && <img className='sfsLogo' src={SFS} alt='SFS' />}
           <label htmlFor={source}>{source}</label>
           <a 
             href={sources[source].link} 

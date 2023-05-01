@@ -17,6 +17,8 @@ function SetFrame(props) {
   const { turnDistance, pilotingModifier } = Tables.getManeuverabilityData(maneuverability)
   const { currentPart } = props;
 
+  const frameList = Tables.getFrameIdList();
+
   useEffect(() => {
     if (specialAbility) setSpecialName(Object.keys(specialAbility)[0])
   }, [specialAbility])

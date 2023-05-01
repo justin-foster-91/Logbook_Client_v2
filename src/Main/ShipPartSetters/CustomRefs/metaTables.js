@@ -9,15 +9,30 @@ const sources = {
     abbrev: 'CRB',
     sfsLegal: true
   },
-  'Starship Operations Manual': {
-    link: 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual',
-    abbrev: 'COM',
-    sfsLegal: false
-  },
   'Pact Worlds': {
     link: 'https://paizo.com/products/btpy9zkn?Starfinder-Pact-Worlds',
     abbrev: 'PW',
     sfsLegal: true
+  },
+  'Alien Archive': {
+    link: 'https://paizo.com/products/btq01wt9?Starfinder-Alien-Archive-3',
+    abbrev: 'AA',
+    sfsLegal: true
+  },
+  'Alien Archive 2': {
+    link: 'https://paizo.com/products/btpya20r?Starfinder-Alien-Archive-2',
+    abbrev: 'AA2',
+    sfsLegal: true
+  },
+  'Drift Crisis': {
+    link: 'https://paizo.com/products/btq02aly?Starfinder-Drift-Crisis',
+    abbrev: 'DC',
+    sfsLegal: true
+  },
+  'Starship Operations Manual': {
+    link: 'https://paizo.com/products/btq0225g?Starfinder-RPG-Starship-Operations-Manual',
+    abbrev: 'SOM',
+    sfsLegal: false
   },
   'Starfinder #6: Empire of Bones': {
     link: 'https://paizo.com/products/btpya1ai/',
@@ -59,16 +74,6 @@ const sources = {
     abbrev: 'TR',
     sfsLegal: false
   },
-  'Alien Archive': {
-    link: 'https://paizo.com/products/btq01wt9?Starfinder-Alien-Archive-3',
-    abbrev: 'AA',
-    sfsLegal: false
-  },
-  'Alien Archive 2': {
-    link: 'https://paizo.com/products/btpya20r?Starfinder-Alien-Archive-2',
-    abbrev: 'AA2',
-    sfsLegal: false
-  }
 }
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
@@ -2406,7 +2411,17 @@ const getTierIdList = () => {
 }
 
 const getFrameIdList = () => {
-  return frames.map(frame => frame.type)
+  const frameList = frames.map(frame => frame.type)
+
+  // sort frames by size
+    // search through frames object for each items and check size, then sort on those sizes?
+    // sort the frames object by size first before making the frameList?
+    // refactor frames object to contain their type as the key?
+    
+
+  // console.log(frameList);
+
+  return frameList
 }
 
 const getPowerCoreIdList = () => {
