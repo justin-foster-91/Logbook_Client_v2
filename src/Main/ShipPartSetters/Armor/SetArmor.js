@@ -12,7 +12,7 @@ function SetArmor(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { armorId } = customShipParts;
-  const { size, hp } = SF.getFramePackageFromShip(customShipParts);
+  const { size, hp } = SF.getFramePackage(customShipParts);
   const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getArmorData(armorId, size);
   const { currentPart } = props;
   

@@ -19,7 +19,7 @@ class Ship {
   }
 
   getFramePackage() {
-    return SF.getFramePackageFromShip(this.parts);
+    return SF.getFramePackage(this.parts);
   }
 
   getSize() {

@@ -14,7 +14,7 @@ function SetThrusters(props) {
   
   const { thrustersId } = customShipParts;
   const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
-  const { size } = SF.getFramePackageFromShip(customShipParts);
+  const { size } = SF.getFramePackage(customShipParts);
   const { currentPart } = props;
 
 

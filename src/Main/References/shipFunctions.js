@@ -86,12 +86,14 @@ const updateComputerToMatchFrame = (ship) => {
 }
 
 const updateDriftEngineToMatchFrame = (ship) => {
-  if (!Validate.isValidDriftEngine(ship, ship.driftEngineId)) ship.driftEngineId = null;
+  const size = getFramePackage(ship).size;
+
+  if (!Validate.isValidDriftEngine(ship, ship.driftEngineId, size)) ship.driftEngineId = null;
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {
   // const size = findComponentByFrameId(ship.frameId, "size")
-  const { expansions: expansionCap } = getFramePackageFromShip(ship)
+  const { expansions: expansionCap } = getFramePackage(ship)
 
   if(ship.expansionBayIds.length > expansionCap) ship.expansionBayIds.length = expansionCap
 
@@ -250,7 +252,7 @@ const validatePowerCores = (ship) => {
 };
 
 const validateArmor = (ship) => {
-  // let { size } = getFramePackageFromShip(ship)
+  // let { size } = getFramePackage(ship)
 
   // ship = new Ship(ship)
 
@@ -281,37 +283,27 @@ const formatExpansions = (defaultString) => {
   return defaultString;
 };
 
-const getFramePackageFromShip = (ship) => {
+const getFramePackage = (ship) => {
   let { tierId } = ship;
   let frameId = Utils.capitalizeEachWord(ship.frameId);
-  let { startTotal, increment } = findComponentByFrameId(frameId, "hp");
 
-  let framePackage = {
-    source: findComponentByFrameId(frameId, "source"),
-    size: findComponentByFrameId(frameId, "size"),
-    maneuverability: findComponentByFrameId(frameId, "maneuverability"),
-    hp: startTotal + increment * Tables.getTierData(tierId).hpIncrementMultiplier,
-    dt: findComponentByFrameId(frameId, "dt"),
-    ct: findComponentByFrameId(frameId, "ct"),
-    mounts: findComponentByFrameId(frameId, "mounts"),
-    expansions: formatExpansions(findComponentByFrameId(frameId, "expansions")),
-    minCrew: findComponentByFrameId(frameId, "minimumCrew"),
-    maxCrew: findComponentByFrameId(frameId, "maximumCrew"),
-    bpCost: findComponentByFrameId(frameId, "cost"),
-    specialAbility: findComponentByFrameId(frameId, "specialAbility"),
-  };
+  let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
 
-  return framePackage;
+  const { startTotal, increment } = hp
+  const { hpIncrementMultiplier } = Tables.getTierData(tierId)
+  hp = startTotal + (increment * hpIncrementMultiplier)
+
+  return { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minCrew, maxCrew, bpCost, specialAbility };
 };
 
 const getTotalBPCosts = (ship) => {
   const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
-  const { size } = getFramePackageFromShip(ship)
+  const { size } = getFramePackage(ship)
   const { frameId } = ship;
   const driftEngineBPCost = Tables.getDriftEngineData(ship.driftEngineId, size, frameId).bpCost
 
   const bpExpenses = [
-    getFramePackageFromShip(ship).bpCost,
+    getFramePackage(ship).bpCost,
     powerCoreTotalBPCost,
     Tables.getThrusterData(ship.thrustersId).bpCost,
     Tables.getArmorData(ship.armorId, size).bpCost,
@@ -364,7 +356,7 @@ const getEssentialPCUCosts = (ship) => {
 }
 
 const getTotalCompBPCosts = (ship) => {
-  const { size } = getFramePackageFromShip(ship)
+  const { size } = getFramePackage(ship)
   const { bpCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
   const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
@@ -376,7 +368,7 @@ const getTotalCompBPCosts = (ship) => {
 }
 
 const getTotalCompPCUCosts = (ship) => {
-  const { size } = getFramePackageFromShip(ship)
+  const { size } = getFramePackage(ship)
   const { pcuCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
   const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
@@ -466,7 +458,7 @@ const copyExpansion = (ship, expansion, index) => {
 }
 
 const removeExpansion = (ship, idx) => {
-  // const { expansions } = getFramePackageFromShip(ship)
+  // const { expansions } = getFramePackage(ship)
 
   ship.expansionBayIds.splice(idx, 1)
 }
@@ -568,7 +560,7 @@ export {
   updateExpansionBaysToMatchFrame,
   updateAntiPersonnelToMatchTier,
   validateShip,
-  getFramePackageFromShip,
+  getFramePackage,
   getTotalBPCosts,
   getTotalPCUCosts,
   getEssentialPCUCosts,

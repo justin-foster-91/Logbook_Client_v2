@@ -2153,6 +2153,22 @@ const getTierData = (tierId) => {
   return {buildPoints, hpIncrementMultiplier: hpIncrement}
 }
 
+const getFrameData = (frameId) => {
+  let matchingFrame = '';
+  
+  frames.every(frame => {
+    if (frame.type === frameId) {
+      matchingFrame = frame;
+      return false;
+    }
+    return true;
+  })
+
+  const { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew, maximumCrew, cost, specialAbility } = matchingFrame;
+
+  return { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew, maximumCrew, cost, specialAbility }
+}
+
 const getManeuverabilityData = (type) => {
   const { turnDistance, pilotingModifier } = maneuverability[type]
 
@@ -2501,6 +2517,7 @@ export {
 
   getSourceData,
   getTierData, 
+  getFrameData,
   getManeuverabilityData,
   getSizeData,
   getPowerCoreData, 

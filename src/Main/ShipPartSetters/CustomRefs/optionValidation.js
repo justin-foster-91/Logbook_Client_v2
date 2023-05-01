@@ -1,7 +1,7 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 
-const isValidDriftEngine = (ship, engine) => {
+const isValidDriftEngine = (ship, engine, size) => {
   const { frameId, powerCoreIds } = ship;
   const frameSize = SF.findComponentByFrameId(frameId, "size")
   const maxPower = Tables.getPowerCoreData(powerCoreIds[0]).pcuProvided
@@ -11,6 +11,7 @@ const isValidDriftEngine = (ship, engine) => {
   let withinMaxSize = (Tables.sizeCategory[frameSize] <= Tables.sizeCategory[maxEngineSize]);
   let withinPowerBudget = (minPCU <= maxPower);
 
+  if (size === "Supercolossal" && engine !== "Signal Basic") return false;
   if (!withinMaxSize || !withinPowerBudget) return false;
   return true;
 }

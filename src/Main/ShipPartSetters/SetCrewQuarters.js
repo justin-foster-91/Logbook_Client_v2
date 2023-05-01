@@ -10,6 +10,7 @@ function SetCrewQuarters(props) {
   const { crewQuartersId } = customShipParts
   const { bpCost, description } = Tables.getQuartersData(crewQuartersId)
   const { currentPart } = props;
+  const size = ship.getSize();
 
   const handleQuartersChange = (ev) => {
     const quartersOption = ev.target.value;
@@ -24,6 +25,12 @@ function SetCrewQuarters(props) {
       <AccordionText>
         <p>Most starships larger than Tiny have places where their crew can eat, sleep, and bathe during long journeys through space. These quarters can range from hammocks strung between cargo containers to cozy chambers with custom furnishings and private bathrooms. Crew quarters consume a negligible amount of PCU, though amenities in fancier quarters require an operational power core to function.</p>
       </AccordionText>
+
+      {size === "Supercolossal" &&
+        <div className="note">
+          On a Supercolossal ship with common crew quarters, the vessel's size enables 10% of the crew to have good quarters and 1% to have luxurious quarters at no additional cost. On a Supercolossal ship with good quarters for the majority of the crew, 10% have luxurious quarters at no additional cost.
+        </div>
+      }
 
       <div className="dropdownBlock">
         <label htmlFor="quarters" className='hidden'>Crew Quarters</label>

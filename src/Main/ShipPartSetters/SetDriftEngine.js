@@ -48,7 +48,7 @@ function SetDriftEngine(props) {
         >
           <option key="None">None</option>
           {Tables.getDriftEngineIdList().map((engine, idx) => 
-            isValidDriftEngine(ship.parts, engine) && 
+            isValidDriftEngine(ship.parts, engine, size) && 
             <option key={idx} value={engine}>
               {engine}
             </option>
