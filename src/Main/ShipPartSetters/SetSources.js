@@ -14,7 +14,7 @@ import SFS from '../Assets/Images/Starfinder_Society.png';
 
 
 function SetSources(props) {
-  const { customShipParts, ship, sourceStatus, setSourceStatus, activeSources } = useContext(CustomShipContext);
+  const { customShipParts, ship, sourceStatus, setSourceStatus } = useContext(CustomShipContext);
 
   const { sources: sourceTable } = Tables
   const sourceList = Object.keys(sourceTable)

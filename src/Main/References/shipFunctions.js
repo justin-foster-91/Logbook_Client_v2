@@ -86,7 +86,7 @@ const updateComputerToMatchFrame = (ship) => {
 }
 
 const updateDriftEngineToMatchFrame = (ship, activeSources) => {
-
+  console.log(ship);
   if (!Validate.isValidDriftEngine(ship, ship.driftEngineId, activeSources)) ship.driftEngineId = null;
 }
 
@@ -287,6 +287,7 @@ const getFramePackage = (ship) => {
   // let frameId = Utils.capitalizeEachWord(ship.frameId);
 
   let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
+  console.log(Tables.getFrameData(frameId));
 
   const { startTotal, increment } = hp
   const { hpIncrementMultiplier } = Tables.getTierData(tierId)

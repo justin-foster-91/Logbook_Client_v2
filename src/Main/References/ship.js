@@ -3,8 +3,9 @@ import * as SF from "./shipFunctions";
 import * as Utils from "./utils";
 
 class Ship {
-  constructor(parts) {
+  constructor(parts, sources) {
     this.parts = parts;
+    this.sources = sources;
 
     this.onShipChange = (parts) => {
     };
@@ -16,6 +17,11 @@ class Ship {
       this.setFrame(frameId)
       this.setTier(tierId)
     }
+  }
+
+  // <... Getters ...>
+  getSources() {
+    return this.sources;
   }
 
   getFramePackage() {
@@ -42,15 +48,7 @@ class Ship {
 
   getBonusPackage() {}
 
-  // setSources(activeSources) {
-  //   console.log("Bop");
-  //   console.log(activeSources);
-
-  //   SF.updateDriftEngineToMatchFrame(this.parts, activeSources);
-  //   this.onShipChange(this.parts);
-  //   return this;
-  // }
-
+  // <... Setters ...>
   setTier(tier) {
     tier = tier.toString();
     if (!Tables.getTierIdList().includes(tier)) {
@@ -63,16 +61,18 @@ class Ship {
     return this;
   }
 
-  setFrame(frame, activeSources) {
+  setFrame(frame) {
     if (!Tables.getFrameIdList().includes(frame)) {
       throw new Error("Frame input did not match allowed frame options");
     }
+    const parts = this.parts;
+    const sources = this.sources;
 
     this.parts.frameId = frame;
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
-    SF.updateDriftEngineToMatchFrame(this.parts, activeSources);
+    SF.updateDriftEngineToMatchFrame(this.parts, this.sources);
     SF.updateExpansionBaysToMatchFrame(this.parts);
     this.onShipChange(this.parts);
 

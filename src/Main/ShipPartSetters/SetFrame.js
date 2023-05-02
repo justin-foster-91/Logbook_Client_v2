@@ -6,6 +6,8 @@ import * as Tables from './CustomRefs/metaTables';
 import PartTitle from "./Components/PartTitle";
 import PartTotals from "./Components/PartTotals";
 import AccordionText from "./Components/AccordionText";
+import { isValidFrame } from './CustomRefs/optionValidation';
+
 
 function SetFrame(props) {
   const { customShipParts, ship, activeSources } = useContext(CustomShipContext);

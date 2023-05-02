@@ -4,6 +4,7 @@ import * as SF from "../../References/shipFunctions.js";
 
 const isValidFrame = (ship, frameOption, activeSources) => {
   // const { frameId } = ship;
+  return true;
 
   let { source } = Tables.getFrameData(frameOption);
 
@@ -12,19 +13,15 @@ const isValidFrame = (ship, frameOption, activeSources) => {
 
 const isValidDriftEngine = (ship, engineOption, activeSources) => {
   const { frameId, powerCoreIds } = ship;
+  // const { sources: activeSources } = ship;
+  // console.log(ship.parts);
+  console.log({activeSources});
   const frameSize = SF.findComponentByFrameId(frameId, "size")
   let { maxSize: maxEngineSize, minPCU, source } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
 
-  // console.log(source);
-  // console.log(source && source.substring(0, source.indexOf(" pg")));
-
-  if (activeSources) {
-    if (source) source = source.substring(0, source.indexOf(" pg"))
-    const allowedBySources = (source && activeSources.includes(source));
-    // console.log(allowedBySources);
-    if (!allowedBySources) return false;
-  }
-
+  if (source) source = source.substring(0, source.indexOf(" pg"))
+  const allowedBySources = (source && activeSources.includes(source));
+  if (!allowedBySources) return false;
 
   const maxPower = Tables.getPowerCoreData(powerCoreIds[0]).pcuProvided
   const withinPowerBudget = (minPCU <= maxPower);
@@ -35,7 +32,7 @@ const isValidDriftEngine = (ship, engineOption, activeSources) => {
   const withinMaxSize = (Tables.sizeCategory[frameSize] <= Tables.sizeCategory[maxEngineSize]);
   if (!withinMaxSize) return false;
 
-  // A Supercolossal starship can mount only a Signal Basic Drift engine, at a cost of 16 BP. 
+  // A Supercolossal starship can mount only a Signal Basic Drift engine
   if (size === "Supercolossal" && engineOption !== "Signal Basic") return false;
 
   return true;
