@@ -14,6 +14,10 @@ class Ship {
       const frameId = Utils.capitalizeEachWord(parts.frameId);
       const tierId = parts.tierId
 
+      if (!this.sources.includes("Starfinder Core Rulebook")) {
+        throw new Error("Starfinder Core Rulebook cannot be disabled.")
+      }
+
       this.setFrame(frameId)
       this.setTier(tierId)
     }
@@ -49,6 +53,10 @@ class Ship {
   getBonusPackage() {}
 
   // <... Setters ...>
+  setSources() {
+    SF.updateFrame(this.parts, this.sources)
+  }
+
   setTier(tier) {
     tier = tier.toString();
     if (!Tables.getTierIdList().includes(tier)) {
@@ -65,8 +73,6 @@ class Ship {
     if (!Tables.getFrameIdList().includes(frame)) {
       throw new Error("Frame input did not match allowed frame options");
     }
-    const parts = this.parts;
-    const sources = this.sources;
 
     this.parts.frameId = frame;
     SF.updatePowerCoresToMatchFrame(this.parts);

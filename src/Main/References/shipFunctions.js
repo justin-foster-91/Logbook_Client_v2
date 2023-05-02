@@ -46,6 +46,10 @@ const findComponentByFrameId = (frameId, returnComponent) => {
   return newFrame[returnComponent];
 };
 
+const updateFrame = (ship, activeSources) => {
+  if (!Validate.isValidFrame(ship, ship.frameId, activeSources)) ship.frameId = "Light Freighter";
+}
+
 const updatePowerCoresToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
   const computerIdList = Tables.getPowerCoreIdList()
@@ -86,7 +90,6 @@ const updateComputerToMatchFrame = (ship) => {
 }
 
 const updateDriftEngineToMatchFrame = (ship, activeSources) => {
-  console.log(ship);
   if (!Validate.isValidDriftEngine(ship, ship.driftEngineId, activeSources)) ship.driftEngineId = null;
 }
 
@@ -287,7 +290,7 @@ const getFramePackage = (ship) => {
   // let frameId = Utils.capitalizeEachWord(ship.frameId);
 
   let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
-  console.log(Tables.getFrameData(frameId));
+  // console.log(Tables.getFrameData(frameId));
 
   const { startTotal, increment } = hp
   const { hpIncrementMultiplier } = Tables.getTierData(tierId)
@@ -553,6 +556,7 @@ export {
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
+  updateFrame,
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,
@@ -570,5 +574,5 @@ export {
   copyExpansion,
   removeExpansion,
   getTotalSecurityBpCosts,
-  getSecurityCheckboxPcuCosts
+  getSecurityCheckboxPcuCosts,
 };

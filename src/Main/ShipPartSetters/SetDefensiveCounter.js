@@ -30,7 +30,7 @@ function SetDefensiveCounters(props) {
         <label htmlFor="defensiveCounter" className='hidden'>Defensive Countermeasures</label>
         <select 
           id="defensiveCounter" 
-          value={defensiveId ? defensiveId : "None"} 
+          value={defensiveId || "None"} 
           onChange={handleDefensiveCounterChange}
         >
           <option key="None">None</option>

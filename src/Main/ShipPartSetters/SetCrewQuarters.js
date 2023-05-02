@@ -12,8 +12,15 @@ function SetCrewQuarters(props) {
   const { currentPart } = props;
   const size = ship.getSize();
 
+  // None:
+  // Tiny: disable other options
+  // > TIny: note that common is free
+  const noQuartersAndTiny = !crewQuartersId && (Tables.sizeCategory[size] > Tables.sizeCategory["Tiny"]);
+  const noteForNone = "Most starships larger than Tiny have Crew Quarters. Common Crew Quarters have no additional cost."
+
   const handleQuartersChange = (ev) => {
-    const quartersOption = ev.target.value;
+    let quartersOption = ev.target.value;
+    if (quartersOption === "None") quartersOption = null;
 
     ship.setCrewQuarters(quartersOption)
   }
@@ -34,15 +41,20 @@ function SetCrewQuarters(props) {
 
       <div className="dropdownBlock">
         <label htmlFor="quarters" className='hidden'>Crew Quarters</label>
-        <select id="quarters" value={crewQuartersId} onChange={handleQuartersChange}>
+        <select 
+          id="quarters" 
+          value={crewQuartersId || "None"} 
+          onChange={handleQuartersChange}
+        >
+          <option key="None">None</option>
           {Tables.getQuartersIdList().map((quarters, idx) => (
-            <option key={idx}>{quarters}</option>
+            <option key={idx} value={quarters}>{quarters}</option>
           ))}
         </select>
       </div>
 
-      {/* <div className='note'>{description}</div> */}
-      <AccordionText>{description}</AccordionText>
+      {noQuartersAndTiny && <div className='note'>{noteForNone}</div>}
+      {crewQuartersId && <AccordionText>{description}</AccordionText>}
 
       <PartTotals part={currentPart} bpCost={bpCost} />
     </>

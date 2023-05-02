@@ -46,9 +46,10 @@ function SetFrame(props) {
 
       <div className="dropdownBlock">
         <label htmlFor="frameId" className="hidden">Frame Type</label>
-        <select id="frameId" onChange={handleFrameIdChange}>
+        <select id="frameId" onChange={handleFrameIdChange} value={frameId}>
           {frames.map((frame, idx) => (
-            <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
+            isValidFrame(ship.parts, frame.type, activeSources) 
+            && <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
           ))}
         </select>
       </div>

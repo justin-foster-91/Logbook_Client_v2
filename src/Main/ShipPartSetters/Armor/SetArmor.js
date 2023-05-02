@@ -66,7 +66,7 @@ function SetArmor(props) {
         <label htmlFor="armor" className="hidden">Armor Type</label>
         <select 
           id="armor"
-          value={armorId ? armorId : "None"}
+          value={armorId || "None"}
           onChange={handleArmorChange}
         >
           <option key="None">None</option>

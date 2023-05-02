@@ -66,7 +66,7 @@
 	"minimumCrew": 1,
 	"maximumCrew": 1,
 	"cost": 5,
-	"specialAbility": {"EMP Dispersal (Ex)": "When a starship built with a statikete frame is hit with an EMP weapon, it reduces the duration of that weapon’s effect by half, rounded down to a minimum of 0 rounds."}
+	"specialAbility": {"EMP Dispersal (Ex)": "When a starship built with a statikete frame is hit with an EMP weapon, it reduces the duration of that weapon's effect by half, rounded down to a minimum of 0 rounds."}
 }, {
 	"type": "Interceptor",
 	"source": "Starfinder Core Rulebook pg. 295",
@@ -582,10 +582,10 @@
 	"minimumCrew": 0,
 	"maximumCrew": 0,
 	"cost": 3,
-	"specialAbility": "A starship made with the starship drone base frame has no life support, artificial gravity, or crew quarters. All its components are accessible from outside the ship, usually through maintenance hatches and other access ports. A starship drone is usually equipped with a VI, or virtual intelligence system. The ship's VI obeys instructions according to its programming, but it can navigate and use onboard systems when supervision isn't available."
+	"specialAbility": {"": "A starship made with the starship drone base frame has no life support, artificial gravity, or crew quarters. All its components are accessible from outside the ship, usually through maintenance hatches and other access ports. A starship drone is usually equipped with a VI, or virtual intelligence system. The ship's VI obeys instructions according to its programming, but it can navigate and use onboard systems when supervision isn't available."}
 }, {
 	"type": "Light Hauler",
-	"source": "Source Drift Crisis pg. 103",
+	"source": "Drift Crisis pg. 103",
 	"size": "Small",
 	"maneuverability": "Average",
 	"hp": {
@@ -609,10 +609,10 @@
 	"minimumCrew": 1,
 	"maximumCrew": 6,
 	"cost": 10,
-	"specialAbility": "Expanded Engine Bay A light hauler has an expanded engine bay that can accommodate engines designed for Medium-sized starships to give it the power necessary to tow vessels larger than itself. While fitted with Medium-sized thrusters and not towing a ship, the light hauler's speed increases by 2."
+	"specialAbility": {"Expanded Engine Bay": "A light hauler has an expanded engine bay that can accommodate engines designed for Medium-sized starships to give it the power necessary to tow vessels larger than itself. While fitted with Medium-sized thrusters and not towing a ship, the light hauler's speed increases by 2."}
 }, {
 	"type": "Tanker",
-	"source": "Source Drift Crisis pg. 103",
+	"source": "Drift Crisis pg. 103",
 	"size": "Large",
 	"maneuverability": "Clumsy",
 	"hp": {
@@ -636,7 +636,7 @@
 	"specialAbility": null
 }, {
 	"type": "Heavy Hauler",
-	"source": "Source Drift Crisis pg. 103",
+	"source": "Drift Crisis pg. 103",
 	"size": "Large",
 	"maneuverability": "Poor",
 	"hp": {
@@ -664,10 +664,10 @@
 	"minimumCrew": 6,
 	"maximumCrew": 20,
 	"cost": 40,
-	"specialAbility": "Expanded Engine Bay A heavy hauler has an expanded engine bay that can accommodate engines designed for Huge-sized starships to give it the power necessary to tow vessels larger than itself. While fitted with Huge-sized thrusters and not towing a ship, the heavy hauler's speed increases by 2."
+	"specialAbility": {"Expanded Engine Bay": "A heavy hauler has an expanded engine bay that can accommodate engines designed for Huge-sized starships to give it the power necessary to tow vessels larger than itself. While fitted with Huge-sized thrusters and not towing a ship, the heavy hauler's speed increases by 2."}
 }, {
 	"type": "Supertanker",
-	"source": "Source Drift Crisis pg. 103",
+	"source": "Drift Crisis pg. 103",
 	"size": "Gargantuan",
 	"maneuverability": "Clumsy",
 	"hp": {

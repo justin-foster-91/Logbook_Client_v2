@@ -2240,6 +2240,8 @@ const getNetworkNodeData = (nodeId, size) => {
 }
 
 const getQuartersData = (quartersId) => {
+  if (!quartersId) return {bpCost: 0, source: null, description: null}
+  
   const { bpCost, source, description } = crewQuarters[quartersId]
 
   return {bpCost, source, description}

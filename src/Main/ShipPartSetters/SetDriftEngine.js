@@ -43,7 +43,7 @@ function SetDriftEngine(props) {
         <label htmlFor="driftEngine" className="hidden">Drift Engine</label>
         <select 
           id="driftEngine" 
-          value={driftEngineId ? driftEngineId : "None"} 
+          value={driftEngineId || "None"} 
           onChange={handleDriftEngineChange}
         >
           <option key="None">None</option>

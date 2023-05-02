@@ -4,18 +4,20 @@ import * as SF from "../../References/shipFunctions.js";
 
 const isValidFrame = (ship, frameOption, activeSources) => {
   // const { frameId } = ship;
-  return true;
-
   let { source } = Tables.getFrameData(frameOption);
 
-  if (source && !activeSources.includes(source)) return false;
+  if (source) source = source.substring(0, source.indexOf(" pg"))
+  const allowedBySources = (source && activeSources.includes(source));
+  if (!allowedBySources) return false;
+
+  return true;
 }
 
 const isValidDriftEngine = (ship, engineOption, activeSources) => {
   const { frameId, powerCoreIds } = ship;
   // const { sources: activeSources } = ship;
   // console.log(ship.parts);
-  console.log({activeSources});
+  // console.log({activeSources});
   const frameSize = SF.findComponentByFrameId(frameId, "size")
   let { maxSize: maxEngineSize, minPCU, source } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
 

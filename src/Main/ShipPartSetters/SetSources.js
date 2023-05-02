@@ -45,22 +45,32 @@ function SetSources(props) {
   const handleButtonClick = (ev) => {
     const clicked = ev.target.value;
 
+    let updatedSources = {}
+
     if (clicked === 'All') {
-      changeActiveSources(true);
+      updatedSources = sourceList.reduce((accum, cur) => {
+          accum[cur] = true;
+          return accum;
+        }, {})
     }
 
     if (clicked === 'None') {
-      changeActiveSources(false);
+      updatedSources = sourceList.reduce((accum, cur) => {
+          accum[cur] = false;
+          return accum;
+        }, {})
+
+      updatedSources['Starfinder Core Rulebook'] = true;
     }
 
     if (clicked === 'SFS Legal') {
-      setSourceStatus(
-        sourceList.reduce((accum, cur) => {
+      updatedSources = sourceList.reduce((accum, cur) => {
           accum[cur] = isSfsLegal(cur);
           return accum;
         }, {})
-      )
     }
+
+    setSourceStatus(updatedSources)
   }
 
   const renderButtons = () => {
@@ -80,6 +90,7 @@ function SetSources(props) {
           <input type="checkbox" id={source} name={source} 
             onChange={handleCheckboxClick} 
             checked={sourceStatus[source]}
+            disabled={source === 'Starfinder Core Rulebook'}
           />
           {isSfsLegal(source) && <img className='sfsLogo' src={SFS} alt='[SFS Legal] ' />}
           <label htmlFor={source}>{source}</label>

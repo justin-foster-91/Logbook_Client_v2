@@ -40,7 +40,7 @@ function SetThrusters(props) {
         <label htmlFor="thrusters" className="hidden">Thruster Type</label>
         <select 
           id="thrusters"
-          value={thrustersId ? thrustersId : "None"} 
+          value={thrustersId || "None"} 
           onChange={handleThrusterChange}
         >
           {/* <option key="None">None</option> */}
