@@ -8,7 +8,7 @@ import PartTotals from "./Components/PartTotals";
 import AccordionText from "./Components/AccordionText";
 
 function SetFrame(props) {
-  const { customShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship, activeSources } = useContext(CustomShipContext);
   const [specialName, setSpecialName] = useState(null);
   
   const frameId = Utils.capitalizeEachWord(customShipParts.frameId);
@@ -31,7 +31,7 @@ function SetFrame(props) {
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
     
-    ship.setFrame(frameOption)
+    ship.setFrame(frameOption, activeSources)
   };
 
   return (

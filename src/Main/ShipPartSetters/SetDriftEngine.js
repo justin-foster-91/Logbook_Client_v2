@@ -8,7 +8,7 @@ import { isValidDriftEngine } from './CustomRefs/optionValidation';
 import AccordionText from './Components/AccordionText';
 
 function SetDriftEngine(props) {
-  const { customShipParts, ship } = useContext(CustomShipContext);
+  const { customShipParts, ship, activeSources } = useContext(CustomShipContext);
 
   const { driftEngineId, frameId } = customShipParts
   const size = ship.getSize()
@@ -25,7 +25,7 @@ function SetDriftEngine(props) {
     let engineOption = ev.target.value;
     if(engineOption === "None") engineOption = null
 
-    ship.setDriftEngine(engineOption)
+    ship.setDriftEngine(engineOption, activeSources)
   }
 
   return (
@@ -48,7 +48,7 @@ function SetDriftEngine(props) {
         >
           <option key="None">None</option>
           {Tables.getDriftEngineIdList().map((engine, idx) => 
-            isValidDriftEngine(ship.parts, engine) && 
+            isValidDriftEngine(ship.parts, engine, activeSources) && 
             <option key={idx} value={engine}>
               {engine}
             </option>

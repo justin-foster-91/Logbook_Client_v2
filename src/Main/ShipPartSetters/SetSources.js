@@ -14,7 +14,7 @@ import SFS from '../Assets/Images/Starfinder_Society.png';
 
 
 function SetSources(props) {
-  const { customShipParts, ship, activeSources, setActiveSources } = useContext(CustomShipContext);
+  const { customShipParts, ship, sourceStatus, setSourceStatus, activeSources } = useContext(CustomShipContext);
 
   const { sources: sourceTable } = Tables
   const sourceList = Object.keys(sourceTable)
@@ -23,14 +23,54 @@ function SetSources(props) {
     return sourceTable[source].sfsLegal;
   }
 
-  const handleClick = (ev) => {
+  const handleCheckboxClick = (ev) => {
     const checkbox = ev.target.name
     const checked = ev.target.checked
 
-    setActiveSources(activeSources => ({
+    setSourceStatus(activeSources => ({
       ...activeSources,
       [checkbox]: checked
     }))
+  }
+
+  const changeActiveSources = (newVal) => {
+    setSourceStatus(
+      sourceList.reduce((accum, cur) => {
+        accum[cur] = newVal;
+        return accum;
+      }, {})
+    )
+  }
+
+  const handleButtonClick = (ev) => {
+    const clicked = ev.target.value;
+
+    if (clicked === 'All') {
+      changeActiveSources(true);
+    }
+
+    if (clicked === 'None') {
+      changeActiveSources(false);
+    }
+
+    if (clicked === 'SFS Legal') {
+      setSourceStatus(
+        sourceList.reduce((accum, cur) => {
+          accum[cur] = isSfsLegal(cur);
+          return accum;
+        }, {})
+      )
+    }
+  }
+
+  const renderButtons = () => {
+    return (
+      <>
+        <input type="button" onClick={handleButtonClick} value="All" />
+        <input type="button" onClick={handleButtonClick} value="SFS Legal" />
+        <input type="button" onClick={handleButtonClick} value="None" />
+      </>
+    )
   }
 
   const renderCheckboxes = () => {
@@ -38,8 +78,8 @@ function SetSources(props) {
       return (
         <div className='row' key={source}>
           <input type="checkbox" id={source} name={source} 
-            onChange={handleClick} 
-            checked={activeSources[source]}
+            onChange={handleCheckboxClick} 
+            checked={sourceStatus[source]}
           />
           {isSfsLegal(source) && <img className='sfsLogo' src={SFS} alt='[SFS Legal] ' />}
           <label htmlFor={source}>{source}</label>
@@ -59,7 +99,7 @@ function SetSources(props) {
   return (
     <>
       <PartTitle currentPart={"Sources"} />
-      
+      {renderButtons()}
       {renderCheckboxes()}
     </>
   );

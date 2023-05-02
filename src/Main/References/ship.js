@@ -42,6 +42,14 @@ class Ship {
 
   getBonusPackage() {}
 
+  // setSources(activeSources) {
+  //   console.log("Bop");
+  //   console.log(activeSources);
+
+  //   SF.updateDriftEngineToMatchFrame(this.parts, activeSources);
+  //   this.onShipChange(this.parts);
+  //   return this;
+  // }
 
   setTier(tier) {
     tier = tier.toString();
@@ -55,7 +63,7 @@ class Ship {
     return this;
   }
 
-  setFrame(frame) {
+  setFrame(frame, activeSources) {
     if (!Tables.getFrameIdList().includes(frame)) {
       throw new Error("Frame input did not match allowed frame options");
     }
@@ -64,7 +72,7 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
-    SF.updateDriftEngineToMatchFrame(this.parts);
+    SF.updateDriftEngineToMatchFrame(this.parts, activeSources);
     SF.updateExpansionBaysToMatchFrame(this.parts);
     this.onShipChange(this.parts);
 

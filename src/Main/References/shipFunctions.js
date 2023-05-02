@@ -85,10 +85,9 @@ const updateComputerToMatchFrame = (ship) => {
   }
 }
 
-const updateDriftEngineToMatchFrame = (ship) => {
-  const size = getFramePackage(ship).size;
+const updateDriftEngineToMatchFrame = (ship, activeSources) => {
 
-  if (!Validate.isValidDriftEngine(ship, ship.driftEngineId, size)) ship.driftEngineId = null;
+  if (!Validate.isValidDriftEngine(ship, ship.driftEngineId, activeSources)) ship.driftEngineId = null;
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {
