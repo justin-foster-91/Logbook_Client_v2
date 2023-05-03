@@ -3,8 +3,8 @@ import * as SF from "../../References/shipFunctions.js";
 
 
 const isValidFrame = (ship, frameOption, activeSources) => {
-  // const { frameId } = ship;
-  let { source } = Tables.getFrameData(frameOption);
+  let { source, cost } = Tables.getFrameData(frameOption);
+  const { buildPoints } = Tables.getTierData(ship.tierId);
 
   if (source) source = source.substring(0, source.indexOf(" pg"))
   const allowedBySources = (source && activeSources.includes(source));
@@ -15,19 +15,12 @@ const isValidFrame = (ship, frameOption, activeSources) => {
 
 const isValidDriftEngine = (ship, engineOption, activeSources) => {
   const { frameId, powerCoreIds } = ship;
-  // const { sources: activeSources } = ship;
-  // console.log(ship.parts);
-  // console.log({activeSources});
   const frameSize = SF.findComponentByFrameId(frameId, "size")
   let { maxSize: maxEngineSize, minPCU, source } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
 
   if (source) source = source.substring(0, source.indexOf(" pg"))
   const allowedBySources = (source && activeSources.includes(source));
   if (!allowedBySources) return false;
-
-  const maxPower = Tables.getPowerCoreData(powerCoreIds[0]).pcuProvided
-  const withinPowerBudget = (minPCU <= maxPower);
-  if (!withinPowerBudget) return false;
 
   const { size } = SF.getFramePackage(ship);
   if (!maxEngineSize) maxEngineSize = "Supercolossal";

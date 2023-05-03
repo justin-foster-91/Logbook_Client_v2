@@ -33,13 +33,11 @@ function SetSources(props) {
     }))
   }
 
-  const changeActiveSources = (newVal) => {
-    setSourceStatus(
-      sourceList.reduce((accum, cur) => {
-        accum[cur] = newVal;
+  const changeActiveSources = (newValFunc) => {
+    return sourceList.reduce((accum, cur) => {
+        accum[cur] = newValFunc(cur);
         return accum;
       }, {})
-    )
   }
 
   const handleButtonClick = (ev) => {
@@ -48,26 +46,17 @@ function SetSources(props) {
     let updatedSources = {}
 
     if (clicked === 'All') {
-      updatedSources = sourceList.reduce((accum, cur) => {
-          accum[cur] = true;
-          return accum;
-        }, {})
+      updatedSources = changeActiveSources((cur) => true)
     }
 
     if (clicked === 'None') {
-      updatedSources = sourceList.reduce((accum, cur) => {
-          accum[cur] = false;
-          return accum;
-        }, {})
+      updatedSources = changeActiveSources((cur) => false)
 
       updatedSources['Starfinder Core Rulebook'] = true;
     }
 
     if (clicked === 'SFS Legal') {
-      updatedSources = sourceList.reduce((accum, cur) => {
-          accum[cur] = isSfsLegal(cur);
-          return accum;
-        }, {})
+      updatedSources = changeActiveSources(isSfsLegal)
     }
 
     setSourceStatus(updatedSources)
