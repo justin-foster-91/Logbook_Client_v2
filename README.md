@@ -4,6 +4,9 @@ This is a data tracking aid and ship builder for the Starfinder tabletop RPG. Th
 
 The second phase of this app will allow users to track changes to their ships throughout in-game ship combat. This will track damage to different components, what stations are manned, and all states of the ship that may change from one round to another.
 
+
+The current development focus is on the "Custom Ship" section which can be reached through clicked the button on the landing page with that name.
+
 ## Installation
 
 Clone the repo
