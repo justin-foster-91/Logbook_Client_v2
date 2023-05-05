@@ -33,10 +33,8 @@ function SetFrame(props) {
   const handleFrameIdChange = (ev) => {
     const frameOption = ev.target.value;
     
-    ship.setFrame(frameOption, activeSources)
+    ship.setFrame(frameOption)
   };
-
-  // console.log(ship.getActiveSources());
 
   return (
     <>
@@ -50,7 +48,7 @@ function SetFrame(props) {
         <label htmlFor="frameId" className="hidden">Frame Type</label>
         <select id="frameId" onChange={handleFrameIdChange} value={frameId}>
           {frames.map((frame, idx) => (
-            isValidFrame(ship.parts, frame.type, activeSources) 
+            isValidFrame(ship, frame.type) 
             && <option key={idx} id={frame.type} value={frame.type}>{`${frame.type} [${abbreviateSize(frame.size)}]`}</option>
           ))}
         </select>

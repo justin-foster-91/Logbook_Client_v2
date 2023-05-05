@@ -47,7 +47,7 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 };
 
 const validateCurrentFrame = (ship, activeSources) => {
-  if (!Validate.isValidFrame(ship, ship.frameId, activeSources)) ship.frameId = "Light Freighter";
+  if (!Validate.isValidFrame(ship, ship.frameId)) ship.frameId = "Light Freighter";
 }
 
 const updatePowerCoresToMatchFrame = (ship) => {

@@ -53,7 +53,7 @@ class Ship {
 
   // <... Setters ...>
   setSources() {
-    SF.validateCurrentFrame(this.parts, this.sources)
+    SF.validateCurrentFrame(this)
   }
 
   setTier(tier) {

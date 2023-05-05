@@ -1,24 +1,17 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 
-const isAllowedBySources = (source, activeSources) => {
+const isAllowedBySources = (ship, option) => {
+  let { source } = Tables.getFrameData(option);
+  const activeSources = ship.getActiveSources();
+
   if (source) source = source.substring(0, source.indexOf(" pg"))
   const allowedBySources = (source && activeSources.includes(source));
-  if (!allowedBySources) return false;
+  return allowedBySources;
 }
 
-const isValidFrame = (ship, frameOption, activeSources) => {
-  let { source, cost } = Tables.getFrameData(frameOption);
-  const { buildPoints } = Tables.getTierData(ship.tierId);
-
-  // console.log(ship.sources);
-  // console.log(activeSources);
-  // console.log(ship);
-
-  if (source) source = source.substring(0, source.indexOf(" pg"))
-  const allowedBySources = (source && activeSources.includes(source));
-  if (!allowedBySources) return false;
-
+const isValidFrame = (ship, frameOption) => {
+  if (!isAllowedBySources(ship, frameOption)) return false; 
   return true;
 }
 
