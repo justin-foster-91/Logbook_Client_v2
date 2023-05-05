@@ -19,7 +19,7 @@ class Ship {
 
       this.setFrame(frameId)
       this.setTier(tierId)
-      this.setSources();
+      this.updatePartsWithNewSources();
     }
 
   }
@@ -55,9 +55,9 @@ class Ship {
 
   // <... Setters ...>
   //TODO: change name
-  setSources() {
-    SF.updateFrameToMatchSources(this)
-    SF.updateDriftEngineToMatchSources(this)
+  updatePartsWithNewSources() {
+    SF.updateFrame(this)
+    SF.updateDriftEngine(this)
   }
 
   setTier(tier) {
@@ -82,7 +82,7 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
-    SF.updateDriftEngineToMatchFrame(this);
+    SF.updateDriftEngine(this);
     SF.updateExpansionBaysToMatchFrame(this.parts);
 
     this.onShipChange(this.parts);

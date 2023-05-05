@@ -46,26 +46,22 @@ const findComponentByFrameId = (frameId, returnComponent) => {
   return newFrame[returnComponent];
 };
 
-const updateFrameToMatchSources = (ship) => {
+const updateFrame = (ship) => {
   if (!Validate.isValidFrame(ship, ship.frameId)) ship.frameId = "Light Freighter";
 }
 
-const updateDriftEngineToMatchSources = (ship) => {
-  const { driftEngineId } = ship.parts
-  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.parts.driftEngineId = null;
-}
 
 const updatePowerCoresToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
   const computerIdList = Tables.getPowerCoreIdList()
   const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
   let newCoreAmount = getCoreQuantityFromSize(size);
-
+  
   ship.powerCoreIds.forEach((core, idx) => {
     if(core !== null && !doesFrameSizeAllowCore(core, size)) ship.powerCoreIds[idx] = null;   
     if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
   });
-
+  
   // reduce length of the power core list if moving to a smaller frame
   if (ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
 };
@@ -75,7 +71,7 @@ const updateThrustersToMatchFrame = (ship) => {
   // let { thrustersId } = ship
   const thrusterIdList = Tables.getThrusterIdList()
   const firstMatch = thrusterIdList.find(thruster => doesFrameSizeAllowThruster(thruster, size))
-
+  
   if (ship.thrustersId === null) ship.thrustersId = firstMatch
   // change thrusters to firstMatch if they don't fit the new frame
   if (ship.thrustersId !== firstMatch && !doesFrameSizeAllowThruster(ship.thrustersId, size)) ship.thrustersId = firstMatch;
@@ -85,7 +81,7 @@ const updateComputerToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
   // let { computerId, secondaryComputerId: secondary} = ship
   const compList = Tables.getComputerIdList()
-
+  
   // change computer to 'Mk 4 Mononode' if size changes to supercolossal
   if(size === 'Supercolossal'){
     if(compList.indexOf(ship.computerId) < 13) ship.computerId = 'Mk 4 Mononode'
@@ -94,7 +90,7 @@ const updateComputerToMatchFrame = (ship) => {
   }
 }
 
-const updateDriftEngineToMatchFrame = (ship) => {
+const updateDriftEngine = (ship) => {
   const { driftEngineId } = ship.parts
   if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.parts.driftEngineId = null;
 }
@@ -562,12 +558,11 @@ export {
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
-  updateFrameToMatchSources,
-  updateDriftEngineToMatchSources,
+  updateFrame,
+  updateDriftEngine,
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,
-  updateDriftEngineToMatchFrame,
   updateExpansionBaysToMatchFrame,
   updateAntiPersonnelToMatchTier,
   validateShip,
