@@ -37,6 +37,8 @@ function CustomShipPage() {
     let allPartBlocks = document.getElementsByClassName("partSetterBlock")
     let highestPartBlockId = null;
 
+    console.log("scroll");
+
     Array.from(allPartBlocks).every(block => {
       let blockTitle = block.querySelector("h3")
       if (!blockTitle) throw new Error ("No h3 found in partSetterBlock")

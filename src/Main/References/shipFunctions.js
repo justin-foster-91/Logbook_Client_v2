@@ -46,8 +46,13 @@ const findComponentByFrameId = (frameId, returnComponent) => {
   return newFrame[returnComponent];
 };
 
-const validateCurrentFrame = (ship, activeSources) => {
+const updateFrameToMatchSources = (ship) => {
   if (!Validate.isValidFrame(ship, ship.frameId)) ship.frameId = "Light Freighter";
+}
+
+const updateDriftEngineToMatchSources = (ship) => {
+  const { driftEngineId } = ship.parts
+  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.parts.driftEngineId = null;
 }
 
 const updatePowerCoresToMatchFrame = (ship) => {
@@ -89,8 +94,9 @@ const updateComputerToMatchFrame = (ship) => {
   }
 }
 
-const updateDriftEngineToMatchFrame = (ship, activeSources) => {
-  if (!Validate.isValidDriftEngine(ship, ship.driftEngineId, activeSources)) ship.driftEngineId = null;
+const updateDriftEngineToMatchFrame = (ship) => {
+  const { driftEngineId } = ship.parts
+  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.parts.driftEngineId = null;
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {
@@ -556,7 +562,8 @@ export {
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
-  validateCurrentFrame,
+  updateFrameToMatchSources,
+  updateDriftEngineToMatchSources,
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,

@@ -1,20 +1,37 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 
-const isAllowedBySources = (ship, option) => {
-  let { source } = Tables.getFrameData(option);
+const isAllowedBySources = (ship, partSource) => {
   const activeSources = ship.getActiveSources();
 
-  if (source) source = source.substring(0, source.indexOf(" pg"))
-  const allowedBySources = (source && activeSources.includes(source));
+  if (partSource) partSource = partSource.substring(0, partSource.indexOf(" pg"))
+  const allowedBySources = (partSource && activeSources.includes(partSource));
+
   return allowedBySources;
 }
 
 const isValidFrame = (ship, frameOption) => {
-  if (!isAllowedBySources(ship, frameOption)) return false; 
+  let { source: partSource } = Tables.getFrameData(frameOption);
+
+  if (!isAllowedBySources(ship, partSource)) return false; 
+
   return true;
 }
 
+// const updatePowerCoresToMatchFrame = (ship) => {
+//   const size = findComponentByFrameId(ship.frameId, "size")
+//   const computerIdList = Tables.getPowerCoreIdList()
+//   const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
+//   let newCoreAmount = getCoreQuantityFromSize(size);
+
+//   ship.powerCoreIds.forEach((core, idx) => {
+//     if(core !== null && !doesFrameSizeAllowCore(core, size)) ship.powerCoreIds[idx] = null;   
+//     if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
+//   });
+
+//   // reduce length of the power core list if moving to a smaller frame
+//   if (ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
+// };
 
 // const doesFrameSizeAllowCore = (core, frameSize) => {
 //   let sizeLetterList = Tables.getPowerCoreData(core).sizes;
@@ -27,7 +44,7 @@ const isValidFrame = (ship, frameOption) => {
 
 //   return sizeWordList.includes(frameSize);
 // };
-const isValidPowerCore = (ship, coreOption, activeSources) => {
+const isValidPowerCore = (ship, coreOption) => {
   const { powerCoreIds, frameId } = ship;
   const frameSize = SF.findComponentByFrameId(frameId, "size")
 
@@ -48,22 +65,22 @@ const isValidThruster = (ship, thrusterOption, activeSources) => {
 }
 
 
-const isValidDriftEngine = (ship, engineOption, activeSources) => {
-  const { frameId } = ship;
-  const frameSize = SF.findComponentByFrameId(frameId, "size")
-  let { maxSize: maxEngineSize, minPCU, source } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
+const isValidDriftEngine = (ship, engineOption) => {
+  const { frameId, powerCoreIds } = ship.parts;
+  const frameSize = ship.getSize();
+  let { maxSize: maxEngineSize, source: partSource, minPCU } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
 
-  if (source) source = source.substring(0, source.indexOf(" pg"))
-  const allowedBySources = (source && activeSources.includes(source));
-  if (!allowedBySources) return false;
+  if (!isAllowedBySources(ship, partSource)) return false; 
 
-  const { size } = SF.getFramePackage(ship);
-  if (!maxEngineSize) maxEngineSize = "Supercolossal";
   const withinMaxSize = (Tables.sizeCategory[frameSize] <= Tables.sizeCategory[maxEngineSize]);
   if (!withinMaxSize) return false;
 
+  const maxPower = Tables.getPowerCoreData(powerCoreIds[0]).pcuProvided
+  const withinPowerBudget = (minPCU <= maxPower);
+  if (!withinPowerBudget) return false;
+  
   // A Supercolossal starship can mount only a Signal Basic Drift engine
-  if (size === "Supercolossal" && engineOption !== "Signal Basic") return false;
+  if (frameSize === "Supercolossal" && engineOption !== "Signal Basic") return false;
 
   return true;
 }

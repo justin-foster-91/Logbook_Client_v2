@@ -2241,7 +2241,7 @@ const getNetworkNodeData = (nodeId, size) => {
 
 const getQuartersData = (quartersId) => {
   if (!quartersId) return {bpCost: 0, source: null, description: null}
-  
+
   const { bpCost, source, description } = crewQuarters[quartersId]
 
   return {bpCost, source, description}
@@ -2262,8 +2262,11 @@ const getDriftEngineData = (driftEngineId, size, frameId) => {
   if(!driftEngineId) return {rating: 0, minPCU: 0, maxSize: null, bpCost: 0, source: null, special: null}
 
   let { rating, minPCU, maxSize, bpCost, source, special } = driftEngines[driftEngineId]
+
   bpCost = bpCost * sizeCategory[size]
   if (frameId === "Oma") bpCost = (Math.ceil(bpCost*1.5))
+
+  if (!maxSize) maxSize = "Supercolossal"
 
   return {rating, minPCU, maxSize, bpCost, source, special}
 }

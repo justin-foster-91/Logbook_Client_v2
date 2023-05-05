@@ -53,7 +53,12 @@ class Ship {
 
   // <... Setters ...>
   setSources() {
-    SF.validateCurrentFrame(this)
+    SF.updateFrameToMatchSources(this)
+    SF.updateDriftEngineToMatchSources(this)
+
+    // TODO: do I need these? 
+    this.onShipChange(this.parts);
+    return this;
   }
 
   setTier(tier) {
@@ -64,6 +69,7 @@ class Ship {
 
     this.parts.tierId = tier;
     SF.updateAntiPersonnelToMatchTier(this.parts);
+
     this.onShipChange(this.parts);
     return this;
   }
@@ -77,10 +83,10 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this.parts);
     SF.updateThrustersToMatchFrame(this.parts);
     SF.updateComputerToMatchFrame(this.parts);
-    SF.updateDriftEngineToMatchFrame(this.parts, this.sources);
+    SF.updateDriftEngineToMatchFrame(this);
     SF.updateExpansionBaysToMatchFrame(this.parts);
-    this.onShipChange(this.parts);
 
+    this.onShipChange(this.parts);
     return this;
   }
 
@@ -240,6 +246,7 @@ class Ship {
     //   throw new Error("Security input did not match allowed security options");
     // }
 
+    // FIXME: this implementation feel messy. Revisit later.
     const targetTranslation = {
       "Biometric Locks": "hasBiometricLocks",
       "Self-Destruct System": "hasSelfDestructSystem",

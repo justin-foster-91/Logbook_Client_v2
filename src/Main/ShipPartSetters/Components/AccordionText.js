@@ -59,6 +59,7 @@ export default AccordionText;
 
 // Hook
 function useWindowSize() {
+  console.log("window");
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
   const [windowSize, setWindowSize] = useState({
