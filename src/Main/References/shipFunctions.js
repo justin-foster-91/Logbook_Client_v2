@@ -19,14 +19,14 @@ const getCoreQuantityFromSize = (size) => {
 };
 
 // String core => Boolean
-const doesFrameSizeAllowCore = (core, frameSize) => {
+const doesFrameSizeAllowCoreSize = (core, frameSize) => {
   let sizeLetterList = Tables.getPowerCoreData(core).sizes;
   let sizeWordList = sizeLetterList.map((size) =>
     Utils.sizeLetterToStringConverter(size)
   );
 
-  if (frameSize === "Supercolossal" && sizeWordList.includes("Huge"))
-    return true;
+  // All sizes from Huge to Colossal have the Huge size
+  if (frameSize === "Supercolossal" && sizeWordList.includes("Huge")) return true;
 
   return sizeWordList.includes(frameSize);
 };
@@ -47,23 +47,22 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 };
 
 const updateFrame = (ship) => {
-  if (!Validate.isValidFrame(ship, ship.frameId)) ship.frameId = "Light Freighter";
+  if (!Validate.isValidFrame(ship, ship.parts.frameId)) ship.parts.frameId = "Light Freighter";
 }
 
 
 const updatePowerCoresToMatchFrame = (ship) => {
   const size = findComponentByFrameId(ship.frameId, "size")
-  const computerIdList = Tables.getPowerCoreIdList()
-  const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
-  let newCoreAmount = getCoreQuantityFromSize(size);
-  
+  const powerCoreIdList = Tables.getPowerCoreIdList()
+  const firstMatch = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
+  let newCoreLength = getCoreQuantityFromSize(size);
+
   ship.powerCoreIds.forEach((core, idx) => {
-    if(core !== null && !doesFrameSizeAllowCore(core, size)) ship.powerCoreIds[idx] = null;   
+    if(core && !doesFrameSizeAllowCoreSize(core, size)) ship.powerCoreIds[idx] = null;   
     if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
   });
   
-  // reduce length of the power core list if moving to a smaller frame
-  if (ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
+  if (ship.powerCoreIds.length > newCoreLength) ship.powerCoreIds.length = newCoreLength;
 };
 
 const updateThrustersToMatchFrame = (ship) => {
@@ -555,7 +554,7 @@ const getSecurityCheckboxPcuCosts = (shipParts) => {
 
 export {
   getCoreQuantityFromSize,
-  doesFrameSizeAllowCore,
+  doesFrameSizeAllowCoreSize,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
   updateFrame,

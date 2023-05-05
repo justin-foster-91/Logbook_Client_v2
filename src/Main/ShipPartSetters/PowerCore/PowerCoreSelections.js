@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as Tables from "../CustomRefs/metaTables";
 import * as SF from "../../References/shipFunctions";
 import { CustomShipContext } from "../../Context/shipContext";
+import { isValidPowerCore } from "../CustomRefs/optionValidation";
 
 const PowerCoreSelections = () => {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -10,13 +11,10 @@ const PowerCoreSelections = () => {
   const size = ship.getSize();
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
-
   const handlePowerCoreChange = (event) => {
     const coreIndex = Number(event.target.name);
     let coreOption = event.target.value;
     if (coreOption === "None") coreOption = null;
-    
-    console.log(coreOption);
 
     ship.setPowerCore(coreOption, coreIndex)
   };
@@ -36,7 +34,7 @@ const PowerCoreSelections = () => {
           >
             {(idx > 0) && <option key="None">None</option>}
             {Tables.getPowerCoreIdList().map((core, idx) =>
-                SF.doesFrameSizeAllowCore(core, size) && (
+                isValidPowerCore(ship, core) && (
                   <option key={"option" + idx} value={core}>
                     {`${core} (PCU ${
                       Tables.getPowerCoreData(core).pcuProvided

@@ -1,5 +1,6 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
+import * as Utils from "../../References/utils.js";
 
 const isAllowedBySources = (ship, partSource) => {
   const activeSources = ship.getActiveSources();
@@ -11,9 +12,10 @@ const isAllowedBySources = (ship, partSource) => {
 }
 
 const isValidFrame = (ship, frameOption) => {
-  let { source: partSource } = Tables.getFrameData(frameOption);
+  let { source } = Tables.getFrameData(frameOption);
 
-  if (!isAllowedBySources(ship, partSource)) return false; 
+  if (!frameOption) console.trace(frameOption)
+  if (!isAllowedBySources(ship, source)) return false; 
 
   return true;
 }
@@ -33,27 +35,35 @@ const isValidFrame = (ship, frameOption) => {
 //   if (ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
 // };
 
-// const doesFrameSizeAllowCore = (core, frameSize) => {
-//   let sizeLetterList = Tables.getPowerCoreData(core).sizes;
-//   let sizeWordList = sizeLetterList.map((size) =>
-//     Utils.sizeLetterToStringConverter(size)
-//   );
-
-//   if (frameSize === "Supercolossal" && sizeWordList.includes("Huge"))
-//     return true;
-
-//   return sizeWordList.includes(frameSize);
-// };
+// 1 Supercolossal && up to 4 of Huge or Gargantuan
+// OR
+// Up to 5 Colossal
 const isValidPowerCore = (ship, coreOption) => {
-  const { powerCoreIds, frameId } = ship;
-  const frameSize = SF.findComponentByFrameId(frameId, "size")
+  const { powerCoreIds, frameId } = ship.parts;
+  const frameSize = ship.getSize()
+  const { sizes, pcuProvided, bpCost, source } = Tables.getPowerCoreData(coreOption);
+  
+  if (!isAllowedBySources(ship, source)) return false; 
+  
+  if (!SF.doesFrameSizeAllowCoreSize(coreOption, frameSize)) return false;
 
+  if (frameSize !== "Supercolossal") return true;
 
+  const usedSizes = new Set();
+  powerCoreIds.forEach(core => {
+    if (!core) return;
+    const coreSizes = Tables.getPowerCoreData(core).sizes
+    coreSizes.forEach(size => usedSizes.add(size))
+  })
 
+  console.log(usedSizes);
+  console.log(usedSizes.size);
+  // first dropdown only allow Sc or C
 
+  // if Sc, allow smaller options && exclude other Sc --- also exclude C?
+  // if C, only allow C options
 
-  // TODO: Only allow 1 supercolossal core
-
+  return true;
 }
 
 const isValidThruster = (ship, thrusterOption, activeSources) => {
@@ -68,9 +78,9 @@ const isValidThruster = (ship, thrusterOption, activeSources) => {
 const isValidDriftEngine = (ship, engineOption) => {
   const { frameId, powerCoreIds } = ship.parts;
   const frameSize = ship.getSize();
-  let { maxSize: maxEngineSize, source: partSource, minPCU } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
+  let { maxSize: maxEngineSize, source, minPCU } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
 
-  if (!isAllowedBySources(ship, partSource)) return false; 
+  if (!isAllowedBySources(ship, source)) return false; 
 
   const withinMaxSize = (Tables.sizeCategory[frameSize] <= Tables.sizeCategory[maxEngineSize]);
   if (!withinMaxSize) return false;

@@ -54,7 +54,6 @@ class Ship {
   getBonusPackage() {}
 
   // <... Setters ...>
-  //TODO: change name
   updatePartsWithNewSources() {
     SF.updateFrame(this)
     SF.updateDriftEngine(this)
