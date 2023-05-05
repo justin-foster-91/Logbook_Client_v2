@@ -12,9 +12,6 @@ function SetCrewQuarters(props) {
   const { currentPart } = props;
   const size = ship.getSize();
 
-  // None:
-  // Tiny: disable other options
-  // > TIny: note that common is free
   const noQuartersAndTiny = !crewQuartersId && (Tables.sizeCategory[size] > Tables.sizeCategory["Tiny"]);
   const noteForNone = "Most starships larger than Tiny have Crew Quarters. Common Crew Quarters have no additional cost."
 

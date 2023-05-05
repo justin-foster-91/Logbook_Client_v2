@@ -10,6 +10,7 @@ import SFS from '../Assets/Images/Starfinder_Society.png';
 function SetSources(props) {
   const { sourceStatus, setSourceStatus } = useContext(CustomShipContext);
 
+  const { currentPart } = props;
   const { sources: sourceTable } = Tables
   const sourceList = Object.keys(sourceTable)
   
@@ -92,7 +93,7 @@ function SetSources(props) {
 
   return (
     <>
-      <PartTitle currentPart={"Sources"} />
+      <PartTitle currentPart={currentPart} />
       {renderButtons()}
       {renderCheckboxes()}
     </>

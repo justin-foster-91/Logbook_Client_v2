@@ -1,17 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 function PartTitle(props) {
-  const [name, setName] = useState('');
   const { currentPart } = props;
-
-
-  useEffect(() => {
-    if (typeof currentPart === "string") {
-      setName(currentPart)
-    } else {
-      setName(currentPart.name)
-    }
-  }, [currentPart])
+  const name = (typeof currentPart === "string") ? currentPart : currentPart.name;
   
   return (
     <h3>{name.toUpperCase()}</h3>

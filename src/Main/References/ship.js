@@ -19,7 +19,9 @@ class Ship {
 
       this.setFrame(frameId)
       this.setTier(tierId)
+      this.setSources();
     }
+
   }
 
   // <... Getters ...>
@@ -52,13 +54,10 @@ class Ship {
   getBonusPackage() {}
 
   // <... Setters ...>
+  //TODO: change name
   setSources() {
     SF.updateFrameToMatchSources(this)
     SF.updateDriftEngineToMatchSources(this)
-
-    // TODO: do I need these? 
-    this.onShipChange(this.parts);
-    return this;
   }
 
   setTier(tier) {
