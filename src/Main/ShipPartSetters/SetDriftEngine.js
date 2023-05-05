@@ -14,13 +14,9 @@ function SetDriftEngine(props) {
   const size = ship.getSize()
   const { rating, bpCost, special } = Tables.getDriftEngineData(driftEngineId, size, frameId)
   const { currentPart } = props;
-  const [note, setNote] = useState(null);
-  
-  useEffect(() => {
-    if (frameId === "Oma") setNote(<div><em>(Oma 50% increase)</em></div>)
-    else setNote(null)
-  }, [frameId])
-  
+
+  const omaNote = <div><em>(Oma 50% increase)</em></div>
+
   const handleDriftEngineChange = (ev) => {
     let engineOption = ev.target.value;
     if(engineOption === "None") engineOption = null
@@ -64,7 +60,7 @@ function SetDriftEngine(props) {
         <div><strong>Engine Rating</strong>: {rating}</div>
       </div>
 
-      <PartTotals part={currentPart} bpCost={bpCost} note={note} />
+      <PartTotals part={currentPart} bpCost={bpCost} note={frameId === "Oma" && omaNote} />
     </>
   );
 }

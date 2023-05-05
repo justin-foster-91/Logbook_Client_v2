@@ -46,7 +46,7 @@ const findComponentByFrameId = (frameId, returnComponent) => {
   return newFrame[returnComponent];
 };
 
-const updateFrame = (ship, activeSources) => {
+const validateCurrentFrame = (ship, activeSources) => {
   if (!Validate.isValidFrame(ship, ship.frameId, activeSources)) ship.frameId = "Light Freighter";
 }
 
@@ -556,7 +556,7 @@ export {
   doesFrameSizeAllowCore,
   doesFrameSizeAllowThruster,
   findComponentByFrameId,
-  updateFrame,
+  validateCurrentFrame,
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,

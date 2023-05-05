@@ -10,7 +10,6 @@ const PowerCoreSelections = () => {
   const size = ship.getSize();
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
-  // TODO: Only allow 1 supercolossal core
 
   const handlePowerCoreChange = (event) => {
     const coreIndex = Number(event.target.name);

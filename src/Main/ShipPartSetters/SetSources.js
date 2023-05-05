@@ -7,14 +7,8 @@ import SFS from '../Assets/Images/Starfinder_Society.png';
 // https://paizo.com/starfindersociety/characteroptions
 // TODO: There are Base Frames from DC and AA that Archives of Nethys indicates aren't legal, but Paizo refs indicate should be
 
-// Allowed: CRB, AA, PW, DC, AA2
-// Not Allowed: NS, SOM, EoB, DM, WotE, RotE, FotF, TLR, TR
-
-// All supercolossals are in SOM/EoB
-
-
 function SetSources(props) {
-  const { customShipParts, ship, sourceStatus, setSourceStatus } = useContext(CustomShipContext);
+  const { sourceStatus, setSourceStatus } = useContext(CustomShipContext);
 
   const { sources: sourceTable } = Tables
   const sourceList = Object.keys(sourceTable)

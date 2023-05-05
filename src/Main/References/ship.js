@@ -7,8 +7,7 @@ class Ship {
     this.parts = parts;
     this.sources = sources;
 
-    this.onShipChange = (parts) => {
-    };
+    this.onShipChange = (parts) => {};
 
     if (parts) {
       const frameId = Utils.capitalizeEachWord(parts.frameId);
@@ -24,7 +23,7 @@ class Ship {
   }
 
   // <... Getters ...>
-  getSources() {
+  getActiveSources() {
     return this.sources;
   }
 
@@ -54,7 +53,7 @@ class Ship {
 
   // <... Setters ...>
   setSources() {
-    SF.updateFrame(this.parts, this.sources)
+    SF.validateCurrentFrame(this.parts, this.sources)
   }
 
   setTier(tier) {

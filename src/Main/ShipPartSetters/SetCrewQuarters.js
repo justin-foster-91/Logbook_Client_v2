@@ -53,7 +53,7 @@ function SetCrewQuarters(props) {
         </select>
       </div>
 
-      {noQuartersAndTiny && <div className='note'>{noteForNone}</div>}
+      {noQuartersAndTiny && <div className='warning'>{noteForNone}</div>}
       {crewQuartersId && <AccordionText>{description}</AccordionText>}
 
       <PartTotals part={currentPart} bpCost={bpCost} />

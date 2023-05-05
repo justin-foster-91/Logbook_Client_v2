@@ -36,6 +36,8 @@ function SetFrame(props) {
     ship.setFrame(frameOption, activeSources)
   };
 
+  // console.log(ship.getActiveSources());
+
   return (
     <>
       <PartTitle currentPart={currentPart} />
