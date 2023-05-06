@@ -47,7 +47,7 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 };
 
 const updateFrame = (ship) => {
-  if (!Validate.isValidFrame(ship, ship.parts.frameId)) ship.parts.frameId = "Light Freighter";
+  if (!Validate.isValidFrame(ship, ship.getParts().frameId)) ship.setFrame("Light Freighter");
 }
 
 
@@ -90,8 +90,8 @@ const updateComputerToMatchFrame = (ship) => {
 }
 
 const updateDriftEngine = (ship) => {
-  const { driftEngineId } = ship.parts
-  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.parts.driftEngineId = null;
+  const { driftEngineId } = ship.getParts()
+  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.setDriftEngine(null);
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {
@@ -259,11 +259,12 @@ const validateArmor = (ship) => {
 
   // ship = new Ship(ship)
 
-  const { forward, port, starboard, aft } = ship.parts.ablativeArmorByPosition
+  const { armorId, ablativeArmorByPosition } = ship.getParts();
+  const { forward, port, starboard, aft } = ablativeArmorByPosition;
   const totalUsedTempHP = forward + port + starboard + aft
-  const totalAllowedTempHP = Tables.getArmorData(ship.parts.armorId, ship.getSize()).tempHP
+  const totalAllowedTempHP = Tables.getArmorData(ship.getParts().armorId, ship.getSize()).tempHP
   
-  if(ship.parts.armorId && ship.parts.armorId.includes('ablative')){
+  if(armorId && armorId.includes('ablative')){
     if(totalAllowedTempHP !== totalUsedTempHP){
       return {
         validity: false,

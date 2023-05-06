@@ -39,7 +39,7 @@ const isValidFrame = (ship, frameOption) => {
 // OR
 // Up to 5 Colossal
 const isValidPowerCore = (ship, coreOption) => {
-  const { powerCoreIds, frameId } = ship.parts;
+  const { powerCoreIds, frameId } = ship.getParts();
   const frameSize = ship.getSize()
   const { sizes, pcuProvided, bpCost, source } = Tables.getPowerCoreData(coreOption);
   
@@ -76,7 +76,7 @@ const isValidThruster = (ship, thrusterOption, activeSources) => {
 
 
 const isValidDriftEngine = (ship, engineOption) => {
-  const { frameId, powerCoreIds } = ship.parts;
+  const { frameId, powerCoreIds } = ship.getParts();
   const frameSize = ship.getSize();
   let { maxSize: maxEngineSize, source, minPCU } = Tables.getDriftEngineData(engineOption, frameSize, frameId);
 

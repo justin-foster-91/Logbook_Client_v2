@@ -10,8 +10,7 @@ function Sidebar(props) {
   const [validPCU, setValidPCU] = useState(true);
 
   const {setterList, partHighlight} = props;
-  const { tierId, powerCoreIds } = customShipParts
-
+  const { tierId, powerCoreIds } = customShipParts;
 
   const totalBPCosts = ship.getTotalBPCosts()
   const totalBPBudget = Tables.getTierData(tierId).buildPoints
