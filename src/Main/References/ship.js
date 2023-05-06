@@ -4,6 +4,7 @@ import * as Utils from "./utils";
 
 class Ship {
   constructor(parts, sources) {
+    // TODO: should these be private and only accessed through getters?
     this.parts = parts;
     this.sources = sources;
 
