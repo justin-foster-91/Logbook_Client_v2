@@ -10,6 +10,8 @@ import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
 const getCoreQuantityFromSize = (size) => {
   size = size.toLowerCase();
 
+  // TODO: condense this logic
+  if (size === "tiny") return 1;
   if (size === "small") return 1;
   if (size === "medium" || size === "large") return 1;
   if (size === "huge") return 2;
@@ -27,7 +29,7 @@ const doesFrameSizeAllowCoreSize = (core, frameSize) => {
 
   // All sizes from Huge to Colossal have the Huge size
   if (frameSize === "Supercolossal" && sizeWordList.includes("Huge")) return true;
-
+  
   return sizeWordList.includes(frameSize);
 };
 
@@ -52,17 +54,44 @@ const updateFrame = (ship) => {
 
 
 const updatePowerCoresToMatchFrame = (ship) => {
-  const size = findComponentByFrameId(ship.frameId, "size")
+  const { powerCoreIds } = ship.getParts();
+  const size = ship.getSize()
   const powerCoreIdList = Tables.getPowerCoreIdList()
-  const firstMatch = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
   let newCoreLength = getCoreQuantityFromSize(size);
+  
+  let firstMatch = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
+  if (size === "Supercolossal") firstMatch = 'Gateway Ultra'
 
-  ship.powerCoreIds.forEach((core, idx) => {
-    if(core && !doesFrameSizeAllowCoreSize(core, size)) ship.powerCoreIds[idx] = null;   
-    if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
+  if (powerCoreIds.length > newCoreLength) ship.setPowerCoreArrayLength(newCoreLength);
+  
+  // powerCoreIds.forEach((core, idx) => {
+  //   if(core && !Validate.isValidPowerCore(ship, core, idx)) {
+  //     if (idx === 0) ship.setPowerCore(firstMatch, idx);
+  //     else ship.setPowerCore(null, idx); 
+  //     // else ship.setPowerCore(firstMatch, idx);
+  //   } else {
+  //     if (idx === 0) ship.setPowerCore(firstMatch, idx);
+  //   }
+  //   // if(idx === 0 && !Validate.isValidPowerCore(ship, core, idx)) ship.setPowerCore(firstMatch, idx);
+  // });
+
+  powerCoreIds.forEach((core, idx) => {
+    if (idx === 0) {
+      if (!core || (core && !Validate.isValidPowerCore(ship, core, idx))) {
+        ship.setPowerCore(firstMatch, idx);
+      }
+    } else {
+      if (core && !Validate.isValidPowerCore(ship, core, idx)) {
+        ship.setPowerCore(null, idx); 
+      }
+    }
   });
   
-  if (ship.powerCoreIds.length > newCoreLength) ship.powerCoreIds.length = newCoreLength;
+  // idx 0
+    // if not a core, give it first match
+    // if core but invalid, give it first match
+  // idx > 0
+    // if core but invalid, null it
 };
 
 const updateThrustersToMatchFrame = (ship) => {

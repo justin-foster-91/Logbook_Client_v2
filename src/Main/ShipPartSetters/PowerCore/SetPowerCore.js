@@ -35,7 +35,7 @@ function SetPowerCore(props) {
           A Supercolossal ship may have either: 
           <ul>
             <li>Up to 5 Colossal sized cores</li>
-            <li>1 Supercolossal core with up to 4 Huge/Gargantuan cores.</li>
+            <li>1 Supercolossal core with up to 4 smaller backup cores</li>
           </ul>
         </div>
       }

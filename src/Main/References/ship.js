@@ -5,7 +5,7 @@ import * as Utils from "./utils";
 class Ship {
   #parts;
   #sources;
-  
+
   constructor(parts, sources) {
     this.#parts = parts;
     this.#sources = sources;
@@ -89,7 +89,8 @@ class Ship {
     }
 
     this.#parts.frameId = frame;
-    SF.updatePowerCoresToMatchFrame(this.#parts);
+    console.log(this.#parts);
+    SF.updatePowerCoresToMatchFrame(this);
     SF.updateThrustersToMatchFrame(this.#parts);
     SF.updateComputerToMatchFrame(this.#parts);
     SF.updateDriftEngine(this);
@@ -109,9 +110,19 @@ class Ship {
 
     const powerCoreQuantity = SF.getCoreQuantityFromSize(this.getSize());
     if (idx + 1 > powerCoreQuantity)
-      throw new Error(`Power core number ${idx + 1} may not exceed the allowed ${powerCoreQuantity} power cores`);
+      throw new Error(`Attempted to set ${idx + 1} power cores when only ${powerCoreQuantity} allowed`);
 
     this.#parts.powerCoreIds[idx] = powerCore;
+    this.onShipChange(this.#parts);
+    return this;
+  }
+
+  setPowerCoreArrayLength(length) {
+    if (length < 1) {
+      throw new Error("Power core array length must be greater than 0");
+    }
+    
+    this.#parts.powerCoreIds.length = length;
     this.onShipChange(this.#parts);
     return this;
   }

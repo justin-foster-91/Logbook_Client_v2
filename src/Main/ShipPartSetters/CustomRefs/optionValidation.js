@@ -38,10 +38,10 @@ const isValidFrame = (ship, frameOption) => {
 // 1 Supercolossal && up to 4 of Huge or Gargantuan
 // OR
 // Up to 5 Colossal
-const isValidPowerCore = (ship, coreOption) => {
+const isValidPowerCore = (ship, coreOption, idx) => {
   const { powerCoreIds, frameId } = ship.getParts();
   const frameSize = ship.getSize()
-  const { sizes, pcuProvided, bpCost, source } = Tables.getPowerCoreData(coreOption);
+  const { sizes: optionSizes, pcuProvided, bpCost, source } = Tables.getPowerCoreData(coreOption);
   
   if (!isAllowedBySources(ship, source)) return false; 
   
@@ -56,12 +56,21 @@ const isValidPowerCore = (ship, coreOption) => {
     coreSizes.forEach(size => usedSizes.add(size))
   })
 
-  console.log(usedSizes);
-  console.log(usedSizes.size);
-  // first dropdown only allow Sc or C
+  if (usedSizes.has("Sc")) {
+    const indexCoreSizes = Tables.getPowerCoreData(powerCoreIds[idx]).sizes;
+    if (indexCoreSizes && indexCoreSizes.includes("Sc")) {
+      if (optionSizes.includes("Sc") || optionSizes.includes("C")) return true;
+      return false;
+    }
 
-  // if Sc, allow smaller options && exclude other Sc --- also exclude C?
-  // if C, only allow C options
+    if (optionSizes.includes("Sc")) return false;
+    if (optionSizes.includes("H")) return true;
+  } else {
+    if (optionSizes.includes("Sc") || optionSizes.includes("C")) return true;
+    else return false;
+  }
+
+
 
   return true;
 }
