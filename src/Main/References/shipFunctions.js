@@ -312,11 +312,9 @@ const formatExpansions = (defaultString) => {
 };
 
 const getFramePackage = (ship) => {
-  let { tierId, frameId } = ship;
-  // let frameId = Utils.capitalizeEachWord(ship.frameId);
+  const { tierId, frameId } = ship;
 
   let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
-  // console.log(Tables.getFrameData(frameId));
 
   const { startTotal, increment } = hp
   const { hpIncrementMultiplier } = Tables.getTierData(tierId)
@@ -328,19 +326,17 @@ const getFramePackage = (ship) => {
 const getTotalBPCosts = (ship) => {
   const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
   const { size } = getFramePackage(ship)
-  const { frameId } = ship;
-  const driftEngineBPCost = Tables.getDriftEngineData(ship.driftEngineId, size, frameId).bpCost
 
   const bpExpenses = [
     getFramePackage(ship).bpCost,
     powerCoreTotalBPCost,
     Tables.getThrusterData(ship.thrustersId).bpCost,
     Tables.getArmorData(ship.armorId, size).bpCost,
-    getTotalCompBPCosts(ship),
+    getTotalCompCosts(ship).bpTotal,
     Tables.getQuartersData(ship.crewQuartersId).bpCost,
     Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).bpCost,
-    driftEngineBPCost,
-    // expansion bays
+    Tables.getDriftEngineData(ship.driftEngineId, size, ship.frameId).bpCost,
+    getTotalExpansionCosts(ship).bpTotal,
     Tables.getFortifiedHullData(ship.fortifiedHullId, size).bpCost,
     Tables.getReinforcedBulkheadData(ship.reinforcedBulkheadId, size).bpCost,
     // security (misc)
@@ -354,14 +350,13 @@ const getTotalBPCosts = (ship) => {
 };
 
 const getTotalPCUCosts = (ship) => {
-  //FIXME: ship or shipParts or Ship (import)?
   const { thrustersId } = ship
 
   const pcuExpenses = [
     Tables.getThrusterData(thrustersId).pcuCost,
-    getTotalCompPCUCosts(ship),
+    getTotalCompCosts(ship).pcuTotal,
     Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).pcuCost,
-    // expansion bays
+    getTotalExpansionCosts(ship).pcuTotal,
     // security (misc)
     // shields
     // weapons
@@ -384,28 +379,33 @@ const getEssentialPCUCosts = (ship) => {
   return pcuExpenses.reduce((total, num) => total + num);
 }
 
-const getTotalCompBPCosts = (ship) => {
+const getTotalCompCosts = (ship) => {
   const { size } = getFramePackage(ship)
-  const { bpCost } = Tables.getComputerData(ship.computerId);
+  const { bpCost, pcuCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
   const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
-  const { bpCost: secondaryBPCost } = Tables.getComputerData(ship.secondaryComputerId)
-  const { bpCost: networkBPCost } = Tables.getNetworkNodeData(networkNodeId, size)
+  const { bpCost: secondaryBPCost, pcuCost: secondaryPCUCost } = Tables.getComputerData(ship.secondaryComputerId)
+  const { bpCost: networkBPCost, pcuCost: networkPCUCost } = Tables.getNetworkNodeData(networkNodeId, size)
 
-  return bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
+  const bpTotal = bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
+  const pcuTotal = pcuCost + secondaryPCUCost + (networkPCUCost * ctNetworkNodes)
+
+  return { bpTotal, pcuTotal }
 }
 
-const getTotalCompPCUCosts = (ship) => {
+const getTotalExpansionCosts = (ship) => {
   const { size } = getFramePackage(ship)
-  const { pcuCost } = Tables.getComputerData(ship.computerId);
-  const { ctNetworkNodes } = ship
-  const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
-  const networkNodeId = `${Mk} ${x}`
-  const { pcuCost: secondaryPCUCost } = Tables.getComputerData(ship.secondaryComputerId)
-  const { pcuCost: networkPCUCost } = Tables.getNetworkNodeData(networkNodeId, size)
 
-  return pcuCost + secondaryPCUCost + (networkPCUCost * ctNetworkNodes)
+  const bpTotal = ship.expansionBayIds
+    .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+    .reduce((total, bp) => total + bp);
+
+  const pcuTotal = ship.expansionBayIds
+    .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+    .reduce((total, bp) => total + bp);
+
+  return { bpTotal, pcuTotal }
 }
 
 const getTotalTL = () => {
@@ -595,8 +595,7 @@ export {
   getTotalBPCosts,
   getTotalPCUCosts,
   getEssentialPCUCosts,
-  getTotalCompBPCosts,
-  getTotalCompPCUCosts,
+  getTotalCompCosts,
   combineComputerBonuses,
   copyExpansion,
   removeExpansion,

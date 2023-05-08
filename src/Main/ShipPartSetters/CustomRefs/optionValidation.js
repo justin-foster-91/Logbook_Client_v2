@@ -158,6 +158,26 @@ const isValidExpansionBay = (ship, bayOption) => {
   return true;
 }
 
+const isValidHull = (ship, hullOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getFortifiedHullData(hullOption, frameSize, frameId);
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+  return true;
+}
+
+const isValidBulkhead = (ship, bulkheadOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getReinforcedBulkheadData(bulkheadOption, frameSize, frameId);
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+  return true;
+}
+
 export {
   isValidFrame,
   isValidPowerCore,
@@ -167,5 +187,7 @@ export {
   isValidQuarters,
   isValidDefensiveCounter,
   isValidDriftEngine,
-  isValidExpansionBay
+  isValidExpansionBay,
+  isValidHull,
+  isValidBulkhead,
 }

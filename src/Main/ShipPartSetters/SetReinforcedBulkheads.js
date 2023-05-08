@@ -4,6 +4,7 @@ import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 import AccordionText from './Components/AccordionText';
+import { isValidBulkhead } from './CustomRefs/optionValidation';
 
 function SetReinforcedBulkheads(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -38,7 +39,8 @@ function SetReinforcedBulkheads(props) {
         >
           <option key={"None"}>None</option>
           {Tables.getReinforcedBulkheadIdList().map((bulkhead, idx) => (
-            <option key={idx} value={bulkhead}>{bulkhead} Bulkhead</option>
+            isValidBulkhead(ship, bulkhead)
+            && <option key={idx} value={bulkhead}>{bulkhead} Bulkhead</option>
           ))}
         </select>
       </div>
