@@ -5,6 +5,7 @@ import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 import AccordionText from './Components/AccordionText';
 import SpecialMaterials from './Components/SpecialMaterials';
+import { isValidSensors } from './CustomRefs/optionValidation';
 
 function SetSensors(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -41,7 +42,8 @@ function SetSensors(props) {
         >
           <option key={"None"}>None</option>
           {Tables.getSensorsIdList().map((sensor, idx) => (
-            <option key={idx} value={sensor}>{sensor}</option>
+            isValidSensors(ship, sensor)
+            && <option key={idx} value={sensor}>{sensor}</option>
           ))}
         </select>
       </div>

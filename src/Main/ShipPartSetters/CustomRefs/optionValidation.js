@@ -1,6 +1,7 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 import * as Utils from "../../References/utils.js";
+import { getLongarmData, getHeavyData } from "./metaTables.js";
 
 const isAllowedBySources = (ship, partSource) => {
   const activeSources = ship.getActiveSources();
@@ -178,6 +179,57 @@ const isValidBulkhead = (ship, bulkheadOption) => {
   return true;
 }
 
+const isValidSecurity = (ship, securityOption, type) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  let source;
+  let sfsCheck;
+
+  // antiPersonnel
+  if (type === "longarm") {
+    sfsCheck = getLongarmData(securityOption).sfsLegal;
+  }
+
+  if (type === "heavy") {
+    sfsCheck = getHeavyData(securityOption).sfsLegal;
+  }
+
+  // shockGrid
+  if (type === "shockGrid") {
+    source = Tables.getComputerShockGridData(securityOption, frameSize, frameId).source;
+  }
+
+  // antiHacking
+  if (type === "antiHacking") {
+    source = Tables.getAntiHackingData(securityOption, frameSize, frameId).source;
+  }
+
+  // cloaking
+  if (type === "cloaking") {
+    source = Tables.getCloakingData(securityOption, frameSize, frameId).source;
+  }
+
+  if (source && !isAllowedBySources(ship, source)) return false; 
+
+  if (sfsCheck) {
+    const activeSources = ship.getActiveSources();
+    const rootSources = activeSources.map(source => source.substring(0, source.indexOf(" pg")))
+    // if (source) source = source.substring(0, source.indexOf(" pg"))
+  }
+
+  return true;
+}
+
+const isValidSensors = (ship, sensorsOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getSensorsData(sensorsOption, frameSize, frameId);
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+  return true;
+}
+
 export {
   isValidFrame,
   isValidPowerCore,
@@ -190,4 +242,6 @@ export {
   isValidExpansionBay,
   isValidHull,
   isValidBulkhead,
+  isValidSecurity,
+  isValidSensors,
 }
