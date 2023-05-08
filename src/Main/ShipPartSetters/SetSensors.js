@@ -9,7 +9,7 @@ import { isValidSensors } from './CustomRefs/optionValidation';
 
 function SetSensors(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const { sensorsId } = customShipParts
+  const { sensorsId } = ship.getParts()
   const { range, modifier, bpCost, sfsLegal, source } = Tables.getSensorsData(sensorsId)
   const { currentPart } = props
 

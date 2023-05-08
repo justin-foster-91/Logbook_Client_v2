@@ -6770,8 +6770,9 @@ const getLongarmData = (longarmId) => {
 
   let { category, level, damage, range, critical, special, sfsLegal } = longarmWeapons[longarmId]
   level = Number(level)
+  const cost = level
 
-  return {category, level, damage, range, critical, special, sfsLegal}
+  return {category, level, damage, range, critical, special, sfsLegal, cost}
 }
 
 const getHeavyData = (heavyId) => {
@@ -6779,8 +6780,9 @@ const getHeavyData = (heavyId) => {
 
   let { category, level, damage, range, critical, special, sfsLegal } = heavyWeapons[heavyId]
   level = Number(level)
+  const cost = level + 5;
 
-  return {category, level, damage, range, critical, special, sfsLegal}
+  return {category, level, damage, range, critical, special, sfsLegal, cost}
 }
 
 const getLongarmIdList = (shipTier) => {

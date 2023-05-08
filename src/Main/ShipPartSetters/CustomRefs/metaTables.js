@@ -34,6 +34,16 @@ const sources = {
     abbrev: 'SOM',
     sfsLegal: false
   },
+  'Near Space': {
+    link: 'https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space',
+    abbrev: 'NS',
+    sfsLegal: false
+  },
+  'Tech Revolution': {
+    link: 'https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution',
+    abbrev: 'TR',
+    sfsLegal: false
+  },
   'Starfinder #6: Empire of Bones': {
     link: 'https://paizo.com/products/btpya1ai/',
     abbrev: 'EoB',
@@ -62,16 +72,6 @@ const sources = {
   'Starfinder #42: Whispers of the Eclipse': {
     link: 'https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse',
     abbrev: 'WotE',
-    sfsLegal: false
-  },
-  'Near Space': {
-    link: 'https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space',
-    abbrev: 'NS',
-    sfsLegal: false
-  },
-  'Tech Revolution': {
-    link: 'https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution',
-    abbrev: 'TR',
     sfsLegal: false
   },
 }

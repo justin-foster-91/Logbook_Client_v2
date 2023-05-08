@@ -19,10 +19,10 @@ class Ship {
       if (!this.#sources.includes("Starfinder Core Rulebook")) {
         throw new Error("Starfinder Core Rulebook cannot be disabled.")
       }
-
-      this.setFrame(frameId)
-      this.setTier(tierId)
+      
       this.updatePartsWithNewSources();
+      // this.setFrame(frameId)
+      this.setTier(tierId)
     }
 
   }
@@ -66,8 +66,12 @@ class Ship {
 
   // <... Setters ...>
   updatePartsWithNewSources() {
-    SF.updateFrame(this)
-    SF.updateDriftEngine(this)
+    SF.updateFrame(this);
+    SF.updatePowerCores(this);
+    SF.updateThrusters(this);
+    SF.updateArmor(this);
+    SF.updateDriftEngine(this);
+    SF.updateExpansionBays(this);
   }
 
   setTier(tier) {
@@ -88,13 +92,15 @@ class Ship {
       throw new Error("Frame input did not match allowed frame options");
     }
 
+    console.log({frame});
+
     this.#parts.frameId = frame;
-    SF.updatePowerCoresToMatchFrame(this);
-    SF.updateThrustersToMatchFrame(this);
-    SF.updateComputerToMatchFrame(this);
-    SF.updateCrewQuartersToMatchFrame(this);
+    SF.updatePowerCores(this);
+    SF.updateThrusters(this);
+    SF.updateComputer(this);
+    SF.updateCrewQuarters(this);
     SF.updateDriftEngine(this);
-    SF.updateExpansionBaysToMatchFrame(this);
+    SF.updateExpansionBays(this);
 
     this.onShipChange(this.#parts);
     return this;
@@ -273,7 +279,7 @@ class Ship {
     //   throw new Error("Security input did not match allowed security options");
     // }
 
-    // FIXME: this implementation feel messy. Revisit later.
+    // FIXME: this implementation feels messy. Revisit later.
     const targetTranslation = {
       "Biometric Locks": "hasBiometricLocks",
       "Self-Destruct System": "hasSelfDestructSystem",
@@ -300,6 +306,12 @@ class Ship {
       this.#parts[reference] = value;
     }
     
+    this.onShipChange(this.#parts);
+    return this;
+  }
+
+  setAntiPersonnelWeapon(weapon) {
+    this.#parts.antiPersonnelWeaponId = weapon;
     this.onShipChange(this.#parts);
     return this;
   }

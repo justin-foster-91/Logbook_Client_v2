@@ -1,7 +1,7 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 import * as Utils from "../../References/utils.js";
-import { getLongarmData, getHeavyData } from "./metaTables.js";
+import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./metaTables.js";
 
 const isAllowedBySources = (ship, partSource) => {
   const activeSources = ship.getActiveSources();
@@ -14,6 +14,10 @@ const isAllowedBySources = (ship, partSource) => {
 
 const isValidFrame = (ship, frameOption) => {
   let { source } = Tables.getFrameData(frameOption);
+
+  // const activeSources = ship.getActiveSources();
+  // console.log(activeSources);
+  // console.log(source);
 
   if (!frameOption) console.trace(frameOption)
   if (!isAllowedBySources(ship, source)) return false; 
@@ -179,43 +183,43 @@ const isValidBulkhead = (ship, bulkheadOption) => {
   return true;
 }
 
-const isValidSecurity = (ship, securityOption, type) => {
-  const { frameId } = ship.getParts();
+const isValidSecurity = (ship, securityOption, type, sourceCategory) => {
+  let { frameId, tierId } = ship.getParts();
   const frameSize = ship.getSize();
-  let source;
-  let sfsCheck;
+  let source, sfsLegal;
+  let longarmLevel, heavyLevel;
+  if (tierId === "1/4" || tierId === "1/3" || tierId === "1/2") tierId = 0;
+  tierId = parseInt(tierId);
 
+  if (!type) return false;
+  
   // antiPersonnel
   if (type === "longarm") {
-    sfsCheck = getLongarmData(securityOption).sfsLegal;
+    if ((Tables.sizeCategory[frameSize] > 3)) return false;
+    sfsLegal = getLongarmData(securityOption).sfsLegal;
+    longarmLevel = getLongarmData(securityOption).level
+    if (longarmLevel > tierId) return false;
   }
-
   if (type === "heavy") {
-    sfsCheck = getHeavyData(securityOption).sfsLegal;
+    if ((Tables.sizeCategory[frameSize] > 3)) return false;
+    sfsLegal = getHeavyData(securityOption).sfsLegal;
+    heavyLevel = getHeavyData(securityOption).level
+    if (heavyLevel > tierId) return false;
   }
+  if (!sfsLegal && sourceCategory === "sfsLegal") return false;
 
-  // shockGrid
-  if (type === "shockGrid") {
-    source = Tables.getComputerShockGridData(securityOption, frameSize, frameId).source;
-  }
-
-  // antiHacking
-  if (type === "antiHacking") {
-    source = Tables.getAntiHackingData(securityOption, frameSize, frameId).source;
-  }
 
   // cloaking
   if (type === "cloaking") {
     source = Tables.getCloakingData(securityOption, frameSize, frameId).source;
   }
 
-  if (source && !isAllowedBySources(ship, source)) return false; 
-
-  if (sfsCheck) {
-    const activeSources = ship.getActiveSources();
-    const rootSources = activeSources.map(source => source.substring(0, source.indexOf(" pg")))
-    // if (source) source = source.substring(0, source.indexOf(" pg"))
+  // securityCheckboxes
+  if (type === "securityCheckbox") {
+    source = Tables.getSecurityCheckboxData(securityOption, frameSize, frameId).source;
   }
+
+  if (source && !isAllowedBySources(ship, source)) return false; 
 
   return true;
 }

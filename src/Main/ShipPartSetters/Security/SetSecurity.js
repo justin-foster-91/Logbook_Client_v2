@@ -18,8 +18,8 @@ function SetSecurity(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { currentPart } = props;
 
-  const totalSecurityBP = SF.getTotalSecurityBpCosts(customShipParts);
-  const totalSecurityPCU = SF.getSecurityCheckboxPcuCosts(customShipParts);
+  const totalSecurityBP = SF.getTotalSecurityCosts(customShipParts).totalBpCosts;
+  const totalSecurityPCU = SF.getTotalSecurityCosts(customShipParts).totalPcuCosts;
 
   return (
     <>

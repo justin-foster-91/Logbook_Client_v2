@@ -3,6 +3,7 @@ import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from '../Components/AccordionText';
+import { isValidSecurity } from '../CustomRefs/optionValidation';
 
 function HackAndCloak(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -60,7 +61,8 @@ function HackAndCloak(props) {
         >
           <option key={"None"}>None</option>
           {Tables.getCloakingIdList().map((cloak, idx) => (
-            <option key={idx}>{cloak}</option>
+            isValidSecurity(ship, cloak, "cloaking") 
+            && <option key={idx}>{cloak}</option>
           ))}
         </select>
 
