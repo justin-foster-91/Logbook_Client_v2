@@ -103,7 +103,15 @@ const isValidComputer = (ship, computerOption, system) => {
 }
 
 const isValidQuarters = (ship, quartersOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getQuartersData(quartersOption, frameSize, frameId);
 
+  if (quartersOption && !isAllowedBySources(ship, source)) return false; 
+
+  if (frameId === "Starship Drone") return false;
+
+  return true;
 }
 
 const isValidDriftEngine = (ship, engineOption) => {

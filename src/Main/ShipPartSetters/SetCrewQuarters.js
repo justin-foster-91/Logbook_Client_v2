@@ -8,13 +8,13 @@ import { isValidQuarters } from './CustomRefs/optionValidation';
 
 function SetCrewQuarters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const { crewQuartersId } = customShipParts
+  const { crewQuartersId, frameId } = ship.getParts();
   const { bpCost, description } = Tables.getQuartersData(crewQuartersId)
   const { currentPart } = props;
   const size = ship.getSize();
 
-  const noQuartersAndTiny = !crewQuartersId && (Tables.sizeCategory[size] > Tables.sizeCategory["Tiny"]);
-  const noteForNone = "Most starships larger than Tiny have Crew Quarters. Common Crew Quarters have no additional cost."
+  const noQuartersAndBiggerThanTiny = !crewQuartersId && (Tables.sizeCategory[size] > Tables.sizeCategory["Tiny"]);
+  const isDrone = frameId === "Starship Drone";
 
   const handleQuartersChange = (ev) => {
     let quartersOption = ev.target.value;
@@ -46,12 +46,14 @@ function SetCrewQuarters(props) {
         >
           <option key="None">None</option>
           {Tables.getQuartersIdList().map((quarters, idx) => (
-            <option key={idx} value={quarters}>{quarters}</option>
+            isValidQuarters(ship, quarters)
+            && <option key={idx} value={quarters}>{quarters}</option>
           ))}
         </select>
       </div>
 
-      {noQuartersAndTiny && <div className='warning'>{noteForNone}</div>}
+      {isDrone && <div className='warning'><p>A starship made with the Starship Drone base frame has no life support, artificial gravity, or crew quarters.</p></div>}
+      {noQuartersAndBiggerThanTiny && <div className='warning'><p>"Most starships larger than Tiny have Crew Quarters. Common Crew Quarters have no additional cost."</p></div>}
       {crewQuartersId && <AccordionText>{description}</AccordionText>}
 
       <PartTotals part={currentPart} bpCost={bpCost} />

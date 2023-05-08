@@ -92,6 +92,7 @@ class Ship {
     SF.updatePowerCoresToMatchFrame(this);
     SF.updateThrustersToMatchFrame(this);
     SF.updateComputerToMatchFrame(this);
+    SF.updateCrewQuartersToMatchFrame(this);
     SF.updateDriftEngine(this);
     SF.updateExpansionBaysToMatchFrame(this);
 
@@ -190,6 +191,7 @@ class Ship {
   }
 
   setCrewQuarters(quarters) {
+    console.log(quarters);
     this.#parts.crewQuartersId = quarters;
     this.onShipChange(this.#parts);
     return this;

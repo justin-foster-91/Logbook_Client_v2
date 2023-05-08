@@ -90,39 +90,26 @@ const updateThrustersToMatchFrame = (ship) => {
 const updateComputerToMatchFrame = (ship) => {
   const { computerId, secondaryComputerId } = ship.getParts()
 
-  // const computerIdList = Tables.getComputerIdList()
-  // const firstValidComputer = computerIdList.find(comp => Validate.isValidComputer())
-  
   const size = ship.getSize()
   const compList = Tables.getComputerIdList()
   
-  // if is Supercolossal
   if (size === "Supercolossal") {
-    // if primary computer not valid
     if (!Validate.isValidComputer(ship, computerId, "Primary")) {
-      // set primary as first match
       ship.setComputer('Mk 4 Mononode')
     }
-    // if secondary computer is not valid
     if (!Validate.isValidComputer(ship, computerId, "Secondary")) {
-      // set secondary as first match
       ship.setSecondaryComputer('Basic Computer')
     }
   } else {
     if (secondaryComputerId !== null) ship.setSecondaryComputer('Basic Computer')
   }
+}
 
-  // if not Supercolossal
-    // if secondary computer is not null
-      // set secondary as null
+const updateCrewQuartersToMatchFrame = (ship) => {
+  const { crewQuartersId, frameId } = ship.getParts();
 
-  // if Supercolossal and smaller than Mk 4
-  // if (size === 'Supercolossal'){
-  //   if (compList.indexOf(computerId) < 13) ship.setComputer('Mk 4 Mononode')
-  // } else{
-  //   // if not Supercolossal and secondary is not a basic computer
-  //   if (secondaryComputerId !== 'Basic Computer') ship.setSecondaryComputer('Basic Computer')
-  // }
+  if (!Validate.isValidQuarters(ship, crewQuartersId)) ship.setCrewQuarters("Common");
+  if (frameId === "Starship Drone") ship.setCrewQuarters(null);
 }
 
 const updateDriftEngine = (ship) => {
@@ -600,6 +587,7 @@ export {
   updatePowerCoresToMatchFrame,
   updateThrustersToMatchFrame,
   updateComputerToMatchFrame,
+  updateCrewQuartersToMatchFrame,
   updateExpansionBaysToMatchFrame,
   updateAntiPersonnelToMatchTier,
   validateShip,
