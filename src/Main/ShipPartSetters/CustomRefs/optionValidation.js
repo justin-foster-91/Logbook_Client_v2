@@ -1,7 +1,7 @@
 import * as Tables from "./metaTables.js";
 import * as SF from "../../References/shipFunctions.js";
 import * as Utils from "../../References/utils.js";
-import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./metaTables.js";
+import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from '../CustomRefs/antiPersonnelData';
 
 const isAllowedBySources = (ship, partSource) => {
   const activeSources = ship.getActiveSources();
@@ -195,15 +195,19 @@ const isValidSecurity = (ship, securityOption, type, sourceCategory) => {
   
   // antiPersonnel
   if (type === "longarm") {
+    // An antipersonnel weapon must be mounted near the boarding ramp of a Medium or smaller starship.
     if ((Tables.sizeCategory[frameSize] > 3)) return false;
     sfsLegal = getLongarmData(securityOption).sfsLegal;
     longarmLevel = getLongarmData(securityOption).level
+    // Redundant code AntiPersonnel renderDropdownSelection() prunes the full list by tier already
     if (longarmLevel > tierId) return false;
   }
   if (type === "heavy") {
+    // An antipersonnel weapon must be mounted near the boarding ramp of a Medium or smaller starship.
     if ((Tables.sizeCategory[frameSize] > 3)) return false;
     sfsLegal = getHeavyData(securityOption).sfsLegal;
     heavyLevel = getHeavyData(securityOption).level
+    // Redundant code AntiPersonnel renderDropdownSelection() prunes the full list by tier already
     if (heavyLevel > tierId) return false;
   }
   if (!sfsLegal && sourceCategory === "sfsLegal") return false;

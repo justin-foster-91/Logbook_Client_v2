@@ -4,6 +4,7 @@ import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from '../Components/AccordionText';
 import { isValidSecurity } from '../CustomRefs/optionValidation';
+import { getLongarmData, getLongarmIdList, getHeavyData, getHeavyIdList } from '../CustomRefs/antiPersonnelData';
 
 function AntiPersonnel(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -19,8 +20,8 @@ function AntiPersonnel(props) {
   useEffect(() => {
     if (!weaponId || !radioWeaponSelection) return setBpCost(0);
 
-    const longarmCost = Tables.getLongarmData(weaponId).cost;
-    const heavyCost = Tables.getHeavyData(weaponId).cost;
+    const longarmCost = getLongarmData(weaponId).cost;
+    const heavyCost = getHeavyData(weaponId).cost;
 
     if (radioWeaponSelection === "longarm" && longarmCost) {
       setBpCost(longarmCost);
@@ -31,10 +32,10 @@ function AntiPersonnel(props) {
   }, [weaponId, radioWeaponSelection])
 
   const renderDropdownSelection = () => {
-    const getter = (radioWeaponSelection === "longarm") ? Tables.getLongarmIdList(tierId) : Tables.getHeavyIdList(tierId)
+    const getter = (radioWeaponSelection === "longarm") ? getLongarmIdList(tierId) : getHeavyIdList(tierId)
 
     return getter.map((weapon, idx) => { 
-      const data = (radioWeaponSelection === "longarm") ? Tables.getLongarmData(weapon) : Tables.getHeavyData(weapon)
+      const data = (radioWeaponSelection === "longarm") ? getLongarmData(weapon) : getHeavyData(weapon)
 
       return isValidSecurity(ship, weapon, radioWeaponSelection, radioSourceSelection) 
       && <option key={idx} value={weapon}>

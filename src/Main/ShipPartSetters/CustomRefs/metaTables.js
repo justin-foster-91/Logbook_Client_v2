@@ -1,6 +1,5 @@
 import { capitalizeEachWord } from "../../References/utils";
 import frames from "./frames";
-import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelData";
 
 const sources = {
   // an item can have multiple sources
@@ -2481,11 +2480,6 @@ const getAntiHackingIdList = () => {
   return Object.keys(antiHackingSystems).sort((a, b) => a + b)
 }
 
-// const getAntiPersonnelIdList = () => {
-//   // TODO: need to change the sorting to divide longarm and heavy weapons
-//   // return [...getLongarmIdList(), ...getHeavyIdList()]
-// }
-
 const getComputerModuleIdList = () => {
   return Object.keys(computerModules).sort((a, b) => a + b)
 }
@@ -2507,7 +2501,6 @@ const getComputerTierIdList = () => {
 }
 
 const getCloakingIdList = () => {
-  // Need data in non-alphabetical order
   return Object.keys(cloakingTechnology)
 }
 
@@ -2557,9 +2550,6 @@ export {
   getFortifiedHullData,
   getReinforcedBulkheadData,
   getAntiHackingData,
-  // getAntiPersonnelData,
-  getLongarmData,
-  getHeavyData,
   getComputerModuleData,
   getComputerUpgradeData,
   getComputerCountermeasureData,
@@ -2584,9 +2574,6 @@ export {
   getFortifiedHullIdList,
   getReinforcedBulkheadIdList,
   getAntiHackingIdList,
-  // getAntiPersonnelIdList,
-  getLongarmIdList, 
-  getHeavyIdList,
   getComputerModuleIdList,
   getComputerUpgradeIdList,
   getComputerCountermeasureIdList,

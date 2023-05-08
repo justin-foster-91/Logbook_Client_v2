@@ -6789,10 +6789,10 @@ const getLongarmIdList = (shipTier) => {
   if (shipTier) {
     return Object.keys(longarmWeapons)
       .filter(weapon => Number(longarmWeapons[weapon].level) <= shipTier)
-      .sort()
+      .sort((a, b) => longarmWeapons[a].level + longarmWeapons[b].level)
   } else {
     return Object.keys(longarmWeapons)
-      .sort()
+      .sort((a, b) => longarmWeapons[a].level + longarmWeapons[b].level)
   }
 }
 
