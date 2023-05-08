@@ -2271,11 +2271,11 @@ const getDriftEngineData = (driftEngineId, size, frameId) => {
   return {rating, minPCU, maxSize, bpCost, source, special}
 }
 
-const getExpansionBayData = (expansionBayId, size) => {
+const getExpansionBayData = (expansionBayId, size, frameId) => {
   if(!size) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
   if(!expansionBayId) return {pcuCost: 0, bpCost: 0, source: null}
 
-  const { pcuCost, bpCost, source } = expansionBays[expansionBayId]
+  let { pcuCost, bpCost, source } = expansionBays[expansionBayId]
 
   if(expansionBayId === "Quantum Defender") {
     return {pcuCost: Math.max(20, (5 * sizeCategory[size])), bpCost: Math.max(10, (4 * sizeCategory[size])), source}
@@ -2283,7 +2283,9 @@ const getExpansionBayData = (expansionBayId, size) => {
   if(expansionBayId === "Decoy Husk") {
     return {pcuCost: (pcuCost + sizeCategory[size]), bpCost: (bpCost * sizeCategory[size]), source}
   }
-  
+
+  if (size === "Supercolossal" && expansionBayId === "Cargo Hold") bpCost = 5; 
+
   return {pcuCost, bpCost, source}
 }
 

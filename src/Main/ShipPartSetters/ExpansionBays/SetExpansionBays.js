@@ -14,32 +14,44 @@ import AccordionText from '../Components/AccordionText';
 //Shuttle 3 (usually cargo holds or passenger seating)
 //Carrier 10 (must have at least 1 hanger bay)
 
+// Treat all unused slots as Cargo Holds
+// By default Supercolossal ship frames have one cargo hold for every 10 BP of the frame’s cost
+
 function SetExpansionBays(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const { expansionBayIds } = customShipParts
+  const { expansionBayIds, frameId, tierId } = ship.getParts()
   const size = ship.getSize()
-  const { expansions: expansionCap } = ship.getFramePackage()
   const { currentPart } = props;
   const [pcuCostTotal, setPcuCostTotal] = useState(0)
   const [bpCostTotal, setBpCostTotal] = useState(0)
+  const [atBudgetLimit, setAtBudgetLimit] = useState(false)
+
+  const isSupercolossal = (size === 'Supercolossal')
+  const frameBpCost = Tables.getFrameData(frameId).cost
+  const totalBPBudget = Tables.getTierData(tierId).buildPoints
+
+  const expansionString = JSON.stringify(expansionBayIds)
 
   useEffect(() => {
-    // This if condition may not be necessary with better checks when setting variables
-    if(expansionBayIds.length){
-      setPcuCostTotal(expansionBayIds
-        .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
-        .reduce((total, pcu) => total + pcu));
-  
-      setBpCostTotal(expansionBayIds
-        .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
-        .reduce((total, bp) => total + bp));
-    } 
-  }, [expansionBayIds, size])
+    if(!expansionBayIds.length) return;
 
-  useEffect(() => {
-    if (expansionCap === 0) return;
-  }, [expansionCap])
-  
+    setPcuCostTotal(expansionBayIds
+      .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+      .reduce((total, pcu) => total + pcu));
+
+    setBpCostTotal(expansionBayIds
+      .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+      .reduce((total, bp) => total + bp));
+
+  }, [expansionBayIds, size, expansionString])
+
+  useEffect(()=> {
+    if (isSupercolossal) {
+      setAtBudgetLimit(bpCostTotal >= totalBPBudget)
+    } else {
+      setAtBudgetLimit(false)
+    }
+  }, [bpCostTotal, totalBPBudget, isSupercolossal])
 
   return (
     <>
@@ -52,7 +64,8 @@ function SetExpansionBays(props) {
         </>
       </AccordionText>
 
-      <ExpansionBaySelections></ExpansionBaySelections>      
+      {isSupercolossal && <p>{frameId} frames come with {frameBpCost/10} Cargo Holds automatically. Additional holds cost 5 BP each.</p>}
+      <ExpansionBaySelections atBudgetLimit={atBudgetLimit}></ExpansionBaySelections>      
 
       <PartTotals part={currentPart} pcuCost={pcuCostTotal} bpCost={bpCostTotal} />
     </>

@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from '../CustomRefs/metaTables';
 import PartTotals from '../Components/PartTotals';
+import { isValidExpansionBay } from '../CustomRefs/optionValidation';
 
   //Booster Thruster Housing: adds an additional thruster slot
   //Dedicated Computer Housing: adds an additional mononode computer slot
@@ -21,16 +22,18 @@ import PartTotals from '../Components/PartTotals';
 
   // TODO: fill all unused expansions with cargo hold by default
 
-function ExpansionBaySelections() {
+function ExpansionBaySelections(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
-  const { expansionBayIds } = customShipParts
-
+  const { expansionBayIds, tierId } = ship.getParts()
   const size = ship.getSize()
   let { expansions: expansionCap } = ship.getFramePackage()
+
   if(typeof expansionCap === 'string') expansionCap = 'Unlimited'
   let expansionCount = expansionBayIds.length
   const allExpansionsShown = (expansionCount === expansionCap)
+
+  const { atBudgetLimit } = props;
 
   // useEffect(() => {
   //   expansionCount = expansionBayIds.length
@@ -40,7 +43,7 @@ function ExpansionBaySelections() {
   const handleExpansionBayChange = (ev) => {
     const expansionIndex = Number(ev.target.name);
     let expansionOption = ev.target.value;
-    if(expansionOption === "None") expansionOption = null
+    // if(expansionOption === "None") expansionOption = null
 
     ship.setExpansionBay(expansionOption, expansionIndex)
   }
@@ -63,7 +66,6 @@ function ExpansionBaySelections() {
 
   const handleDelete = (ev) => {
     const expansionId = ev.target.name;
-    console.log("DELETE: " + expansionId);
 
     ship.deleteExpansionBay(expansionId);
   }
@@ -72,20 +74,19 @@ function ExpansionBaySelections() {
     <>
       <div className='row'>Slots Used: {expansionCount}/{expansionCap}</div>
 
-      {expansionCap === "Unlimited" 
-      && <div className='note'><i>Supercolossal ships with increased width or length can support more expansion bays.</i></div>}
+      <div className='row'>Unused slots will be treated as Cargo Holds</div>
 
       {Array(expansionCount)
         .fill(1)
         .map((dropdown, idx) => {
           const { pcuCost, bpCost } = Tables.getExpansionBayData(expansionBayIds[idx], size)
-          const indexValue = expansionBayIds[idx] ? expansionBayIds[idx] : "None"
+          const indexValue = expansionBayIds[idx] ? expansionBayIds[idx] : "Cargo Hold"
           return (
             <div key={"expansionBay" + idx} className='dropdownBlock'>
               <div className='row spaced'>
                 <label htmlFor={`expansionBay${idx + 1}`}><strong>Expansion Bay {idx + 1}</strong></label>
                 <div>
-                  <button name={idx} value={indexValue} onClick={handleCopy}>Copy</button>
+                  <button name={idx} value={indexValue} onClick={handleCopy} disabled={atBudgetLimit}>Copy</button>
                   <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
                 </div>
               </div>
@@ -98,7 +99,8 @@ function ExpansionBaySelections() {
               >
                 {/* <option key="None">None</option> */}
                 {Tables.getExpansionBayIdList().map((expansion, idx) => (
-                  <option key={"option" + idx} value={expansion}>
+                  isValidExpansionBay(ship, expansion)
+                  && <option key={"option" + idx} value={expansion}>
                     {expansion}
                   </option>)
                 )}
@@ -110,7 +112,7 @@ function ExpansionBaySelections() {
           );
       })}
 
-      {!allExpansionsShown && <button onClick={handleNewExpansion}>New Expansion</button>}
+      {!allExpansionsShown && <button onClick={handleNewExpansion} disabled={atBudgetLimit}>New Expansion</button>}
     </>
   )}
 

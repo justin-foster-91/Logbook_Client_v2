@@ -4,6 +4,7 @@ import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 import AccordionText from './Components/AccordionText';
+import { isValidDefensiveCounter } from './CustomRefs/optionValidation';
 
 function SetDefensiveCounters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -35,7 +36,8 @@ function SetDefensiveCounters(props) {
         >
           <option key="None">None</option>
           {Tables.getDefensiveCounterIdList().map((defense, idx) => (
-            <option key={idx} value={defense}>{defense} Defenses</option>
+            isValidDefensiveCounter(ship, defense) 
+            && <option key={idx} value={defense}>{defense} Defenses</option>
           ))}
         </select>
       </div>

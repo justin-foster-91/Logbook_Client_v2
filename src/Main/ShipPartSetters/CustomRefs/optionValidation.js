@@ -114,6 +114,16 @@ const isValidQuarters = (ship, quartersOption) => {
   return true;
 }
 
+const isValidDefensiveCounter = (ship, counterOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getDefensiveCounterData(counterOption, frameSize, frameId);
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+  return true;
+}
+
 const isValidDriftEngine = (ship, engineOption) => {
   const { frameId, powerCoreIds } = ship.getParts();
   const frameSize = ship.getSize();
@@ -134,6 +144,20 @@ const isValidDriftEngine = (ship, engineOption) => {
   return true;
 }
 
+const isValidExpansionBay = (ship, bayOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getExpansionBayData(bayOption, frameSize, frameId);
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+  if (frameSize !== "Supercolossal") {
+    if (bayOption === "Drift Booster" || bayOption === "Recycling System") return false;
+  }
+
+  return true;
+}
+
 export {
   isValidFrame,
   isValidPowerCore,
@@ -141,5 +165,7 @@ export {
   isValidArmor,
   isValidComputer,
   isValidQuarters,
+  isValidDefensiveCounter,
   isValidDriftEngine,
+  isValidExpansionBay
 }

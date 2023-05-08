@@ -178,7 +178,7 @@ let defaultSelections = {
 	"defensiveCountermeasuresMaterialId": null,
 	"deflectorShieldId": null,
 	"driftEngineId": null,
-	"expansionBayIds": [null, null, null],
+	"expansionBayIds": ["Cargo Hold", "Cargo Hold", "Cargo Hold"],
 	"fortifiedHullId": null,
 	"frameId": "Light Freighter",
 	"hasAlgalShielding": 0,
