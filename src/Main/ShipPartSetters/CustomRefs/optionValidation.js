@@ -20,10 +20,6 @@ const isValidFrame = (ship, frameOption) => {
   return true;
 }
 
-
-// 1 Supercolossal && up to 4 of Huge or Gargantuan
-// OR
-// Up to 5 Colossal
 const isValidPowerCore = (ship, coreOption, idx) => {
   const { powerCoreIds, frameId } = ship.getParts();
   const frameSize = ship.getSize()
@@ -80,6 +76,35 @@ const isValidThruster = (ship, thrusterOption) => {
   return true;
 }
 
+const isValidArmor = (ship, armorOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  let { tempHP, source } = Tables.getArmorData(armorOption, frameSize, frameId);
+  const { hp } = SF.getFramePackage(ship.getParts());
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+  if (tempHP && tempHP >= (hp * 2)) return false;
+
+  return true;
+}
+
+const isValidComputer = (ship, computerOption, system) => {
+  const frameSize = ship.getSize();
+
+  let optionMk = computerOption.split(" ")[1];
+  if (computerOption === "Basic Computer") optionMk = 0;
+
+  if (system === "Primary" && frameSize === "Supercolossal" && optionMk < 4) return false;
+
+  if (system === "Secondary" && optionMk > 4) return false;
+
+  return true;
+}
+
+const isValidQuarters = (ship, quartersOption) => {
+
+}
 
 const isValidDriftEngine = (ship, engineOption) => {
   const { frameId, powerCoreIds } = ship.getParts();
@@ -105,5 +130,8 @@ export {
   isValidFrame,
   isValidPowerCore,
   isValidThruster,
+  isValidArmor,
+  isValidComputer,
+  isValidQuarters,
   isValidDriftEngine,
 }

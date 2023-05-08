@@ -301,19 +301,19 @@ const powerCores = {
     sizes: [ 'Sc' ],
     pcuProvided: 700,
     bpCost: 50,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   'Titan Heavy': {
     sizes: [ 'Sc' ],
     pcuProvided: 950,
     bpCost: 60,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   'Titan Ultra': {
     sizes: [ 'Sc' ],
     pcuProvided: 1200,
     bpCost: 70,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   }
 }
 
@@ -549,7 +549,7 @@ const thrusters = {
     pilotingModifier: 1,
     pcuCost: 300,
     bpCost: 16,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   SC6: {
     size: 'Sc',
@@ -557,7 +557,7 @@ const thrusters = {
     pilotingModifier: 0,
     pcuCost: 400,
     bpCost: 20,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   SC8: {
     size: 'Sc',
@@ -565,7 +565,7 @@ const thrusters = {
     pilotingModifier: -1,
     pcuCost: 500,
     bpCost: 24,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   }
 }
 
@@ -1529,7 +1529,7 @@ const expansionBays = {
   'Drift Booster': {
     pcuCost: 40,
     bpCost: 20,
-    source: 'Starfinder #6: Empire of Bones pg. 46',
+    source: 'Starship Operations Manual pg. 36',
     description: "A Drift booster is a rail for launching smaller ships into the Drift from within a Supercolossal vessel's hangar bay. A smaller ship that launches from within the Supercolossal vessel's hangar bay using the Drift booster can temporarily raise its Drift engine rating by 1. This increase lasts only as long as the smaller ship stays in the Drift and on the same course after launching using the Drift booster. If the boosted ship changes course or leaves the Drift, this temporary increase ends."
   },
   'Drift Shadow Projector': {
@@ -1710,7 +1710,7 @@ const expansionBays = {
   'Recycling System': {
     pcuCost: 2,
     bpCost: 1,
-    source: 'Starfinder #6: Empire of Bones pg. 46',
+    source: 'Starship Operations Manual pg. 36',
     description: 'A recycling system enables a Supercolossal starship to be nearly self-sustaining, operating independently for decades or even centuries. A combination of smelters, biomass processors, manufacturing, and UPB converters allows the ship to convert almost all its waste into goods and materials.'
   },
   'Sample Acquisition Bay': {

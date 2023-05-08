@@ -91,9 +91,9 @@ class Ship {
     this.#parts.frameId = frame;
     SF.updatePowerCoresToMatchFrame(this);
     SF.updateThrustersToMatchFrame(this);
-    SF.updateComputerToMatchFrame(this.#parts);
+    SF.updateComputerToMatchFrame(this);
     SF.updateDriftEngine(this);
-    SF.updateExpansionBaysToMatchFrame(this.#parts);
+    SF.updateExpansionBaysToMatchFrame(this);
 
     this.onShipChange(this.#parts);
     return this;
@@ -239,6 +239,12 @@ class Ship {
       this.onShipChange(this.#parts);
       return this;
     }
+
+  setExpansionBayArrayLength(length) {
+    this.#parts.expansionBayIds.length = length;
+    this.onShipChange(this.#parts);
+    return this;
+  }
 
   setFortifiedHull(hull) {
     if (!Tables.getFortifiedHullIdList().includes(hull) && hull !== null) {

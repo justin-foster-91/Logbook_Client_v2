@@ -88,16 +88,41 @@ const updateThrustersToMatchFrame = (ship) => {
 };
 
 const updateComputerToMatchFrame = (ship) => {
-  const size = findComponentByFrameId(ship.frameId, "size")
-  // let { computerId, secondaryComputerId: secondary} = ship
+  const { computerId, secondaryComputerId } = ship.getParts()
+
+  // const computerIdList = Tables.getComputerIdList()
+  // const firstValidComputer = computerIdList.find(comp => Validate.isValidComputer())
+  
+  const size = ship.getSize()
   const compList = Tables.getComputerIdList()
   
-  // change computer to 'Mk 4 Mononode' if size changes to supercolossal
-  if(size === 'Supercolossal'){
-    if(compList.indexOf(ship.computerId) < 13) ship.computerId = 'Mk 4 Mononode'
-  } else{
-    if(ship.secondaryComputerId !== 'Basic Computer') ship.secondaryComputerId = 'Basic Computer'
+  // if is Supercolossal
+  if (size === "Supercolossal") {
+    // if primary computer not valid
+    if (!Validate.isValidComputer(ship, computerId, "Primary")) {
+      // set primary as first match
+      ship.setComputer('Mk 4 Mononode')
+    }
+    // if secondary computer is not valid
+    if (!Validate.isValidComputer(ship, computerId, "Secondary")) {
+      // set secondary as first match
+      ship.setSecondaryComputer('Basic Computer')
+    }
+  } else {
+    if (secondaryComputerId !== null) ship.setSecondaryComputer('Basic Computer')
   }
+
+  // if not Supercolossal
+    // if secondary computer is not null
+      // set secondary as null
+
+  // if Supercolossal and smaller than Mk 4
+  // if (size === 'Supercolossal'){
+  //   if (compList.indexOf(computerId) < 13) ship.setComputer('Mk 4 Mononode')
+  // } else{
+  //   // if not Supercolossal and secondary is not a basic computer
+  //   if (secondaryComputerId !== 'Basic Computer') ship.setSecondaryComputer('Basic Computer')
+  // }
 }
 
 const updateDriftEngine = (ship) => {
@@ -106,14 +131,15 @@ const updateDriftEngine = (ship) => {
 }
 
 const updateExpansionBaysToMatchFrame = (ship) => {
-  // const size = findComponentByFrameId(ship.frameId, "size")
-  const { expansions: expansionCap } = getFramePackage(ship)
+  const { expansionBayIds } = ship.getParts()
 
-  if(ship.expansionBayIds.length > expansionCap) ship.expansionBayIds.length = expansionCap
+  const { expansions: expansionCap } = getFramePackage(ship.getParts())
+
+  if(expansionBayIds.length > expansionCap) ship.setExpansionBayArrayLength(expansionCap)
 
   // Set "Cargo Hold" as default selection for any expansion not specified
-  ship.expansionBayIds.forEach((expansion, idx) => {
-    if(expansion === null) ship.expansionBayIds[idx] = "Cargo Hold"
+  expansionBayIds.forEach((expansion, idx) => {
+    if(expansion === null) ship.setExpansionBay("Cargo Hold")
   })
 }
 

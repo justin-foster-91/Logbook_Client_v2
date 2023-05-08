@@ -6,6 +6,7 @@ import * as SF from "../../References/shipFunctions";
 import PartTitle from "../Components/PartTitle";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from "../Components/AccordionText";
+import { isValidComputer } from "../CustomRefs/optionValidation";
 
 function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -72,7 +73,8 @@ function SetComputer(props) {
 
         <select id="primaryComputer" value={computerId} onChange={handleComputerChange}>
           {Tables.getComputerIdList().map((computer, idx) =>
-            renderComputerOptions(computer, idx)
+            isValidComputer(ship, computer, "Primary") 
+            && <option key={idx}>{computer}</option>
           )}
         </select>
       </div>

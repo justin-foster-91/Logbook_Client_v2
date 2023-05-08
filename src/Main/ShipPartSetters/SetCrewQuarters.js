@@ -4,6 +4,7 @@ import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 import AccordionText from './Components/AccordionText';
+import { isValidQuarters } from './CustomRefs/optionValidation';
 
 function SetCrewQuarters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

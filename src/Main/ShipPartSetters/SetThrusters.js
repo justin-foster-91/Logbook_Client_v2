@@ -68,6 +68,7 @@ function SetThrusters(props) {
         <div><strong>Speed (in hexes)</strong>: {speed}</div>
         <div><strong>Piloting Modifier</strong>: {pilotingModifier}</div>
       </div>
+      {isHauler && <div><strong>Speed</strong>: {speed+2} -- while not hauling a ship</div>}
 
       <PartTotals part={currentPart} pcuCost={pcuCost} bpCost={bpCost} />
     </>

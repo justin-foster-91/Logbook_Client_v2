@@ -7,11 +7,12 @@ import PartTitle from "../Components/PartTitle";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from "../Components/AccordionText";
 import SpecialMaterials from "../Components/SpecialMaterials";
+import { isValidArmor } from "../CustomRefs/optionValidation";
 
 function SetArmor(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
-  const { armorId } = customShipParts;
+  const { armorId } = ship.getParts();
   const { size, hp } = SF.getFramePackage(customShipParts);
   const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getArmorData(armorId, size);
   const { currentPart } = props;
@@ -71,8 +72,8 @@ function SetArmor(props) {
         >
           <option key="None">None</option>
           {Tables.getArmorIdList().map((armor, idx) => 
-            (Tables.getArmorData(armor, size).tempHP >= hp * 2)
-            || <option key={idx} value={armor}>
+            isValidArmor(ship, armor)
+            && <option key={idx} value={armor}>
               {createDropdownItem(armor, idx)}
             </option>
           )}
