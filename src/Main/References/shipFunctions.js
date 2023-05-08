@@ -59,26 +59,15 @@ const updatePowerCoresToMatchFrame = (ship) => {
   const powerCoreIdList = Tables.getPowerCoreIdList()
   let newCoreLength = getCoreQuantityFromSize(size);
   
-  let firstMatch = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
-  if (size === "Supercolossal") firstMatch = 'Gateway Ultra'
+  let firstValidCore = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
+  if (size === "Supercolossal") firstValidCore = 'Gateway Ultra'
 
   if (powerCoreIds.length > newCoreLength) ship.setPowerCoreArrayLength(newCoreLength);
-  
-  // powerCoreIds.forEach((core, idx) => {
-  //   if(core && !Validate.isValidPowerCore(ship, core, idx)) {
-  //     if (idx === 0) ship.setPowerCore(firstMatch, idx);
-  //     else ship.setPowerCore(null, idx); 
-  //     // else ship.setPowerCore(firstMatch, idx);
-  //   } else {
-  //     if (idx === 0) ship.setPowerCore(firstMatch, idx);
-  //   }
-  //   // if(idx === 0 && !Validate.isValidPowerCore(ship, core, idx)) ship.setPowerCore(firstMatch, idx);
-  // });
 
   powerCoreIds.forEach((core, idx) => {
     if (idx === 0) {
       if (!core || (core && !Validate.isValidPowerCore(ship, core, idx))) {
-        ship.setPowerCore(firstMatch, idx);
+        ship.setPowerCore(firstValidCore, idx);
       }
     } else {
       if (core && !Validate.isValidPowerCore(ship, core, idx)) {
@@ -86,23 +75,16 @@ const updatePowerCoresToMatchFrame = (ship) => {
       }
     }
   });
-  
-  // idx 0
-    // if not a core, give it first match
-    // if core but invalid, give it first match
-  // idx > 0
-    // if core but invalid, null it
 };
 
 const updateThrustersToMatchFrame = (ship) => {
-  const size = findComponentByFrameId(ship.frameId, "size")
-  // let { thrustersId } = ship
+  const { thrustersId } = ship.getParts()
+
   const thrusterIdList = Tables.getThrusterIdList()
-  const firstMatch = thrusterIdList.find(thruster => doesFrameSizeAllowThruster(thruster, size))
+  const firstValidThruster = thrusterIdList.find(thruster => Validate.isValidThruster(ship, thruster))
   
-  if (ship.thrustersId === null) ship.thrustersId = firstMatch
-  // change thrusters to firstMatch if they don't fit the new frame
-  if (ship.thrustersId !== firstMatch && !doesFrameSizeAllowThruster(ship.thrustersId, size)) ship.thrustersId = firstMatch;
+  if (thrustersId === null) ship.setThrusters(firstValidThruster)
+  if (thrustersId !== firstValidThruster && !Validate.isValidThruster(ship, thrustersId)) ship.setThrusters(firstValidThruster);
 };
 
 const updateComputerToMatchFrame = (ship) => {

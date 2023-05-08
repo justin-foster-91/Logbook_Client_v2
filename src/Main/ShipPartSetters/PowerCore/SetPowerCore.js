@@ -32,7 +32,7 @@ function SetPowerCore(props) {
 
       {size === "Supercolossal" &&
         <div className="note">
-          A Supercolossal ship may have either: 
+          A Supercolossal ship may have only a single Supercolossal power core. 
           <ul>
             <li>Up to 5 Colossal sized cores</li>
             <li>1 Supercolossal core with up to 4 smaller backup cores</li>

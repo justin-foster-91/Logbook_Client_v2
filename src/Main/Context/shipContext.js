@@ -36,7 +36,6 @@ export const CustomShipProvider = ({children}) => {
     
   const ship = new Ship(customShipParts, activeSources)
   
-  console.log(ship.getParts().powerCoreIds);
   ship.onShipChange = (parts) => setCustomShipParts({...parts})
 
   return (<CustomShipContext.Provider value={{customShipParts, setCustomShipParts, ship, sourceStatus, setSourceStatus, activeSources}}>{children}</CustomShipContext.Provider>)

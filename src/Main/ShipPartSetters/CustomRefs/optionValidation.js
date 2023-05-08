@@ -20,20 +20,6 @@ const isValidFrame = (ship, frameOption) => {
   return true;
 }
 
-// const updatePowerCoresToMatchFrame = (ship) => {
-//   const size = findComponentByFrameId(ship.frameId, "size")
-//   const computerIdList = Tables.getPowerCoreIdList()
-//   const firstMatch = computerIdList.find(core => doesFrameSizeAllowCore(core, size))
-//   let newCoreAmount = getCoreQuantityFromSize(size);
-
-//   ship.powerCoreIds.forEach((core, idx) => {
-//     if(core !== null && !doesFrameSizeAllowCore(core, size)) ship.powerCoreIds[idx] = null;   
-//     if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
-//   });
-
-//   // reduce length of the power core list if moving to a smaller frame
-//   if (ship.powerCoreIds.length > newCoreAmount) ship.powerCoreIds.length = newCoreAmount;
-// };
 
 // 1 Supercolossal && up to 4 of Huge or Gargantuan
 // OR
@@ -70,17 +56,28 @@ const isValidPowerCore = (ship, coreOption, idx) => {
     else return false;
   }
 
-
-
   return true;
 }
 
-const isValidThruster = (ship, thrusterOption, activeSources) => {
+const isValidThruster = (ship, thrusterOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize()
+  const { source } = Tables.getThrusterData(thrusterOption);
+  let largerFrameSize;
+  
+  if (!isAllowedBySources(ship, source)) return false; 
+  
+  // A hauler frame can accommodate [thrusters] designed for starships 1 size category larger than normal.
+  if (frameId.includes("Hauler")) {
+    const largerFrameCategory = Tables.sizeCategory[frameSize] + 1
+    Object.keys(Tables.sizeCategory).forEach(key => {
+      if(Tables.sizeCategory[key] === largerFrameCategory) largerFrameSize = key;
+    })
+  }
 
+  if (!SF.doesFrameSizeAllowThruster(thrusterOption, largerFrameSize ? largerFrameSize : frameSize)) return false;
 
-  // A hauler can accommodate [thrusters] designed for starships 1 size category larger than normal.
-  // if (frameId.includes("Hauler")) [thruster size] += 1;
-
+  return true;
 }
 
 

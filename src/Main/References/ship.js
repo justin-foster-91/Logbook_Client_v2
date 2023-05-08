@@ -89,9 +89,8 @@ class Ship {
     }
 
     this.#parts.frameId = frame;
-    console.log(this.#parts);
     SF.updatePowerCoresToMatchFrame(this);
-    SF.updateThrustersToMatchFrame(this.#parts);
+    SF.updateThrustersToMatchFrame(this);
     SF.updateComputerToMatchFrame(this.#parts);
     SF.updateDriftEngine(this);
     SF.updateExpansionBaysToMatchFrame(this.#parts);

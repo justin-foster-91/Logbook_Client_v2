@@ -8,15 +8,17 @@ import PowerIcon from "../IconRefs/PowerIcon";
 import BuildIcon from "../IconRefs/BuildIcon";
 import SpecialMaterials from "./Components/SpecialMaterials";
 import AccordionText from "./Components/AccordionText";
+import { isValidThruster } from "./CustomRefs/optionValidation";
 
 function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
-  const { thrustersId } = customShipParts;
+  const { thrustersId, frameId } = ship.getParts();
   const { speed, pilotingModifier, pcuCost, bpCost } = Tables.getThrusterData(thrustersId);
-  const { size } = SF.getFramePackage(customShipParts);
+  const { size } = ship.getSize();
   const { currentPart } = props;
 
+  const isHauler = frameId.includes("Hauler")
 
   const handleThrusterChange = (ev) => {
     let thrusterOption = ev.target.value;
@@ -36,6 +38,9 @@ function SetThrusters(props) {
         </>
       </AccordionText>
 
+      {isHauler && <div className="note">
+        A hauler frame accommodates thrusters designed for starships 1 size category larger than normal.
+      </div>}
       <div className="dropdownBlock">
         <label htmlFor="thrusters" className="hidden">Thruster Type</label>
         <select 
@@ -45,7 +50,7 @@ function SetThrusters(props) {
         >
           {/* <option key="None">None</option> */}
           {Tables.getThrusterIdList().map((thruster, idx) =>
-            SF.doesFrameSizeAllowThruster(thruster, size) 
+            isValidThruster(ship, thruster) 
             && <option key={idx} value={thruster}>
               {thruster} Thrusters
             </option>

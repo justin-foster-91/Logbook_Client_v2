@@ -34,6 +34,7 @@ function CustomShipPage() {
 
 
   const handleScroll = () => {
+    // TODO: Find a React way to do this, probably with useRef
     let allPartBlocks = document.getElementsByClassName("partSetterBlock")
     let highestPartBlockId = null;
 
