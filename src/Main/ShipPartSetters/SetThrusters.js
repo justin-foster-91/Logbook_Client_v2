@@ -4,11 +4,13 @@ import * as SF from "../References/shipFunctions";
 import { CustomShipContext } from "../Context/shipContext";
 import PartTitle from "./Components/PartTitle";
 import PartTotals from "./Components/PartTotals";
-import PowerIcon from "../IconRefs/PowerIcon";
-import BuildIcon from "../IconRefs/BuildIcon";
 import SpecialMaterials from "./Components/SpecialMaterials";
 import AccordionText from "./Components/AccordionText";
 import { isValidThruster } from "./CustomRefs/optionValidation";
+
+
+// TODO: Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
+// ship.getSpeed() && ship.getPilotingMod()
 
 function SetThrusters(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

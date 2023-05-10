@@ -14,6 +14,9 @@ function SetPowerCore(props) {
   const size = ship.getSize();
   const { currentPart } = props;
 
+  // TODO: 
+  // An abysium power core increases the PCU it provides by 25% (maximum +50 PCU).
+  // A djezet power core increases the PCU it provides by 10% (maximum +20 PCU), but it can direct that power only to fulfill the PCU requirements for expansion bays.
   const pcuProvided = powerCoreIds
     .map((core) => Tables.getPowerCoreData(core).pcuProvided)
     .reduce((total, pcu) => total + pcu);

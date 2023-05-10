@@ -17,6 +17,8 @@ import AccordionText from '../Components/AccordionText';
 // Treat all unused slots as Cargo Holds
 // By default Supercolossal ship frames have one cargo hold for every 10 BP of the frame’s cost
 
+// TODO: A djezet power core increases the PCU it provides by 10% (maximum +20 PCU), but it can direct that power only to fulfill the PCU requirements for expansion bays.
+
 function SetExpansionBays(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { expansionBayIds, frameId, tierId } = ship.getParts()

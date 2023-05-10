@@ -25,7 +25,7 @@ function SpecialMaterials(props) {
     "Power Core": "powerCoreSpecialMaterials", 
     "Thrusters": "thrustersMaterialId", 
     "Armor": "armorMaterialId",
-    "Defensive Countermeasure": "defensiveCountermeasuresMaterialId",
+    "Defensive Countermeasures": "defensiveCountermeasuresMaterialId",
     "Sensors": "sensorsMaterialId",
   }
 
@@ -47,7 +47,7 @@ function SpecialMaterials(props) {
   // Adamantine Armor: Adamantine alloy increases a starship's size category by 1 for the purpose of calculating the cost of its armor; the value of a Supercolossal ship's size category increases from 8 to 9 for this purpose.
 
   useEffect(() => {
-    const allowedPartProps = ["Power Core", "Thrusters", "Armor", "Defensive Countermeasure", "Sensors", "Weapon Mount"]
+    const allowedPartProps = ["Power Core", "Thrusters", "Armor", "Defensive Countermeasures", "Sensors", "Weapon Mount"]
 
     if (allowedPartProps.indexOf(shipPart) < 0) {
       throw new Error("Part prop is not a valid ship part.")

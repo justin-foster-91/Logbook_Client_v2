@@ -421,6 +421,8 @@ const getTotalTL = () => {
     size, defensive countermeasures (see page 298), and armor, plus the pilot’s number of ranks 
     in the Piloting skill. See page 320 for details.
   */
+
+    // A horacalcum lattice incorporated into a starship’s defensive countermeasures creates a field of space-time fluctuation that slows larger incoming projectiles. The speed of any tracking weapon fired at the starship is reduced by 25% (round down the final speed).
 }
 
 const getTotalAC = () => {
@@ -441,12 +443,13 @@ const getTotalSpecialMaterialCosts = () => {
   // weaponMounts per weapon, per arc
 }
 
-const getTotalSpeed = () => {
-  //Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
+const getSpeed = () => {
+  // Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
 }
 
-const getTotalPilotingMod = () => {
-  //Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
+const getPilotingMod = () => {
+  // -1 piloting check if using ablative && ablative armor hp is not balanced
+  // Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
 }
 
 const combineComputerBonuses = (ship, size) => {

@@ -48,7 +48,7 @@ function SetSensors(props) {
         </select>
       </div>
 
-      <SpecialMaterials part={"Sensors"}/>
+      {sensorsId && <SpecialMaterials part={"Sensors"}/>}
       
       <div className='row'>
         <div><strong>Range</strong>: {range || "n/a"}</div>

@@ -169,8 +169,6 @@ class Ship {
   setAblativeHPByPosition(pos, hp) {
     this.#parts.ablativeArmorByPosition[pos] = hp;
 
-    // TODO: -1 piloting check if hp is not balanced
-
     this.onShipChange(this.#parts);
     return this;
   }
@@ -332,7 +330,7 @@ class Ship {
       "Power Core": "powerCoreSpecialMaterials", 
       "Thrusters": "thrustersMaterialId", 
       "Armor": "armorMaterialId",
-      "Defensive Countermeasure": "defensiveCountermeasuresMaterialId",
+      "Defensive Countermeasures": "defensiveCountermeasuresMaterialId",
       "Sensors": "sensorsMaterialId",
     }
 
