@@ -57,6 +57,9 @@ class Ship {
   }
 
   getTotalPCUBudget() {
+    // TODO: 
+    // An abysium power core increases the PCU it provides by 25% (maximum +50 PCU).
+    // A djezet power core increases the PCU it provides by 10% (maximum +20 PCU), but it can direct that power only to fulfill the PCU requirements for expansion bays.
     return this.#parts.powerCoreIds
       .map((core) => Tables.getPowerCoreData(core).pcuProvided)
       .reduce((total, num) => total + num);
@@ -320,6 +323,26 @@ class Ship {
     }
 
     this.#parts.sensorsId = sensor;
+    this.onShipChange(this.#parts);
+    return this;
+  }
+
+  setMaterial(part, material, idx) {
+    const partTranslate = {
+      "Power Core": "powerCoreSpecialMaterials", 
+      "Thrusters": "thrustersMaterialId", 
+      "Armor": "armorMaterialId",
+      "Defensive Countermeasure": "defensiveCountermeasuresMaterialId",
+      "Sensors": "sensorsMaterialId",
+    }
+
+    let keyId = partTranslate[part];
+    if (part === "Power Core") {
+      this.#parts[keyId][idx] = material;
+    } else {
+      this.#parts[keyId] = material;
+    }
+
     this.onShipChange(this.#parts);
     return this;
   }

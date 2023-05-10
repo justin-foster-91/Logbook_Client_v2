@@ -441,6 +441,14 @@ const getTotalSpecialMaterialCosts = () => {
   // weaponMounts per weapon, per arc
 }
 
+const getTotalSpeed = () => {
+  //Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
+}
+
+const getTotalPilotingMod = () => {
+  //Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
+}
+
 const combineComputerBonuses = (ship, size) => {
   const { 
     computerId: primary, 
