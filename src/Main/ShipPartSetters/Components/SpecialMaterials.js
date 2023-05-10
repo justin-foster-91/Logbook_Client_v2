@@ -16,11 +16,21 @@ import AccordionText from './AccordionText';
 // }
 
 function SpecialMaterials(props) {
+  const { part: shipPart, idx: rowIdx = 0 } = props
+  
   const [checkedRadio, setCheckedRadio] = useState("None");
-  const [description, setDescription] = useState(null);
+  // const [description, setDescription] = useState(null);
 
-  const { part: shipPart } = props
+  // const [radioData, setRadioData] = useState({[shipPart]: {[rowIdx]: {material: "None", description: null}}});
+  const [radioData, setRadioData] = useState({[shipPart]: {[rowIdx]: {material: "None", description: null}}});
+
   const materials = Tables.specialMaterial
+  // const description = radioData[shipPart][rowIdx].description || null;
+
+  if (shipPart === "Power Core") {
+    console.log({rowIdx})
+    console.log(radioData[shipPart]);
+  }
 
   // const partTranslate = {"Power Core": "powerCoreSpecialMaterials", "Thrusters": "thrustersMaterialId", }
   // armorMaterialId
@@ -35,6 +45,9 @@ function SpecialMaterials(props) {
   // Adamantine weapon mount: Mounting an adamantine alloy weapon increases its BP cost by an amount equal to half the weapon's damage dice. If a weapon's damage is multiplied, multiply the cost increase by an equal amount.
   // Adamantine Armor: Adamantine alloy increases a starship's size category by 1 for the purpose of calculating the cost of its armor; the value of a Supercolossal ship's size category increases from 8 to 9 for this purpose.
 
+  // TODO: take in idx for components like power core with repeat options
+  // idx for list location
+  // idx for radio button ID
   useEffect(() => {
     const allowedPartProps = ["Power Core", "Thrusters", "Armor", "Defensive Countermeasure", "Sensors", "Weapon Mount"]
 
@@ -60,10 +73,51 @@ function SpecialMaterials(props) {
 
   const handleRadioChange = (ev) => {
     const radioOption = ev.target.value;
+    // const data = ev.target.id.split(":");
 
-    // ship.setX
-    setCheckedRadio(radioOption);
+    // const part = data[0]
+    // const material = data[1]
+    // console.log(data);
+
+    const description = materials[radioOption].description;
+    // if (!description) description = ''
+    // console.log(description);
+
+    // const newMaterial = {...radioData[shipPart][rowIdx], material: radioOption}
+    // const newDescription = {...radioData[shipPart][rowIdx], description: description}
+
+    // console.log(radioData);
+    console.log({radioOption, description});
+    console.log("Original", radioData);
+    const tempRadio = {...radioData}
+    tempRadio[shipPart][rowIdx].material = radioOption 
+    radioData[shipPart][rowIdx].description = description
+    console.log("Replacement: ", tempRadio);
+    // console.log("WTF: ", radioData);
+    setRadioData(tempRadio);
   }
+
+  // {"Power Core": {0: {material: 'None', description: null}}
+  // {"Power Core": {0: {material: 'Abysium', description: 'blah'}}
+  // {
+  //   "Power Core": {
+  //     0: {material: '', description: ''},
+  //     1: {material: '', description: ''}
+  //   }
+  // }
+    // {
+  //   "Power Core": [
+  //     {material: '', description: ''},
+  //     {material: '', description: ''}
+  //   ]
+  // }
+
+  // const handleRadioChange = (ev) => {
+  //   const radioOption = ev.target.value;
+
+  //   // ship.setX
+  //   setCheckedRadio(radioOption);
+  // }
 
   const renderAllRadios = () => {   
     return (
@@ -75,35 +129,56 @@ function SpecialMaterials(props) {
             return renderRadioButton(material)
           })}
         </div>
-        {description 
+        {radioData[shipPart][rowIdx].description 
           && <AccordionText>
-            {description}
+            {radioData[shipPart][rowIdx].description}
           </AccordionText>}
       </fieldset>
     )
   }
 
   const renderRadioButton = (material) => {
-    // console.log(shipPart);
+    // if (material === "None") setRadioData({[shipPart]: {'-1': {material: "None", description: null}}})
+    
+    // console.log(rowIdx);
+    // console.log(radioData[shipPart][rowIdx]);
+    // console.log(material);
     return (
-      <div key={`${shipPart}:${material}`}>
+      <div key={`${shipPart}:${rowIdx}:${material}`}>
         <input 
           type="radio" 
-          id={`${shipPart}:${material}`} 
-          name={shipPart} 
+          id={`${shipPart}:${rowIdx}:${material}`} 
+          name={`${shipPart}:${rowIdx}:${material}`} 
           value={material} 
           onChange={handleRadioChange}
-          checked={checkedRadio === material}
+          checked={radioData[shipPart][rowIdx].material === material}
         />
-        <label htmlFor={`${shipPart}:${material}`}>{material}</label>
+        <label htmlFor={`${shipPart}:${rowIdx}:${material}`}>{material}</label>
       </div>
     )
   }
 
+  // const renderRadioButton = (material) => {
+  //   // console.log(shipPart);
+  //   return (
+  //     <div key={`${shipPart}:${material}:${idx}`}>
+  //       <input 
+  //         type="radio" 
+  //         id={`${shipPart}:${material}:${idx}`} 
+  //         name={shipPart} 
+  //         value={material} 
+  //         onChange={handleRadioChange}
+  //         checked={checkedRadio === material}
+  //       />
+  //       <label htmlFor={`${shipPart}:${material}:${idx}`}>{material}</label>
+  //     </div>
+  //   )
+  // }
+
   const renderAccordion = () => {
     let text = null
     if (checkedRadio !== "None") {
-      text = <p>{materials[checkedRadio].shipComponent[shipPart].description}</p>;
+      text = <p>{radioData[shipPart][rowIdx].description}</p>;
     }
 
     return (
@@ -111,13 +186,13 @@ function SpecialMaterials(props) {
     )
   }
 
-  useEffect(() => {
-    if (checkedRadio !== "None") {
-      setDescription(materials[checkedRadio].shipComponent[shipPart].description)
-    } else {
-      setDescription(null)
-    }
-  }, [checkedRadio, materials, shipPart])
+  // useEffect(() => {
+  //   if (checkedRadio !== "None") {
+  //     setDescription(radioData[shipPart][rowIdx].description)
+  //   } else {
+  //     setDescription(null)
+  //   }
+  // }, [checkedRadio, materials, shipPart])
 
   return (
     <>
@@ -125,29 +200,7 @@ function SpecialMaterials(props) {
       {renderAllRadios()}
     </>
   );
-
-  // <div className="row">
-  //   <input 
-  //     type="radio" 
-  //     id="longarm" 
-  //     name="weaponRadio" 
-  //     value="longarm" 
-  //     onChange={handleRadioChange}
-  //   />
-  //   <label htmlFor="longarm">Longarm</label>
-
-  //   <input 
-  //     type="radio" 
-  //     id="heavy" 
-  //     name="weaponRadio" 
-  //     value="heavy" 
-  //     onChange={handleRadioChange}
-  //   />
-  //   <label htmlFor="heavy">Heavy</label>
-  // </div>
 }
-
-
 
 
 export default SpecialMaterials;

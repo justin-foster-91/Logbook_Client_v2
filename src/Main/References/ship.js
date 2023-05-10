@@ -92,8 +92,6 @@ class Ship {
       throw new Error("Frame input did not match allowed frame options");
     }
 
-    console.log({frame});
-
     this.#parts.frameId = frame;
     SF.updatePowerCores(this);
     SF.updateThrusters(this);

@@ -3,6 +3,7 @@ import * as Tables from "../CustomRefs/metaTables";
 import * as SF from "../../References/shipFunctions";
 import { CustomShipContext } from "../../Context/shipContext";
 import { isValidPowerCore } from "../CustomRefs/optionValidation";
+import SpecialMaterials from "../Components/SpecialMaterials";
 
 const PowerCoreSelections = () => {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -45,9 +46,7 @@ const PowerCoreSelections = () => {
             )}
           </select>
 
-          {/* TODO: */}
-          <div>Special Material:</div>
-          {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
+          <SpecialMaterials part="Power Core" idx={idx}/>
 
         </div>
       );
