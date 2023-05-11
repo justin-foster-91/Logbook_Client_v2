@@ -2142,6 +2142,44 @@ const specialMaterial = {
   }
 }
 
+const shields = {
+  "Basic Shields 10": {totalSP: 10, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 5, bpCost: 2, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Basic Shields 20": {totalSP: 20, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 10, bpCost: 3, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Basic Shields 30": {totalSP: 30, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 15, bpCost: 4, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Basic Shields 40": {totalSP: 40, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 15, bpCost: 5, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 50": {totalSP: 50, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 20, bpCost: 6, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 60": {totalSP: 60, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 20, bpCost: 8, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 70": {totalSP: 70, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 25, bpCost: 10, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 80": {totalSP: 80, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 30, bpCost: 12, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 90": {totalSP: 90, regeneration: '4/min', dv: null, ac: null, tl: null, pcu: 30, bpCost: 13, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 100": {totalSP: 100, regeneration: '4/min', dv: null, ac: null, tl: null, pcu: 30, bpCost: 15, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 120": {totalSP: 120, regeneration: '4/min', dv: null, ac: null, tl: null, pcu: 35, bpCost: 17, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 140": {totalSP: 140, regeneration: '8/min', dv: null, ac: null, tl: null, pcu: 40, bpCost: 18, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 160": {totalSP: 160, regeneration: '8/min', dv: null, ac: null, tl: null, pcu: 45, bpCost: 20, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 200": {totalSP: 200, regeneration: '8/min', dv: null, ac: null, tl: null, pcu: 50, bpCost: 22, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 240": {totalSP: 240, regeneration: '16/min', dv: null, ac: null, tl: null, pcu: 55, bpCost: 23, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 280": {totalSP: 280, regeneration: '16/min', dv: null, ac: null, tl: null, pcu: 60, bpCost: 25, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 320": {totalSP: 320, regeneration: '16/min', dv: null, ac: null, tl: null, pcu: 70, bpCost: 27, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 360": {totalSP: 360, regeneration: '32/min', dv: null, ac: null, tl: null, pcu: 80, bpCost: 28, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 420": {totalSP: 420, regeneration: '32/min', dv: null, ac: null, tl: null, pcu: 90, bpCost: 30, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 480": {totalSP: 480, regeneration: '32/min', dv: null, ac: null, tl: null, pcu: 110, bpCost: 32, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Superior Shields 540": {totalSP: 540, regeneration: '64/min', dv: null, ac: null, tl: null, pcu: 160, bpCost: 40, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Superior Shields 600": {totalSP: 600, regeneration: '64/min', dv: null, ac: null, tl: null, pcu: 120, bpCost: 90, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Aeon shields 10": {totalSP: 10, regeneration: '1/round', dv: null, ac: null, tl: null, pcu: 10, bpCost: 3, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Aeon shields 30": {totalSP: 30, regeneration: '3/round', dv: null, ac: null, tl: null, pcu: 20, bpCost: 8, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Aeon shields 50": {totalSP: 50, regeneration: '5/round', dv: null, ac: null, tl: null, pcu: 30, bpCost: 15, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Aeon shields 80": {totalSP: 80, regeneration: '8/round', dv: null, ac: null, tl: null, pcu: 45, bpCost: 20, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Basic deflector shield 1": {totalSP: null, regeneration: null, dv: 1, ac: 1, tl: 1, pcu: 5, bpCost: 4, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Basic deflector shield 3": {totalSP: null, regeneration: null, dv: 3, ac: 1, tl: 1, pcu: 5, bpCost: 6, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Light deflector shield 5": {totalSP: null, regeneration: null, dv: 5, ac: 1, tl: 2, pcu: 10, bpCost: 12, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Light deflector shield 8": {totalSP: null, regeneration: null, dv: 8, ac: 1, tl: 2, pcu: 15, bpCost: 15, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Medium deflector shield 10": {totalSP: null, regeneration: null, dv: 10, ac: 2, tl: 2, pcu: 30, bpCost: 22, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Medium deflector shield 12": {totalSP: null, regeneration: null, dv: 12, ac: 2, tl: 2, pcu: 45, bpCost: 26, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Heavy deflector shield 13": {totalSP: null, regeneration: null, dv: 13, ac: 2, tl: 3, pcu: 60, bpCost: 33, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Heavy deflector shield 15": {totalSP: null, regeneration: null, dv: 15, ac: 2, tl: 3, pcu: 80, bpCost: 36, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Superior deflector shield 18": {totalSP: null, regeneration: null, dv: 18, ac: 3, tl: 3, pcu: 100, bpCost: 45, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Superior deflector shield 20": {totalSP: null, regeneration: null, dv: 20, ac: 3, tl: 3, pcu: 120, bpCost: 50, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+}
 
 // <--- Data extractions --->
 const getSourceData = (source) => {
