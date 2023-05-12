@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import * as Tables from "../CustomRefs/metaTables";
-import AblativeArmor from "./AblativeArmor";
+import SetAblativeArmor from "./AblativeArmor";
 import { CustomShipContext } from "../../Context/shipContext";
 import * as SF from "../../References/shipFunctions";
 import PartTitle from "../Components/PartTitle";
@@ -89,7 +89,7 @@ function SetArmor(props) {
         && <SpecialMaterials part="Armor"/>}
 
       {armorId?.includes("ablative") 
-        && <AblativeArmor size={size}></AblativeArmor>}
+        && <SetAblativeArmor size={size}></SetAblativeArmor>}
 
       <div className="row">
         <div>{renderArmorBonus()}</div>

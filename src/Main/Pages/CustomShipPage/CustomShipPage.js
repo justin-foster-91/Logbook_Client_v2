@@ -5,6 +5,7 @@ import SetPowerCore from "../../ShipPartSetters/PowerCore/SetPowerCore";
 import * as SF from "../../References/shipFunctions";
 import SetThrusters from "../../ShipPartSetters/SetThrusters";
 import SetArmor from "../../ShipPartSetters/Armor/SetArmor";
+import SetAblativeArmor from "../../ShipPartSetters/Armor/AblativeArmor";
 import { CustomShipContext } from "../../Context/shipContext";
 import SetComputer from "../../ShipPartSetters/Computer/SetComputer";
 import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
@@ -20,6 +21,7 @@ import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
 import SetSensors from "../../ShipPartSetters/SetSensors";
 import SetSources from "../../ShipPartSetters/SetSources";
+import SetShields from "../../ShipPartSetters/SetShields";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -73,6 +75,7 @@ function CustomShipPage() {
     {component: SetPowerCore, name: "Power Core"}, 
     {component: SetThrusters, name: "Thrusters"},
     {component: SetArmor, name: "Armor"}, 
+    {component: SetAblativeArmor, name: "Ablative Armor"},
     {component: SetComputer, name: "Computer"},
     {component: SetCrewQuarters, name: "Crew Quarters"}, 
     {component: SetDefensiveCounter, name: "Defensive Countermeasures"},
@@ -82,7 +85,7 @@ function CustomShipPage() {
     {component: SetReinforcedBulkheads, name: "Reinforced Bulkheads"},
     {component: SetSecurity, name: "Security"},
     {component: SetSensors, name: "Sensors"},
-    
+    {component: SetShields, name: "Shields"}
   ]
 
   return (

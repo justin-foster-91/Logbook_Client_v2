@@ -238,6 +238,12 @@ const isValidSensors = (ship, sensorsOption) => {
   return true;
 }
 
+const isValidShields = (ship, shieldsOption) => {
+
+
+  return true;
+}
+
 export {
   isValidFrame,
   isValidPowerCore,
@@ -252,4 +258,5 @@ export {
   isValidBulkhead,
   isValidSecurity,
   isValidSensors,
+  isValidShields,
 }

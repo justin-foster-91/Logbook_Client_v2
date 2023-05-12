@@ -698,6 +698,9 @@ const armor = {
     bpCost: 4,
     source: "Starfinder #27: Deceivers' Moon pg. 47"
   },
+}
+
+const ablativeArmor = {
   'Basic ablative armor 1': {
     acBonus: null,
     tempHP: 8,
@@ -2432,6 +2435,10 @@ const getSensorsData = (sensorId) => {
   return {range, modifier, bpCost, sfsLegal, source}
 }
 
+const getShieldsData = (shieldsId) => {
+
+}
+
 
 
 // <--- ID extractions -->
@@ -2550,6 +2557,10 @@ const getSensorsIdList = () => {
   return Object.keys(sensors)
 }
 
+const getShieldsIdList = () => {
+  return Object.keys(shields)
+}
+
 export {
   sources,
   // shipTiers,
@@ -2596,6 +2607,7 @@ export {
   getCloakingData,
   getSecurityCheckboxData,
   getSensorsData,
+  getShieldsData,
 
   getSourceIdList,
   getTierIdList, 
@@ -2620,4 +2632,5 @@ export {
   getCloakingIdList,
   getSecurityCheckboxIdList,
   getSensorsIdList,
+  getShieldsIdList,
 }
