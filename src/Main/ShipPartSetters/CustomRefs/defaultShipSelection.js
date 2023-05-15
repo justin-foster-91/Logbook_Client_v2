@@ -1,4 +1,5 @@
 let defaultSelections = {
+	"ablativeArmorId": null,
 	"ablativeArmorByPosition": {
 		"forward": 0,
 		"aft": 0,

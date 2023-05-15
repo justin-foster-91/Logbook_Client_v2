@@ -2247,7 +2247,15 @@ const getArmorData = (armorId, size) => {
   if(!armorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
-  bpCost = (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (bpCost * sizeCategory[size]) : bpCost
+  bpCost = bpCost * sizeCategory[size]
+
+  return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
+}
+
+const getAblativeArmorData = (ablativeArmorId) => {
+  if(!ablativeArmorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
+
+  let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = ablativeArmor[ablativeArmorId]
 
   return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
 }
@@ -2489,6 +2497,10 @@ const getArmorIdList = () => {
   return Object.keys(armor).sort((a, b) => a + b)
 }
 
+const getAblativeArmorIdList = () => {
+  return Object.keys(ablativeArmor).sort((a, b) => a + b)
+}
+
 const getComputerIdList = () => {
   return Object.keys(computers).sort((a, b) => a + b)
 }
@@ -2589,6 +2601,7 @@ export {
   getPowerCoreData, 
   getThrusterData,
   getArmorData,
+  getAblativeArmorData,
   getComputerData,
   getComputerHackDC,
   getNetworkNodeData,
@@ -2615,6 +2628,7 @@ export {
   getPowerCoreIdList, 
   getThrusterIdList,
   getArmorIdList,
+  getAblativeArmorIdList,
   getComputerIdList,
   getNetworkNodeIdList,
   getQuartersIdList,

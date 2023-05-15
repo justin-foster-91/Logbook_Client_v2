@@ -143,6 +143,10 @@ h1 {
   padding: .3rem 0 .3rem 0;
 }
 
+.dropdownBlock > input {
+  width: 90%;
+}
+
 .spaced {
   justify-content: space-between;
 }

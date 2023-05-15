@@ -84,7 +84,19 @@ const isValidThruster = (ship, thrusterOption) => {
 const isValidArmor = (ship, armorOption) => {
   const { frameId } = ship.getParts();
   const frameSize = ship.getSize();
-  let { tempHP, source } = Tables.getArmorData(armorOption, frameSize, frameId);
+  let { source } = Tables.getArmorData(armorOption, frameSize, frameId);
+
+  if (!isAllowedBySources(ship, source)) return false; 
+
+
+
+  return true;
+}
+
+const isValidAblativeArmor = (ship, armorOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  let { tempHP, source } = Tables.getAblativeArmorData(armorOption, frameSize, frameId);
   const { hp } = SF.getFramePackage(ship.getParts());
 
   if (!isAllowedBySources(ship, source)) return false; 
@@ -249,6 +261,7 @@ export {
   isValidPowerCore,
   isValidThruster,
   isValidArmor,
+  isValidAblativeArmor,
   isValidComputer,
   isValidQuarters,
   isValidDefensiveCounter,

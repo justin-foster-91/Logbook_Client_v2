@@ -166,6 +166,16 @@ class Ship {
     return this;
   }
 
+  setAblativeArmor(armor) {
+    if (!Tables.getAblativeArmorIdList().includes(armor) && armor !== null) {
+      throw new Error("Ablative Armor input did not match allowed armor options");
+    }
+
+    this.#parts.ablativeArmorId = armor;
+    this.onShipChange(this.#parts);
+    return this;
+  }
+
   setAblativeHPByPosition(pos, hp) {
     this.#parts.ablativeArmorByPosition[pos] = hp;
 
@@ -341,6 +351,16 @@ class Ship {
       this.#parts[keyId] = material;
     }
 
+    this.onShipChange(this.#parts);
+    return this;
+  }
+
+  setShields(shield) {
+    if (!Tables.getShieldsIdList().includes(shield) && shield !== null) {
+      throw new Error("Shield input did not match allowed shield options");
+    }
+
+    this.#parts.shieldsId = shield;
     this.onShipChange(this.#parts);
     return this;
   }

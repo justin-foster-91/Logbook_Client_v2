@@ -31,7 +31,8 @@ function Sidebar(props) {
 
   const sidebarList = () => {
     return setterList.map(part => {
-      let { name } = part;
+      let { name, subComponents } = part;
+
 
       let highlight = false;
       if (name === partHighlight) highlight = true;
@@ -40,11 +41,14 @@ function Sidebar(props) {
       // if (name === "Defensive Countermeasures") shortName = "Defensive Counter"
 
       return (
-        <a href={`#${name}`} key={name} >
-          <div className={highlight ? "sidebarHighlight" : ""}>
-            {shortName || name}
-          </div>
-        </a>
+        <>
+          <a href={`#${name}`} key={name} >
+            <div className={highlight ? "sidebarHighlight" : ""}>
+              {shortName || name}
+            </div>
+          </a>
+          {subComponents && subComponents.map(sub => {return <div>{sub}</div>})}
+        </>
     )})
   }
 
