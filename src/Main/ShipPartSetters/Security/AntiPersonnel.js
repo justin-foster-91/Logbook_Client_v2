@@ -8,7 +8,7 @@ import { getLongarmData, getLongarmIdList, getHeavyData, getHeavyIdList } from '
 
 function AntiPersonnel(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [radioWeaponSelection, setRadioWeaponSelection] = useState(null);
+  const [radioWeaponSelection, setRadioWeaponSelection] = useState("longarm");
   const [radioSourceSelection, setRadioSourceSelection] = useState("allSources");
   const [bpCost, setBpCost] = useState(0);
 
@@ -84,6 +84,7 @@ function AntiPersonnel(props) {
             id="longarm" 
             name="weaponRadio" 
             value="longarm" 
+            checked={radioWeaponSelection === "longarm"}
             onChange={handleWeaponRadioChange}
           />
           <label htmlFor="longarm">Longarm</label>
@@ -93,6 +94,7 @@ function AntiPersonnel(props) {
             id="heavy" 
             name="weaponRadio" 
             value="heavy" 
+            checked={radioWeaponSelection === "heavy"}
             onChange={handleWeaponRadioChange}
           />
           <label htmlFor="heavy">Heavy</label>

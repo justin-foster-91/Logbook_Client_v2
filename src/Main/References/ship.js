@@ -67,16 +67,20 @@ class Ship {
 
   getBonusPackage() {}
 
-  // <... Setters ...>
   updatePartsWithNewSources() {
     SF.updateFrame(this);
     SF.updatePowerCores(this);
     SF.updateThrusters(this);
     SF.updateArmor(this);
+    // ablative
     SF.updateDriftEngine(this);
     SF.updateExpansionBays(this);
+    // security
+    // sensors
+    // shields
   }
-
+  
+  // <... Setters ...>
   setTier(tier) {
     tier = tier.toString();
     if (!Tables.getTierIdList().includes(tier)) {

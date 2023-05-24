@@ -2248,6 +2248,7 @@ const getArmorData = (armorId, size) => {
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
   bpCost = bpCost * sizeCategory[size]
+  // Adamantine Armor: Adamantine alloy increases a starship's size category by 1 for the purpose of calculating the cost of its armor; the value of a Supercolossal ship's size category increases from 8 to 9 for this purpose.
 
   return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
 }
@@ -2444,7 +2445,11 @@ const getSensorsData = (sensorId) => {
 }
 
 const getShieldsData = (shieldsId) => {
+  if (!shieldsId) return {totalSP: 0, regeneration: null, dv: null, ac: null, tl: null, pcu: 0, bpCost: 0, sfsLegal: null, source: null}
 
+  const { totalSP, regeneration, dv, ac, tl, pcu, bpCost, sfsLegal, source } = shields[shieldsId]
+
+  return { totalSP, regeneration, dv, ac, tl, pcu, bpCost, sfsLegal, source }
 }
 
 
@@ -2486,75 +2491,75 @@ const getFrameIdList = () => {
 }
 
 const getPowerCoreIdList = () => {
-  return Object.keys(powerCores).sort((a, b) => a + b)
+  return Object.keys(powerCores)
 }
 
 const getThrusterIdList = () => {
-  return Object.keys(thrusters).sort((a, b) => a + b)
+  return Object.keys(thrusters)
 }
 
 const getArmorIdList = () => {
-  return Object.keys(armor).sort((a, b) => a + b)
+  return Object.keys(armor)
 }
 
 const getAblativeArmorIdList = () => {
-  return Object.keys(ablativeArmor).sort((a, b) => a + b)
+  return Object.keys(ablativeArmor)
 }
 
 const getComputerIdList = () => {
-  return Object.keys(computers).sort((a, b) => a + b)
+  return Object.keys(computers)
 }
 
 const getNetworkNodeIdList = () => {
-  return Object.keys(networkNodes).sort((a, b) => a + b)
+  return Object.keys(networkNodes)
 }
 
 const getQuartersIdList = () => {
-  return Object.keys(crewQuarters).sort((a, b) => a + b)
+  return Object.keys(crewQuarters)
 }
 
 const getDefensiveCounterIdList = () => {
-  return Object.keys(defensiveCounter).sort((a, b) => a + b)
+  return Object.keys(defensiveCounter)
 }
 
 const getDriftEngineIdList = () => {
-  return Object.keys(driftEngines).sort((a, b) => a + b)
+  return Object.keys(driftEngines)
 }
 
 const getExpansionBayIdList = () => {
-  return Object.keys(expansionBays).sort((a, b) => a + b)
+  return Object.keys(expansionBays)
 }
 
 const getFortifiedHullIdList = () => {
-  return Object.keys(fortifiedHulls).sort((a, b) => a + b)
+  return Object.keys(fortifiedHulls)
 }
 
 const getReinforcedBulkheadIdList = () => {
-  return Object.keys(reinforcedBulkheads).sort((a, b) => a + b)
+  return Object.keys(reinforcedBulkheads)
 }
 
 const getAntiHackingIdList = () => {
-  return Object.keys(antiHackingSystems).sort((a, b) => a + b)
+  return Object.keys(antiHackingSystems)
 }
 
 const getComputerModuleIdList = () => {
-  return Object.keys(computerModules).sort((a, b) => a + b)
+  return Object.keys(computerModules)
 }
 
 const getComputerUpgradeIdList = () => {
-  return Object.keys(computerUpgrades).sort((a, b) => a + b)
+  return Object.keys(computerUpgrades)
 }
 
 const getComputerCountermeasureIdList = () => {
-  return Object.keys(computerCountermeasures).sort((a, b) => a + b)
+  return Object.keys(computerCountermeasures)
 }
 
 const getComputerShockGridIdList = () => {
-  return Object.keys(computerShockGrid).sort((a, b) => a - b)
+  return Object.keys(computerShockGrid)
 }
 
 const getComputerTierIdList = () => {
-  return Object.keys(computerTiers).sort((a, b) => a + b)
+  return Object.keys(computerTiers)
 }
 
 const getCloakingIdList = () => {
@@ -2562,7 +2567,7 @@ const getCloakingIdList = () => {
 }
 
 const getSecurityCheckboxIdList = () => {
-  return Object.keys(computerTiers).sort((a, b) => a + b)
+  return Object.keys(computerTiers)
 }
 
 const getSensorsIdList = () => {

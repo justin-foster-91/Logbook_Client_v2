@@ -219,6 +219,7 @@ select:disabled {
   /* width: 100%; */
   /* max-width: 68vw; */
   margin: 0 !important;
+  cursor: pointer;
 }
 
 .iconWrapper .icon {
@@ -247,11 +248,17 @@ select:disabled {
 }
 
 .iconWrapper {
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex;
+  justify-content: flex-end; */
   padding: 0 .1rem .1rem 0;
   margin: 0 !important;
+  float: right;
 }
+
+.accordionWrapper > .iconWrapper {
+  cursor: pointer;
+}
+
 .sfsLogo {
   width: 1rem;
   height: 1rem;

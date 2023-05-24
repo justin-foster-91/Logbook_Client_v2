@@ -251,7 +251,11 @@ const isValidSensors = (ship, sensorsOption) => {
 }
 
 const isValidShields = (ship, shieldsOption) => {
+  const { frameId } = ship.getParts();
+  const frameSize = ship.getSize();
+  const { source } = Tables.getShieldsData(shieldsOption, frameSize, frameId);
 
+  if (!isAllowedBySources(ship, source)) return false;
 
   return true;
 }

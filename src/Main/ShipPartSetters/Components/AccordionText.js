@@ -40,7 +40,7 @@ function AccordionText(props) {
   }
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className='accordionWrapper'>
       <div 
         className={`accordion ${expanded ? 'full' : 'snipped'}`}
         onClick={handleAccordionClick}
@@ -49,9 +49,10 @@ function AccordionText(props) {
         {/* {fullText} */}
 
       </div>
-      <div className='iconWrapper' onClick={handleAccordionClick}>
+      <span className='iconWrapper' onClick={handleAccordionClick}>
         {expanded? <UpArrowIcon/> : <DownArrowIcon/>}
-      </div>
+      </span>
+      <div style={{clear: 'both'}}></div>
     </div>
   );
 }

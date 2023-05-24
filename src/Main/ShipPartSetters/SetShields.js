@@ -33,7 +33,7 @@ function SetShields(props) {
           value={shieldsId || "None"} 
           onChange={handleShieldsChange}
         >
-          {/* <option key="None">None</option> */}
+          <option key="None">None</option>
           {Tables.getShieldsIdList().map((shields, idx) =>
             isValidShields(ship, shields) 
             && <option key={idx} value={shields}>
