@@ -1,6 +1,8 @@
 import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as SF from "./shipFunctions";
 import * as Utils from "./utils";
+import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
+
 
 class Ship {
   #parts;
@@ -72,12 +74,12 @@ class Ship {
     SF.updatePowerCores(this);
     SF.updateThrusters(this);
     SF.updateArmor(this);
-    // ablative
+    SF.updateAblativeArmor(this);
     SF.updateDriftEngine(this);
     SF.updateExpansionBays(this);
     // security
     // sensors
-    // shields
+    SF.updateShields(this);
   }
   
   // <... Setters ...>
@@ -100,12 +102,11 @@ class Ship {
     }
 
     this.#parts.frameId = frame;
-    SF.updatePowerCores(this);
-    SF.updateThrusters(this);
+
+    // Parts that are dependent on frame && not altered by setSource
     SF.updateComputer(this);
     SF.updateCrewQuarters(this);
-    SF.updateDriftEngine(this);
-    SF.updateExpansionBays(this);
+    // frame reliant parts: powerCore, thrusters, computer, crewQuarters, driftEngine, expansionBays
 
     this.onShipChange(this.#parts);
     return this;
@@ -364,6 +365,7 @@ class Ship {
       throw new Error("Shield input did not match allowed shield options");
     }
 
+    console.log(shield);
     this.#parts.shieldsId = shield;
     this.onShipChange(this.#parts);
     return this;

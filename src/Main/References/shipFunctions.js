@@ -49,9 +49,10 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 };
 
 const updateFrame = (ship) => {
-  if (!Validate.isValidFrame(ship, ship.getParts().frameId)) ship.setFrame("Light Freighter");
+  if (!Validate.isValidFrame(ship, ship.getParts().frameId)) {
+    ship.setFrame("Light Freighter");
+  }
 }
-
 
 const updatePowerCores = (ship) => {
   const { powerCoreIds } = ship.getParts();
@@ -91,6 +92,12 @@ const updateArmor = (ship) => {
   const { armorId } = ship.getParts()
 
   if (!Validate.isValidArmor(ship, armorId)) ship.setArmor(null)
+}
+
+const updateAblativeArmor = (ship) => {
+  const { armorId } = ship.getParts()
+
+  if (!Validate.isValidAblativeArmor(ship, armorId)) ship.setAblativeArmor(null)
 }
 
 const updateComputer = (ship) => {
@@ -149,6 +156,21 @@ const updateAntiPersonnelToMatchTier = (ship) => {
   if (foundLongarm) type = "longarm"
   if (foundHeavy) type = "heavy"
   if (!Validate.isValidSecurity(ship, weaponId, type)) ship.setAntiPersonnelWeapon(null);
+}
+
+const updateSecurity = (ship) => {
+
+}
+
+const updateSensors = (ship) => {
+
+}
+
+const updateShields = (ship) => {
+  const { shieldsId } = ship.getParts()
+  
+  // if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.setDriftEngine(null);
+  if (!Validate.isValidShields(ship, shieldsId)) ship.setShields(null);
 }
 
 // Object ship => {validity: Bool, errors: [Error]}
@@ -602,10 +624,14 @@ export {
   updatePowerCores,
   updateThrusters,
   updateArmor,
+  updateAblativeArmor,
   updateComputer,
   updateCrewQuarters,
   updateExpansionBays,
   updateAntiPersonnelToMatchTier,
+  updateSecurity,
+  updateSensors,
+  updateShields,
   validateShip,
   getFramePackage,
   getTotalBPCosts,
