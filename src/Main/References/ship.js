@@ -254,13 +254,13 @@ class Ship {
     return this;
   }
 
-    // TODO: Should this be part of setExpansionBay()?
-    deleteExpansionBay(idx) {
-      SF.removeExpansion(this.#parts, idx);
-  
-      this.onShipChange(this.#parts);
-      return this;
-    }
+  // TODO: Should this be part of setExpansionBay()?
+  deleteExpansionBay(idx) {
+    SF.removeExpansion(this.#parts, idx);
+
+    this.onShipChange(this.#parts);
+    return this;
+  }
 
   setExpansionBayArrayLength(length) {
     this.#parts.expansionBayIds.length = length;
@@ -365,7 +365,6 @@ class Ship {
       throw new Error("Shield input did not match allowed shield options");
     }
 
-    console.log(shield);
     this.#parts.shieldsId = shield;
     this.onShipChange(this.#parts);
     return this;

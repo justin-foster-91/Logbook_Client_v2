@@ -163,13 +163,14 @@ const updateSecurity = (ship) => {
 }
 
 const updateSensors = (ship) => {
+  const { sensorsId } = ship.getParts()
 
+  if (!Validate.isValidSensors(ship, sensorsId)) ship.setSensors(null)
 }
 
 const updateShields = (ship) => {
   const { shieldsId } = ship.getParts()
   
-  // if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.setDriftEngine(null);
   if (!Validate.isValidShields(ship, shieldsId)) ship.setShields(null);
 }
 

@@ -41,14 +41,11 @@ function Sidebar(props) {
       // if (name === "Defensive Countermeasures") shortName = "Defensive Counter"
 
       return (
-        <>
-          <a href={`#${name}`} key={name} >
-            <div className={highlight ? "sidebarHighlight" : ""}>
-              {shortName || name}
-            </div>
-          </a>
-          {subComponents && subComponents.map(sub => {return <div>{sub}</div>})}
-        </>
+        <a href={`#${name}`} key={name} >
+          <div className={highlight ? "sidebarHighlight" : ""}>
+            {shortName || name}
+          </div>
+        </a>
     )})
   }
 
