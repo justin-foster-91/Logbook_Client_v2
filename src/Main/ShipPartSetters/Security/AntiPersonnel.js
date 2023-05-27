@@ -3,38 +3,42 @@ import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from '../Components/AccordionText';
+import { isValidSecurity } from '../CustomRefs/optionValidation';
+import { getLongarmData, getLongarmIdList, getHeavyData, getHeavyIdList } from '../CustomRefs/antiPersonnelData';
 
 function AntiPersonnel(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [radioSelection, setRadioSelection] = useState(null);
+  const [radioWeaponSelection, setRadioWeaponSelection] = useState("longarm");
+  const [radioSourceSelection, setRadioSourceSelection] = useState("allSources");
   const [bpCost, setBpCost] = useState(0);
 
   const { antiPersonnelWeaponId: weaponId, tierId } = customShipParts;
   const { currentPart } = props;
   const size = ship.getSize()
-
-
-  //An antipersonnel weapon must be mounted near the boarding ramp of a Medium or smaller starship. This weapon can be any longarm whose item level is equal to or less than the starship’s tier. By spending 5 additional Build Points, the installed weapon can be a heavy weapon (of creature scale, not starship scale). When an antipersonnel weapon is activated, if a hostile creature approaches within the weapon’s range increment, it begins firing with an attack roll modifier equal to the ship’s tier (minimum 1). It fires once per round during combat until its ammunition is depleted or the hostile creature is disabled or flees. The weapon can’t detect invisible (or similarly hidden) creatures. This weapon can’t be removed and used by characters. Anyone with access to the starship’s computer system can activate or deactivate the weapon, as well designate what kind of targets are considered hostile. Once installed, this weapon can’t be removed from the starship without destroying it.
+  const frameTooLarge = Tables.sizeCategory[size] > 3
 
   useEffect(() => {
-    if (!weaponId || !radioSelection) return setBpCost(0);
+    if (!weaponId || !radioWeaponSelection) return setBpCost(0);
 
-    if (radioSelection === "longarm" && Tables.getLongarmData(weaponId).level !== 0) {
-      setBpCost(Tables.getLongarmData(weaponId).level);
+    const longarmCost = getLongarmData(weaponId).cost;
+    const heavyCost = getHeavyData(weaponId).cost;
+
+    if (radioWeaponSelection === "longarm" && longarmCost) {
+      setBpCost(longarmCost);
     } 
-    if (radioSelection === "heavy" && Tables.getHeavyData(weaponId).level !== 0) {
-      setBpCost(5 + Tables.getHeavyData(weaponId).level);
+    if (radioWeaponSelection === "heavy" && heavyCost) {
+      setBpCost(heavyCost);
     } 
-  }, [weaponId, radioSelection])
+  }, [weaponId, radioWeaponSelection])
 
   const renderDropdownSelection = () => {
-    const getter = (radioSelection === "longarm") ? Tables.getLongarmIdList(tierId) : Tables.getHeavyIdList(tierId)
+    const getter = (radioWeaponSelection === "longarm") ? getLongarmIdList(tierId) : getHeavyIdList(tierId)
 
     return getter.map((weapon, idx) => { 
-      const data = (radioSelection === "longarm") ? Tables.getLongarmData(weapon) : Tables.getHeavyData(weapon)
+      const data = (radioWeaponSelection === "longarm") ? getLongarmData(weapon) : getHeavyData(weapon)
 
-      if (Tables.sizeCategory[size] > 3) return null;
-      return <option key={idx} value={weapon}>
+      return isValidSecurity(ship, weapon, radioWeaponSelection, radioSourceSelection) 
+      && <option key={idx} value={weapon}>
         {weapon} (Lvl {data.level}; {data.damage})
       </option>
     })
@@ -50,12 +54,19 @@ function AntiPersonnel(props) {
     ship.setSecurity({ reference: "Anti-Personnel Weapon", value: option})
   };
 
-  const handleRadioChange = (ev) => {
+  const handleWeaponRadioChange = (ev) => {
     const radioOption = ev.target.value;
 
     ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
     setBpCost(0)
-    setRadioSelection(radioOption)
+    setRadioWeaponSelection(radioOption)
+  }
+
+  const handleSourceRadioChange = (ev) => {
+    const radioOption = ev.target.value;
+
+
+    setRadioSourceSelection(radioOption)
   }
 
   return (
@@ -73,7 +84,8 @@ function AntiPersonnel(props) {
             id="longarm" 
             name="weaponRadio" 
             value="longarm" 
-            onChange={handleRadioChange}
+            checked={radioWeaponSelection === "longarm"}
+            onChange={handleWeaponRadioChange}
           />
           <label htmlFor="longarm">Longarm</label>
           
@@ -82,9 +94,34 @@ function AntiPersonnel(props) {
             id="heavy" 
             name="weaponRadio" 
             value="heavy" 
-            onChange={handleRadioChange}
+            checked={radioWeaponSelection === "heavy"}
+            onChange={handleWeaponRadioChange}
           />
           <label htmlFor="heavy">Heavy</label>
+        </div>
+
+        <div className="row">
+          <div>Sources:</div>
+
+          <input 
+            type="radio" 
+            id="allSources" 
+            name="sourceToggle" 
+            value="allSources"
+            checked={radioSourceSelection === "allSources"}
+            onChange={handleSourceRadioChange}
+          />
+          <label htmlFor="allSources">All</label>
+          
+          <input 
+            type="radio" 
+            id="sfsLegal" 
+            name="sourceToggle" 
+            value="sfsLegal" 
+            checked={radioSourceSelection === "sfsLegal"}
+            onChange={handleSourceRadioChange}
+          />
+          <label htmlFor="sfsLegal">SFS Legal</label>
         </div>
         
         <div className="dropdownBlock">
@@ -93,13 +130,14 @@ function AntiPersonnel(props) {
             id="antiPersonnelWeapon" 
             value={weaponId || "None"} 
             onChange={handleDropdownChange}
-            disabled={!radioSelection}
+            disabled={!radioWeaponSelection}
           >
             <option key={"None"}>None</option>
             {renderDropdownSelection()}
           </select>
           <PartTotals part={currentPart} bpCost={bpCost} />
         </div>
+        {/* {frameTooLarge && <p className="note">An antipersonnel weapon must be mounted near the boarding ramp of a <strong>Medium or smaller</strong> starship.</p>} */}
       </fieldset>
     </>
   );

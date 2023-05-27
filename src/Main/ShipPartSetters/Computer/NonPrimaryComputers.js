@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as Tables from "../CustomRefs/metaTables";
 import { CustomShipContext } from "../../Context/shipContext";
 import * as Utils from '../../References/utils'
+import { isValidComputer } from "../CustomRefs/optionValidation";
 
 function NonPrimaryComputers(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -36,10 +37,9 @@ function NonPrimaryComputers(props) {
           value={secondaryComputerId}
           onChange={handleSecondaryComputerChange}
         >
-          <option key={-1}>Basic Computer</option>
           {Tables.getComputerIdList().map(
             (computer, idx) =>
-              computer.split(" ")[1] < 4 && (
+              isValidComputer(ship, computer, "Secondary") && (
                 <option key={idx}>{computer}</option>
               )
           )}

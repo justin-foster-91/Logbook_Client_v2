@@ -6,6 +6,7 @@ import * as SF from "../../References/shipFunctions";
 import PartTitle from "../Components/PartTitle";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from "../Components/AccordionText";
+import { isValidComputer } from "../CustomRefs/optionValidation";
 
 function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -18,8 +19,7 @@ function SetComputer(props) {
   const { nodes: secondaryNodes } = Tables.getComputerData(secondaryComputerId)
   const { currentPart } = props;
 
-  const totalCompBPCosts = SF.getTotalCompBPCosts(customShipParts)
-  const totalCompPCUCosts = SF.getTotalCompPCUCosts(customShipParts)
+  const { bpTotal, pcuTotal } = SF.getTotalCompCosts(customShipParts)
   const totalNodes = nodes + secondaryNodes + ctNetworkNodes
   const bonusList = SF.combineComputerBonuses(customShipParts, size)
   const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
@@ -72,7 +72,8 @@ function SetComputer(props) {
 
         <select id="primaryComputer" value={computerId} onChange={handleComputerChange}>
           {Tables.getComputerIdList().map((computer, idx) =>
-            renderComputerOptions(computer, idx)
+            isValidComputer(ship, computer, "Primary") 
+            && <option key={idx}>{computer}</option>
           )}
         </select>
       </div>
@@ -90,7 +91,7 @@ function SetComputer(props) {
         <div><strong>Hack DC</strong>: {hackDC}</div>
       </div>
 
-      <PartTotals part={currentPart} pcuCost={totalCompPCUCosts} bpCost={totalCompBPCosts}/>
+      <PartTotals part={currentPart} pcuCost={pcuTotal} bpCost={bpTotal}/>
     </>
   );
 }

@@ -10,8 +10,7 @@ function Sidebar(props) {
   const [validPCU, setValidPCU] = useState(true);
 
   const {setterList, partHighlight} = props;
-  const { tierId, powerCoreIds } = customShipParts
-
+  const { tierId, powerCoreIds } = customShipParts;
 
   const totalBPCosts = ship.getTotalBPCosts()
   const totalBPBudget = Tables.getTierData(tierId).buildPoints
@@ -32,7 +31,8 @@ function Sidebar(props) {
 
   const sidebarList = () => {
     return setterList.map(part => {
-      let { name } = part;
+      let { name, subComponents } = part;
+
 
       let highlight = false;
       if (name === partHighlight) highlight = true;

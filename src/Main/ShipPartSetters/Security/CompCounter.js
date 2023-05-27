@@ -5,6 +5,7 @@ import { splitCamelCase } from "../../References/utils";
 import PartTotals from "../Components/PartTotals";
 import * as Utils from "../../References/utils";
 import AccordionText from '../Components/AccordionText';
+import { isValidSecurity } from '../CustomRefs/optionValidation';
 
 function CompCounter(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);

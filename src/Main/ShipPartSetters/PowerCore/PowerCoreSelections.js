@@ -3,6 +3,7 @@ import * as Tables from "../CustomRefs/metaTables";
 import * as SF from "../../References/shipFunctions";
 import { CustomShipContext } from "../../Context/shipContext";
 import { isValidPowerCore } from "../CustomRefs/optionValidation";
+import SpecialMaterials from "../Components/SpecialMaterials";
 
 const PowerCoreSelections = () => {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -16,6 +17,7 @@ const PowerCoreSelections = () => {
     let coreOption = event.target.value;
     if (coreOption === "None") coreOption = null;
 
+    console.log({ coreOption, coreIndex });
     ship.setPowerCore(coreOption, coreIndex)
   };
 
@@ -33,9 +35,9 @@ const PowerCoreSelections = () => {
             onChange={handlePowerCoreChange}
           >
             {(idx > 0) && <option key="None">None</option>}
-            {Tables.getPowerCoreIdList().map((core, idx) =>
-                isValidPowerCore(ship, core) && (
-                  <option key={"option" + idx} value={core}>
+            {Tables.getPowerCoreIdList().map((core, i) =>
+                isValidPowerCore(ship, core, idx) && (
+                  <option key={"option" + i} value={core}>
                     {`${core} (PCU ${
                       Tables.getPowerCoreData(core).pcuProvided
                     } | Size: ${Tables.getPowerCoreData(core).sizes.join(", ")})`}
@@ -44,9 +46,7 @@ const PowerCoreSelections = () => {
             )}
           </select>
 
-          {/* TODO: */}
-          <div>Special Material:</div>
-          {/* https://www.aonsrd.com/StarshipMaterials.aspx */}
+          <SpecialMaterials part="Power Core" idx={idx}/>
 
         </div>
       );

@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import UpArrowIcon from '../../IconRefs/UpArrowIcon';
 import DownArrowIcon from '../../IconRefs/DownArrowIcon';
 
+// TODO: add a check to see if the full text will fit without needing to be snipped
+
 function AccordionText(props) {
   const [expanded, setExpanded] = useState(false);
   const ref = useRef(null);
@@ -21,16 +23,16 @@ function AccordionText(props) {
     if (!stringInput) return;
 
     if (typeof stringInput === "string") {
-      return <p>{sliceByWindowSize(stringInput)}...  <br/>(read more)</p>;
+      return <p>{sliceByWindowSize(stringInput)}...</p>;
     }
 
     let stringInTag = stringInput.props.children;
     if (typeof stringInTag === "string") {
-      return <p>{sliceByWindowSize(stringInTag)}...  <br/>(read more)</p>;
+      return <p>{sliceByWindowSize(stringInTag)}...</p>;
     }
 
     let stringInSiblingTags = stringInTag[0].props.children
-    return <p>{sliceByWindowSize(stringInSiblingTags)}...  <br/>(read more)</p>;
+    return <p>{sliceByWindowSize(stringInSiblingTags)}...</p>;
   }
 
   const handleAccordionClick = () => {
@@ -38,7 +40,7 @@ function AccordionText(props) {
   }
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className='accordionWrapper'>
       <div 
         className={`accordion ${expanded ? 'full' : 'snipped'}`}
         onClick={handleAccordionClick}
@@ -47,9 +49,10 @@ function AccordionText(props) {
         {/* {fullText} */}
 
       </div>
-      <div className='iconWrapper' onClick={handleAccordionClick}>
+      <span className='iconWrapper' onClick={handleAccordionClick}>
         {expanded? <UpArrowIcon/> : <DownArrowIcon/>}
-      </div>
+      </span>
+      <div style={{clear: 'both'}}></div>
     </div>
   );
 }

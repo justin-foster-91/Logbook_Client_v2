@@ -10,6 +10,8 @@ import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
 const getCoreQuantityFromSize = (size) => {
   size = size.toLowerCase();
 
+  // TODO: condense this logic
+  if (size === "tiny") return 1;
   if (size === "small") return 1;
   if (size === "medium" || size === "large") return 1;
   if (size === "huge") return 2;
@@ -27,7 +29,7 @@ const doesFrameSizeAllowCoreSize = (core, frameSize) => {
 
   // All sizes from Huge to Colossal have the Huge size
   if (frameSize === "Supercolossal" && sizeWordList.includes("Huge")) return true;
-
+  
   return sizeWordList.includes(frameSize);
 };
 
@@ -47,81 +49,129 @@ const findComponentByFrameId = (frameId, returnComponent) => {
 };
 
 const updateFrame = (ship) => {
-  if (!Validate.isValidFrame(ship, ship.parts.frameId)) ship.parts.frameId = "Light Freighter";
-}
-
-
-const updatePowerCoresToMatchFrame = (ship) => {
-  const size = findComponentByFrameId(ship.frameId, "size")
-  const powerCoreIdList = Tables.getPowerCoreIdList()
-  const firstMatch = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
-  let newCoreLength = getCoreQuantityFromSize(size);
-
-  ship.powerCoreIds.forEach((core, idx) => {
-    if(core && !doesFrameSizeAllowCoreSize(core, size)) ship.powerCoreIds[idx] = null;   
-    if(idx === 0 && ship.powerCoreIds[idx] !== firstMatch) ship.powerCoreIds[idx] = firstMatch
-  });
-  
-  if (ship.powerCoreIds.length > newCoreLength) ship.powerCoreIds.length = newCoreLength;
-};
-
-const updateThrustersToMatchFrame = (ship) => {
-  const size = findComponentByFrameId(ship.frameId, "size")
-  // let { thrustersId } = ship
-  const thrusterIdList = Tables.getThrusterIdList()
-  const firstMatch = thrusterIdList.find(thruster => doesFrameSizeAllowThruster(thruster, size))
-  
-  if (ship.thrustersId === null) ship.thrustersId = firstMatch
-  // change thrusters to firstMatch if they don't fit the new frame
-  if (ship.thrustersId !== firstMatch && !doesFrameSizeAllowThruster(ship.thrustersId, size)) ship.thrustersId = firstMatch;
-};
-
-const updateComputerToMatchFrame = (ship) => {
-  const size = findComponentByFrameId(ship.frameId, "size")
-  // let { computerId, secondaryComputerId: secondary} = ship
-  const compList = Tables.getComputerIdList()
-  
-  // change computer to 'Mk 4 Mononode' if size changes to supercolossal
-  if(size === 'Supercolossal'){
-    if(compList.indexOf(ship.computerId) < 13) ship.computerId = 'Mk 4 Mononode'
-  } else{
-    if(ship.secondaryComputerId !== 'Basic Computer') ship.secondaryComputerId = 'Basic Computer'
+  if (!Validate.isValidFrame(ship, ship.getParts().frameId)) {
+    ship.setFrame("Light Freighter");
   }
 }
 
-const updateDriftEngine = (ship) => {
-  const { driftEngineId } = ship.parts
-  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.parts.driftEngineId = null;
+const updatePowerCores = (ship) => {
+  const { powerCoreIds } = ship.getParts();
+  const size = ship.getSize()
+  const powerCoreIdList = Tables.getPowerCoreIdList()
+  let newCoreLength = getCoreQuantityFromSize(size);
+  
+  let firstValidCore = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
+  if (size === "Supercolossal") firstValidCore = 'Gateway Ultra'
+
+  if (powerCoreIds.length > newCoreLength) ship.setPowerCoreArrayLength(newCoreLength);
+
+  powerCoreIds.forEach((core, idx) => {
+    if (idx === 0) {
+      if (!core || (core && !Validate.isValidPowerCore(ship, core, idx))) {
+        ship.setPowerCore(firstValidCore, idx);
+      }
+    } else {
+      if (core && !Validate.isValidPowerCore(ship, core, idx)) {
+        ship.setPowerCore(null, idx); 
+      }
+    }
+  });
+};
+
+const updateThrusters = (ship) => {
+  const { thrustersId } = ship.getParts()
+
+  const thrusterIdList = Tables.getThrusterIdList()
+  const firstValidThruster = thrusterIdList.find(thruster => Validate.isValidThruster(ship, thruster))
+  
+  if (thrustersId === null) ship.setThrusters(firstValidThruster)
+  if (thrustersId !== firstValidThruster && !Validate.isValidThruster(ship, thrustersId)) ship.setThrusters(firstValidThruster);
+};
+
+const updateArmor = (ship) => {
+  const { armorId } = ship.getParts()
+
+  if (!Validate.isValidArmor(ship, armorId)) ship.setArmor(null)
 }
 
-const updateExpansionBaysToMatchFrame = (ship) => {
-  // const size = findComponentByFrameId(ship.frameId, "size")
-  const { expansions: expansionCap } = getFramePackage(ship)
+const updateAblativeArmor = (ship) => {
+  const { armorId } = ship.getParts()
 
-  if(ship.expansionBayIds.length > expansionCap) ship.expansionBayIds.length = expansionCap
+  if (!Validate.isValidAblativeArmor(ship, armorId)) ship.setAblativeArmor(null)
+}
+
+const updateComputer = (ship) => {
+  const { computerId, secondaryComputerId } = ship.getParts()
+
+  const size = ship.getSize()
+  const compList = Tables.getComputerIdList()
+  
+  if (size === "Supercolossal") {
+    if (!Validate.isValidComputer(ship, computerId, "Primary")) {
+      ship.setComputer('Mk 4 Mononode')
+    }
+    if (!Validate.isValidComputer(ship, computerId, "Secondary")) {
+      ship.setSecondaryComputer('Basic Computer')
+    }
+  } else {
+    if (secondaryComputerId !== null) ship.setSecondaryComputer('Basic Computer')
+  }
+}
+
+const updateCrewQuarters = (ship) => {
+  const { crewQuartersId, frameId } = ship.getParts();
+
+  if (!Validate.isValidQuarters(ship, crewQuartersId)) ship.setCrewQuarters("Common");
+  if (frameId === "Starship Drone") ship.setCrewQuarters(null);
+}
+
+const updateDriftEngine = (ship) => {
+  const { driftEngineId } = ship.getParts()
+  if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.setDriftEngine(null);
+}
+
+const updateExpansionBays = (ship) => {
+  const { expansionBayIds } = ship.getParts()
+
+  const { expansions: expansionCap } = getFramePackage(ship.getParts())
+
+  if(expansionBayIds.length > expansionCap) ship.setExpansionBayArrayLength(expansionCap)
 
   // Set "Cargo Hold" as default selection for any expansion not specified
-  ship.expansionBayIds.forEach((expansion, idx) => {
-    if(expansion === null) ship.expansionBayIds[idx] = "Cargo Hold"
+  expansionBayIds.forEach((expansion, idx) => {
+    if(expansion === null) ship.setExpansionBay("Cargo Hold")
   })
 }
 
 const updateAntiPersonnelToMatchTier = (ship) => {
-  let { antiPersonnelWeaponId: weaponId, tierId } = ship
-  if (tierId === "1/4" || tierId === "1/3" || tierId === "1/2") tierId = 0;
-  tierId = parseInt(tierId);
+  let { antiPersonnelWeaponId: weaponId } = ship
+
 
   if (!weaponId) return;
 
   const foundLongarm = personnelWeapons.getLongarmIdList().indexOf(weaponId) >= 0
   const foundHeavy = personnelWeapons.getHeavyIdList().indexOf(weaponId) >= 0
-  const foundWeapon = foundLongarm || foundHeavy
-  if (!foundWeapon) ship.antiPersonnelWeaponId = null
 
-  const longarmLevel = personnelWeapons.getLongarmData(weaponId).level
-  const heavyLevel = personnelWeapons.getHeavyData(weaponId).level
-  if (foundLongarm && longarmLevel > tierId) ship.antiPersonnelWeaponId = null;
-  if (foundHeavy && heavyLevel > tierId) ship.antiPersonnelWeaponId = null;
+  let type;
+  if (foundLongarm) type = "longarm"
+  if (foundHeavy) type = "heavy"
+  if (!Validate.isValidSecurity(ship, weaponId, type)) ship.setAntiPersonnelWeapon(null);
+}
+
+const updateSecurity = (ship) => {
+
+}
+
+const updateSensors = (ship) => {
+  const { sensorsId } = ship.getParts()
+
+  if (!Validate.isValidSensors(ship, sensorsId)) ship.setSensors(null)
+}
+
+const updateShields = (ship) => {
+  const { shieldsId } = ship.getParts()
+  
+  if (!Validate.isValidShields(ship, shieldsId)) ship.setShields(null);
 }
 
 // Object ship => {validity: Bool, errors: [Error]}
@@ -259,11 +309,12 @@ const validateArmor = (ship) => {
 
   // ship = new Ship(ship)
 
-  const { forward, port, starboard, aft } = ship.parts.ablativeArmorByPosition
+  const { armorId, ablativeArmorByPosition } = ship.getParts();
+  const { forward, port, starboard, aft } = ablativeArmorByPosition;
   const totalUsedTempHP = forward + port + starboard + aft
-  const totalAllowedTempHP = Tables.getArmorData(ship.parts.armorId, ship.getSize()).tempHP
+  const totalAllowedTempHP = Tables.getArmorData(ship.getParts().armorId, ship.getSize()).tempHP
   
-  if(ship.parts.armorId && ship.parts.armorId.includes('ablative')){
+  if(armorId && armorId.includes('ablative')){
     if(totalAllowedTempHP !== totalUsedTempHP){
       return {
         validity: false,
@@ -287,11 +338,9 @@ const formatExpansions = (defaultString) => {
 };
 
 const getFramePackage = (ship) => {
-  let { tierId, frameId } = ship;
-  // let frameId = Utils.capitalizeEachWord(ship.frameId);
+  const { tierId, frameId } = ship;
 
   let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
-  // console.log(Tables.getFrameData(frameId));
 
   const { startTotal, increment } = hp
   const { hpIncrementMultiplier } = Tables.getTierData(tierId)
@@ -303,41 +352,39 @@ const getFramePackage = (ship) => {
 const getTotalBPCosts = (ship) => {
   const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
   const { size } = getFramePackage(ship)
-  const { frameId } = ship;
-  const driftEngineBPCost = Tables.getDriftEngineData(ship.driftEngineId, size, frameId).bpCost
 
   const bpExpenses = [
     getFramePackage(ship).bpCost,
     powerCoreTotalBPCost,
     Tables.getThrusterData(ship.thrustersId).bpCost,
     Tables.getArmorData(ship.armorId, size).bpCost,
-    getTotalCompBPCosts(ship),
+    getTotalCompCosts(ship).bpTotal,
     Tables.getQuartersData(ship.crewQuartersId).bpCost,
     Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).bpCost,
-    driftEngineBPCost,
-    // expansion bays
+    Tables.getDriftEngineData(ship.driftEngineId, size, ship.frameId).bpCost,
+    getTotalExpansionCosts(ship).bpTotal,
     Tables.getFortifiedHullData(ship.fortifiedHullId, size).bpCost,
     Tables.getReinforcedBulkheadData(ship.reinforcedBulkheadId, size).bpCost,
-    // security (misc)
-    // sensors
+    getTotalSecurityCosts(ship).totalBpCosts,
+    Tables.getSensorsData(ship.sensorsId).bpCost,
     // shields
     // weapons
     // other systems
+    // getTotalSpecialMaterialCosts(ship).bpTotal
   ]
 
   return bpExpenses.reduce((total, num) => total + num);
 };
 
 const getTotalPCUCosts = (ship) => {
-  //FIXME: ship or shipParts or Ship (import)?
   const { thrustersId } = ship
 
   const pcuExpenses = [
     Tables.getThrusterData(thrustersId).pcuCost,
-    getTotalCompPCUCosts(ship),
+    getTotalCompCosts(ship).pcuTotal,
     Tables.getDefensiveCounterData(ship.defensiveCountermeasuresId).pcuCost,
-    // expansion bays
-    // security (misc)
+    getTotalExpansionCosts(ship).pcuTotal,
+    getTotalSecurityCosts(ship).totalPcuCosts,
     // shields
     // weapons
     // other systems
@@ -359,28 +406,35 @@ const getEssentialPCUCosts = (ship) => {
   return pcuExpenses.reduce((total, num) => total + num);
 }
 
-const getTotalCompBPCosts = (ship) => {
+const getTotalCompCosts = (ship) => {
   const { size } = getFramePackage(ship)
-  const { bpCost } = Tables.getComputerData(ship.computerId);
+  const { bpCost, pcuCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
   const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
   const networkNodeId = `${Mk} ${x}`
-  const { bpCost: secondaryBPCost } = Tables.getComputerData(ship.secondaryComputerId)
-  const { bpCost: networkBPCost } = Tables.getNetworkNodeData(networkNodeId, size)
+  const { bpCost: secondaryBPCost, pcuCost: secondaryPCUCost } = Tables.getComputerData(ship.secondaryComputerId)
+  const { bpCost: networkBPCost, pcuCost: networkPCUCost } = Tables.getNetworkNodeData(networkNodeId, size)
 
-  return bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
+  const bpTotal = bpCost + secondaryBPCost + (networkBPCost * ctNetworkNodes)
+  const pcuTotal = pcuCost + secondaryPCUCost + (networkPCUCost * ctNetworkNodes)
+
+  return { bpTotal, pcuTotal }
 }
 
-const getTotalCompPCUCosts = (ship) => {
+const getTotalExpansionCosts = (ship) => {
   const { size } = getFramePackage(ship)
-  const { pcuCost } = Tables.getComputerData(ship.computerId);
-  const { ctNetworkNodes } = ship
-  const [Mk, x] = Utils.capitalizeEachWord(ship.computerId).split(' ')
-  const networkNodeId = `${Mk} ${x}`
-  const { pcuCost: secondaryPCUCost } = Tables.getComputerData(ship.secondaryComputerId)
-  const { pcuCost: networkPCUCost } = Tables.getNetworkNodeData(networkNodeId, size)
 
-  return pcuCost + secondaryPCUCost + (networkPCUCost * ctNetworkNodes)
+  if (!ship.expansionBayIds.length) return { bpTotal: 0, pcuTotal: 0 }
+
+  const bpTotal = ship.expansionBayIds
+    .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+    .reduce((total, bp) => total + bp);
+
+  const pcuTotal = ship.expansionBayIds
+    .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+    .reduce((total, bp) => total + bp);
+
+  return { bpTotal, pcuTotal }
 }
 
 const getTotalTL = () => {
@@ -390,6 +444,8 @@ const getTotalTL = () => {
     size, defensive countermeasures (see page 298), and armor, plus the pilot’s number of ranks 
     in the Piloting skill. See page 320 for details.
   */
+
+    // A horacalcum lattice incorporated into a starship’s defensive countermeasures creates a field of space-time fluctuation that slows larger incoming projectiles. The speed of any tracking weapon fired at the starship is reduced by 25% (round down the final speed).
 }
 
 const getTotalAC = () => {
@@ -408,6 +464,15 @@ const getTotalSpecialMaterialCosts = () => {
   // sensorsMaterialId
   // thrustersMaterialId
   // weaponMounts per weapon, per arc
+}
+
+const getSpeed = () => {
+  // Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
+}
+
+const getPilotingMod = () => {
+  // -1 piloting check if using ablative && ablative armor hp is not balanced
+  // Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
 }
 
 const combineComputerBonuses = (ship, size) => {
@@ -467,15 +532,18 @@ const removeExpansion = (ship, idx) => {
   ship.expansionBayIds.splice(idx, 1)
 }
 
-const getTotalSecurityBpCosts = (shipParts) => {
+const getTotalSecurityCosts = (shipParts) => {
   const antiPersonnelCost = getAntiPersonnelCosts(shipParts);
   const compCounterCost = getCompCounterCosts(shipParts);
   const hackAndCloakCost = getHackAndCloakCosts(shipParts);
-  const checkboxBpCosts = getSecurityCheckboxBpCosts(shipParts);
+  const checkboxBpCosts = getSecurityCheckboxCosts(shipParts).totalBpCosts;
 
-  const totalSecurityBpCosts = antiPersonnelCost + compCounterCost + hackAndCloakCost + checkboxBpCosts;
+  const checkboxPcuCosts = getSecurityCheckboxCosts(shipParts).totalPcuCosts;
 
-  return totalSecurityBpCosts;
+  const totalBpCosts = antiPersonnelCost + compCounterCost + hackAndCloakCost + checkboxBpCosts;
+  const totalPcuCosts = checkboxPcuCosts;
+
+  return { totalBpCosts, totalPcuCosts };
 }
 
 const getAntiPersonnelCosts = (shipParts) => {
@@ -526,7 +594,7 @@ const getHackAndCloakCosts = (shipParts) => {
   return hackingBpCost + cloakingBpCost;
 }
 
-const getSecurityCheckboxBpCosts = (shipParts) => {
+const getSecurityCheckboxCosts = (shipParts) => {
   const { hasBiometricLocks, hasSelfDestructSystem, hasEmergencyAccelerator, hasHolographicMantle, hasReconfigurationSystem, frameId } = shipParts;
 
   const size = findComponentByFrameId(frameId, "size")
@@ -537,19 +605,14 @@ const getSecurityCheckboxBpCosts = (shipParts) => {
   const holographicBpCost = hasHolographicMantle && Tables.getSecurityCheckboxData("Holographic Mantle", size).bpCost;
   const reconfigurationBpCost = hasReconfigurationSystem && Tables.getSecurityCheckboxData("Reconfiguration System", size).bpCost;
 
-  return biometricBpCost + selfDestructBpCost + emergencyBpCost + holographicBpCost + reconfigurationBpCost;
-}
-
-const getSecurityCheckboxPcuCosts = (shipParts) => {
-  const { hasEmergencyAccelerator, hasHolographicMantle, hasReconfigurationSystem, frameId } = shipParts;
-
-  const size = findComponentByFrameId(frameId, "size")
-
   const emergencyPcuCost = hasEmergencyAccelerator && Tables.getSecurityCheckboxData("Emergency Accelerator", size).pcuCost;
   const holographicPcuCost = hasHolographicMantle && Tables.getSecurityCheckboxData("Holographic Mantle", size).pcuCost;
   const reconfigurationPcuCost = hasReconfigurationSystem && Tables.getSecurityCheckboxData("Reconfiguration System", size).pcuCost;
 
-  return emergencyPcuCost + holographicPcuCost + reconfigurationPcuCost;
+  const totalBpCosts = biometricBpCost + selfDestructBpCost + emergencyBpCost + holographicBpCost + reconfigurationBpCost;
+  const totalPcuCosts = emergencyPcuCost + holographicPcuCost + reconfigurationPcuCost;
+
+  return { totalBpCosts, totalPcuCosts };
 }
 
 export {
@@ -559,21 +622,25 @@ export {
   findComponentByFrameId,
   updateFrame,
   updateDriftEngine,
-  updatePowerCoresToMatchFrame,
-  updateThrustersToMatchFrame,
-  updateComputerToMatchFrame,
-  updateExpansionBaysToMatchFrame,
+  updatePowerCores,
+  updateThrusters,
+  updateArmor,
+  updateAblativeArmor,
+  updateComputer,
+  updateCrewQuarters,
+  updateExpansionBays,
   updateAntiPersonnelToMatchTier,
+  updateSecurity,
+  updateSensors,
+  updateShields,
   validateShip,
   getFramePackage,
   getTotalBPCosts,
   getTotalPCUCosts,
   getEssentialPCUCosts,
-  getTotalCompBPCosts,
-  getTotalCompPCUCosts,
+  getTotalCompCosts,
   combineComputerBonuses,
   copyExpansion,
   removeExpansion,
-  getTotalSecurityBpCosts,
-  getSecurityCheckboxPcuCosts,
+  getTotalSecurityCosts,
 };

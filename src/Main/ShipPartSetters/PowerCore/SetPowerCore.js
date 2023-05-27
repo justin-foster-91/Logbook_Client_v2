@@ -14,6 +14,9 @@ function SetPowerCore(props) {
   const size = ship.getSize();
   const { currentPart } = props;
 
+  // TODO: 
+  // An abysium power core increases the PCU it provides by 25% (maximum +50 PCU).
+  // A djezet power core increases the PCU it provides by 10% (maximum +20 PCU), but it can direct that power only to fulfill the PCU requirements for expansion bays.
   const pcuProvided = powerCoreIds
     .map((core) => Tables.getPowerCoreData(core).pcuProvided)
     .reduce((total, pcu) => total + pcu);
@@ -35,7 +38,7 @@ function SetPowerCore(props) {
           A Supercolossal ship may have either: 
           <ul>
             <li>Up to 5 Colossal sized cores</li>
-            <li>1 Supercolossal core with up to 4 Huge/Gargantuan cores.</li>
+            <li>Only 1 Supercolossal core with up to 4 backup cores designed for Huge or Gargantuan ships</li>
           </ul>
         </div>
       }

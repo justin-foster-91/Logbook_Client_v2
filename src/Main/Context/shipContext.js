@@ -30,7 +30,7 @@ export const CustomShipProvider = ({children}) => {
       accum[cur] = true;
       return accum;
     }, {})
-    )
+  )
     
   const activeSources = Object.keys(sourceStatus).filter((source) => sourceStatus[source] === true)
     

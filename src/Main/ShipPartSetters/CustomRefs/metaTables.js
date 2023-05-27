@@ -1,6 +1,5 @@
 import { capitalizeEachWord } from "../../References/utils";
 import frames from "./frames";
-import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from "./antiPersonnelData";
 
 const sources = {
   // an item can have multiple sources
@@ -34,6 +33,16 @@ const sources = {
     abbrev: 'SOM',
     sfsLegal: false
   },
+  'Near Space': {
+    link: 'https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space',
+    abbrev: 'NS',
+    sfsLegal: false
+  },
+  'Tech Revolution': {
+    link: 'https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution',
+    abbrev: 'TR',
+    sfsLegal: false
+  },
   'Starfinder #6: Empire of Bones': {
     link: 'https://paizo.com/products/btpya1ai/',
     abbrev: 'EoB',
@@ -62,16 +71,6 @@ const sources = {
   'Starfinder #42: Whispers of the Eclipse': {
     link: 'https://paizo.com/products/btq027nt/discuss?Starfinder-Adventure-Path-42-Whispers-of-the-Eclipse',
     abbrev: 'WotE',
-    sfsLegal: false
-  },
-  'Near Space': {
-    link: 'https://paizo.com/products/btq01zud?Starfinder-RPG-Near-Space',
-    abbrev: 'NS',
-    sfsLegal: false
-  },
-  'Tech Revolution': {
-    link: 'https://paizo.com/products/btq026mr/discuss?Starfinder-Tech-Revolution',
-    abbrev: 'TR',
     sfsLegal: false
   },
 }
@@ -301,19 +300,19 @@ const powerCores = {
     sizes: [ 'Sc' ],
     pcuProvided: 700,
     bpCost: 50,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   'Titan Heavy': {
     sizes: [ 'Sc' ],
     pcuProvided: 950,
     bpCost: 60,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   'Titan Ultra': {
     sizes: [ 'Sc' ],
     pcuProvided: 1200,
     bpCost: 70,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   }
 }
 
@@ -549,7 +548,7 @@ const thrusters = {
     pilotingModifier: 1,
     pcuCost: 300,
     bpCost: 16,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   SC6: {
     size: 'Sc',
@@ -557,7 +556,7 @@ const thrusters = {
     pilotingModifier: 0,
     pcuCost: 400,
     bpCost: 20,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   },
   SC8: {
     size: 'Sc',
@@ -565,7 +564,7 @@ const thrusters = {
     pilotingModifier: -1,
     pcuCost: 500,
     bpCost: 24,
-    source: 'Starfinder #6: Empire of Bones pg. 45'
+    source: 'Starship Operations Manual pg. 36'
   }
 }
 
@@ -699,6 +698,9 @@ const armor = {
     bpCost: 4,
     source: "Starfinder #27: Deceivers' Moon pg. 47"
   },
+}
+
+const ablativeArmor = {
   'Basic ablative armor 1': {
     acBonus: null,
     tempHP: 8,
@@ -1529,7 +1531,7 @@ const expansionBays = {
   'Drift Booster': {
     pcuCost: 40,
     bpCost: 20,
-    source: 'Starfinder #6: Empire of Bones pg. 46',
+    source: 'Starship Operations Manual pg. 36',
     description: "A Drift booster is a rail for launching smaller ships into the Drift from within a Supercolossal vessel's hangar bay. A smaller ship that launches from within the Supercolossal vessel's hangar bay using the Drift booster can temporarily raise its Drift engine rating by 1. This increase lasts only as long as the smaller ship stays in the Drift and on the same course after launching using the Drift booster. If the boosted ship changes course or leaves the Drift, this temporary increase ends."
   },
   'Drift Shadow Projector': {
@@ -1710,7 +1712,7 @@ const expansionBays = {
   'Recycling System': {
     pcuCost: 2,
     bpCost: 1,
-    source: 'Starfinder #6: Empire of Bones pg. 46',
+    source: 'Starship Operations Manual pg. 36',
     description: 'A recycling system enables a Supercolossal starship to be nearly self-sustaining, operating independently for decades or even centuries. A combination of smelters, biomass processors, manufacturing, and UPB converters allows the ship to convert almost all its waste into goods and materials.'
   },
   'Sample Acquisition Bay': {
@@ -2143,6 +2145,44 @@ const specialMaterial = {
   }
 }
 
+const shields = {
+  "Basic Shields 10": {totalSP: 10, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 5, bpCost: 2, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Basic Shields 20": {totalSP: 20, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 10, bpCost: 3, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Basic Shields 30": {totalSP: 30, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 15, bpCost: 4, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Basic Shields 40": {totalSP: 40, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 15, bpCost: 5, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 50": {totalSP: 50, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 20, bpCost: 6, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 60": {totalSP: 60, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 20, bpCost: 8, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 70": {totalSP: 70, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 25, bpCost: 10, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Light Shields 80": {totalSP: 80, regeneration: '2/min', dv: null, ac: null, tl: null, pcu: 30, bpCost: 12, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 90": {totalSP: 90, regeneration: '4/min', dv: null, ac: null, tl: null, pcu: 30, bpCost: 13, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 100": {totalSP: 100, regeneration: '4/min', dv: null, ac: null, tl: null, pcu: 30, bpCost: 15, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 120": {totalSP: 120, regeneration: '4/min', dv: null, ac: null, tl: null, pcu: 35, bpCost: 17, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 140": {totalSP: 140, regeneration: '8/min', dv: null, ac: null, tl: null, pcu: 40, bpCost: 18, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 160": {totalSP: 160, regeneration: '8/min', dv: null, ac: null, tl: null, pcu: 45, bpCost: 20, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Medium Shields 200": {totalSP: 200, regeneration: '8/min', dv: null, ac: null, tl: null, pcu: 50, bpCost: 22, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 240": {totalSP: 240, regeneration: '16/min', dv: null, ac: null, tl: null, pcu: 55, bpCost: 23, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 280": {totalSP: 280, regeneration: '16/min', dv: null, ac: null, tl: null, pcu: 60, bpCost: 25, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 320": {totalSP: 320, regeneration: '16/min', dv: null, ac: null, tl: null, pcu: 70, bpCost: 27, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 360": {totalSP: 360, regeneration: '32/min', dv: null, ac: null, tl: null, pcu: 80, bpCost: 28, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 420": {totalSP: 420, regeneration: '32/min', dv: null, ac: null, tl: null, pcu: 90, bpCost: 30, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Heavy Shields 480": {totalSP: 480, regeneration: '32/min', dv: null, ac: null, tl: null, pcu: 110, bpCost: 32, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Superior Shields 540": {totalSP: 540, regeneration: '64/min', dv: null, ac: null, tl: null, pcu: 160, bpCost: 40, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Superior Shields 600": {totalSP: 600, regeneration: '64/min', dv: null, ac: null, tl: null, pcu: 120, bpCost: 90, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
+  "Aeon shields 10": {totalSP: 10, regeneration: '1/round', dv: null, ac: null, tl: null, pcu: 10, bpCost: 3, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Aeon shields 30": {totalSP: 30, regeneration: '3/round', dv: null, ac: null, tl: null, pcu: 20, bpCost: 8, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Aeon shields 50": {totalSP: 50, regeneration: '5/round', dv: null, ac: null, tl: null, pcu: 30, bpCost: 15, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Aeon shields 80": {totalSP: 80, regeneration: '8/round', dv: null, ac: null, tl: null, pcu: 45, bpCost: 20, sfsLegal: false, source: "Starfinder #42: Whispers of the Eclipse pg. 50"},
+  "Basic deflector shield 1": {totalSP: null, regeneration: null, dv: 1, ac: 1, tl: 1, pcu: 5, bpCost: 4, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Basic deflector shield 3": {totalSP: null, regeneration: null, dv: 3, ac: 1, tl: 1, pcu: 5, bpCost: 6, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Light deflector shield 5": {totalSP: null, regeneration: null, dv: 5, ac: 1, tl: 2, pcu: 10, bpCost: 12, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Light deflector shield 8": {totalSP: null, regeneration: null, dv: 8, ac: 1, tl: 2, pcu: 15, bpCost: 15, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Medium deflector shield 10": {totalSP: null, regeneration: null, dv: 10, ac: 2, tl: 2, pcu: 30, bpCost: 22, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Medium deflector shield 12": {totalSP: null, regeneration: null, dv: 12, ac: 2, tl: 2, pcu: 45, bpCost: 26, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Heavy deflector shield 13": {totalSP: null, regeneration: null, dv: 13, ac: 2, tl: 3, pcu: 60, bpCost: 33, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Heavy deflector shield 15": {totalSP: null, regeneration: null, dv: 15, ac: 2, tl: 3, pcu: 80, bpCost: 36, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Superior deflector shield 18": {totalSP: null, regeneration: null, dv: 18, ac: 3, tl: 3, pcu: 100, bpCost: 45, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+  "Superior deflector shield 20": {totalSP: null, regeneration: null, dv: 20, ac: 3, tl: 3, pcu: 120, bpCost: 50, sfsLegal: false, source: "Starship Operations Manual pg. 20"},
+}
 
 // <--- Data extractions --->
 const getSourceData = (source) => {
@@ -2207,7 +2247,16 @@ const getArmorData = (armorId, size) => {
   if(!armorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
   let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
-  bpCost = (armorId.includes("Mk") || armorId.includes("Energy-Absorbent")) ? (bpCost * sizeCategory[size]) : bpCost
+  bpCost = bpCost * sizeCategory[size]
+  // Adamantine Armor: Adamantine alloy increases a starship's size category by 1 for the purpose of calculating the cost of its armor; the value of a Supercolossal ship's size category increases from 8 to 9 for this purpose.
+
+  return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
+}
+
+const getAblativeArmorData = (ablativeArmorId) => {
+  if(!ablativeArmorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
+
+  let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = ablativeArmor[ablativeArmorId]
 
   return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
 }
@@ -2271,11 +2320,11 @@ const getDriftEngineData = (driftEngineId, size, frameId) => {
   return {rating, minPCU, maxSize, bpCost, source, special}
 }
 
-const getExpansionBayData = (expansionBayId, size) => {
+const getExpansionBayData = (expansionBayId, size, frameId) => {
   if(!size) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
   if(!expansionBayId) return {pcuCost: 0, bpCost: 0, source: null}
 
-  const { pcuCost, bpCost, source } = expansionBays[expansionBayId]
+  let { pcuCost, bpCost, source } = expansionBays[expansionBayId]
 
   if(expansionBayId === "Quantum Defender") {
     return {pcuCost: Math.max(20, (5 * sizeCategory[size])), bpCost: Math.max(10, (4 * sizeCategory[size])), source}
@@ -2283,7 +2332,9 @@ const getExpansionBayData = (expansionBayId, size) => {
   if(expansionBayId === "Decoy Husk") {
     return {pcuCost: (pcuCost + sizeCategory[size]), bpCost: (bpCost * sizeCategory[size]), source}
   }
-  
+
+  if (size === "Supercolossal" && expansionBayId === "Cargo Hold") bpCost = 5; 
+
   return {pcuCost, bpCost, source}
 }
 
@@ -2393,6 +2444,14 @@ const getSensorsData = (sensorId) => {
   return {range, modifier, bpCost, sfsLegal, source}
 }
 
+const getShieldsData = (shieldsId) => {
+  if (!shieldsId) return {totalSP: 0, regeneration: null, dv: null, ac: null, tl: null, pcu: 0, bpCost: 0, sfsLegal: null, source: null}
+
+  const { totalSP, regeneration, dv, ac, tl, pcu, bpCost, sfsLegal, source } = shields[shieldsId]
+
+  return { totalSP, regeneration, dv, ac, tl, pcu, bpCost, sfsLegal, source }
+}
+
 
 
 // <--- ID extractions -->
@@ -2432,89 +2491,91 @@ const getFrameIdList = () => {
 }
 
 const getPowerCoreIdList = () => {
-  return Object.keys(powerCores).sort((a, b) => a + b)
+  return Object.keys(powerCores)
 }
 
 const getThrusterIdList = () => {
-  return Object.keys(thrusters).sort((a, b) => a + b)
+  return Object.keys(thrusters)
 }
 
 const getArmorIdList = () => {
-  return Object.keys(armor).sort((a, b) => a + b)
+  return Object.keys(armor)
+}
+
+const getAblativeArmorIdList = () => {
+  return Object.keys(ablativeArmor)
 }
 
 const getComputerIdList = () => {
-  return Object.keys(computers).sort((a, b) => a + b)
+  return Object.keys(computers)
 }
 
 const getNetworkNodeIdList = () => {
-  return Object.keys(networkNodes).sort((a, b) => a + b)
+  return Object.keys(networkNodes)
 }
 
 const getQuartersIdList = () => {
-  return Object.keys(crewQuarters).sort((a, b) => a + b)
+  return Object.keys(crewQuarters)
 }
 
 const getDefensiveCounterIdList = () => {
-  return Object.keys(defensiveCounter).sort((a, b) => a + b)
+  return Object.keys(defensiveCounter)
 }
 
 const getDriftEngineIdList = () => {
-  return Object.keys(driftEngines).sort((a, b) => a + b)
+  return Object.keys(driftEngines)
 }
 
 const getExpansionBayIdList = () => {
-  return Object.keys(expansionBays).sort((a, b) => a + b)
+  return Object.keys(expansionBays)
 }
 
 const getFortifiedHullIdList = () => {
-  return Object.keys(fortifiedHulls).sort((a, b) => a + b)
+  return Object.keys(fortifiedHulls)
 }
 
 const getReinforcedBulkheadIdList = () => {
-  return Object.keys(reinforcedBulkheads).sort((a, b) => a + b)
+  return Object.keys(reinforcedBulkheads)
 }
 
 const getAntiHackingIdList = () => {
-  return Object.keys(antiHackingSystems).sort((a, b) => a + b)
+  return Object.keys(antiHackingSystems)
 }
 
-// const getAntiPersonnelIdList = () => {
-//   // TODO: need to change the sorting to divide longarm and heavy weapons
-//   // return [...getLongarmIdList(), ...getHeavyIdList()]
-// }
-
 const getComputerModuleIdList = () => {
-  return Object.keys(computerModules).sort((a, b) => a + b)
+  return Object.keys(computerModules)
 }
 
 const getComputerUpgradeIdList = () => {
-  return Object.keys(computerUpgrades).sort((a, b) => a + b)
+  return Object.keys(computerUpgrades)
 }
 
 const getComputerCountermeasureIdList = () => {
-  return Object.keys(computerCountermeasures).sort((a, b) => a + b)
+  return Object.keys(computerCountermeasures)
 }
 
 const getComputerShockGridIdList = () => {
-  return Object.keys(computerShockGrid).sort((a, b) => a - b)
+  return Object.keys(computerShockGrid)
 }
 
 const getComputerTierIdList = () => {
-  return Object.keys(computerTiers).sort((a, b) => a + b)
+  return Object.keys(computerTiers)
 }
 
 const getCloakingIdList = () => {
-  // Need data in non-alphabetical order
   return Object.keys(cloakingTechnology)
 }
 
 const getSecurityCheckboxIdList = () => {
-  return Object.keys(computerTiers).sort((a, b) => a + b)
+  return Object.keys(computerTiers)
 }
 
 const getSensorsIdList = () => {
   return Object.keys(sensors)
+}
+
+const getShieldsIdList = () => {
+  return Object.keys(shields)
 }
 
 export {
@@ -2545,6 +2606,7 @@ export {
   getPowerCoreData, 
   getThrusterData,
   getArmorData,
+  getAblativeArmorData,
   getComputerData,
   getComputerHackDC,
   getNetworkNodeData,
@@ -2555,9 +2617,6 @@ export {
   getFortifiedHullData,
   getReinforcedBulkheadData,
   getAntiHackingData,
-  // getAntiPersonnelData,
-  getLongarmData,
-  getHeavyData,
   getComputerModuleData,
   getComputerUpgradeData,
   getComputerCountermeasureData,
@@ -2566,6 +2625,7 @@ export {
   getCloakingData,
   getSecurityCheckboxData,
   getSensorsData,
+  getShieldsData,
 
   getSourceIdList,
   getTierIdList, 
@@ -2573,6 +2633,7 @@ export {
   getPowerCoreIdList, 
   getThrusterIdList,
   getArmorIdList,
+  getAblativeArmorIdList,
   getComputerIdList,
   getNetworkNodeIdList,
   getQuartersIdList,
@@ -2582,9 +2643,6 @@ export {
   getFortifiedHullIdList,
   getReinforcedBulkheadIdList,
   getAntiHackingIdList,
-  // getAntiPersonnelIdList,
-  getLongarmIdList, 
-  getHeavyIdList,
   getComputerModuleIdList,
   getComputerUpgradeIdList,
   getComputerCountermeasureIdList,
@@ -2593,4 +2651,5 @@ export {
   getCloakingIdList,
   getSecurityCheckboxIdList,
   getSensorsIdList,
+  getShieldsIdList,
 }

@@ -4,6 +4,7 @@ import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
 import PartTotals from './Components/PartTotals';
 import AccordionText from './Components/AccordionText';
+import { isValidHull } from './CustomRefs/optionValidation';
 
 //TODO: track the CT bonus
 
@@ -38,7 +39,8 @@ function SetFortifiedHull(props) {
         >
           <option key={"None"}>None</option>
           {Tables.getFortifiedHullIdList().map((hull, idx) => (
-            <option key={idx}>{hull}</option>
+            isValidHull(ship, hull)
+            && <option key={idx}>{hull}</option>
           ))}
         </select>
       </div>

@@ -3,6 +3,7 @@ import { CustomShipContext } from "../../Context/shipContext";
 import * as Tables from "../CustomRefs/metaTables";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from '../Components/AccordionText';
+import { isValidSecurity } from '../CustomRefs/optionValidation';
 
 function SecurityCheckboxes(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
@@ -61,7 +62,8 @@ function SecurityCheckboxes(props) {
     <>
       <div>
         {Object.keys(securityCheckbox).map((box, idx) => (
-          <div key={box}>
+          isValidSecurity(ship, box, "securityCheckbox") 
+          && <div key={box}>
             <div className="row">
               <input type="checkbox" id={box} name={box} 
                 checked={securityCheckbox[box].active}

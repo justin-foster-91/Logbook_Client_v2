@@ -503,7 +503,7 @@
 	"specialAbility": null
 }, {
 	"type": "Base Ship",
-	"source": "Starfinder #6: Empire of Bones pg. 45",
+	"source": "Starship Operations Manual pg. 36",
 	"size": "Supercolossal",
 	"maneuverability": "Clumsy",
 	"hp": {
@@ -533,7 +533,7 @@
 	"specialAbility": null
 }, {
 	"type": "Ultranought",
-	"source": "Starfinder #6: Empire of Bones pg. 45",
+	"source": "Starship Operations Manual pg. 36",
 	"size": "Supercolossal",
 	"maneuverability": "Clumsy",
 	"hp": {
