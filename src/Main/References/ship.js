@@ -78,7 +78,7 @@ class Ship {
     SF.updateDriftEngine(this);
     SF.updateExpansionBays(this);
     // security
-    // sensors
+    SF.updateSensors(this);
     SF.updateShields(this);
   }
   

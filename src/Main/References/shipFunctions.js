@@ -95,9 +95,9 @@ const updateArmor = (ship) => {
 }
 
 const updateAblativeArmor = (ship) => {
-  const { armorId } = ship.getParts()
+  const { ablativeArmorId } = ship.getParts()
 
-  if (!Validate.isValidAblativeArmor(ship, armorId)) ship.setAblativeArmor(null)
+  if (!Validate.isValidAblativeArmor(ship, ablativeArmorId)) ship.setAblativeArmor(null)
 }
 
 const updateComputer = (ship) => {
@@ -159,7 +159,9 @@ const updateAntiPersonnelToMatchTier = (ship) => {
 }
 
 const updateSecurity = (ship) => {
+  // cloaking
 
+  // securityCheckboxes
 }
 
 const updateSensors = (ship) => {
