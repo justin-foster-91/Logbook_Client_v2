@@ -8,10 +8,18 @@ import SpecialMaterials from "./Components/SpecialMaterials";
 import AccordionText from "./Components/AccordionText";
 import { isValidShields } from "./CustomRefs/optionValidation";
 
+// "shieldsByPosition": {
+//   "forward": 0,
+//   "aft": 0,
+//   "port": 0,
+//   "starboard": 0
+// },
+
 function SetShields(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { shieldsId  } = ship.getParts();
+  const { forward, aft, port, starboard } = ship.getParts().shieldsByPosition;
 
   const { currentPart } = props;
 
