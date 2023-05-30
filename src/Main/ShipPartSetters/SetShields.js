@@ -24,7 +24,7 @@ function SetShields(props) {
 
   return (
     <>
-      <PartTitle currentPart={currentPart} />
+      {/* <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <label htmlFor="shields" className="hidden">Shields Type</label>
@@ -41,7 +41,7 @@ function SetShields(props) {
             </option>
           )}
         </select>
-      </div>
+      </div> */}
     </>
   );
 }

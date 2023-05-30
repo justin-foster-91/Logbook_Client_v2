@@ -13,7 +13,6 @@ function AccordionText(props) {
   // let fullText = props.children
   const fullText = (typeof props.children === "string") ? <p>{props.children}</p> : props.children
 
-
   const sliceByWindowSize = (str) => {
     return str.slice(0, ref.current?.offsetWidth/8)
   }

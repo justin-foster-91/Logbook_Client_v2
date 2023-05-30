@@ -159,7 +159,21 @@ const updateAntiPersonnelToMatchTier = (ship) => {
 }
 
 const updateSecurity = (ship) => {
+  updateCloaking(ship);
+}
 
+const updateCloaking = (ship) => {
+  const { cloakingId } = ship.getParts()
+
+  if (!Validate.isValidSecurity(ship, cloakingId, "cloaking")) ship.setSecurity({ reference: "Cloaking Device", value: null});
+}
+
+const updateSecurityCheckbox = (ship) => {
+  // hasBiometricLocks legal
+  // hasSelfDestructSystem legal
+  // hasEmergencyAccelerator not legal
+  // hasHolographicMantle not legal
+  // hasReconfigurationSystem not legal
 }
 
 const updateSensors = (ship) => {

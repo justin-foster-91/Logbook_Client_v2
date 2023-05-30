@@ -77,8 +77,8 @@ class Ship {
     SF.updateAblativeArmor(this);
     SF.updateDriftEngine(this);
     SF.updateExpansionBays(this);
-    // security
-    // sensors
+    SF.updateSecurity(this);
+    SF.updateSensors(this);
     SF.updateShields(this);
   }
   
@@ -289,11 +289,6 @@ class Ship {
   }
 
   setSecurity(security) {
-    // if (!Tables.getSecurityIdList().includes(security) && security !== null) {
-    //   throw new Error("Security input did not match allowed security options");
-    // }
-
-    // FIXME: this implementation feels messy. Revisit later.
     const targetTranslation = {
       "Biometric Locks": "hasBiometricLocks",
       "Self-Destruct System": "hasSelfDestructSystem",
