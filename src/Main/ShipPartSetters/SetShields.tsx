@@ -7,21 +7,25 @@ import PartTotals from "./Components/PartTotals";
 import SpecialMaterials from "./Components/SpecialMaterials";
 import AccordionText from "./Components/AccordionText";
 import { isValidShields } from "./CustomRefs/optionValidation";
+import { SetterProps } from "./CustomRefs/customInterface";
 
-interface WrapperProps {
-  component: Function, 
-  name: string
-}
+// "shieldsByPosition": {
+//   "forward": 0,
+//   "aft": 0,
+//   "port": 0,
+//   "starboard": 0
+// },
 
-function SetShields(props: WrapperProps) {
+// const SetShields = (props: WrapperProps) => {
+function SetShields(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { shieldsId } = ship.getParts();
 
   const { currentPart } = props;
 
-  const handleShieldsChange = (ev: object) => {
-    let shieldsOption = ev.target.value;
+  const handleShieldsChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    let shieldsOption: string | null = ev.target.value;
     console.log(ev);
     if (shieldsOption === "None") shieldsOption = null;
 
