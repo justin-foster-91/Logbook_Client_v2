@@ -21,7 +21,7 @@ import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
 import SetSensors from "../../ShipPartSetters/SetSensors.tsx";
 import SetSources from "../../ShipPartSetters/SetSources.tsx";
-import SetShields from "../../ShipPartSetters/SetShields.tsx";
+import SetShields from "../../ShipPartSetters/SetShields";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
