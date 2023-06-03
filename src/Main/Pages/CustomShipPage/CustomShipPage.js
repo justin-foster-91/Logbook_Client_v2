@@ -15,7 +15,7 @@ import SetDriftEngine from "../../ShipPartSetters/SetDriftEngine.tsx";
 import SetExpansionBays from "../../ShipPartSetters/ExpansionBays/SetExpansionBays";
 import SetFortifiedHull from "../../ShipPartSetters/Armor/SetFortifiedHull.tsx";
 import SetReinforcedBulkheads from "../../ShipPartSetters/Armor/SetReinforcedBulkheads.tsx";
-import SetSecurity from '../../ShipPartSetters/Security/SetSecurity'
+import SetSecurity from '../../ShipPartSetters/Security/SetSecurity.tsx'
 import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
