@@ -5,7 +5,7 @@ import SetPowerCore from "../../ShipPartSetters/PowerCore/SetPowerCore";
 import * as SF from "../../References/shipFunctions";
 import SetThrusters from "../../ShipPartSetters/SetThrusters.tsx";
 import SetArmor from "../../ShipPartSetters/Armor/SetArmor.tsx";
-import SetAblativeArmor from "../../ShipPartSetters/Armor/SetAblativeArmor";
+import SetAblativeArmor from "../../ShipPartSetters/Armor/SetAblativeArmor.tsx";
 import { CustomShipContext } from "../../Context/shipContext";
 import SetComputer from "../../ShipPartSetters/Computer/SetComputer";
 import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
