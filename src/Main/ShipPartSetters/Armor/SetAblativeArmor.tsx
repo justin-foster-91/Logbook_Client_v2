@@ -10,11 +10,12 @@ import { SetterProps } from "../CustomRefs/customInterface";
 function SetAblativeArmor(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { ablativeArmorId } = customShipParts;
-  const size = ship.getSize();
+
   const { forward, port, starboard, aft } = customShipParts.ablativeArmorByPosition;
   // const { maxHP, tempHP } = Tables.getAblativeArmorData(armorId, size).tempHP;
-  const { acBonus, tempHP, tlPenalty, turnDistance, bpCost, maxHP } = Tables.getAblativeArmorData(ablativeArmorId);
-  const balancedHP: number = tempHP / 4;
+  const { acBonus, tempHP, tlPenalty, turnDistance, bpCost } = Tables.getAblativeArmorData(ablativeArmorId);
+  const balancedHP = tempHP / 4;
+  const maxHP = tempHP
   const usedHP = forward + port + starboard + aft;
 
   const { hp } = SF.getFramePackage(customShipParts);

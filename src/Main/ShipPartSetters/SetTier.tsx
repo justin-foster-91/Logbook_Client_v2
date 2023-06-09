@@ -9,7 +9,7 @@ import { SetterProps } from "./CustomRefs/customInterface";
 function SetTier(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
-  const { tierId } = customShipParts;
+  const { tierId } = ship.getParts();
   const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
   const { currentPart } = props;
   

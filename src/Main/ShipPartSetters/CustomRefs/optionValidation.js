@@ -1,4 +1,4 @@
-import * as Tables from "./metaTables.js";
+import * as Tables from "./metaTables.tsx";
 import * as SF from "../../References/shipFunctions.js";
 import * as Utils from "../../References/utils.js";
 import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from '../CustomRefs/antiPersonnelData';
