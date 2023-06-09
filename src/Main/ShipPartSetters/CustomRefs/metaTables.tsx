@@ -1,14 +1,17 @@
 import { capitalizeEachWord } from "../../References/utils";
 import frames from "./frames.json";
 
-interface Sources {
-  [source: string]: {
-    link: string,
-    abbrev: string,
-    sfsLegal: boolean
-  },
+interface Options<T> {
+  [option: string]: T
 }
-const sources: Sources = {
+
+
+interface Sources {
+  link: string,
+  abbrev: string,
+  sfsLegal: boolean
+}
+const sources: Options<Sources> = {
   // an item can have multiple sources
   'Starfinder Core Rulebook': {
     link: 'https://paizo.com/products/btpy9ssr?Starfinder-Core-Rulebook',
@@ -84,12 +87,10 @@ const sources: Sources = {
 
 // https://www.aonsrd.com/Rules.aspx?ID=183
 interface ShipTiers {
-  [tier: string]: {
-    buildPoints: number,
-    hpIncrement: number
-  }
+  buildPoints: number,
+  hpIncrement: number
 }
-const shipTiers: ShipTiers = {
+const shipTiers: Options<ShipTiers> = {
   '1/4': { buildPoints: 25, hpIncrement: 0 },
   '1/3': { buildPoints: 30, hpIncrement: 0 },
   '1/2': { buildPoints: 40, hpIncrement: 0 },
@@ -116,14 +117,12 @@ const shipTiers: ShipTiers = {
 }
 
 interface ShipSize {
-  [size: string]: {
-    length: string,
-    weight: string,
-    acMod: number,
-    tlMod: number
-  },
+  length: string,
+  weight: string,
+  acMod: number,
+  tlMod: number
 }
-const shipSize: ShipSize = {
+const shipSize: Options<ShipSize> = {
   Tiny: { length: '20-60 ft.', weight: '2-40 tons', acMod: 2, tlMod: 2 },
   Small: { length: '60-120 ft.', weight: '30-250 tons', acMod: 1, tlMod: 1 },
   Medium: {
@@ -165,12 +164,10 @@ const shipSize: ShipSize = {
 }
 
 interface Maneuverability {
-  [type: string]: {
-    turnDistance: number,
-    pilotingModifier: number
-  }
+  turnDistance: number,
+  pilotingModifier: number
 }
-const maneuverability: Maneuverability = {
+const maneuverability: Options<Maneuverability> = {
   Clumsy: { turnDistance: 4, pilotingModifier: -2 },
   Poor: { turnDistance: 3, pilotingModifier: -1 },
   Average: { turnDistance: 2, pilotingModifier: 0 },
@@ -194,14 +191,12 @@ const sizeCategory: SizeCategory = {
 
 // https://www.aonsrd.com/Starship_PowerCores.aspx
 interface PowerCores {
-  [type: string]: {
-    sizes: Array<string>,
-    pcuProvided: number,
-    bpCost: number,
-    source: string
-  }
+  sizes: Array<string> | null,
+  pcuProvided: number,
+  bpCost: number,
+  source: string | null
 }
-const powerCores: PowerCores = {
+const powerCores: Options<PowerCores> = {
   'Micron Light': {
     sizes: [ 'T' ],
     pcuProvided: 50,
@@ -356,16 +351,14 @@ const powerCores: PowerCores = {
 
 // https://www.aonsrd.com/Starship_Thrusters.aspx
 interface Thrusters {
-  [type: string]: {
-    size: string,
-    speed: number,
-    pilotingModifier: number,
-    pcuCost: number,
-    bpCost: number,
-    source: string
-  }
+  size: string | null,
+  speed: number,
+  pilotingModifier: number,
+  pcuCost: number,
+  bpCost: number,
+  source: string | null
 }
-const thrusters: Thrusters = {
+const thrusters: Options<Thrusters> = {
   T6: {
     size: 'T',
     speed: 6,
@@ -618,19 +611,15 @@ const thrusters: Thrusters = {
 
 // https://www.aonsrd.com/Starship_Armor.aspx
 interface Armor {
-  [type: string]: {
-    acBonus: number | null,
-    tempHP: number | null,
-    tlPenalty: number | null,
-    turnDistance: number | null,
-    bpCost: number,
-    source: string
-  }
+  acBonus: number | null,
+  tlPenalty: number | null,
+  turnDistance: number | null,
+  bpCost: number,
+  source: string | null
 }
-const armor: Armor = {
+const armor: Options<Armor> = {
   'Mk 1': {
     acBonus: 1,
-    tempHP: null,
     tlPenalty: null,
     turnDistance: null,
     bpCost: 1,
@@ -638,7 +627,6 @@ const armor: Armor = {
   },
   'Mk 2': {
     acBonus: 2,
-    tempHP: null,
     tlPenalty: null,
     turnDistance: null,
     bpCost: 2,
@@ -646,7 +634,6 @@ const armor: Armor = {
   },
   'Mk 3': {
     acBonus: 3,
-    tempHP: null,
     tlPenalty: null,
     turnDistance: null,
     bpCost: 3,
@@ -654,7 +641,6 @@ const armor: Armor = {
   },
   'Mk 4': {
     acBonus: 4,
-    tempHP: null,
     tlPenalty: null,
     turnDistance: null,
     bpCost: 5,
@@ -662,7 +648,6 @@ const armor: Armor = {
   },
   'Mk 5': {
     acBonus: 5,
-    tempHP: null,
     tlPenalty: -1,
     turnDistance: null,
     bpCost: 7,
@@ -670,7 +655,6 @@ const armor: Armor = {
   },
   'Mk 6': {
     acBonus: 6,
-    tempHP: null,
     tlPenalty: -1,
     turnDistance: null,
     bpCost: 9,
@@ -678,7 +662,6 @@ const armor: Armor = {
   },
   'Mk 7': {
     acBonus: 7,
-    tempHP: null,
     tlPenalty: -1,
     turnDistance: null,
     bpCost: 12,
@@ -686,7 +669,6 @@ const armor: Armor = {
   },
   'Mk 8': {
     acBonus: 8,
-    tempHP: null,
     tlPenalty: -1,
     turnDistance: null,
     bpCost: 15,
@@ -694,7 +676,6 @@ const armor: Armor = {
   },
   'Mk 9': {
     acBonus: 9,
-    tempHP: null,
     tlPenalty: -2,
     turnDistance: 1,
     bpCost: 18,
@@ -702,7 +683,6 @@ const armor: Armor = {
   },
   'Mk 10': {
     acBonus: 10,
-    tempHP: null,
     tlPenalty: -2,
     turnDistance: 1,
     bpCost: 21,
@@ -710,7 +690,6 @@ const armor: Armor = {
   },
   'Mk 11': {
     acBonus: 11,
-    tempHP: null,
     tlPenalty: -2,
     turnDistance: 1,
     bpCost: 25,
@@ -718,7 +697,6 @@ const armor: Armor = {
   },
   'Mk 12': {
     acBonus: 12,
-    tempHP: null,
     tlPenalty: -3,
     turnDistance: 2,
     bpCost: 30,
@@ -726,7 +704,6 @@ const armor: Armor = {
   },
   'Mk 13': {
     acBonus: 13,
-    tempHP: null,
     tlPenalty: -3,
     turnDistance: 2,
     bpCost: 35,
@@ -734,7 +711,6 @@ const armor: Armor = {
   },
   'Mk 14': {
     acBonus: 14,
-    tempHP: null,
     tlPenalty: -3,
     turnDistance: 2,
     bpCost: 40,
@@ -742,7 +718,6 @@ const armor: Armor = {
   },
   'Mk 15': {
     acBonus: 15,
-    tempHP: null,
     tlPenalty: -4,
     turnDistance: 3,
     bpCost: 45,
@@ -750,7 +725,6 @@ const armor: Armor = {
   },
   'Energy-Absorbent Plating': {
     acBonus: null,
-    tempHP: null,
     tlPenalty: null,
     turnDistance: null,
     bpCost: 4,
@@ -758,18 +732,15 @@ const armor: Armor = {
   },
 }
 
-interface AblativeArmorOptions {
-  [type: string]: AblativeArmor
-}
 interface AblativeArmor {
-    acBonus: number | null,
-    tempHP: number,
-    tlPenalty: number | null,
-    turnDistance: number | null,
-    bpCost: number,
-    source: string
+  acBonus: number | null,
+  tempHP: number,
+  tlPenalty: number | null,
+  turnDistance: number | null,
+  bpCost: number,
+  source: string
 }
-const ablativeArmor: AblativeArmorOptions = {
+const ablativeArmor: Options<AblativeArmor> = {
   'Basic ablative armor 1': {
     acBonus: null,
     tempHP: 8,
@@ -998,15 +969,13 @@ const ablativeArmor: AblativeArmorOptions = {
 
 // https://www.aonsrd.com/Starship_Computers.aspx
 interface Computers {
-  [type: string]: {
-    bonus: number,
-    nodes: number,
-    pcuCost: number,
-    bpCost: number,
-    source: string
-  }
+  bonus: number,
+  nodes: number,
+  pcuCost: number,
+  bpCost: number,
+  source: string | null
 }
-const computers: Computers = {
+const computers: Options<Computers> = {
   'Basic Computer': {
     bonus: 0,
     nodes: 0,
@@ -1213,14 +1182,12 @@ const computers: Computers = {
 }
 
 interface NetworkNodes {
-  [type: string]: { 
-    bonus: number, 
-    nodeMax: number, 
-    pcuCost: number, 
-    bpCost: number 
-  }
+  bonus: number, 
+  nodeMax: number, 
+  pcuCost: number, 
+  bpCost: number 
 }
-const networkNodes: NetworkNodes = {
+const networkNodes: Options<NetworkNodes> = {
   'Mk 4': { bonus: 4, nodeMax: 2, pcuCost: 8, bpCost: 4 },
   'Mk 5': { bonus: 5, nodeMax: 2, pcuCost: 10, bpCost: 5 },
   'Mk 6': { bonus: 6, nodeMax: 3, pcuCost: 11, bpCost: 6 },
@@ -1232,13 +1199,11 @@ const networkNodes: NetworkNodes = {
 
 // https://www.aonsrd.com/Starship_CrewQuarters.aspx?ItemName=All
 interface CrewQuarters {
-  [type: string]: {
-    bpCost: number,
-    source: string,
-    description: string
-  },
+  bpCost: number,
+  source: string | null,
+  description: string | null
 }
-const crewQuarters: CrewQuarters = {
+const crewQuarters: Options<CrewQuarters> = {
   Common: {
     bpCost: 0,
     source: 'Starfinder Core Rulebook pg. 298',
@@ -1258,14 +1223,12 @@ const crewQuarters: CrewQuarters = {
 
 // https://aonsrd.com/Starship_DefCounters.aspx
 interface DefensiveCounter {
-  [type: string]: {
-    tlBonus: number,
-    pcuCost: number,
-    bpCost: number,
-    source: string
-  }
+  tlBonus: number,
+  pcuCost: number,
+  bpCost: number,
+  source: string | null
 }
-const defensiveCounter: DefensiveCounter = {
+const defensiveCounter: Options<DefensiveCounter> = {
   'Mk 1': {
     tlBonus: 1,
     pcuCost: 1,
@@ -1361,16 +1324,14 @@ const defensiveCounter: DefensiveCounter = {
 // https://www.aonsrd.com/Starship_DriftEngines.aspx
 // https://aonsrd.com/StarshipInterstellar.aspx
 interface DriftEngines {
-  [type: string]: {
-    rating: number | string,
-    minPCU: number,
-    maxSize: string | null,
-    bpCost: number,
-    source: string,
-    special: string | null
-  }
+  rating: number | string,
+  minPCU: number,
+  maxSize: string | null,
+  bpCost: number,
+  source: string | null,
+  special: string | null
 }
-const driftEngines: DriftEngines = {
+const driftEngines: Options<DriftEngines> = {
   'Signal Basic': {
     rating: 1,
     minPCU: 75,
@@ -1494,14 +1455,12 @@ const driftEngines: DriftEngines = {
 
 //https://www.aonsrd.com/Starship_ExpBays.aspx?ItemName=All&Family=None
 interface ExpansionBays {
-  [type: string]: {
-    pcuCost: number | string,
-    bpCost: number | string,
-    source: string,
-    description: string
-  }
+  pcuCost: number | string,
+  bpCost: number | string,
+  source: string | null,
+  description: string | null
 }
-const expansionBays: ExpansionBays = {
+const expansionBays: Options<ExpansionBays> = {
   'Aeon Comm': {
     pcuCost: 5,
     bpCost: 3,
@@ -1911,13 +1870,11 @@ const expansionBays: ExpansionBays = {
 
 //https://www.aonsrd.com/StarshipHulls.aspx
 interface FortifiedHulls {
-  [type: string]: {
-    ctBonus: number,
-    bpCost: number,
-    source: string
-  }
+  ctBonus: number,
+  bpCost: number,
+  source: string | null
 }
-const fortifiedHulls: FortifiedHulls = {
+const fortifiedHulls: Options<FortifiedHulls> = {
   'Steel composite': {
     ctBonus: 1,
     bpCost: 2,
@@ -1947,13 +1904,11 @@ const fortifiedHulls: FortifiedHulls = {
 
 //https://www.aonsrd.com/StarshipBulkheads.aspx
 interface ReinforcedBulkheads {
-  [type: string]: {
-    fortification: number,
-    bpCost: number,
-    source: string
-  }
+  fortification: number,
+  bpCost: number,
+  source: string | null
 }
-const reinforcedBulkheads: ReinforcedBulkheads = {
+const reinforcedBulkheads: Options<ReinforcedBulkheads> = {
   'Mk 1': {
     fortification: 10,
     bpCost: 2,
@@ -1986,12 +1941,10 @@ const reinforcedBulkheads: ReinforcedBulkheads = {
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 interface AntiHackingSystems {
-  [type: string]:	{
-    bpCost: number, 
-    source: string
-  }
+  bpCost: number, 
+  source: string | null
 }
-const antiHackingSystems: AntiHackingSystems = {
+const antiHackingSystems: Options<AntiHackingSystems> = {
   "Mk 1":	{bpCost: 3, source: "Starship Operations Manual pg. 300"},
   "Mk 2":	{bpCost: 6, source: "Starship Operations Manual pg. 300"},
   "Mk 3":	{bpCost: 9, source: "Starship Operations Manual pg. 300"},
@@ -2000,12 +1953,10 @@ const antiHackingSystems: AntiHackingSystems = {
 
 // https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
 interface ComputerModules {
-  [type: string]: {
-    cost: string, 
-    sfsLegal: boolean
-  }
+  cost: string | number, 
+  sfsLegal: boolean | null
 }
-const computerModules: ComputerModules = {
+const computerModules: Options<ComputerModules> = {
   "Spell Chip": {cost: '110% of component spell gem', sfsLegal: true},
   "Control, Complex": {cost: '10% of controlled device', sfsLegal: true},
   "Rakmodoi Computers, Skill": {cost: "10% of computer's base price", sfsLegal: true},
@@ -2016,12 +1967,10 @@ const computerModules: ComputerModules = {
 
 // https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
 interface ComputerUpgrades {
-  [type: string]:	{
-    cost: string | number, 
-    sfsLegal: boolean
-  }
+  cost: string | number, 
+  sfsLegal: boolean | null
 }
-const computerUpgrades: ComputerUpgrades = {
+const computerUpgrades: Options<ComputerUpgrades> = {
   "Artificial Personality":	{cost: "10% of computer's base price", sfsLegal: true},
   "Hardened":	{cost: "50% of computer's base price", sfsLegal: true},
   "Miniaturization": {cost: "10% of computer's base price", sfsLegal: true},
@@ -2040,13 +1989,11 @@ const computerUpgrades: ComputerUpgrades = {
 
 // https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
 interface ComputerCountermeasures {
-  [type: string]: {
-    cost: string,
-    sfsLegal: boolean,
-    description: JSX.Element,
-  }
+  cost: string | number,
+  sfsLegal: boolean | null,
+  description: JSX.Element | null,
 }
-const computerCountermeasures: ComputerCountermeasures = {
+const computerCountermeasures: Options<ComputerCountermeasures> = {
   Alarm: {
     cost: "Tier of computer",
     sfsLegal: true,
@@ -2087,13 +2034,11 @@ const computerCountermeasures: ComputerCountermeasures = {
 
 // https://www.aonsrd.com/ComputerMods.aspx?ItemName=Shock%20Grid&Family=None
 interface ComputerShockGrid {
-  [type: string]:	{
-    DC: number,	
-    damage: string,	
-    price: number
-  }
+  DC: number | null,	
+  damage: string | null,	
+  price: number
 }
-const computerShockGrid: ComputerShockGrid = {
+const computerShockGrid: Options<ComputerShockGrid> = {
   1:	{DC: 20,	damage: "8d6",	price: 500},
   2:	{DC: 22,	damage: "10d6",	price: 2000},
   3:	{DC: 24,	damage: "12d6",	price: 5000},
@@ -2103,12 +2048,10 @@ const computerShockGrid: ComputerShockGrid = {
 
 // https://www.aonsrd.com/Computers.aspx
 interface ComputerTiers {
-  [type: number]: {
-    price: number,
-    hackDC: number
-  }
+  price: number | null,
+  hackDC: number | null
 }
-const computerTiers: ComputerTiers = {
+const computerTiers: Options<ComputerTiers> = {
   1: {price: 50, hackDC: 17},
   2: {price: 250, hackDC: 21},
   3: {price: 1250, hackDC: 25},
@@ -2124,15 +2067,13 @@ const computerTiers: ComputerTiers = {
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=Advanced&Family=Cloaking
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=Advanced&Family=Gray%20Cloaking%20Device
 interface CloakingTechnology {
-  [type: string]: {
-    bpCost: number, 
-    pcuCost: number, 
-    sfsLegal: boolean, 
-    source: string, 
-    type: string
-  }
+  bpCost: number, 
+  pcuCost: number, 
+  sfsLegal: boolean | null, 
+  source: string | null, 
+  type: string | null
 }
-const cloakingTechnology: CloakingTechnology = {
+const cloakingTechnology: Options<CloakingTechnology> = {
   "Cut-Rate": {bpCost: 10, pcuCost: 15, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
   "Budget": {bpCost: 15, pcuCost: 25, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
   "Basic": {bpCost: 25, pcuCost: 40, sfsLegal: false, source: "Near Space pg. 114", type: "Normal"},
@@ -2145,15 +2086,13 @@ const cloakingTechnology: CloakingTechnology = {
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 interface SecurityCheckboxes {
-  [type: string]: {
-    bpCost: number | string,
-    pcuCost: number | null,
-    sfsLegal: boolean,
-    source: string,
-    description: JSX.Element
-  }
+  bpCost: number | string,
+  pcuCost: number | null,
+  sfsLegal: boolean | null,
+  source: string | null,
+  description: JSX.Element | null
 }
-const securityCheckboxes: SecurityCheckboxes = {
+const securityCheckboxes: Options<SecurityCheckboxes> = {
   "Biometric Locks": {
     bpCost: 5,
     pcuCost: null,
@@ -2199,15 +2138,13 @@ const securityCheckboxes: SecurityCheckboxes = {
 
 // https://aonsrd.com/Starship_Sensors.aspx
 interface Sensors {
-  [type: string]: {
-    range: string | null, 
-    modifier: number | null, 
-    bpCost: number, 
-    sfsLegal: boolean, 
-    source: string
-  }
+  range: string | null, 
+  modifier: number | null, 
+  bpCost: number, 
+  sfsLegal: boolean | null, 
+  source: string | null
 }
-const sensors: Sensors = {
+const sensors: Options<Sensors> = {
   "Observation Sensors": {range: null, modifier: null, bpCost: 4, sfsLegal: false, source: "Starfinder #27: Deceivers' Moon pg. 49"},
   "System-Wide Sensors": {range: null, modifier: null, bpCost: 3, sfsLegal: false, source: "Galaxy Exploration Manual pg. 35"},
   "Sensor Drones": {range: null, modifier: null, bpCost: 1, sfsLegal: false, source: "Galaxy Exploration Manual pg. 35"},
@@ -2226,20 +2163,19 @@ const sensors: Sensors = {
   "Ultra Long-Range": {range: "Long", modifier: 6, bpCost: 20, sfsLegal: false, source: "Near Space pg. 114"},
 }
 
-interface SpecialMaterial {
-  [material: string]: {
-    shipComponent: {
-      [type: string]: {
-        bpCost: number | string, 
-        description: string,
-        summary: string
-      }
-    },
-    description: string,
-    source: string
-  }
+interface SpecialMaterial<T> {
+  shipComponent: {
+    [type: string]: T
+  },
+  description: string,
+  source: string
 }
-const specialMaterial: SpecialMaterial = {
+interface MaterialComponent {
+  bpCost: number | string, 
+  description: string,
+  summary: string
+}
+const specialMaterial: Options<SpecialMaterial<MaterialComponent>> = {
   "Abysium": {
     shipComponent: {
       "Power Core": {
@@ -2358,19 +2294,17 @@ const specialMaterial: SpecialMaterial = {
 }
 
 interface Shields {
-  [type: string]: {
-    totalSP: number | null, 
-    regeneration: string | null, 
-    dv: number | null, 
-    ac: number | null, 
-    tl: number | null, 
-    pcu: number, 
-    bpCost: number, 
-    sfsLegal: boolean, 
-    source: string
-  }
+  totalSP: number | null, 
+  regeneration: string | null, 
+  dv: number | null, 
+  ac: number | null, 
+  tl: number | null, 
+  pcu: number, 
+  bpCost: number, 
+  sfsLegal: boolean | null, 
+  source: string | null
 }
-const shields: Shields = {
+const shields: Options<Shields> = {
   "Basic Shields 10": {totalSP: 10, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 5, bpCost: 2, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
   "Basic Shields 20": {totalSP: 20, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 10, bpCost: 3, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
   "Basic Shields 30": {totalSP: 30, regeneration: '1/min', dv: null, ac: null, tl: null, pcu: 15, bpCost: 4, sfsLegal: true, source: "Starfinder Core Rulebook pg. 302"},
@@ -2410,17 +2344,17 @@ const shields: Shields = {
 }
 
 // <--- Data extractions --->
-const getSourceData = (source: string) => {
+const getSourceData = (source: string): Sources => {
   const { link, abbrev, sfsLegal } = sources[source];
 
   return {link, abbrev, sfsLegal};
 }
 
-const getTierData = (tierId: string) => {
+const getTierData = (tierId: string): ShipTiers => {
   // const array = shipTiers[tierId]
   const { buildPoints, hpIncrement } = shipTiers[tierId];
 
-  return {buildPoints, hpIncrementMultiplier: hpIncrement}
+  return {buildPoints, hpIncrement}
 }
 
 const getFrameData = (frameId: string) => {
@@ -2442,19 +2376,19 @@ const getFrameData = (frameId: string) => {
   return { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew, maximumCrew, cost, specialAbility }
 }
 
-const getManeuverabilityData = (type: string) => {
+const getManeuverabilityData = (type: string): Maneuverability => {
   const { turnDistance, pilotingModifier } = maneuverability[type]
 
   return {turnDistance, pilotingModifier}
 }
 
-const getSizeData = (size: string) => {
+const getSizeData = (size: string): ShipSize => {
   const { length, weight, acMod, tlMod } = shipSize[size]
 
   return {length, weight, acMod, tlMod}
 }
 
-const getPowerCoreData = (powerCoreId: string) => {
+const getPowerCoreData = (powerCoreId: string): PowerCores => {
   if(!powerCoreId) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null};
 
   const { sizes, pcuProvided, bpCost, source } = powerCores[capitalizeEachWord(powerCoreId)]
@@ -2462,7 +2396,7 @@ const getPowerCoreData = (powerCoreId: string) => {
   return {sizes, pcuProvided, bpCost, source}
 }
 
-const getThrusterData = (thrustersId: string) => {
+const getThrusterData = (thrustersId: string): Thrusters => {
   if(!thrustersId) return {size: null, speed: 0, pilotingModifier: 0, pcuCost: 0, bpCost: 0, source: null};
 
   const { size, speed, pilotingModifier, pcuCost, bpCost, source } = thrusters[thrustersId]
@@ -2470,15 +2404,15 @@ const getThrusterData = (thrustersId: string) => {
   return {size, speed, pilotingModifier, pcuCost, bpCost, source}
 }
 
-const getArmorData = (armorId: string, size: string) => {
+const getArmorData = (armorId: string, size: string): Armor => {
   if(!size) throw new Error("getArmorData(armorId, size) must take in a size parameter")
   if(!armorId) return {acBonus: 0, tlPenalty: 0, turnDistance: 0, bpCost: 0, source: null}
 
-  let { acBonus, tempHP, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
+  let { acBonus, tlPenalty, turnDistance, bpCost, source } = armor[armorId]
   bpCost = bpCost * sizeCategory[size]
   // Adamantine Armor: Adamantine alloy increases a starship's size category by 1 for the purpose of calculating the cost of its armor; the value of a Supercolossal ship's size category increases from 8 to 9 for this purpose.
 
-  return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
+  return {acBonus, tlPenalty, turnDistance, bpCost, source}
 }
 
 const getAblativeArmorData = (ablativeArmorId: string): AblativeArmor => {
@@ -2489,7 +2423,7 @@ const getAblativeArmorData = (ablativeArmorId: string): AblativeArmor => {
   return {acBonus, tempHP, tlPenalty, turnDistance, bpCost, source}
 }
 
-const getComputerData = (computerId: string) => {
+const getComputerData = (computerId: string): Computers => {
   if(!computerId) return {bonus: 0, nodes: 0, pcuCost: 0, bpCost: 0, source: null}
 
 
@@ -2499,15 +2433,15 @@ const getComputerData = (computerId: string) => {
   return {bonus, nodes, pcuCost, bpCost, source}
 }
 
-const getComputerHackDC = (computerTier: number) => {
-  if(!computerTier) return { hackDC: null }
+const getComputerHackDC = (computerTier: number): ComputerTiers => {
+  if(!computerTier) return { hackDC: null, price: null }
 
-  const { hackDC } = computerTiers[computerTier]
+  const { hackDC, price } = computerTiers[computerTier]
 
-  return hackDC;
+  return { hackDC, price };
 }
 
-const getNetworkNodeData = (nodeId: string, size: string) => { 
+const getNetworkNodeData = (nodeId: string, size: string): NetworkNodes => { 
   if(!size) throw new Error("getNetworkNodeData(nodeId, size) must take in a size parameter")
   if(!nodeId || nodeId === "Basic Computer" || size !== "Supercolossal") return {bonus: 0, nodeMax: 0, pcuCost: 0, bpCost: 0}
 
@@ -2516,7 +2450,7 @@ const getNetworkNodeData = (nodeId: string, size: string) => {
   return {bonus, nodeMax, pcuCost, bpCost}
 }
 
-const getQuartersData = (quartersId: string) => {
+const getQuartersData = (quartersId: string): CrewQuarters => {
   if (!quartersId) return {bpCost: 0, source: null, description: null}
 
   const { bpCost, source, description } = crewQuarters[quartersId]
@@ -2524,7 +2458,7 @@ const getQuartersData = (quartersId: string) => {
   return {bpCost, source, description}
 }
 
-const getDefensiveCounterData = (defensiveCounterId: string) => {
+const getDefensiveCounterData = (defensiveCounterId: string): DefensiveCounter => {
   if(!defensiveCounterId) return {tlBonus: 0, pcuCost: 0, bpCost: 0, source: null}
 
   const { tlBonus, pcuCost, bpCost, source } = defensiveCounter[defensiveCounterId]
@@ -2532,7 +2466,7 @@ const getDefensiveCounterData = (defensiveCounterId: string) => {
   return {tlBonus, pcuCost, bpCost, source}
 }
 
-const getDriftEngineData = (driftEngineId: string, size: string, frameId: string) => {
+const getDriftEngineData = (driftEngineId: string, size: string, frameId: string): DriftEngines => {
   // const size = Ship.getSize()
 
   if(!size || !frameId) throw new Error("getDriftEngineData(driftEngines, size, frameId) must take in a size and frameId parameter")
@@ -2548,25 +2482,25 @@ const getDriftEngineData = (driftEngineId: string, size: string, frameId: string
   return {rating, minPCU, maxSize, bpCost, source, special}
 }
 
-const getExpansionBayData = (expansionBayId: string, size: string, frameId: string) => {
+const getExpansionBayData = (expansionBayId: string, size: string): ExpansionBays => {
   if(!size) throw new Error("getExpansionBayData(expansionBayId, size) must take in a size parameter")
-  if(!expansionBayId) return {pcuCost: 0, bpCost: 0, source: null}
+  if(!expansionBayId) return {pcuCost: 0, bpCost: 0, source: null, description: null}
 
-  let { pcuCost, bpCost, source } = expansionBays[expansionBayId]
+  let { pcuCost, bpCost, source, description } = expansionBays[expansionBayId]
 
   if(expansionBayId === "Quantum Defender") {
-    return {pcuCost: Math.max(20, (5 * sizeCategory[size])), bpCost: Math.max(10, (4 * sizeCategory[size])), source}
+    return {pcuCost: Math.max(20, (5 * sizeCategory[size])), bpCost: Math.max(10, (4 * sizeCategory[size])), source, description}
   }
   if(expansionBayId === "Decoy Husk") {
-    return {pcuCost: (Number(pcuCost) + sizeCategory[size]), bpCost: (Number(bpCost) * sizeCategory[size]), source}
+    return {pcuCost: (Number(pcuCost) + sizeCategory[size]), bpCost: (Number(bpCost) * sizeCategory[size]), source, description}
   }
 
   if (size === "Supercolossal" && expansionBayId === "Cargo Hold") bpCost = 5; 
 
-  return {pcuCost, bpCost, source}
+  return {pcuCost, bpCost, source, description}
 }
 
-const getFortifiedHullData = (fortifiedHullId: string, size: string) => {
+const getFortifiedHullData = (fortifiedHullId: string, size: string): FortifiedHulls => {
   if(!size) throw new Error("getFortifiedHullData(fortifiedHullId, size) must take in a size parameter")
   if(!fortifiedHullId) return {ctBonus: 0, bpCost: 0, source: null}
 
@@ -2577,17 +2511,17 @@ const getFortifiedHullData = (fortifiedHullId: string, size: string) => {
   return {ctBonus, bpCost, source}
 }
 
-const getReinforcedBulkheadData = (reinforcedBulkheadId: string, size: string) => {
+const getReinforcedBulkheadData = (reinforcedBulkheadId: string, size: string): ReinforcedBulkheads => {
   if(!size) throw new Error("getReinforcedBulkeadData(reinforcedBulkheadId, size) must take in a size parameter")
-  if(!reinforcedBulkheadId) return {fortPercent: 0, bpCost: 0, source: null}
+  if(!reinforcedBulkheadId) return {fortification: 0, bpCost: 0, source: null}
 
-  let { fortification: fortPercent, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
+  let { fortification, bpCost, source } = reinforcedBulkheads[reinforcedBulkheadId]
   bpCost = bpCost * sizeCategory[size]
 
-  return {fortPercent, bpCost, source}
+  return {fortification, bpCost, source}
 }
 
-const getAntiHackingData = (antiHackingId: string) => {
+const getAntiHackingData = (antiHackingId: string): AntiHackingSystems => {
   if(!antiHackingId) return {bpCost: 0, source: null}
 
   const { bpCost, source } = antiHackingSystems[antiHackingId]
@@ -2595,7 +2529,7 @@ const getAntiHackingData = (antiHackingId: string) => {
   return {bpCost, source}
 }
 
-const getComputerModuleData = (computerModuleId: string) => {
+const getComputerModuleData = (computerModuleId: string): ComputerModules => {
   if (!computerModuleId) return {cost: 0, sfsLegal: null}
 
   const { cost, sfsLegal } = computerModules[computerModuleId]
@@ -2603,7 +2537,7 @@ const getComputerModuleData = (computerModuleId: string) => {
   return {cost, sfsLegal}
 }
 
-const getComputerUpgradeData = (computerUpgradeId: string) => {
+const getComputerUpgradeData = (computerUpgradeId: string): ComputerUpgrades => {
   if (!computerUpgradeId) return {cost: 0, sfsLegal: null}
 
   const { cost, sfsLegal } = computerUpgrades[computerUpgradeId]
@@ -2611,7 +2545,7 @@ const getComputerUpgradeData = (computerUpgradeId: string) => {
   return {cost, sfsLegal}
 }
 
-const getComputerCountermeasureData = (computerCountermeasureId: string, compTier: number) => {
+const getComputerCountermeasureData = (computerCountermeasureId: string, compTier: number): ComputerCountermeasures => {
   if(compTier === undefined) throw new Error("getComputerCountermeasureData(computerCountermeasureId, compTier) must take in a computer tier parameter")
 
   if (!computerCountermeasureId) return {cost: 0, sfsLegal: null, description: null}
@@ -2623,18 +2557,18 @@ const getComputerCountermeasureData = (computerCountermeasureId: string, compTie
   return {cost, sfsLegal, description}
 }
 
-const getComputerShockGridData = (computerShockGridId: string, compTier: number) => {
+const getComputerShockGridData = (computerShockGridId: string, compTier: number): ComputerShockGrid => {
   if(compTier === undefined) throw new Error("getComputerShockGridData(computerShockGridId, compTier) must take in a computer tier parameter")
 
-  if (!computerShockGridId) return {DC: null, damage: null, cost: 0}
+  if (!computerShockGridId) return {DC: null, damage: null, price: 0}
 
   const { DC, damage } = computerShockGrid[computerShockGridId]
-  const cost = compTier * Number(computerShockGridId)
+  const price = compTier * Number(computerShockGridId)
 
-  return {DC, damage, cost}
+  return {DC, damage, price}
 }
 
-const getComputerTierData = (computerTierId: number) => {
+const getComputerTierData = (computerTierId: number): ComputerTiers => {
   if (!computerTierId) return {price: null, hackDC: null}
 
   const { price, hackDC } = computerTiers[computerTierId]
@@ -2642,7 +2576,7 @@ const getComputerTierData = (computerTierId: number) => {
   return {price, hackDC}
 }
 
-const getCloakingData = (cloakingId: string) => {
+const getCloakingData = (cloakingId: string): CloakingTechnology => {
   if (!cloakingId) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null, type: null}
 
 
@@ -2651,7 +2585,7 @@ const getCloakingData = (cloakingId: string) => {
   return {bpCost, pcuCost, sfsLegal, source, type}
 }
 
-const getSecurityCheckboxData = (securityCheckboxId: string, size: string) => {
+const getSecurityCheckboxData = (securityCheckboxId: string, size: string): SecurityCheckboxes => {
   if(!size) throw new Error("getSecurityCheckboxData(securityCheckboxId, size) must take in a size parameter")
   if (!securityCheckboxId) return {bpCost: 0, pcuCost: 0, sfsLegal: null, source: null, description: null}
 
@@ -2664,7 +2598,7 @@ const getSecurityCheckboxData = (securityCheckboxId: string, size: string) => {
   return {bpCost, pcuCost, sfsLegal, source, description}
 }
 
-const getSensorsData = (sensorId: string) => {
+const getSensorsData = (sensorId: string): Sensors => {
   if (!sensorId) return {range: null, modifier: null, bpCost: 0, sfsLegal: null, source: null}
 
   const { range, modifier, bpCost, sfsLegal, source } = sensors[sensorId]
@@ -2672,7 +2606,7 @@ const getSensorsData = (sensorId: string) => {
   return {range, modifier, bpCost, sfsLegal, source}
 }
 
-const getShieldsData = (shieldsId: string) => {
+const getShieldsData = (shieldsId: string): Shields => {
   if (!shieldsId) return {totalSP: 0, regeneration: null, dv: null, ac: null, tl: null, pcu: 0, bpCost: 0, sfsLegal: null, source: null}
 
   const { totalSP, regeneration, dv, ac, tl, pcu, bpCost, sfsLegal, source } = shields[shieldsId]

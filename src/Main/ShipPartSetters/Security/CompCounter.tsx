@@ -59,7 +59,7 @@ function CompCounter(props: SetterProps) {
       if (!counters[key].active) return;
       
       if (key === "shockGrid") {
-        total += shockTable.cost
+        total += shockTable.price
       } else {
         total += counters[key].data.cost
       }
