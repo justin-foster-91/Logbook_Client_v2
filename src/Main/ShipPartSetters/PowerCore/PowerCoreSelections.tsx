@@ -12,9 +12,9 @@ const PowerCoreSelections = () => {
   const size = ship.getSize();
   const powerCoreQuantity = SF.getCoreQuantityFromSize(size);
 
-  const handlePowerCoreChange = (event) => {
+  const handlePowerCoreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const coreIndex = Number(event.target.name);
-    let coreOption = event.target.value;
+    let coreOption: string | null = event.target.value;
     if (coreOption === "None") coreOption = null;
 
     console.log({ coreOption, coreIndex });
@@ -31,7 +31,7 @@ const PowerCoreSelections = () => {
           <select
             id={`powerCore${idx + 1}`}
             value={powerCoreIds[idx] || "None"}
-            name={idx}
+            name={String(idx)}
             onChange={handlePowerCoreChange}
           >
             {(idx > 0) && <option key="None">None</option>}

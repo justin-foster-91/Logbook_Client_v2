@@ -2,17 +2,18 @@ import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as SF from "./shipFunctions";
 import * as Utils from "./utils";
 import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
-
+import { ShipParts, ShipArcs, Security, SecurityCheckboxes, CounterSecurity, isCounterSecurity, SecurityCounter, Material } from "../ShipPartSetters/CustomRefs/customInterface";
 
 class Ship {
-  #parts;
-  #sources;
+  #parts: ShipParts;
+  #sources: Array<Object>;
+  onShipChange: (arg: ShipParts) => void;
 
-  constructor(parts, sources) {
+  constructor(parts: ShipParts, sources: Array<Object>) {
     this.#parts = parts;
     this.#sources = sources;
 
-    this.onShipChange = (parts) => {};
+    this.onShipChange = (parts: ShipParts) => {};
 
     if (parts) {
       const frameId = Utils.capitalizeEachWord(parts.frameId);
@@ -83,7 +84,7 @@ class Ship {
   }
   
   // <... Setters ...>
-  setTier(tier) {
+  setTier(tier: string) {
     tier = tier.toString();
     if (!Tables.getTierIdList().includes(tier)) {
       throw new Error("Tier input did not match allowed tier options");
@@ -96,7 +97,7 @@ class Ship {
     return this;
   }
 
-  setFrame(frame) {
+  setFrame(frame: string) {
     if (!Tables.getFrameIdList().includes(frame)) {
       throw new Error("Frame input did not match allowed frame options");
     }
@@ -112,7 +113,7 @@ class Ship {
     return this;
   }
 
-  setPowerCore(powerCore, idx) {
+  setPowerCore(powerCore: string, idx: number) {
     if (!Tables.getPowerCoreIdList().includes(powerCore) && powerCore !== null) {
       throw new Error("Power core input did not match allowed power core options");
     }
@@ -129,7 +130,7 @@ class Ship {
     return this;
   }
 
-  setPowerCoreArrayLength(length) {
+  setPowerCoreArrayLength(length: number) {
     if (length < 1) {
       throw new Error("Power core array length must be greater than 0");
     }
@@ -139,7 +140,7 @@ class Ship {
     return this;
   }
 
-  setThrusters(thruster) {
+  setThrusters(thruster: string) {
     if (!Tables.getThrusterIdList().includes(thruster) && thruster !== null) {
       throw new Error("Thrusters input did not match allowed thruster options");
     }
@@ -149,21 +150,9 @@ class Ship {
     return this;
   }
 
-  setArmor(armor) {
+  setArmor(armor: string) {
     if (!Tables.getArmorIdList().includes(armor) && armor !== null) {
       throw new Error("Armor input did not match allowed armor options");
-    }
-    const balancedHP = Tables.getArmorData(armor, this.getSize()).tempHP / 4;
-    const arcList = ["forward", "port", "starboard", "aft"];
-
-    // if armor is not ablative, empty ablative hp values
-    if (!armor?.includes("ablative")) {
-      arcList.map((arc) => this.setAblativeHPByPosition(arc, 0));
-    }
-
-    // if armor is ablative, balance hp values
-    if (armor?.includes("ablative")) {
-      arcList.map((arc) => this.setAblativeHPByPosition(arc, balancedHP));
     }
 
     this.#parts.armorId = armor;
@@ -171,9 +160,21 @@ class Ship {
     return this;
   }
 
-  setAblativeArmor(armor) {
-    if (!Tables.getAblativeArmorIdList().includes(armor) && armor !== null) {
+  setAblativeArmor(armor: string | null) {
+    if (armor && !Tables.getAblativeArmorIdList().includes(armor) && armor !== null) {
       throw new Error("Ablative Armor input did not match allowed armor options");
+    }
+    
+    const arcList: Array<ShipArcs> = ["forward", "port", "starboard", "aft"];
+
+    if (!armor) {
+      arcList.map((arc) => this.setAblativeHPByPosition(arc, 0));
+    }
+
+    if (armor) {
+      const balancedHP = Tables.getAblativeArmorData(armor).tempHP / 4;
+
+      arcList.map((arc) => this.setAblativeHPByPosition(arc, balancedHP));
     }
 
     this.#parts.ablativeArmorId = armor;
@@ -181,14 +182,14 @@ class Ship {
     return this;
   }
 
-  setAblativeHPByPosition(pos, hp) {
+  setAblativeHPByPosition(pos: ShipArcs, hp: number) {
     this.#parts.ablativeArmorByPosition[pos] = hp;
 
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setComputer(comp) {
+  setComputer(comp: string) {
     if (!Tables.getComputerIdList().includes(comp) && comp !== null) {
       throw new Error("Computer input did not match allowed computer options");
     }
@@ -198,26 +199,26 @@ class Ship {
     return this;
   }
 
-  setSecondaryComputer(comp) {
+  setSecondaryComputer(comp: string) {
     this.#parts.secondaryComputerId = comp;
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setNetworkNodeCount(count) {
+  setNetworkNodeCount(count: number) {
     this.#parts.ctNetworkNodes = count;
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setCrewQuarters(quarters) {
+  setCrewQuarters(quarters: string) {
     console.log(quarters);
     this.#parts.crewQuartersId = quarters;
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setDefensiveCounters(defense) {
+  setDefensiveCounters(defense: string) {
     if (!Tables.getDefensiveCounterIdList().includes(defense) && defense !== null) {
       throw new Error("Defensive counter input did not match allowed defensive options");
     }
@@ -227,7 +228,7 @@ class Ship {
     return this;
   }
 
-  setDriftEngine(engine) {
+  setDriftEngine(engine: string) {
     if (!Tables.getDriftEngineIdList().includes(engine) && engine !== null) {
       throw new Error("Drift engine input did not match allowed engine options");
     }
@@ -237,7 +238,7 @@ class Ship {
     return this;
   }
 
-  setExpansionBay(expansion, idx, copy) {
+  setExpansionBay(expansion: string, idx: number, copy: string) {
     if (!Tables.getExpansionBayIdList().includes(expansion) && expansion !== null) {
       throw new Error("Expansion bay input did not match allowed expansion options");
     }
@@ -255,20 +256,20 @@ class Ship {
   }
 
   // TODO: Should this be part of setExpansionBay()?
-  deleteExpansionBay(idx) {
+  deleteExpansionBay(idx: number) {
     SF.removeExpansion(this.#parts, idx);
 
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setExpansionBayArrayLength(length) {
+  setExpansionBayArrayLength(length: number) {
     this.#parts.expansionBayIds.length = length;
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setFortifiedHull(hull) {
+  setFortifiedHull(hull: string) {
     if (!Tables.getFortifiedHullIdList().includes(hull) && hull !== null) {
       throw new Error("Fortified hull input did not match allowed hull options");
     }
@@ -278,7 +279,7 @@ class Ship {
     return this;
   }
 
-  setReinforcedBulkheads(bulkhead) {
+  setReinforcedBulkheads(bulkhead: string) {
     if (!Tables.getReinforcedBulkheadIdList().includes(bulkhead) &&bulkhead !== null) {
       throw new Error("Reinforced bulkhead input did not match allowed bulkhead options");
     }
@@ -288,14 +289,18 @@ class Ship {
     return this;
   }
 
-  setSecurity(security) {
-    const targetTranslation = {
+  
+  setSecurity(security: Security) {
+    interface StringObj {
+      [index: string]: keyof ShipParts;
+  }
+    const targetTranslation: StringObj = {
       "Biometric Locks": "hasBiometricLocks",
       "Self-Destruct System": "hasSelfDestructSystem",
       "Emergency Accelerator": "hasEmergencyAccelerator",
       "Holographic Mantle": "hasHolographicMantle",
       "Reconfiguration System": "hasReconfigurationSystem",
-      "shockGrid": "shockGridId",
+      // "shockGrid": "shockGridId",
       "Anti-Hacking Systems": "antiHackingSystemsId",
       "Anti-Personnel Weapon": "antiPersonnelWeaponId",
       "Cloaking Device": "cloakingId",
@@ -303,29 +308,35 @@ class Ship {
 
     const translationKeys = Object.keys(targetTranslation);
 
-    let { reference, value, parent } = security;
+    let { reference, value } = security;
 
-    if (translationKeys.includes(reference)) {
-      reference = targetTranslation[reference];
-    }
+    // if (translationKeys.includes(reference)) {
+      let referenceTranslated: keyof ShipParts = targetTranslation[reference];
+    // }
 
-    if (parent) {
-      this.#parts[parent][reference] = value;
-    } else {
-      this.#parts[reference] = value;
-    }
-    
+    this.#parts["antiHackingSystemsId"] = value;
+
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setAntiPersonnelWeapon(weapon) {
+  setCounterSecurity(security: CounterSecurity) {
+    let { reference, value, parent } = security;
+
+    let partsParent: any = this.#parts[parent]
+    partsParent[reference] = value;
+
+    this.onShipChange(this.#parts);
+    return this;
+  }
+
+  setAntiPersonnelWeapon(weapon: string) {
     this.#parts.antiPersonnelWeaponId = weapon;
     this.onShipChange(this.#parts);
     return this;
   }
 
-  setSensors(sensor) {
+  setSensors(sensor: string) {
     if (!Tables.getSensorsIdList().includes(sensor) && sensor !== null) {
       throw new Error("Sensor input did not match allowed sensor options");
     }
@@ -335,8 +346,8 @@ class Ship {
     return this;
   }
 
-  setMaterial(part, material, idx) {
-    const partTranslate = {
+  setMaterial(part: string, material: string, idx: number) {
+    const partTranslate: any = {
       "Power Core": "powerCoreSpecialMaterials", 
       "Thrusters": "thrustersMaterialId", 
       "Armor": "armorMaterialId",
@@ -344,7 +355,7 @@ class Ship {
       "Sensors": "sensorsMaterialId",
     }
 
-    let keyId = partTranslate[part];
+    let keyId: Material = partTranslate[part];
     if (part === "Power Core") {
       this.#parts[keyId][idx] = material;
     } else {
@@ -355,7 +366,7 @@ class Ship {
     return this;
   }
 
-  setShields(shield) {
+  setShields(shield: string) {
     if (!Tables.getShieldsIdList().includes(shield) && shield !== null) {
       throw new Error("Shield input did not match allowed shield options");
     }

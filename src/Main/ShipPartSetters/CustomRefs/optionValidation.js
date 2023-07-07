@@ -1,7 +1,7 @@
-import * as Tables from "./metaTables.tsx";
-import * as SF from "../../References/shipFunctions.js";
+import * as Tables from "./metaTables";
+import * as SF from "../../References/shipFunctions";
 import * as Utils from "../../References/utils.js";
-import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from '../CustomRefs/antiPersonnelData';
+import { getLongarmData, getHeavyData, getLongarmIdList, getHeavyIdList } from './antiPersonnelData';
 
 const isAllowedBySources = (ship, partSource) => {
   const activeSources = ship.getActiveSources();

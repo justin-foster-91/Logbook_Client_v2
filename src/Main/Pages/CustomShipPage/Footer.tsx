@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Footer(props) {
+function Footer(props: any) {
   return (
     <div>
       {/* TODO: links to site and automatic "last updated" */}

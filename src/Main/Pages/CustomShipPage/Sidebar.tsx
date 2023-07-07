@@ -4,11 +4,11 @@ import * as SF from "../../References/shipFunctions";
 import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
 import PointTotals from '../../ShipPartSetters/Components/PointTotals';
 
-function Sidebar(props) {
+function Sidebar(props: any) {
   const {setterList, partHighlight} = props;
 
   const sidebarList = () => {
-    return setterList.map(part => {
+    return setterList.map((part: any) => {
       let { name, subComponents } = part;
 
 

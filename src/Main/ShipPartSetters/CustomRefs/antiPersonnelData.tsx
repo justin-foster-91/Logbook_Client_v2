@@ -1,4 +1,20 @@
-const longarmWeapons = {
+interface Options<T> {
+  [key: string]: T
+}
+interface Weapon {
+    category: string | null;
+    level: string;
+    price: string;
+    damage: string | null;
+    range: string;
+    critical: string | null;
+    capacity: string;
+    usage: string;
+    bulk: string;
+    special: string | null;
+    sfsLegal: boolean;
+}
+const longarmWeapons: Options<Weapon> = {
   "Needler Rifle": {
     "category": null,
     "level": "1",
@@ -3589,7 +3605,7 @@ const longarmWeapons = {
   }
 }
 
-const heavyWeapons = {
+const heavyWeapons: Options<Weapon> = {
   "NIL Grenade Launcher, Merc": {
     "category": null,
     "level": "1",
@@ -6765,30 +6781,32 @@ const heavyWeapons = {
 }
 
 // <--- Data extractions --->
-const getLongarmData = (longarmId) => {
+const getLongarmData = (longarmId: string) => {
   if (!longarmId || !longarmWeapons[longarmId]) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
 
   let { category, level, damage, range, critical, special, sfsLegal } = longarmWeapons[longarmId]
-  level = Number(level)
-  const cost = level
+  const cost = Number(level)
 
   return {category, level, damage, range, critical, special, sfsLegal, cost}
 }
 
-const getHeavyData = (heavyId) => {
+const getHeavyData = (heavyId: string) => {
   if (!heavyId || !heavyWeapons[heavyId]) return { category: null, level: 0, damage: 0, range: 0, critical: 0, special: null, sfsLegal: null }
 
   let { category, level, damage, range, critical, special, sfsLegal } = heavyWeapons[heavyId]
-  level = Number(level)
-  const cost = level + 5;
+  const cost = Number(level) + 5;
 
   return {category, level, damage, range, critical, special, sfsLegal, cost}
 }
 
-const getLongarmIdList = (shipTier) => {
+const getLongarmIdList = (shipTier: string) => {
+  let tempShipTier: number;
+  if (isNaN(Number(shipTier))) tempShipTier = 0;
+  else tempShipTier = Number(shipTier);
+
   if (shipTier) {
     return Object.keys(longarmWeapons)
-      .filter(weapon => Number(longarmWeapons[weapon].level) <= shipTier)
+      .filter(weapon => Number(longarmWeapons[weapon].level) <= tempShipTier)
       .sort((a, b) => Number(longarmWeapons[b].level) - Number(longarmWeapons[a].level))
   } else {
     return Object.keys(longarmWeapons)
@@ -6796,10 +6814,14 @@ const getLongarmIdList = (shipTier) => {
   }
 }
 
-const getHeavyIdList = (shipTier) => {
+const getHeavyIdList = (shipTier: string) => {
+  let tempShipTier: number;
+  if (isNaN(Number(shipTier))) tempShipTier = 0;
+  else tempShipTier = Number(shipTier);
+
   if (shipTier) {
     return Object.keys(heavyWeapons)
-      .filter(weapon => Number(heavyWeapons[weapon].level) <= shipTier)
+      .filter(weapon => Number(heavyWeapons[weapon].level) <= tempShipTier)
       .sort()
   } else {
     return Object.keys(heavyWeapons)

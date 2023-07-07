@@ -5,7 +5,7 @@ import PartTotals from "../Components/PartTotals";
 import AccordionText from '../Components/AccordionText';
 import { isValidSecurity } from '../CustomRefs/optionValidation';
 
-function SecurityCheckboxes(props) {
+function SecurityCheckboxes(props: any) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { hasBiometricLocks, hasSelfDestructSystem, hasEmergencyAccelerator, hasHolographicMantle, hasReconfigurationSystem } = customShipParts;
@@ -13,7 +13,20 @@ function SecurityCheckboxes(props) {
   const { currentPart } = props;
   const size = ship.getSize();
 
-  const securityCheckbox = {
+  interface SecurityCheckbox {
+    [key: string]: {
+      active: boolean,
+      data: Checkboxes
+    }
+  }
+  interface Checkboxes {
+    bpCost: number | string,
+    pcuCost: number | null,
+    sfsLegal: boolean | null,
+    source: string | null,
+    description: JSX.Element | null
+  }
+  const securityCheckbox: SecurityCheckbox = {
     "Biometric Locks": {
       active: hasBiometricLocks,
       data: Tables.getSecurityCheckboxData("Biometric Locks", size),
@@ -36,14 +49,14 @@ function SecurityCheckboxes(props) {
     },
   };
 
-  const handleCheckboxChange = (ev) => {
+  const handleCheckboxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const checkboxOption = ev.target.name
     const checkboxActive = ev.target.checked
 
     ship.setSecurity({ reference: checkboxOption, value: checkboxActive})
   }
 
-  const partTotalsRender = (box) => {
+  const partTotalsRender = (box: any) => {
     if (box === "Biometric Locks" || box === "Self-Destruct System") {
       return <PartTotals 
         part={currentPart} 

@@ -4,12 +4,12 @@ import * as SF from "../References/shipFunctions";
 
 // TODO: display as stat-block style instead of component list
 
-const TemplateBreakdown = (props) => {
+const TemplateBreakdown = (props: any) => {
   const { frameId, shipName, tierId } = props
   const size = SF.findComponentByFrameId(frameId, "size");
 
   const showFrameComponents = () => {
-    const pairedArray = [];
+    const pairedArray: any[] = [];
     const componentArray = [
       "tierId",
       "frameId",
@@ -51,7 +51,7 @@ const TemplateBreakdown = (props) => {
               {/* Check if the value in an array */}
               {typeof partValue === "object"
                 ? partValue
-                  .filter((element) => element !== null)
+                  .filter((element: any) => element !== null)
                   .join(", ")
                 : partValue}
             </div>

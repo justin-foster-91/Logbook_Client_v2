@@ -5,7 +5,7 @@ import * as Tables from '../CustomRefs/metaTables'
 
 // TODO: tooltip explaining what the numbers mean in sidebar
 
-function PointTotals(props) {
+function PointTotals(props: any) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { tierId, powerCoreIds } = customShipParts
 

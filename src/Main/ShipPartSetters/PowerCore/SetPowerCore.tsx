@@ -7,7 +7,7 @@ import PowerIcon from "../../IconRefs/PowerIcon";
 import PartTotals from "../Components/PartTotals";
 import AccordionText from "../Components/AccordionText";
 
-function SetPowerCore(props) {
+function SetPowerCore(props: any) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { powerCoreIds } = customShipParts;
@@ -18,12 +18,12 @@ function SetPowerCore(props) {
   // An abysium power core increases the PCU it provides by 25% (maximum +50 PCU).
   // A djezet power core increases the PCU it provides by 10% (maximum +20 PCU), but it can direct that power only to fulfill the PCU requirements for expansion bays.
   const pcuProvided = powerCoreIds
-    .map((core) => Tables.getPowerCoreData(core).pcuProvided)
-    .reduce((total, pcu) => total + pcu);
+    .map((core: string) => Tables.getPowerCoreData(core).pcuProvided)
+    .reduce((total: number, pcu: number) => total + pcu);
 
   const bpCost = powerCoreIds
-    .map((core) => Tables.getPowerCoreData(core).bpCost)
-    .reduce((total, bp) => total + bp);
+    .map((core: string) => Tables.getPowerCoreData(core).bpCost)
+    .reduce((total: number, bp: number) => total + bp);
 
   return (
     <>
@@ -43,7 +43,8 @@ function SetPowerCore(props) {
         </div>
       }
 
-      <PowerCoreSelections></PowerCoreSelections>
+      {/* <PowerCoreSelections></PowerCoreSelections> */}
+      {PowerCoreSelections()}
 
       <div className="row">
         <PowerIcon />

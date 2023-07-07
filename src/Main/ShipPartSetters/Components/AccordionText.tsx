@@ -4,7 +4,7 @@ import DownArrowIcon from '../../IconRefs/DownArrowIcon';
 
 // TODO: add a check to see if the full text will fit without needing to be snipped
 
-function AccordionText(props) {
+function AccordionText(props: any) {
   const [expanded, setExpanded] = useState(false);
   const ref = useRef(null);
 
@@ -13,7 +13,7 @@ function AccordionText(props) {
   // let fullText = props.children
   const fullText = (typeof props.children === "string") ? <p>{props.children}</p> : props.children
 
-  const sliceByWindowSize = (str) => {
+  const sliceByWindowSize = (str: string) => {
     return str.slice(0, ref.current?.offsetWidth/8)
   }
 
@@ -62,10 +62,8 @@ export default AccordionText;
 function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
+  const [windowSize, setWindowSize] = useState({});
+
   useEffect(() => {
     // Handler to call on window resize
     function handleResize() {

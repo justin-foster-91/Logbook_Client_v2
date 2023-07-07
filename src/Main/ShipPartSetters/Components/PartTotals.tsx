@@ -3,7 +3,7 @@ import { CustomShipContext } from "../../Context/shipContext";
 import PowerIcon from "../../IconRefs/PowerIcon";
 import BuildIcon from "../../IconRefs/BuildIcon";
 
-function PartTotals(props) {
+function PartTotals(props: any) {
   const { ship, customShipParts } = useContext(CustomShipContext);
 
   const { part, pcuCost, bpCost, note } = props;

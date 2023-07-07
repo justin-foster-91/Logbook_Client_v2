@@ -191,7 +191,7 @@ const sizeCategory: SizeCategory = {
 
 // https://www.aonsrd.com/Starship_PowerCores.aspx
 interface PowerCores {
-  sizes: Array<string> | null,
+  sizes: Array<string>,
   pcuProvided: number,
   bpCost: number,
   source: string | null
@@ -1989,11 +1989,11 @@ const computerUpgrades: Options<ComputerUpgrades> = {
 
 // https://www.aonsrd.com/ComputerMods.aspx?ItemName=All&Family=None
 interface ComputerCountermeasures {
-  cost: string | number,
+  cost: number,
   sfsLegal: boolean | null,
   description: JSX.Element | null,
 }
-const computerCountermeasures: Options<ComputerCountermeasures> = {
+const computerCountermeasures: Options<any> = {
   Alarm: {
     cost: "Tier of computer",
     sfsLegal: true,
@@ -2359,7 +2359,7 @@ const getTierData = (tierId: string): ShipTiers => {
 
 const getFrameData = (frameId: string) => {
   interface WrapperObject { 
-    [x: string | number | symbol]: unknown;
+    [x: string | number | symbol]: any;
   }
   let matchingFrame: WrapperObject = {};
   
@@ -2389,7 +2389,7 @@ const getSizeData = (size: string): ShipSize => {
 }
 
 const getPowerCoreData = (powerCoreId: string): PowerCores => {
-  if(!powerCoreId) return {sizes: null, pcuProvided: 0, bpCost: 0, source: null};
+  if(!powerCoreId) return {sizes: [], pcuProvided: 0, bpCost: 0, source: null};
 
   const { sizes, pcuProvided, bpCost, source } = powerCores[capitalizeEachWord(powerCoreId)]
 

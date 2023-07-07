@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PowerIcon(props) {
+function PowerIcon(props: any) {
   return (
     // <img src={powerIcon} alt='PCU' className='icon'/>
     <svg viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" fill="#000000" className="bi bi-lightning-charge-fill icon">

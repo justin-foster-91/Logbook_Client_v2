@@ -4,7 +4,7 @@ import { CustomShipContext } from "../../Context/shipContext";
 import * as Utils from '../../References/utils'
 import { isValidComputer } from "../CustomRefs/optionValidation";
 
-function NonPrimaryComputers(props) {
+function NonPrimaryComputers(props: any) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { computerId, secondaryComputerId, ctNetworkNodes } = customShipParts;
@@ -14,13 +14,13 @@ function NonPrimaryComputers(props) {
   const networkNodeId = `Mk ${mkNumber}`
   const { nodeMax } = Tables.getNetworkNodeData(networkNodeId, ship.getSize())
 
-  const handleSecondaryComputerChange = (ev) => {
+  const handleSecondaryComputerChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     const secondaryOption = ev.target.value;
 
     ship.setSecondaryComputer(secondaryOption)
   };
 
-  const handleNodeChange = (ev) => {
+  const handleNodeChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     const nodeAmount = Number(ev.target.value)
 
     ship.setNetworkNodeCount(nodeAmount)

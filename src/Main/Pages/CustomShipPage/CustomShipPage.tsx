@@ -25,8 +25,7 @@ import SetShields from "../../ShipPartSetters/SetShields";
 
 function CustomShipPage() {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const [partHighlight, setPartHighlight] = useState();
-  let test;
+  const [partHighlight, setPartHighlight] = useState('');
 
   //SetWeapon Fighter - forward arc (2 light [1 must be a tracking weapon])
 
@@ -55,7 +54,6 @@ function CustomShipPage() {
   };  
   
   useEffect(() => {
-    test = "blah"
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true });
     
@@ -64,7 +62,7 @@ function CustomShipPage() {
     };
   }, []);
 
-  const [showJSON, setShowJSON] = useState();
+  const [showJSON, setShowJSON] = useState(false);
 
   const printJSON = () => {
     setShowJSON(!showJSON);

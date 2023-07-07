@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function PartTitle(props) {
+function PartTitle(props: any) {
   const { currentPart } = props;
   const name = (typeof currentPart === "string") ? currentPart : currentPart.name;
   
