@@ -5,15 +5,14 @@ import PartTotals from "../Components/PartTotals";
 import AccordionText from '../Components/AccordionText';
 import { isValidSecurity } from '../CustomRefs/optionValidation';
 import { getLongarmData, getLongarmIdList, getHeavyData, getHeavyIdList } from '../CustomRefs/antiPersonnelData';
-import { SetterProps } from "../CustomRefs/customInterface";
 
-function AntiPersonnel(props: SetterProps) {
+function AntiPersonnel(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const [radioWeaponSelection, setRadioWeaponSelection] = useState("longarm");
   const [radioSourceSelection, setRadioSourceSelection] = useState("allSources");
   const [bpCost, setBpCost] = useState(0);
 
-  const { antiPersonnelWeaponId: weaponId, tierId }: any = customShipParts;
+  const { antiPersonnelWeaponId: weaponId, tierId } = customShipParts;
   const { currentPart } = props;
   const size = ship.getSize()
   const frameTooLarge = Tables.sizeCategory[size] > 3
@@ -45,8 +44,8 @@ function AntiPersonnel(props: SetterProps) {
     })
   }
 
-  const handleDropdownChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    let option: string | null = ev.target.value;
+  const handleDropdownChange = (ev) => {
+    let option = ev.target.value;
     if (option === "None") {
       option = null;
       setBpCost(0)
@@ -55,7 +54,7 @@ function AntiPersonnel(props: SetterProps) {
     ship.setSecurity({ reference: "Anti-Personnel Weapon", value: option})
   };
 
-  const handleWeaponRadioChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  const handleWeaponRadioChange = (ev) => {
     const radioOption = ev.target.value;
 
     ship.setSecurity({ reference: "Anti-Personnel Weapon", value: null})
@@ -63,7 +62,7 @@ function AntiPersonnel(props: SetterProps) {
     setRadioWeaponSelection(radioOption)
   }
 
-  const handleSourceRadioChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSourceRadioChange = (ev) => {
     const radioOption = ev.target.value;
 
 

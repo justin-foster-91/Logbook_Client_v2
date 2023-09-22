@@ -9,7 +9,7 @@ import { SetterProps } from "../CustomRefs/customInterface";
 
 function SetReinforcedBulkheads(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const { reinforcedBulkheadId }: any = customShipParts
+  const { reinforcedBulkheadId } = customShipParts
   const size = ship.getSize()
   const { fortPercent, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
   const { currentPart } = props

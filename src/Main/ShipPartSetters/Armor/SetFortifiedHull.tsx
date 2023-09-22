@@ -11,7 +11,7 @@ import { SetterProps } from "../CustomRefs/customInterface";
 
 function SetFortifiedHull(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
-  const { fortifiedHullId }: any = customShipParts
+  const { fortifiedHullId } = customShipParts
   const size = ship.getSize()
   const { ctBonus, bpCost } = Tables.getFortifiedHullData(fortifiedHullId, size)
   const { currentPart } = props;

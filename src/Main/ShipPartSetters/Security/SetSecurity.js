@@ -8,14 +8,14 @@ import HackAndCloak from "./HackAndCloak";
 import SecurityCheckboxes from "./SecurityCheckboxes";
 import * as SF from "../../References/shipFunctions";
 import AccordionText from "../Components/AccordionText";
-import { SetterProps } from "../CustomRefs/customInterface";
+import { SetterProps } from "../CustomRefs/customInterface.tsx";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 
 // TODO: change layouts of the different costs to look more organized
 // possibly list all cost right aligned or at least in a column with other costs of same type
 
-function SetSecurity(props: SetterProps) {
+function SetSecurity(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { currentPart } = props;
 

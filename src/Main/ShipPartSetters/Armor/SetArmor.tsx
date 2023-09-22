@@ -18,8 +18,8 @@ function SetArmor(props: SetterProps) {
   const { currentPart } = props;
   
 
-  const handleArmorChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    let armorOption: string | null = ev.target.value;
+  const handleArmorChange = (ev) => {
+    let armorOption = ev.target.value;
     if (armorOption === "None") armorOption = null;
 
     ship.setArmor(armorOption)
@@ -43,7 +43,7 @@ function SetArmor(props: SetterProps) {
       return "A ship equipped with energy-absorbent plating can store some of the energy that strikes the hull, redirecting that energy to power the ship's systems. Once per turn, when a ship with energy-absorbent plating is hit by an attack that penetrates its shields, the ship's engineer may immediately take a free divert action. The boost granted by this free divert action does not stack with the benefit of any other divert action already benefiting the ship.";
   }
 
-  const createDropdownItem = (armor: string, idx: number) => {
+  const createDropdownItem = (armor, idx) => {
     if (armor.includes("Mk")) return `${armor} Armor (+${Tables.getArmorData(armor, size).acBonus} AC)`;
     if (armor.includes("Energy")) return `${armor}`;  }
 
