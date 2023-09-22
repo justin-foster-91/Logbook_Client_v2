@@ -8,7 +8,6 @@ import HackAndCloak from "./HackAndCloak";
 import SecurityCheckboxes from "./SecurityCheckboxes";
 import * as SF from "../../References/shipFunctions";
 import AccordionText from "../Components/AccordionText";
-import { SetterProps } from "../CustomRefs/customInterface.tsx";
 
 // https://www.aonsrd.com/Starship_Security.aspx?ItemName=All&Family=None
 

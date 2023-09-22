@@ -18,7 +18,7 @@ export const CustomShipContext = createContext({
   setCustomShipParts: ()=>{}, 
   ship: new Ship(), 
   sourceStatus: {},
-  setSourceStatus: (sources)=>{},
+  setSourceStatus: ()=>{},
   activeSources: []
 })
 export const CustomShipProvider = ({children}) => {
@@ -40,8 +40,3 @@ export const CustomShipProvider = ({children}) => {
 
   return (<CustomShipContext.Provider value={{customShipParts, setCustomShipParts, ship, sourceStatus, setSourceStatus, activeSources}}>{children}</CustomShipContext.Provider>)
 }
-
-
-// interface SourceStatus {
-//   [x: string]: bool;
-// }

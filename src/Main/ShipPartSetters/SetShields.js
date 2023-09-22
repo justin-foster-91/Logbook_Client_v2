@@ -8,21 +8,23 @@ import SpecialMaterials from "./Components/SpecialMaterials";
 import AccordionText from "./Components/AccordionText";
 import { isValidShields } from "./CustomRefs/optionValidation";
 
-interface WrapperProps {
-  component: Function, 
-  name: string
-}
+// "shieldsByPosition": {
+//   "forward": 0,
+//   "aft": 0,
+//   "port": 0,
+//   "starboard": 0
+// },
 
-function SetShields(props: WrapperProps) {
+function SetShields(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
-  const { shieldsId } = ship.getParts();
+  const { shieldsId  } = ship.getParts();
+  const { forward, aft, port, starboard } = ship.getParts().shieldsByPosition;
 
   const { currentPart } = props;
 
-  const handleShieldsChange = (ev: object) => {
+  const handleShieldsChange = (ev) => {
     let shieldsOption = ev.target.value;
-    console.log(ev);
     if (shieldsOption === "None") shieldsOption = null;
 
     ship.setShields(shieldsOption)
@@ -30,7 +32,7 @@ function SetShields(props: WrapperProps) {
 
   return (
     <>
-      <PartTitle currentPart={currentPart} />
+      {/* <PartTitle currentPart={currentPart} />
 
       <div className="dropdownBlock">
         <label htmlFor="shields" className="hidden">Shields Type</label>
@@ -47,7 +49,7 @@ function SetShields(props: WrapperProps) {
             </option>
           )}
         </select>
-      </div>
+      </div> */}
     </>
   );
 }
