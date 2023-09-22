@@ -5,36 +5,29 @@ import * as Utils from '../References/utils';
 import * as Tables from '../ShipPartSetters/CustomRefs/metaTables';
 
 
-export const ShipsContext = createContext({userShips: [], setUserShips: (ships: any)=>{}});
-export const ShipsProvider = ({children}: any) => {
-  const [userShips, setUserShips] = useState<any>([]);
+export const ShipsContext = createContext({userShips: [], setUserShips: ()=>{}});
+export const ShipsProvider = ({children}) => {
+  const [userShips, setUserShips] = useState([]);
 
   return (<ShipsContext.Provider value={{userShips, setUserShips}}>{children}</ShipsContext.Provider>)
 }
 
 
-interface CustomShipInterface {
-  customShipParts: any,
-  setCustomShipParts: any, 
-  ship: any, 
-  sourceStatus: any,
-  setSourceStatus: any,
-  activeSources: any
-}
-export const CustomShipContext = createContext<CustomShipInterface>({
+
+export const CustomShipContext = createContext({
   customShipParts: {}, 
-  setCustomShipParts: (shipParts: any)=>{}, 
+  setCustomShipParts: ()=>{}, 
   ship: new Ship(), 
   sourceStatus: {},
-  setSourceStatus: (sources: any)=>{},
+  setSourceStatus: (sources)=>{},
   activeSources: []
 })
-export const CustomShipProvider = ({children}: any) => {
+export const CustomShipProvider = ({children}) => {
   const [customShipParts, setCustomShipParts] = useState(defaultSelections)
   
   const sourceList = Object.keys(Tables.sources)
   const [sourceStatus, setSourceStatus] = useState(
-    sourceList.reduce((accum: any, cur: string) => {
+    sourceList.reduce((accum, cur) => {
       accum[cur] = true;
       return accum;
     }, {})

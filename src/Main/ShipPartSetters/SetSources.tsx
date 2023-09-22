@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { CustomShipContext } from "../Context/shipContext";
 import * as Tables from './CustomRefs/metaTables'
 import PartTitle from './Components/PartTitle';
@@ -23,34 +23,30 @@ function SetSources(props: SetterProps) {
     const checkbox = ev.target.name
     const checked = ev.target.checked
 
-    setSourceStatus((activeSources: Array<Object>) => ({
+    setSourceStatus(activeSources => ({
       ...activeSources,
       [checkbox]: checked
     }))
   }
 
-  // if cur is 'Starfinder Core Rulebook' return
   const changeActiveSources = (newValFunc: Function) => {
-    return sourceList.reduce((accum: any, cur) => {
+    return sourceList.reduce((accum, cur) => {
         accum[cur] = newValFunc(cur);
         return accum;
       }, {})
   }
 
   const handleButtonClick = (ev: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    const clicked = ev.currentTarget.value;
+    const clicked = ev.target['value'];
 
-    interface Sources {
-      [x: string | number | symbol]: unknown;
-    }
-    let updatedSources: Sources = {}
+    let updatedSources = {}
 
     if (clicked === 'All') {
-      updatedSources = changeActiveSources((cur: Array<Object>) => true)
+      updatedSources = changeActiveSources((cur) => true)
     }
 
     if (clicked === 'None') {
-      updatedSources = changeActiveSources((cur: Array<Object>) => false)
+      updatedSources = changeActiveSources((cur) => false)
 
       updatedSources['Starfinder Core Rulebook'] = true;
     }
