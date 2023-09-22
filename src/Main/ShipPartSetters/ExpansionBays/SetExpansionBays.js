@@ -19,7 +19,7 @@ import AccordionText from '../Components/AccordionText';
 
 // TODO: A djezet power core increases the PCU it provides by 10% (maximum +20 PCU), but it can direct that power only to fulfill the PCU requirements for expansion bays.
 
-function SetExpansionBays(props: any) {
+function SetExpansionBays(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { expansionBayIds, frameId, tierId } = ship.getParts()
   const size = ship.getSize()
@@ -38,12 +38,12 @@ function SetExpansionBays(props: any) {
     if(!expansionBayIds.length) return;
 
     setPcuCostTotal(expansionBayIds
-      .map((expansion: string) => Tables.getExpansionBayData(expansion, size).pcuCost)
-      .reduce((total: number, pcu: number) => total + pcu));
+      .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+      .reduce((total, pcu) => total + pcu));
 
     setBpCostTotal(expansionBayIds
-      .map((expansion: string) => Tables.getExpansionBayData(expansion, size).bpCost)
-      .reduce((total: number, bp: number) => total + bp));
+      .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+      .reduce((total, bp) => total + bp));
 
   }, [expansionBayIds, size, expansionString])
 

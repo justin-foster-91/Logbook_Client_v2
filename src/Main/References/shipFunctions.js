@@ -1,16 +1,16 @@
 import * as Tables from "../ShipPartSetters/CustomRefs/metaTables";
 import * as Utils from "./utils";
-// import frames from "../ShipPartSetters/CustomRefs/frames.json";
+import frames from "../ShipPartSetters/CustomRefs/frames";
 import Ship from './ship'
 import * as personnelWeapons from "../ShipPartSetters/CustomRefs/antiPersonnelData";
 import * as Validate from "../ShipPartSetters/CustomRefs/optionValidation";
-const frames: any = require('../ShipPartSetters/CustomRefs/frames.json')
 
 // TODO: add in bonus core from expansion
 // Str size => Num core quantity
-const getCoreQuantityFromSize = (size: string): number => {
+const getCoreQuantityFromSize = (size) => {
   size = size.toLowerCase();
 
+  // TODO: condense this logic
   if (size === "tiny") return 1;
   if (size === "small") return 1;
   if (size === "medium" || size === "large") return 1;
@@ -18,12 +18,10 @@ const getCoreQuantityFromSize = (size: string): number => {
   if (size === "gargantuan") return 3;
   if (size === "colossal") return 4;
   if (size === "supercolossal") return 5;
-
-  return 0;
 };
 
 // String core => Boolean
-const doesFrameSizeAllowCoreSize = (core: string, frameSize: string): boolean => {
+const doesFrameSizeAllowCoreSize = (core, frameSize) => {
   let sizeLetterList = Tables.getPowerCoreData(core).sizes;
   let sizeWordList = sizeLetterList.map((size) =>
     Utils.sizeLetterToStringConverter(size)
@@ -35,28 +33,28 @@ const doesFrameSizeAllowCoreSize = (core: string, frameSize: string): boolean =>
   return sizeWordList.includes(frameSize);
 };
 
-const doesFrameSizeAllowThruster = (thruster: string, frameSize: string): boolean => {
+const doesFrameSizeAllowThruster = (thruster, frameSize) => {
   let sizeLetter = Tables.getThrusterData(thruster).size;
   let sizeWord = Utils.sizeLetterToStringConverter(sizeLetter);
 
   return sizeWord.match(frameSize) ? true : false;
 };
 
-const findComponentByFrameId = (frameId: string, returnComponent: string): any => {
+const findComponentByFrameId = (frameId, returnComponent) => {
   let newFrame = frames.find(
-    (frame: any) => frame.type === frameId
+    (frame) => frame.type === frameId
   );
 
-  if (newFrame) return newFrame[returnComponent];
+  return newFrame[returnComponent];
 };
 
-const updateFrame = (ship: any) => {
+const updateFrame = (ship) => {
   if (!Validate.isValidFrame(ship, ship.getParts().frameId)) {
     ship.setFrame("Light Freighter");
   }
 }
 
-const updatePowerCores = (ship: any) => {
+const updatePowerCores = (ship) => {
   const { powerCoreIds } = ship.getParts();
   const size = ship.getSize()
   const powerCoreIdList = Tables.getPowerCoreIdList()
@@ -65,9 +63,9 @@ const updatePowerCores = (ship: any) => {
   let firstValidCore = powerCoreIdList.find(core => doesFrameSizeAllowCoreSize(core, size))
   if (size === "Supercolossal") firstValidCore = 'Gateway Ultra'
 
-  if (newCoreLength && powerCoreIds.length > newCoreLength) ship.setPowerCoreArrayLength(newCoreLength);
+  if (powerCoreIds.length > newCoreLength) ship.setPowerCoreArrayLength(newCoreLength);
 
-  powerCoreIds.forEach((core: string, idx: number) => {
+  powerCoreIds.forEach((core, idx) => {
     if (idx === 0) {
       if (!core || (core && !Validate.isValidPowerCore(ship, core, idx))) {
         ship.setPowerCore(firstValidCore, idx);
@@ -80,7 +78,7 @@ const updatePowerCores = (ship: any) => {
   });
 };
 
-const updateThrusters = (ship: any) => {
+const updateThrusters = (ship) => {
   const { thrustersId } = ship.getParts()
 
   const thrusterIdList = Tables.getThrusterIdList()
@@ -90,19 +88,19 @@ const updateThrusters = (ship: any) => {
   if (thrustersId !== firstValidThruster && !Validate.isValidThruster(ship, thrustersId)) ship.setThrusters(firstValidThruster);
 };
 
-const updateArmor = (ship: any) => {
+const updateArmor = (ship) => {
   const { armorId } = ship.getParts()
 
   if (!Validate.isValidArmor(ship, armorId)) ship.setArmor(null)
 }
 
-const updateAblativeArmor = (ship: any) => {
+const updateAblativeArmor = (ship) => {
   const { ablativeArmorId } = ship.getParts()
 
   if (!Validate.isValidAblativeArmor(ship, ablativeArmorId)) ship.setAblativeArmor(null)
 }
 
-const updateComputer = (ship: any) => {
+const updateComputer = (ship) => {
   const { computerId, secondaryComputerId } = ship.getParts()
 
   const size = ship.getSize()
@@ -120,38 +118,39 @@ const updateComputer = (ship: any) => {
   }
 }
 
-const updateCrewQuarters = (ship: any) => {
+const updateCrewQuarters = (ship) => {
   const { crewQuartersId, frameId } = ship.getParts();
 
   if (!Validate.isValidQuarters(ship, crewQuartersId)) ship.setCrewQuarters("Common");
   if (frameId === "Starship Drone") ship.setCrewQuarters(null);
 }
 
-const updateDriftEngine = (ship: any) => {
+const updateDriftEngine = (ship) => {
   const { driftEngineId } = ship.getParts()
   if (!Validate.isValidDriftEngine(ship, driftEngineId)) ship.setDriftEngine(null);
 }
 
-const updateExpansionBays = (ship: any) => {
+const updateExpansionBays = (ship) => {
   const { expansionBayIds } = ship.getParts()
 
   const { expansions: expansionCap } = getFramePackage(ship.getParts())
 
-  if(expansionCap && expansionBayIds.length > expansionCap) ship.setExpansionBayArrayLength(expansionCap)
+  if(expansionBayIds.length > expansionCap) ship.setExpansionBayArrayLength(expansionCap)
 
   // Set "Cargo Hold" as default selection for any expansion not specified
-  expansionBayIds.forEach((expansion: string, idx: number) => {
+  expansionBayIds.forEach((expansion, idx) => {
     if(expansion === null) ship.setExpansionBay("Cargo Hold")
   })
 }
 
-const updateAntiPersonnelToMatchTier = (ship: any) => {
-  let { antiPersonnelWeaponId: weaponId, tierId } = ship
+const updateAntiPersonnelToMatchTier = (ship) => {
+  let { antiPersonnelWeaponId: weaponId } = ship
+
 
   if (!weaponId) return;
 
-  const foundLongarm = personnelWeapons.getLongarmIdList(tierId).indexOf(weaponId) >= 0
-  const foundHeavy = personnelWeapons.getHeavyIdList(tierId).indexOf(weaponId) >= 0
+  const foundLongarm = personnelWeapons.getLongarmIdList().indexOf(weaponId) >= 0
+  const foundHeavy = personnelWeapons.getHeavyIdList().indexOf(weaponId) >= 0
 
   let type;
   if (foundLongarm) type = "longarm"
@@ -159,17 +158,17 @@ const updateAntiPersonnelToMatchTier = (ship: any) => {
   if (!Validate.isValidSecurity(ship, weaponId, type)) ship.setAntiPersonnelWeapon(null);
 }
 
-const updateSecurity = (ship: any) => {
+const updateSecurity = (ship) => {
   updateCloaking(ship);
 }
 
-const updateCloaking = (ship: any) => {
+const updateCloaking = (ship) => {
   const { cloakingId } = ship.getParts()
 
   if (!Validate.isValidSecurity(ship, cloakingId, "cloaking")) ship.setSecurity({ reference: "Cloaking Device", value: null});
 }
 
-const updateSecurityCheckbox = (ship: any) => {
+const updateSecurityCheckbox = (ship) => {
   // hasBiometricLocks legal
   // hasSelfDestructSystem legal
   // hasEmergencyAccelerator not legal
@@ -177,13 +176,13 @@ const updateSecurityCheckbox = (ship: any) => {
   // hasReconfigurationSystem not legal
 }
 
-const updateSensors = (ship: any) => {
+const updateSensors = (ship) => {
   const { sensorsId } = ship.getParts()
 
   if (!Validate.isValidSensors(ship, sensorsId)) ship.setSensors(null)
 }
 
-const updateShields = (ship: any) => {
+const updateShields = (ship) => {
   const { shieldsId } = ship.getParts()
   
   if (!Validate.isValidShields(ship, shieldsId)) ship.setShields(null);
@@ -191,7 +190,7 @@ const updateShields = (ship: any) => {
 
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
-const validateShip = (ship: any) => {
+const validateShip = (ship) => {
   let powerCoreValidation = validatePowerCores(ship);
   let thrustersValidation = validateThrusters(ship);
   let armorValidation = validateArmor(ship)
@@ -199,11 +198,11 @@ const validateShip = (ship: any) => {
   return mergeValidations([powerCoreValidation, thrustersValidation, armorValidation]);
 };
 
-const mergeValidations = (validationList: any) => {
+const mergeValidations = (validationList) => {
   let allValid = true;
-  let allErrors: Array<any> = [];
+  let allErrors = [];
 
-  validationList.forEach((validation: any) => {
+  validationList.forEach((validation) => {
     allValid = allValid && validation.validity;
     if (validation.errors) allErrors = allErrors.concat(validation.errors);
   });
@@ -211,7 +210,7 @@ const mergeValidations = (validationList: any) => {
   return { validity: allValid, errors: allErrors };
 };
 
-const validateThrusters = (ship: any) => {
+const validateThrusters = (ship) => {
   if (ship.thrustersId === null) {
     return {
       validity: false,
@@ -229,11 +228,11 @@ const validateThrusters = (ship: any) => {
 
 // Object ship => {validity: Bool, errors: [Error]}
 // Error = {shipPart: String, message: String}
-const validatePowerCores = (ship: any) => {
+const validatePowerCores = (ship) => {
   // power core must fit frame size
   // limit core number by frame size
 
-  if (ship.powerCoreIds.every((core: string) => core === null)) {
+  if (ship.powerCoreIds.every((core) => core === null)) {
     // all power cores are empty
 
     return {
@@ -253,7 +252,7 @@ const validatePowerCores = (ship: any) => {
   ) {
     // ship frame is supercolossal
 
-    let supercolossalCoreBoolArray = ship.powerCoreIds.map((core: string) =>
+    let supercolossalCoreBoolArray = ship.powerCoreIds.map((core) =>
       Tables.getPowerCoreData(core).sizes.includes("Sc")
     );
 
@@ -263,9 +262,9 @@ const validatePowerCores = (ship: any) => {
       let indexOfFirstSupercolossalMatch =
         supercolossalCoreBoolArray.indexOf(true);
       let hugeCoreBoolArray = ship.powerCoreIds
-        .filter((core: string, idx: number) => indexOfFirstSupercolossalMatch !== idx)
+        .filter((core, idx) => indexOfFirstSupercolossalMatch !== idx)
         .map(
-          (core: string) =>
+          (core) =>
             Tables.getPowerCoreData(core).sizes.includes("H") &&
             !Tables.getPowerCoreData(core).sizes.includes("C")
         );
@@ -291,7 +290,7 @@ const validatePowerCores = (ship: any) => {
     } else {
       // no cores were supercolossal size
 
-      let colossalCoreBoolArray = ship.powerCoreIds.map((core: string) =>
+      let colossalCoreBoolArray = ship.powerCoreIds.map((core) =>
         Tables.getPowerCoreData(core).sizes.includes("C")
       );
 
@@ -319,7 +318,7 @@ const validatePowerCores = (ship: any) => {
   return { validity: true, errors: [] };
 };
 
-const validateArmor = (ship: any) => {
+const validateArmor = (ship) => {
   // let { size } = getFramePackage(ship)
 
   // ship = new Ship(ship)
@@ -327,7 +326,7 @@ const validateArmor = (ship: any) => {
   const { armorId, ablativeArmorByPosition } = ship.getParts();
   const { forward, port, starboard, aft } = ablativeArmorByPosition;
   const totalUsedTempHP = forward + port + starboard + aft
-  const totalAllowedTempHP = Tables.getArmorData(ship.getParts().armorId, ship.getSize())
+  const totalAllowedTempHP = Tables.getArmorData(ship.getParts().armorId, ship.getSize()).tempHP
   
   if(armorId && armorId.includes('ablative')){
     if(totalAllowedTempHP !== totalUsedTempHP){
@@ -346,26 +345,26 @@ const validateArmor = (ship: any) => {
   return { validity: true, errors: [] };
 }
 
-const formatExpansions = (defaultString: string) => {
+const formatExpansions = (defaultString) => {
   if (defaultString.toString().search("unlimited") >= 0) return "Unlimited";
 
   return defaultString;
 };
 
-const getFramePackage = (ship: any) => {
+const getFramePackage = (ship) => {
   const { tierId, frameId } = ship;
 
   let { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minimumCrew: minCrew, maximumCrew: maxCrew, cost: bpCost, specialAbility } = Tables.getFrameData(frameId)
 
   const { startTotal, increment } = hp
-  const { hpIncrement: hpIncrementMultiplier } = Tables.getTierData(tierId)
+  const { hpIncrementMultiplier } = Tables.getTierData(tierId)
   hp = startTotal + (increment * hpIncrementMultiplier)
 
   return { type, source, size, maneuverability, hp, dt, ct, mounts, expansions, minCrew, maxCrew, bpCost, specialAbility };
 };
 
-const getTotalBPCosts = (ship: any) => {
-  const powerCoreTotalBPCost = ship.powerCoreIds.map((core: string) => Tables.getPowerCoreData(core).bpCost).reduce((total: number, num: number) => total + num)
+const getTotalBPCosts = (ship) => {
+  const powerCoreTotalBPCost = ship.powerCoreIds.map(core => Tables.getPowerCoreData(core).bpCost).reduce((total, num) => total + num)
   const { size } = getFramePackage(ship)
 
   const bpExpenses = [
@@ -391,7 +390,7 @@ const getTotalBPCosts = (ship: any) => {
   return bpExpenses.reduce((total, num) => total + num);
 };
 
-const getTotalPCUCosts = (ship: any) => {
+const getTotalPCUCosts = (ship) => {
   const { thrustersId } = ship
 
   const pcuExpenses = [
@@ -408,7 +407,7 @@ const getTotalPCUCosts = (ship: any) => {
   return pcuExpenses.reduce((total, num) => total + num);
 }
 
-const getEssentialPCUCosts = (ship: any) => {
+const getEssentialPCUCosts = (ship) => {
   const { thrustersId } = ship
 
   const pcuExpenses = [
@@ -421,7 +420,7 @@ const getEssentialPCUCosts = (ship: any) => {
   return pcuExpenses.reduce((total, num) => total + num);
 }
 
-const getTotalCompCosts = (ship: any) => {
+const getTotalCompCosts = (ship) => {
   const { size } = getFramePackage(ship)
   const { bpCost, pcuCost } = Tables.getComputerData(ship.computerId);
   const { ctNetworkNodes } = ship
@@ -436,18 +435,18 @@ const getTotalCompCosts = (ship: any) => {
   return { bpTotal, pcuTotal }
 }
 
-const getTotalExpansionCosts = (ship: any) => {
+const getTotalExpansionCosts = (ship) => {
   const { size } = getFramePackage(ship)
 
   if (!ship.expansionBayIds.length) return { bpTotal: 0, pcuTotal: 0 }
 
   const bpTotal = ship.expansionBayIds
-    .map((expansion: string) => Tables.getExpansionBayData(expansion, size).bpCost)
-    .reduce((total: number, bp: number) => total + bp);
+    .map((expansion) => Tables.getExpansionBayData(expansion, size).bpCost)
+    .reduce((total, bp) => total + bp);
 
   const pcuTotal = ship.expansionBayIds
-    .map((expansion: string) => Tables.getExpansionBayData(expansion, size).pcuCost)
-    .reduce((total: number, bp: number) => total + bp);
+    .map((expansion) => Tables.getExpansionBayData(expansion, size).pcuCost)
+    .reduce((total, bp) => total + bp);
 
   return { bpTotal, pcuTotal }
 }
@@ -490,7 +489,7 @@ const getPilotingMod = () => {
   // Horacalcum increases the maximum speed of any thrusters by 1 and reduces a starship’s Piloting check penalty based on its maximum speed by 1 (minimum +0).
 }
 
-const combineComputerBonuses = (ship: any, size: string) => {
+const combineComputerBonuses = (ship, size) => {
   const { 
     computerId: primary, 
     secondaryComputerId: secondary, 
@@ -525,13 +524,13 @@ const combineComputerBonuses = (ship: any, size: string) => {
   return combineBonuses()
 }
 
-const bonusSplitter = (comp: string, bonus: number, nodes: number, isPrimary: boolean) => {
+const bonusSplitter = (comp, bonus, nodes, isPrimary) => {
   if(comp.includes("Basic") && isPrimary) return ['+0']
 
   return Array(nodes).fill(`+${bonus}`)
 }
 
-const copyExpansion = (ship: any, expansion: string, index: number) => {
+const copyExpansion = (ship, expansion, index) => {
   let expansionArray = ship.expansionBayIds
   const firstPiece = expansionArray.slice(0, index+1)
   const lastPiece = expansionArray.slice(index+1)
@@ -541,13 +540,13 @@ const copyExpansion = (ship: any, expansion: string, index: number) => {
   ship.expansionBayIds = [...firstPiece, ...middlePiece, ...lastPiece]
 }
 
-const removeExpansion = (ship: any, idx: number) => {
+const removeExpansion = (ship, idx) => {
   // const { expansions } = getFramePackage(ship)
 
   ship.expansionBayIds.splice(idx, 1)
 }
 
-const getTotalSecurityCosts = (shipParts: any) => {
+const getTotalSecurityCosts = (shipParts) => {
   const antiPersonnelCost = getAntiPersonnelCosts(shipParts);
   const compCounterCost = getCompCounterCosts(shipParts);
   const hackAndCloakCost = getHackAndCloakCosts(shipParts);
@@ -561,7 +560,7 @@ const getTotalSecurityCosts = (shipParts: any) => {
   return { totalBpCosts, totalPcuCosts };
 }
 
-const getAntiPersonnelCosts = (shipParts: any) => {
+const getAntiPersonnelCosts = (shipParts) => {
   const { antiPersonnelWeaponId: weaponId } = shipParts;
 
   if (!weaponId) return 0;
@@ -579,7 +578,7 @@ const getAntiPersonnelCosts = (shipParts: any) => {
   }
 }
 
-const getCompCounterCosts = (shipParts: any) => {
+const getCompCounterCosts = (shipParts) => {
   const { computerCountermeasures: compCounter, tierId } = shipParts;
 
   const computerTier = Math.max(Math.floor(parseInt(tierId) / 2), 1);
@@ -593,14 +592,14 @@ const getCompCounterCosts = (shipParts: any) => {
     } 
 
     if (counterReadable === "Shock Grid" && compCounter[counter]) {
-      totalCost += Tables.getComputerShockGridData(compCounter[counter], computerTier).price
+      totalCost += Tables.getComputerShockGridData(compCounter[counter], computerTier).cost
     }
   })
 
   return totalCost;
 }
 
-const getHackAndCloakCosts = (shipParts: any) => {
+const getHackAndCloakCosts = (shipParts) => {
   const { antiHackingSystemsId, cloakingId } = shipParts;
 
   const { bpCost: hackingBpCost } = Tables.getAntiHackingData(antiHackingSystemsId);
@@ -609,7 +608,7 @@ const getHackAndCloakCosts = (shipParts: any) => {
   return hackingBpCost + cloakingBpCost;
 }
 
-const getSecurityCheckboxCosts = (shipParts: any) => {
+const getSecurityCheckboxCosts = (shipParts) => {
   const { hasBiometricLocks, hasSelfDestructSystem, hasEmergencyAccelerator, hasHolographicMantle, hasReconfigurationSystem, frameId } = shipParts;
 
   const size = findComponentByFrameId(frameId, "size")

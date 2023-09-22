@@ -16,15 +16,12 @@ import AccordionText from './AccordionText';
 //   }
 // }
 
-function SpecialMaterials(props: any) {
+function SpecialMaterials(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { part: shipPart, idx: rowIdx = 0 } = props
 
-  interface PartTranslate {
-    [key: string]: string
-  }
-  const partTranslate: PartTranslate = {
+  const partTranslate = {
     "Power Core": "powerCoreSpecialMaterials", 
     "Thrusters": "thrustersMaterialId", 
     "Armor": "armorMaterialId",
@@ -59,7 +56,7 @@ function SpecialMaterials(props: any) {
 
   const allSpecialsForShipPart = () => {
     const specialTypes = Object.keys(materials)
-    const specialsForPart: any[] = []
+    const specialsForPart = []
 
     specialTypes.forEach(type => {
       const partsForSpecial = Object.keys(materials[type].shipComponent)
@@ -71,8 +68,8 @@ function SpecialMaterials(props: any) {
     return specialsForPart;
   }
 
-  const handleRadioChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    let radioOption: string | null = ev.target.value;
+  const handleRadioChange = (ev) => {
+    let radioOption = ev.target.value;
     if (radioOption === "None") radioOption = null;
 
     ship.setMaterial(shipPart, radioOption, rowIdx)
@@ -89,7 +86,7 @@ function SpecialMaterials(props: any) {
     )
   }
 
-  const renderRadioButton = (material: string) => {
+  const renderRadioButton = (material) => {
     return (
       <div key={`${shipPart}:${rowIdx}:${material}`}>
         <input 

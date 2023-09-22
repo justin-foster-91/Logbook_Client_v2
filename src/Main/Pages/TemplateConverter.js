@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import * as Utils from '../References/utils'
 import temp from './tempShip.json'
 
-function TemplateConverter(props: any) {
+function TemplateConverter(props) {
   const [jsonPackage, setJsonPackage] = useState()
 
-  const handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (ev) => {
     const input = ev.target.value
 
     setJsonPackage(JSON.parse(input))
   }
 
-  const convert = (ship: any) => {
+  const convert = (ship) => {
     ship = sortObject(ship)
     hyphensToSpaces(ship)
     noneToNull(ship)
@@ -19,10 +19,10 @@ function TemplateConverter(props: any) {
     return ship
   }
 
-  const hyphensToSpaces = (ship: any) => {
-    return Utils.treeTransform(ship, (node: any, key: string)=>{
+  const hyphensToSpaces = (ship) => {
+    return Utils.treeTransform(ship, (node, key)=>{
       if(key.match(/Id/)) {
-        if(typeof node === 'object') return node.map((item: string) => Utils.capitalizeEachWord(item))
+        if(typeof node === 'object') return node.map(item => Utils.capitalizeEachWord(item))
         else return Utils.capitalizeEachWord(node)
       }
       return node
@@ -30,15 +30,15 @@ function TemplateConverter(props: any) {
   }
   
 
-  const noneToNull = (ship: any) => {
-    Utils.treeTransform(ship, (node: any)=>{
+  const noneToNull = (ship) => {
+    Utils.treeTransform(ship, (node)=>{
       if(node === 'None' || node === 'none') return null
       return node
     })
   }
 
-  function sortObject(obj: any) {
-    return Object.keys(obj).sort().reduce(function (result: any, key) {
+  function sortObject(obj) {
+    return Object.keys(obj).sort().reduce(function (result, key) {
         result[key] = obj[key];
         return result;
     }, {});

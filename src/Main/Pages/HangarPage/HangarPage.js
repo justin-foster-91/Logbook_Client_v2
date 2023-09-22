@@ -21,7 +21,7 @@ const HangarPage = () => {
         <h2>Hangar Page</h2>
 
         {/* Display ships that are present in the hangar */}
-        {userShips.map((ship: any, idx: number) => {
+        {userShips.map((ship, idx) => {
           return (
             <div className="hangarShips hangarCard" key={ship.shipName + idx}>
               <div className="row">

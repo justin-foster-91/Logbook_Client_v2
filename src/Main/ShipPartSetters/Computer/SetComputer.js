@@ -8,7 +8,7 @@ import PartTotals from "../Components/PartTotals";
 import AccordionText from "../Components/AccordionText";
 import { isValidComputer } from "../CustomRefs/optionValidation";
 
-function SetComputer(props: any) {
+function SetComputer(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const [isSupercolossal, setIsSupercolossal] = useState(false);
   const [isMononode, setIsMononode] = useState(true)
@@ -39,15 +39,15 @@ function SetComputer(props: any) {
     }
   }, [size, computerId]);
 
-  const handleComputerChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleComputerChange = (ev) => {
     const computerOption = ev.target.value;
     
     ship.setComputer(computerOption).setNetworkNodeCount(0)
   };
 
-  const renderComputerOptions = (computer: string, idx: number) => {
+  const renderComputerOptions = (computer, idx) => {
     if (isSupercolossal) {
-      if (Number(computer.split(" ")[1]) >= 4) {
+      if (computer.split(" ")[1] >= 4) {
         return <option key={idx}>{computer}</option>;
       }
     } else {

@@ -3,10 +3,9 @@ import React, { useState, useContext } from "react";
 import templates from "../../References/shipTemplates";
 import { ShipsContext } from "../../Context/shipContext";
 import TemplateBreakdown from '../TemplateBreakdown';
-import { ShipParts, ShipPartKeys } from "../../ShipPartSetters/CustomRefs/customInterface";
 
 const TemplatePage = () => {
-  const [selectedTemplate, setSelectedTemplate] = useState<ShipParts>({});
+  const [selectedTemplate, setSelectedTemplate] = useState({});
   const { setUserShips } = useContext(ShipsContext);
 
   return (
@@ -41,7 +40,7 @@ const TemplatePage = () => {
         <Link to="/">
           {/* <button>Cancel</button> */}
           <button
-            onClick={() => setUserShips((userShips: any) => userShips.concat([selectedTemplate]))}
+            onClick={() => setUserShips((userShips) => userShips.concat([selectedTemplate]))}
           >
             Add Ship
           </button>

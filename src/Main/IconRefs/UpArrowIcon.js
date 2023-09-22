@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BuildIcon(props: any) {
+function BuildIcon(props) {
   return (
     <svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 511.735 511.735" className='icon' stroke="#c9c9c9" strokeWidth="15px">

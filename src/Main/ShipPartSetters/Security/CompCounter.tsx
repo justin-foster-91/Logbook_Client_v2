@@ -143,14 +143,14 @@ function CompCounter(props: SetterProps) {
     let parent = null;
     if (counterOption !== "shockGrid") parent = "computerCountermeasures"
 
-    ship.setCounterSecurity({ reference: counterOption, value: counterActive, parent})
+    ship.setSecurity({ reference: counterOption, value: counterActive, parent})
   }
 
   const handleShockChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     let shockOption: string | null = ev.target.value;
     if (shockOption === "None") shockOption = null;
 
-    ship.setCounterSecurity({ reference: "shockGrid", value: shockOption, parent: "computerCountermeasures"})
+    ship.setSecurity({ reference: "shockGrid", value: shockOption, parent: "computerCountermeasures"})
   }
 
   return (

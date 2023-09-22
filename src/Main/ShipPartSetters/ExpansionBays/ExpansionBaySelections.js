@@ -22,7 +22,7 @@ import { isValidExpansionBay } from '../CustomRefs/optionValidation';
 
   // TODO: fill all unused expansions with cargo hold by default
 
-function ExpansionBaySelections(props: any) {
+function ExpansionBaySelections(props) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { expansionBayIds, tierId } = ship.getParts()
@@ -40,7 +40,7 @@ function ExpansionBaySelections(props: any) {
   // }, [stateToggle])
 
 
-  const handleExpansionBayChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleExpansionBayChange = (ev) => {
     const expansionIndex = Number(ev.target.name);
     let expansionOption = ev.target.value;
     // if(expansionOption === "None") expansionOption = null
@@ -55,17 +55,17 @@ function ExpansionBaySelections(props: any) {
     ship.setExpansionBay('Cargo Hold', expansionCount)
   }
 
-  const handleCopy = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleCopy = (ev) => {
     if(expansionCap === 'Unlimited') expansionCap = Infinity
-    const expansionOption = ev.currentTarget.value
-    const expansionIndex = Number(ev.currentTarget.name)
+    const expansionOption = ev.target.value
+    const expansionIndex = Number(ev.target.name)
 
     // console.log(expansionCount < expansionCap);
     if(expansionCount < expansionCap) ship.setExpansionBay(expansionOption, expansionIndex, true)
   }
 
-  const handleDelete = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const expansionId = ev.currentTarget.name;
+  const handleDelete = (ev) => {
+    const expansionId = ev.target.name;
 
     ship.deleteExpansionBay(expansionId);
   }
@@ -86,15 +86,15 @@ function ExpansionBaySelections(props: any) {
               <div className='row spaced'>
                 <label htmlFor={`expansionBay${idx + 1}`}><strong>Expansion Bay {idx + 1}</strong></label>
                 <div>
-                  <button name={String(idx)} value={indexValue} onClick={handleCopy} disabled={atBudgetLimit}>Copy</button>
-                  <button name={String(idx)} value={indexValue} onClick={handleDelete}>Delete</button>
+                  <button name={idx} value={indexValue} onClick={handleCopy} disabled={atBudgetLimit}>Copy</button>
+                  <button name={idx} value={indexValue} onClick={handleDelete}>Delete</button>
                 </div>
               </div>
 
               <select
                 id={`expansionBay${idx + 1}`}
                 value={indexValue}
-                name={String(idx)}
+                name={idx}
                 onChange={handleExpansionBayChange}
               >
                 {/* <option key="None">None</option> */}
