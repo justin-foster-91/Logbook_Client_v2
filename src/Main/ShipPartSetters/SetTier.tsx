@@ -10,7 +10,7 @@ function SetTier(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   
   const { tierId } = ship.getParts();
-  const { buildPoints, hpIncrement: hpIncrementMultiplier } = Tables.getTierData(tierId);
+  const { buildPoints, hpIncrementMultiplier } = Tables.getTierData(tierId);
   const { currentPart } = props;
   
   const handleTierChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {

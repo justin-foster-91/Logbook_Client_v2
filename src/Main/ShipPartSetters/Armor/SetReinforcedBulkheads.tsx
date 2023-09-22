@@ -11,7 +11,7 @@ function SetReinforcedBulkheads(props: SetterProps) {
   const { customShipParts, ship } = useContext(CustomShipContext);
   const { reinforcedBulkheadId }: any = customShipParts
   const size = ship.getSize()
-  const { fortification: fortPercent, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
+  const { fortPercent, bpCost } = Tables.getReinforcedBulkheadData(reinforcedBulkheadId, size)
   const { currentPart } = props
 
   const handleReinforcedBulkheadsChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
