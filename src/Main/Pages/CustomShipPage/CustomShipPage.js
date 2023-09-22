@@ -1,26 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
-import SetTier from "../../ShipPartSetters/SetTier";
-import SetFrame from "../../ShipPartSetters/SetFrame";
+import SetTier from "../../ShipPartSetters/SetTier.tsx";
+import SetFrame from "../../ShipPartSetters/SetFrame.tsx";
 import SetPowerCore from "../../ShipPartSetters/PowerCore/SetPowerCore";
 import * as SF from "../../References/shipFunctions";
-import SetThrusters from "../../ShipPartSetters/SetThrusters";
-import SetArmor from "../../ShipPartSetters/Armor/SetArmor";
-import SetAblativeArmor from "../../ShipPartSetters/Armor/SetAblativeArmor";
+import SetThrusters from "../../ShipPartSetters/SetThrusters.tsx";
+import SetArmor from "../../ShipPartSetters/Armor/SetArmor.tsx";
+import SetAblativeArmor from "../../ShipPartSetters/Armor/SetAblativeArmor.tsx";
 import { CustomShipContext } from "../../Context/shipContext";
 import SetComputer from "../../ShipPartSetters/Computer/SetComputer";
 import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
-import SetCrewQuarters from "../../ShipPartSetters/SetCrewQuarters";
-import SetDefensiveCounter from "../../ShipPartSetters/SetDefensiveCounter";
-import SetDriftEngine from "../../ShipPartSetters/SetDriftEngine";
+import SetCrewQuarters from "../../ShipPartSetters/SetCrewQuarters.tsx";
+import SetDefensiveCounter from "../../ShipPartSetters/SetDefensiveCounter.tsx";
+import SetDriftEngine from "../../ShipPartSetters/SetDriftEngine.tsx";
 import SetExpansionBays from "../../ShipPartSetters/ExpansionBays/SetExpansionBays";
-import SetFortifiedHull from "../../ShipPartSetters/Armor/SetFortifiedHull";
-import SetReinforcedBulkheads from "../../ShipPartSetters/Armor/SetReinforcedBulkheads";
-import SetSecurity from '../../ShipPartSetters/Security/SetSecurity'
+import SetFortifiedHull from "../../ShipPartSetters/Armor/SetFortifiedHull.tsx";
+import SetReinforcedBulkheads from "../../ShipPartSetters/Armor/SetReinforcedBulkheads.tsx";
+import SetSecurity from '../../ShipPartSetters/Security/SetSecurity.tsx'
 import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
-import SetSensors from "../../ShipPartSetters/SetSensors";
-import SetSources from "../../ShipPartSetters/SetSources";
+import SetSensors from "../../ShipPartSetters/SetSensors.tsx";
+import SetSources from "../../ShipPartSetters/SetSources.tsx";
 import SetShields from "../../ShipPartSetters/SetShields";
 
 function CustomShipPage() {
