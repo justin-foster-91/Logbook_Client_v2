@@ -8,21 +8,15 @@ import SpecialMaterials from "./Components/SpecialMaterials";
 import AccordionText from "./Components/AccordionText";
 import { isValidShields } from "./CustomRefs/optionValidation";
 
-interface WrapperProps {
-  component: Function, 
-  name: string
-}
-
-function SetShields(props: WrapperProps) {
+function SetShields(props: any) {
   const { customShipParts, ship } = useContext(CustomShipContext);
 
   const { shieldsId } = ship.getParts();
 
   const { currentPart } = props;
 
-  const handleShieldsChange = (ev: object) => {
+  const handleShieldsChange = (ev: any) => {
     let shieldsOption = ev.target.value;
-    console.log(ev);
     if (shieldsOption === "None") shieldsOption = null;
 
     ship.setShields(shieldsOption)
