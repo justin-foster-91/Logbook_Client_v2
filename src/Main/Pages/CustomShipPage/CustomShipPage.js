@@ -5,7 +5,7 @@ import SetPowerCore from "../../ShipPartSetters/PowerCore/SetPowerCore";
 import * as SF from "../../References/shipFunctions";
 import SetThrusters from "../../ShipPartSetters/SetThrusters.tsx";
 import SetArmor from "../../ShipPartSetters/Armor/SetArmor.tsx";
-import SetAblativeArmor from "../../ShipPartSetters/Armor/SetAblativeArmor.tsx";
+import SetAblativeArmor from "../../ShipPartSetters/Armor/SetAblativeArmor";
 import { CustomShipContext } from "../../Context/shipContext";
 import SetComputer from "../../ShipPartSetters/Computer/SetComputer";
 import * as Tables from '../../ShipPartSetters/CustomRefs/metaTables'
@@ -15,7 +15,7 @@ import SetDriftEngine from "../../ShipPartSetters/SetDriftEngine.tsx";
 import SetExpansionBays from "../../ShipPartSetters/ExpansionBays/SetExpansionBays";
 import SetFortifiedHull from "../../ShipPartSetters/Armor/SetFortifiedHull.tsx";
 import SetReinforcedBulkheads from "../../ShipPartSetters/Armor/SetReinforcedBulkheads.tsx";
-import SetSecurity from '../../ShipPartSetters/Security/SetSecurity.tsx'
+import SetSecurity from '../../ShipPartSetters/Security/SetSecurity'
 import Sidebar from "./Sidebar";
 import "./CustomShipPage.css";
 import PointTotals from "../../ShipPartSetters/Components/PointTotals";
