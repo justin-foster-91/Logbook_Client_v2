@@ -95,9 +95,9 @@ const updateArmor = (ship) => {
 }
 
 const updateAblativeArmor = (ship) => {
-  const { ablativeArmorId } = ship.getParts()
+  const { armorId } = ship.getParts()
 
-  if (!Validate.isValidAblativeArmor(ship, ablativeArmorId)) ship.setAblativeArmor(null)
+  if (!Validate.isValidAblativeArmor(ship, armorId)) ship.setAblativeArmor(null)
 }
 
 const updateComputer = (ship) => {
