@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Logbook_Client_v2/custom_ship/static/css/main.eb658cce.css",
-    "main.js": "/Logbook_Client_v2/custom_ship/static/js/main.93cdade6.js",
-    "static/js/787.c06c73ff.chunk.js": "/Logbook_Client_v2/custom_ship/static/js/787.c06c73ff.chunk.js",
-    "static/media/Base_ship.jpg": "/Logbook_Client_v2/custom_ship/static/media/Base_ship.2df7c10183f4b09a3414.jpg",
-    "static/media/Carrier.jpg": "/Logbook_Client_v2/custom_ship/static/media/Carrier.14789dcce8fb4d9144bd.jpg",
-    "static/media/Starfinder_Society.png": "/Logbook_Client_v2/custom_ship/static/media/Starfinder_Society.dab3a8a154bea61667a0.png",
-    "static/media/SansationRegular-OgJP.ttf": "/Logbook_Client_v2/custom_ship/static/media/SansationRegular-OgJP.9be04a011dc2beea9985.ttf",
-    "index.html": "/Logbook_Client_v2/custom_ship/index.html",
-    "main.eb658cce.css.map": "/Logbook_Client_v2/custom_ship/static/css/main.eb658cce.css.map",
-    "main.93cdade6.js.map": "/Logbook_Client_v2/custom_ship/static/js/main.93cdade6.js.map",
-    "787.c06c73ff.chunk.js.map": "/Logbook_Client_v2/custom_ship/static/js/787.c06c73ff.chunk.js.map"
+    "main.css": "/Logbook_Client_v2/static/css/main.3bc81b0b.css",
+    "main.js": "/Logbook_Client_v2/static/js/main.3647f650.js",
+    "static/js/787.c06c73ff.chunk.js": "/Logbook_Client_v2/static/js/787.c06c73ff.chunk.js",
+    "static/media/Base_ship.jpg": "/Logbook_Client_v2/static/media/Base_ship.2df7c10183f4b09a3414.jpg",
+    "static/media/Carrier.jpg": "/Logbook_Client_v2/static/media/Carrier.14789dcce8fb4d9144bd.jpg",
+    "static/media/Starfinder_Society.png": "/Logbook_Client_v2/static/media/Starfinder_Society.dab3a8a154bea61667a0.png",
+    "static/media/SansationRegular-OgJP.ttf": "/Logbook_Client_v2/static/media/SansationRegular-OgJP.9be04a011dc2beea9985.ttf",
+    "index.html": "/Logbook_Client_v2/index.html",
+    "main.3bc81b0b.css.map": "/Logbook_Client_v2/static/css/main.3bc81b0b.css.map",
+    "main.3647f650.js.map": "/Logbook_Client_v2/static/js/main.3647f650.js.map",
+    "787.c06c73ff.chunk.js.map": "/Logbook_Client_v2/static/js/787.c06c73ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb658cce.css",
-    "static/js/main.93cdade6.js"
+    "static/css/main.3bc81b0b.css",
+    "static/js/main.3647f650.js"
   ]
 }
