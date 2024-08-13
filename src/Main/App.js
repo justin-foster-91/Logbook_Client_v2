@@ -19,8 +19,8 @@ function App() {
               {/* <Route index element={<HangarPage/>}/> */}
               {/* <Route path={'hangar'} element={<HangarPage/>}/> */}
               {/* <Route path={'templates'} element={<TemplatePage/>}/> */}
-              <Route path='/' element={<CustomShipPage/>}/>
-              <Route path='template_converter' element={<TemplateConverter/>}/>
+              <Route exact path='/' element={<CustomShipPage/>}/>
+              <Route exact path='template_converter' element={<TemplateConverter/>}/>
             </Routes>
         </main>
       </div>
